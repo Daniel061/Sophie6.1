@@ -52,9 +52,23 @@ class c_Sentence : public c_SubjectStack
         string GetSubWords(int loc){return SubWords[loc];}
         void SetPattern(string strData){Pattern = strData;}
         string GetPattern(){return Pattern;}
+
+
+
+        void RebuildPattern(){
+            Pattern = "";
+            for(int x =0; x < GetWordCount(); x++) Pattern += GetWordType(x);}
+
+
+
         int GetVerbPointingToAdjective(){
+            int VerbLoc; VerbLoc = -1;
             for(int x = 0; x < GetWordCount(); x++)
-                if((GetWordType(x)=='v') & (GetWordType(x+1)=='a')) return x;
+                if((GetWordType(x)=='v') & (GetWordType(x+1)=='a')) VerbLoc = x;
+            if(VerbLoc == -1){
+                for(int x = 0; x< GetWordCount(); x++){
+                    if(GetWordType(x) == 'v')VerbLoc = x;}}
+            return VerbLoc;
             }
 
 void Parse (string str_Sentence_Data)

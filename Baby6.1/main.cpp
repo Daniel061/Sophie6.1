@@ -11,7 +11,7 @@ int main()
 Brain.SetMyGender('f');
 string Raw_Sentence;
 Verbose = false;
-//ProcessVerbFile();
+
 
 
 

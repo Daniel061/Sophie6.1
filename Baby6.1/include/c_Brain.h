@@ -165,7 +165,7 @@ class c_Brain : public c_Cerebellum
                             if(z >0){
                                 cout << "Adjective " << x << " " <<  RightLobeMemory[RightLobeMemory[GetWordTokens(2)].GetAdjective(x)].GetpCellDataString()<< " Verbs: ";
                                 for(int y = 1; y < 4; y++){
-                                    cout << RightLobeMemory[RightLobeMemory[q].GetVerbWithAdjective(z,y)].GetpCellDataString() << " ";
+                                    cout << RightLobeMemory[RightLobeMemory[q].GetVerbWithAdjective(x,y)].GetpCellDataString() << " ";
                                 }
                                 cout << endl;
                             }

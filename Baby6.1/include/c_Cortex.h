@@ -190,7 +190,9 @@ class c_Cortex : public c_Sentence
                     string tmpSubject;
                     tmpSubject = GetWords(SubjectLoc);
                     SetSubject(GetWordTokens(SubjectLoc),tmpSubject);
-                 SlowSpeak("Why??");
+                 SlowSpeak("Okay.");
+                 IncreaseMoodLevel();
+                 SlowSpeak(":)");
                  break;
                 }
 
@@ -253,6 +255,9 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
                     SlowSpeak(":)");
                     IncreaseMoodLevel();
                     SetWordType('a',tmpAdjectiveLoc);
+                    SetWordType('n',Determiner+1);
+                    RebuildPattern();
+
             }
             else{
                 SlowSpeak(":(");
@@ -297,11 +302,22 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
 //---------------------------------------------------------------------------------------------------------------
 int HandleQuestion(){
     int Control;    Control = -1;
+    string VerbUsed, MatchedAdjective;
+    bool Matched;
     if(Verbose)
         cout << "qLoc:" << QuestionLocation << " Pattern:" << Pattern << " SubjectLoc:" << GetSubjectLocation() << endl;
 
+   // Matched = CheckLinkOfTwoNounsWithAdjectives("dog","color",VerbUsed,MatchedAdjective);
 
-
+    Matched = CheckLinkOfTwoNounsWithAdjectives(RightLobeMemory[GetWordTokens(GetSubjectLocation())].GetpCellDataString(),
+                                                RightLobeMemory[GetWordTokens(QuestionLocation+1)].GetpCellDataString(),
+                                                VerbUsed,MatchedAdjective);
+    if (Matched){
+        SlowSpeak("The " + GetWords(GetSubjectLocation())+ " " + VerbUsed + " " + MatchedAdjective + ".");}
+        else
+        SlowSpeak("You haven't told me yet.");
+    if(Verbose)
+        cout << "Matched:" << Matched << " Verb:" << VerbUsed << " Adjective: " << MatchedAdjective << endl;
 
   return Control;
 }

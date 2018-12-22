@@ -112,7 +112,35 @@ class c_Lobes //: public c_MemoryCell
 
         }
 
+    bool CheckLinkOfTwoNounsWithAdjectives(string FirstNoun,string SecondNoun, string& VerbUsage, string& MatchedAdjective){
 
+       VerbUsage           = "";
+       MatchedAdjective    = "";
+       bool Result; Result = false;
+       int FirstNounAdjectiveCount,SecondNounAdjectiveCount;
+       int TokenFirstNoun,TokenSecondNoun,intVerbUsage,intMatchedAdjective;
+
+       TokenFirstNoun           = Tokenize(FirstNoun);
+       TokenSecondNoun          = Tokenize(SecondNoun);
+       FirstNounAdjectiveCount  = RightLobeMemory[TokenFirstNoun].GetAdjectiveCount();
+       SecondNounAdjectiveCount = RightLobeMemory[TokenSecondNoun].GetAdjectiveCount();
+
+       if((FirstNounAdjectiveCount == 0) | (SecondNounAdjectiveCount == 0)){
+          //can't match, no adjectives to compare
+          }
+       else{
+          for(int x = 0; x < FirstNounAdjectiveCount; x++){
+            for(int y = 0; y < SecondNounAdjectiveCount; y++){
+                if(RightLobeMemory[TokenFirstNoun].GetAdjective(x) == RightLobeMemory[TokenSecondNoun].GetAdjective(y)){
+                    Result              = true;
+                    intMatchedAdjective = RightLobeMemory[TokenFirstNoun].GetAdjective(x);
+                    MatchedAdjective    = RightLobeMemory[intMatchedAdjective].GetpCellDataString();
+                    intVerbUsage        = RightLobeMemory[TokenFirstNoun].GetVerbWithAdjective(x,1);
+                    VerbUsage           = RightLobeMemory[intVerbUsage].GetpCellDataString();}
+            } } }
+
+          return Result;
+    }
 
 };
 

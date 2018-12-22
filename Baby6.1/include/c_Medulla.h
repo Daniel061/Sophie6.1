@@ -13,6 +13,14 @@ class c_Medulla : public c_ShortTermMemory
     protected:
 
     private:
+
+
+
+    public:
+
+
+
+
 };
 
 #endif // C_MEDULLA_H

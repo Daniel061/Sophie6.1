@@ -71,20 +71,16 @@ class c_MemoryCell
             if(!(Matched >=0))
                AdjectiveList[EndList][0]=NewAdjective;
 
-            AdjectiveCount = EndList;
+            AdjectiveCount = EndList+1;
 
          }
          //-----END ACCOCIATEADJECTIVE----------------------------
 
 
         int GetAdjective(int Location){return AdjectiveList[Location][0];}
+
         int GetVerbWithAdjective(int AdjectiveLocation, int VerbLocation){
-            int z; z = -1;
-            for(int x = 0; x < 15; x++){
-                if (AdjectiveList[x][0]==AdjectiveLocation){z=x;}}
-            if(z == -1) return 0;
-            else
-             return AdjectiveList[z][VerbLocation];}
+             return AdjectiveList[AdjectiveLocation][VerbLocation];}
 
         void AccociateAdjectiveWithVerb(int NewVerb,int AdjectiveToAssociate){  //Stores New Tokenized VERB with Tokenized Adjective at the end of the list 1,2,3
             int EndList;  EndList = -1;
@@ -119,12 +115,9 @@ class c_MemoryCell
                 PlaceValue = 1;
                 tmpToken = 0;
 
-                for( y = z; y > 0; y--)
-                {
+                for( y = z; y > 0; y--){
                     tmpToken = tmpToken + (int(str_Data[y-1]))*PlaceValue;
-
-                    PlaceValue ++;
-                }
+                    PlaceValue ++;}
             return tmpToken;
 
         }
