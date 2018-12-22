@@ -5,7 +5,7 @@
 #include <iostream>
 extern bool Verbose;
 using namespace std;
-class c_Lobes //: public c_MemoryCell
+class c_Lobes
 {
     public:
         c_Lobes();
@@ -66,7 +66,7 @@ class c_Lobes //: public c_MemoryCell
                } }
 
 
-        bool CheckForKnownWord (string strData){                                         //currently right side only
+        bool CheckForKnownWord (string strData){                                                //currently right side only
             int tmpToken; tmpToken = Tokenize(strData);
             if(RightLobeMemory[tmpToken].GetpCellDataString() == strData){
                 return true;}
@@ -74,7 +74,7 @@ class c_Lobes //: public c_MemoryCell
                     return false;}}
 
 
-        void InstallNewWord(string NewWord, char WordType, char Purpose, string NewWordLC){
+        void InstallNewWord(string NewWord, char WordType, char Purpose, string NewWordLC){     //currently right side only
             int tmpToken;
             tmpToken = Tokenize(NewWord);
             if (tmpToken){
@@ -131,6 +131,7 @@ class c_Lobes //: public c_MemoryCell
 
        if((FirstNounAdjectiveCount == 0) | (SecondNounAdjectiveCount == 0)){
           //can't match, no adjectives to compare
+          //returns empty strings and false.
           }
        else{
           for(int x = 0; x < FirstNounAdjectiveCount; x++){
