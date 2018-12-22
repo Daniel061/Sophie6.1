@@ -101,10 +101,9 @@ class c_Lobes
                 z = str_Data.size();
                 PlaceValue = 1;
                 tmpToken = 0;
-
                 for( y = z; y > 0; y--)
                 {
-                    tmpToken = tmpToken + (int(str_Data[y-1]))*PlaceValue;
+                    tmpToken = tmpToken + (int(tolower(str_Data[y-1])))*PlaceValue;
 
                     PlaceValue ++;
                 }

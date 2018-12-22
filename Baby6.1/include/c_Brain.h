@@ -20,7 +20,7 @@ class c_Brain : public c_Cerebellum
         //c_SubjectStack SubjectStack;
         c_Sentence SlowSpeakSentence;
         c_Sentence LastSentence;
-        c_Sentence HoldingSentence;
+        c_Sentence CommandCheckSentence;
 
 
         int rBrainCellCount;
@@ -53,10 +53,12 @@ class c_Brain : public c_Cerebellum
             a = 0;
 
             //LastSentence = Sentence;                                                   //save past statement from user
+            CommandCheckSentence.Parse(strData);
+            a = CommandTrap();
             Parse(strData);                                                              //break sentence down
             CheckForGreetings(Greeting);
            if(Greeting == false){
-            a = CommandTrap();
+
             SetWordTypes();                                                               //try to set all word types
             if(a == 0){                                                                   //check for command
              SubjectLocation = FindSubject();                                             //try to located subject
@@ -111,10 +113,10 @@ class c_Brain : public c_Cerebellum
             int Count;
             Command = 0;
             int Control; Control =0;
-            Count = GetWordCount();
-            Command = GetWordTokens(0);
+            Count = CommandCheckSentence.GetWordCount();
+            Command = CommandCheckSentence.GetWordTokens(0);
             if(Count >1)
-             Command = Command + GetWordTokens(1);
+             Command = Command + CommandCheckSentence.GetWordTokens(1);
 
 
 

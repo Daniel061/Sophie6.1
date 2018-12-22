@@ -155,7 +155,7 @@ void Parse (string str_Sentence_Data)
 //-----------------------------------------TOKENIZE ALL WORDS----------------------------------------------
     for (x = 0; x < int_Word_Count; x++)
     {
-        WordTokens[x] = Tokenize(Words[x]);
+
         WordType[x] = 'u';
         SecondaryType[x] = 'u';
         AlternateType[x] = 'u';
@@ -167,6 +167,7 @@ void Parse (string str_Sentence_Data)
                 tmpWord[t] =  tolower(tmpWord[t]);
             WordsLC[x] = tmpWord;
          //----------------------------------------
+         WordTokens[x] = Tokenize(WordsLC[x]);
     }
 }
 };
