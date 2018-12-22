@@ -113,6 +113,10 @@ class c_Lobes //: public c_MemoryCell
         }
 
     bool CheckLinkOfTwoNounsWithAdjectives(string FirstNoun,string SecondNoun, string& VerbUsage, string& MatchedAdjective){
+       /** TODO **
+         Check for multi Matching and report back if so.
+         Current logic returns last matching Adjective.
+       */
 
        VerbUsage           = "";
        MatchedAdjective    = "";
