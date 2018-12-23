@@ -101,7 +101,7 @@ class c_Sentence : public c_SubjectStack
         void Parse (string str_Sentence_Data)
 {
     //----------------------Initialize-------------------------------------------------------------------------------------------------
-
+                if(Verbose)cout << "[c_Sentence.h::Parse]\n";
                 InitializeVars();
                 OriginalString = str_Sentence_Data;
                 int int_Word_Count;

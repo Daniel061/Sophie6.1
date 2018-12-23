@@ -1,10 +1,10 @@
 #ifndef C_SUBJECTSTACK_H
 #define C_SUBJECTSTACK_H
 
-#include <c_Language.h>
+//#include <c_Language.h>
+#include <c_Personality.h>
 
-
-class c_SubjectStack : public c_Language
+class c_SubjectStack :  public c_Personality  //public c_Language
 {
     public:
         c_SubjectStack();

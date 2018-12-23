@@ -36,7 +36,7 @@ class c_Lobes
                     RightLobeMemory[TokenizedstrData].SetpCellDataString(strData);}}}
 
         bool GetBrainCellIsSet(char LR, int Location){
-            if(LR = 'r'){
+            if(LR == 'r'){
                 return RightLobeMemory[Location].GetpIsSet();}
                 else
                     return LeftLobeMemory[Location].GetpIsSet();}
@@ -75,6 +75,7 @@ class c_Lobes
 
 
         void InstallNewWord(string NewWord, char WordType, char Purpose, string NewWordLC){     //currently right side only
+            if(Verbose)cout << "[c_Lobes.h::InstallNewWord]\n";
             int tmpToken;
             tmpToken = Tokenize(NewWord);
             if (tmpToken){

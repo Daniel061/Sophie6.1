@@ -12,12 +12,11 @@ class c_Brain : public c_Cerebellum
 
 
 
-        //c_MemoryCell rBrainCells[3000000];
-        //c_MemoryCell lBrainCells[3000000];
-       // c_Personality MyPersonality;
+
+
         c_Personality UserPersonality;
         c_ShortTermMemory ShortTermMemory;
-        //c_SubjectStack SubjectStack;
+
         c_Sentence SlowSpeakSentence;
         c_Sentence LastSentence;
         c_Sentence CommandCheckSentence;
@@ -45,7 +44,7 @@ class c_Brain : public c_Cerebellum
 //********************************************* First Processing Point / Cortex is Main Processor****************************************************
 
         void ProcessUserInput(string& strData){
-
+            if(Verbose)cout << "[c_Brain.h::ProcessUserInput]" << endl;
             int a, ConfidenceLevel;
             string b,c,CheckedPattern;
             int SubjectLocation;
@@ -59,12 +58,14 @@ class c_Brain : public c_Cerebellum
             CheckForGreetings(Greeting);
            if(Greeting == false){
 
-            SetWordTypes();                                                               //try to set all word types
+
             if(a == 0){                                                                   //check for command
+             SetWordTypes();                                                               //try to set all word types
              SubjectLocation = FindSubject();                                             //try to located subject
              SetSubjectLocation(SubjectLocation);                                         //set the suggestion
              CheckedPattern = PatternReview(GetPattern(),ConfidenceLevel);                //see if language class can enhance pattern
-             if(Verbose){cout << "Processed Pattern:" << CheckedPattern << ":" << GetPattern() << "Confidence level: " << ConfidenceLevel << endl;}
+             if(Verbose){
+                    cout << "Processed Pattern:" << CheckedPattern << ":" << GetPattern() << "Confidence level: " << ConfidenceLevel << endl;}
              if(CheckedPattern != GetPattern()){
                 SetPattern(CheckedPattern);
                 for(int x = 0; x < GetWordCount(); x++){
@@ -196,6 +197,12 @@ class c_Brain : public c_Cerebellum
                     Control = 2;
                     break;
                 }
+            case 4854:  //moodlevel
+                {
+                    cout << "MoodLevel = " << GetMoodLevel() << endl;
+                    Control = 2;
+                    break;
+                }
             case 5352:  //subject report
                 {
                     for(int x =0; x<15; x++){
@@ -206,7 +213,7 @@ class c_Brain : public c_Cerebellum
 
 
             }
-
+            if((Control != 0)&(Verbose)) cout << "[c_Brain.h::CommandTrap]-successful\n";
             return Control;
         }
 
@@ -236,7 +243,7 @@ class c_Brain : public c_Cerebellum
       //   Check memory storage first (search only lowercase storage)
       //     if already stored set the sentence word type to the memory value
       //     if not, has already been initialized to 'u' unless sentence parser has set something other than 'u'
-      //
+      //    doCorrection is control to not override wordtype stored in brain  true = change it to whatever is set by others
 
        void SetWordTypes(bool doCorrection = false)
         {
@@ -273,6 +280,7 @@ class c_Brain : public c_Cerebellum
 //---------------------------------FINDSUBJECT()--------------------------------------------------
         int FindSubject()
         {
+            if(Verbose)cout << "[c_Brain.h::FindSubject]" << endl;
             int DeterminerLocation;       DeterminerLocation = -1;
             int UnknownLocation;          UnknownLocation    = -1;
             int WordCount;                WordCount          =  0;
@@ -291,16 +299,16 @@ class c_Brain : public c_Cerebellum
                 Pattern += GetWordType(x);
             }
             SetPattern(Pattern);
-            if(SubLocation == -1 & NounLocation != -1)
+            if((SubLocation == -1) & (NounLocation != -1))
                 SubLocation = NounLocation;
             else
-                if(SubLocation == -1 & ProNounLocation !=-1)
+                if((SubLocation == -1) & (ProNounLocation !=-1))
                     SubLocation = ProNounLocation;
             else
-                if(SubLocation == -1 & DeterminerLocation != -1)
+                if((SubLocation == -1) & (DeterminerLocation != -1))
                     SubLocation = DeterminerLocation +1;
             else
-                if(SubLocation == -1 & UnknownLocation != -1)
+                if((SubLocation == -1) & (UnknownLocation != -1))
                     SubLocation = UnknownLocation;
 
 
@@ -361,6 +369,7 @@ class c_Brain : public c_Cerebellum
 //------------------------------STORE NEW WORDS-----------------------------------------------------------------
         int StoreNewWords()
         {
+         if(Verbose)cout << "[c_Brain.h::StoreNewWords]" << endl;
          int NewWords; NewWords = 0;
 
          for (int x = 0; x < GetWordCount(); x++)

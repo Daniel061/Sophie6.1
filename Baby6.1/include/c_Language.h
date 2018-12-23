@@ -1,12 +1,14 @@
 #ifndef C_LANGUAGE_H
 #define C_LANGUAGE_H
-#include <c_Personality.h>
+//#include <c_Personality.h>
+#include <c_Sentence.h>
 #include <c2_Sentence.h>
 #include <string>
 #include <iostream>
 extern bool Verbose;
 using namespace std;
-class c_Language : public c_Personality
+//public c_Personality
+class c_Language : public c_Sentence
 {
     public:
         c_Language();
@@ -116,7 +118,7 @@ class c_Language : public c_Personality
 //--------------------------------end Find Word Type--------------------------------------
 
 
-void SlowSpeak(string str_Data)
+void SlowSpeak(string str_Data, int Delay = 30000000 )
 {
      string WorkingWord;
 
@@ -126,7 +128,7 @@ void SlowSpeak(string str_Data)
         WorkingWord = SlowSentence.GetWords(x);
         for(int y = 0; y < WorkingWord.size(); y++){
             cout << WorkingWord[y];
-            for(int dly = 0; dly < 30000000; dly++);
+            for(int dly = 0; dly < Delay; dly++);
         }
         cout  << " ";
 

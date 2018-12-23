@@ -1,10 +1,10 @@
 #ifndef C_CORTEX_H
 #define C_CORTEX_H
 
-#include <c_Sentence.h>
+//#include <c_Sentence.h>
+#include <c_Language.h>
 
-
-class c_Cortex : public c_Sentence
+class c_Cortex : public c_Language             //c_Sentence
 {
     public:
         c_Cortex();
@@ -39,7 +39,7 @@ class c_Cortex : public c_Sentence
             //CurrectSubject = sbjData;                                                                                    // changes to Data are seen in calling program, not in CurrentSentence
             //Personality = PData;                                                                                         // Remember to destroy CurrentSentence ~ Automatic
 
-
+            if(Verbose){cout << "[c_Cortex.h::DeciperCurrentSentence]" << endl;}
             SubjectLoc = GetSubjectLocation();
             AdjectiveLocation  = -1; FirstUnknown = -1;
             DeterminerLocation = -1; ProNounLocation = -1; ISQ = false;
@@ -222,6 +222,7 @@ int CheckForGreetings(bool& Greeting){
 //-------------------------------------PROCESS MIDLEVEL UNDERSTANDING----------------------------------------------------------------
 
 int WorkWithHalfLevel(string Pattern, int Determiner){
+    if(Verbose){cout << "[c_Cortex.h::WorkWithHalfLevel]" << endl;}
        int Response;
        string tmpAdjective;
        int tmpAdjectiveLoc;
@@ -301,6 +302,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
 }//end work with half level
 //---------------------------------------------------------------------------------------------------------------
 int HandleQuestion(){
+    if(Verbose){cout << "[c_Cortex.h::HandleQuestion]" << endl;}
     int Control;    Control = -1;
     string VerbUsed, MatchedAdjective;
     bool Matched;
@@ -327,7 +329,7 @@ int HandleQuestion(){
 void Handle75LevelUnderstanding(){
     bool Testing; Testing = true;
     if(Verbose){
-        cout << "75% Level Process.\n";
+        cout << "c_Cortex.h::Handle75LevelUnderstanding\n";
         cout << "  Pattern:" << Pattern << endl;
         cout << "  Subject Location:" << GetSubjectLocation() << endl;
         cout << "  Noun Location:" << NounLocation << endl;

@@ -23,6 +23,7 @@ while (Raw_Sentence != "end")
 
     if(Raw_Sentence != "end")
     {
+    if(Verbose)cout << "[main.cpp]\n";
     cout << ">>";
     Raw_Sentence = "";
     getline(cin,Raw_Sentence);
