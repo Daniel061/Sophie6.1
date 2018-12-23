@@ -337,7 +337,7 @@ void Handle75LevelUnderstanding(){
         cout << "  Verb Location:" << VerbLocation << endl;}
 
 
-   while(Testing){
+   while(Testing & (NounLocation >=0)){   //no noun! How to handle this Kenzie??
 
     //----------Missing Noun Test------
     if((NounLocation == -1) & (VerbLocation >=0) & (DeterminerLocation >=0) & (AdjectiveLocation >=0)){ //no noun but has verb, determiner and adjective
@@ -350,6 +350,7 @@ void Handle75LevelUnderstanding(){
             Testing = false;
             break;}
     }
+
     //------End Missing noun test------
 
     //-------Modifier Test-------------
