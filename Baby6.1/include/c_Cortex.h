@@ -29,6 +29,8 @@ class c_Cortex : public c_Language             //c_Sentence
             int FirstUnknown;
             int QuestionLocation;
             int UserResponse;
+            int ContractionLocation;
+            int AdverbLocation;
             float UnderstandingRatio;
             bool ISQ;
 
@@ -41,10 +43,11 @@ class c_Cortex : public c_Language             //c_Sentence
 
             if(Verbose){cout << "[c_Cortex.h::DeciperCurrentSentence]" << endl;}
             SubjectLoc = GetSubjectLocation();
-            AdjectiveLocation  = -1; FirstUnknown = -1;
+            AdjectiveLocation  = -1; FirstUnknown = -1; ContractionLocation = -1;
             DeterminerLocation = -1; ProNounLocation = -1; ISQ = false;
             Pattern = ""; NounLocation = -1; Control = -1; UnderstandingLevel = 0;
             UnderstandingRatio = 0.0; UnknownCount = 0; QuestionLocation = 0;
+            AdverbLocation = -1;
             for(int x =0; x < GetWordCount(); x++){                                                                  // Build pattern string i.e. duvu  4 word sentence
                     Pattern += GetWordType(x);
                     tmpWordType = GetWordType(x);
@@ -55,6 +58,8 @@ class c_Cortex : public c_Language             //c_Sentence
                     if (tmpWordType == 'a') {AdjectiveLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'r') {ReplacementLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'q') {QuestionLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'C') {ContractionLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'A') {AdverbLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'u') {
                             UnknownCount++; UnKnownLocation = x;
                             if(FirstUnknown == -1) FirstUnknown = x;
@@ -337,7 +342,7 @@ void Handle75LevelUnderstanding(){
         cout << "  Verb Location:" << VerbLocation << endl;}
 
 
-   while(Testing & (NounLocation >=0)){   //no noun! How to handle this Kenzie??
+   while(Testing & (NounLocation >=0)){   //no noun! How to handle this Kenzie??  she says if pronoun use it as noun and subject
 
     //----------Missing Noun Test------
     if((NounLocation == -1) & (VerbLocation >=0) & (DeterminerLocation >=0) & (AdjectiveLocation >=0)){ //no noun but has verb, determiner and adjective

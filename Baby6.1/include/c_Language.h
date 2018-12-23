@@ -24,7 +24,7 @@ class c_Language : public c_Sentence
     public:
 //-------------------------Pattern Review  i.e. Language Helper ------------------------
  string PatternReview(string Pattern, int& ConfidenceLevel){
-
+   if(Verbose)cout << "[c_Language::PatternReview]" << endl;
    string CorrectedPattern; CorrectedPattern = Pattern;
    ConfidenceLevel = -1;  // no suggestion
 
@@ -53,7 +53,7 @@ class c_Language : public c_Sentence
         CorrectedPattern = "dnvp";
         ConfidenceLevel = 100;}
 
-
+     if(Verbose)cout << " Received Pattern:" << Pattern << " Correct Pattern:" << CorrectedPattern << endl;
    return CorrectedPattern;
  }
 //--------------------------End Language Review------------------------------------------------
