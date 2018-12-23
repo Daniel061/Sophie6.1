@@ -36,7 +36,8 @@ class c_Cortex : public c_Language             //c_Sentence
 
 
     public:
-        void DecipherCurrentSentence(){                                                                                  // objects and variables are passed by reference
+        void DecipherCurrentSentence(){
+            //***TODO add D(direct object) and I(indirect object) s(plural possessive                                      // objects and variables are passed by reference
             //CurrentSentence = Data;                                                                                      // Data is referenced to Sentence in calling program, CurrentSentence is a LOCAL copy!!
             //CurrectSubject = sbjData;                                                                                    // changes to Data are seen in calling program, not in CurrentSentence
             //Personality = PData;                                                                                         // Remember to destroy CurrentSentence ~ Automatic
