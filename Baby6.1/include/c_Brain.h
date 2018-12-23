@@ -52,7 +52,7 @@ class c_Brain : public c_Cerebellum
             bool ISQ,Greeting;
             a = 0;
 
-            //LastSentence = Sentence;                                                   //save past statement from user
+
             CommandCheckSentence.Parse(strData);
             a = CommandTrap();
             Parse(strData);                                                              //break sentence down
@@ -96,9 +96,10 @@ class c_Brain : public c_Cerebellum
         cout << "Punctuation Flag:" << GetHasPunctuation() << "  Punctuation Character:" << GetPunctuation() << endl;
         cout << "Word Count:" << WC << endl;
         for (int x = 0; x < WC; x++){
-            cout << x << " " << GetWords(x) << ":" << GetWordTokens(x) <<  " Type:" << GetWordType(x) << endl;
+            cout << x << " " << GetWords(x) << ":" << GetWordTokens(x) <<  " Type:"
+            << GetWordType(x) << " isContraction:" << GetisContraction(x) << " Quote Location:" << GetQuoteLocation(x) << endl;
         }
-            cout << "Cell Usage(r):" << rBrainCellCount <<  " Cell Usage(l):" << lBrainCellCount << endl;
+            cout << "Cell Usage(r):" << GetRightLobeUsageCount() <<  " Cell Usage(l):" << GetLeftLobeUsageCount() << endl;
         }
 
 
@@ -191,20 +192,14 @@ class c_Brain : public c_Cerebellum
 
             case 3383:  //report last
                 {
-                    //HoldingSentence = Sentence;
-                    //Sentence = LastSentence;
                     Report();
-                    //Sentence = HoldingSentence;
                     Control = 2;
                     break;
                 }
             case 5352:  //subject report
                 {
                     for(int x =0; x<15; x++){
-                        cout << x << ":" << GetSubject(x) << " " << RightLobeMemory[GetSubject(x)].GetpCellDataString() << " " << GetstrSubject(x) << endl;
-
-                    }
-
+                        cout << x << ":" << GetSubject(x) << " " << RightLobeMemory[GetSubject(x)].GetpCellDataString() << " " << GetstrSubject(x) << endl;}
                     Control = 2;
                 }
 
@@ -217,7 +212,7 @@ class c_Brain : public c_Cerebellum
 
 
 
-        int Respond(){
+        int Respond(){    //can delete this
 
         //if(lBrainCellCount == 0){
         //    cout << "Hello. My name is " << MyPersonality.GetMyName() << endl;
@@ -237,48 +232,43 @@ class c_Brain : public c_Cerebellum
 
 
 
+      //scan sentence words and set their types
+      //   Check memory storage first (search only lowercase storage)
+      //     if already stored set the sentence word type to the memory value
+      //     if not, has already been initialized to 'u' unless sentence parser has set something other than 'u'
+      //
 
-
-       void SetWordTypes()    //scan sentence words and set their types
+       void SetWordTypes(bool doCorrection = false)
         {
-           string tmpWord;
-           string OrigWord;
-           bool HasBeenSet;
-           char tmpWordType;
+            if(Verbose){cout << "[c_Brain.h::SetWordTypes]" << endl;}
+            char tmpTypeInSentence, tmpTypeInMemoryCell, tmpTypeFromLanguageHelper;
+            bool isSetInMemory;
+            for(int x = 0; x < GetWordCount(); x++){
+                    tmpTypeInSentence         = GetWordType(x);
+                    tmpTypeInMemoryCell       = GetBrainWordType(GetWordsLC(x),'r');
+                    tmpTypeFromLanguageHelper = FindWordType(GetWordsLC(x));
+                    isSetInMemory             = GetBrainCellIsSet('r',Tokenize(GetWordsLC(x)));
+                    if(Verbose){
+                        cout << "WordLC:  " << GetWordsLC(x) << endl;
+                        cout << "     Sentence Set:" << tmpTypeInSentence << endl;
+                        cout << "     MemoryCell Set:" << tmpTypeInMemoryCell << endl;
+                        cout << "     Language helper Set:" << tmpTypeFromLanguageHelper << endl;
+                        cout << "      Memory Cell Previously set?" << isSetInMemory << endl;}
 
+                    if(isSetInMemory & doCorrection) isSetInMemory = false;
 
-           int x; x = GetWordCount();
+                    if(isSetInMemory == false){
+                        if(tmpTypeInSentence == 'u')
+                            SetWordType(tmpTypeFromLanguageHelper,x);}
+                    else{
+                        SetWordType(tmpTypeInMemoryCell,x);}
 
-           for(int i = 0; i < x; i++)
-             {
-              tmpWord = GetWords(i);
-              tmpWordType = GetBrainWordType(tmpWord,'r');
-              HasBeenSet = GetBrainCellIsSet('r',Tokenize(tmpWord));
-              if(HasBeenSet == false) tmpWordType = 'u';
-              for(int t = 0; t < tmpWord.size(); t++){
-                tmpWord[t] = tolower(tmpWord[t]);}
-              OrigWord = tmpWord;
-              HasBeenSet = GetBrainCellIsSet('r',Tokenize(tmpWord));
-              if(tmpWordType == 'u'){
-                tmpWordType = FindWordType(tmpWord);
+                     if( GetWordType(x) == 'q') SetIsQuestion(true);
 
-                  if (tmpWordType == 'p'){
-                       SetSubWords(i,GetstrSubject(0));
-                       SetWords(GetstrSubject(0),i);
-                       }
-                  if (tmpWordType == 'q'){
-                       SetIsQuestion(true);}
-                  if (tmpWordType == 'r'){
-                        SetSubWords(i,GetstrSubject(0));}
-                                        }
-                  SetWordType(tmpWordType,i);
-             }
-                 for (int x = 0; x< GetWordCount(); x++){
-                    if(GetWordType(x)=='q')
-                       SetIsQuestion(true);}
-        }
+            }
+        }//------END SET WORD TYPES---------------------------------------------------------------
 
-//------------------------------------------------------------------------------------------------
+///------------------------------------------------------------------------------------------------
 
 //---------------------------------FINDSUBJECT()--------------------------------------------------
         int FindSubject()
@@ -368,7 +358,7 @@ class c_Brain : public c_Cerebellum
             //cout << "Tech me about " << Sentence.GetWords(SubjectLoc) << ",please." << endl;
             //}
         }
-
+//------------------------------STORE NEW WORDS-----------------------------------------------------------------
         int StoreNewWords()
         {
          int NewWords; NewWords = 0;

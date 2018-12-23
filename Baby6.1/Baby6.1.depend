@@ -6,7 +6,7 @@
 1545438670 source:h:\c++projects\baby6.1\baby6.1\src\c_memorycell.cpp
 	"c_MemoryCell.h"
 
-1545485488 h:\c++projects\baby6.1\baby6.1\include\c_memorycell.h
+1545579252 h:\c++projects\baby6.1\baby6.1\include\c_memorycell.h
 	<string>
 
 1544995222 source:h:\c++projects\baby6.1\baby6.1\src\c_personality.cpp
@@ -18,7 +18,7 @@
 1545435962 source:h:\c++projects\baby6.1\baby6.1\src\c_language.cpp
 	"c_Language.h"
 
-1545435864 h:\c++projects\baby6.1\baby6.1\include\c_language.h
+1545583158 h:\c++projects\baby6.1\baby6.1\include\c_language.h
 	<c_Personality.h>
 	<c2_Sentence.h>
 	<string>
@@ -33,10 +33,8 @@
 1544996084 source:h:\c++projects\baby6.1\baby6.1\src\c_sentence.cpp
 	"c_Sentence.h"
 
-1545507968 h:\c++projects\baby6.1\baby6.1\include\c_sentence.h
+1545579264 h:\c++projects\baby6.1\baby6.1\include\c_sentence.h
 	<c_SubjectStack.h>
-	<string>
-	<iostream>
 
 1544997036 source:h:\c++projects\baby6.1\baby6.1\src\c_cortex.cpp
 	"c_Cortex.h"
@@ -65,7 +63,7 @@
 1544998682 source:h:\c++projects\baby6.1\baby6.1\src\c_brain.cpp
 	"c_Brain.h"
 
-1545514104 h:\c++projects\baby6.1\baby6.1\include\c_brain.h
+1545582304 h:\c++projects\baby6.1\baby6.1\include\c_brain.h
 	<c_Cerebellum.h>
 
 1545432114 source:h:\c++projects\baby6.1\baby6.1\src\c_lobes.cpp

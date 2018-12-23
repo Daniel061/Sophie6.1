@@ -60,7 +60,7 @@ class c_Language : public c_Personality
 //-------------------------Find Word Type------------------------------------------------------
  char FindWordType(string tmpWord){
 
-
+           if(Verbose)cout << "[c_Language::FindWordType]" << endl;
 
 
            string Determiners;
@@ -69,17 +69,20 @@ class c_Language : public c_Personality
            string OrigWord;
            string Verbs;
            string SubjectReplacements;
+           string Adverbs;
            char tmpWordType;
            ProNouns =            " you your my mine yours me they them he him she her we i it that ";
            Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
            Questions =           " what where how when who ";
            Verbs =               " be have do say get make go know take see is come think look want give use find tell ask work seem feel try leave call ";
-           SubjectReplacements = " it that";
+           SubjectReplacements = " it that this ";
+           Adverbs =             " very ";
            int isDeterminer; isDeterminer = -1;
            int isProNoun;    isProNoun    = -1;
            int isQuestion;   isQuestion   = -1;
            int isVerb;       isVerb       = -1;
            int isSubRep;     isSubRep     = -1;
+           int isAdverb;     isAdverb     = -1;
            tmpWordType = 'u';
 
 
@@ -88,10 +91,11 @@ class c_Language : public c_Personality
               OrigWord = tmpWord;
               tmpWord = " " + tmpWord + " ";
                 isDeterminer = Determiners.find(tmpWord);
-                isProNoun = ProNouns.find(tmpWord);
-                isQuestion = Questions.find(tmpWord);
-                isVerb = Verbs.find(tmpWord);
-                isSubRep = SubjectReplacements.find(tmpWord);
+                isProNoun    = ProNouns.find(tmpWord);
+                isQuestion   = Questions.find(tmpWord);
+                isVerb       = Verbs.find(tmpWord);
+                isSubRep     = SubjectReplacements.find(tmpWord);
+                isAdverb     = Adverbs.find(tmpWord);
                   if (isVerb >= 0){
                       tmpWordType = 'v';}
                   if (isDeterminer >= 0){
@@ -102,6 +106,8 @@ class c_Language : public c_Personality
                        tmpWordType = 'q';}
                   if (isSubRep >=0){
                         tmpWordType = 'r';}
+                  if (isAdverb >=0){
+                        tmpWordType = 'A';}
             if(Verbose)
                 cout << "tmpWord " << tmpWord <<" type:" << tmpWordType << endl;
             return tmpWordType;

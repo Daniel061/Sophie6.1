@@ -12,21 +12,23 @@ class c_MemoryCell
     protected:
 
     private:
-        string pCellData;          //the raw data
-        string pCellDataLC;        //raw data in lower case
-        char pCellPurpose;         //s-sentence w-word r-response m-memory
-        char pWordType;            //if word, n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object d(LC) Indirect object
-                                   //the decision on this word type is made elsewhere
-        char SecondaryType;        //Could be used as another type i.e. light-n light red - A box is light -a
-        char AlternateType;        //some words without modification could have a third type (All type references conform to pWordType definitions)
-        char GenderClass;          //n - neutral e- either m - male only f - female only
-        bool pIsRoot;              //the root of a word
-        bool pIsSet;               //Has been set with data before
-        int  pNextVerb;            //pointer to next verb
-        int  pNextNoun;            //pointer to next noun
-        int  AdjectiveList[15][4]; //points to linked adjectives with verbs [0][0] = Adjective [0][1]..[0][3] = verbs
-        int  AdjectiveCount;       //the number of adjectives here
-        int  pToken;               //the token value of this data
+        string pCellData;          // the raw data
+        string pCellDataLC;        // raw data in lower case
+        char pCellPurpose;         // s-sentence w-word r-response m-memory
+        char pWordType;            // n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
+                                   // n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object d(LC) Indirect object
+                                   // initialize to 'u'
+                                   // the decision on this word type is made elsewhere
+        char SecondaryType;        // Could be used as another type i.e. light-n light red - A box is light -a
+        char AlternateType;        // some words without modification could have a third type (All type references conform to pWordType definitions)
+        char GenderClass;          // n - neutral e- either m - male only f - female only
+        bool pIsRoot;              // the root of a word
+        bool pIsSet;               // Has been set with data before
+        int  pNextVerb;            // pointer to next verb
+        int  pNextNoun;            // pointer to next noun
+        int  AdjectiveList[15][4]; // points to linked adjectives with verbs [0][0] = Adjective [0][1]..[0][3] = verbs
+        int  AdjectiveCount;       // the number of adjectives here
+        int  pToken;               // the token value of this data
 
 
 
