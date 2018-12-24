@@ -52,6 +52,9 @@ class c_Language : public c_Sentence
     if(Pattern == "dnup"){
         CorrectedPattern = "dnvp";
         ConfidenceLevel = 100;}
+    if(Pattern == "avdu"){
+        CorrectedPattern = "avdn";
+        ConfidenceLevel - 100;}
 
      if(Verbose)cout << " Received Pattern:" << Pattern << " Correct Pattern:" << CorrectedPattern << endl;
    return CorrectedPattern;
@@ -72,6 +75,8 @@ class c_Language : public c_Sentence
            string Verbs;
            string SubjectReplacements;
            string Adverbs;
+           string Directives;
+           string JoiningWords;
            char tmpWordType;
            ProNouns =            " you your my mine yours me they them he him she her we i it that ";
            Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
@@ -79,12 +84,16 @@ class c_Language : public c_Sentence
            Verbs =               " be have do say get make go know take see is come think look want give use find tell ask work seem feel try leave call ";
            SubjectReplacements = " it that this ";
            Adverbs =             " very ";
+           Directives =          " compare ";
+           JoiningWords =        " and ";
+           int isDirective;  isDirective  = -1;
            int isDeterminer; isDeterminer = -1;
            int isProNoun;    isProNoun    = -1;
            int isQuestion;   isQuestion   = -1;
            int isVerb;       isVerb       = -1;
            int isSubRep;     isSubRep     = -1;
            int isAdverb;     isAdverb     = -1;
+           int isJoiner;     isJoiner     = -1;
            tmpWordType = 'u';
 
 
@@ -92,6 +101,8 @@ class c_Language : public c_Sentence
                 tmpWord[t] = tolower(tmpWord[t]);}
               OrigWord = tmpWord;
               tmpWord = " " + tmpWord + " ";
+                isJoiner     = JoiningWords.find(tmpWord);
+                isDirective  = Directives.find(tmpWord);
                 isDeterminer = Determiners.find(tmpWord);
                 isProNoun    = ProNouns.find(tmpWord);
                 isQuestion   = Questions.find(tmpWord);
@@ -110,6 +121,10 @@ class c_Language : public c_Sentence
                         tmpWordType = 'r';}
                   if (isAdverb >=0){
                         tmpWordType = 'A';}
+                  if (isDirective >=0){
+                        tmpWordType = 'X';}
+                  if (isJoiner >=0){
+                        tmpWordType = 'j';}
             if(Verbose)
                 cout << "tmpWord " << tmpWord <<" type:" << tmpWordType << endl;
             return tmpWordType;

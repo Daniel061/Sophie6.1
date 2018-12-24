@@ -31,6 +31,8 @@ class c_Cortex : public c_Language             //c_Sentence
             int UserResponse;
             int ContractionLocation;
             int AdverbLocation;
+            int DirectiveLocation;
+            int JoinerLocation;
             float UnderstandingRatio;
             bool ISQ;
 
@@ -48,7 +50,7 @@ class c_Cortex : public c_Language             //c_Sentence
             DeterminerLocation = -1; ProNounLocation = -1; ISQ = false;
             Pattern = ""; NounLocation = -1; Control = -1; UnderstandingLevel = 0;
             UnderstandingRatio = 0.0; UnknownCount = 0; QuestionLocation = 0;
-            AdverbLocation = -1;
+            AdverbLocation = -1; DirectiveLocation = -1; JoinerLocation = -1;
             for(int x =0; x < GetWordCount(); x++){                                                                  // Build pattern string i.e. duvu  4 word sentence
                     Pattern += GetWordType(x);
                     tmpWordType = GetWordType(x);
@@ -61,6 +63,8 @@ class c_Cortex : public c_Language             //c_Sentence
                     if (tmpWordType == 'q') {QuestionLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'C') {ContractionLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'A') {AdverbLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'X') {DirectiveLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'j') {JoinerLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'u') {
                             UnknownCount++; UnKnownLocation = x;
                             if(FirstUnknown == -1) FirstUnknown = x;
@@ -85,7 +89,8 @@ class c_Cortex : public c_Language             //c_Sentence
                 UnderstandingDegree = 0;
             if(Verbose)
              cout << "Pattern: " + Pattern + " Understanding Level:" << UnderstandingLevel << " Ratio:" << UnderstandingRatio<< " Is Question:" << ISQ << " Degree:" << UnderstandingDegree << " Unknown Count:" << UnknownCount << "\n";
-            if(ISQ == true)UnderstandingDegree= 1; //question trap
+            if(ISQ == true)UnderstandingDegree = 1;             //question trap
+            if(DirectiveLocation >=0)UnderstandingDegree = 2;   //directive trap
             switch (UnderstandingDegree)
             {
                case 0:{  ///All new words, lots of work to do
@@ -129,6 +134,10 @@ class c_Cortex : public c_Language             //c_Sentence
                    HandleQuestion();
                    break;
 
+               }
+               case 2:{ //directive trap
+                    HandleDirective();
+                    break;
                }
                 case 10:{  ///Only 1 known but could have a ratio of 100%
                    if (Verbose)
@@ -416,7 +425,66 @@ void Handle75LevelUnderstanding(){
    }//---end testing control loop
 }
 
+//------------------------DIRECTIVE TRAP-----------------------------------------------------
 
+    void HandleDirective(){
+        int CompareMode, dLoc; CompareMode = 0;
+        string Noun1,Noun2,VerbUsage,MatchedAdjective,WorkingPattern;
+        Noun1 = ""; Noun2 = "";
+        if(Verbose)cout << "[c_Cortex.h::Directive Trap] Pattern:" << Pattern << " ";
+
+
+        if(GetWordTokens(DirectiveLocation) == 2972){
+            if(Verbose) cout << "compare directive ";
+            //extract determiners 'd' from pattern
+            WorkingPattern = Pattern;
+            dLoc = WorkingPattern.find('d');
+            while(dLoc >=0 & dLoc <= WorkingPattern.size()){
+                WorkingPattern = WorkingPattern.substr(0,dLoc) + WorkingPattern.substr(dLoc+1);
+                dLoc = WorkingPattern.find('d');
+
+            }
+            if((WorkingPattern.find("njn") >= 0 & WorkingPattern.find("njn")<=WorkingPattern.size())) CompareMode = 3;
+            if((WorkingPattern.find("nun") >= 0 & WorkingPattern.find("nun")<=WorkingPattern.size())) CompareMode = 3;
+            if((WorkingPattern.find("aua") >= 0 & WorkingPattern.find("aua")<=WorkingPattern.size())) CompareMode = 1;
+            if((WorkingPattern.find("aja") >= 0 & WorkingPattern.find("aja")<=WorkingPattern.size())) CompareMode = 1;
+            if((WorkingPattern.find("aun") >= 0 & WorkingPattern.find("aun")<=WorkingPattern.size())) CompareMode = 2;
+            if((WorkingPattern.find("ajn") >= 0 & WorkingPattern.find("ajn")<=WorkingPattern.size())) CompareMode = 2;
+            if((WorkingPattern.find("Aua") >= 0 & WorkingPattern.find("Aua")<=WorkingPattern.size())) CompareMode = 4;
+            if((WorkingPattern.find("Aja") >= 0 & WorkingPattern.find("Aja")<=WorkingPattern.size())) CompareMode = 4;
+            if((WorkingPattern.find("AuA") >= 0 & WorkingPattern.find("AuA")<=WorkingPattern.size())) CompareMode = 5;
+            if((WorkingPattern.find("AjA") >= 0 & WorkingPattern.find("AjA")<=WorkingPattern.size())) CompareMode = 5;
+            if((WorkingPattern.find("Aun") >= 0 & WorkingPattern.find("Aun")<=WorkingPattern.size())) CompareMode = 6;
+            if((WorkingPattern.find("Ajn") >= 0 & WorkingPattern.find("Ajn")<=WorkingPattern.size())) CompareMode = 6;
+
+                switch(CompareMode){
+
+                    case 3: //noun to noun
+                        {
+                            for(int x =0; x < GetWordCount(); x++){
+                                if((GetWordType(x)=='n')&(Noun1 == "")) Noun1 = GetWordsLC(x);
+                                else
+                                    Noun2 = GetWordsLC(x);}
+
+                             if(Verbose) cout << "Noun to Noun :" << Noun1 << " " << Noun2 << endl;
+
+                             if (CheckLinkOfTwoNounsWithAdjectives(Noun1,Noun2,VerbUsage,MatchedAdjective)){
+                                 SlowSpeak("They both can be " + MatchedAdjective + ".");
+                                 SlowSpeak(":)");}
+                              else{
+                                 SlowSpeak("I don't know anything alike between " + Noun2 + " and " + Noun1 + ".");
+                                 SlowSpeak(":(");}
+                        }
+
+                }
+
+
+
+        }
+
+
+
+    }
 
 
 

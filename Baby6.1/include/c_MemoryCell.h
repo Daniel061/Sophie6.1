@@ -17,7 +17,7 @@ class c_MemoryCell
         char pCellPurpose;         // s-sentence w-word r-response m-memory
         char pWordType;            // n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
                                    // n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object I(LC) Indirect object
-                                   // s - plural possessive
+                                   // s - plural possessive  X(cap) Directive j-joining word
                                    // initialize to 'u'
                                    // the decision on this word type is made elsewhere
         char SecondaryType;        // Could be used as another type i.e. light-n light red - A box is light -a

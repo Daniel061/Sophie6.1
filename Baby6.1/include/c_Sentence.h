@@ -101,7 +101,7 @@ class c_Sentence : public c_SubjectStack
         void Parse (string str_Sentence_Data)
 {
     //----------------------Initialize-------------------------------------------------------------------------------------------------
-                if(Verbose)cout << "[c_Sentence.h::Parse]\n";
+                if(Verbose)cout << "[c_Sentence.h::Parse] " << str_Sentence_Data << endl;
                 InitializeVars();
                 OriginalString = str_Sentence_Data;
                 int int_Word_Count;
@@ -184,7 +184,7 @@ class c_Sentence : public c_SubjectStack
 
                     QuoteLoc = Words[x].find('\'');
                     if((QuoteLoc >=0)&(QuoteLoc<int_Last_Pos)){
-                        WordType[x] = 'C';  //Contraction flag
+                        WordType[x] = 'C';  //Contraction flag~ Possible plural possessive
                         isContraction[x] = true;}
                     QuoteLocation[x] = QuoteLoc;
                     string tmpWord;

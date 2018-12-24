@@ -67,26 +67,39 @@ class c_Lobes
 
 
         bool CheckForKnownWord (string strData){                                                //currently right side only
-            int tmpToken; tmpToken = Tokenize(strData);
+            int tmpToken; tmpToken = Tokenize(strData);                                         //**TODO ensure force lower case searching
             if(RightLobeMemory[tmpToken].GetpCellDataString() == strData){
                 return true;}
                 else{
                     return false;}}
 
 
-        void InstallNewWord(string NewWord, char WordType, char Purpose, string NewWordLC){     //currently right side only
+        void InstallNewWord(string NewWord, char WordType, char Purpose, string NewWordLC, bool Update=false){     //currently right side only
             if(Verbose)cout << "[c_Lobes.h::InstallNewWord]\n";
             int tmpToken;
             tmpToken = Tokenize(NewWord);
             if (tmpToken){
-            RightLobeMemory[tmpToken].SetpCellDataString(NewWord);
-            RightLobeMemory[tmpToken].SetpWordType(WordType);
-            RightLobeMemory[tmpToken].SetpCellPurpose(Purpose);
-            RightLobeMemory[tmpToken].SetpCellDataLC(NewWordLC);
-            if(Verbose)
-                cout << "Storing -->" << NewWord << " at " << tmpToken << endl;
+                    if(!(RightLobeMemory[tmpToken].GetpIsSet())){
+                        RightLobeMemory[tmpToken].SetpCellDataString(NewWord);
+                        RightLobeMemory[tmpToken].SetpWordType(WordType);
+                        RightLobeMemory[tmpToken].SetpCellPurpose(Purpose);
+                        RightLobeMemory[tmpToken].SetpCellDataLC(NewWordLC);
+                        if(Verbose)
+                            cout << "Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << endl;
 
-            RightLobeUsageCount++;
+                        RightLobeUsageCount++;}
+                    else
+                        if(Verbose)
+                             cout << "Not Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << endl;
+                    else
+                        if(Update){
+                            RightLobeMemory[tmpToken].SetpCellDataString(NewWord);
+                            RightLobeMemory[tmpToken].SetpWordType(WordType);
+                            RightLobeMemory[tmpToken].SetpCellPurpose(Purpose);
+                            RightLobeMemory[tmpToken].SetpCellDataLC(NewWordLC);
+                            if(Verbose)
+                                cout << "Updating -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << endl;
+                        }
             }
         }
 
