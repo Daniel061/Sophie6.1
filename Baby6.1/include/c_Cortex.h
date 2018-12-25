@@ -1,10 +1,8 @@
 #ifndef C_CORTEX_H
 #define C_CORTEX_H
-
-//#include <c_Sentence.h>
 #include <c_Language.h>
 
-class c_Cortex : public c_Language             //c_Sentence
+class c_Cortex : public c_Language
 {
     public:
         c_Cortex();
@@ -33,16 +31,16 @@ class c_Cortex : public c_Language             //c_Sentence
             int AdverbLocation;
             int DirectiveLocation;
             int JoinerLocation;
+            int DirectObjectLocation;
+            int IndirectObjectLocation;
+            int PluralPossessiveLocation;
             float UnderstandingRatio;
             bool ISQ;
 
 
     public:
         void DecipherCurrentSentence(){
-            //***TODO add D(direct object) and I(indirect object) s(plural possessive                                      // objects and variables are passed by reference
-            //CurrentSentence = Data;                                                                                      // Data is referenced to Sentence in calling program, CurrentSentence is a LOCAL copy!!
-            //CurrectSubject = sbjData;                                                                                    // changes to Data are seen in calling program, not in CurrentSentence
-            //Personality = PData;                                                                                         // Remember to destroy CurrentSentence ~ Automatic
+
 
             if(Verbose){cout << "[c_Cortex.h::DeciperCurrentSentence]" << endl;}
             SubjectLoc = GetSubjectLocation();
@@ -51,6 +49,7 @@ class c_Cortex : public c_Language             //c_Sentence
             Pattern = ""; NounLocation = -1; Control = -1; UnderstandingLevel = 0;
             UnderstandingRatio = 0.0; UnknownCount = 0; QuestionLocation = 0;
             AdverbLocation = -1; DirectiveLocation = -1; JoinerLocation = -1;
+            DirectObjectLocation = -1; IndirectObjectLocation = -1; PluralPossessiveLocation = -1;
             for(int x =0; x < GetWordCount(); x++){                                                                  // Build pattern string i.e. duvu  4 word sentence
                     Pattern += GetWordType(x);
                     tmpWordType = GetWordType(x);
@@ -65,6 +64,9 @@ class c_Cortex : public c_Language             //c_Sentence
                     if (tmpWordType == 'A') {AdverbLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'X') {DirectiveLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'j') {JoinerLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 's') {PluralPossessiveLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'D') {DirectObjectLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'I') {IndirectObjectLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'u') {
                             UnknownCount++; UnKnownLocation = x;
                             if(FirstUnknown == -1) FirstUnknown = x;
@@ -437,7 +439,7 @@ void Handle75LevelUnderstanding(){
         if(Verbose)cout << "[c_Cortex.h::Directive Trap] Pattern:" << Pattern << " ";
 
 
-        if(GetWordTokens(DirectiveLocation) == 2972){
+        if(GetWordTokens(DirectiveLocation) == 2972 | GetWordTokens(DirectiveLocation)==1070){
             if(Verbose) cout << "compare directive ";
             //extract determiners 'd' from pattern
             WorkingPattern = Pattern;
@@ -467,7 +469,7 @@ void Handle75LevelUnderstanding(){
                             for(int x =0; x < GetWordCount(); x++){
                                 if((GetWordType(x)=='n')&(Noun1 == "")) Noun1 = GetWordsLC(x);
                                 else
-                                    Noun2 = GetWordsLC(x);}
+                                    if(GetWordType(x)=='n') Noun2 = GetWordsLC(x);}
 
                              if(Verbose) cout << "Noun to Noun :" << Noun1 << " " << Noun2 << endl;
 

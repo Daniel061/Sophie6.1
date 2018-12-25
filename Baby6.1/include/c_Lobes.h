@@ -126,10 +126,7 @@ class c_Lobes
         }
 
     bool CheckLinkOfTwoNounsWithAdjectives(string FirstNoun,string SecondNoun, string& VerbUsage, string MatchedAdjective[], int& MatchedCount){
-       /** TODO **
-         Check for multi Matching and report back if so.
-         Current logic returns last matching Adjective.
-       */
+
 
        VerbUsage           = "";
        for(int x = 0; x<15; x++) MatchedAdjective[x] = "";

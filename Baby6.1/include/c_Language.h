@@ -24,13 +24,47 @@ class c_Language : public c_Sentence
     public:
 //-------------------------Pattern Review  i.e. Language Helper ------------------------
  string PatternReview(string Pattern, int& ConfidenceLevel){
-   if(Verbose)cout << "[c_Language::PatternReview]" << endl;
-   string CorrectedPattern; CorrectedPattern = Pattern;
+   if(Verbose)cout << "[c_Language::PatternReview]: " ;
+   string CorrectedPattern, LeftOfJoiner, RightOfJoiner; CorrectedPattern = Pattern;
    ConfidenceLevel = -1;  // no suggestion
+   int LeftOfJoinerLocation,RightOfJoinerLocation;
+   LeftOfJoinerLocation = -1; RightOfJoinerLocation = 1;
+   int JoinerLocation;
 
-//    if(Pattern == "duu"){
-//        CorrectedPattern = "dnv";
-//        ConfidenceLevel = 100;}
+
+
+   /*Check for a joiner word and assist if possible
+      Possible combinations are;
+        unknown-type joiner known-type              can assume unknown-type = known-type
+        unknown-type joiner unknown-type            cannot help here
+        known-type joiner unknown-type              can assume unknown-type = known-type
+        known-type joiner known-type                no help needed here
+        unknown-type joiner determiner known-type   can assume unknown-type = known-type after skipping determiner
+
+        Working principle~ you cannot join unlike word types i.e. dog and cat ~ ok     dirty and dog ~ improper form
+
+    */
+    JoinerLocation = Pattern.find("j");
+    if((JoinerLocation >=0) & (JoinerLocation < Pattern.size())){
+        LeftOfJoiner = Pattern.substr(JoinerLocation + LeftOfJoinerLocation,1);
+        RightOfJoiner = Pattern.substr(JoinerLocation + RightOfJoinerLocation,1);
+        if(RightOfJoiner == "d"){
+            RightOfJoinerLocation++; //move past determiner
+            RightOfJoiner[0] = Pattern[JoinerLocation + RightOfJoinerLocation];} //get new character
+
+        if(LeftOfJoiner == RightOfJoiner){ // if both known-type or unknown-type  cannot help
+
+        }
+        else
+            if(LeftOfJoiner == "u") LeftOfJoiner = RightOfJoiner;  //assume left is same as right
+                else
+                    RightOfJoiner = LeftOfJoiner;                  //assume right is same as left
+
+    CorrectedPattern = Pattern;
+    CorrectedPattern[JoinerLocation + LeftOfJoinerLocation]  = LeftOfJoiner[0];
+    CorrectedPattern[JoinerLocation + RightOfJoinerLocation] = RightOfJoiner[0];
+    }
+
     if(Pattern == "duvu"){
         CorrectedPattern = "dnvu";
         ConfidenceLevel = 100;}
@@ -80,11 +114,11 @@ class c_Language : public c_Sentence
            char tmpWordType;
            ProNouns =            " you your my mine yours me they them he him she her we i it that ";
            Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
-           Questions =           " what where how when who ";
-           Verbs =               " be have do say get make go know take see is come think look want give use find tell ask work seem feel try leave call ";
+           Questions =           " what where how when who what's ";
+           Verbs =               " be have do say get make go know take see is are come think look want give use find tell ask work seem feel try leave call ";
            SubjectReplacements = " it that this ";
            Adverbs =             " very ";
-           Directives =          " compare ";
+           Directives =          " compare same ";
            JoiningWords =        " and ";
            int isDirective;  isDirective  = -1;
            int isDeterminer; isDeterminer = -1;
