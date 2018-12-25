@@ -96,7 +96,7 @@ class c_Brain : public c_Cerebellum
         int WC; int sbj;
         WC = GetWordCount();
         cout << "Punctuation Flag:" << GetHasPunctuation() << "  Punctuation Character:" << GetPunctuation() << endl;
-        cout << "Word Count:" << WC << endl;
+        cout << "Word Count:" << WC << " Pattern:" << GetPattern() << endl;
         for (int x = 0; x < WC; x++){
             cout << x << " " << GetWords(x) << ":" << GetWordTokens(x) <<  " Type:"
             << GetWordType(x) << " isContraction:" << GetisContraction(x) << " Quote Location:" << GetQuoteLocation(x) << endl;
