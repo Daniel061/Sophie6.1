@@ -125,17 +125,18 @@ class c_Lobes
 
         }
 
-    bool CheckLinkOfTwoNounsWithAdjectives(string FirstNoun,string SecondNoun, string& VerbUsage, string& MatchedAdjective){
+    bool CheckLinkOfTwoNounsWithAdjectives(string FirstNoun,string SecondNoun, string& VerbUsage, string MatchedAdjective[], int& MatchedCount){
        /** TODO **
          Check for multi Matching and report back if so.
          Current logic returns last matching Adjective.
        */
 
        VerbUsage           = "";
-       MatchedAdjective    = "";
+       for(int x = 0; x<15; x++) MatchedAdjective[x] = "";
        bool Result; Result = false;
        int FirstNounAdjectiveCount,SecondNounAdjectiveCount;
        int TokenFirstNoun,TokenSecondNoun,intVerbUsage,intMatchedAdjective;
+       int AdjectiveMatches; AdjectiveMatches = 0;
 
        TokenFirstNoun           = Tokenize(FirstNoun);
        TokenSecondNoun          = Tokenize(SecondNoun);
@@ -150,13 +151,14 @@ class c_Lobes
           for(int x = 0; x < FirstNounAdjectiveCount; x++){
             for(int y = 0; y < SecondNounAdjectiveCount; y++){
                 if(RightLobeMemory[TokenFirstNoun].GetAdjective(x) == RightLobeMemory[TokenSecondNoun].GetAdjective(y)){
-                    Result              = true;
-                    intMatchedAdjective = RightLobeMemory[TokenFirstNoun].GetAdjective(x);
-                    MatchedAdjective    = RightLobeMemory[intMatchedAdjective].GetpCellDataString();
-                    intVerbUsage        = RightLobeMemory[TokenFirstNoun].GetVerbWithAdjective(x,1);
-                    VerbUsage           = RightLobeMemory[intVerbUsage].GetpCellDataString();}
+                    Result                                = true;
+                    intMatchedAdjective                   = RightLobeMemory[TokenFirstNoun].GetAdjective(x);
+                    MatchedAdjective[AdjectiveMatches]    = RightLobeMemory[intMatchedAdjective].GetpCellDataString();
+                    intVerbUsage                          = RightLobeMemory[TokenFirstNoun].GetVerbWithAdjective(x,1);
+                    VerbUsage                             = RightLobeMemory[intVerbUsage].GetpCellDataString();
+                    AdjectiveMatches++;}
             } } }
-
+          MatchedCount = AdjectiveMatches;
           return Result;
     }
 

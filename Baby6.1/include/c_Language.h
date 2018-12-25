@@ -65,7 +65,7 @@ class c_Language : public c_Sentence
 //-------------------------Find Word Type------------------------------------------------------
  char FindWordType(string tmpWord){
 
-           if(Verbose)cout << "[c_Language::FindWordType]" << endl;
+           if(Verbose)cout << "[c_Language::FindWordType] :";
 
 
            string Determiners;

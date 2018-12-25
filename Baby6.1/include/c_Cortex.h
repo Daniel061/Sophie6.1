@@ -319,7 +319,8 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
 int HandleQuestion(){
     if(Verbose){cout << "[c_Cortex.h::HandleQuestion]" << endl;}
     int Control;    Control = -1;
-    string VerbUsed, MatchedAdjective;
+    int MatchedCount;
+    string VerbUsed, MatchedAdjective[15];
     bool Matched;
     if(Verbose)
         cout << "qLoc:" << QuestionLocation << " Pattern:" << Pattern << " SubjectLoc:" << GetSubjectLocation() << endl;
@@ -328,13 +329,13 @@ int HandleQuestion(){
 
     Matched = CheckLinkOfTwoNounsWithAdjectives(RightLobeMemory[GetWordTokens(GetSubjectLocation())].GetpCellDataString(),
                                                 RightLobeMemory[GetWordTokens(QuestionLocation+1)].GetpCellDataString(),
-                                                VerbUsed,MatchedAdjective);
+                                                VerbUsed,MatchedAdjective, MatchedCount);
     if (Matched){
-        SlowSpeak("The " + GetWords(GetSubjectLocation())+ " " + VerbUsed + " " + MatchedAdjective + ".");}
+        SlowSpeak("The " + GetWords(GetSubjectLocation())+ " " + VerbUsed + " " + MatchedAdjective[0] + ".");}
         else
         SlowSpeak("You haven't told me yet.");
     if(Verbose)
-        cout << "Matched:" << Matched << " Verb:" << VerbUsed << " Adjective: " << MatchedAdjective << endl;
+        cout << "Matched:" << Matched << " Verb:" << VerbUsed << " Adjective: " << MatchedAdjective[0] << endl;
 
   return Control;
 }
@@ -407,6 +408,7 @@ void Handle75LevelUnderstanding(){
         else{
             SlowSpeak(":("); DecreaseMoodLevel();
             Testing = false;
+            break;
         }
     //---end Adjective Testing ----------
 
@@ -429,7 +431,8 @@ void Handle75LevelUnderstanding(){
 
     void HandleDirective(){
         int CompareMode, dLoc; CompareMode = 0;
-        string Noun1,Noun2,VerbUsage,MatchedAdjective,WorkingPattern;
+        int MatchedCount;
+        string Noun1,Noun2,VerbUsage,MatchedAdjective[15],WorkingPattern, ResponseString;
         Noun1 = ""; Noun2 = "";
         if(Verbose)cout << "[c_Cortex.h::Directive Trap] Pattern:" << Pattern << " ";
 
@@ -468,8 +471,15 @@ void Handle75LevelUnderstanding(){
 
                              if(Verbose) cout << "Noun to Noun :" << Noun1 << " " << Noun2 << endl;
 
-                             if (CheckLinkOfTwoNounsWithAdjectives(Noun1,Noun2,VerbUsage,MatchedAdjective)){
-                                 SlowSpeak("They both can be " + MatchedAdjective + ".");
+                             if (CheckLinkOfTwoNounsWithAdjectives(Noun1,Noun2,VerbUsage,MatchedAdjective,MatchedCount)){
+                                    if(MatchedCount > 1){
+                                        ResponseString = "They both can be " + MatchedAdjective[0] + " or ";
+                                        for(int x = 1; x< MatchedCount; x++)ResponseString += MatchedAdjective[x];
+                                        ResponseString += ".";}
+                                     else
+                                        ResponseString = "They both can be " + MatchedAdjective[0] + ".";
+
+                                 SlowSpeak(ResponseString);
                                  SlowSpeak(":)");}
                               else{
                                  SlowSpeak("I don't know anything alike between " + Noun2 + " and " + Noun1 + ".");

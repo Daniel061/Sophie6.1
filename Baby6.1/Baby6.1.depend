@@ -18,7 +18,7 @@
 1545435962 source:h:\c++projects\baby6.1\baby6.1\src\c_language.cpp
 	"c_Language.h"
 
-1545658286 h:\c++projects\baby6.1\baby6.1\include\c_language.h
+1545752466 h:\c++projects\baby6.1\baby6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<string>
@@ -39,7 +39,7 @@
 1544997036 source:h:\c++projects\baby6.1\baby6.1\src\c_cortex.cpp
 	"c_Cortex.h"
 
-1545664886 h:\c++projects\baby6.1\baby6.1\include\c_cortex.h
+1545757464 h:\c++projects\baby6.1\baby6.1\include\c_cortex.h
 	<c_Language.h>
 
 1544998330 source:h:\c++projects\baby6.1\baby6.1\src\c_shorttermmemory.cpp
@@ -69,7 +69,7 @@
 1545432114 source:h:\c++projects\baby6.1\baby6.1\src\c_lobes.cpp
 	"c_Lobes.h"
 
-1545655814 h:\c++projects\baby6.1\baby6.1\include\c_lobes.h
+1545753890 h:\c++projects\baby6.1\baby6.1\include\c_lobes.h
 	<c_MemoryCell.h>
 	<iostream>
 
