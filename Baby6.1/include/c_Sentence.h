@@ -108,7 +108,7 @@ class c_Sentence : public c_SubjectStack
                 int_Word_Count = 0;
                 int x; x = 0; int int_Sentence_Length;
                 int int_Last_Pos;
-                int int_Sentence_Token_Position;
+                int int_Sentence_Token_Position=0; // Initialize Token Position to start
                 int t; t = 0;
                 int_Sentence_Length = str_Sentence_Data.size();
                 int_Last_Pos = int_Sentence_Length;
