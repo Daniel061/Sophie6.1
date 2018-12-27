@@ -22,7 +22,7 @@ class c_MemoryCell
                                    // the decision on this word type is made elsewhere
         char SecondaryType;        // Could be used as another type i.e. light-n light red - A box is light -a
         char AlternateType;        // some words without modification could have a third type (All type references conform to pWordType definitions)
-        char GenderClass;          // n - neutral e- either m - male only f - female only
+        char GenderClass;          // n - neutral e- either m - male only f - female only u - undefined
         bool pIsRoot;              // the root of a word
         bool pIsSet;               // Has been set with data before
         int  pNextVerb;            // pointer to next verb

@@ -1,13 +1,12 @@
 #ifndef C_LANGUAGE_H
 #define C_LANGUAGE_H
-//#include <c_Personality.h>
 #include <c_Sentence.h>
 #include <c2_Sentence.h>
 #include <string>
 #include <iostream>
 extern bool Verbose;
 using namespace std;
-//public c_Personality
+
 class c_Language : public c_Sentence
 {
     public:
@@ -103,53 +102,69 @@ class c_Language : public c_Sentence
            if(Verbose)cout << "[c_Language::FindWordType] :";
 
           //TODO add new word types s,D,I,t
-           string Determiners;
-           string ProNouns;
-           string Questions;
+
+
+
+
+
            string OrigWord;
-           string Verbs;
-           string SubjectReplacements;
-           string Adverbs;
-           string Directives;
-           string JoiningWords;
-           char tmpWordType;
-           ProNouns =            " you your my mine yours me they them he him she her we i it that ";
-           Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
-           Questions =           " what where how when who what's ";
-           Verbs =               " be have do say get make go know take see is are come think look want give use find tell ask work seem feel try leave call ";
-           SubjectReplacements = " it that this ";
-           Adverbs =             " very ";
-           Directives =          " compare same ";
-           JoiningWords =        " and ";
-           int isDirective;  isDirective  = -1;
-           int isDeterminer; isDeterminer = -1;
-           int isProNoun;    isProNoun    = -1;
-           int isQuestion;   isQuestion   = -1;
-           int isVerb;       isVerb       = -1;
-           int isSubRep;     isSubRep     = -1;
-           int isAdverb;     isAdverb     = -1;
-           int isJoiner;     isJoiner     = -1;
-           tmpWordType = 'u';
+
+
+
+
+
+           char tmpWordType = 'u';
+
+           string ProNounsInward =      " you your yours ";
+           string ProNounsOther =       " they them he him she her it we ";
+           string ProNounsOutward =     " me mine my I i ";
+           string Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
+           string Questions =           " what where how when who what's ";
+           string Verbs =               " be have do say get make go know take see is are come think look want give use find tell ask work seem feel try leave call ";
+           string SubjectReplacements = " it that this ";
+           string Adverbs =             " very ";
+           string Directives =          " compare same ";
+           string JoiningWords =        " and ";
+
+           int isDirective       = -1;
+           int isDeterminer      = -1;
+           int isQuestion        = -1;
+           int isVerb            = -1;
+           int isSubRep          = -1;
+           int isAdverb          = -1;
+           int isJoiner          = -1;
+           int isProNounsOther   = -1;
+           int isProNounsInward  = -1;
+           int isProNounsOutward = -1;
+
 
 
               for(int t = 0; t < tmpWord.size(); t++){
                 tmpWord[t] = tolower(tmpWord[t]);}
               OrigWord = tmpWord;
               tmpWord = " " + tmpWord + " ";
-                isJoiner     = JoiningWords.find(tmpWord);
-                isDirective  = Directives.find(tmpWord);
-                isDeterminer = Determiners.find(tmpWord);
-                isProNoun    = ProNouns.find(tmpWord);
-                isQuestion   = Questions.find(tmpWord);
-                isVerb       = Verbs.find(tmpWord);
-                isSubRep     = SubjectReplacements.find(tmpWord);
-                isAdverb     = Adverbs.find(tmpWord);
+
+                isJoiner            = JoiningWords.find(tmpWord);
+                isDirective         = Directives.find(tmpWord);
+                isDeterminer        = Determiners.find(tmpWord);
+                isProNounsOther     = ProNounsOther.find(tmpWord);
+                isProNounsInward    = ProNounsInward.find(tmpWord);
+                isProNounsOutward   = ProNounsOutward.find(tmpWord);
+                isQuestion          = Questions.find(tmpWord);
+                isVerb              = Verbs.find(tmpWord);
+                isSubRep            = SubjectReplacements.find(tmpWord);
+                isAdverb            = Adverbs.find(tmpWord);
+
                   if (isVerb >= 0){
                       tmpWordType = 'v';}
                   if (isDeterminer >= 0){
                        tmpWordType = 'd';}
-                  if (isProNoun >= 0){
+                  if (isProNounsOther >= 0){
                        tmpWordType = 'p';}
+                  if (isProNounsInward >=0){
+                       tmpWordType = 'm';}
+                  if (isProNounsOutward >=0){
+                       tmpWordType = 'y';}
                   if (isQuestion >= 0){
                        tmpWordType = 'q';}
                   if (isSubRep >=0){

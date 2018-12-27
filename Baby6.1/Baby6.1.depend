@@ -99,13 +99,13 @@
 1545762928 d:\c++projects\baby6.1\baby6.1\include\c_cortex.h
 	<c_Language.h>
 
-1545826928 d:\c++projects\baby6.1\baby6.1\include\c_language.h
+1545946176 d:\c++projects\baby6.1\baby6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<string>
 	<iostream>
 
-1545655372 d:\c++projects\baby6.1\baby6.1\include\c_sentence.h
+1545943792 d:\c++projects\baby6.1\baby6.1\include\c_sentence.h
 	<c_SubjectStack.h>
 
 1545587044 d:\c++projects\baby6.1\baby6.1\include\c_subjectstack.h
@@ -118,7 +118,7 @@
 	<c_MemoryCell.h>
 	<iostream>
 
-1545658040 d:\c++projects\baby6.1\baby6.1\include\c_memorycell.h
+1545945064 d:\c++projects\baby6.1\baby6.1\include\c_memorycell.h
 	<string>
 
 1545437506 d:\c++projects\baby6.1\baby6.1\include\c2_sentence.h
