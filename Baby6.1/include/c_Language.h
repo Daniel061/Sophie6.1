@@ -42,6 +42,7 @@ class c_Language : public c_Sentence
         unknown-type joiner determiner known-type   can assume unknown-type = known-type after skipping determiner
 
         Working principle~ you cannot join unlike word types i.e. dog and cat ~ ok     dirty and dog ~ improper form
+        Possible exception~ The cat is fast and the dog is too.  The joining word 'and' would trigger this routine to match dog and fast as the same word types
 
     */
     JoinerLocation = Pattern.find("j");
@@ -101,7 +102,7 @@ class c_Language : public c_Sentence
 
            if(Verbose)cout << "[c_Language::FindWordType] :";
 
-
+          //TODO add new word types s,D,I,t
            string Determiners;
            string ProNouns;
            string Questions;

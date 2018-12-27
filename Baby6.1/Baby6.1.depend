@@ -80,3 +80,84 @@
 1545437288 source:h:\c++projects\baby6.1\baby6.1\src\c2_sentence.cpp
 	"c2_Sentence.h"
 
+1545585060 source:d:\c++projects\baby6.1\baby6.1\main.cpp
+	<iostream>
+	<c_Brain.h>
+
+1545761626 d:\c++projects\baby6.1\baby6.1\include\c_brain.h
+	<c_Cerebellum.h>
+
+1544998580 d:\c++projects\baby6.1\baby6.1\include\c_cerebellum.h
+	<c_Medulla.h>
+
+1545481536 d:\c++projects\baby6.1\baby6.1\include\c_medulla.h
+	<c_ShortTermMemory.h>
+
+1544998330 d:\c++projects\baby6.1\baby6.1\include\c_shorttermmemory.h
+	<c_Cortex.h>
+
+1545762928 d:\c++projects\baby6.1\baby6.1\include\c_cortex.h
+	<c_Language.h>
+
+1545826928 d:\c++projects\baby6.1\baby6.1\include\c_language.h
+	<c_Sentence.h>
+	<c2_Sentence.h>
+	<string>
+	<iostream>
+
+1545655372 d:\c++projects\baby6.1\baby6.1\include\c_sentence.h
+	<c_SubjectStack.h>
+
+1545587044 d:\c++projects\baby6.1\baby6.1\include\c_subjectstack.h
+	<c_Personality.h>
+
+1545432392 d:\c++projects\baby6.1\baby6.1\include\c_personality.h
+	<c_Lobes.h>
+
+1545760292 d:\c++projects\baby6.1\baby6.1\include\c_lobes.h
+	<c_MemoryCell.h>
+	<iostream>
+
+1545658040 d:\c++projects\baby6.1\baby6.1\include\c_memorycell.h
+	<string>
+
+1545437506 d:\c++projects\baby6.1\baby6.1\include\c2_sentence.h
+	<string>
+	<iostream>
+
+1545437288 source:d:\c++projects\baby6.1\baby6.1\src\c2_sentence.cpp
+	"c2_Sentence.h"
+
+1544998682 source:d:\c++projects\baby6.1\baby6.1\src\c_brain.cpp
+	"c_Brain.h"
+
+1544998580 source:d:\c++projects\baby6.1\baby6.1\src\c_cerebellum.cpp
+	"c_Cerebellum.h"
+
+1544997036 source:d:\c++projects\baby6.1\baby6.1\src\c_cortex.cpp
+	"c_Cortex.h"
+
+1545435962 source:d:\c++projects\baby6.1\baby6.1\src\c_language.cpp
+	"c_Language.h"
+
+1545432114 source:d:\c++projects\baby6.1\baby6.1\src\c_lobes.cpp
+	"c_Lobes.h"
+
+1544998410 source:d:\c++projects\baby6.1\baby6.1\src\c_medulla.cpp
+	"c_Medulla.h"
+
+1545438670 source:d:\c++projects\baby6.1\baby6.1\src\c_memorycell.cpp
+	"c_MemoryCell.h"
+
+1544995222 source:d:\c++projects\baby6.1\baby6.1\src\c_personality.cpp
+	"c_Personality.h"
+
+1544996084 source:d:\c++projects\baby6.1\baby6.1\src\c_sentence.cpp
+	"c_Sentence.h"
+
+1544998330 source:d:\c++projects\baby6.1\baby6.1\src\c_shorttermmemory.cpp
+	"c_ShortTermMemory.h"
+
+1544995944 source:d:\c++projects\baby6.1\baby6.1\src\c_subjectstack.cpp
+	"c_SubjectStack.h"
+
