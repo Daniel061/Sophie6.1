@@ -96,10 +96,10 @@
 1544998330 d:\c++projects\baby6.1\baby6.1\include\c_shorttermmemory.h
 	<c_Cortex.h>
 
-1545762928 d:\c++projects\baby6.1\baby6.1\include\c_cortex.h
+1545949090 d:\c++projects\baby6.1\baby6.1\include\c_cortex.h
 	<c_Language.h>
 
-1545946176 d:\c++projects\baby6.1\baby6.1\include\c_language.h
+1545947868 d:\c++projects\baby6.1\baby6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<string>
@@ -118,7 +118,7 @@
 	<c_MemoryCell.h>
 	<iostream>
 
-1545945064 d:\c++projects\baby6.1\baby6.1\include\c_memorycell.h
+1545947532 d:\c++projects\baby6.1\baby6.1\include\c_memorycell.h
 	<string>
 
 1545437506 d:\c++projects\baby6.1\baby6.1\include\c2_sentence.h

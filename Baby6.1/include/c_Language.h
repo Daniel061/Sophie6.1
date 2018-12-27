@@ -125,6 +125,7 @@ class c_Language : public c_Sentence
            string Adverbs =             " very ";
            string Directives =          " compare same ";
            string JoiningWords =        " and ";
+           string AssociativeWord =     " name name's ";
 
            int isDirective       = -1;
            int isDeterminer      = -1;
@@ -136,6 +137,7 @@ class c_Language : public c_Sentence
            int isProNounsOther   = -1;
            int isProNounsInward  = -1;
            int isProNounsOutward = -1;
+           int isAssociativeWord = -1;
 
 
 
@@ -154,6 +156,7 @@ class c_Language : public c_Sentence
                 isVerb              = Verbs.find(tmpWord);
                 isSubRep            = SubjectReplacements.find(tmpWord);
                 isAdverb            = Adverbs.find(tmpWord);
+                isAssociativeWord   = AssociativeWord.find(tmpWord);
 
                   if (isVerb >= 0){
                       tmpWordType = 'v';}
@@ -175,6 +178,8 @@ class c_Language : public c_Sentence
                         tmpWordType = 'X';}
                   if (isJoiner >=0){
                         tmpWordType = 'j';}
+                  if (isAssociativeWord >=0){
+                        tmpWordType = 'g';}
             if(Verbose)
                 cout << "tmpWord " << tmpWord <<" type:" << tmpWordType << endl;
             return tmpWordType;

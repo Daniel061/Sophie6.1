@@ -15,7 +15,10 @@ class c_Cortex : public c_Language
             char tmpWordType;
             int NounLocation;
             int DeterminerLocation;
-            int ProNounLocation;
+            int ProNounOtherLocation;
+            int ProNounInwardLocation;
+            int ProNounOutwardLocation;
+            int AssociativeWordLocation;
             int VerbLocation;
             int AdjectiveLocation;
             int SubjectLoc;
@@ -45,17 +48,22 @@ class c_Cortex : public c_Language
             if(Verbose){cout << "[c_Cortex.h::DeciperCurrentSentence]" << endl;}
             SubjectLoc = GetSubjectLocation();
             AdjectiveLocation  = -1; FirstUnknown = -1; ContractionLocation = -1;
-            DeterminerLocation = -1; ProNounLocation = -1; ISQ = false;
+            DeterminerLocation = -1; ProNounOtherLocation = -1; ISQ = false;
             Pattern = ""; NounLocation = -1; Control = -1; UnderstandingLevel = 0;
             UnderstandingRatio = 0.0; UnknownCount = 0; QuestionLocation = 0;
             AdverbLocation = -1; DirectiveLocation = -1; JoinerLocation = -1;
             DirectObjectLocation = -1; IndirectObjectLocation = -1; PluralPossessiveLocation = -1;
+            ProNounInwardLocation = -1; ProNounOutwardLocation = -1; AssociativeWordLocation = -1;
+
             for(int x =0; x < GetWordCount(); x++){                                                                  // Build pattern string i.e. duvu  4 word sentence
                     Pattern += GetWordType(x);
                     tmpWordType = GetWordType(x);
                     if (tmpWordType == 'n') {NounLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'd') {DeterminerLocation = x; UnderstandingLevel++;}
-                    if (tmpWordType == 'p') {ProNounLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'p') {ProNounOtherLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'y') {ProNounOutwardLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'm') {ProNounInwardLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'g') {AssociativeWordLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'v') {VerbLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'a') {AdjectiveLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'r') {ReplacementLocation = x; UnderstandingLevel++;}
@@ -167,38 +175,7 @@ class c_Cortex : public c_Language
                    if (Verbose)
                     cout << "Case 75" << endl;
                  Handle75LevelUnderstanding();
-                 //todo******
-                 //see if a noun already exist
-                 //see if it matches the tracked subject
 
-//                 SlowSpeak("Hmmm.");
-//                 string tmpUnknown; string tmpSubject; int a,b; int tmpLocation;
-//                 tmpSubject = CurrentSentence.GetWords(SubjectLoc);
-//                 for(int x =0; x < CurrentSentence.GetWordCount(); x++)
-//                    if(CurrentSentence.GetWordType(x)=='u'){
-//                            tmpUnknown = CurrentSentence.GetWords(x);
-//                            tmpLocation = x;}
-//                 if(AdjectiveLocation == -1)a = tmpLocation; else a = AdjectiveLocation;
-//                 SlowSpeak("I think " + CurrentSentence.GetWords(a) + " is describing the " + tmpSubject + ".");
-//                 SlowSpeak(" Am I right?");
-//                 b = RequestUserResponse();
-//                 if(b==1){
-//                    CurrentSentence.SetWordType('a',a);
-//
-//                    CurrentSentence.SetWordType('n',SubjectLoc);
-//                    SlowSpeak("Got it!"); SlowSpeak("Thanks!");
-//                    SlowSpeak("So a " + CurrentSentence.GetWords(a) + " " + tmpSubject + ".");
-//                    SlowSpeak("What else can a " + tmpSubject + " be or do?");
-//                    CurrectSubject.SetSubject(CurrentSentence.GetWordTokens(SubjectLoc),tmpSubject);
-//                    Personality.IncreaseMoodLevel();
-//                 }
-//                 else
-//                 {
-//                     SlowSpeak("Hmmm. I'll get it eventually.");
-//                     SlowSpeak(":(");
-//                     Personality.DecreaseMoodLevel();
-//
-//                 }
                  break;
                 }
                 case 100:{  ///very strong
