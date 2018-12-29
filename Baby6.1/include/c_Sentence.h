@@ -17,7 +17,7 @@ class c_Sentence : public c_SubjectStack
         int    SubjectLocation;                 // from 0 to WordCount, -1 = subject not located
         int    WordTokens[30];                  // dog = 625 initialize to 0
         bool   isContraction[30];               // true / false  initialize to false  initialize to ""
-        int    QuoteLocation[30];               // can't set to 3 for this, set to -1 for dog
+        int    QuoteLocation[30];               // "can't" set to 3 for this, set to -1 for "dog"
         string Words[30];                       // Dog  i.e. original unedited word  initialize to ""
         string WordsLC[30];                     // dog  initialize to ""
         string SubWords[30];                    // replacement words, usually from subject stack
@@ -44,15 +44,14 @@ class c_Sentence : public c_SubjectStack
                 ContractionWordLongForm[x] = "";
                 WordType[x]                = 'u';
                 SecondaryType[x]           = 'u';
-                AlternateType[x]           = 'u';
-            }
+                AlternateType[x]           = 'u';}
+
                 WordCount                  = 0;
                 SubjectLocation            = -1;
                 OriginalString             = "";
                 Pattern                    = "";
                 HasPunctuation             = false;
-                IsQuestion                 = false;
-        }
+                IsQuestion                 = false;}
 
     public:
         char   GetSecondaryType(int Location){return SecondaryType[Location];}

@@ -88,7 +88,7 @@ class c_Language : public c_Sentence
         ConfidenceLevel = 100;}
     if(Pattern == "avdu"){
         CorrectedPattern = "avdn";
-        ConfidenceLevel - 100;}
+        ConfidenceLevel = 100;}
 
      if(Verbose)cout << " Received Pattern:" << Pattern << " Correct Pattern:" << CorrectedPattern << endl;
    return CorrectedPattern;
@@ -191,7 +191,7 @@ class c_Language : public c_Sentence
 void SlowSpeak(string str_Data, int Delay = 30000000 )
 {
      string WorkingWord;
-
+     SaveResponsesSent(str_Data);
      SlowSentence.Parse(str_Data);
      for(int x = 0; x < SlowSentence.GetWordCount(); x++){
 

@@ -421,23 +421,22 @@ void Handle75LevelUnderstanding(){
             //extract determiners 'd' from pattern
             WorkingPattern = Pattern;
             dLoc = WorkingPattern.find('d');
-            while(dLoc >=0 & dLoc <= WorkingPattern.size()){
+            while((dLoc >=0) & (dLoc <= WorkingPattern.size())){
                 WorkingPattern = WorkingPattern.substr(0,dLoc) + WorkingPattern.substr(dLoc+1);
-                dLoc = WorkingPattern.find('d');
+                dLoc = WorkingPattern.find('d');}
 
-            }
-            if((WorkingPattern.find("njn") >= 0 & WorkingPattern.find("njn")<=WorkingPattern.size())) CompareMode = 3;
-            if((WorkingPattern.find("nun") >= 0 & WorkingPattern.find("nun")<=WorkingPattern.size())) CompareMode = 3;
-            if((WorkingPattern.find("aua") >= 0 & WorkingPattern.find("aua")<=WorkingPattern.size())) CompareMode = 1;
-            if((WorkingPattern.find("aja") >= 0 & WorkingPattern.find("aja")<=WorkingPattern.size())) CompareMode = 1;
-            if((WorkingPattern.find("aun") >= 0 & WorkingPattern.find("aun")<=WorkingPattern.size())) CompareMode = 2;
-            if((WorkingPattern.find("ajn") >= 0 & WorkingPattern.find("ajn")<=WorkingPattern.size())) CompareMode = 2;
-            if((WorkingPattern.find("Aua") >= 0 & WorkingPattern.find("Aua")<=WorkingPattern.size())) CompareMode = 4;
-            if((WorkingPattern.find("Aja") >= 0 & WorkingPattern.find("Aja")<=WorkingPattern.size())) CompareMode = 4;
-            if((WorkingPattern.find("AuA") >= 0 & WorkingPattern.find("AuA")<=WorkingPattern.size())) CompareMode = 5;
-            if((WorkingPattern.find("AjA") >= 0 & WorkingPattern.find("AjA")<=WorkingPattern.size())) CompareMode = 5;
-            if((WorkingPattern.find("Aun") >= 0 & WorkingPattern.find("Aun")<=WorkingPattern.size())) CompareMode = 6;
-            if((WorkingPattern.find("Ajn") >= 0 & WorkingPattern.find("Ajn")<=WorkingPattern.size())) CompareMode = 6;
+            if( (WorkingPattern.find("njn") >= 0) & (WorkingPattern.find("njn")<=WorkingPattern.size()) ) CompareMode = 3;
+            if( (WorkingPattern.find("nun") >= 0) & (WorkingPattern.find("nun")<=WorkingPattern.size()) ) CompareMode = 3;
+            if( (WorkingPattern.find("aua") >= 0) & (WorkingPattern.find("aua")<=WorkingPattern.size()) ) CompareMode = 1;
+            if( (WorkingPattern.find("aja") >= 0) & (WorkingPattern.find("aja")<=WorkingPattern.size()) ) CompareMode = 1;
+            if( (WorkingPattern.find("aun") >= 0) & (WorkingPattern.find("aun")<=WorkingPattern.size()) ) CompareMode = 2;
+            if( (WorkingPattern.find("ajn") >= 0) & (WorkingPattern.find("ajn")<=WorkingPattern.size()) ) CompareMode = 2;
+            if( (WorkingPattern.find("Aua") >= 0) & (WorkingPattern.find("Aua")<=WorkingPattern.size()) ) CompareMode = 4;
+            if( (WorkingPattern.find("Aja") >= 0) & (WorkingPattern.find("Aja")<=WorkingPattern.size()) ) CompareMode = 4;
+            if( (WorkingPattern.find("AuA") >= 0) & (WorkingPattern.find("AuA")<=WorkingPattern.size()) ) CompareMode = 5;
+            if( (WorkingPattern.find("AjA") >= 0) & (WorkingPattern.find("AjA")<=WorkingPattern.size()) ) CompareMode = 5;
+            if( (WorkingPattern.find("Aun") >= 0) & (WorkingPattern.find("Aun")<=WorkingPattern.size()) ) CompareMode = 6;
+            if( (WorkingPattern.find("Ajn") >= 0) & (WorkingPattern.find("Ajn")<=WorkingPattern.size()) ) CompareMode = 6;
 
                 switch(CompareMode){
 
@@ -476,6 +475,9 @@ void Handle75LevelUnderstanding(){
     }
 
 
+
+    void DeconstructContractions(){
+    }
 
 };
 
