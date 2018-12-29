@@ -1,10 +1,10 @@
 #ifndef C_MEDULLA_H
 #define C_MEDULLA_H
 
-#include <c_Cortex.h>
+#include <c_Lobes.h>
 
 
-class c_Medulla : public c_Cortex
+class c_Medulla : public c_Lobes
 {
 
 

@@ -1,10 +1,10 @@
 #ifndef C_SHORTTERMMEMORY_H
 #define C_SHORTTERMMEMORY_H
 
-#include <c_Lobes.h>
+#include <c_Medulla.h>
 
 
-class c_ShortTermMemory : public c_Lobes
+class c_ShortTermMemory : public c_Medulla
 {
     public:
         c_ShortTermMemory();
