@@ -37,6 +37,7 @@ class c_Cortex : public c_Language
             int DirectObjectLocation;
             int IndirectObjectLocation;
             int PluralPossessiveLocation;
+            int PluralPronounLocation;
             float UnderstandingRatio;
             bool ISQ;
 
@@ -54,6 +55,7 @@ class c_Cortex : public c_Language
             AdverbLocation = -1; DirectiveLocation = -1; JoinerLocation = -1;
             DirectObjectLocation = -1; IndirectObjectLocation = -1; PluralPossessiveLocation = -1;
             ProNounInwardLocation = -1; ProNounOutwardLocation = -1; AssociativeWordLocation = -1;
+            PluralPronounLocation = -1;
 
             for(int x =0; x < GetWordCount(); x++){                                                                  // Build pattern string i.e. duvu  4 word sentence
                     Pattern += GetWordType(x);
@@ -75,6 +77,7 @@ class c_Cortex : public c_Language
                     if (tmpWordType == 's') {PluralPossessiveLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'D') {DirectObjectLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'I') {IndirectObjectLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'N') {PluralPronounLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'u') {
                             UnknownCount++; UnKnownLocation = x;
                             if(FirstUnknown == -1) FirstUnknown = x;
@@ -99,8 +102,10 @@ class c_Cortex : public c_Language
                 UnderstandingDegree = 0;
             if(Verbose)
              cout << "Pattern: " + Pattern + " Understanding Level:" << UnderstandingLevel << " Ratio:" << UnderstandingRatio<< " Is Question:" << ISQ << " Degree:" << UnderstandingDegree << " Unknown Count:" << UnknownCount << "\n";
-            if(ISQ == true)UnderstandingDegree = 1;             //question trap
-            if(DirectiveLocation >=0)UnderstandingDegree = 2;   //directive trap
+
+            if(ISQ == true)UnderstandingDegree = 1;               //question trap
+            if(DirectiveLocation >=0)UnderstandingDegree = 2;     //directive trap
+            if(PluralPronounLocation >=0)UnderstandingDegree = 3; //plural pronoun trap
             switch (UnderstandingDegree)
             {
                case 0:{  ///All new words, lots of work to do
@@ -147,6 +152,10 @@ class c_Cortex : public c_Language
                }
                case 2:{ //directive trap
                     HandleDirective();
+                    break;
+               }
+               case 3:{ //plural pronoun trap
+                    HandlePluralPronoun(PluralPronounLocation);
                     break;
                }
                 case 10:{  ///Only 1 known but could have a ratio of 100%
@@ -417,7 +426,7 @@ void Handle75LevelUnderstanding(){
 
 
         if(GetWordTokens(DirectiveLocation) == 2972 | GetWordTokens(DirectiveLocation)==1070){
-            if(Verbose) cout << "compare directive ";
+            if(Verbose) cout << "compare/same directive ";
             //extract determiners 'd' from pattern
             WorkingPattern = Pattern;
             dLoc = WorkingPattern.find('d');
@@ -479,6 +488,29 @@ void Handle75LevelUnderstanding(){
     void DeconstructContractions(){
     }
 
+
+    void HandlePluralPronoun(int PluralPronounLocation){     // i.e. both
+        string Noun1       = "";
+        string Noun2       = "";
+        int NounCount      = 0;
+        int JoinerLocation = 0;
+
+        for(int x = 0; x < GetWordCount(); x++){
+           if(GetWordType(x)=='n'){
+                NounCount++;
+                if(Noun1 =="")Noun1 = GetWordsLC(x); else Noun2 = GetWordsLC(x);}
+            if(GetWordType(x)=='j') JoinerLocation = x;}
+
+
+         if((JoinerLocation >0)&(NounCount==2)){ //two nouns with joiner
+                RightLobeMemory[Tokenize(Noun1)].AccociateAdjective(GetWordTokens(PluralPronounLocation+1));
+                RightLobeMemory[Tokenize(Noun2)].AccociateAdjective(GetWordTokens(PluralPronounLocation+1));
+                SetWordType('a',PluralPronounLocation+1);}
+
+         SlowSpeak("Alright.");
+         SlowSpeak(":)");
+         IncreaseMoodLevel();
+    }
 };
 
 #endif // C_CORTEX_H

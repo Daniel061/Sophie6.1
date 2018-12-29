@@ -101,16 +101,8 @@ class c_Language : public c_Sentence
 
            if(Verbose)cout << "[c_Language::FindWordType] :";
 
-          //TODO add new word types s,D,I,t
-
-
-
-
 
            string OrigWord;
-
-
-
 
 
            char tmpWordType = 'u';
@@ -126,7 +118,9 @@ class c_Language : public c_Sentence
            string Directives =          " compare same ";
            string JoiningWords =        " and ";
            string AssociativeWord =     " name name's ";
+           string PluralPronoun =       " both ";
 
+           int isPluralPronoun   = -1;
            int isDirective       = -1;
            int isDeterminer      = -1;
            int isQuestion        = -1;
@@ -146,6 +140,7 @@ class c_Language : public c_Sentence
               OrigWord = tmpWord;
               tmpWord = " " + tmpWord + " ";
 
+                isPluralPronoun     = PluralPronoun.find(tmpWord);
                 isJoiner            = JoiningWords.find(tmpWord);
                 isDirective         = Directives.find(tmpWord);
                 isDeterminer        = Determiners.find(tmpWord);
@@ -180,6 +175,9 @@ class c_Language : public c_Sentence
                         tmpWordType = 'j';}
                   if (isAssociativeWord >=0){
                         tmpWordType = 'g';}
+                  if (isPluralPronoun >=0){
+                        tmpWordType = 'N';
+                        SetHasPluralPronoun(true);}
             if(Verbose)
                 cout << "tmpWord " << tmpWord <<" type:" << tmpWordType << endl;
             return tmpWordType;
