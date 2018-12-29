@@ -305,21 +305,36 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
 }//end work with half level
 //---------------------------------------------------------------------------------------------------------------
 int HandleQuestion(){
+    //***TODO**
+    //check for multi match and handle
+
     if(Verbose){cout << "[c_Cortex.h::HandleQuestion]" << endl;}
     int Control;    Control = -1;
     int MatchedCount;
     string VerbUsed, MatchedAdjective[15];
-    bool Matched;
+    string AnswerString;
+    bool Matched = false;
     if(Verbose)
         cout << "qLoc:" << QuestionLocation << " Pattern:" << Pattern << " SubjectLoc:" << GetSubjectLocation() << endl;
 
-   // Matched = CheckLinkOfTwoNounsWithAdjectives("dog","color",VerbUsed,MatchedAdjective);
-
+   // check for correct form
+    if(GetSubjectLocation() != QuestionLocation + 1)
     Matched = CheckLinkOfTwoNounsWithAdjectives(RightLobeMemory[GetWordTokens(GetSubjectLocation())].GetpCellDataString(),
                                                 RightLobeMemory[GetWordTokens(QuestionLocation+1)].GetpCellDataString(),
                                                 VerbUsed,MatchedAdjective, MatchedCount);
     if (Matched){
-        SlowSpeak("The " + GetWords(GetSubjectLocation())+ " " + VerbUsed + " " + MatchedAdjective[0] + ".");}
+            if(MatchedCount > 1){
+                AnswerString = "The " +  GetWordsLC(QuestionLocation + 1) + " of the "  + GetWords(GetSubjectLocation()) + " can be ";
+                for(int x = 0; x < MatchedCount; x++){
+                        AnswerString = AnswerString + MatchedAdjective[x];
+                        if(!(x+1==MatchedCount)) AnswerString += " or ";}
+                AnswerString += ".";
+                SlowSpeak(AnswerString);
+            }
+            else{
+               SlowSpeak("The " +  GetWordsLC(QuestionLocation + 1) + " of the "  + GetWords(GetSubjectLocation())+ " is " + MatchedAdjective[0] + ".");
+            }
+        }
         else
         SlowSpeak("You haven't told me yet.");
     if(Verbose)
@@ -490,6 +505,11 @@ void Handle75LevelUnderstanding(){
 
 
     void HandlePluralPronoun(int PluralPronounLocation){     // i.e. both
+
+        //**TODO**
+        //Check the word type after PluralPronounLocation
+        // could be adverb
+
         string Noun1       = "";
         string Noun2       = "";
         int NounCount      = 0;
@@ -505,11 +525,13 @@ void Handle75LevelUnderstanding(){
          if((JoinerLocation >0)&(NounCount==2)){ //two nouns with joiner
                 RightLobeMemory[Tokenize(Noun1)].AccociateAdjective(GetWordTokens(PluralPronounLocation+1));
                 RightLobeMemory[Tokenize(Noun2)].AccociateAdjective(GetWordTokens(PluralPronounLocation+1));
-                SetWordType('a',PluralPronounLocation+1);}
-
-         SlowSpeak("Alright.");
-         SlowSpeak(":)");
-         IncreaseMoodLevel();
+                SetWordType('a',PluralPronounLocation+1);
+                SlowSpeak("Alright.");
+                SlowSpeak(":)");
+                IncreaseMoodLevel();}
+          else{
+                SlowSpeak(":{");
+                DecreaseMoodLevel();}
     }
 };
 
