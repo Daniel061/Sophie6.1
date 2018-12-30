@@ -20,6 +20,7 @@ class c_MemoryCell
                                    // n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object I(LC) Indirect object
                                    // s - plural possessive  X(cap) Directive j-joining word
                                    // initialize to 'u'
+        char WordTense;            // p-past c-present f-future s-plural
                                    // the decision on this word type is made elsewhere
         char SecondaryType;        // Could be used as another type i.e. light-n light red - A box is light -a
         char AlternateType;        // some words without modification could have a third type (All type references conform to pWordType definitions)
@@ -35,6 +36,8 @@ class c_MemoryCell
 
 
     public:
+        char   GetWordTense() {return WordTense;}
+        void   SetWordTense(char newTense){WordTense = newTense;}
         int    GetAdjectiveCount(){return AdjectiveCount;}
         char   GetSecondaryType(){return SecondaryType;}
         void   SetSecondaryType(char Type){SecondaryType = Type;}
