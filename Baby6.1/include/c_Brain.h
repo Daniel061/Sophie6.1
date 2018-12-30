@@ -292,47 +292,7 @@ class c_Brain : public c_Cerebellum
 
 ///------------------------------------------------------------------------------------------------
 
-//---------------------------------FINDSUBJECT()--------------------------------------------------
-        int FindSubject()
-        {
-            if(Verbose)cout << "[c_Brain.h::FindSubject]" << endl;
-            int DeterminerLocation;       DeterminerLocation = -1;
-            int UnknownLocation;          UnknownLocation    = -1;
-            int WordCount;                WordCount          =  0;
-            int SubLocation;              SubLocation        = -1;
-            int NounLocation;             NounLocation       = -1;
-            int ProNounLocation;          ProNounLocation    = -1;
-            string Pattern;               Pattern            = "";
 
-            WordCount = GetWordCount();
-            for(int x = 0; x < WordCount; x++){
-                if(GetWordType(x)== 'd')DeterminerLocation = x;
-                if(GetWordType(x)== 'u')UnknownLocation    = x;
-                if(GetWordType(x)== 'n')NounLocation       = x;
-                if(GetWordType(x)== 'r')SubLocation        = x;
-                if(GetWordType(x)== 'p')ProNounLocation    = x;
-                Pattern += GetWordType(x);
-            }
-            SetPattern(Pattern);
-            if((SubLocation == -1) & (NounLocation != -1))
-                SubLocation = NounLocation;
-            else
-                if((SubLocation == -1) & (ProNounLocation !=-1))
-                    SubLocation = ProNounLocation;
-            else
-                if((SubLocation == -1) & (DeterminerLocation != -1))
-                    SubLocation = DeterminerLocation +1;
-            else
-                if((SubLocation == -1) & (UnknownLocation != -1))
-                    SubLocation = UnknownLocation;
-
-
-            if(Verbose)
-                    cout << "Suggested subject location:" << SubLocation << " Pattern:" << GetPattern() << endl;
-
-            return SubLocation;
-        }
-//--------------------------------------------------end Find Subject----------------------------------------------------------
 
         void TrySubject()
         {
