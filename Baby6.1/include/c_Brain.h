@@ -48,6 +48,7 @@ class c_Brain : public c_Cerebellum
             int a, ConfidenceLevel;
             string b,c,CheckedPattern;
             int SubjectLocation;
+            string FirstPattern = "";
             bool Greeting;
             a = 0;
 
@@ -64,6 +65,8 @@ class c_Brain : public c_Cerebellum
              SetWordTypes();                                                              //try to set all word types
              SubjectLocation = FindSubject();                                             //try to located subject
              SetSubjectLocation(SubjectLocation);                                         //set the suggestion
+             RebuildPattern();
+             FirstPattern = GetPattern();
              CheckedPattern = PatternReview(GetPattern(),ConfidenceLevel);                //see if language class can enhance pattern
              if(Verbose){
                     cout << "Processed Pattern:" << CheckedPattern << ":" << GetPattern() << "Confidence level: " << ConfidenceLevel << endl;}
@@ -76,11 +79,13 @@ class c_Brain : public c_Cerebellum
                 SetSubjectLocation(SubjectLocation);
              }
              DecipherCurrentSentence();                                                             //work with sentence
+             SubjectLocation = FindSubject();                                                       // need to run this again to see if any indirect objects
              SetSubjectLocation(SubjectLocation);                                                  //store the location or -1
              a = StoreNewWords();                                                                  //save any new words in rBrainCells
              SaveProcessedPattern(GetPattern());                                                   //update short term memory
              if(SubjectLocation >=0)
                 SetSubject(GetWordTokens(SubjectLocation),GetWords(SubjectLocation));
+                SavePreAndPostPatternConstruction(FirstPattern,GetPattern());                      //save learned pattern for future// language helper to use this
              }
             else
                 if(a == -1)
@@ -219,6 +224,15 @@ class c_Brain : public c_Cerebellum
                     for(int x =0; x<15; x++){
                         if(GetSubject(x)>0)
                             cout << x << ":   " << GetSubject(x) << "    " << RightLobeMemory[GetSubject(x)].GetpCellDataString() << " " << GetstrSubject(x) << endl;}
+                    break;
+                }
+            case 5365:   // pattern report 'duvu'
+                {
+                    Control = 2;
+                    cout << LeftLobeMemory[CommandCheckSentence.GetWordTokens(2)].GetpCellDataString() << " points to "
+                         << LeftLobeMemory[LeftLobeMemory[CommandCheckSentence.GetWordTokens(2)].GetPointerToNextPattern()].GetpCellDataString() << endl;
+
+                    break;
 
                 }
 
@@ -355,9 +369,13 @@ class c_Brain : public c_Cerebellum
                 if(GetWordType(x)=='a'){
                         if(GetSubjectLocation() >=0 )
                             RightLobeMemory[GetWordTokens(GetSubjectLocation())].AccociateAdjective(GetWordTokens(x));
+                            if(GetIndirectObjectLocation() >=0)
+                                RightLobeMemory[GetWordTokens(GetIndirectObjectLocation())].AccociateAdjective(GetWordTokens(x));
                     int z; z = GetVerbPointingToAdjective();
                     if(z >=0)
                         RightLobeMemory[GetWordTokens(GetSubjectLocation())].AccociateAdjectiveWithVerb(GetWordTokens(z),GetWordTokens(x));
+                        if(GetIndirectObjectLocation()>=0)
+                            RightLobeMemory[GetWordTokens(GetIndirectObjectLocation())].AccociateAdjectiveWithVerb(GetWordTokens(z),GetWordTokens(x));
                 }
          }
 

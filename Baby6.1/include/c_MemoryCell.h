@@ -32,10 +32,13 @@ class c_MemoryCell
         int  AdjectiveList[15][4]; // points to linked adjectives with verbs [0][0] = Adjective [0][1]..[0][3] = verbs
         int  AdjectiveCount;       // the number of adjectives here
         int  pToken;               // the token value of this data
+        int  PointerToNextPattern; // if used as pattern storage, points to constructed pattern
 
 
 
     public:
+        int    GetPointerToNextPattern(){return PointerToNextPattern;}
+        void   SetPointerToNextPattern(int NextPattern){PointerToNextPattern = NextPattern;}
         char   GetWordTense() {return WordTense;}
         void   SetWordTense(char newTense){WordTense = newTense;}
         int    GetAdjectiveCount(){return AdjectiveCount;}
