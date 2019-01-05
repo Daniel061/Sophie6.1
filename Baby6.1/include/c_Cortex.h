@@ -349,6 +349,9 @@ int HandleQuestion(){
 //--------------------------------HANDLE75LEVELUNDERSTANDING-------------------------------------------------------
 void Handle75LevelUnderstanding(){
     bool Testing; Testing = true;
+    int localVerbLocation = -1;
+    int localUnknownLocation = -1;
+
     if(Verbose){
         cout << "c_Cortex.h::Handle75LevelUnderstanding\n";
         cout << "  Pattern:" << Pattern << endl;
@@ -371,8 +374,41 @@ void Handle75LevelUnderstanding(){
             Testing = false;
             break;}
     }
+    else{
+        if( (NounLocation == -1) && (VerbLocation >=0) && (DeterminerLocation >=0) ){    // no noun but has verb and determiner
+            SlowSpeak(" Are we talking about a" + GetWords(DeterminerLocation+1) + "?");
+            UserResponse = RequestUserResponse();
+            if(UserResponse == 1){
+                SetWordType('n',DeterminerLocation+1);
+                SetSubjectLocation(DeterminerLocation+1);
+                SlowSpeak(":)");
+                IncreaseMoodLevel();
+                Testing = false;
+                break;}
+            }
+    }
+
 
     //------End Missing noun test------
+
+
+    // --TEST FOR MISSING VERB--------------
+    for(int x= 0; x < GetWordCount(); x++){
+        if(GetWordType(x)=='v') localVerbLocation = x;
+        if(GetWordType(x)=='u') localUnknownLocation =x;}
+
+    if(localVerbLocation == -1 ){
+        if(UnKnownLocation != -1){
+            SetWordType('v',UnKnownLocation);
+            Testing = false;
+            SlowSpeak("Okay.");
+            break;
+        }
+    }
+
+
+
+    //--END TEST FOR MISSING VERB ----------
 
     //-------Modifier Test-------------
     int tmpLocation; tmpLocation = Pattern.find("uav");
@@ -423,7 +459,10 @@ void Handle75LevelUnderstanding(){
     SlowSpeak("A " + GetWords(UnKnownLocation) + " " + GetWords(AdjectiveLocation) + " " + GetWords(GetSubjectLocation()) + "?");
     UserResponse = RequestUserResponse();
 
-    //-- END TESTING FOR ADVERB -----------
+
+    Testing = false;
+    break;
+    //-- END TESTING FOR ADVERB ------------
 
 
 

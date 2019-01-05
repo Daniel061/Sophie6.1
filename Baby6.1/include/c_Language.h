@@ -98,6 +98,9 @@ class c_Language : public c_Sentence
             if(Pattern == "avdu"){
                 CorrectedPattern = "avdn";
                 ConfidenceLevel = 100;}
+            if (Pattern == "dntua"){
+                CorrectedPattern = "dntva";
+                ConfidenceLevel = 100;}
           }
 
      if(Verbose)cout << " Received Pattern:" << Pattern << " Correct Pattern:" << CorrectedPattern << endl;
@@ -129,7 +132,7 @@ class c_Language : public c_Sentence
            string JoiningWords =        " and ";
            string AssociativeWord =     " name name's ";
            string PluralPronoun =       " both ";
-           string ThrowAwayWords =      " of also ";
+           string ThrowAwayWords =      " of also can ";
 
            int isThrowAwayWord   = -1;
            int isPluralPronoun   = -1;
