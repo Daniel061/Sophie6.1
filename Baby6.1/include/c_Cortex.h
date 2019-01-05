@@ -437,6 +437,20 @@ void Handle75LevelUnderstanding(){
 
     //-------End Modifier test---------
 
+    //-------Noun to Noun test---------
+    //i.e. the dog is an animal
+
+    tmpLocation = Pattern.find("nvdu") + Pattern.find("uvdn") + 1;
+    if (tmpLocation>=0){
+        SlowSpeak("Okay. Tell me more about " + GetWordsLC(tmpLocation+2) + " " + GetWordsLC(tmpLocation+3) + ".");
+        SetWordType('n',tmpLocation+3);
+        L_AssociateNounToNoun(GetWordsLC(tmpLocation),GetWordsLC(tmpLocation+3));  //associate first noun to second noun
+        L_AssociateNounToNoun(GetWordsLC(tmpLocation+3),GetWordsLC(tmpLocation));  //associate second noun to first noun
+
+        Testing = false;
+        break;
+    }
+
     //----------Adjective Test---------
 
     SlowSpeak( "A " + GetWords(UnKnownLocation) + " " + GetWords(NounLocation) + "?");

@@ -185,6 +185,7 @@ class c_Lobes
     int L_GetNumberOfAdjectivesInMap(int CellAddress){return RightLobeMemory[CellAddress].GetNumberOfAdjectivesInMap();}
     int L_GetNumberOfVerbsInMap(int CellAddress){return RightLobeMemory[CellAddress].GetNumberOfVerbsInMap();}
     int L_GetNumberOfAdverbsInMap(int CellAddress){return RightLobeMemory[CellAddress].GetNumberOfAdverbsInMap();}
+    int L_GetNumberOfRelatedNounsInMap(int CellAddress){return RightLobeMemory[CellAddress].GetNumberOfRelatedNounsInMap();}
     void L_AssociateAdjectiveInMap(string AdjectiveToAssociate,int CellAddress){RightLobeMemory[CellAddress].AssociateAdjectiveInMap(AdjectiveToAssociate);}
     void L_AssociateVerbToAdjectiveInMap(string AdjectiveToAssociate, string VerbToAssociate,int CellAddress){RightLobeMemory[CellAddress].AssociateVerbToAdjectiveInMap(AdjectiveToAssociate, VerbToAssociate);}
     void L_AssociateAdverbToVerbInMap(string AdverbToAssociate,string VerbToAssociate,int CellAddress){RightLobeMemory[CellAddress].AssociateAdverbToVerbInMap( AdverbToAssociate,VerbToAssociate);}
@@ -199,6 +200,17 @@ class c_Lobes
     string L_GetAdverb(int CellAddress,int Location){
          int AdverbToken = RightLobeMemory[CellAddress].GetAdverbFromMap(Location);
           return RightLobeMemory[AdverbToken].GetpCellDataLC(); }
+
+    void L_AssociateNounToNoun(string BaseNoun, string RelatedNoun){
+         RightLobeMemory[Tokenize(BaseNoun)].AssociateNounInMap(RelatedNoun);}
+
+    bool L_CheckForRelatedNoun(string BaseNoun, string NounToCheck){
+         return RightLobeMemory[Tokenize(BaseNoun)].IsNounRelatedToMe(NounToCheck);}
+
+    string L_GetRelatedNoun(int CellAddress,int Location){
+         int NounToken = RightLobeMemory[CellAddress].GetNounFromMap(Location);
+          return RightLobeMemory[NounToken].GetpCellDataLC(); }
+
 };
 
 #endif // C_LOBES_H

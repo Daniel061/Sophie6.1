@@ -70,8 +70,8 @@ class c_Language : public c_Sentence
        pull it into CorrectPattern
    */
 
-    if(LeftLobeMemory[Tokenize(CorrectedPattern)].GetpIsSet() == true){                     //seen this pattern before
-        CorrectedPattern = LeftLobeMemory[LeftLobeMemory[Tokenize(Pattern)].GetPointerToNextPattern()].GetpCellDataString();
+    if(LeftLobeMemory[Tokenize(CorrectedPattern,false)].GetpIsSet() == true){                     //seen this pattern before
+        CorrectedPattern = LeftLobeMemory[LeftLobeMemory[Tokenize(Pattern,false)].GetPointerToNextPattern()].GetpCellDataString();
         ConfidenceLevel = 100;}
     else{
             if(Pattern == "duvu"){

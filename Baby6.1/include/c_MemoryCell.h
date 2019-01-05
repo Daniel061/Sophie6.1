@@ -37,6 +37,7 @@ class c_MemoryCell
         multimap<int,int> adjDescriptors;    // storage of adjectives                        (Adjective,token)
         multimap<int,int> verbDescriptors;   // storage of verbs associated with adjectives  (Verb,Adjective)
         multimap<int,int> advDescriptors;    // storage of adverbs associated with verbs     (Adverb,Adjective)
+        multimap<int,int> RelatedNouns;      // storage of related nouns   i.e. dog,animal   (Noun(this cell),related noun)
         multimap<int,int>::iterator mapIT;   // pointer for maps
 
 
@@ -70,10 +71,7 @@ class c_MemoryCell
         char   GetGenderClass(){return GenderClass;}
         string GetGivenName(){return GivenName;}
         void   SetGivenName(string NewName){GivenName = NewName;}
-
-        void SetpCellDataString(string NewData){
-            pCellData = NewData;
-            pIsSet = true;}
+        void   SetpCellDataString(string NewData){pCellData = NewData; pIsSet = true;}
 
 
         void AccociateAdjective(int NewAdjective){                  //Stores New Tokenized Adjective at the end of the list
@@ -103,7 +101,7 @@ class c_MemoryCell
 
         int GetVerbWithAdjective(int AdjectiveLocation, int VerbLocation){
              return AdjectiveList[AdjectiveLocation][VerbLocation];}
-//Adjective
+
         void AccociateAdjectiveWithVerb(int NewVerb,int AdjectiveToAssociate, int AdverbToAssociate = -1){  //Stores New Tokenized VERB with Tokenized Adjective at the end of the list 1,2,3
             int EndList;  EndList = -1;
             int Matched;  Matched = -1;
@@ -135,6 +133,11 @@ class c_MemoryCell
        void AssociateAdjectiveInMap(string AdjectiveToAssociate){
            if(adjDescriptors.find(Tokenize(AdjectiveToAssociate)) == adjDescriptors.end())
             adjDescriptors.emplace(Tokenize(AdjectiveToAssociate),pToken);
+       }
+
+       void AssociateNounInMap(string NounToAssociate){
+           if(RelatedNouns.find(Tokenize(NounToAssociate)) == RelatedNouns.end())
+            RelatedNouns.emplace(Tokenize(NounToAssociate),pToken);
        }
 
        void AssociateVerbToAdjectiveInMap(string AdjectiveToAssociate, string VerbToAssociate){
@@ -177,6 +180,16 @@ class c_MemoryCell
            return Count;
        }
 
+       int GetNumberOfRelatedNounsInMap(){
+           int Count = 0;
+           mapIT = RelatedNouns.begin();
+           while(mapIT != RelatedNouns.end()) {
+            Count++;
+            ++mapIT;
+           }
+           return Count;
+       }
+
        int GetAdjectiveFromMap(int Location){
             mapIT = adjDescriptors.begin();
             for(int x = 0; x < Location; x++) ++mapIT;
@@ -206,6 +219,24 @@ class c_MemoryCell
                 else
                     return mapIT->first;
        }
+
+        int GetNounFromMap(int Location){
+            mapIT = RelatedNouns.begin();
+            for(int x = 0; x < Location; x++) ++mapIT;
+
+            if(mapIT == RelatedNouns.end()){
+                return -1;}
+                else
+                    return mapIT->first;
+       }
+
+
+       bool IsNounRelatedToMe(string NounToCheck){
+           mapIT = RelatedNouns.find(Tokenize(NounToCheck));
+           if(mapIT == RelatedNouns.end()) return false;
+           else return true;}
+
+
 
 
         int Tokenize (string str_Data, bool ForceLowerCase=true)

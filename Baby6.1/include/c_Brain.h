@@ -180,6 +180,11 @@ class c_Brain : public c_Cerebellum
                          cout  << "   " << L_GetAdjective(WorkingWord,x) << " " << L_GetVerb(WorkingWord,x) << " " << L_GetAdverb(WorkingWord,x) << endl;
                        }
                        cout << endl;
+                    cout << "Cell related Nouns:\n";
+
+                       for(int x = 0; x< L_GetNumberOfRelatedNounsInMap(WorkingWord);x++){
+                         cout << "   " << L_GetRelatedNoun(WorkingWord,x) << endl;
+                       }
                     int q,z;
                     if(RightLobeMemory[CommandCheckSentence.GetWordTokens(2)].GetpWordType()=='n'){
                         for(int x = 0; x < 15; x++){
@@ -296,10 +301,10 @@ class c_Brain : public c_Cerebellum
                     isSetInMemory             = GetBrainCellIsSet('r',Tokenize(GetWordsLC(x)));
                     if(Verbose){
                         cout << "WordLC:  " << GetWordsLC(x) << endl;
-                        cout << "     Sentence Set:" << tmpTypeInSentence << endl;
-                        cout << "     MemoryCell Set:" << tmpTypeInMemoryCell << endl;
-                        cout << "     Language helper Set:" << tmpTypeFromLanguageHelper << endl;
-                        cout << "      Memory Cell Previously set?" << isSetInMemory << endl;}
+                        cout << "  Sentence Set:" << tmpTypeInSentence << endl;
+                        cout << "  MemoryCell Set:" << tmpTypeInMemoryCell << endl;
+                        cout << "  Language helper Set:" << tmpTypeFromLanguageHelper << endl;
+                        cout << "  Memory Cell Previously set?" << boolalpha << isSetInMemory << endl;}
 
                     if(isSetInMemory & doCorrection) isSetInMemory = false;
 
