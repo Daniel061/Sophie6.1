@@ -88,9 +88,7 @@ class c_Lobes
                             cout << "Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << endl;
 
                         RightLobeUsageCount++;}
-                    else
-                        if(Verbose)
-                             cout << "Not Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << endl;
+
                     else
                         if(Update){
                             RightLobeMemory[tmpToken].SetpCellDataString(NewWord);
@@ -100,6 +98,9 @@ class c_Lobes
                             if(Verbose)
                                 cout << "Updating -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << endl;
                         }
+                        else
+                            if(Verbose)
+                             cout << "Not Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << endl;
             }
         }
 

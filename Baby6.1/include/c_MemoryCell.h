@@ -151,44 +151,16 @@ class c_MemoryCell
        }
 
        int GetNumberOfAdjectivesInMap(){
-           int Count = 0;
-           mapIT = adjDescriptors.begin();
-           while(mapIT != adjDescriptors.end()) {
-            Count++;
-            ++mapIT;
-           }
-           return Count;
-       }
+           return adjDescriptors.size();}
 
        int GetNumberOfVerbsInMap(){
-           int Count = 0;
-           mapIT = verbDescriptors.begin();
-           while(mapIT != verbDescriptors.end()) {
-            Count++;
-            ++mapIT;
-           }
-           return Count;
-       }
+           return verbDescriptors.size();}
 
        int GetNumberOfAdverbsInMap(){
-           int Count = 0;
-           mapIT = advDescriptors.begin();
-           while(mapIT != advDescriptors.end()) {
-            Count++;
-            ++mapIT;
-           }
-           return Count;
-       }
+           return advDescriptors.size();}
 
        int GetNumberOfRelatedNounsInMap(){
-           int Count = 0;
-           mapIT = RelatedNouns.begin();
-           while(mapIT != RelatedNouns.end()) {
-            Count++;
-            ++mapIT;
-           }
-           return Count;
-       }
+           return RelatedNouns.size();}
 
        int GetAdjectiveFromMap(int Location){
             mapIT = adjDescriptors.begin();

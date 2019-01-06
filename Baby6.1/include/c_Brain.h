@@ -46,7 +46,7 @@ class c_Brain : public c_Cerebellum
         void ProcessUserInput(string& strData){
             if(Verbose)cout << "[c_Brain.h::ProcessUserInput]" << endl;
             int a, ConfidenceLevel;
-            string b,c,CheckedPattern;
+            string CheckedPattern;
             int SubjectLocation;
             string FirstPattern = "";
             bool Greeting;
@@ -180,7 +180,7 @@ class c_Brain : public c_Cerebellum
                          cout  << "   " << L_GetAdjective(WorkingWord,x) << " " << L_GetVerb(WorkingWord,x) << " " << L_GetAdverb(WorkingWord,x) << endl;
                        }
                        cout << endl;
-                    cout << "Cell related Nouns:\n";
+                    cout << "Cell related Nouns("  << L_GetNumberOfRelatedNounsInMap(WorkingWord) << "):\n";
 
                        for(int x = 0; x< L_GetNumberOfRelatedNounsInMap(WorkingWord);x++){
                          cout << "   " << L_GetRelatedNoun(WorkingWord,x) << endl;
