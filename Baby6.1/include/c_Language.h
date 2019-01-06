@@ -226,13 +226,12 @@ int RequestUserResponse()
 {
     int Matched;
 
-    string PositiveResponse;
-    string NegativeResponse;
-    string Response; Response = "";
-    PositiveResponse = " yes Yes OK ok Ok correct Correct right Right Exactly exactly ye ";
-    NegativeResponse = " No no wrong Wrong What what n ";
+    string PositiveResponse = " yes Yes OK ok Ok correct Correct right Right Exactly exactly ye ";
+    string NegativeResponse = " No no wrong Wrong What what n ";
+    string Response         = "";
+
     while (Response == ""){
-        cout << ">>>";
+        cout << ">?";
         getline (cin,Response);}
     tmpSentence.Parse(Response);
     Response = tmpSentence.GetWords(0);
@@ -277,7 +276,7 @@ int RequestUserResponse()
                 Pattern += GetWordType(x);
             }
             SetPattern(Pattern);
-            if(SecondNounLocation != -1) SetIndirectObjectLocation(SecondNounLocation);
+            if(SecondNounLocation != -1) SetIndirectObjectLocation(SecondNounLocation); else SetIndirectObjectLocation(-1);
             while(PickingSubject){
                 if((SubLocation == -1) && (ProperNounLocation != -1))
                     SubLocation = ProperNounLocation;

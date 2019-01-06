@@ -306,7 +306,7 @@ class c_Brain : public c_Cerebellum
                         cout << "  Language helper Set:" << tmpTypeFromLanguageHelper << endl;
                         cout << "  Memory Cell Previously set?" << boolalpha << isSetInMemory << endl;}
 
-                    if(isSetInMemory & doCorrection) isSetInMemory = false;
+                    if(isSetInMemory && doCorrection) isSetInMemory = false;
 
                     if(isSetInMemory == false){
                         if(tmpTypeInSentence == 'u')

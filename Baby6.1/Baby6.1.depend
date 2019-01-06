@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1545585060 source:h:\c++projects\baby6.1\baby6.1\main.cpp
+1546804918 source:h:\c++projects\baby6.1\baby6.1\main.cpp
 	<iostream>
 	<c_Brain.h>
 
@@ -19,7 +19,7 @@
 1545435962 source:h:\c++projects\baby6.1\baby6.1\src\c_language.cpp
 	"c_Language.h"
 
-1546797680 h:\c++projects\baby6.1\baby6.1\include\c_language.h
+1546807690 h:\c++projects\baby6.1\baby6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<string>
@@ -34,7 +34,7 @@
 1544996084 source:h:\c++projects\baby6.1\baby6.1\src\c_sentence.cpp
 	"c_Sentence.h"
 
-1546375060 h:\c++projects\baby6.1\baby6.1\include\c_sentence.h
+1546807690 h:\c++projects\baby6.1\baby6.1\include\c_sentence.h
 	<c_SubjectStack.h>
 
 1544997036 source:h:\c++projects\baby6.1\baby6.1\src\c_cortex.cpp
@@ -64,7 +64,7 @@
 1544998682 source:h:\c++projects\baby6.1\baby6.1\src\c_brain.cpp
 	"c_Brain.h"
 
-1546791964 h:\c++projects\baby6.1\baby6.1\include\c_brain.h
+1546807690 h:\c++projects\baby6.1\baby6.1\include\c_brain.h
 	<c_Cerebellum.h>
 
 1545432114 source:h:\c++projects\baby6.1\baby6.1\src\c_lobes.cpp
