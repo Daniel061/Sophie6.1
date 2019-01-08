@@ -277,6 +277,17 @@ int RequestUserResponse()
             }
             SetPattern(Pattern);
             if(SecondNounLocation != -1) SetIndirectObjectLocation(SecondNounLocation); else SetIndirectObjectLocation(-1);
+
+            if( (ProperNounLocation != -1) && (NounLocation != -1) ){
+                SetIndirectObjectLocation(ProperNounLocation);
+                SubLocation = NounLocation;
+                PickingSubject = false;}
+            else
+                if ((ProNounLocation != -1) && (NounLocation != -1)){
+                    SetIndirectObjectLocation(ProNounLocation);
+                    SubLocation = NounLocation;
+                    PickingSubject = false;}
+
             while(PickingSubject){
                 if((SubLocation == -1) && (ProperNounLocation != -1))
                     SubLocation = ProperNounLocation;

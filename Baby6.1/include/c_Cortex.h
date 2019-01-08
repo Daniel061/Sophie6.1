@@ -326,7 +326,9 @@ int HandleQuestion(){
                                                 VerbUsed,MatchedAdjective, MatchedCount);
     if (Matched){
             if(MatchedCount > 1){
-                AnswerString = "The " +  GetWordsLC(GetSubjectLocation()) + " of the "  + GetWords(GetIndirectObjectLocation()) + " can be ";
+                AnswerString = "The " +  GetWordsLC(GetSubjectLocation()) + " of ";
+                if(!(GetWordType(GetIndirectObjectLocation())== 'P') || (GetWordType(GetIndirectObjectLocation())== 'p')) AnswerString += "the ";
+                AnswerString +=  GetWords(GetIndirectObjectLocation()) + " can be ";
                 for(int x = 0; x < MatchedCount; x++){
                         AnswerString = AnswerString + MatchedAdjective[x];
                         if(!(x+1==MatchedCount)) AnswerString += " or ";}
@@ -334,7 +336,10 @@ int HandleQuestion(){
                 SlowSpeak(AnswerString);
             }
             else{
-               SlowSpeak("The " +  GetWordsLC(GetSubjectLocation()) + " of the "  + GetWords(GetIndirectObjectLocation())+ " is " + MatchedAdjective[0] + ".");
+               AnswerString = "The " +  GetWordsLC(GetSubjectLocation()) + " of ";
+               if(!(GetWordType(GetIndirectObjectLocation())== 'P') || (GetWordType(GetIndirectObjectLocation())== 'p')) AnswerString += "the ";
+               AnswerString +=  GetWords(GetIndirectObjectLocation())+ " is " + MatchedAdjective[0] + "."xi;
+               SlowSpeak(AnswerString);
             }
         }
         else
