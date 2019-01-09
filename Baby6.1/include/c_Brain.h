@@ -376,9 +376,12 @@ class c_Brain : public c_Cerebellum
         {
          if(Verbose)cout << "[c_Brain.h::StoreNewWords]" << endl;
          int NewWords; NewWords = 0;
+         int Noun1 = -1;
+         int Noun2 = -1;
 
          for (int x = 0; x < GetWordCount(); x++)
          {
+             if((GetWordType(x)=='n') && (Noun1 == -1) ) Noun1 = x; else if((GetWordType(x) == 'n') && (Noun2 == -1))  Noun2 =x;
              if( !(CheckForKnownWord(GetWords(x))))
                 {NewWords++;}
                 InstallNewWord(GetWords(x),GetWordType(x),'w',GetWordsLC(x),true);
@@ -396,7 +399,10 @@ class c_Brain : public c_Cerebellum
                 if(GetWordType(x) == 'A')
                     L_AssociateAdverbToVerbInMap(GetWordsLC(x),GetWordsLC(GetVerbPointingToAdjective()),GetWordTokens(GetSubjectLocation()));
          }
-
+         if(GetNounCount() >=2){
+            RightLobeMemory[GetWordTokens(Noun1)].AssociateNounInMap(GetWordsLC(Noun2));
+            RightLobeMemory[GetWordTokens(Noun2)].AssociateNounInMap(GetWordsLC(Noun1));
+         }
 
             return NewWords;
 

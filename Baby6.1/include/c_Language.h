@@ -259,6 +259,7 @@ int RequestUserResponse()
             int WordCount;                WordCount          =  0;
             int SubLocation;              SubLocation        = -1;
             int NounLocation;             NounLocation       = -1;
+            int VerbLocationFound;        VerbLocationFound  = -1;
             int SecondNounLocation;       SecondNounLocation = -1;
             int ProNounLocation;          ProNounLocation    = -1;
             int ProperNounLocation;       ProperNounLocation = -1;
@@ -273,11 +274,12 @@ int RequestUserResponse()
                 if(GetWordType(x)== 'r')if(SubLocation == -1)        SubLocation        = x;
                 if(GetWordType(x)== 'p')if(ProNounLocation == -1)    ProNounLocation    = x;
                 if(GetWordType(x)== 'P')if(ProperNounLocation == -1) ProperNounLocation = x;
+                if(GetWordType(x)== 'v'){VerbLocationFound =x; SetVerbLocation(x);}
                 Pattern += GetWordType(x);
             }
             SetPattern(Pattern);
             if(SecondNounLocation != -1) SetIndirectObjectLocation(SecondNounLocation); else SetIndirectObjectLocation(-1);
-
+            if(SecondNounLocation != -1) SetNounCount(2); else SetNounCount(1);
             if( (ProperNounLocation != -1) && (NounLocation != -1) ){
                 SetIndirectObjectLocation(ProperNounLocation);
                 SubLocation = NounLocation;

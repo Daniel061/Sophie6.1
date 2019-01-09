@@ -20,6 +20,8 @@ class c_Sentence : public c_SubjectStack
         int    QuoteLocation[30];               // "can't" set to 3 for this, set to -1 for "dog"
         int    IndirectObjectLocation;          // usually the second noun
         int    AdverbLocation;                  // -1 means none
+        int    NounCount;                       // number of nouns in this sentence
+        int    VerbLocation;                    // position of verb
         string Words[30];                       // Dog  i.e. original unedited word  initialize to ""
         string WordsLC[30];                     // dog  initialize to ""
         string SubWords[30];                    // replacement words, usually from subject stack
@@ -57,9 +59,15 @@ class c_Sentence : public c_SubjectStack
                 HasPunctuation             = false;
                 IsQuestion                 = false;
                 AdverbLocation             = -1;
+                NounCount                  = -1;
+                VerbLocation               = -1;
                 IndirectObjectLocation     = -1;}
 
     public:
+        void   SetVerbLocation(int NewLoc){VerbLocation = NewLoc;}
+        int    GetVerbLocation(){return VerbLocation;}
+        void   SetNounCount(int NewCount){NounCount = NewCount;}
+        int    GetNounCount(){return NounCount;}
         int    GetIndirectObjectLocation(){return IndirectObjectLocation;}
         void   SetIndirectObjectLocation(int NewVal){IndirectObjectLocation = NewVal;}
         bool   GetHasPluralPronoun(){return HasPluralPronoun;}

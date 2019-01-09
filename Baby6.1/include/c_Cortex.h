@@ -338,7 +338,7 @@ int HandleQuestion(){
             else{
                AnswerString = "The " +  GetWordsLC(GetSubjectLocation()) + " of ";
                if(!(GetWordType(GetIndirectObjectLocation())== 'P') || (GetWordType(GetIndirectObjectLocation())== 'p')) AnswerString += "the ";
-               AnswerString +=  GetWords(GetIndirectObjectLocation())+ " is " + MatchedAdjective[0] + "."xi;
+               AnswerString +=  GetWords(GetIndirectObjectLocation())+ " is " + MatchedAdjective[0] + ".";
                SlowSpeak(AnswerString);
             }
         }
