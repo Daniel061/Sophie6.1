@@ -110,7 +110,7 @@ class c_Brain : public c_Cerebellum
             cout << x << " " << GetWords(x) << ":" << GetWordTokens(x) <<  " Type:"
             << GetWordType(x) << " isContraction:" << GetisContraction(x) << " Quote Location:" << GetQuoteLocation(x) << endl;
         }
-            cout << "Cell Usage(r):" << GetRightLobeUsageCount() <<  " Cell Usage(l):" << GetLeftLobeUsageCount() << endl;
+            cout << "Cell Usage(r):" << GetRightLobeCellCount() <<  " Cell Usage(l):" << GetLeftLobeCellCount() << endl;
         }
 
 
@@ -162,44 +162,37 @@ class c_Brain : public c_Cerebellum
             case 3337:    // cell report
                 {
                     int WorkingWord = CommandCheckSentence.GetWordTokens(2);
+                    int AdjectivesInMap[20];
+                    int AdverbsInMap[20];
+                    int VerbsInMap[20];
+                    int RelatedNounsInMap[20];
+                    int y = 0;
+                    bool Result = false;
                     cout << "Cell Report:Right Brain" << endl << endl;
-                    cout << "Cell String:" << RightLobeMemory[WorkingWord].GetpCellDataString() << endl;
-                    cout << "Cell String (LC):" << RightLobeMemory[WorkingWord].GetpCellDataLC() << endl;
-                    cout << "Cell Word Type:" << RightLobeMemory[WorkingWord].GetpWordType() << endl;
-                    cout << "Cell Secondary Word Type:" << RightLobeMemory[WorkingWord].GetSecondaryType() << endl;
-                    cout << "Cell Alternate Word Type:" << RightLobeMemory[WorkingWord].GetAlternateType() << endl;
-                    cout << "Cell Gender:" << RightLobeMemory[WorkingWord].GetGenderClass() << endl;
-                    cout << "Cell Primary Usage:" << RightLobeMemory[WorkingWord].GetpCellPurpose() << endl;
-                    cout << "Cell Root Pointer:" << RightLobeMemory[WorkingWord].GetpNextNoun() << endl;
-                    cout << "Cell Data is Set:" << boolalpha << RightLobeMemory[WorkingWord].GetpIsSet() << endl;
+                    cout << "Cell String:" << GetMemoryCellRawStringData(Result,"",WorkingWord)<< endl;
+                    cout << "Cell String (LC):" << GetMemoryCellWordLC("",WorkingWord) << endl;
+                    cout << "Cell Word Type:" << GetMemoryCellWordType(WorkingWord) << endl;
+                    //cout << "Cell Secondary Word Type:" << RightLobeMemory[WorkingWord].GetSecondaryType() << endl;
+                    //cout << "Cell Alternate Word Type:" << RightLobeMemory[WorkingWord].GetAlternateType() << endl;
+                    cout << "Cell Gender:" << GetMemoryCellGenderClass(WorkingWord) << endl;
+                    cout << "Cell Primary Usage:" << GetMemoryCellPurpose(WorkingWord) << endl;
+                   // cout << "Cell Root Pointer:" << RightLobeMemory[WorkingWord].GetpNextNoun() << endl;
+                    cout << "Cell Data is Set:" << boolalpha << GetMemoryCellIsSet(WorkingWord) << endl;
                     cout << "Cell Location by token:" << WorkingWord << endl;
-                    cout << "Cell adjectives stored in map:" << L_GetNumberOfAdjectivesInMap(WorkingWord) << endl;
-                    cout << "Cell verbs stored in map:" << L_GetNumberOfVerbsInMap(WorkingWord) << endl;
-                    cout << "Cell adverbs stored in map:" << L_GetNumberOfAdverbsInMap(WorkingWord) << endl;
+                    cout << "Cell adjectives stored in map:" << GetMemoryCellAdjectives(WorkingWord,AdjectivesInMap) << endl;
+                    cout << "Cell verbs stored in map:" << GetMemoryCellVerbs(WorkingWord,VerbsInMap) << endl;
+                    cout << "Cell adverbs stored in map:" << GetMemoryCellAdverbs(WorkingWord,AdverbsInMap) << endl;
                     cout << "Cell Adjectives, Verbs, Adverbs:\n";
-                       for(int x = 0; x< L_GetNumberOfAdjectivesInMap(WorkingWord); x++){
-                         cout  << "   " << L_GetAdjective(WorkingWord,x) << " " << L_GetVerb(WorkingWord,x) << " " << L_GetAdverb(WorkingWord,x) << endl;
+                       for(int x = 0; x< GetMemoryCellAdjectiveCount(WorkingWord); x++){
+                         cout  << "   " << GetMemoryCellWordLC("",AdjectivesInMap[x]) << " " << GetMemoryCellWordLC("",VerbsInMap[x]) << " " << GetMemoryCellWordLC("",AdverbsInMap[x]) << endl;
                        }
-                       cout << endl;
-                    cout << "Cell related Nouns("  << L_GetNumberOfRelatedNounsInMap(WorkingWord) << "):\n";
+                    cout << endl;
+                    y = GetMemoryCellRelatedNouns(WorkingWord,RelatedNounsInMap);
+                    cout << "Cell related Nouns("  << y << "):\n";
 
-                       for(int x = 0; x< L_GetNumberOfRelatedNounsInMap(WorkingWord);x++){
-                         cout << "   " << L_GetRelatedNoun(WorkingWord,x) << endl;
+                       for(int x = 0; x< y;x++){
+                         cout << "   " << GetMemoryCellWordLC("",RelatedNounsInMap[x]) << endl;
                        }
-                    int q,z;
-                    if(RightLobeMemory[CommandCheckSentence.GetWordTokens(2)].GetpWordType()=='n'){
-                        for(int x = 0; x < 15; x++){
-                            q = CommandCheckSentence.GetWordTokens(2); z = RightLobeMemory[q].GetAdjective(x);
-                            if(z >0){
-                                cout << "Adjective " << x << " " <<  RightLobeMemory[RightLobeMemory[CommandCheckSentence.GetWordTokens(2)].GetAdjective(x)].GetpCellDataString()<< " Verbs: ";
-                                for(int y = 1; y < 4; y++){
-                                    cout << RightLobeMemory[RightLobeMemory[q].GetVerbWithAdjective(x,y)].GetpCellDataString() << " ";
-                                }
-                                cout << endl;
-                            }
-                        }
-                    }
-
 
                     Control = 2;
                     break;
@@ -239,14 +232,16 @@ class c_Brain : public c_Cerebellum
                     cout << "no. Token Memory Subject string\n";
                     for(int x =0; x<15; x++){
                         if(GetSubject(x)>0)
-                            cout << x << ":   " << GetSubject(x) << "    " << RightLobeMemory[GetSubject(x)].GetpCellDataString() << " " << GetstrSubject(x) << endl;}
+                            cout << x << ":   " << GetSubject(x) << "    " << GetMemoryCellWordLC("",GetSubject(x)) << " " << GetstrSubject(x) << endl;}
                     break;
                 }
             case 5365:   // pattern report 'duvu'
                 {
                     Control = 2;
-                    cout << LeftLobeMemory[CommandCheckSentence.GetWordTokens(2)].GetpCellDataString() << " points to "
-                         << LeftLobeMemory[LeftLobeMemory[CommandCheckSentence.GetWordTokens(2)].GetPointerToNextPattern()].GetpCellDataString() << endl;
+                    cout << GetMemoryCellWordLC("",CommandCheckSentence.GetWordTokens(2)) << " points to "
+                         << GetMemoryCellWordLC("",GetMemoryCellPointerToNextPattern(CommandCheckSentence.GetWordTokens(2))) << endl;
+                    //cout << LeftLobeMemory[CommandCheckSentence.GetWordTokens(2)].GetpCellDataString() << " points to "
+                    //     << LeftLobeMemory[LeftLobeMemory[CommandCheckSentence.GetWordTokens(2)].GetPointerToNextPattern()].GetpCellDataString() << endl;
 
                     break;
 
@@ -297,9 +292,9 @@ class c_Brain : public c_Cerebellum
             bool isSetInMemory;
             for(int x = 0; x < GetWordCount(); x++){
                     tmpTypeInSentence         = GetWordType(x);
-                    tmpTypeInMemoryCell       = GetBrainWordType(GetWordsLC(x),'r');
+                    tmpTypeInMemoryCell       = GetMemoryCellWordType(GetWordTokens(x));//  GetBrainWordType(GetWordsLC(x),'r');
                     tmpTypeFromLanguageHelper = FindWordType(GetWordsLC(x));
-                    isSetInMemory             = GetBrainCellIsSet('r',Tokenize(GetWordsLC(x)));
+                    isSetInMemory             = GetMemoryCellIsSet(GetWordTokens(x)); //  GetBrainCellIsSet('r',Tokenize(GetWordsLC(x)));
                     if(Verbose){
                         cout << "WordLC:  " << GetWordsLC(x) << endl;
                         cout << "  Sentence Set:" << tmpTypeInSentence << endl;
@@ -382,26 +377,43 @@ class c_Brain : public c_Cerebellum
          for (int x = 0; x < GetWordCount(); x++)
          {
              if((GetWordType(x)=='n') && (Noun1 == -1) ) Noun1 = x; else if((GetWordType(x) == 'n') && (Noun2 == -1))  Noun2 =x;
-             if( !(CheckForKnownWord(GetWords(x))))
+             if( !( GetMemoryCellIsSet(GetWordTokens(x)) )) //   CheckForKnownWord(GetWords(x))))
                 {NewWords++;}
-                InstallNewWord(GetWords(x),GetWordType(x),'w',GetWordsLC(x),true);
+                InstallNewWord(GetWords(x),GetWordType(x),'w',true);
                 if(GetWordType(x)=='a'){
                         if(GetSubjectLocation() >=0 )
-                            RightLobeMemory[GetWordTokens(GetSubjectLocation())].AccociateAdjective(GetWordTokens(x));
+                            if(!AssociateMemoryCellAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(x))){
+                                InstallNewWord(GetWords(GetSubjectLocation()),GetWordType(GetSubjectLocation()),'w',true);
+                                AssociateMemoryCellAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(x));
+                                if(Verbose)
+                                    cout << "Associating " << GetWords(x) << " with " << GetWords(GetSubjectLocation()) << endl;
+                            }
                             if(GetIndirectObjectLocation() >=0)
-                                RightLobeMemory[GetWordTokens(GetIndirectObjectLocation())].AccociateAdjective(GetWordTokens(x));
+                                if(!AssociateMemoryCellAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(x))){
+                                    InstallNewWord(GetWords(GetIndirectObjectLocation()),GetWordType(GetIndirectObjectLocation()),'w',true);
+                                    AssociateMemoryCellAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(x));
+                                    if(Verbose)
+                                       cout << "Associating " << GetWords(x) << " with " << GetWords(GetIndirectObjectLocation()) << endl;
+                                }
+                                //RightLobeMemory[GetWordTokens(GetIndirectObjectLocation())].AccociateAdjective(GetWordTokens(x));
                     int z; z = GetVerbPointingToAdjective();
                     if(z >=0)
-                        RightLobeMemory[GetWordTokens(GetSubjectLocation())].AccociateAdjectiveWithVerb(GetWordTokens(z),GetWordTokens(x));
+                        AssociateMemoryCellVerbToAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(z),GetWordsLC(x));
+                        //RightLobeMemory[GetWordTokens(GetSubjectLocation())].AccociateAdjectiveWithVerb(GetWordTokens(z),GetWordTokens(x));
                         if(GetIndirectObjectLocation()>=0)
-                            RightLobeMemory[GetWordTokens(GetIndirectObjectLocation())].AccociateAdjectiveWithVerb(GetWordTokens(z),GetWordTokens(x));
+                            AssociateMemoryCellVerbToAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(z),GetWordsLC(x));
+                            //RightLobeMemory[GetWordTokens(GetIndirectObjectLocation())].AccociateAdjectiveWithVerb(GetWordTokens(z),GetWordTokens(x));
                 }
                 if(GetWordType(x) == 'A')
-                    L_AssociateAdverbToVerbInMap(GetWordsLC(x),GetWordsLC(GetVerbPointingToAdjective()),GetWordTokens(GetSubjectLocation()));
+                    AssociateMemoryCellAdverbToVerb(GetWordTokens(GetSubjectLocation()),GetWordsLC(GetWordTokens(GetVerbPointingToAdjective())),GetWordsLC(x));
+                    //L_AssociateAdverbToVerbInMap(GetWordsLC(x),GetWordsLC(GetVerbPointingToAdjective()),GetWordTokens(GetSubjectLocation()));
          }
-         if(GetNounCount() >=2){
-            RightLobeMemory[GetWordTokens(Noun1)].AssociateNounInMap(GetWordsLC(Noun2));
-            RightLobeMemory[GetWordTokens(Noun2)].AssociateNounInMap(GetWordsLC(Noun1));
+         if((GetNounCount() >=2)&& (!GetIsQuestion())){
+                if(Verbose)
+                   cout << "Associating " << GetWords(Noun1) << " with " << GetWords(Noun2) << endl;
+                AssociateMemoryCellNoun(GetWordTokens(Noun1),GetWordsLC(Noun2));
+                AssociateMemoryCellNoun(GetWordTokens(Noun2),GetWordsLC(Noun1));
+
          }
 
             return NewWords;

@@ -1,0 +1,40 @@
+Private Functions:
+
+	unordered_map <int, c_MemoryCell>::iterator FindAddressInMap(int Address, bool &Result)
+	
+Public Functions:
+	
+	bool   SetRawStringData(string strData, int Address)
+	bool   SetLCStringData(string strData, int Address)
+	
+	char   GetMemoryCellWordType(int Address)
+	bool   SetMemoryCellWordType(int Address,char WordTypeToSet)
+	
+	int    GetMemoryCellPointerToNextPattern(int Address)
+	int    SetMemoryCellPointerToNextPattern(int Address, int PointerToNextAddress)
+	
+	char   GetMemoryCellWordTense(int Address)
+	bool   SetMemoryCellWordTense(int Address, char TenseToSet)
+	
+	int    GetMemoryCellAdjectiveCount(int Address)
+	bool   GetMemoryCellIsSet(int Address)
+	
+	int    GetMemoryCellAdjectives(int Address,int Adjectives[])
+	int    GetMemoryCellRelatedNouns(int Address,int RelatedNouns[])
+	int    GetMemoryCellVerbs(int Address,int Verbs[])
+	int    GetMemoryCellAdverbs(int Address,int Adverbs[])
+	
+	bool   AssociateMemoryCellAdjective(int Address, string AdjectiveToAssociate)
+	bool   AssociateMemoryCellNoun(int Address, string NounToAssociate)
+	bool   AssociateMemoryCellAdverbToVerb(int Address, string AdverbToAssociate, string VerbToAssociate)
+	bool   AssociateMemoryCellVerbToAdjective(int Address, string AdverbToAssociate, string VerbToAssociate)
+	bool   GetIsNounRelatedToThisMemoryCell(int Address, string NounToCheck)
+	
+	bool   SetMemoryCellPurpose(int Address,char CellPurpose)
+	string GetMemoryCellWordLC(string WordInUC, int Address = -1)
+	
+	bool   InstallNewWord(string NewWord, char WordType, char Purpose, bool Update=false)
+	void   SavePreAndPostPatternConstruction(string PreConstructionPattern,string PostConstructionPattern)
+	
+	string MakeStringLowerCase(string strData)
+	

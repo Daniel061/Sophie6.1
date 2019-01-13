@@ -73,6 +73,32 @@ class c_MemoryCell
         void   SetGivenName(string NewName){GivenName = NewName;}
         void   SetpCellDataString(string NewData){pCellData = NewData; pIsSet = true;}
 
+        void InitializeAll(){
+                pCellData    = "";
+                pCellDataLC  = "";
+                GivenName    = "";
+                pCellPurpose = 'u'; //undefined
+                pWordType    = 'u';
+                pIsRoot      = false;
+                pNextVerb    = 0;
+                pNextNoun    = 0;
+                pToken       = 0;
+                pIsSet       = false;
+                GenderClass  = 'n';
+                SecondaryType= 'u';
+                AlternateType= 'u';
+                for(int x = 0; x < 15; x++){
+                        AdjectiveList[x][0]=0;
+                        AdjectiveList[x][1]=0;
+                        AdjectiveList[x][2]=0;
+                        AdjectiveList[x][3]=0;}
+                AdjectiveCount = 0;
+                advDescriptors.clear();
+                verbDescriptors.clear();
+                adjDescriptors.clear();
+                PointerToNextPattern = 0;
+        }
+
 
         void AccociateAdjective(int NewAdjective){                  //Stores New Tokenized Adjective at the end of the list
             int EndList; EndList = -1;
@@ -207,6 +233,8 @@ class c_MemoryCell
            mapIT = RelatedNouns.find(Tokenize(NounToCheck));
            if(mapIT == RelatedNouns.end()) return false;
            else return true;}
+
+
 
 
 

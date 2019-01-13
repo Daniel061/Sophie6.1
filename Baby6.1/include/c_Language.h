@@ -28,8 +28,9 @@ class c_Language : public c_Sentence
    ConfidenceLevel = -1;  // no suggestion
    int LeftOfJoinerLocation,RightOfJoinerLocation;
    LeftOfJoinerLocation = -1; RightOfJoinerLocation = 1;
-   int JoinerLocation;
-
+   int  JoinerLocation     = -1;
+   bool Result             = false;
+   int  PatternPointer     = 0;
 
 
    /*Check for a joiner word and assist if possible
@@ -46,7 +47,7 @@ class c_Language : public c_Sentence
     */
     CorrectedPattern = Pattern;
     JoinerLocation = Pattern.find("j");
-    if((JoinerLocation >=0) & (JoinerLocation < Pattern.size())){
+    if((JoinerLocation >=0) & (JoinerLocation < int(Pattern.size()))){
         LeftOfJoiner = Pattern.substr(JoinerLocation + LeftOfJoinerLocation,1);
         RightOfJoiner = Pattern.substr(JoinerLocation + RightOfJoinerLocation,1);
         if(RightOfJoiner == "d"){
@@ -70,9 +71,14 @@ class c_Language : public c_Sentence
        pull it into CorrectPattern
    */
 
-    if(LeftLobeMemory[Tokenize(CorrectedPattern,false)].GetpIsSet() == true){                     //seen this pattern before
-        CorrectedPattern = LeftLobeMemory[LeftLobeMemory[Tokenize(Pattern,false)].GetPointerToNextPattern()].GetpCellDataString();
-        ConfidenceLevel = 100;}
+//    if(LeftLobeMemory[Tokenize(CorrectedPattern,false)].GetpIsSet() == true){                     //seen this pattern before
+//        CorrectedPattern = LeftLobeMemory[LeftLobeMemory[Tokenize(Pattern,false)].GetPointerToNextPattern()].GetpCellDataString();
+//        ConfidenceLevel = 100;}
+     if(GetMemoryCellIsSet(Tokenize(CorrectedPattern,false),'l')==true){
+            PatternPointer       = GetMemoryCellPointerToNextPattern(Tokenize(CorrectedPattern,false),'l');
+            CorrectedPattern     = GetMemoryCellRawStringData(Result,"",PatternPointer,'l');
+     }
+
     else{
             if(Pattern == "duvu"){
                 CorrectedPattern = "dnvu";
@@ -125,7 +131,7 @@ class c_Language : public c_Sentence
            string ProNounsOutward =     " me mine my I i ";
            string Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
            string Questions =           " what where how when who what's ";
-           string Verbs =               " be have do say get make go know take see is are come think look want give use find tell ask work seem feel try leave call ";
+           string Verbs =               " can will be have do say get make go know take see is are come think look want give use find tell ask work seem feel try leave call ";
            string SubjectReplacements = " it that this ";
            string Adverbs =             " very ";
            string Directives =          " compare same about ";
@@ -150,7 +156,7 @@ class c_Language : public c_Sentence
 
 
 
-              for(int t = 0; t < tmpWord.size(); t++){
+              for(int t = 0; t < int(tmpWord.size()); t++){
                 tmpWord[t] = tolower(tmpWord[t]);}
               OrigWord = tmpWord;
               tmpWord = " " + tmpWord + " ";
@@ -212,7 +218,7 @@ void SlowSpeak(string str_Data, int Delay = 30000000 )
      for(int x = 0; x < SlowSentence.GetWordCount(); x++){
 
         WorkingWord = SlowSentence.GetWords(x);
-        for(int y = 0; y < WorkingWord.size(); y++){
+        for(int y = 0; y < int(WorkingWord.size()); y++){
             cout << WorkingWord[y];
             for(int dly = 0; dly < Delay; dly++);
         }
@@ -258,6 +264,7 @@ int RequestUserResponse()
             int UnknownLocation;          UnknownLocation    = -1;
             int WordCount;                WordCount          =  0;
             int SubLocation;              SubLocation        = -1;
+            int AdjectiveLocation;        AdjectiveLocation  = -1;
             int NounLocation;             NounLocation       = -1;
             int VerbLocationFound;        VerbLocationFound  = -1;
             int SecondNounLocation;       SecondNounLocation = -1;
@@ -267,6 +274,9 @@ int RequestUserResponse()
             bool PickingSubject;          PickingSubject     = true;
 
             WordCount = GetWordCount();
+
+            if ((GetWordsLC(0)== "is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)=="will")) SetIsQuestion(true);
+
             for(int x = 0; x < WordCount; x++){
                 if(GetWordType(x)== 'd')if(DeterminerLocation == -1) DeterminerLocation = x;
                 if(GetWordType(x)== 'u')if(UnknownLocation == -1)    UnknownLocation    = x;
@@ -275,6 +285,7 @@ int RequestUserResponse()
                 if(GetWordType(x)== 'p')if(ProNounLocation == -1)    ProNounLocation    = x;
                 if(GetWordType(x)== 'P')if(ProperNounLocation == -1) ProperNounLocation = x;
                 if(GetWordType(x)== 'v'){VerbLocationFound =x; SetVerbLocation(x);}
+                if(GetWordType(x)== 'a'){AdjectiveLocation = x; SetAdjectiveLocation(x);}
                 Pattern += GetWordType(x);
             }
             SetPattern(Pattern);

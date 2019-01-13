@@ -145,7 +145,7 @@ void Parse (string str_Sentence_Data)
         tmpWord = Words[x];
         WordsLC[x] = "";
          //Set WordsLC-----------------------------
-            for(int t = 0; t < Words[x].size(); t++)
+            for(int t = 0; t < int(Words[x].size()); t++)
                 tmpWord[t] =  tolower(tmpWord[t]);
             WordsLC[x] = tmpWord;
          //----------------------------------------
