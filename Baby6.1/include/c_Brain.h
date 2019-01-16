@@ -102,8 +102,7 @@ class c_Brain : public c_Cerebellum
 
 
         void Report(){
-        int WC; int sbj;
-        WC = GetWordCount();
+        int WC = GetWordCount();
         cout << "Punctuation Flag:" << boolalpha << GetHasPunctuation() << "  Punctuation Character:" << GetPunctuation() << endl;
         cout << "Word Count:" << WC << " Pattern:" << GetPattern() << endl;
         cout << "Subject location:" << GetSubjectLocation() << "\nIndirect Object Location:" << GetIndirectObjectLocation() << endl;
@@ -126,7 +125,7 @@ class c_Brain : public c_Cerebellum
             int Count;
             Command = 0;
             int Control; Control =0;
-            Count = CommandCheckSentence.GetWordCount();
+            Count   = CommandCheckSentence.GetWordCount();
             Command = CommandCheckSentence.GetWordTokens(0);
             if(Count >1)
              Command = Command + CommandCheckSentence.GetWordTokens(1);
@@ -241,8 +240,6 @@ class c_Brain : public c_Cerebellum
                     Control = 2;
                     cout << GetMemoryCellWordLC("",CommandCheckSentence.GetWordTokens(2)) << " points to "
                          << GetMemoryCellWordLC("",GetMemoryCellPointerToNextPattern(CommandCheckSentence.GetWordTokens(2))) << endl;
-                    //cout << LeftLobeMemory[CommandCheckSentence.GetWordTokens(2)].GetpCellDataString() << " points to "
-                    //     << LeftLobeMemory[LeftLobeMemory[CommandCheckSentence.GetWordTokens(2)].GetPointerToNextPattern()].GetpCellDataString() << endl;
 
                     break;
 
@@ -259,32 +256,12 @@ class c_Brain : public c_Cerebellum
         }
 
 
-
-        int Respond(){    //can delete this
-
-        //if(lBrainCellCount == 0){
-        //    cout << "Hello. My name is " << MyPersonality.GetMyName() << endl;
-        //    return 1;                                                         //ask user for more input
-
-         return CommandTrap() ;
-
-        return 0;
-        }
-
-
-
-
-
-
-
-
-
-
-      //scan sentence words and set their types
-      //   Check memory storage first (search only lowercase storage)
+      //------------------------SETWORDTYPES---------------------------------------------------------------------------
+      //     scan sentence words and set their types
+      //     Check memory storage first (search only lowercase storage)
       //     if already stored set the sentence word type to the memory value
       //     if not, has already been initialized to 'u' unless sentence parser has set something other than 'u'
-      //    doCorrection is control to not override wordtype stored in brain  true = change it to whatever is set by others
+      //     doCorrection is control to not override wordtype stored in brain  true = change it to whatever is set by others
 
        void SetWordTypes(bool doCorrection = false)
         {
@@ -293,9 +270,9 @@ class c_Brain : public c_Cerebellum
             bool isSetInMemory;
             for(int x = 0; x < GetWordCount(); x++){
                     tmpTypeInSentence         = GetWordType(x);
-                    tmpTypeInMemoryCell       = GetMemoryCellWordType(GetWordTokens(x));//  GetBrainWordType(GetWordsLC(x),'r');
+                    tmpTypeInMemoryCell       = GetMemoryCellWordType(GetWordTokens(x));
                     tmpTypeFromLanguageHelper = FindWordType(GetWordsLC(x));
-                    isSetInMemory             = GetMemoryCellIsSet(GetWordTokens(x)); //  GetBrainCellIsSet('r',Tokenize(GetWordsLC(x)));
+                    isSetInMemory             = GetMemoryCellIsSet(GetWordTokens(x));
                     if(Verbose){
                         cout << "WordLC:  " << GetWordsLC(x) << endl;
                         cout << "  Sentence Set:" << tmpTypeInSentence << endl;
@@ -319,54 +296,6 @@ class c_Brain : public c_Cerebellum
 ///------------------------------------------------------------------------------------------------
 
 
-
-        void TrySubject()
-        {
-          int SubjectLoc;
-          int Complexity;
-          int Response;
-          SubjectLoc = GetSubjectLocation();
-          Complexity = GetWordCount();
-          //cout << "Subject Location:" << SubjectLoc << endl;
-
-           switch(Complexity)
-           {
-
-
-             case 4:
-               {
-                   DecipherCurrentSentence();
-
-                   SlowSpeak(GetWords(0)+ " " + GetWords(3)+ " " + GetWords(SubjectLoc)+ ".");
-                   SlowSpeak("Is this right?");
-                   Response = RequestUserResponse();
-                   if(Response == 1){
-                    cout << "Yeah!" << endl;
-                    //tell user to describe subject or suggest the subject we're understanding
-                    //set assumptions
-                    //set/adjust subject stack
-                   }
-                   else{
-                    SlowSpeak("Oh. Let me try again.");   //subject is wrong
-                    SlowSpeak("Is " + GetWords(3) + " " + GetWords(1) + " " + GetWords(2)+ "?");
-                    Response = RequestUserResponse();
-                     if(Response == 1){
-                        //reset subject location
-                        //tell user to describe subject or suggest the subject we're understanding
-                       //set assumptions
-                       //set/adjust subject stack
-                     }
-
-                   }
-                   break;
-               }
-
-           }
-
-            //if(SubjectLoc){
-            //cout << "Tech me about " << Sentence.GetWords(SubjectLoc) << ",please." << endl;
-            //}
-        }
 //------------------------------STORE NEW WORDS-----------------------------------------------------------------
         int StoreNewWords()
         {
@@ -396,18 +325,14 @@ class c_Brain : public c_Cerebellum
                                     if(Verbose)
                                        cout << "Associating " << GetWords(x) << " with " << GetWords(GetIndirectObjectLocation()) << endl;
                                 }
-                                //RightLobeMemory[GetWordTokens(GetIndirectObjectLocation())].AccociateAdjective(GetWordTokens(x));
                     int z; z = GetVerbPointingToAdjective();
                     if(z >=0)
                         AssociateMemoryCellVerbToAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(z),GetWordsLC(x));
-                        //RightLobeMemory[GetWordTokens(GetSubjectLocation())].AccociateAdjectiveWithVerb(GetWordTokens(z),GetWordTokens(x));
                         if(GetIndirectObjectLocation()>=0)
                             AssociateMemoryCellVerbToAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(z),GetWordsLC(x));
-                            //RightLobeMemory[GetWordTokens(GetIndirectObjectLocation())].AccociateAdjectiveWithVerb(GetWordTokens(z),GetWordTokens(x));
                 }
                 if(GetWordType(x) == 'A')
                     AssociateMemoryCellAdverbToVerb(GetWordTokens(GetSubjectLocation()),GetWordsLC(GetWordTokens(GetVerbPointingToAdjective())),GetWordsLC(x));
-                    //L_AssociateAdverbToVerbInMap(GetWordsLC(x),GetWordsLC(GetVerbPointingToAdjective()),GetWordTokens(GetSubjectLocation()));
          }
          if((GetNounCount() >=2)&& (!GetIsQuestion())){
                 if(Verbose)

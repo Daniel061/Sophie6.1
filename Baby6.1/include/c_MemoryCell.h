@@ -30,8 +30,6 @@ class c_MemoryCell
         bool pIsSet;                         // Has been set with data before
         int  pNextVerb;                      // pointer to next verb
         int  pNextNoun;                      // pointer to next noun
-        int  AdjectiveList[15][4];           // points to linked adjectives with verbs [0][0] = Adjective [0][1]..[0][3] = verbs
-        int  AdjectiveCount;                 // the number of adjectives here
         int  pToken;                         // the token value of this data
         int  PointerToNextPattern;           // if used as pattern storage, points to constructed pattern or to self if final construction form
         multimap<int,int> adjDescriptors;    // storage of adjectives                        (Adjective,token)
@@ -47,7 +45,6 @@ class c_MemoryCell
         void   SetPointerToNextPattern(int NextPattern){PointerToNextPattern = NextPattern;}
         char   GetWordTense() {return WordTense;}
         void   SetWordTense(char newTense){WordTense = newTense;}
-        int    GetAdjectiveCount(){return AdjectiveCount;}
         char   GetSecondaryType(){return SecondaryType;}
         void   SetSecondaryType(char Type){SecondaryType = Type;}
         char   GetAlternateType(){return AlternateType;}
@@ -87,73 +84,11 @@ class c_MemoryCell
                 GenderClass  = 'n';
                 SecondaryType= 'u';
                 AlternateType= 'u';
-                for(int x = 0; x < 15; x++){
-                        AdjectiveList[x][0]=0;
-                        AdjectiveList[x][1]=0;
-                        AdjectiveList[x][2]=0;
-                        AdjectiveList[x][3]=0;}
-                AdjectiveCount = 0;
                 advDescriptors.clear();
                 verbDescriptors.clear();
                 adjDescriptors.clear();
                 PointerToNextPattern = 0;
         }
-
-
-        void AccociateAdjective(int NewAdjective){                  //Stores New Tokenized Adjective at the end of the list
-            int EndList; EndList = -1;
-            int Matched; Matched = -1;
-            for(int x =0; x <15; x++){
-                if((AdjectiveList[x][0]==0) & (EndList == -1)){
-                     EndList = x;}                                   //mark first occurrence of 0
-                if(AdjectiveList[x][0] == NewAdjective)
-                    Matched = x;
-                    }
-            if(!(Matched >=0))
-               AdjectiveList[EndList][0]=NewAdjective;
-
-            AdjectiveCount = EndList+1;
-            if(adjDescriptors.find(NewAdjective) == adjDescriptors.end())
-                adjDescriptors.emplace(NewAdjective,pToken);
-
-         }
-         //-----END ACCOCIATEADJECTIVE----------------------------
-
-
-        int GetAdjective(int Location){
-
-            //adjDescriptors.find()
-            return AdjectiveList[Location][0];}
-
-        int GetVerbWithAdjective(int AdjectiveLocation, int VerbLocation){
-             return AdjectiveList[AdjectiveLocation][VerbLocation];}
-
-        void AccociateAdjectiveWithVerb(int NewVerb,int AdjectiveToAssociate, int AdverbToAssociate = -1){  //Stores New Tokenized VERB with Tokenized Adjective at the end of the list 1,2,3
-            int EndList;  EndList = -1;
-            int Matched;  Matched = -1;
-            int aMatched; aMatched = -1;
-            for(int x = 0; x<15; x++){
-                if(AdjectiveToAssociate == AdjectiveList[x][0])
-                    aMatched = x;}
-
-            if(!(aMatched == -1)){
-            for(int x =1; x <4; x++){
-                if((AdjectiveList[aMatched][x]==0) & (EndList == -1)){
-                     EndList = x;}                                       //mark first occurrence of 0
-                if(AdjectiveList[aMatched][x] == NewVerb)
-                    Matched = x;
-                    }
-            if(Matched == -1)
-               AdjectiveList[aMatched][EndList]=NewVerb;
-            }
-            if(AdverbToAssociate >=0){
-            if(advDescriptors.find(AdverbToAssociate) == advDescriptors.end())
-                advDescriptors.emplace(AdverbToAssociate,NewVerb);}
-
-            if(verbDescriptors.find(NewVerb) == verbDescriptors.end())
-                verbDescriptors.emplace(NewVerb,AdjectiveToAssociate);
-         }
-         //-----END ACCOCIATE VERB WITH ADJECTIVE----------------------------
 
 
        void AssociateAdjectiveInMap(string AdjectiveToAssociate){

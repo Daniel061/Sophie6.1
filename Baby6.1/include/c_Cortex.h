@@ -321,9 +321,6 @@ int HandleQuestion(){
    // check for correct form
    //actually need to compare indirect object to subject
     if(GetIndirectObjectLocation() != -1)
-  //  Matched = CheckLinkOfTwoNounsWithAdjectives(RightLobeMemory[GetWordTokens(GetIndirectObjectLocation())].GetpCellDataString(),
-  //                                              RightLobeMemory[GetWordTokens(GetSubjectLocation())].GetpCellDataString(),
-  //                                              VerbUsed,MatchedAdjective, MatchedCount);
     Matched = CheckLinkOfTwoNounsWithAdjectives(GetWords(GetIndirectObjectLocation()),GetWords(GetSubjectLocation()),VerbUsed,MatchedAdjective,MatchedCount);
     if (Matched){
             if(MatchedCount > 1){
@@ -356,7 +353,7 @@ int HandleQuestion(){
 void Handle75LevelUnderstanding(){
     bool Testing; Testing = true;
     int localVerbLocation = -1;
-    int localUnknownLocation = -1;
+
 
     if(Verbose){
         cout << "c_Cortex.h::Handle75LevelUnderstanding\n";
@@ -400,8 +397,8 @@ void Handle75LevelUnderstanding(){
 
     // --TEST FOR MISSING VERB--------------
     for(int x= 0; x < GetWordCount(); x++){
-        if(GetWordType(x)=='v') localVerbLocation = x;
-        if(GetWordType(x)=='u') localUnknownLocation =x;}
+        if(GetWordType(x)=='v') localVerbLocation = x;}
+
 
     if(localVerbLocation == -1 ){
         if(UnKnownLocation != -1){
@@ -453,8 +450,7 @@ void Handle75LevelUnderstanding(){
         SlowSpeak("Okay. Tell me more about " + GetWordsLC(tmpLocation+2) + " " + GetWordsLC(tmpLocation+3) + ".");
         SetWordType('n',tmpLocation+3);
         SetWordType('n',tmpLocation);
-//        L_AssociateNounToNoun(GetWordsLC(tmpLocation),GetWordsLC(tmpLocation+3));
-//        L_AssociateNounToNoun(GetWordsLC(tmpLocation+3),GetWordsLC(tmpLocation));
+
         AssociateMemoryCellNoun(GetWordTokens(tmpLocation),GetWordsLC(tmpLocation+3));  //associate first noun to second noun
         AssociateMemoryCellNoun(GetWordTokens(tmpLocation+3),GetWordsLC(tmpLocation));  //associate second noun to first noun
         FindSubject();                                                                  //Update subject
@@ -557,7 +553,7 @@ void Handle75LevelUnderstanding(){
                                  SlowSpeak(":)");}
                               else{
 
-//                                 if(L_CheckForRelatedNoun(Noun1,Noun2)){
+
                                   if(GetIsNounRelatedToThisMemoryCell(Tokenize(Noun1),Noun2)){
                                     SlowSpeak("A " + Noun1 + " is a " + Noun2 + ".");}
                                  else{
@@ -604,8 +600,6 @@ void Handle75LevelUnderstanding(){
 
 
          if((JoinerLocation >0)&(NounCount==2)){ //two nouns with joiner
-//                RightLobeMemory[Tokenize(Noun1)].AccociateAdjective(GetWordTokens(PluralPronounLocation+1));
-//                RightLobeMemory[Tokenize(Noun2)].AccociateAdjective(GetWordTokens(PluralPronounLocation+1));
                 AssociateMemoryCellAdjective(Tokenize(Noun1),GetWordsLC(PluralPronounLocation+1));
                 AssociateMemoryCellAdjective(Tokenize(Noun2),GetWordsLC(PluralPronounLocation+1));
                 SetWordType('a',PluralPronounLocation+1);
@@ -619,15 +613,14 @@ void Handle75LevelUnderstanding(){
 
 //--------------------Question Sentence Break Down----------------------------------------------------------
     bool QuestionSentenceBreakDown(){
-        int QuestionMode        = -1;
+
         int PatternMatch        = 0;
         int DirectionOfQuestion = 4;
         int MatchedAdjective    = -1;
         int Adjectives[20];
         int IndirectObjectLoc   = GetIndirectObjectLocation();
-        int AdjectiveLocation   = GetAdjectiveLocation();
         int SubjectLocation     = GetSubjectLocation();
-        int AdjectiveCount      = GetMemoryCellAdjectives(GetWordTokens(SubjectLocation),Adjectives)-1;//        L_GetNumberOfAdjectivesInMap(GetWordTokens(SubjectLocation)) - 1;
+        int AdjectiveCount      = GetMemoryCellAdjectives(GetWordTokens(SubjectLocation),Adjectives)-1;
         bool Result             = false;
         string WorkingPattern   = GetPattern();
 
@@ -638,7 +631,6 @@ void Handle75LevelUnderstanding(){
                     if(Adjectives[x] == GetWordTokens(GetAdjectiveLocation())) MatchedAdjective = x; }
                 if(IndirectObjectLoc >=0){
                     if(GetIsNounRelatedToThisMemoryCell(GetWordTokens(SubjectLocation),GetWordsLC(IndirectObjectLoc))==true) MatchedAdjective = 1;
-                    //if(L_CheckForRelatedNoun(GetWordsLC(SubjectLocation),GetWordsLC(IndirectObjectLoc)) == true) MatchedAdjective = 1;
                 }
             }
             if(MatchedAdjective >=0) {SlowSpeak("Yes."); Result = true;} else SlowSpeak("No.");
@@ -712,7 +704,7 @@ void Handle75LevelUnderstanding(){
         // subject must be pronoun   he,she,her, him
         string MaleProNouns      = " he him his ";
         string FemaleProNouns    = " she her ";
-        string SubjectText       = GetMemoryCellWordLC("",GetSubject(1));//    RightLobeMemory[GetSubject(1)].GetpCellDataString();   //pronoun has already been set as subject so get next
+        string SubjectText       = GetMemoryCellWordLC("",GetSubject(1)); //pronoun has already been set as subject so get next
         string ProNounResolution = "";
         char GenderClass         = '\0';
         int MatchedM             = MaleProNouns.find(" " + GetWordsLC(GetSubjectLocation())+" ");
@@ -732,7 +724,6 @@ void Handle75LevelUnderstanding(){
             Response = RequestUserResponse();
             if(Response == 1){
                 SetMemoryCellGenderClass(GetSubject(1),GenderClass);
-                //RightLobeMemory[GetSubject(1)].SetGenderClass(GenderClass);
                 SlowSpeak("Okay."); SlowSpeak(":)"); IncreaseMoodLevel();
             }
         }

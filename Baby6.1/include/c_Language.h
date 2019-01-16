@@ -72,10 +72,8 @@ class c_Language : public c_LongTermMemory
        pull it into CorrectPattern
    */
 
-//    if(LeftLobeMemory[Tokenize(CorrectedPattern,false)].GetpIsSet() == true){                     //seen this pattern before
-//        CorrectedPattern = LeftLobeMemory[LeftLobeMemory[Tokenize(Pattern,false)].GetPointerToNextPattern()].GetpCellDataString();
-//        ConfidenceLevel = 100;}
-     if(GetMemoryCellIsSet(Tokenize(CorrectedPattern,false),'l')==true){
+
+     if(GetMemoryCellIsSet(Tokenize(CorrectedPattern,false),'l')==true){  //seen this pattern before
             PatternPointer       = GetMemoryCellPointerToNextPattern(Tokenize(CorrectedPattern,false),'l');
             CorrectedPattern     = GetMemoryCellRawStringData(Result,"",PatternPointer,'l');
      }
@@ -267,9 +265,7 @@ int RequestUserResponse()
             int UnknownLocation;          UnknownLocation    = -1;
             int WordCount;                WordCount          =  0;
             int SubLocation;              SubLocation        = -1;
-            int AdjectiveLocation;        AdjectiveLocation  = -1;
             int NounLocation;             NounLocation       = -1;
-            int VerbLocationFound;        VerbLocationFound  = -1;
             int SecondNounLocation;       SecondNounLocation = -1;
             int ProNounLocation;          ProNounLocation    = -1;
             int ProperNounLocation;       ProperNounLocation = -1;
@@ -287,8 +283,8 @@ int RequestUserResponse()
                 if(GetWordType(x)== 'r')if(SubLocation == -1)        SubLocation        = x;
                 if(GetWordType(x)== 'p')if(ProNounLocation == -1)    ProNounLocation    = x;
                 if(GetWordType(x)== 'P')if(ProperNounLocation == -1) ProperNounLocation = x;
-                if(GetWordType(x)== 'v'){VerbLocationFound =x; SetVerbLocation(x);}
-                if(GetWordType(x)== 'a'){AdjectiveLocation = x; SetAdjectiveLocation(x);}
+                if(GetWordType(x)== 'v'){ SetVerbLocation(x);}
+                if(GetWordType(x)== 'a'){ SetAdjectiveLocation(x);}
                 Pattern += GetWordType(x);
             }
             SetPattern(Pattern);

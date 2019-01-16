@@ -420,7 +420,7 @@ class c_Lobes : public c_MemoryCell
                    for(int x = 0; x<15; x++) MatchedAdjective[x] = "";
                    bool Result; Result = false;
                    int FirstNounAdjectiveCount,SecondNounAdjectiveCount;
-                   int TokenFirstNoun,TokenSecondNoun,intVerbUsage,intMatchedAdjective;
+                   int TokenFirstNoun,TokenSecondNoun; //,intMatchedAdjective; //intVerbUsage,intMatchedAdjective;
                    int AdjectiveMatches; AdjectiveMatches = 0;
                    int AdjectivesFirstNoun[20];
                    int AdjectivesSecondNoun[20];
@@ -439,9 +439,9 @@ class c_Lobes : public c_MemoryCell
                         for(int y = 0; y < SecondNounAdjectiveCount; y++){
                             if(AdjectivesFirstNoun[x] == AdjectivesSecondNoun[y]){
                                 Result                                = true;
-                                intMatchedAdjective                   = AdjectivesFirstNoun[x];
+                                //intMatchedAdjective                   = AdjectivesFirstNoun[x];
                                 MatchedAdjective[AdjectiveMatches]    = GetMemoryCellWordLC("",AdjectivesFirstNoun[x]);
-                                intVerbUsage                          = GetMemoryCellVerbs(intMatchedAdjective,Verbs);
+                                //intVerbUsage                          = GetMemoryCellVerbs(intMatchedAdjective,Verbs);
                                 VerbUsage                             = Verbs[0];
                                 AdjectiveMatches++;}
                         } } }
