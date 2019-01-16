@@ -62,6 +62,7 @@ class c_Brain : public c_Cerebellum
 
             if(a == 0){                                                                   //check for command
              SaveReceivedInput(strData,true);                                             //update short term memory
+             SaveSentenceInLongTermMemory(strData);                                       //update Long Term Memory
              SetWordTypes();                                                              //try to set all word types
              SubjectLocation = FindSubject();                                             //try to located subject
              SetSubjectLocation(SubjectLocation);                                         //set the suggestion
@@ -105,12 +106,12 @@ class c_Brain : public c_Cerebellum
         WC = GetWordCount();
         cout << "Punctuation Flag:" << boolalpha << GetHasPunctuation() << "  Punctuation Character:" << GetPunctuation() << endl;
         cout << "Word Count:" << WC << " Pattern:" << GetPattern() << endl;
-        cout << "Subject location:" << GetSubjectLocation() << " Indirect Object Location:" << GetIndirectObjectLocation() << endl;
+        cout << "Subject location:" << GetSubjectLocation() << "\nIndirect Object Location:" << GetIndirectObjectLocation() << endl;
         for (int x = 0; x < WC; x++){
             cout << x << " " << GetWords(x) << ":" << GetWordTokens(x) <<  " Type:"
             << GetWordType(x) << " isContraction:" << GetisContraction(x) << " Quote Location:" << GetQuoteLocation(x) << endl;
         }
-            cout << "Cell Usage(r):" << GetRightLobeCellCount() <<  " Cell Usage(l):" << GetLeftLobeCellCount() << endl;
+            cout << "Cell Usage(r):" << GetRightLobeCellCount() <<  " Cell Usage(l):" << GetLeftLobeCellCount() << " Number of Sentences in LTM:" << GetNumberOfSentencesSaved() << endl;
         }
 
 

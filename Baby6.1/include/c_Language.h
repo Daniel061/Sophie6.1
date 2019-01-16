@@ -2,12 +2,13 @@
 #define C_LANGUAGE_H
 #include <c_Sentence.h>
 #include <c2_Sentence.h>
+#include <c_LongTermMemory.h>
 #include <string>
 #include <iostream>
 extern bool Verbose;
 using namespace std;
 
-class c_Language : public c_Sentence
+class c_Language : public c_LongTermMemory
 {
     public:
         c_Language();
@@ -138,7 +139,7 @@ class c_Language : public c_Sentence
            string JoiningWords =        " and ";
            string AssociativeWord =     " name name's ";
            string PluralPronoun =       " both ";
-           string ThrowAwayWords =      " of also can ";
+           string ThrowAwayWords =      " of also ";
 
            int isThrowAwayWord   = -1;
            int isPluralPronoun   = -1;
@@ -230,7 +231,7 @@ void SlowSpeak(string str_Data, int Delay = 30000000 )
 
 int RequestUserResponse()
 {
-    int Matched;
+    int Matched = -1;
 
     string PositiveResponse = " yes Yes OK ok Ok correct Correct right Right Exactly exactly ye ";
     string NegativeResponse = " No no wrong Wrong What what n ";
@@ -242,9 +243,11 @@ int RequestUserResponse()
     tmpSentence.Parse(Response);
     Response = tmpSentence.GetWords(0);
     Matched = PositiveResponse.find(" " + Response + " ");
-    if(Matched >= 0) return 1;
+    if(Matched >= 0)
+        return 1;
     Matched = NegativeResponse.find(" " + Response + " ");
-    if(Matched >= 0) return -1;
+    if(Matched >= 0)
+        return -1;
 
     return 0;
 }

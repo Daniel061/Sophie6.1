@@ -40,6 +40,7 @@
 		<Unit filename="include/c_Cortex.h" />
 		<Unit filename="include/c_Language.h" />
 		<Unit filename="include/c_Lobes.h" />
+		<Unit filename="include/c_LongTermMemory.h" />
 		<Unit filename="include/c_Medulla.h" />
 		<Unit filename="include/c_MemoryCell.h" />
 		<Unit filename="include/c_Personality.h" />
@@ -53,6 +54,7 @@
 		<Unit filename="src/c_Cortex.cpp" />
 		<Unit filename="src/c_Language.cpp" />
 		<Unit filename="src/c_Lobes.cpp" />
+		<Unit filename="src/c_LongTermMemory.cpp" />
 		<Unit filename="src/c_Medulla.cpp" />
 		<Unit filename="src/c_MemoryCell.cpp" />
 		<Unit filename="src/c_Personality.cpp" />
