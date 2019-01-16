@@ -41,7 +41,7 @@
 1544997036 source:h:\c++projects\baby6.1\baby6.1\src\c_cortex.cpp
 	"c_Cortex.h"
 
-1547677490 h:\c++projects\baby6.1\baby6.1\include\c_cortex.h
+1547680450 h:\c++projects\baby6.1\baby6.1\include\c_cortex.h
 	<c_Language.h>
 
 1544998330 source:h:\c++projects\baby6.1\baby6.1\src\c_shorttermmemory.cpp
@@ -65,7 +65,7 @@
 1544998682 source:h:\c++projects\baby6.1\baby6.1\src\c_brain.cpp
 	"c_Brain.h"
 
-1547677266 h:\c++projects\baby6.1\baby6.1\include\c_brain.h
+1547680708 h:\c++projects\baby6.1\baby6.1\include\c_brain.h
 	<c_Cerebellum.h>
 
 1547676280 source:h:\c++projects\baby6.1\baby6.1\src\c_lobes.cpp

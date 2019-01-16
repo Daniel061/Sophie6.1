@@ -310,6 +310,7 @@ class c_Brain : public c_Cerebellum
              if( !( GetMemoryCellIsSet(GetWordTokens(x)) )) //   CheckForKnownWord(GetWords(x))))
                 {NewWords++;}
                 InstallNewWord(GetWords(x),GetWordType(x),'w',true);
+                //Associate Adjective
                 if(GetWordType(x)=='a'){
                         if(GetSubjectLocation() >=0 )
                             if(!AssociateMemoryCellAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(x))){
@@ -331,9 +332,11 @@ class c_Brain : public c_Cerebellum
                         if(GetIndirectObjectLocation()>=0)
                             AssociateMemoryCellVerbToAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(z),GetWordsLC(x));
                 }
+                //Associate Adverb
                 if(GetWordType(x) == 'A')
                     AssociateMemoryCellAdverbToVerb(GetWordTokens(GetSubjectLocation()),GetWordsLC(GetWordTokens(GetVerbPointingToAdjective())),GetWordsLC(x));
          }
+         //Associate two nouns if not a question sentence
          if((GetNounCount() >=2)&& (!GetIsQuestion())){
                 if(Verbose)
                    cout << "Associating " << GetWords(Noun1) << " with " << GetWords(Noun2) << endl;
@@ -341,7 +344,11 @@ class c_Brain : public c_Cerebellum
                 AssociateMemoryCellNoun(GetWordTokens(Noun2),GetWordsLC(Noun1));
 
          }
-
+          //Associate Proper Noun to noun and vice versa
+          if((GetWordType(GetIndirectObjectLocation())=='P') && (!GetIsQuestion()) ){
+                AssociateMemoryCellNoun(GetWordTokens(GetSubjectLocation()),GetWordsLC(GetIndirectObjectLocation()));
+                AssociateMemoryCellNoun(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(GetSubjectLocation()));
+          }
             return NewWords;
 
         }

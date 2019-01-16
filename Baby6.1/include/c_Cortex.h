@@ -618,6 +618,8 @@ void Handle75LevelUnderstanding(){
         int DirectionOfQuestion = 4;
         int MatchedAdjective    = -1;
         int Adjectives[20];
+        int LinkedNouns[20];
+        int LinkedNounCount     = -1;
         int IndirectObjectLoc   = GetIndirectObjectLocation();
         int SubjectLocation     = GetSubjectLocation();
         int AdjectiveCount      = GetMemoryCellAdjectives(GetWordTokens(SubjectLocation),Adjectives)-1;
@@ -627,13 +629,7 @@ void Handle75LevelUnderstanding(){
 
         if(GetWordType(0) == 'v'){
             if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") ){
-                for(int x = 0; x <= AdjectiveCount; x++){
-                    if(Adjectives[x] == GetWordTokens(GetAdjectiveLocation())) MatchedAdjective = x; }
-                if(IndirectObjectLoc >=0){
-                    if(GetIsNounRelatedToThisMemoryCell(GetWordTokens(SubjectLocation),GetWordsLC(IndirectObjectLoc))==true) MatchedAdjective = 1;
-                }
-            }
-            if(MatchedAdjective >=0) {SlowSpeak("Yes."); Result = true;} else SlowSpeak("No.");
+                DirectionOfQuestion = 3;}
         }
 
         PatternMatch = WorkingPattern.find("vmv");      //i.e. do you know
@@ -660,6 +656,27 @@ void Handle75LevelUnderstanding(){
             case 3: {
                 if(Verbose)
                     cout << "[c_Cortex::QuestionSentenceBreakDown()] Question direction Yes/No\n";
+                //checks for direct comparison i.e. the dog is black.   is the dog black
+                //compares adjective list with the adjective in the sentence
+                //sets MatchedAdjective to the location in the array if matched
+                for(int x = 0; x <= AdjectiveCount; x++){
+                    if(Adjectives[x] == GetWordTokens(GetAdjectiveLocation())) MatchedAdjective = x; }
+                //Checks for direct comparison of linked nouns between the subject and the indirect object
+                //sets MatchedAdjective is found
+                if(IndirectObjectLoc >=0){
+                    if(GetIsNounRelatedToThisMemoryCell(GetWordTokens(SubjectLocation),GetWordsLC(IndirectObjectLoc))==true) MatchedAdjective = 1;
+                }
+                //checks for an indirect comparison between the subjects linked nouns and the indirect object linked nouns
+                //sets MatchedAdjective if found
+                LinkedNounCount = GetMemoryCellRelatedNouns(GetWordTokens(GetSubjectLocation()),LinkedNouns);
+                for(int x =0; x < LinkedNounCount; x++){
+                    if(GetIsNounRelatedToThisMemoryCell(GetWordTokens(GetIndirectObjectLocation()),GetMemoryCellWordLC("",LinkedNouns[x]))){
+                        MatchedAdjective = x;
+                    }
+                }
+
+                if(MatchedAdjective >=0) {SlowSpeak("Yes."); Result = true;} else SlowSpeak("No.");
+
                 break;}
 
             default: if(Verbose) cout << "No direction detected.\n";
