@@ -152,7 +152,7 @@ class c_Lobes : public c_MemoryCell
             bool SearchResult = false;
             mapIT             = FindAddressInMap(Address,SearchResult,SideToCheck);
                 if(SearchResult){
-                    Result = mapIT->second.GetPointerToNextPattern();}
+                    Result = mapIT->second.GetpPointerToNextPattern();}
             return Result;
         }
 
@@ -162,7 +162,7 @@ class c_Lobes : public c_MemoryCell
             bool SearchResult = false;
             mapIT = FindAddressInMap(Address,SearchResult,SideToCheck);
                 if(SearchResult){
-                    mapIT->second.SetPointerToNextPattern(PointerToNextAddress);
+                    mapIT->second.SetpPointerToNextPattern(PointerToNextAddress);
                     Result = 0;}
             return Result;
         }
@@ -173,7 +173,7 @@ class c_Lobes : public c_MemoryCell
             bool SearchResult = false;
             mapIT             = FindAddressInMap(Address,SearchResult);
                 if(SearchResult){
-                    Result = mapIT->second.GetWordTense();}
+                    Result = mapIT->second.GetpWordTense();}
             return Result;
         }
 
@@ -182,7 +182,7 @@ class c_Lobes : public c_MemoryCell
             bool Result = false;
             mapIT       = FindAddressInMap(Address,Result);
                 if(Result){
-                    mapIT->second. SetWordTense(TenseToSet);
+                    mapIT->second. SetpWordTense(TenseToSet);
                     Result = true;}
             return Result;
         }
@@ -192,7 +192,7 @@ class c_Lobes : public c_MemoryCell
             bool Result = false;
             mapIT       = FindAddressInMap(Address,Result);
                 if(Result){
-                    mapIT->second.SetGenderClass(GenderToSet);
+                    mapIT->second.SetpGenderClass(GenderToSet);
                     Result = true;}
             return Result;
         }
@@ -203,7 +203,7 @@ class c_Lobes : public c_MemoryCell
             char Gender = '\0';
             mapIT       = FindAddressInMap(Address,Result);
                 if(Result){
-                    Gender = mapIT->second.GetGenderClass();
+                    Gender = mapIT->second.GetpGenderClass();
                     Result = true;}
             return Gender;
         }
@@ -420,7 +420,7 @@ class c_Lobes : public c_MemoryCell
                    for(int x = 0; x<15; x++) MatchedAdjective[x] = "";
                    bool Result; Result = false;
                    int FirstNounAdjectiveCount,SecondNounAdjectiveCount;
-                   int TokenFirstNoun,TokenSecondNoun; //,intMatchedAdjective; //intVerbUsage,intMatchedAdjective;
+                   int TokenFirstNoun,TokenSecondNoun;
                    int AdjectiveMatches; AdjectiveMatches = 0;
                    int AdjectivesFirstNoun[20];
                    int AdjectivesSecondNoun[20];
@@ -466,34 +466,34 @@ class c_Lobes : public c_MemoryCell
                     WorkingCell.SetpCellDataString(PreConstructionPattern);
                     WorkingCell.SetpCellPurpose('1');    // pattern storage
                     WorkingCell.SetpToken(PreToken);
-                    WorkingCell.SetPointerToNextPattern(PostToken);
+                    WorkingCell.SetpPointerToNextPattern(PostToken);
                     LeftLobeMemoryMap.emplace(PreToken,WorkingCell);
                     mapIT  = FindAddressInMap(PostToken,Result,'l');
                     WorkingCell.InitializeAll();
                     WorkingCell.SetpCellDataString(PostConstructionPattern);
                     WorkingCell.SetpCellPurpose('1');    //pattern storage
                     WorkingCell.SetpToken(PostToken);
-                    WorkingCell.SetPointerToNextPattern(PostToken);
+                    WorkingCell.SetpPointerToNextPattern(PostToken);
                     LeftLobeMemoryMap.emplace(PostToken,WorkingCell);
                 }
                 else{
                      mapIT->second.SetpCellDataString(PreConstructionPattern);
                      mapIT->second.SetpCellPurpose('1');    // pattern storage
                      mapIT->second.SetpToken(PreToken);
-                     mapIT->second.SetPointerToNextPattern(PostToken);
+                     mapIT->second.SetpPointerToNextPattern(PostToken);
 
                      mapIT  = FindAddressInMap(PostToken,Result,'l');
                      if(Result){
                          mapIT->second.SetpCellDataString(PostConstructionPattern);
                          mapIT->second.SetpCellPurpose('1');    //pattern storage
                          mapIT->second.SetpToken(PostToken);
-                         mapIT->second.SetPointerToNextPattern(PostToken);}
+                         mapIT->second.SetpPointerToNextPattern(PostToken);}
                          else{
                             WorkingCell.InitializeAll();
                             WorkingCell.SetpCellDataString(PostConstructionPattern);
                             WorkingCell.SetpCellPurpose('1');    //pattern storage
                             WorkingCell.SetpToken(PostToken);
-                            WorkingCell.SetPointerToNextPattern(PostToken);
+                            WorkingCell.SetpPointerToNextPattern(PostToken);
                             LeftLobeMemoryMap.emplace(PostToken,WorkingCell);
                          }
 
@@ -501,6 +501,100 @@ class c_Lobes : public c_MemoryCell
                 }
 
     }
+
+            //Returns miniDefinition from memorycell
+            //Returns "" if memorycell doesn't exist
+            //can send string data or tokenized string data for address
+            //currently rightside cells only, don't see a need for leftside yet
+
+          string GetMemoryCellMiniDefinition(string strData = "", int Address = 0){
+                bool Result = false;
+                if(Address ==0) Address = Tokenize(strData);
+
+                mapIT       = FindAddressInMap(Address,Result);
+                if(Result){
+                    return mapIT->second.GetpCellMiniDefinition();
+                }
+                else
+                            return "";
+          }
+
+            //Sets the memorycell minidefinition if the memorycell exists
+            //can send string data or the tokenized version of the string data for the address
+          void SetMemoryCellMiniDefinition(string Definition, string strData = "", int Address = 0){
+               bool Result = false;
+               if (Address ==0) Address = Tokenize(strData);
+
+               mapIT       = FindAddressInMap(Address,Result);
+               if(Result){
+                   mapIT->second.SetpCellMiniDefinition(Definition);
+               }
+
+          }
+
+
+            //Returns pCellIsSingular from memorycell
+            //Returns '\0' null, if memorycell doesn't exist
+            //can send string data or tokenized string data for address
+            //currently right side cells only, don't see a need for left side yet
+
+          char GetMemoryCellpCellIsSingular(string strData = "", int Address = 0){
+                bool Result = false;
+                if(Address ==0) Address = Tokenize(strData);
+
+                mapIT       = FindAddressInMap(Address,Result);
+                if(Result){
+                    return mapIT->second.GetpCellIsSingular();
+                }
+                else
+                return '\0';}
+
+            //Sets pCellIsSingular in memorycell
+            //if memorycell exist
+            //can send string data or tokenized string data for address
+            //currently right side cells only, don't see a need for left side yet
+
+          void SetMemoryCellpCellIsSingular(char newData, string strData = "", int Address = 0){
+                bool Result = false;
+                if(Address ==0) Address = Tokenize(strData);
+
+                mapIT       = FindAddressInMap(Address,Result);
+                if(Result){
+                    return mapIT->second.SetpCellIsSingular(newData);
+                }}
+
+
+            //Returns pSingularLocation from memorycell
+            //Returns 0 , if memorycell doesn't exist
+            //can send string data or tokenized string data for address
+            //currently right side cells only, don't see a need for left side yet
+
+          int GetpSingularLocation(string strData = "", int Address = 0){
+                bool Result = false;
+                if(Address ==0) Address = Tokenize(strData);
+
+                mapIT       = FindAddressInMap(Address,Result);
+                if(Result){
+                    return mapIT->second.GetpSingularLocation();
+                }
+                else
+                return 0;}
+
+            //Sets pSingularLocation from memorycell
+            //if memorycell exist
+            //can send string data or tokenized string data for address
+            //send int for new location
+            //currently right side cells only, don't see a need for left side yet
+
+          void SetpSingularLocation(int newLocation, string strData = "", int Address = 0){
+                bool Result = false;
+                if(Address ==0) Address = Tokenize(strData);
+
+                mapIT       = FindAddressInMap(Address,Result);
+                if(Result){
+                    return mapIT->second.SetpSingularLocation(newLocation);
+                }
+                }
 
         int Tokenize (string str_Data,bool ForceLowerCase = true)
         {

@@ -15,23 +15,26 @@ class c_MemoryCell
     private:
         string pCellData;                    // the raw data
         string pCellDataLC;                  // raw data in lower case
-        string GivenName;                    // if this noun or proper noun has a given name
+        string pGivenName;                   // if this noun or proper noun has a given name
+        string pCellMiniDefinition;          // a short string defining this data
         char pCellPurpose;                   // s-sentence w-word r-response m-memory
         char pWordType;                      // n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
                                              // n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object I(LC) Indirect object
                                              // s - plural possessive  X(cap) Directive j-joining word
                                              // initialize to 'u'
-        char WordTense;                      // p-past c-present f-future s-plural
+        char pWordTense;                     // p-past c-present f-future s-plural
                                              // the decision on this word type is made elsewhere
-        char SecondaryType;                  // Could be used as another type i.e. light-n light red - A box is light -a
-        char AlternateType;                  // some words without modification could have a third type (All type references conform to pWordType definitions)
-        char GenderClass;                    // n - neutral e- either m - male only f - female only u - undefined
+        char pSecondaryType;                 // Could be used as another type i.e. light-n light red - A box is light -a
+        char pAlternateType;                 // some words without modification could have a third type (All type references conform to pWordType definitions)
+        char pGenderClass;                   // n - neutral e- either m - male only f - female only u - undefined
         bool pIsRoot;                        // the root of a word
         bool pIsSet;                         // Has been set with data before
+        char pCellIsSingular;                // p = plural s = singular u = undefined
+        int  pSingularLocation;              // if CellIsSingular = p, this points to the memorycell containing the singular version
         int  pNextVerb;                      // pointer to next verb
         int  pNextNoun;                      // pointer to next noun
         int  pToken;                         // the token value of this data
-        int  PointerToNextPattern;           // if used as pattern storage, points to constructed pattern or to self if final construction form
+        int  pPointerToNextPattern;          // if used as pattern storage, points to constructed pattern or to self if final construction form
         multimap<int,int> adjDescriptors;    // storage of adjectives                        (Adjective,token)
         multimap<int,int> verbDescriptors;   // storage of verbs associated with adjectives  (Verb,Adjective)
         multimap<int,int> advDescriptors;    // storage of adverbs associated with verbs     (Adverb,Adjective)
@@ -41,14 +44,20 @@ class c_MemoryCell
 
 
     public:
-        int    GetPointerToNextPattern(){return PointerToNextPattern;}
-        void   SetPointerToNextPattern(int NextPattern){PointerToNextPattern = NextPattern;}
-        char   GetWordTense() {return WordTense;}
-        void   SetWordTense(char newTense){WordTense = newTense;}
-        char   GetSecondaryType(){return SecondaryType;}
-        void   SetSecondaryType(char Type){SecondaryType = Type;}
-        char   GetAlternateType(){return AlternateType;}
-        void   SetAlternateType(char Type){AlternateType = Type;}
+        void   SetpCellMiniDefinition(string newData){pCellMiniDefinition=newData;}
+        string GetpCellMiniDefinition(){return pCellMiniDefinition;}
+        char   GetpCellIsSingular(){return pCellIsSingular;}
+        void   SetpCellIsSingular(char newData){pCellIsSingular = newData;}
+        int    GetpSingularLocation(){return pSingularLocation;}
+        void   SetpSingularLocation(int newLocation){pSingularLocation = newLocation;}
+        int    GetpPointerToNextPattern(){return pPointerToNextPattern;}
+        void   SetpPointerToNextPattern(int NextPattern){pPointerToNextPattern = NextPattern;}
+        char   GetpWordTense() {return pWordTense;}
+        void   SetpWordTense(char newTense){pWordTense = newTense;}
+        char   GetpSecondaryType(){return pSecondaryType;}
+        void   SetpSecondaryType(char Type){pSecondaryType = Type;}
+        char   GetpAlternateType(){return pAlternateType;}
+        void   SetpAlternateType(char Type){pAlternateType = Type;}
         string GetpCellDataString(){return pCellData;}
         string GetpCellDataLC(){return pCellDataLC;}
         void   SetpCellDataLC(string newData){pCellDataLC=newData;}
@@ -64,30 +73,34 @@ class c_MemoryCell
         void   SetpToken(int NewVal){pToken=NewVal;}
         int    GetpToken(){return pToken;}
         bool   GetpIsSet() {return pIsSet;}
-        void   SetGenderClass(char NewClass){GenderClass = NewClass;}
-        char   GetGenderClass(){return GenderClass;}
-        string GetGivenName(){return GivenName;}
-        void   SetGivenName(string NewName){GivenName = NewName;}
+        void   SetpGenderClass(char NewClass){pGenderClass = NewClass;}
+        char   GetpGenderClass(){return pGenderClass;}
+        string GetpGivenName(){return pGivenName;}
+        void   SetpGivenName(string NewName){pGivenName = NewName;}
         void   SetpCellDataString(string NewData){pCellData = NewData; pIsSet = true;}
 
         void InitializeAll(){
-                pCellData    = "";
-                pCellDataLC  = "";
-                GivenName    = "";
-                pCellPurpose = 'u'; //undefined
-                pWordType    = 'u';
-                pIsRoot      = false;
-                pNextVerb    = 0;
-                pNextNoun    = 0;
-                pToken       = 0;
-                pIsSet       = false;
-                GenderClass  = 'n';
-                SecondaryType= 'u';
-                AlternateType= 'u';
+                pCellIsSingular     = 'u';
+                pWordTense          = 'u';
+                pCellData           = "";
+                pCellDataLC         = "";
+                pGivenName          = "";
+                pCellMiniDefinition = "";
+                pCellPurpose        = 'u'; //undefined
+                pWordType           = 'u';
+                pIsRoot             = false;
+                pNextVerb           = 0;
+                pNextNoun           = 0;
+                pToken              = 0;
+                pIsSet              = false;
+                pGenderClass        = 'n';
+                pSecondaryType      = 'u';
+                pAlternateType      = 'u';
                 advDescriptors.clear();
                 verbDescriptors.clear();
                 adjDescriptors.clear();
-                PointerToNextPattern = 0;
+                pPointerToNextPattern= 0;
+                pSingularLocation    = 0;
         }
 
 
