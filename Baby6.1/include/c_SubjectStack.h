@@ -1,10 +1,10 @@
 #ifndef C_SUBJECTSTACK_H
 #define C_SUBJECTSTACK_H
 
-//#include <c_Language.h>
+#include <vector>
 #include <c_Personality.h>
 
-class c_SubjectStack :  public c_Personality  //public c_Language
+class c_SubjectStack :  public c_Personality
 {
     public:
         c_SubjectStack();
@@ -16,44 +16,43 @@ class c_SubjectStack :  public c_Personality  //public c_Language
         string strTmpSubject;
         int SubjectCount;
         int tmpSubject;
+        vector <int> SubjectStack;
+        vector <string> strSubjectStack;
+        vector <int>::iterator stackIT;
+        vector <string>::iterator strStackIT;
+        vector <string> strSentenceStack;
     public:
 
-        void SetSubject (int Subject,string strSubject)  //Push down old subjects
-        {
-            for(int x = 0; x< 15; x++)                      //swap to front if been here before
-            if(Subjects[x]== Subject){
-                tmpSubject     = Subjects[0];               //matched so swap to the front as the active subject
-                strTmpSubject  = strSubjects[0];
-                Subjects[0]    = Subject;
-                strSubjects[0] = strSubject;
-                Subjects[x]    = tmpSubject;                //move the old front subject to this place
-                strSubjects[x] = strTmpSubject;}
-            if(Subjects[0] != Subject){                     //no move down if already current
-                    tmpSubject = Subjects[1];
-                    strTmpSubject = strSubjects[1];
-                for (int x = 14; x >0; x--){
-                    Subjects[x] = Subjects[x-1];
-                    strSubjects[x] = strSubjects[x-1];
-                }
-                Subjects[0] = Subject;
-                strSubjects[0] = strSubject;
-                SubjectCount++;
-                if(SubjectCount > 15) SubjectCount = 15;}
+
+        void SetSubjectInStack(int NewSubject,string strSubject,string OriginalString){
+            stackIT = SubjectStack.begin();
+            int FirstSubject = -1;
+            if(SubjectStack.size()!= 0){
+               FirstSubject = SubjectStack[0];}
+            if(FirstSubject != NewSubject){
+                SubjectStack.emplace(stackIT,NewSubject);
+                strStackIT = strSubjectStack.begin();
+                strSubjectStack.emplace(strStackIT,strSubject);
+                strStackIT = strSentenceStack.begin();
+                strSentenceStack.emplace(strStackIT,OriginalString);}
         }
 
+        int GetSubjectInStack(int Location = 0){
+            stackIT = SubjectStack.begin()+Location;
+            return *stackIT;
 
+        }
+        string GetstrSubjectInStack(int Location){
+            strStackIT = strSubjectStack.begin()+Location;
+            return *strStackIT;
+        }
 
-        int GetSubject(int Place=0)    //0 = current
-        {
-            return Subjects[Place];
+        string GetOriginalStringInStack(int Location){
+            return strSentenceStack[Location];
         }
-        string GetstrSubject(int Place)
-        {
-            return strSubjects[Place];
-        }
-        int GetSubjectCount()
-        {
-            return SubjectCount;
+
+        int GetSubjectStackCount(){
+            return SubjectStack.size();
         }
 };
 

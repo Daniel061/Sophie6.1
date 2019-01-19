@@ -192,7 +192,7 @@ class c_Cortex : public c_Language
                     cout << "Case 100" << endl;
                     string tmpSubject;
                  tmpSubject = GetWords(SubjectLoc);
-                 SetSubject(GetWordTokens(SubjectLoc),tmpSubject);
+                 SetSubjectInStack(GetWordTokens(SubjectLoc),tmpSubject,GetOriginalString());
                  if(GetWordType(GetSubjectLocation())=='p'){
                     CheckForImpliedGender();}
                  SlowSpeak("Okay.");
@@ -240,7 +240,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
             //see if this is a known word
             IncreaseMoodLevel();
             SetWordType('n',Determiner+1);
-            SetSubject(Tokenize(GetWords(Determiner+1)),GetWords(Determiner+1));
+            SetSubjectInStack(Tokenize(GetWords(Determiner+1)),GetWords(Determiner+1),GetOriginalString());
             for(int x =0; x < GetWordCount(); x++){
                 if (GetWordType(x)=='u'){
                     tmpAdjective = GetWords(x);
@@ -295,7 +295,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
                 SlowSpeak("Ok");
                 SlowSpeak("You'll have to tell me more about a " + GetWords(Determiner+2)+ ".");
                 SetWordType('n',Determiner+2);
-                SetSubject(Tokenize(GetWords(Determiner+2)),GetWords(Determiner+2));
+                SetSubjectInStack(Tokenize(GetWords(Determiner+2)),GetWords(Determiner+2),GetOriginalString());
                 IncreaseMoodLevel();
                 //set subject
             }
@@ -451,10 +451,10 @@ void Handle75LevelUnderstanding(){
         SetWordType('n',tmpLocation+3);
         SetWordType('n',tmpLocation);
 
-        AssociateMemoryCellNoun(GetWordTokens(tmpLocation),GetWordsLC(tmpLocation+3));  //associate first noun to second noun
-        AssociateMemoryCellNoun(GetWordTokens(tmpLocation+3),GetWordsLC(tmpLocation));  //associate second noun to first noun
-        FindSubject();                                                                  //Update subject
-        SetSubject(GetWordTokens(GetSubjectLocation()),GetWords(GetSubjectLocation())); //update subject stack
+        AssociateMemoryCellNoun(GetWordTokens(tmpLocation),GetWordsLC(tmpLocation+3));                               //associate first noun to second noun
+        AssociateMemoryCellNoun(GetWordTokens(tmpLocation+3),GetWordsLC(tmpLocation));                               //associate second noun to first noun
+        FindSubject();                                                                                              //Update subject
+        SetSubjectInStack(GetWordTokens(GetSubjectLocation()),GetWords(GetSubjectLocation()),GetOriginalString()); //update subject stack
         CheckForImpliedName();
         Testing = false;
         break;
@@ -705,7 +705,7 @@ void Handle75LevelUnderstanding(){
             //set subject to Proper Noun
             SetWordType('P',GetSubjectLocation());
             SlowSpeak(":)");
-            SetSubject(GetWordTokens(GetSubjectLocation()),GetWords(GetSubjectLocation()));
+            SetSubjectInStack(GetWordTokens(GetSubjectLocation()),GetWords(GetSubjectLocation()),GetOriginalString());
             IncreaseMoodLevel();
         }
     }
@@ -721,7 +721,7 @@ void Handle75LevelUnderstanding(){
         // subject must be pronoun   he,she,her, him
         string MaleProNouns      = " he him his ";
         string FemaleProNouns    = " she her ";
-        string SubjectText       = GetMemoryCellWordLC("",GetSubject(1)); //pronoun has already been set as subject so get next
+        string SubjectText       = GetMemoryCellWordLC("",GetSubjectInStack(1)); //pronoun has already been set as subject so get next
         string ProNounResolution = "";
         char GenderClass         = '\0';
         int MatchedM             = MaleProNouns.find(" " + GetWordsLC(GetSubjectLocation())+" ");
@@ -740,7 +740,7 @@ void Handle75LevelUnderstanding(){
             SlowSpeak("So " + SubjectText + " is a " + ProNounResolution + "?");
             Response = RequestUserResponse();
             if(Response == 1){
-                SetMemoryCellGenderClass(GetSubject(1),GenderClass);
+                SetMemoryCellGenderClass(GetSubjectInStack(1),GenderClass);
                 SlowSpeak("Okay."); SlowSpeak(":)"); IncreaseMoodLevel();
             }
         }

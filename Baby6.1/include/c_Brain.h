@@ -86,7 +86,7 @@ class c_Brain : public c_Cerebellum
              RebuildPattern();
              SaveProcessedPattern(GetPattern());                                                   //update short term memory
              if(SubjectLocation >=0)
-                SetSubject(GetWordTokens(SubjectLocation),GetWords(SubjectLocation));
+                SetSubjectInStack(GetWordTokens(SubjectLocation),GetWords(SubjectLocation),GetOriginalString());
                 SavePreAndPostPatternConstruction(FirstPattern,GetPattern());                      //save learned pattern for future// language helper to use this
              }
             else
@@ -229,10 +229,10 @@ class c_Brain : public c_Cerebellum
             case 5352:  //subject report
                 {
                     Control = 2;
-                    cout << "no. Token Memory Subject string\n";
-                    for(int x =0; x<15; x++){
-                        if(GetSubject(x)>0)
-                            cout << x << ":   " << GetSubject(x) << "    " << GetMemoryCellWordLC("",GetSubject(x)) << " " << GetstrSubject(x) << endl;}
+                    cout << "no.\tToken\tMemory\tString\tOriginal sentence string.\n";
+                    for(int x =0; x<GetSubjectStackCount(); x++){
+                        if(GetSubjectInStack(x)>0)
+                            cout << x << ":\t" << GetSubjectInStack(x) << "\t" << GetMemoryCellWordLC("",GetSubjectInStack(x)) << "\t" << GetstrSubjectInStack(x) << "\t" << GetOriginalStringInStack(x) << endl;}
                     break;
                 }
             case 5365:   // pattern report 'duvu'
