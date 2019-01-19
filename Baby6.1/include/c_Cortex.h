@@ -697,9 +697,13 @@ void Handle75LevelUnderstanding(){
         int SubjectLocation     = GetSubjectLocation();
         int AdjectiveCount      = GetMemoryCellAdjectives(GetWordTokens(SubjectLocation),Adjectives)-1;
         bool Result             = false;
+        int Response            = -1;
         string WorkingPattern   = GetPattern();
 
-
+        for(int x =0; x<= GetWordCount(); x++){
+            if(GetWordType(x)== 'm') DirectionOfQuestion = 0;
+             else
+                if(GetWordType(x)=='y') DirectionOfQuestion = 1;}
         if(GetWordType(0) == 'v'){
             if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") ){
                 DirectionOfQuestion = 3;}}
@@ -719,6 +723,32 @@ void Handle75LevelUnderstanding(){
             case 0: {
                 if(Verbose)
                     cout << "[c_Cortex::QuestionSentenceBreakDown()] Question direction toMe\n";
+
+                if((GetWordsLC(0)=="how")&& (GetWordsLC(GetVerbLocation()) == "are") && (GetSubjectLocation() == -1)){
+                    SlowSpeak("I'm fine thanks!");
+                    SlowSpeak("But I want to learn all that I can. Will you teach me something please?");
+                    Response = RequestUserResponse();
+                    if (Response == 1){
+                        SlowSpeak("Thank you!");
+                        SlowSpeak(":)");
+                        Result = true;} //using this as a control here
+                        else{
+                            SlowSpeak(":(");
+                            Result = true;
+                            break;}}
+                   if((GetWordsLC(0)=="how")&& (GetWordsLC(GetVerbLocation()) == "are") && (GetSubjectLocation() != -1)) {
+                      if(GetWordType(GetSubjectLocation())=='r'){ //this
+                        SlowSpeak("I'm learning, just like you do.");
+                        SlowSpeak("I hope that I am doing a good job.");
+                        SlowSpeak(":)");
+                        Result = true;
+                        break;}}
+                   if((GetWordsLC(0)=="how")&& (GetWordsLC(GetVerbLocation()) == "do") && (GetSubjectLocation() != -1)) {
+                      if(GetWordType(GetSubjectLocation())=='r'){ //this
+                        SlowSpeak("I try.");
+                        SlowSpeak(":)");
+                        Result = true;
+                        break;}}
                 break;}
             case 1: {
                 if(Verbose)
