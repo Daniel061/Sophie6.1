@@ -4,9 +4,9 @@ We welcome suggestions and comments for this project.
 
 Contributors List;
 
-Daniel              @Daniel061
+Daniel              @Daniel061 (owner)
 
-Ashish Kshirsagar   @ASK149
+Ashish Kshirsagar   @ASK149 (Contributor)
 
-Mackenzie Ankrom @mackenzieankrom
+Mackenzie Ankrom @mackenzieankrom (Tester / English Advisor)
 
