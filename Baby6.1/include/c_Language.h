@@ -138,6 +138,7 @@ class c_Language : public c_LongTermMemory
            string AssociativeWord =     " name name's ";
            string PluralPronoun =       " both ";
            string ThrowAwayWords =      " of also ";
+           string GenderIndicator =     " boy male man men girl female woman women ";
 
            int isThrowAwayWord   = -1;
            int isPluralPronoun   = -1;
@@ -152,6 +153,7 @@ class c_Language : public c_LongTermMemory
            int isProNounsInward  = -1;
            int isProNounsOutward = -1;
            int isAssociativeWord = -1;
+           int isGenderIndicator = -1;
 
 
 
@@ -160,6 +162,7 @@ class c_Language : public c_LongTermMemory
               OrigWord = tmpWord;
               tmpWord = " " + tmpWord + " ";
 
+                isGenderIndicator   = GenderIndicator.find(tmpWord);
                 isThrowAwayWord     = ThrowAwayWords.find(tmpWord);
                 isPluralPronoun     = PluralPronoun.find(tmpWord);
                 isJoiner            = JoiningWords.find(tmpWord);
@@ -201,6 +204,8 @@ class c_Language : public c_LongTermMemory
                         SetHasPluralPronoun(true);}
                   if (isThrowAwayWord >=0){
                         tmpWordType = 't';}
+                  if (isGenderIndicator >=0){
+                        tmpWordType = 'G';}
             if(Verbose)
                 cout << "tmpWord " << tmpWord <<" type:" << tmpWordType << endl;
             return tmpWordType;
@@ -209,8 +214,7 @@ class c_Language : public c_LongTermMemory
 //--------------------------------end Find Word Type--------------------------------------
 
 
-void SlowSpeak(string str_Data, int Delay = 30000000 )
-{
+void SlowSpeak(string str_Data, int Delay = 3000000 ){
      string WorkingWord;
      SaveResponsesSent(str_Data);
      SlowSentence.Parse(str_Data);
@@ -227,13 +231,15 @@ void SlowSpeak(string str_Data, int Delay = 30000000 )
      cout << "\b" << SlowSentence.GetPunctuation() << endl;
 }
 
-int RequestUserResponse()
+int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeResponse = "", string OtherResponse = "")
 {
     int Matched = -1;
 
     string PositiveResponse = " yes Yes OK ok Ok correct Correct right Right Exactly exactly ye ";
     string NegativeResponse = " No no wrong Wrong What what n ";
     string Response         = "";
+    if(AltPositiveResponse != "") PositiveResponse = AltPositiveResponse;
+    if(AltNegativeResponse != "") NegativeResponse = AltNegativeResponse;
 
     while (Response == ""){
         cout << ">?";
@@ -246,6 +252,10 @@ int RequestUserResponse()
     Matched = NegativeResponse.find(" " + Response + " ");
     if(Matched >= 0)
         return -1;
+
+    Matched = OtherResponse.find(" " + Response + " ");
+    if(Matched >= 0)
+        return -2;
 
     return 0;
 }

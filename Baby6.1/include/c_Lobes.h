@@ -376,7 +376,7 @@ class c_Lobes : public c_MemoryCell
           //if so AND Update = true, Updates the data, returns Installed = false.
           //If NewWord doesn't exist,
           //Stores all the data and returns Installed = true.
-          bool InstallNewWord(string NewWord, char WordType, char Purpose, bool Update=false){     //currently right side only
+          bool InstallNewWord(string NewWord, char WordType, char Purpose, bool Update=false, char GenderClass = 'u'){     //currently right side only
                 if(Verbose)cout << "[c_Lobes.h::InstallNewWord]\n";
                 int tmpToken     = 0;
                 tmpToken         = Tokenize(NewWord);
@@ -390,6 +390,7 @@ class c_Lobes : public c_MemoryCell
                             WorkingCell.SetpWordType(WordType);                      //stores word type
                             WorkingCell.SetpCellPurpose(Purpose);                    //store cell purpose i.e 'w' - word
                             WorkingCell.SetpCellDataLC(NewWordLC);                   //store the raw data in lower case
+                            WorkingCell.SetpGenderClass(GenderClass);                //store the gender class
                             RightLobeMemoryMap.emplace(tmpToken,WorkingCell);        //Add this new cell to map.
                             Installed = true;                                        //flag this operation as happened.
                             if(Verbose)

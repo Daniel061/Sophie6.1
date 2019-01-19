@@ -267,12 +267,16 @@ class c_Brain : public c_Cerebellum
         {
             if(Verbose){cout << "[c_Brain.h::SetWordTypes]" << endl;}
             char tmpTypeInSentence, tmpTypeInMemoryCell, tmpTypeFromLanguageHelper;
+            char tmpGenderClassFromMemoryCell;
             bool isSetInMemory;
             for(int x = 0; x < GetWordCount(); x++){
-                    tmpTypeInSentence         = GetWordType(x);
-                    tmpTypeInMemoryCell       = GetMemoryCellWordType(GetWordTokens(x));
-                    tmpTypeFromLanguageHelper = FindWordType(GetWordsLC(x));
-                    isSetInMemory             = GetMemoryCellIsSet(GetWordTokens(x));
+                    tmpTypeInSentence            = GetWordType(x);
+                    tmpTypeInMemoryCell          = GetMemoryCellWordType(GetWordTokens(x));
+                    tmpTypeFromLanguageHelper    = FindWordType(GetWordsLC(x));
+                    isSetInMemory                = GetMemoryCellIsSet(GetWordTokens(x));
+                    tmpGenderClassFromMemoryCell = GetMemoryCellGenderClass(GetWordTokens(x));
+                    if(tmpGenderClassFromMemoryCell != '\0')
+                        SetGenderClassInSentence(x,tmpGenderClassFromMemoryCell);
                     if(Verbose){
                         cout << "WordLC:  " << GetWordsLC(x) << endl;
                         cout << "  Sentence Set:" << tmpTypeInSentence << endl;
@@ -309,19 +313,19 @@ class c_Brain : public c_Cerebellum
              if((GetWordType(x)=='n') && (Noun1 == -1) ) Noun1 = x; else if((GetWordType(x) == 'n') && (Noun2 == -1))  Noun2 =x;
              if( !( GetMemoryCellIsSet(GetWordTokens(x)) )) //   CheckForKnownWord(GetWords(x))))
                 {NewWords++;}
-                InstallNewWord(GetWords(x),GetWordType(x),'w',true);
+                InstallNewWord(GetWords(x),GetWordType(x),'w',true,GetGenderClassInSentence(x));
                 //Associate Adjective
                 if(GetWordType(x)=='a'){
                         if(GetSubjectLocation() >=0 )
                             if(!AssociateMemoryCellAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(x))){
-                                InstallNewWord(GetWords(GetSubjectLocation()),GetWordType(GetSubjectLocation()),'w',true);
+                                InstallNewWord(GetWords(GetSubjectLocation()),GetWordType(GetSubjectLocation()),'w',true,GetGenderClassInSentence(GetSubjectLocation()));
                                 AssociateMemoryCellAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(x));
                                 if(Verbose)
                                     cout << "Associating " << GetWords(x) << " with " << GetWords(GetSubjectLocation()) << endl;
                             }
                             if(GetIndirectObjectLocation() >=0)
                                 if(!AssociateMemoryCellAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(x))){
-                                    InstallNewWord(GetWords(GetIndirectObjectLocation()),GetWordType(GetIndirectObjectLocation()),'w',true);
+                                    InstallNewWord(GetWords(GetIndirectObjectLocation()),GetWordType(GetIndirectObjectLocation()),'w',true,GetGenderClassInSentence(GetIndirectObjectLocation()));
                                     AssociateMemoryCellAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(x));
                                     if(Verbose)
                                        cout << "Associating " << GetWords(x) << " with " << GetWords(GetIndirectObjectLocation()) << endl;

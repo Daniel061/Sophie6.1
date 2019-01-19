@@ -39,6 +39,8 @@ class c_Cortex : public c_Language
             int PluralPossessiveLocation;
             int PluralPronounLocation;
             int ProperNounLocation;
+            int GenderIndicatorLocation;
+            bool isGenderIndicator;
             float UnderstandingRatio;
             bool ISQ;
 
@@ -48,15 +50,34 @@ class c_Cortex : public c_Language
 
 
             if(Verbose){cout << "[c_Cortex.h::DeciperCurrentSentence]" << endl;}
-            SubjectLoc = GetSubjectLocation();
-            AdjectiveLocation  = -1; FirstUnknown = -1; ContractionLocation = -1;
-            DeterminerLocation = -1; ProNounOtherLocation = -1; ISQ = false;
-            Pattern = ""; NounLocation = -1; Control = -1; UnderstandingLevel = 0;
-            UnderstandingRatio = 0.0; UnknownCount = 0; QuestionLocation = 0;
-            AdverbLocation = -1; DirectiveLocation = -1; JoinerLocation = -1;
-            DirectObjectLocation = -1; IndirectObjectLocation = -1; PluralPossessiveLocation = -1;
-            ProNounInwardLocation = -1; ProNounOutwardLocation = -1; AssociativeWordLocation = -1;
-            PluralPronounLocation = -1; ProperNounLocation = -1;
+            SubjectLoc               = GetSubjectLocation();
+            AdjectiveLocation        = -1;
+            FirstUnknown             = -1;
+            ContractionLocation      = -1;
+            DeterminerLocation       = -1;
+            ProNounOtherLocation     = -1;
+            ISQ                      = false;
+            Pattern                  = "";
+            NounLocation             = -1;
+            Control                  = -1;
+            UnderstandingLevel       = 0;
+            UnderstandingRatio       = 0.0;
+            UnknownCount             = 0;
+            QuestionLocation         = 0;
+            AdverbLocation           = -1;
+            DirectiveLocation        = -1;
+            JoinerLocation           = -1;
+            DirectObjectLocation     = -1;
+            IndirectObjectLocation   = -1;
+            PluralPossessiveLocation = -1;
+            ProNounInwardLocation    = -1;
+            ProNounOutwardLocation   = -1;
+            AssociativeWordLocation  = -1;
+            PluralPronounLocation    = -1;
+            ProperNounLocation       = -1;
+            bool ProcessContraction  = false;
+            GenderIndicatorLocation  = -1;
+            isGenderIndicator        = false;
 
             for(int x =0; x < GetWordCount(); x++){                                                                  // Build pattern string i.e. duvu  4 word sentence
                     Pattern += GetWordType(x);
@@ -72,7 +93,7 @@ class c_Cortex : public c_Language
                     if (tmpWordType == 'a') {AdjectiveLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'r') {ReplacementLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'q') {QuestionLocation = x; UnderstandingLevel++;}
-                    if (tmpWordType == 'C') {ContractionLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'C') {ContractionLocation = x; UnderstandingLevel++; ProcessContraction = true;}
                     if (tmpWordType == 'A') {AdverbLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'X') {DirectiveLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'P') {ProperNounLocation = x; UnderstandingLevel++;}
@@ -81,10 +102,17 @@ class c_Cortex : public c_Language
                     if (tmpWordType == 'D') {DirectObjectLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'I') {IndirectObjectLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'N') {PluralPronounLocation = x; UnderstandingLevel++;}
+                    if (tmpWordType == 'G') {GenderIndicatorLocation = x; UnderstandingLevel++; isGenderIndicator = true;}
                     if (tmpWordType == 'u') {
                             UnknownCount++; UnKnownLocation = x;
                             if(FirstUnknown == -1) FirstUnknown = x;
                             }
+            }
+            if(ProcessContraction){
+                bool    OwnerShip,Plural;
+                string  Root,LongFormFirst,LongFormSecond;
+                DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond);
+
             }
             SetPattern(Pattern);
             ISQ = GetIsQuestion();
@@ -576,9 +604,54 @@ void Handle75LevelUnderstanding(){
     }
 
 
+//---------------------DECONSTRUCTCONTRACTIONS()--------------------------------------------
+    void DeconstructContractions(bool &OwnerShip, bool &Plural, string &Root, string &LongFormFirst, string &LongFormSecond){
 
-    void DeconstructContractions(){
+         string TrailingCharacters   = "";    //i.e  cat's = s   baby's = s
+         string PreceedingCharacters = "";    //i.e  cat's = cat  baby's = baby
+         int    ContractionPointer   = 0;
+         string WorkingWord          = "";
+                OwnerShip            = false;
+                Plural               = false;
+                Root                 = "";
+                LongFormFirst        = "";
+                LongFormSecond       = "";
+         char   FollowingWordType    = GetWordType(ContractionLocation+1);
+         char   PreceedingWordType   = GetWordType(ContractionLocation-1);
+         bool   Split                = false;
+
+         WorkingWord           = GetWordsLC(ContractionLocation);
+         ContractionPointer    = GetQuoteLocation(ContractionLocation);
+         PreceedingCharacters  = WorkingWord.substr(0,ContractionPointer);
+         TrailingCharacters    = WorkingWord.substr(ContractionPointer+1);
+         Root                  = PreceedingCharacters;
+
+         if(FollowingWordType == 'g'){
+            OwnerShip = true;}
+            else
+              if(FollowingWordType == 'd'){
+                 Split = true;}
+
+         if(Split){
+            LongFormFirst   = Root;
+            if(TrailingCharacters == "s"){
+                LongFormSecond = "is";}
+
+         }
+
+         if(Verbose){
+            cout << "c_Cortex.h::DeconstructContraction\n";
+            cout << "  " << boolalpha << "OwnerShip:" << OwnerShip << endl;
+            cout << "  " << boolalpha << "Plural:" << Plural << endl;
+            cout << "  " << "Root:" << Root << endl;
+            cout << "  " << "Long Form first:" << LongFormFirst << endl;
+            cout << "  " << "Long Form second:" << LongFormSecond << endl;}
+
+
     }
+
+//-----------------------END DECONSTRUCTCONTRACTIONS()---------------------------------------
+
 
 
     void HandlePluralPronoun(int PluralPronounLocation){     // i.e. both
@@ -629,8 +702,10 @@ void Handle75LevelUnderstanding(){
 
         if(GetWordType(0) == 'v'){
             if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") ){
-                DirectionOfQuestion = 3;}
-        }
+                DirectionOfQuestion = 3;}}
+
+        PatternMatch = WorkingPattern.find('g');
+        if(PatternMatch >=0) DirectionOfQuestion = 4;
 
         PatternMatch = WorkingPattern.find("vmv");      //i.e. do you know
         if (PatternMatch >=0){
@@ -675,9 +750,46 @@ void Handle75LevelUnderstanding(){
                     }
                 }
 
+                //Checks for gender class request
+                if(isGenderIndicator){
+                    string FemaleIndicators = " girl female woman women ";
+                    int    LocatorPlace     = FemaleIndicators.find(GetWordsLC(GenderIndicatorLocation));
+                    char   SubjectsGender   = GetGenderClassInSentence(GetSubjectLocation());
+
+                    if( (SubjectsGender == 'f') && (LocatorPlace >=0) ){
+                        MatchedAdjective = 3;  //just using the variable as a control here
+                    }
+
+                }
+
                 if(MatchedAdjective >=0) {SlowSpeak("Yes."); Result = true;} else SlowSpeak("No.");
 
                 break;}
+             case 4: {//Proper noun reference
+                 string  ReferenceWord = GetWordsLC(GetSubjectLocation());
+                 bool    OwnerShip,Plural;
+                 string  Root,LongFormFirst,LongFormSecond;
+                 int     RelatedNouns[20];
+                 int     RelatedNounCount = -1;
+
+                 if(GetWordType(GetSubjectLocation())=='C'){
+                     DeconstructContractions(OwnerShip,Plural,ReferenceWord,LongFormFirst,LongFormSecond);
+                 }
+
+                 RelatedNounCount = GetMemoryCellRelatedNouns(Tokenize(ReferenceWord),RelatedNouns);
+
+                 for(int x = 0; x < RelatedNounCount; x++){
+                    if(GetMemoryCellWordType(RelatedNouns[x])== 'P')
+                        SlowSpeak(GetMemoryCellRawStringData(Result,"",RelatedNouns[x]));
+                        Result = true;
+                 }
+
+
+                 if(Verbose)
+                    cout << "[c_Cortex::QuestionSentenceBreakDown()] Question direction Name handler\n";
+
+                 break;
+             }
 
             default: if(Verbose) cout << "No direction detected.\n";
         }
@@ -692,7 +804,8 @@ void Handle75LevelUnderstanding(){
 //--------------------------CHECK FOR IMPLIED NAME------------------------------------------------------------
  void CheckForImpliedName(){
 
-
+    if(Verbose)
+        cout << "[c_Cortex.h::CheckForImpliedName]\n";
     // Subject must be noun
     // must also start with capital letter
 
@@ -704,10 +817,12 @@ void Handle75LevelUnderstanding(){
         if(Response == 1){ // yes
             //set subject to Proper Noun
             SetWordType('P',GetSubjectLocation());
-            SlowSpeak(":)");
             SetSubjectInStack(GetWordTokens(GetSubjectLocation()),GetWords(GetSubjectLocation()),GetOriginalString());
             IncreaseMoodLevel();
+            QuizForGenderInformation();
         }
+        else
+            SlowSpeak(":(");
     }
 
 
@@ -715,8 +830,39 @@ void Handle75LevelUnderstanding(){
  }
  //-------------------------------------END OF CHECK FOR IMPLIED NAME------------------------------------------------
 
+ //-----------------------------QUIZFORGENDERINFORMATION------------------------------------------------------------
+    void QuizForGenderInformation(){
+        if(Verbose)
+            cout << "[c_Cortex.h::QuizForGenderInformation]\n";
+
+        string PositiveString   = " boy Boy m male b ";
+        string NegativeString   = " girl Girl f female g ";
+        string OtherString      = " neither none not no ";
+        int    Response         = -4;
+
+        if(GetGenderClassInSentence(GetSubjectLocation())=='u'){
+            SlowSpeak("Is " + GetWords(GetSubjectLocation()) + " a boy or girl?");
+            Response = RequestUserResponse(PositiveString,NegativeString,OtherString);
+            if(Response == 1){ // boy
+                SetGenderClassInSentence(GetSubjectLocation(),'m');
+                SlowSpeak("Ok");}
+                else
+                if(Response == -1){ // girl
+                    SetGenderClassInSentence(GetSubjectLocation(),'f');
+                    SlowSpeak("Like me!");
+                    SlowSpeak(":)");}
+                    else
+                    if(Response == -2){ //neither
+                        SetGenderClassInSentence(GetSubjectLocation(),'n');}
+        }
+    }
+
+ //-----------------------------END OF QUIZFORGENDERINFORMATION------------------------------------------------------
+
  //--------------------------CHECK FOR IMPLIED GENDER----------------------------------------------------------------
  void CheckForImpliedGender(){
+        if(Verbose)
+            cout << "[c_Cortex.h::CheckForImpliedGender\n]";
         //qualification;
         // subject must be pronoun   he,she,her, him
         string MaleProNouns      = " he him his ";

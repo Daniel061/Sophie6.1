@@ -27,6 +27,7 @@ class c_Sentence : public c_SubjectStack
         string WordsLC[30];                     // dog  initialize to ""
         string SubWords[30];                    // replacement words, usually from subject stack
         string ContractionWordLongForm[30];     // i.e. can not  will not   initialize to ""
+        char   GenderClassInSentence[30];       // i.e m-male f-female n-neutral   initialize to u-undefined
         string OriginalString;                  // the whole unedited string  initialize to ""
         string Pattern;                         // i.e. dnvua  initialize to ""
         char   Punctuation;                     // !  initialize to null
@@ -50,7 +51,8 @@ class c_Sentence : public c_SubjectStack
                 ContractionWordLongForm[x] = "";
                 WordType[x]                = 'u';
                 SecondaryType[x]           = 'u';
-                AlternateType[x]           = 'u';}
+                AlternateType[x]           = 'u';
+                GenderClassInSentence[x]   = 'u';}
 
                 WordCount                  = 0;
                 SubjectLocation            = -1;
@@ -66,6 +68,8 @@ class c_Sentence : public c_SubjectStack
                 IndirectObjectLocation     = -1;}
 
     public:
+        char   GetGenderClassInSentence(int Location){return GenderClassInSentence[Location];}
+        void   SetGenderClassInSentence(int Location, char NewGenderClass){GenderClassInSentence[Location]=NewGenderClass;}
         int    GetAdjectiveLocation(){return AdjectiveLocation;}
         void   SetAdjectiveLocation(int NewVal){AdjectiveLocation = NewVal;}
         void   SetVerbLocation(int NewLoc){VerbLocation = NewLoc;}

@@ -14,7 +14,7 @@ c_MemoryCell::c_MemoryCell()
     pNextNoun             = 0;
     pToken                = 0;
     pIsSet                = false;
-    pGenderClass          = 'n';
+    pGenderClass          = 'u';
     pSecondaryType        = 'u';
     pAlternateType        = 'u';
     pCellIsSingular       = 'u';
