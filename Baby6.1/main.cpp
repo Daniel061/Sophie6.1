@@ -20,7 +20,7 @@ ThisSpeed = BaseSpeed * CalcSpeed;
 if(ThisSpeed == 0) ThisSpeed = BaseSpeed;
 
 
-//cout << EndCount - StartCount << " This delay count " << ThisSpeed << endl;
+cout << EndCount - StartCount << " This delay count " << ThisSpeed << endl;
 Brain.SetMyGender('f');
 Brain.SetMyName("Sophie");
 Brain.FirstRunWelcomeMessage();
