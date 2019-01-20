@@ -9,6 +9,8 @@ bool Verbose;
 int main()
 {
 Brain.SetMyGender('f');
+Brain.SetMyName("Sophie");
+Brain.FirstRunWelcomeMessage();
 string Raw_Sentence;
 Verbose = false;
 

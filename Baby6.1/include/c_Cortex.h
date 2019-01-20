@@ -43,13 +43,13 @@ class c_Cortex : public c_Language
             bool isGenderIndicator;
             float UnderstandingRatio;
             bool ISQ;
+            bool Rerundecipher = false;
 
 
     public:
-        void DecipherCurrentSentence(){
-
-
+        void DecipherCurrentSentence(string &strData){
             if(Verbose){cout << "[c_Cortex.h::DeciperCurrentSentence]" << endl;}
+
             SubjectLoc               = GetSubjectLocation();
             AdjectiveLocation        = -1;
             FirstUnknown             = -1;
@@ -76,6 +76,7 @@ class c_Cortex : public c_Language
             PluralPronounLocation    = -1;
             ProperNounLocation       = -1;
             bool ProcessContraction  = false;
+            bool Greetings           = false;
             GenderIndicatorLocation  = -1;
             isGenderIndicator        = false;
 
@@ -103,17 +104,17 @@ class c_Cortex : public c_Language
                     if (tmpWordType == 'I') {IndirectObjectLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'N') {PluralPronounLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'G') {GenderIndicatorLocation = x; UnderstandingLevel++; isGenderIndicator = true;}
+                    if (tmpWordType == 'W') {UnderstandingLevel++;}
                     if (tmpWordType == 'u') {
                             UnknownCount++; UnKnownLocation = x;
                             if(FirstUnknown == -1) FirstUnknown = x;
                             }
             }
-            if(ProcessContraction){
-                bool    OwnerShip,Plural;
-                string  Root,LongFormFirst,LongFormSecond;
-                DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond);
+//            if(ProcessContraction){
+//                bool    OwnerShip,Plural;
+//                string  Root,LongFormFirst,LongFormSecond;
+//                Rerundecipher = DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,strData);}
 
-            }
             SetPattern(Pattern);
             ISQ = GetIsQuestion();
             if(UnderstandingLevel > 0)
@@ -137,6 +138,7 @@ class c_Cortex : public c_Language
             if(ISQ == true)UnderstandingDegree = 1;               //question trap
             if(DirectiveLocation >=0)UnderstandingDegree = 2;     //directive trap
             if(PluralPronounLocation >=0)UnderstandingDegree = 3; //plural pronoun trap
+            if(GetHasGreetingsWord())UnderstandingDegree = 4;     //greetings trap
             switch (UnderstandingDegree)
             {
                case 0:{  ///All new words, lots of work to do
@@ -177,16 +179,28 @@ class c_Cortex : public c_Language
                  break;
                }
                case 1:{ //question trap
+                   if (Verbose)
+                    cout << "Case 1" << endl;
                    if(!QuestionSentenceBreakDown())
-                        HandleQuestion();
+                   HandleQuestion();
                    break;}
 
                case 2:{ //directive trap
+                   if (Verbose)
+                    cout << "Case 2" << endl;
                     HandleDirective();
                     break;}
 
                case 3:{ //plural pronoun trap
+                   if (Verbose)
+                    cout << "Case 3" << endl;
                     HandlePluralPronoun(PluralPronounLocation);
+                    break;}
+
+                case 4:{ //Greetings trap
+                   if (Verbose)
+                    cout << "Case 4" << endl;
+                    CheckForGreetings(Greetings);
                     break;}
 
                 case 10:{  ///Only 1 known but could have a ratio of 100%
@@ -219,17 +233,23 @@ class c_Cortex : public c_Language
                    if (Verbose)
                     cout << "Case 100" << endl;
                     string tmpSubject;
-                 tmpSubject = GetWords(SubjectLoc);
-                 SetSubjectInStack(GetWordTokens(SubjectLoc),tmpSubject,GetOriginalString());
-                 if(GetWordType(GetSubjectLocation())=='p'){
-                    CheckForImpliedGender();}
+                    if(GetSubjectLocation() != -1){
+                         tmpSubject = GetWords(SubjectLoc);
+                         SetSubjectInStack(GetWordTokens(SubjectLoc),tmpSubject,GetOriginalString());
+                         if(GetWordType(GetSubjectLocation())=='p'){
+                            CheckForImpliedGender();}}
+                     if((GetHasGenderReference()) && (GetSubjectLocation()!=-1)){
+                        //assign Gender to subject
+                        if(GenderIndicatorLocation != -1){
+                            SetGenderClassInSentence(GetSubjectLocation(),GetGenderClassInSentence(GenderIndicatorLocation));
+                        }
+                     }
                  SlowSpeak("Okay.");
                  IncreaseMoodLevel();
                  SlowSpeak(":)");
                  break;}
 
             }
-
             }
 //--------------------------------------END DECIPHER SENTENCE------------------------------------------------------------------------
 
@@ -245,8 +265,6 @@ int CheckForGreetings(bool& Greeting){
         Greeting = true;
 
     }
-
-
     return -1;
 }
 //---------------------------------------end greetings-------------------------------------------------------------------------------
@@ -605,20 +623,28 @@ void Handle75LevelUnderstanding(){
 
 
 //---------------------DECONSTRUCTCONTRACTIONS()--------------------------------------------
-    void DeconstructContractions(bool &OwnerShip, bool &Plural, string &Root, string &LongFormFirst, string &LongFormSecond){
+    bool DeconstructContractions(bool &OwnerShip, bool &Plural, string &Root, string &LongFormFirst, string &LongFormSecond, string &strData){
 
          string TrailingCharacters   = "";    //i.e  cat's = s   baby's = s
          string PreceedingCharacters = "";    //i.e  cat's = cat  baby's = baby
          int    ContractionPointer   = 0;
          string WorkingWord          = "";
+         string NewSentence          = "";
                 OwnerShip            = false;
                 Plural               = false;
                 Root                 = "";
                 LongFormFirst        = "";
                 LongFormSecond       = "";
+                ContractionLocation  = -1;
+         //error check - ensure a contraction exists
+         for(int x = 0; x<= GetWordCount(); x++){if(GetWordType(x) == 'C') ContractionLocation = x;}
+         if(ContractionLocation == -1) return false;
+
+
          char   FollowingWordType    = GetWordType(ContractionLocation+1);
          char   PreceedingWordType   = GetWordType(ContractionLocation-1);
          bool   Split                = false;
+         bool   NeedRerun            = false;
 
          WorkingWord           = GetWordsLC(ContractionLocation);
          ContractionPointer    = GetQuoteLocation(ContractionLocation);
@@ -628,26 +654,35 @@ void Handle75LevelUnderstanding(){
 
          if(FollowingWordType == 'g'){
             OwnerShip = true;}
-            else
-              if(FollowingWordType == 'd'){
+            else{
                  Split = true;}
 
          if(Split){
             LongFormFirst   = Root;
             if(TrailingCharacters == "s"){
-                LongFormSecond = "is";}
+                LongFormSecond = "is";
+                }
+         for(int x =0; x<ContractionLocation; x++){
+            NewSentence += GetWords(x) + " ";}
+            NewSentence += LongFormFirst + " ";
+            NewSentence += LongFormSecond + " ";
 
-         }
+         for(int x = ContractionLocation+1; x<= GetWordCount(); x++){
+            NewSentence += GetWords(x)+ " ";}
+            strData = NewSentence;
+            NeedRerun    = true;}
 
          if(Verbose){
             cout << "c_Cortex.h::DeconstructContraction\n";
             cout << "  " << boolalpha << "OwnerShip:" << OwnerShip << endl;
             cout << "  " << boolalpha << "Plural:" << Plural << endl;
+            cout << "  " << boolalpha << "Request Rerun:" << NeedRerun << endl;
             cout << "  " << "Root:" << Root << endl;
             cout << "  " << "Long Form first:" << LongFormFirst << endl;
-            cout << "  " << "Long Form second:" << LongFormSecond << endl;}
+            cout << "  " << "Long Form second:" << LongFormSecond << endl;
+            cout << "   New Sentence:" << NewSentence << endl;}
 
-
+          return NeedRerun;
     }
 
 //-----------------------END DECONSTRUCTCONTRACTIONS()---------------------------------------
@@ -696,12 +731,13 @@ void Handle75LevelUnderstanding(){
         int IndirectObjectLoc   = GetIndirectObjectLocation();
         int SubjectLocation     = GetSubjectLocation();
         int AdjectiveCount      = GetMemoryCellAdjectives(GetWordTokens(SubjectLocation),Adjectives)-1;
+        bool ToMe               = false;
         bool Result             = false;
         int Response            = -1;
         string WorkingPattern   = GetPattern();
 
         for(int x =0; x<= GetWordCount(); x++){
-            if(GetWordType(x)== 'm') DirectionOfQuestion = 0;
+            if(GetWordType(x)== 'm'){ DirectionOfQuestion = 0; ToMe = true;}
              else
                 if(GetWordType(x)=='y') DirectionOfQuestion = 1;}
         if(GetWordType(0) == 'v'){
@@ -749,6 +785,20 @@ void Handle75LevelUnderstanding(){
                         SlowSpeak(":)");
                         Result = true;
                         break;}}
+
+                    if(GetHasGenderReference()){
+                        if(GetMyGender() == GetGenderClassInSentence(GetSubjectLocation())){
+                            SlowSpeak("Yes.");
+                            Result = true;
+                            break;}
+                            else{
+                                SlowSpeak("No.");
+                                Result = true;
+                                break;}
+                    }
+
+
+
                 break;}
             case 1: {
                 if(Verbose)
@@ -790,21 +840,25 @@ void Handle75LevelUnderstanding(){
                         MatchedAdjective = 3;  //just using the variable as a control here
                     }
 
+                    if( SubjectsGender == GetGenderClassInSentence(GenderIndicatorLocation)){
+                        MatchedAdjective = 3;  //just using the variable as a control here
+                    }
+
                 }
 
-                if(MatchedAdjective >=0) {SlowSpeak("Yes."); Result = true;} else SlowSpeak("No.");
+                if(MatchedAdjective >=0) {SlowSpeak("Yes."); Result = true;} else {SlowSpeak("No."); Result = true;}
 
                 break;}
              case 4: {//Proper noun reference
                  string  ReferenceWord = GetWordsLC(GetSubjectLocation());
                  bool    OwnerShip,Plural;
                  string  Root,LongFormFirst,LongFormSecond;
+                 string  strData = "";
                  int     RelatedNouns[20];
                  int     RelatedNounCount = -1;
 
                  if(GetWordType(GetSubjectLocation())=='C'){
-                     DeconstructContractions(OwnerShip,Plural,ReferenceWord,LongFormFirst,LongFormSecond);
-                 }
+                     DeconstructContractions(OwnerShip,Plural,ReferenceWord,LongFormFirst,LongFormSecond,strData);}
 
                  RelatedNounCount = GetMemoryCellRelatedNouns(Tokenize(ReferenceWord),RelatedNouns);
 
@@ -813,6 +867,14 @@ void Handle75LevelUnderstanding(){
                         SlowSpeak(GetMemoryCellRawStringData(Result,"",RelatedNouns[x]));
                         Result = true;
                  }
+
+                   if((GetWordsLC(0)=="what")&&
+                      (GetWordsLC(GetVerbLocation()) == "is")&&
+                      (GetNamePointer() != -1) && (ToMe) ) {
+                        SlowSpeak(GetMyName());
+                        SlowSpeak(":)");
+                        Result = true;
+                        break;}
 
 
                  if(Verbose)
@@ -923,6 +985,7 @@ void Handle75LevelUnderstanding(){
 
  }
  //-----------------------------------END OF CHECK FOR IMPLIED GENDER-------------------------------------------------
+
 };
 
 #endif // C_CORTEX_H

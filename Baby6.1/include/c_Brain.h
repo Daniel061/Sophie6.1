@@ -45,56 +45,60 @@ class c_Brain : public c_Cerebellum
 
         void ProcessUserInput(string& strData){
             if(Verbose)cout << "[c_Brain.h::ProcessUserInput]" << endl;
-            int a, ConfidenceLevel;
-            string CheckedPattern;
+            int CommandFound, ConfidenceLevel;
+            string CheckedPattern,Root,LongFormFirst,LongFormSecond;
             int SubjectLocation;
             string FirstPattern = "";
-            bool Greeting;
-            a = 0;
+            CommandFound = 0;
+            bool OwnerShip,Plural,NeedRerun;
 
 
             CommandCheckSentence.Parse(strData);
-            a = CommandTrap();
+            CommandFound = CommandTrap();
             Parse(strData);                                                              //break sentence down
-            CheckForGreetings(Greeting);
-           if(Greeting == false){
 
+            if(CommandFound == 0){                                                        //check for command  0 = no command
+                 SaveReceivedInput(strData,true);                                             //update short term memory
+                 SaveSentenceInLongTermMemory(strData);                                       //update Long Term Memory
+                 SetWordTypes();                                                              //try to set all word types
+                 if(GetHasContraction()){
+                   NeedRerun = DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,strData);
+                   if(NeedRerun){
+                    Parse(strData);
+                    SetWordTypes();
+                    SaveReceivedInput(strData,true);
+                    SaveSentenceInLongTermMemory(strData);
+                   }
+                 }
+                 SubjectLocation = FindSubject();                                             //try to located subject
+                 SetSubjectLocation(SubjectLocation);                                         //set the suggestion
+                 RebuildPattern();
+                 FirstPattern = GetPattern();
+                 CheckedPattern = PatternReview(GetPattern(),ConfidenceLevel);                //see if language class can enhance pattern
+                 if(Verbose){
+                        cout << "Processed Pattern:" << CheckedPattern << ":" << GetPattern() << "Confidence level: " << ConfidenceLevel << endl;}
+                 if(CheckedPattern != GetPattern()){
+                    SetPattern(CheckedPattern);
+                    for(int x = 0; x < GetWordCount(); x++){
+                        SetWordType(CheckedPattern[x],x);
+                    }
+                    SubjectLocation = FindSubject();
+                    SetSubjectLocation(SubjectLocation);
+                 }
+                 DecipherCurrentSentence(strData);                                           //work with sentence
 
-            if(a == 0){                                                                   //check for command
-             SaveReceivedInput(strData,true);                                             //update short term memory
-             SaveSentenceInLongTermMemory(strData);                                       //update Long Term Memory
-             SetWordTypes();                                                              //try to set all word types
-             SubjectLocation = FindSubject();                                             //try to located subject
-             SetSubjectLocation(SubjectLocation);                                         //set the suggestion
-             RebuildPattern();
-             FirstPattern = GetPattern();
-             CheckedPattern = PatternReview(GetPattern(),ConfidenceLevel);                //see if language class can enhance pattern
-             if(Verbose){
-                    cout << "Processed Pattern:" << CheckedPattern << ":" << GetPattern() << "Confidence level: " << ConfidenceLevel << endl;}
-             if(CheckedPattern != GetPattern()){
-                SetPattern(CheckedPattern);
-                for(int x = 0; x < GetWordCount(); x++){
-                    SetWordType(CheckedPattern[x],x);
-                }
-                SubjectLocation = FindSubject();
-                SetSubjectLocation(SubjectLocation);
-             }
-             DecipherCurrentSentence();                                                             //work with sentence
-             SubjectLocation = FindSubject();                                                       // need to run this again to see if any indirect objects
-             SetSubjectLocation(SubjectLocation);                                                  //store the location or -1
-             a = StoreNewWords();                                                                  //save any new words in rBrainCells
-             RebuildPattern();
-             SaveProcessedPattern(GetPattern());                                                   //update short term memory
-             if(SubjectLocation >=0)
-                SetSubjectInStack(GetWordTokens(SubjectLocation),GetWords(SubjectLocation),GetOriginalString());
-                SavePreAndPostPatternConstruction(FirstPattern,GetPattern());                      //save learned pattern for future// language helper to use this
-             }
-            else
-                if(a == -1)
-            {
-                strData = "end";
-            }
-           }//end Greeting check
+                 SubjectLocation = FindSubject();                                                      // need to run this again to see if any indirect objects
+                 SetSubjectLocation(SubjectLocation);                                                  //store the location or -1
+                 StoreNewWords();                                                                  //save any new words in rBrainCells
+                 RebuildPattern();
+                 SaveProcessedPattern(GetPattern());                                                   //update short term memory
+                 if(SubjectLocation >=0)
+                    SetSubjectInStack(GetWordTokens(SubjectLocation),GetWords(SubjectLocation),GetOriginalString());
+                 SavePreAndPostPatternConstruction(FirstPattern,GetPattern());                      //save learned pattern for future// language helper to use this
+               }
+               else
+                if(CommandFound == -1){  //exit commands
+                strData = "end";}//stop the loop
 
             }
 //-----------------------------------------------END FIRST PROCESSING---------------------------------------------------------------------------------
@@ -272,7 +276,7 @@ class c_Brain : public c_Cerebellum
             for(int x = 0; x < GetWordCount(); x++){
                     tmpTypeInSentence            = GetWordType(x);
                     tmpTypeInMemoryCell          = GetMemoryCellWordType(GetWordTokens(x));
-                    tmpTypeFromLanguageHelper    = FindWordType(GetWordsLC(x));
+                    tmpTypeFromLanguageHelper    = FindWordType(GetWordsLC(x),x);
                     isSetInMemory                = GetMemoryCellIsSet(GetWordTokens(x));
                     tmpGenderClassFromMemoryCell = GetMemoryCellGenderClass(GetWordTokens(x));
                     if(tmpGenderClassFromMemoryCell != '\0')
@@ -293,6 +297,8 @@ class c_Brain : public c_Cerebellum
                         SetWordType(tmpTypeInMemoryCell,x);}
 
                      if( GetWordType(x) == 'q') SetIsQuestion(true);
+                     if( GetWordType(x) == 'g') SetNamePointer(x);
+                     if( GetWordType(x) == 'C') SetHasContraction(true);
 
             }
         }//------END SET WORD TYPES---------------------------------------------------------------
@@ -356,6 +362,33 @@ class c_Brain : public c_Cerebellum
             return NewWords;
 
         }
+
+
+
+
+
+
+ //----------------------------------FIRST RUN WELCOME MESSAGE--------------------------------------------------------
+
+    void FirstRunWelcomeMessage(){
+           //Recording turned off for this
+            SlowSpeak("Hello there!",false);
+            SlowSpeak("Thanks for helping me learn new things.",false);
+            SlowSpeak("Right now I don't know much about anything. I need for you to teach me.",false);
+            SlowSpeak("I will do my best to understand you but if I don't I may ask you a question about what you said.",false);
+            SlowSpeak("If I do need to ask a question, you will see >? prompt. Please respond with a yes or no answer unless I ask something more specific.",false);
+            SlowSpeak("This will help me to understand.");
+            SlowSpeak(":)",false);
+
+
+
+
+
+
+
+
+    }
+//--------------------------------END FIRST RUN WELCOME MESSAGE-------------------------------------------------------------
 };
 
 #endif // C_BRAIN_H

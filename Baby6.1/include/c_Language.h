@@ -115,7 +115,7 @@ class c_Language : public c_LongTermMemory
 
 
 //-------------------------Find Word Type------------------------------------------------------
- char FindWordType(string tmpWord){
+ char FindWordType(string tmpWord, int LocationInSentence = -1){
 
            if(Verbose)cout << "[c_Language::FindWordType] :";
 
@@ -139,21 +139,27 @@ class c_Language : public c_LongTermMemory
            string PluralPronoun =       " both ";
            string ThrowAwayWords =      " of also ";
            string GenderIndicator =     " boy male man men girl female woman women ";
+           string MaleGenderClass =     " boy male man men ";
+           string FemaleGenderClass =   " girl female woman women ";
+           string GreetingsWord =       " hello hi ";
 
-           int isThrowAwayWord   = -1;
-           int isPluralPronoun   = -1;
-           int isDirective       = -1;
-           int isDeterminer      = -1;
-           int isQuestion        = -1;
-           int isVerb            = -1;
-           int isSubRep          = -1;
-           int isAdverb          = -1;
-           int isJoiner          = -1;
-           int isProNounsOther   = -1;
-           int isProNounsInward  = -1;
-           int isProNounsOutward = -1;
-           int isAssociativeWord = -1;
-           int isGenderIndicator = -1;
+           int isThrowAwayWord     = -1;
+           int isPluralPronoun     = -1;
+           int isDirective         = -1;
+           int isDeterminer        = -1;
+           int isQuestion          = -1;
+           int isVerb              = -1;
+           int isSubRep            = -1;
+           int isAdverb            = -1;
+           int isJoiner            = -1;
+           int isProNounsOther     = -1;
+           int isProNounsInward    = -1;
+           int isProNounsOutward   = -1;
+           int isAssociativeWord   = -1;
+           int isGenderIndicator   = -1;
+           int isGreetingsWord     = -1;
+           int isMaleGenderClass   = -1;
+           int isFemaleGenderClass = -1;
 
 
 
@@ -162,6 +168,9 @@ class c_Language : public c_LongTermMemory
               OrigWord = tmpWord;
               tmpWord = " " + tmpWord + " ";
 
+                isMaleGenderClass   = MaleGenderClass.find(tmpWord);
+                isFemaleGenderClass = FemaleGenderClass.find(tmpWord);
+                isGreetingsWord     = GreetingsWord.find(tmpWord);
                 isGenderIndicator   = GenderIndicator.find(tmpWord);
                 isThrowAwayWord     = ThrowAwayWords.find(tmpWord);
                 isPluralPronoun     = PluralPronoun.find(tmpWord);
@@ -205,7 +214,15 @@ class c_Language : public c_LongTermMemory
                   if (isThrowAwayWord >=0){
                         tmpWordType = 't';}
                   if (isGenderIndicator >=0){
-                        tmpWordType = 'G';}
+                        tmpWordType = 'G';
+                        SetHasGenderReference(true);}
+                  if (isGreetingsWord >=0){
+                        tmpWordType = 'W';
+                        SetHasGreetingsWord(true);}
+                  if ((isFemaleGenderClass >=0) && (LocationInSentence != -1)){
+                        SetGenderClassInSentence(LocationInSentence,'f');}
+                  if ((isMaleGenderClass >=0) && (LocationInSentence != -1)){
+                        SetGenderClassInSentence(LocationInSentence,'m');}
             if(Verbose)
                 cout << "tmpWord " << tmpWord <<" type:" << tmpWordType << endl;
             return tmpWordType;
@@ -214,9 +231,10 @@ class c_Language : public c_LongTermMemory
 //--------------------------------end Find Word Type--------------------------------------
 
 
-void SlowSpeak(string str_Data, int Delay = 3000000 ){
+void SlowSpeak(string str_Data, bool Recording = true, int Delay = 3000000 ){
      string WorkingWord;
-     SaveResponsesSent(str_Data);
+     if(Recording){
+        SaveResponsesSent(str_Data);}
      SlowSentence.Parse(str_Data);
      for(int x = 0; x < SlowSentence.GetWordCount(); x++){
 
@@ -284,7 +302,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 
             WordCount = GetWordCount();
 
-            if ((GetWordsLC(0)== "is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)=="will")) SetIsQuestion(true);
+            if ((GetWordsLC(0)== "is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)=="will") || (GetWordsLC(0)=="are") ) SetIsQuestion(true);
 
             for(int x = 0; x < WordCount; x++){
                 if(GetWordType(x)== 'd')if(DeterminerLocation == -1) DeterminerLocation = x;

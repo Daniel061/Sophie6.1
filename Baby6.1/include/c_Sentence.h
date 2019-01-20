@@ -23,6 +23,7 @@ class c_Sentence : public c_SubjectStack
         int    AdjectiveLocation;               // -1 means none
         int    NounCount;                       // number of nouns in this sentence
         int    VerbLocation;                    // position of verb
+        int    NamePointer;                     // position of the word name
         string Words[30];                       // Dog  i.e. original unedited word  initialize to ""
         string WordsLC[30];                     // dog  initialize to ""
         string SubWords[30];                    // replacement words, usually from subject stack
@@ -34,6 +35,9 @@ class c_Sentence : public c_SubjectStack
         bool   HasPunctuation;                  // true / false initialize to false
         bool   HasPluralPronoun;                // true / false initialize to false
         bool   IsQuestion;                      // true / false initialize to false
+        bool   HasContraction;                  // true / false initialize to false
+        bool   HasGreetingsWord;                // true / false initialize to false
+        bool   HasGenderReference;              // true / false initialize to false
         char   WordType[30];                    // n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
                                                 // n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object d(LC) Indirect object
                                                 // initialize to 'u'
@@ -61,13 +65,25 @@ class c_Sentence : public c_SubjectStack
                 HasPluralPronoun           = false;
                 HasPunctuation             = false;
                 IsQuestion                 = false;
+                HasContraction             = false;
+                HasGreetingsWord           = false;
+                HasGenderReference         = false;
                 AdverbLocation             = -1;
                 NounCount                  = -1;
                 VerbLocation               = -1;
                 AdjectiveLocation          = -1;
+                NamePointer                = -1;
                 IndirectObjectLocation     = -1;}
 
     public:
+        bool   GetHasGenderReference(){return HasGenderReference;}
+        void   SetHasGenderReference(bool NewVal){HasGenderReference = NewVal;}
+        bool   GetHasGreetingsWord(){return HasGreetingsWord;}
+        void   SetHasGreetingsWord(bool NewVal){HasGreetingsWord = NewVal;}
+        bool   GetHasContraction(){return HasContraction;}
+        void   SetHasContraction(bool NewVal){HasContraction = NewVal;}
+        int    GetNamePointer(){return NamePointer;}
+        void   SetNamePointer(int NewLocation){NamePointer = NewLocation;}
         char   GetGenderClassInSentence(int Location){return GenderClassInSentence[Location];}
         void   SetGenderClassInSentence(int Location, char NewGenderClass){GenderClassInSentence[Location]=NewGenderClass;}
         int    GetAdjectiveLocation(){return AdjectiveLocation;}

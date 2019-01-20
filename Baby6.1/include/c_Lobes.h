@@ -394,7 +394,7 @@ class c_Lobes : public c_MemoryCell
                             RightLobeMemoryMap.emplace(tmpToken,WorkingCell);        //Add this new cell to map.
                             Installed = true;                                        //flag this operation as happened.
                             if(Verbose)
-                             cout << "Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << endl;
+                             cout << "Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
                             }
                         else
                             if(Update){
@@ -402,12 +402,13 @@ class c_Lobes : public c_MemoryCell
                                 mapIT->second.SetpWordType(WordType);
                                 mapIT->second.SetpCellPurpose(Purpose);
                                 mapIT->second.SetpCellDataLC(NewWordLC);
+                                mapIT->second.SetpGenderClass(GenderClass);
                                 if(Verbose)
-                                    cout << "Updating -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << endl;
+                                    cout << "Updating -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
                             }
                             else
                                 if(Verbose)
-                                 cout << "Not Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << endl;
+                                 cout << "Not Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
 
 
                          return Installed;

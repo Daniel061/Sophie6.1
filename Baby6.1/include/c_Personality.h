@@ -21,6 +21,7 @@ class c_Personality : public c_ShortTermMemory
     public:
         void SetName(string NewVal){MyName = NewVal;}
         void SetGender(char NewVal){MyGender = NewVal;}
+        char GetMyGender(){return MyGender;}
         string GetMyName() {return MyName;}
         void SetMyName(string NewVal){MyName = NewVal;}
         void IncreaseMoodLevel(){MoodLevel++;}
