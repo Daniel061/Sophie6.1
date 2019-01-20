@@ -6,8 +6,8 @@ using namespace std;
 
 c_Brain Brain;
 bool Verbose;
-int  BaseSpeed = 15000000;
-int  SpeedStandard = 50;
+int  BaseSpeed = 150000000;
+int  SpeedStandard = 30;
 int  ThisSpeed;
 float CalcSpeed;
 int main()
@@ -15,12 +15,13 @@ int main()
 int StartCount = clock();
  for(int t = 0; t<=BaseSpeed;t++);
 int EndCount = clock();
-CalcSpeed = float((EndCount - StartCount)/SpeedStandard);
+//cout << ((float(EndCount) - float(StartCount))/SpeedStandard) << endl;
+CalcSpeed = ((float(EndCount) - float(StartCount))/SpeedStandard)/100;
 ThisSpeed = BaseSpeed * CalcSpeed;
 if(ThisSpeed == 0) ThisSpeed = BaseSpeed;
 
 
-cout << EndCount - StartCount << " This delay count " << ThisSpeed << endl;
+//cout << EndCount - StartCount << " This delay count " << ThisSpeed << " Calc Speed " << CalcSpeed << endl;
 Brain.SetMyGender('f');
 Brain.SetMyName("Sophie");
 Brain.FirstRunWelcomeMessage();
