@@ -1,5 +1,6 @@
 #include <iostream>
 #include <c_Brain.h>
+#include <time.h>
 
 using namespace std;
 
@@ -8,6 +9,10 @@ bool Verbose;
 
 int main()
 {
+int StartCount = clock();
+ for(int t = 0; t<=30000000;t++);
+int EndCount = clock();
+cout << EndCount - StartCount << endl;
 Brain.SetMyGender('f');
 Brain.SetMyName("Sophie");
 Brain.FirstRunWelcomeMessage();

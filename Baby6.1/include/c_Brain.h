@@ -378,6 +378,7 @@ class c_Brain : public c_Cerebellum
             SlowSpeak("I will do my best to understand you but if I don't I may ask you a question about what you said.",false);
             SlowSpeak("If I do need to ask a question, you will see >? prompt. Please respond with a yes or no answer unless I ask something more specific.",false);
             SlowSpeak("This will help me to understand.");
+            SlowSpeak("Thank you!");
             SlowSpeak(":)",false);
 
 
