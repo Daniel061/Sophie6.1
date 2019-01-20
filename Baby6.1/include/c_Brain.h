@@ -2,7 +2,7 @@
 #define C_BRAIN_H
 
 #include <c_Cerebellum.h>
-
+extern string Version;
 
 class c_Brain : public c_Cerebellum
 {
@@ -208,6 +208,12 @@ class c_Brain : public c_Cerebellum
                     else
                         Verbose = true;
 
+                    Control = 2;
+                    break;
+                }
+            case 3109:  //version
+                {
+                    cout << "Version:" << Version << endl;
                     Control = 2;
                     break;
                 }
