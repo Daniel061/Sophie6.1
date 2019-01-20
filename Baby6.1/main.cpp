@@ -6,11 +6,11 @@
 using namespace std;
 
 c_Brain Brain;
-string Version = "6.1.004.08";
+string Version = "6.1.004.09";
 bool Verbose;
 int  BaseSpeed = 600000000;
 int  SpeedStandard = 1000;
-int  RunningStandard = 8500000;
+int  RunningStandard = 9000000;
 int  ThisSpeed;
 float CalcSpeed;
 clock_t Elapsed;
