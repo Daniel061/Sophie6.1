@@ -6,11 +6,11 @@
 using namespace std;
 
 c_Brain Brain;
-string Version = "6.1.004.09";
+string Version = "6.1.004.10";
 bool Verbose;
 int  BaseSpeed = 600000000;
 int  SpeedStandard = 1000;
-int  RunningStandard = 9000000;
+int  RunningStandard = 9000000;  //adjust up or down to change delay for all machines. up=more delay
 int  ThisSpeed;
 float CalcSpeed;
 clock_t Elapsed;
@@ -20,13 +20,13 @@ int main()
 Elapsed = clock();
  for(int t = 0; t<=BaseSpeed;t++);
 Elapsed = clock() - Elapsed;
-cout << " Elapsed:" << Elapsed << endl;
+//cout << " Elapsed:" << Elapsed << endl;
 CalcSpeed = float(SpeedStandard)/float(Elapsed);
 ThisSpeed = CalcSpeed * RunningStandard;
 if(ThisSpeed == 0) ThisSpeed = RunningStandard;
 
 
-cout << Elapsed << " This delay count " << ThisSpeed << " Calc Speed " << CalcSpeed << endl;
+//cout << Elapsed << " This delay count " << ThisSpeed << " Calc Speed " << CalcSpeed << endl;
 Brain.SetMyGender('f');
 Brain.SetMyName("Sophie");
 Brain.FirstRunWelcomeMessage();
