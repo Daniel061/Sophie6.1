@@ -378,6 +378,7 @@ class c_Brain : public c_Cerebellum
 
     void FirstRunWelcomeMessage(){
            //Recording turned off for this
+            cout << "[Version:" << Version << "]\n";
             SlowSpeak("Hello there!",false);
             SlowSpeak("Thanks for helping me learn new things.",false);
             SlowSpeak("Right now I don't know much about anything. I need for you to teach me.",false);
