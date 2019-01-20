@@ -6,13 +6,21 @@ using namespace std;
 
 c_Brain Brain;
 bool Verbose;
-
+int  BaseSpeed = 15000000;
+int  SpeedStandard = 50;
+int  ThisSpeed;
+float CalcSpeed;
 int main()
 {
 int StartCount = clock();
- for(int t = 0; t<=30000000;t++);
+ for(int t = 0; t<=BaseSpeed;t++);
 int EndCount = clock();
-cout << EndCount - StartCount << endl;
+CalcSpeed = float((EndCount - StartCount)/SpeedStandard);
+ThisSpeed = BaseSpeed * CalcSpeed;
+if(ThisSpeed == 0) ThisSpeed = BaseSpeed;
+
+
+//cout << EndCount - StartCount << " This delay count " << ThisSpeed << endl;
 Brain.SetMyGender('f');
 Brain.SetMyName("Sophie");
 Brain.FirstRunWelcomeMessage();

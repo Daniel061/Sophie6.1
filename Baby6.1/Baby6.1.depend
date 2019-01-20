@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1547992944 source:h:\c++projects\baby6.1\baby6.1\main.cpp
+1547993962 source:h:\c++projects\baby6.1\baby6.1\main.cpp
 	<iostream>
 	<c_Brain.h>
 	<time.h>
@@ -20,7 +20,7 @@
 1545435962 source:h:\c++projects\baby6.1\baby6.1\src\c_language.cpp
 	"c_Language.h"
 
-1547988940 h:\c++projects\baby6.1\baby6.1\include\c_language.h
+1547994062 h:\c++projects\baby6.1\baby6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<c_LongTermMemory.h>

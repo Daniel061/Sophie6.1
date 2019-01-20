@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 extern bool Verbose;
+extern int ThisSpeed;
 using namespace std;
 
 class c_Language : public c_LongTermMemory
@@ -231,7 +232,7 @@ class c_Language : public c_LongTermMemory
 //--------------------------------end Find Word Type--------------------------------------
 
 
-void SlowSpeak(string str_Data, bool Recording = true, int Delay = 3000000 ){
+void SlowSpeak(string str_Data, bool Recording = true, int Delay = ThisSpeed ){
      string WorkingWord;
      if(Recording){
         SaveResponsesSent(str_Data);}
