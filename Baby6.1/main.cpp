@@ -15,13 +15,13 @@ int main()
 int StartCount = clock();
  for(int t = 0; t<=BaseSpeed;t++);
 int EndCount = clock();
-//cout << ((float(EndCount) - float(StartCount))/SpeedStandard) << endl;
+cout << ((float(EndCount) - float(StartCount))/SpeedStandard) << endl;
 CalcSpeed = ((float(EndCount) - float(StartCount))/SpeedStandard)/100;
 ThisSpeed = BaseSpeed * CalcSpeed;
 if(ThisSpeed == 0) ThisSpeed = BaseSpeed;
 
 
-//cout << EndCount - StartCount << " This delay count " << ThisSpeed << " Calc Speed " << CalcSpeed << endl;
+cout << EndCount - StartCount << " This delay count " << ThisSpeed << " Calc Speed " << CalcSpeed << endl;
 Brain.SetMyGender('f');
 Brain.SetMyName("Sophie");
 Brain.FirstRunWelcomeMessage();
