@@ -47,7 +47,7 @@ class c_Cortex : public c_Language
 
 
     public:
-        void DecipherCurrentSentence(string &strData){
+        void DecipherCurrentSentence(){
             if(Verbose){cout << "[c_Cortex.h::DeciperCurrentSentence]" << endl;}
 
             SubjectLoc               = GetSubjectLocation();
@@ -75,7 +75,7 @@ class c_Cortex : public c_Language
             AssociativeWordLocation  = -1;
             PluralPronounLocation    = -1;
             ProperNounLocation       = -1;
-            bool ProcessContraction  = false;
+            UnKnownLocation          = -1;
             bool Greetings           = false;
             GenderIndicatorLocation  = -1;
             isGenderIndicator        = false;
@@ -94,7 +94,7 @@ class c_Cortex : public c_Language
                     if (tmpWordType == 'a') {AdjectiveLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'r') {ReplacementLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'q') {QuestionLocation = x; UnderstandingLevel++;}
-                    if (tmpWordType == 'C') {ContractionLocation = x; UnderstandingLevel++; ProcessContraction = true;}
+                    if (tmpWordType == 'C') {ContractionLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'A') {AdverbLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'X') {DirectiveLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'P') {ProperNounLocation = x; UnderstandingLevel++;}
@@ -110,10 +110,7 @@ class c_Cortex : public c_Language
                             if(FirstUnknown == -1) FirstUnknown = x;
                             }
             }
-//            if(ProcessContraction){
-//                bool    OwnerShip,Plural;
-//                string  Root,LongFormFirst,LongFormSecond;
-//                Rerundecipher = DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,strData);}
+
 
             SetPattern(Pattern);
             ISQ = GetIsQuestion();
@@ -143,7 +140,7 @@ class c_Cortex : public c_Language
             {
                case 0:{  ///All new words, lots of work to do
                    if (Verbose)
-                    cout << "Case 0" << endl;
+                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 0" << endl;
 
 
                  switch(GetMoodLevel()){
@@ -180,58 +177,58 @@ class c_Cortex : public c_Language
                }
                case 1:{ //question trap
                    if (Verbose)
-                    cout << "Case 1" << endl;
+                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 1 - Question trap" << endl;
                    if(!QuestionSentenceBreakDown())
                    HandleQuestion();
                    break;}
 
                case 2:{ //directive trap
                    if (Verbose)
-                    cout << "Case 2" << endl;
+                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 2 - directive trap" << endl;
                     HandleDirective();
                     break;}
 
                case 3:{ //plural pronoun trap
                    if (Verbose)
-                    cout << "Case 3" << endl;
+                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 3 - Plural pronoun trap" << endl;
                     HandlePluralPronoun(PluralPronounLocation);
                     break;}
 
                 case 4:{ //Greetings trap
                    if (Verbose)
-                    cout << "Case 4" << endl;
+                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 4 - Greetings trap" << endl;
                     CheckForGreetings(Greetings);
                     break;}
 
                 case 10:{  ///Only 1 known but could have a ratio of 100%
                    if (Verbose)
-                    cout << "Case 10" << endl;
+                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 10 - no code here" << endl;
 
                  SlowSpeak("I'm going to have to work on this.");
                  break;}
 
                 case 25:{  ///Some understanding but depends on ratio
                    if (Verbose)
-                    cout << "Case 25" << endl;
+                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 25 - no code here" << endl;
 
                  SlowSpeak("I don't know "  + GetWords(FirstUnknown)+"?");
                  break;}
 
                 case 50:{  ///stronger understanding but also depends on ratio
                    if (Verbose)
-                    cout << "Case 50" << endl;
+                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 50 -send to WorkWithHalfLevel()" << endl;
                  WorkWithHalfLevel(Pattern,DeterminerLocation);
                  break;}
 
                 case 75:{  ///Much stronger
                    if (Verbose)
-                    cout << "Case 75" << endl;
+                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 75 - send to Handle75LevelUnderstanding" << endl;
                  Handle75LevelUnderstanding();
                  break;}
 
                 case 100:{  ///very strong
                    if (Verbose)
-                    cout << "Case 100" << endl;
+                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 100 - inside logic" << endl;
                     string tmpSubject;
                     if(GetSubjectLocation() != -1){
                          tmpSubject = GetWords(SubjectLoc);
@@ -363,6 +360,9 @@ int HandleQuestion(){
     bool Matched = false;
     if(Verbose)
         cout << "qLoc:" << QuestionLocation << " Pattern:" << Pattern << " SubjectLoc:" << GetSubjectLocation() << endl;
+    if(UnKnownLocation >=0){
+            Handle75LevelUnderstanding(true); //try to find the unknown but run silent.
+            FindSubject();}
 
    // check for correct form
    //actually need to compare indirect object to subject
@@ -396,14 +396,16 @@ int HandleQuestion(){
 //End HandleQuestion-----------------------------------------------------------------------------------------------
 
 //--------------------------------HANDLE75LEVELUNDERSTANDING-------------------------------------------------------
-void Handle75LevelUnderstanding(){
-    bool Testing; Testing = true;
-    int localVerbLocation = -1;
-
+void Handle75LevelUnderstanding(bool RunSilent = false){
+    bool Testing; Testing       = true;
+    int localVerbLocation       = -1;
+    int SubjectLocationInCortex = -1;
+    //in case of recursive entry, scan for unknown location again
 
     if(Verbose){
-        cout << "c_Cortex.h::Handle75LevelUnderstanding\n";
+        cout << "[c_Cortex.h::Handle75LevelUnderstanding]\n";
         cout << "  Pattern:" << Pattern << endl;
+        cout << "  Run Silent:" << boolalpha << RunSilent << endl;
         cout << "  Subject Location:" << GetSubjectLocation() << endl;
         cout << "  Noun Location:" << NounLocation << endl;
         cout << "  Adjective Location:" << AdjectiveLocation << endl;
@@ -435,10 +437,30 @@ void Handle75LevelUnderstanding(){
                 Testing = false;
                 break;}
             }
-    }
+         else{
+             if( (NounLocation == -1) && (VerbLocation >=0) && (GetHasGenderReference()) ){  // no noun but has verb and gender reference
+                if(IsThisAPropernoun(GetWords(UnKnownLocation))){
+                    SetWordType('P',UnKnownLocation);
+                    SubjectLocationInCortex = FindSubject();
+                    SetSubjectLocation(SubjectLocationInCortex);
+                    RebuildPattern();
+                    DecipherCurrentSentence();
+                    Testing = false;
+                    break;}
+                 else  {
+                    SetWordType('n',UnKnownLocation);
+                    SubjectLocationInCortex = FindSubject();
+                    SetSubjectLocation(SubjectLocationInCortex);
+                    RebuildPattern();
+                    DecipherCurrentSentence();
+                    Testing = false;
+                    break;
 
+                 }
+             }
 
-    //------End Missing noun test------
+            }
+    } //------End Missing noun test------
 
 
     // --TEST FOR MISSING VERB--------------
@@ -493,7 +515,8 @@ void Handle75LevelUnderstanding(){
 
     tmpLocation = Pattern.find("nvdu") + Pattern.find("uvdn") + 1;  //if one .find returns -1 it is removed with the +1, if both return -1, the +1 results in -1
     if (tmpLocation>=0){
-        SlowSpeak("Okay. Tell me more about " + GetWordsLC(tmpLocation+2) + " " + GetWordsLC(tmpLocation+3) + ".");
+        if(!RunSilent)
+            SlowSpeak("Okay. Tell me more about " + GetWordsLC(tmpLocation+2) + " " + GetWordsLC(tmpLocation+3) + ".");
         SetWordType('n',tmpLocation+3);
         SetWordType('n',tmpLocation);
 
@@ -510,19 +533,19 @@ void Handle75LevelUnderstanding(){
 
 
     //----------Adjective Test---------
-
-    SlowSpeak( "A " + GetWords(UnKnownLocation) + " " + GetWords(NounLocation) + "?");
-    UserResponse = RequestUserResponse();
-    if(UserResponse == 1){
-        SetWordType('a',UnKnownLocation);  //set word type to adjective
-        SlowSpeak(":)"); IncreaseMoodLevel();
-        Testing = false;
-        break;}
-        else{
-            SlowSpeak(":("); DecreaseMoodLevel();
+    if(UnKnownLocation >=0){
+        SlowSpeak( "A " + GetWords(UnKnownLocation) + " " + GetWords(NounLocation) + "?");
+        UserResponse = RequestUserResponse();
+        if(UserResponse == 1){
+            SetWordType('a',UnKnownLocation);  //set word type to adjective
+            SlowSpeak(":)"); IncreaseMoodLevel();
             Testing = false;
-            break;
-        }
+            break;}
+            else{
+                SlowSpeak(":("); DecreaseMoodLevel();
+                Testing = false;
+                break;
+            }}
     //---end Adjective Testing ----------
 
 
@@ -541,7 +564,27 @@ void Handle75LevelUnderstanding(){
 
 
    }//---end testing control loop
+   if(Verbose)
+    cout << "  New Pattern:" << GetPattern() << endl;
 }
+//-----------------------------END HANDLE75LEVELUNDERSTANDING -------------------------------
+
+//----------------------ISTHISAPROPERNOUN----------------------------------------------------
+
+    bool IsThisAPropernoun(string strDataToTest){
+        if((strDataToTest[0] >= 'A') && (strDataToTest[0] <= 'Z') )
+            return true;
+        else
+            return false;
+
+    }
+
+
+
+//-----------------END ISTHISAPROPERNOUN------------------------------------------------------
+
+
+
 
 //------------------------DIRECTIVE TRAP-----------------------------------------------------
 
@@ -723,7 +766,7 @@ void Handle75LevelUnderstanding(){
     bool QuestionSentenceBreakDown(){
 
         int PatternMatch        = 0;
-        int DirectionOfQuestion = 4;
+        int DirectionOfQuestion = 50;
         int MatchedAdjective    = -1;
         int Adjectives[20];
         int LinkedNouns[20];
@@ -883,7 +926,7 @@ void Handle75LevelUnderstanding(){
                  break;
              }
 
-            default: if(Verbose) cout << "No direction detected.\n";
+            default: if(Verbose) cout << "[c_Cortex::QuestionSentenceBreakDown()] No direction detected.\n";
         }
 
 

@@ -27,11 +27,13 @@ class c_Language : public c_LongTermMemory
  string PatternReview(string Pattern, int& ConfidenceLevel){
    if(Verbose)cout << "[c_Language::PatternReview]: " ;
    string CorrectedPattern, LeftOfJoiner, RightOfJoiner; CorrectedPattern = Pattern;
+   string WorkingWord = "";
    ConfidenceLevel = -1;  // no suggestion
    int LeftOfJoinerLocation,RightOfJoinerLocation;
    LeftOfJoinerLocation = -1; RightOfJoinerLocation = 1;
    int  JoinerLocation     = -1;
    bool Result             = false;
+   bool VerifyPattern      = false;
    int  PatternPointer     = 0;
 
 
@@ -77,6 +79,7 @@ class c_Language : public c_LongTermMemory
      if(GetMemoryCellIsSet(Tokenize(CorrectedPattern,false),'l')==true){  //seen this pattern before
             PatternPointer       = GetMemoryCellPointerToNextPattern(Tokenize(CorrectedPattern,false),'l');
             CorrectedPattern     = GetMemoryCellRawStringData(Result,"",PatternPointer,'l');
+            VerifyPattern        = true;
      }
 
     else{
@@ -108,6 +111,26 @@ class c_Language : public c_LongTermMemory
                 CorrectedPattern = "dntva";
                 ConfidenceLevel = 100;}
           }
+
+      if(VerifyPattern){
+        //check rules
+
+        //first check proper noun rule of must start with a capital letter
+        PatternPointer = CorrectedPattern.find('P');
+        if(PatternPointer >=0){
+            WorkingWord = GetWords(PatternPointer);
+            if((WorkingWord[0]>='A') && (WorkingWord[0]<='Z')){
+                //rule passed
+                 }
+              else
+                //rule failed
+                {CorrectedPattern = Pattern;
+                ConfidenceLevel = -1;
+                if(Verbose)
+                    cout << "[c_Language.h::PatternReview] Pattern rejected!\n";
+                }
+        }
+      } //end verify pattern
 
      if(Verbose)cout << " Received Pattern:" << Pattern << " Correct Pattern:" << CorrectedPattern << endl;
    return CorrectedPattern;

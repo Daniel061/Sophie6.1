@@ -85,7 +85,7 @@ class c_Brain : public c_Cerebellum
                     SubjectLocation = FindSubject();
                     SetSubjectLocation(SubjectLocation);
                  }
-                 DecipherCurrentSentence(strData);                                           //work with sentence
+                 DecipherCurrentSentence();                                           //work with sentence
 
                  SubjectLocation = FindSubject();                                                      // need to run this again to see if any indirect objects
                  SetSubjectLocation(SubjectLocation);                                                  //store the location or -1
@@ -239,10 +239,10 @@ class c_Brain : public c_Cerebellum
             case 5352:  //subject report
                 {
                     Control = 2;
-                    cout << "no.\tToken\tMemory\tString\tOriginal sentence string.\n";
+                    cout << "no.\tToken\tMemory\t\tString\tOriginal sentence string.\n";
                     for(int x =0; x<GetSubjectStackCount(); x++){
                         if(GetSubjectInStack(x)>0)
-                            cout << x << ":\t" << GetSubjectInStack(x) << "\t" << GetMemoryCellWordLC("",GetSubjectInStack(x)) << "\t" << GetstrSubjectInStack(x) << "\t" << GetOriginalStringInStack(x) << endl;}
+                            cout << x << ":\t" << GetSubjectInStack(x) << "\t" << GetMemoryCellWordLC("",GetSubjectInStack(x)) << "\t\t" << GetstrSubjectInStack(x) << "\t" << GetOriginalStringInStack(x) << endl;}
                     break;
                 }
             case 5365:   // pattern report 'duvu'
@@ -365,6 +365,13 @@ class c_Brain : public c_Cerebellum
                 AssociateMemoryCellNoun(GetWordTokens(GetSubjectLocation()),GetWordsLC(GetIndirectObjectLocation()));
                 AssociateMemoryCellNoun(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(GetSubjectLocation()));
           }
+
+          //Associate Noun to gender word and vice versa
+          if((GetWordType(GetIndirectObjectLocation())=='P') && (!GetIsQuestion()) ){
+                AssociateMemoryCellNoun(GetWordTokens(GetSubjectLocation()),GetWordsLC(GetIndirectObjectLocation()));
+                AssociateMemoryCellNoun(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(GetSubjectLocation()));
+          }
+
             return NewWords;
 
         }
