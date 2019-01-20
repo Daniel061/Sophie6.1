@@ -2,27 +2,31 @@
 #include <c_Brain.h>
 #include <time.h>
 
+
 using namespace std;
 
 c_Brain Brain;
-string Version = "6.1.004.07";
+string Version = "6.1.004.08";
 bool Verbose;
 int  BaseSpeed = 600000000;
-int  SpeedStandard = 600;
+int  SpeedStandard = 1000;
+int  RunningStandard = 8500000;
 int  ThisSpeed;
 float CalcSpeed;
+clock_t Elapsed;
 int main()
 {
-int StartCount = clock();
+
+Elapsed = clock();
  for(int t = 0; t<=BaseSpeed;t++);
-int EndCount = clock();
-cout << ((float(EndCount) - float(StartCount))/SpeedStandard) << endl;
-CalcSpeed = ((float(EndCount) - float(StartCount))/SpeedStandard)/100;
-ThisSpeed = BaseSpeed * CalcSpeed;
-if(ThisSpeed == 0) ThisSpeed = BaseSpeed;
+Elapsed = clock() - Elapsed;
+cout << " Elapsed:" << Elapsed << endl;
+CalcSpeed = float(SpeedStandard)/float(Elapsed);
+ThisSpeed = CalcSpeed * RunningStandard;
+if(ThisSpeed == 0) ThisSpeed = RunningStandard;
 
 
-cout << float(EndCount) - float(StartCount) << " This delay count " << ThisSpeed << " Calc Speed " << CalcSpeed << endl;
+cout << Elapsed << " This delay count " << ThisSpeed << " Calc Speed " << CalcSpeed << endl;
 Brain.SetMyGender('f');
 Brain.SetMyName("Sophie");
 Brain.FirstRunWelcomeMessage();
