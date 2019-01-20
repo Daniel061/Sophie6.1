@@ -5,10 +5,10 @@
 using namespace std;
 
 c_Brain Brain;
-string Version = "6.1.004.06";
+string Version = "6.1.004.07";
 bool Verbose;
-int  BaseSpeed = 350000000;
-int  SpeedStandard = 250;
+int  BaseSpeed = 600000000;
+int  SpeedStandard = 600;
 int  ThisSpeed;
 float CalcSpeed;
 int main()
@@ -16,13 +16,13 @@ int main()
 int StartCount = clock();
  for(int t = 0; t<=BaseSpeed;t++);
 int EndCount = clock();
-//cout << ((float(EndCount) - float(StartCount))/SpeedStandard) << endl;
+cout << ((float(EndCount) - float(StartCount))/SpeedStandard) << endl;
 CalcSpeed = ((float(EndCount) - float(StartCount))/SpeedStandard)/100;
 ThisSpeed = BaseSpeed * CalcSpeed;
 if(ThisSpeed == 0) ThisSpeed = BaseSpeed;
 
 
-//cout << float(EndCount) - float(StartCount) << " This delay count " << ThisSpeed << " Calc Speed " << CalcSpeed << endl;
+cout << float(EndCount) - float(StartCount) << " This delay count " << ThisSpeed << " Calc Speed " << CalcSpeed << endl;
 Brain.SetMyGender('f');
 Brain.SetMyName("Sophie");
 Brain.FirstRunWelcomeMessage();
