@@ -62,6 +62,8 @@ class c_Brain : public c_Cerebellum
                  SaveSentenceInLongTermMemory(strData);                                       //update Long Term Memory
                  GatherAndSetAllSentenceData();
                  //SetWordTypes();                                                              //try to set all word types
+                 if(IsThisSentenceDuplicated(strData))
+                    SlowSpeak("You said that before.");
                  if(GetHasContraction()){
                    NeedRerun = DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,strData);
                    if(NeedRerun){
@@ -97,6 +99,7 @@ class c_Brain : public c_Cerebellum
                  if(SubjectLocation >=0)
                     SetSubjectInStack(GetWordTokens(SubjectLocation),GetWords(SubjectLocation),GetOriginalString());
                  SavePreAndPostPatternConstruction(FirstPattern,GetPattern());                      //save learned pattern for future// language helper to use this
+                 SaveCurrentSentenceInMap();
                }
                else
                 if(CommandFound == -1){  //exit commands
@@ -116,7 +119,8 @@ class c_Brain : public c_Cerebellum
             cout << x << " " << GetWords(x) << ":" << GetWordTokens(x) <<  " Type:"
             << GetWordType(x) << " isContraction:" << GetisContraction(x) << " Quote Location:" << GetQuoteLocation(x) << endl;
         }
-            cout << "Cell Usage(r):" << GetRightLobeCellCount() <<  " Cell Usage(l):" << GetLeftLobeCellCount() << " Number of Sentences in LTM:" << GetNumberOfSentencesSaved() << endl;
+            cout << "Cell Usage(r):" << GetRightLobeCellCount() <<  " Cell Usage(l):" << GetLeftLobeCellCount() << "\n"
+                 << " Number of Sentences in LTM:" << GetNumberOfSentencesSaved() << " Sentence Map Count:" << GetSentenceStorageCountInMap() << endl;
         }
 
 

@@ -16,6 +16,45 @@ class c_LongTermMemory : public c_Sentence
     private:
         unordered_map <int,string> SentenceStorage;
         unordered_map <int,string>::iterator ssIT;
+        unordered_map <int,c_Sentence> CopySentenceMap;
+        unordered_map <int,c_Sentence>::iterator csIT;
+        c_Sentence  CopySentence;
+
+        void CopyCurrentSentence(){
+            CopySentence.InitializeVars();
+            for (int x =0; x<=GetWordCount(); x++){
+                CopySentence.Words[x]                   = GetWords(x);
+                CopySentence.WordTokens[x]              = GetWordTokens(x);
+                CopySentence.QuoteLocation[x]           = GetQuoteLocation(x);
+                CopySentence.isContraction[x]           = GetisContraction(x);
+                CopySentence.WordsLC[x]                 = GetWordsLC(x);
+                CopySentence.SubWords[x]                = GetSubWords(x);
+                //CopySentence.ContractionWordLongForm  = GetContractWord
+                CopySentence.WordType[x]                =GetWordType(x);
+                CopySentence.SecondaryType[x]           =GetSecondaryType(x);
+                CopySentence.AlternateType[x]           =GetAlternateType(x);
+                CopySentence.GenderClassInSentence[x]   =GetGenderClassInSentence(x);
+                }
+              CopySentence.WordCount                    =GetWordCount();
+              CopySentence.SubjectLocation              =GetSubjectLocation();
+              CopySentence.OriginalString               =GetOriginalString();
+              CopySentence.Pattern                      =GetPattern();
+              CopySentence.HasPluralPronoun             =GetHasPluralPronoun();
+              CopySentence.HasPunctuation               =GetHasPunctuation();
+              CopySentence.IsQuestion                   =GetIsQuestion();
+              CopySentence.HasContraction               =GetHasContraction();
+              CopySentence.HasGreetingsWord             =GetHasGreetingsWord();
+              CopySentence.HasGenderReference           =GetHasGenderReference();
+              CopySentence.HasBeenUnderstood            =GetHasBeenUnderstood();
+              CopySentence.AdverbLocation               =GetAdverbLocation();
+              CopySentence.NounCount                    =GetNounCount();
+              CopySentence.VerbLocation                 =GetVerbLocation();
+              CopySentence.AdjectiveLocation            =GetAdjectiveLocation();
+              CopySentence.NamePointer                  =GetNamePointer();
+              CopySentence.IndirectObjectLocation       =GetIndirectObjectLocation();
+
+
+            }//-------------------END COPYCURRENTSENTENCE----------------------------
 
 
     public:
@@ -28,6 +67,45 @@ class c_LongTermMemory : public c_Sentence
         int  GetNumberOfSentencesSaved(){
              return SentenceStorage.size();
         }
+
+        void SaveCurrentSentenceInMap(){
+            int SentenceToken = 0;
+
+            CopyCurrentSentence();
+            SentenceToken = Tokenize(CopySentence.OriginalString);
+            CopySentenceMap.emplace(SentenceToken,CopySentence);
+        }
+
+        bool FindPhraseInSentenceMap(string PhraseToFind){
+            PhraseToFind = " " + PhraseToFind + " ";
+            int MatchedLocation = -1;
+            csIT = CopySentenceMap.begin();
+            for(int x = 0; x<= int(CopySentenceMap.size()); x++){
+                MatchedLocation = csIT->second.GetOriginalString().find(PhraseToFind);
+                if(MatchedLocation >=0){
+                  return true;
+                  break;}
+                csIT++;
+            }
+        }
+
+
+        bool IsThisSentenceDuplicated(string strData){
+            int TokenizedSentence = Tokenize(strData);
+            csIT = CopySentenceMap.find(TokenizedSentence);
+            if(csIT != CopySentenceMap.end())
+                return true;
+            else
+                return false;
+        }
+
+        int GetSentenceStorageCountInMap(){
+            return CopySentenceMap.size();
+        }
+
+
+
+
 };
 
 #endif // C_LONGTERMMEMORY_H

@@ -243,6 +243,7 @@ class c_Cortex : public c_Language
                      }
                  SlowSpeak("Okay.");
                  IncreaseMoodLevel();
+                 SetHasBeenUnderstood(true);
                  SlowSpeak(":)");
                  break;}
 
@@ -260,6 +261,7 @@ int CheckForGreetings(bool& Greeting){
         IncreaseMoodLevel();
         SlowSpeak("How are you?");
         Greeting = true;
+        SetHasBeenUnderstood(true);
 
     }
     return -1;
@@ -302,6 +304,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
                     SlowSpeak("I want to learn more!");
                     SlowSpeak(":)");
                     IncreaseMoodLevel();
+                    SetHasBeenUnderstood(true);
                     SetWordType('a',tmpAdjectiveLoc);
                     SetWordType('n',Determiner+1);
                     RebuildPattern();
@@ -325,6 +328,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
                     SlowSpeak("I will need to learn about " + GetWords(Determiner + 3)+".");
                     SlowSpeak("Please tell me more.");
                     IncreaseMoodLevel();
+                    SetHasBeenUnderstood(true);
                     //set subject
                 }
                 else{
@@ -340,6 +344,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
                 SetWordType('n',Determiner+2);
                 SetSubjectInStack(Tokenize(GetWords(Determiner+2)),GetWords(Determiner+2),GetOriginalString());
                 IncreaseMoodLevel();
+                SetHasBeenUnderstood(true);
                 //set subject
             }
          }
@@ -378,12 +383,14 @@ int HandleQuestion(){
                         if(!(x+1==MatchedCount)) AnswerString += " or ";}
                 AnswerString += ".";
                 SlowSpeak(AnswerString);
+                SetHasBeenUnderstood(true);
             }
             else{
                AnswerString = "The " +  GetWordsLC(GetSubjectLocation()) + " of ";
                if(!(GetWordType(GetIndirectObjectLocation())== 'P') || (GetWordType(GetIndirectObjectLocation())== 'p')) AnswerString += "the ";
                AnswerString +=  GetWords(GetIndirectObjectLocation())+ " is " + MatchedAdjective[0] + ".";
                SlowSpeak(AnswerString);
+               SetHasBeenUnderstood(true);
             }
         }
         else
@@ -422,6 +429,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
             SetWordType('n',DeterminerLocation+1);    //set the noun
             SetSubjectLocation(DeterminerLocation+1); //be sure subject location is newly found noun
             SlowSpeak(":)"); IncreaseMoodLevel();
+            SetHasBeenUnderstood(true);
             Testing = false;
             break;}
     }
@@ -434,6 +442,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                 SetSubjectLocation(DeterminerLocation+1);
                 SlowSpeak(":)");
                 IncreaseMoodLevel();
+                SetHasBeenUnderstood(true);
                 Testing = false;
                 break;}
             }
@@ -473,6 +482,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
             SetWordType('v',UnKnownLocation);
             Testing = false;
             SlowSpeak("Okay.");
+            SetHasBeenUnderstood(true);
             break;
         }
     }
@@ -493,6 +503,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                   if(UserResponse == 1){ //tmpLocation has to be adverb(A)
                         SetWordType('A',tmpLocation);
                         SlowSpeak(":)"); IncreaseMoodLevel();
+                        SetHasBeenUnderstood(true);
                   }
                   else{
                     SlowSpeak(":("); DecreaseMoodLevel();
@@ -517,6 +528,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
     if (tmpLocation>=0){
         if(!RunSilent)
             SlowSpeak("Okay. Tell me more about " + GetWordsLC(tmpLocation+2) + " " + GetWordsLC(tmpLocation+3) + ".");
+            SetHasBeenUnderstood(true);
         SetWordType('n',tmpLocation+3);
         SetWordType('n',tmpLocation);
 
@@ -539,6 +551,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
         if(UserResponse == 1){
             SetWordType('a',UnKnownLocation);  //set word type to adjective
             SlowSpeak(":)"); IncreaseMoodLevel();
+            SetHasBeenUnderstood(true);
             Testing = false;
             break;}
             else{
@@ -639,12 +652,14 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                                         ResponseString = "They both can be " + MatchedAdjective[0] + ".";
 
                                  SlowSpeak(ResponseString);
+                                 SetHasBeenUnderstood(true);
                                  SlowSpeak(":)");}
                               else{
 
 
                                   if(GetIsNounRelatedToThisMemoryCell(Tokenize(Noun1),Noun2)){
-                                    SlowSpeak("A " + Noun1 + " is a " + Noun2 + ".");}
+                                    SlowSpeak("A " + Noun1 + " is a " + Noun2 + ".");
+                                    SetHasBeenUnderstood(true);}
                                  else{
                                  SlowSpeak("I don't know anything alike between " + Noun2 + " and " + Noun1 + ".");
                                  SlowSpeak(":(");}}
@@ -761,6 +776,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                 SetWordType('a',PluralPronounLocation+1);
                 SlowSpeak("Alright.");
                 SlowSpeak(":)");
+                SetHasBeenUnderstood(true);
                 IncreaseMoodLevel();}
           else{
                 SlowSpeak(":{");
@@ -815,6 +831,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                     if (Response == 1){
                         SlowSpeak("Thank you!");
                         SlowSpeak(":)");
+                        SetHasBeenUnderstood(true);
                         Result = true;} //using this as a control here
                         else{
                             SlowSpeak(":(");
@@ -825,12 +842,14 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                         SlowSpeak("I'm learning, just like you do.");
                         SlowSpeak("I hope that I am doing a good job.");
                         SlowSpeak(":)");
+                        SetHasBeenUnderstood(true);
                         Result = true;
                         break;}}
                    if((GetWordsLC(0)=="how")&& (GetWordsLC(GetVerbLocation()) == "do") && (GetSubjectLocation() != -1)) {
                       if(GetWordType(GetSubjectLocation())=='r'){ //this
                         SlowSpeak("I try.");
                         SlowSpeak(":)");
+                        SetHasBeenUnderstood(true);
                         Result = true;
                         break;}}
 
@@ -838,6 +857,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                         if(GetMyGender() == GetGenderClassInSentence(GetSubjectLocation())){
                             SlowSpeak("Yes.");
                             Result = true;
+                            SetHasBeenUnderstood(true);
                             break;}
                             else{
                                 SlowSpeak("No.");
@@ -921,6 +941,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                       (GetNamePointer() != -1) && (ToMe) ) {
                         SlowSpeak(GetMyName());
                         SlowSpeak(":)");
+                        SetHasBeenUnderstood(true);
                         Result = true;
                         break;}
 
@@ -959,6 +980,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
             SetWordType('P',GetSubjectLocation());
             SetSubjectInStack(GetWordTokens(GetSubjectLocation()),GetWords(GetSubjectLocation()),GetOriginalString());
             IncreaseMoodLevel();
+            SetHasBeenUnderstood(true);
             QuizForGenderInformation();
         }
         else
@@ -985,12 +1007,14 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
             Response = RequestUserResponse(PositiveString,NegativeString,OtherString);
             if(Response == 1){ // boy
                 SetGenderClassInSentence(GetSubjectLocation(),'m');
-                SlowSpeak("Ok");}
+                SlowSpeak("Ok");
+                SetHasBeenUnderstood(true);}
                 else
                 if(Response == -1){ // girl
                     SetGenderClassInSentence(GetSubjectLocation(),'f');
                     SlowSpeak("Like me!");
-                    SlowSpeak(":)");}
+                    SlowSpeak(":)");
+                    SetHasBeenUnderstood(true);}
                     else
                     if(Response == -2){ //neither
                         SetGenderClassInSentence(GetSubjectLocation(),'n');}
@@ -1029,7 +1053,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
             Response = RequestUserResponse();
             if(Response == 1){
                 SetMemoryCellGenderClass(GetSubjectInStack(1),GenderClass);
-                SlowSpeak("Okay."); SlowSpeak(":)"); IncreaseMoodLevel();
+                SlowSpeak("Okay."); SlowSpeak(":)"); IncreaseMoodLevel();SetHasBeenUnderstood(true);
             }
         }
 

@@ -12,7 +12,7 @@ class c_Sentence : public c_SubjectStack
 
     protected:
 
-    private:
+    public:
         int    WordCount;                       // no. of words in sentence not counting punctuation  initialize to 0
         int    SubjectLocation;                 // from 0 to WordCount, -1 = subject not located
         int    WordTokens[30];                  // dog = 625 initialize to 0
@@ -38,12 +38,15 @@ class c_Sentence : public c_SubjectStack
         bool   HasContraction;                  // true / false initialize to false
         bool   HasGreetingsWord;                // true / false initialize to false
         bool   HasGenderReference;              // true / false initialize to false
+        bool   HasBeenUnderstood;               // initialized to false, set externally
         char   WordType[30];                    // n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
                                                 // n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object d(LC) Indirect object
                                                 // initialize to 'u'
         char   SecondaryType[30];               // same as WordType[]
         char   AlternateType[30];               // same as WordType[]
 
+
+    public:
         void InitializeVars(){
             for(int x =0; x < 30; x++){
                 Words[x]                   = "";
@@ -68,6 +71,7 @@ class c_Sentence : public c_SubjectStack
                 HasContraction             = false;
                 HasGreetingsWord           = false;
                 HasGenderReference         = false;
+                HasBeenUnderstood          = false;
                 AdverbLocation             = -1;
                 NounCount                  = -1;
                 VerbLocation               = -1;
@@ -75,7 +79,9 @@ class c_Sentence : public c_SubjectStack
                 NamePointer                = -1;
                 IndirectObjectLocation     = -1;}
 
-    public:
+
+        bool   GetHasBeenUnderstood(){return HasBeenUnderstood;}
+        void   SetHasBeenUnderstood(bool NewVal){HasBeenUnderstood = NewVal;}
         bool   GetHasGenderReference(){return HasGenderReference;}
         void   SetHasGenderReference(bool NewVal){HasGenderReference = NewVal;}
         bool   GetHasGreetingsWord(){return HasGreetingsWord;}
