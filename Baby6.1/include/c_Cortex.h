@@ -671,6 +671,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
          string TrailingCharacters   = "";    //i.e  cat's = s   baby's = s
          string PreceedingCharacters = "";    //i.e  cat's = cat  baby's = baby
          int    ContractionPointer   = 0;
+         int    ContractionCount     = 0;
          string WorkingWord          = "";
          string NewSentence          = "";
                 OwnerShip            = false;
@@ -680,7 +681,11 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                 LongFormSecond       = "";
                 ContractionLocation  = -1;
          //error check - ensure a contraction exists
-         for(int x = 0; x<= GetWordCount(); x++){if(GetWordType(x) == 'C') ContractionLocation = x;}
+         for(int x = 0; x<= GetWordCount(); x++){
+                if(GetWordType(x) == 'C'){
+                   if(ContractionLocation == -1)     //process first contraction only  ***TODO*** work with the others if exists
+                      ContractionLocation = x;
+                   ContractionCount++;}}
          if(ContractionLocation == -1) return false;
 
 

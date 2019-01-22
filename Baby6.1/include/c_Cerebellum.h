@@ -19,12 +19,16 @@ class c_Cerebellum : public c_Cortex
          int    LocalVerbLocation      = 0;
          int    LocalNounCount         = 0;
          int    LocalWordCount         = -1;
+         int    QuoteMarker            = -1;
          string LocalPattern           = "";
+         string LocalWordCopy          = "";
          char   LocalGenderClass       = '\0';
          char   LocalWordType          = '\0';
          char   MemoryWordType         = '\0';
+         char   SentenceWordType       = '\0';
          char   SelectedWordType       = '\0';
          bool   LocalBoolFlag          = false;
+         bool   LocalContractionFlag   = false;
 
          void InitializeAll(){
                  LocalGenderClass       = '\0';
@@ -34,11 +38,15 @@ class c_Cerebellum : public c_Cortex
                  LocalVerbLocation      = 0;
                  LocalNounCount         = 0;
                  LocalWordCount         = -1;
+                 QuoteMarker            = -1;
                  LocalPattern           = "";
+                 LocalWordCopy          = "";
+                 SentenceWordType       = '\0';
                  LocalWordType          = '\0';
                  MemoryWordType         = '\0';
                  SelectedWordType       = '\0';
-                 LocalBoolFlag          = false;}
+                 LocalBoolFlag          = false;
+                 LocalContractionFlag   = false;}
 
 public:
 
@@ -58,7 +66,6 @@ public:
         //     bool   HasPluralPronoun
         //     bool   HasGenderReference
         //     bool   HasGreetingsWord
-        //     bool   HasContraction
         // ::FindSubject() sets the following in c_Sentence.h private variables
         //     int    SubjectLocation
         // c_Sentence.h sets the rest of the private variables except
@@ -69,12 +76,16 @@ public:
         //     int    VerbLocation (SET HERE)
         //     int    NamePointer  (SET HERE)
         //     string Pattern   (SET HERE) c_Sentence.h can rebuild Pattern
-        //     char   WordType[]  (SET HERE)
-        //     char GenderClassInSentence[] (SET HERE)
+        //     char   WordType[]  (SET HERE) / checked against Memorycell and Sentence
+        //     char   GenderClassInSentence[] (SET HERE)
+        //     bool   HasContraction (SET HERE)
 
         for(int x = 0; x  <= LocalWordCount; x++){                                  //***First try to set wordtype
-            LocalWordType  = FindWordType(GetWordsLC(x),x);                         //Get Wordtype from language helper, receives 'u' if can't determine
-            MemoryWordType = GetMemoryCellWordType(GetWordTokens(x));               //Get Wordtype from memory cell, receives NULL if doesn't exist, else returns CellWordType
+            LocalWordType    = FindWordType(GetWordsLC(x),x);                       //Get Wordtype from language helper, receives 'u' if can't determine
+            MemoryWordType   = GetMemoryCellWordType(GetWordTokens(x));             //Get Wordtype from memory cell, receives NULL if doesn't exist, else returns CellWordType
+            SentenceWordType = GetWordType(x);                                      //Get Wordtype from c_sentence
+            LocalWordCopy    = GetWords(x);                                         //Get a copy of the word
+
             if(MemoryWordType == '\0'){                                             //Nothing in memory cell
                 SelectedWordType = LocalWordType;}                                  //  -use type from language helper, could still be 'u'
             else
@@ -92,9 +103,15 @@ public:
                                    cout << "Disagreement!\n";
                                   //disagreement here!!!                            //We have a disagreement here between memory cell wordtype and language helper
                                     else
-                                    {
-                                     SelectedWordType = MemoryWordType;             //Use MemoryWordType because language helper did not help
-                                    }
+                                        if(SentenceWordType != 'u'){
+                                            SelectedWordType = SentenceWordType;}   //use c_Sentence wordtype
+                                                else
+                                                {
+                                                 SelectedWordType = MemoryWordType; //Use MemoryWordType because language helper did not help
+                                                }
+
+         QuoteMarker = LocalWordCopy.find('\'');                                    //check for contraction
+         if(QuoteMarker >=0) SelectedWordType = 'C';                                //Mark the word type
 
          LocalPattern += SelectedWordType;                                          //build the pattern as we go
          SetWordType(SelectedWordType,x);                                           //set the selected word type in the sentence
@@ -103,6 +120,7 @@ public:
          if(SelectedWordType == 'g') LocalNamePointer = x;                          //save the name pointer
          if(SelectedWordType == 'A') LocalAdverbLocation = x;                       //save the Adverb location
          if(SelectedWordType == 'a') LocalAdjectiveLocation = x;                    //save the adjective location
+         if(SelectedWordType == 'C') LocalContractionFlag = true;                   //mark has contraction
 
          LocalGenderClass = GetMemoryCellGenderClass(GetWordTokens(x));             //take care of GenderClass in sentence
          if(LocalGenderClass != '\0')
@@ -114,6 +132,7 @@ public:
         SetVerbLocation(LocalVerbLocation);                                         //store in c_Sentence
         SetNounCount(LocalNounCount);                                               //store in c_Sentence
         SetPattern(LocalPattern);                                                   //store in c_Sentence
+        SetHasContraction(LocalContractionFlag);                                    //Store contraction flag
 
         return LocalWordCount;                                                      //finished
 
