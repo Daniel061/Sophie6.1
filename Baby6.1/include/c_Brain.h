@@ -60,12 +60,14 @@ class c_Brain : public c_Cerebellum
             if(CommandFound == 0){                                                        //check for command  0 = no command
                  SaveReceivedInput(strData,true);                                             //update short term memory
                  SaveSentenceInLongTermMemory(strData);                                       //update Long Term Memory
-                 SetWordTypes();                                                              //try to set all word types
+                 GatherAndSetAllSentenceData();
+                 //SetWordTypes();                                                              //try to set all word types
                  if(GetHasContraction()){
                    NeedRerun = DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,strData);
                    if(NeedRerun){
                     Parse(strData);
-                    SetWordTypes();
+                    //SetWordTypes();
+                    GatherAndSetAllSentenceData();
                     SaveReceivedInput(strData,true);
                     SaveSentenceInLongTermMemory(strData);
                    }

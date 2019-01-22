@@ -1000,6 +1000,8 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
             cout << "[c_Cortex.h::CheckForImpliedGender\n]";
         //qualification;
         // subject must be pronoun   he,she,her, him
+        //***TODO***    Check to be sure gender isn't already set
+
         string MaleProNouns      = " he him his ";
         string FemaleProNouns    = " she her ";
         string SubjectText       = GetMemoryCellWordLC("",GetSubjectInStack(1)); //pronoun has already been set as subject so get next

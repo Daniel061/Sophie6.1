@@ -6,7 +6,7 @@
 using namespace std;
 
 c_Brain Brain;
-string Version = "6.1.004.11";
+string Version = "6.1.004.12";
 bool Verbose;
 int  BaseSpeed = 600000000;
 int  SpeedStandard = 1000;
@@ -29,7 +29,7 @@ if(ThisSpeed == 0) ThisSpeed = RunningStandard;
 //cout << Elapsed << " This delay count " << ThisSpeed << " Calc Speed " << CalcSpeed << endl;
 Brain.SetMyGender('f');
 Brain.SetMyName("Sophie");
-//Brain.FirstRunWelcomeMessage();
+Brain.FirstRunWelcomeMessage();
 string Raw_Sentence;
 Verbose = false;
 

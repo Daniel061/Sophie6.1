@@ -120,6 +120,7 @@ class c_Sentence : public c_SubjectStack
         string GetPattern(){return Pattern;}
         bool   GetisContraction(int Location){return isContraction[Location];}
         int    GetQuoteLocation(int Location){return QuoteLocation[Location];}
+        void   SetAdverbLocation(int newVal){AdverbLocation = newVal;}
         int    GetAdverbLocation(){
           for(int x =0; x < WordCount; x++){
             if(WordType[x]=='A')AdverbLocation = x;}
@@ -232,7 +233,8 @@ class c_Sentence : public c_SubjectStack
                     QuoteLoc = Words[x].find('\'');
                     if((QuoteLoc >=0)&(QuoteLoc<int_Last_Pos)){
                         WordType[x] = 'C';  //Contraction flag~ Possible plural possessive
-                        isContraction[x] = true;}
+                        isContraction[x] = true;
+                        HasContraction = true;}
                     QuoteLocation[x] = QuoteLoc;
                     string tmpWord;
                     tmpWord = Words[x];

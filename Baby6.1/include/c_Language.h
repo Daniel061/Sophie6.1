@@ -115,19 +115,25 @@ class c_Language : public c_LongTermMemory
       if(VerifyPattern){
         //check rules
 
-        //first check proper noun rule of must start with a capital letter
+        //(1) first check proper noun rule of must start with a capital letter
+        //(2) Sentence should not start with adjective
+        //(3) there should be a verb in the sentence
+
+        //(1)
         PatternPointer = CorrectedPattern.find('P');
         if(PatternPointer >=0){
             WorkingWord = GetWords(PatternPointer);
             if((WorkingWord[0]>='A') && (WorkingWord[0]<='Z')){
                 //rule passed
+                if(Verbose)
+                    cout << "[c_Language.h::PatternReview] Pattern accepted,\n    proper noun rule passed.\n";
                  }
               else
                 //rule failed
                 {CorrectedPattern = Pattern;
                 ConfidenceLevel = -1;
                 if(Verbose)
-                    cout << "[c_Language.h::PatternReview] Pattern rejected!\n";
+                    cout << "[c_Language.h::PatternReview] Pattern rejected,\n    proper noun indicated but did not start with a capital!\n";
                 }
         }
       } //end verify pattern
@@ -221,7 +227,8 @@ class c_Language : public c_LongTermMemory
                   if (isProNounsOutward >=0){
                        tmpWordType = 'y';}
                   if (isQuestion >= 0){
-                       tmpWordType = 'q';}
+                       tmpWordType = 'q';
+                       SetIsQuestion(true);}
                   if (isSubRep >=0){
                         tmpWordType = 'r';}
                   if (isAdverb >=0){
