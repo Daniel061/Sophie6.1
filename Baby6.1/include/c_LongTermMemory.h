@@ -23,35 +23,37 @@ class c_LongTermMemory : public c_Sentence
         void CopyCurrentSentence(){
             CopySentence.InitializeVars();
             for (int x =0; x<=GetWordCount(); x++){
-                CopySentence.Words[x]                   = GetWords(x);
-                CopySentence.WordTokens[x]              = GetWordTokens(x);
-                CopySentence.QuoteLocation[x]           = GetQuoteLocation(x);
-                CopySentence.isContraction[x]           = GetisContraction(x);
-                CopySentence.WordsLC[x]                 = GetWordsLC(x);
-                CopySentence.SubWords[x]                = GetSubWords(x);
-                //CopySentence.ContractionWordLongForm  = GetContractWord
-                CopySentence.WordType[x]                =GetWordType(x);
-                CopySentence.SecondaryType[x]           =GetSecondaryType(x);
-                CopySentence.AlternateType[x]           =GetAlternateType(x);
-                CopySentence.GenderClassInSentence[x]   =GetGenderClassInSentence(x);
+                CopySentence.Words[x]                     = GetWords(x);
+                CopySentence.WordTokens[x]                = GetWordTokens(x);
+                CopySentence.QuoteLocation[x]             = GetQuoteLocation(x);
+                CopySentence.isContraction[x]             = GetisContraction(x);
+                CopySentence.WordsLC[x]                   = GetWordsLC(x);
+                CopySentence.SubWords[x]                  = GetSubWords(x);
+                CopySentence.WordType[x]                  =GetWordType(x);
+                CopySentence.SecondaryType[x]             =GetSecondaryType(x);
+                CopySentence.AlternateType[x]             =GetAlternateType(x);
+                CopySentence.GenderClassInSentence[x]     =GetGenderClassInSentence(x);
+                CopySentence.ContractionLongFormFirst[x]  =GetContractionLongFormFirst(x);
+                CopySentence.ContractionLongFormSecond[x] =GetContractionLongFormSecond(x);
                 }
-              CopySentence.WordCount                    =GetWordCount();
-              CopySentence.SubjectLocation              =GetSubjectLocation();
-              CopySentence.OriginalString               =GetOriginalString();
-              CopySentence.Pattern                      =GetPattern();
-              CopySentence.HasPluralPronoun             =GetHasPluralPronoun();
-              CopySentence.HasPunctuation               =GetHasPunctuation();
-              CopySentence.IsQuestion                   =GetIsQuestion();
-              CopySentence.HasContraction               =GetHasContraction();
-              CopySentence.HasGreetingsWord             =GetHasGreetingsWord();
-              CopySentence.HasGenderReference           =GetHasGenderReference();
-              CopySentence.HasBeenUnderstood            =GetHasBeenUnderstood();
-              CopySentence.AdverbLocation               =GetAdverbLocation();
-              CopySentence.NounCount                    =GetNounCount();
-              CopySentence.VerbLocation                 =GetVerbLocation();
-              CopySentence.AdjectiveLocation            =GetAdjectiveLocation();
-              CopySentence.NamePointer                  =GetNamePointer();
-              CopySentence.IndirectObjectLocation       =GetIndirectObjectLocation();
+              CopySentence.WordCount                      =GetWordCount();
+              CopySentence.SubjectLocation                =GetSubjectLocation();
+              CopySentence.OriginalString                 =GetOriginalString();
+              CopySentence.Pattern                        =GetPattern();
+              CopySentence.HasPluralPronoun               =GetHasPluralPronoun();
+              CopySentence.HasPunctuation                 =GetHasPunctuation();
+              CopySentence.IsQuestion                     =GetIsQuestion();
+              CopySentence.HasContraction                 =GetHasContraction();
+              CopySentence.HasGreetingsWord               =GetHasGreetingsWord();
+              CopySentence.HasGenderReference             =GetHasGenderReference();
+              CopySentence.HasBeenUnderstood              =GetHasBeenUnderstood();
+              CopySentence.AdverbLocation                 =GetAdverbLocation();
+              CopySentence.NounCount                      =GetNounCount();
+              CopySentence.VerbLocation                   =GetVerbLocation();
+              CopySentence.AdjectiveLocation              =GetAdjectiveLocation();
+              CopySentence.NamePointer                    =GetNamePointer();
+              CopySentence.IndirectObjectLocation         =GetIndirectObjectLocation();
+              CopySentence.HasGenderDeterminer            =GetHasGenderDeterminer();
 
 
             }//-------------------END COPYCURRENTSENTENCE----------------------------

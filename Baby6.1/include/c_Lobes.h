@@ -44,6 +44,67 @@ class c_Lobes : public c_MemoryCell
 
     public:
 
+        //Updates ContractionLongFormFirst if exists
+        //returns True if added, else false if updated
+        //send LongFormFirst data in strData and the address of the contraction word in Address
+        bool SetMemoryCellContractionLongFormFirst(string strData,int Address, char SideToCheck = 'r'){
+           bool Result = false;
+           mapIT       = FindAddressInMap(Address, Result, SideToCheck);
+               if (!Result){
+                  WorkingCell.SetpCellContractionLongFormFirst(strData);
+                  RightLobeMemoryMap.emplace(Address,WorkingCell);
+                  Result = true;}
+                  else{
+                    mapIT->second.SetpCellContractionLongFormFirst(strData);}
+               return Result;
+        }
+
+
+        //Updates ContractionLongFormSecond if exists
+        //returns True if added, else false if updated
+        //send LongFormSecond data in strData and the address of the contraction word in Address
+        bool SetMemoryCellContractionLongFormSecond(string strData,int Address, char SideToCheck = 'r'){
+           bool Result = false;
+           mapIT       = FindAddressInMap(Address, Result, SideToCheck);
+               if (!Result){
+                  WorkingCell.SetpCellContractionLongFormSecond(strData);
+                  RightLobeMemoryMap.emplace(Address,WorkingCell);
+                  Result = true;}
+                  else{
+                    mapIT->second.SetpCellContractionLongFormSecond(strData);}
+               return Result;
+        }
+
+
+
+        //Gets ContractionLongFormFirst if exists
+        //returns the data if exits, else "" if not found
+        //send the address of the contraction word in Address
+        string GetMemoryCellContractionLongFormFirst(int Address, char SideToCheck = 'r'){
+           bool Result    = false;
+           string strData = "";
+           mapIT       = FindAddressInMap(Address, Result, SideToCheck);
+               if (Result){
+                 strData =  mapIT->second.GetpCellContractionLongFormFirst();}
+                return strData;
+
+        }
+
+
+        //Gets ContractionLongFormSecond if exists
+        //returns the data if exits, else "" if not found
+        //send the address of the contraction word in Address
+        string GetMemoryCellContractionLongFormSecond(int Address, char SideToCheck = 'r'){
+           bool Result    = false;
+           string strData = "";
+           mapIT       = FindAddressInMap(Address, Result, SideToCheck);
+               if (Result){
+                 strData =  mapIT->second.GetpCellContractionLongFormSecond();}
+                return strData;
+
+        }
+
+
         //Updates the RawStringData if exists, adds it if it doesn't exist
         //returns True if added, else false if updated
         bool SetMemoryCellRawStringData(string strData, int Address, char SideToCheck = 'r'){
@@ -376,7 +437,7 @@ class c_Lobes : public c_MemoryCell
           //if so AND Update = true, Updates the data, returns Installed = false.
           //If NewWord doesn't exist,
           //Stores all the data and returns Installed = true.
-          bool InstallNewWord(string NewWord, char WordType, char Purpose, bool Update=false, char GenderClass = 'u'){     //currently right side only
+          bool InstallNewWord(string NewWord, char WordType, char Purpose, bool Update=false, char GenderClass = 'u', string LongFormFirst = "", string LongFormSecond = ""){     //currently right side only
                 if(Verbose)cout << "[c_Lobes.h::InstallNewWord]\n";
                 int tmpToken     = 0;
                 tmpToken         = Tokenize(NewWord);
@@ -386,13 +447,15 @@ class c_Lobes : public c_MemoryCell
                 mapIT            = FindAddressInMap(tmpToken,Result);
                 if (!Result){
                             WorkingCell.InitializeAll();
-                            WorkingCell.SetpCellDataString(NewWord);                 //stores raw data
-                            WorkingCell.SetpWordType(WordType);                      //stores word type
-                            WorkingCell.SetpCellPurpose(Purpose);                    //store cell purpose i.e 'w' - word
-                            WorkingCell.SetpCellDataLC(NewWordLC);                   //store the raw data in lower case
-                            WorkingCell.SetpGenderClass(GenderClass);                //store the gender class
-                            RightLobeMemoryMap.emplace(tmpToken,WorkingCell);        //Add this new cell to map.
-                            Installed = true;                                        //flag this operation as happened.
+                            WorkingCell.SetpCellDataString(NewWord);                        //stores raw data
+                            WorkingCell.SetpWordType(WordType);                             //stores word type
+                            WorkingCell.SetpCellPurpose(Purpose);                           //store cell purpose i.e 'w' - word
+                            WorkingCell.SetpCellDataLC(NewWordLC);                          //store the raw data in lower case
+                            WorkingCell.SetpGenderClass(GenderClass);                       //store the gender class
+                            WorkingCell.SetpCellContractionLongFormFirst(LongFormFirst);    //store the contraction word long form
+                            WorkingCell.SetpCellContractionLongFormSecond(LongFormSecond);  //store the contraction word long form
+                            RightLobeMemoryMap.emplace(tmpToken,WorkingCell);               //Add this new cell to map.
+                            Installed = true;                                               //flag this operation as happened.
                             if(Verbose)
                              cout << "Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
                             }
@@ -403,6 +466,8 @@ class c_Lobes : public c_MemoryCell
                                 mapIT->second.SetpCellPurpose(Purpose);
                                 mapIT->second.SetpCellDataLC(NewWordLC);
                                 mapIT->second.SetpGenderClass(GenderClass);
+                                mapIT->second.SetpCellContractionLongFormFirst(LongFormFirst);
+                                mapIT->second.SetpCellContractionLongFormSecond(LongFormSecond);
                                 if(Verbose)
                                     cout << "Updating -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
                             }

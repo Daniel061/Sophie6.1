@@ -171,6 +171,7 @@ class c_Language : public c_LongTermMemory
            string GenderIndicator =     " boy male man men girl female woman women ";
            string MaleGenderClass =     " boy male man men ";
            string FemaleGenderClass =   " girl female woman women ";
+           string GenderDeterminer =    " gender ";
            string GreetingsWord =       " hello hi ";
 
            int isThrowAwayWord     = -1;
@@ -190,6 +191,7 @@ class c_Language : public c_LongTermMemory
            int isGreetingsWord     = -1;
            int isMaleGenderClass   = -1;
            int isFemaleGenderClass = -1;
+           int isGenderDeterminer  = -1;
 
 
 
@@ -198,6 +200,7 @@ class c_Language : public c_LongTermMemory
               OrigWord = tmpWord;
               tmpWord = " " + tmpWord + " ";
 
+                isGenderDeterminer  = GenderDeterminer.find(tmpWord);
                 isMaleGenderClass   = MaleGenderClass.find(tmpWord);
                 isFemaleGenderClass = FemaleGenderClass.find(tmpWord);
                 isGreetingsWord     = GreetingsWord.find(tmpWord);
@@ -250,6 +253,9 @@ class c_Language : public c_LongTermMemory
                   if (isGreetingsWord >=0){
                         tmpWordType = 'W';
                         SetHasGreetingsWord(true);}
+                  if (isGenderDeterminer >=0){
+                        tmpWordType = 'B';
+                        SetHasGenderDeterminer(true);}
                   if ((isFemaleGenderClass >=0) && (LocationInSentence != -1)){
                         SetGenderClassInSentence(LocationInSentence,'f');}
                   if ((isMaleGenderClass >=0) && (LocationInSentence != -1)){
@@ -314,7 +320,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
         {
             //Order Of Preference:
             //  Proper Noun
-            //  Pronoun
+            ///  Pronoun   ****TODO***Check and use the other two types of Pronouns; ProNounsInward-m,ProNounsOutward-y, and still use ProNounsOther-p
             //  Noun
             //  Determiner +1
             //  Unknown word
@@ -342,6 +348,8 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                 if(GetWordType(x)== 'r')if(SubLocation == -1)        SubLocation        = x;
                 if(GetWordType(x)== 'p')if(ProNounLocation == -1)    ProNounLocation    = x;
                 if(GetWordType(x)== 'P')if(ProperNounLocation == -1) ProperNounLocation = x;
+                if(GetWordType(x)== 'm')if(ProNounLocation == -1) ProNounLocation = x;
+                if(GetWordType(x)== 'y')if(ProNounLocation == -1) ProNounLocation = x;
                 if(GetWordType(x)== 'v'){ SetVerbLocation(x);}
                 if(GetWordType(x)== 'a'){ SetAdjectiveLocation(x);}
                 Pattern += GetWordType(x);

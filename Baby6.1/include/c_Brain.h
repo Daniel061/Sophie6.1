@@ -61,14 +61,13 @@ class c_Brain : public c_Cerebellum
                  SaveReceivedInput(strData,true);                                             //update short term memory
                  SaveSentenceInLongTermMemory(strData);                                       //update Long Term Memory
                  GatherAndSetAllSentenceData();
-                 //SetWordTypes();                                                              //try to set all word types
                  if(IsThisSentenceDuplicated(strData))
                     SlowSpeak("You said that before.");
                  if(GetHasContraction()){
                    NeedRerun = DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,strData);
                    if(NeedRerun){
+                    StoreNewWords();
                     Parse(strData);
-                    //SetWordTypes();
                     GatherAndSetAllSentenceData();
                     SaveReceivedInput(strData,true);
                     SaveSentenceInLongTermMemory(strData);
@@ -182,6 +181,10 @@ class c_Brain : public c_Cerebellum
                     cout << "Cell String:" << GetMemoryCellRawStringData(Result,"",WorkingWord)<< endl;
                     cout << "Cell String (LC):" << GetMemoryCellWordLC("",WorkingWord) << endl;
                     cout << "Cell Word Type:" << GetMemoryCellWordType(WorkingWord) << endl;
+                    if(GetMemoryCellWordType(WorkingWord)=='C'){
+                        cout << "  Contraction Word Long Form First:" << GetMemoryCellContractionLongFormFirst(WorkingWord) << endl;
+                        cout << "  Contraction Word Long Form Second:" << GetMemoryCellContractionLongFormSecond(WorkingWord) << endl;
+                    }
                     //cout << "Cell Secondary Word Type:" << RightLobeMemory[WorkingWord].GetSecondaryType() << endl;
                     //cout << "Cell Alternate Word Type:" << RightLobeMemory[WorkingWord].GetAlternateType() << endl;
                     cout << "Cell Gender:" << GetMemoryCellGenderClass(WorkingWord) << endl;
@@ -331,7 +334,7 @@ class c_Brain : public c_Cerebellum
              if((GetWordType(x)=='n') && (Noun1 == -1) ) Noun1 = x; else if((GetWordType(x) == 'n') && (Noun2 == -1))  Noun2 =x;
              if( !( GetMemoryCellIsSet(GetWordTokens(x)) )) //   CheckForKnownWord(GetWords(x))))
                 {NewWords++;}
-                InstallNewWord(GetWords(x),GetWordType(x),'w',true,GetGenderClassInSentence(x));
+                InstallNewWord(GetWords(x),GetWordType(x),'w',true,GetGenderClassInSentence(x),GetContractionLongFormFirst(x),GetContractionLongFormSecond(x));
                 //Associate Adjective
                 if(GetWordType(x)=='a'){
                         if(GetSubjectLocation() >=0 )

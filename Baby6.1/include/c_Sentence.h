@@ -27,7 +27,8 @@ class c_Sentence : public c_SubjectStack
         string Words[30];                       // Dog  i.e. original unedited word  initialize to ""
         string WordsLC[30];                     // dog  initialize to ""
         string SubWords[30];                    // replacement words, usually from subject stack
-        string ContractionWordLongForm[30];     // i.e. can not  will not   initialize to ""
+        string ContractionLongFormFirst[30];    // i.e.he's to he
+        string ContractionLongFormSecond[30];   // i.e he's  to is
         char   GenderClassInSentence[30];       // i.e m-male f-female n-neutral   initialize to u-undefined
         string OriginalString;                  // the whole unedited string  initialize to ""
         string Pattern;                         // i.e. dnvua  initialize to ""
@@ -39,6 +40,7 @@ class c_Sentence : public c_SubjectStack
         bool   HasGreetingsWord;                // true / false initialize to false
         bool   HasGenderReference;              // true / false initialize to false
         bool   HasBeenUnderstood;               // initialized to false, set externally
+        bool   HasGenderDeterminer;             // the word 'gender' was used
         char   WordType[30];                    // n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
                                                 // n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object d(LC) Indirect object
                                                 // initialize to 'u'
@@ -49,37 +51,44 @@ class c_Sentence : public c_SubjectStack
     public:
         void InitializeVars(){
             for(int x =0; x < 30; x++){
-                Words[x]                   = "";
-                WordTokens[x]              = 0;
-                QuoteLocation[x]           = -1;
-                isContraction[x]           = false;
-                WordsLC[x]                 = "";
-                SubWords[x]                = "";
-                ContractionWordLongForm[x] = "";
-                WordType[x]                = 'u';
-                SecondaryType[x]           = 'u';
-                AlternateType[x]           = 'u';
-                GenderClassInSentence[x]   = 'u';}
+                Words[x]                      = "";
+                WordTokens[x]                 = 0;
+                QuoteLocation[x]              = -1;
+                isContraction[x]              = false;
+                WordsLC[x]                    = "";
+                SubWords[x]                   = "";
+                ContractionLongFormFirst[x]   = "";
+                ContractionLongFormSecond[x]  = "";
+                WordType[x]                   = 'u';
+                SecondaryType[x]              = 'u';
+                AlternateType[x]              = 'u';
+                GenderClassInSentence[x]      = 'u';}
 
-                WordCount                  = 0;
-                SubjectLocation            = -1;
-                OriginalString             = "";
-                Pattern                    = "";
-                HasPluralPronoun           = false;
-                HasPunctuation             = false;
-                IsQuestion                 = false;
-                HasContraction             = false;
-                HasGreetingsWord           = false;
-                HasGenderReference         = false;
-                HasBeenUnderstood          = false;
-                AdverbLocation             = -1;
-                NounCount                  = -1;
-                VerbLocation               = -1;
-                AdjectiveLocation          = -1;
-                NamePointer                = -1;
-                IndirectObjectLocation     = -1;}
+                WordCount                     = 0;
+                SubjectLocation               = -1;
+                OriginalString                = "";
+                Pattern                       = "";
+                HasPluralPronoun              = false;
+                HasPunctuation                = false;
+                IsQuestion                    = false;
+                HasContraction                = false;
+                HasGreetingsWord              = false;
+                HasGenderReference            = false;
+                HasBeenUnderstood             = false;
+                HasGenderDeterminer           = false;
+                AdverbLocation                = -1;
+                NounCount                     = -1;
+                VerbLocation                  = -1;
+                AdjectiveLocation             = -1;
+                NamePointer                   = -1;
+                IndirectObjectLocation        = -1;}
 
-
+        string GetContractionLongFormFirst(int Location){return ContractionLongFormFirst[Location];}
+        string GetContractionLongFormSecond(int Location){return ContractionLongFormSecond[Location];}
+        void   SetContractionLongFormFirst(int Location,string newVal){ContractionLongFormFirst[Location]=newVal;}
+        void   SetContractionLongFormSecond(int Location,string newVal){ContractionLongFormSecond[Location]=newVal;}
+        bool   GetHasGenderDeterminer(){return HasGenderDeterminer;}
+        void   SetHasGenderDeterminer(bool newVal){HasGenderDeterminer = newVal;}
         bool   GetHasBeenUnderstood(){return HasBeenUnderstood;}
         void   SetHasBeenUnderstood(bool NewVal){HasBeenUnderstood = NewVal;}
         bool   GetHasGenderReference(){return HasGenderReference;}

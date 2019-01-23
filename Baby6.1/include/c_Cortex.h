@@ -715,16 +715,19 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
          TrailingCharacters    = WorkingWord.substr(ContractionPointer+1);
          Root                  = PreceedingCharacters;
 
-         if(FollowingWordType == 'g'){
+         if(FollowingWordType == 'g'){ // i.e cat's name
             OwnerShip = true;}
             else{
                  Split = true;}
 
          if(Split){
             LongFormFirst   = Root;
-            if(TrailingCharacters == "s"){
-                LongFormSecond = "is";
-                }
+            if(TrailingCharacters == "s"){LongFormSecond = "is";}
+            if(TrailingCharacters == "ll"){LongFormSecond = "will";}
+            if(TrailingCharacters == "ve"){LongFormSecond = "have";}
+            if(TrailingCharacters == "m"){LongFormSecond = "am";}
+            if(TrailingCharacters == "d"){LongFormSecond = "would";}
+
          for(int x =0; x<ContractionLocation; x++){
             NewSentence += GetWords(x) + " ";}
             NewSentence += LongFormFirst + " ";
@@ -744,6 +747,9 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
             cout << "  " << "Long Form first:" << LongFormFirst << endl;
             cout << "  " << "Long Form second:" << LongFormSecond << endl;
             cout << "   New Sentence:" << NewSentence << endl;}
+
+         SetContractionLongFormFirst(ContractionLocation,LongFormFirst);
+         SetContractionLongFormSecond(ContractionLocation,LongFormSecond);
 
           return NeedRerun;
     }
@@ -787,7 +793,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
     bool QuestionSentenceBreakDown(){
 
         int PatternMatch        = 0;
-        int DirectionOfQuestion = 50;
+        int DirectionOfQuestion = -1;
         int MatchedAdjective    = -1;
         int Adjectives[20];
         int LinkedNouns[20];
@@ -798,12 +804,17 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
         bool ToMe               = false;
         bool Result             = false;
         int Response            = -1;
+        char GenderChar         = '\0';
         string WorkingPattern   = GetPattern();
 
         for(int x =0; x<= GetWordCount(); x++){
-            if(GetWordType(x)== 'm'){ DirectionOfQuestion = 0; ToMe = true;}
+            if((GetWordType(x)== 'm')&&(DirectionOfQuestion == -1)){ DirectionOfQuestion = 0; ToMe = true;}
              else
-                if(GetWordType(x)=='y') DirectionOfQuestion = 1;}
+                if((GetWordType(x)=='y')&&(DirectionOfQuestion == -1)) DirectionOfQuestion = 1;
+                  else
+                    if((GetWordType(x)=='B')&&(DirectionOfQuestion == -1)) DirectionOfQuestion = 2;}
+
+
         if(GetWordType(0) == 'v'){
             if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") ){
                 DirectionOfQuestion = 3;}}
@@ -823,6 +834,17 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
             case 0: {
                 if(Verbose)
                     cout << "[c_Cortex::QuestionSentenceBreakDown()] Question direction toMe\n";
+
+
+                if(GetHasGenderDeterminer()){
+                    GenderChar = GetMyGender();
+                    if(GenderChar == 'f'){SlowSpeak("I'm a girl."); Result = true; SetHasBeenUnderstood(true);}
+                       else
+                          if(GenderChar == 'm') {SlowSpeak("I'm a boy.");Result = true; SetHasBeenUnderstood(true);}
+                             else
+                                {SlowSpeak("You haven't said yet.");Result = true; SetHasBeenUnderstood(true);}
+                    break;
+                }
 
                 if((GetWordsLC(0)=="how")&& (GetWordsLC(GetVerbLocation()) == "are") && (GetSubjectLocation() == -1)){
                     SlowSpeak("I'm fine thanks!");
@@ -875,6 +897,17 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
             case 2: {
                 if(Verbose)
                     cout << "[c_Cortex::QuestionSentenceBreakDown()] Question direction to Report\n";
+
+                if(GetHasGenderDeterminer()){
+                    GenderChar = GetMemoryCellGenderClass(GetWordTokens(GetSubjectLocation()));
+                    if(GenderChar == 'f'){SlowSpeak("Girl."); Result = true; SetHasBeenUnderstood(true);}
+                       else
+                          if(GenderChar == 'm') {SlowSpeak("Boy.");Result = true; SetHasBeenUnderstood(true);}
+                             else
+                                {SlowSpeak("You haven't said yet.");Result = true; SetHasBeenUnderstood(true);}
+                 break;
+                }
+
                 break;}
             case 3: {
                 if(Verbose)
@@ -918,6 +951,8 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
 
                 break;}
              case 4: {//Proper noun reference
+                if(Verbose)
+                    cout << "[c_Cortex::QuestionSentenceBreakDown()] Question direction Proper noun reference\n";
                  string  ReferenceWord = GetWordsLC(GetSubjectLocation());
                  bool    OwnerShip,Plural;
                  string  Root,LongFormFirst,LongFormSecond;
