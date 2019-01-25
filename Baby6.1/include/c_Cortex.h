@@ -44,6 +44,7 @@ class c_Cortex : public c_Language
             float UnderstandingRatio;
             bool ISQ;
             bool Rerundecipher = false;
+            bool ForcedSubjectChange = false;
 
 
     public:
@@ -57,6 +58,7 @@ class c_Cortex : public c_Language
             DeterminerLocation       = -1;
             ProNounOtherLocation     = -1;
             ISQ                      = false;
+            ForcedSubjectChange      = false;
             Pattern                  = "";
             NounLocation             = -1;
             Control                  = -1;
@@ -274,9 +276,65 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
     if(Verbose){cout << "[c_Cortex.h::WorkWithHalfLevel]" << endl;}
        int Response;
        string tmpAdjective;
+       int StatementDirection = -1;
        int tmpAdjectiveLoc;
+       bool Testing = true;
        if(Verbose)
             cout << "Noun Loc:" << NounLocation << "Unknown Loc:" << UnKnownLocation << "Pattern:" << Pattern << endl;
+       for(int x = 0; x < GetWordCount(); x++){
+        if((GetWordType(x) == 'y') || (GetWordType(x) == 'm') || (GetWordType(x) == 'p')){
+            if(GetWordType(x)== 'y') StatementDirection = 0; //Statement towards user
+            if(GetWordType(x)== 'm') StatementDirection = 1; //Statement towards program
+            if(GetWordType(x)== 'p') StatementDirection = 2; //Statement towards other
+        }
+       }
+
+
+       while(Testing){
+
+         switch (StatementDirection){
+
+            case 0: //Statement towards user
+                {
+                  if((GetWords(UnKnownLocation)[0]>='A') && (GetWords(UnKnownLocation)[0]<='Z')) {
+                    //Proper noun is unknown word - user might be naming self
+                    SetWordType('P',UnKnownLocation);
+                    SlowSpeak("Hello " + GetWords(UnKnownLocation) + "!");
+                    SlowSpeak("Nice to meet you.");
+                    SlowSpeak(":)");
+                    IncreaseMoodLevel();
+                    SetHasBeenUnderstood(true);
+                    SetUserName(GetWords(UnKnownLocation));
+
+                  }
+                  else
+                  {
+                      //user may be using an adjective
+                  }
+
+
+                  if(Verbose){cout << "[c_Cortex.h::WorkWithHalfLevel]:Case 0" << endl;}
+                  Testing = false;
+                  break;
+                }
+
+            case 1: //Statement towards program
+                {
+
+                  if(Verbose){cout << "[c_Cortex.h::WorkWithHalfLevel]:Case 1" << endl;}
+                  Testing = false;
+                  break;
+                }
+            case 2: //Statement towards other
+                {
+
+                  if(Verbose){cout << "[c_Cortex.h::WorkWithHalfLevel]:Case 2" << endl;}
+                  Testing = false;
+                  break;
+                }
+
+
+
          SlowSpeak("  Are we talking about a " + GetWords(Determiner + 1) + "?");
          Response = RequestUserResponse();
          if(Response == 1){  //yes answer
@@ -308,11 +366,13 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
                     SetWordType('a',tmpAdjectiveLoc);
                     SetWordType('n',Determiner+1);
                     RebuildPattern();
+                    Testing = false;
 
             }
             else{
                 SlowSpeak(":(");
                 DecreaseMoodLevel();
+                Testing = false;
 
             }
             //release control back for more user input
@@ -329,6 +389,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
                     SlowSpeak("Please tell me more.");
                     IncreaseMoodLevel();
                     SetHasBeenUnderstood(true);
+                    Testing = false;
                     //set subject
                 }
                 else{
@@ -336,6 +397,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
                     SlowSpeak("I need to learn more before I understand this.");
                     SlowSpeak(":(");
                     DecreaseMoodLevel();
+                    Testing = false;
                 }
             }
             else{
@@ -345,12 +407,14 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
                 SetSubjectInStack(Tokenize(GetWords(Determiner+2)),GetWords(Determiner+2),GetOriginalString());
                 IncreaseMoodLevel();
                 SetHasBeenUnderstood(true);
+                Testing = false;
                 //set subject
             }
          }
+         }//end switch statement
 
-      return 0;
-
+     }//end control Loop
+     return 0;
 }//end work with half level
 //---------------------------------------------------------------------------------------------------------------
 int HandleQuestion(){
@@ -408,7 +472,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
     int localVerbLocation       = -1;
     int SubjectLocationInCortex = -1;
     //in case of recursive entry, scan for unknown location again
-
+//cout << "at 757Levelunderstanding with pattern of:" << Pattern << endl;
     if(Verbose){
         cout << "[c_Cortex.h::Handle75LevelUnderstanding]\n";
         cout << "  Pattern:" << Pattern << endl;
@@ -419,7 +483,12 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
         cout << "  Verb Location:" << VerbLocation << endl;}
 
 
-   while(Testing && (NounLocation >=0)){   //no noun! How to handle this Kenzie??  she says if pronoun use it as noun and subject
+//   if(NounLocation == -1){
+//            NounLocation = GetSubjectLocation(); //no noun! How to handle this Kenzie??  she says if pronoun(or Proper noun) use it as noun and subject
+//            ForcedSubjectChange = true;
+//   }
+
+   while(Testing && (NounLocation >=0)){
 
     //----------Missing Noun Test------
     if((NounLocation == -1) && (VerbLocation >=0) && (DeterminerLocation >=0) && (AdjectiveLocation >=0)){ //no noun but has verb, determiner and adjective
@@ -716,7 +785,8 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
          Root                  = PreceedingCharacters;
 
          if(FollowingWordType == 'g'){ // i.e cat's name
-            OwnerShip = true;}
+            OwnerShip = true;
+            LongFormFirst = Root;}
             else{
                  Split = true;}
 
@@ -727,6 +797,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
             if(TrailingCharacters == "ve"){LongFormSecond = "have";}
             if(TrailingCharacters == "m"){LongFormSecond = "am";}
             if(TrailingCharacters == "d"){LongFormSecond = "would";}
+            if(TrailingCharacters == "re"){LongFormSecond = "are";}
 
          for(int x =0; x<ContractionLocation; x++){
             NewSentence += GetWords(x) + " ";}
@@ -836,7 +907,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                     cout << "[c_Cortex::QuestionSentenceBreakDown()] Question direction toMe\n";
 
 
-                if(GetHasGenderDeterminer()){
+                if((GetHasGenderDeterminer()) || (GetHasGenderReference())){
                     GenderChar = GetMyGender();
                     if(GenderChar == 'f'){SlowSpeak("I'm a girl."); Result = true; SetHasBeenUnderstood(true);}
                        else

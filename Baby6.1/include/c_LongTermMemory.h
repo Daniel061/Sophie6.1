@@ -2,6 +2,8 @@
 #define C_LONGTERMMEMORY_H
 #include <c_Sentence.h>
 #include <unordered_map>
+#include <map>
+#include <vector>
 #include <string>
 
 class c_LongTermMemory : public c_Sentence
@@ -14,10 +16,14 @@ class c_LongTermMemory : public c_Sentence
     protected:
 
     private:
-        unordered_map <int,string> SentenceStorage;
-        unordered_map <int,string>::iterator ssIT;
+//        unordered_map <int,string> SentenceStorage;
+//        unordered_map <int,string>::iterator ssIT;
+        map <int,string> SentenceStorage;
+        map <int,string>::iterator ssIT;
         unordered_map <int,c_Sentence> CopySentenceMap;
         unordered_map <int,c_Sentence>::iterator csIT;
+        vector <int> SentenceOrder;
+        vector <int>::iterator soIT;
         c_Sentence  CopySentence;
 
         void CopyCurrentSentence(){
@@ -76,6 +82,8 @@ class c_LongTermMemory : public c_Sentence
             CopyCurrentSentence();
             SentenceToken = Tokenize(CopySentence.OriginalString);
             CopySentenceMap.emplace(SentenceToken,CopySentence);
+            soIT = SentenceOrder.begin();
+            SentenceOrder.emplace(soIT,SentenceToken);
         }
 
         bool FindPhraseInSentenceMap(string PhraseToFind){
@@ -105,6 +113,18 @@ class c_LongTermMemory : public c_Sentence
             return CopySentenceMap.size();
         }
 
+
+        void DumpSentencesInMap(){
+            int x = 1;
+            for(soIT = SentenceOrder.begin(); soIT != SentenceOrder.end(); soIT++){
+                csIT = CopySentenceMap.find(*soIT);
+                cout << x << ": " << *soIT << " " << csIT->second.GetOriginalString() << endl;
+                x++;
+            }
+
+
+
+        }
 
 
 

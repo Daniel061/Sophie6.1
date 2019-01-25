@@ -245,6 +245,12 @@ class c_Brain : public c_Cerebellum
                     Control = 2;
                     break;
                 }
+            case 4981:  //dump sentence
+                {
+                    DumpSentencesInMap();
+                    Control = 2;
+                    break;
+                }
             case 5352:  //subject report
                 {
                     Control = 2;

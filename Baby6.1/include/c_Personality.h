@@ -17,6 +17,8 @@ class c_Personality : public c_ShortTermMemory
         string MyName;
         char MyGender;
         int MoodLevel;
+        string UserName = "";
+        char UserGender = '\0';
 
     public:
         void SetName(string NewVal){MyName = NewVal;}
@@ -27,6 +29,10 @@ class c_Personality : public c_ShortTermMemory
         void IncreaseMoodLevel(){MoodLevel++;}
         void DecreaseMoodLevel(){MoodLevel--;}
         int GetMoodLevel(){return MoodLevel;}
+        string GetUserName(){return UserName;}
+        void   SetUserName(string NewVal){UserName = NewVal;}
+        char   GetUserGender(){return UserGender;}
+        void   SetUserGender(char NewVal){UserGender = NewVal;}
 
 
 

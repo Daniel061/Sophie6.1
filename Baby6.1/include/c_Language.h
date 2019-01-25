@@ -160,7 +160,7 @@ class c_Language : public c_LongTermMemory
            string ProNounsOutward =     " me mine my I i ";
            string Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
            string Questions =           " what where how when who ";
-           string Verbs =               " can will be have do say get make go know take see is are come think look want give use find tell ask work seem feel try leave call ";
+           string Verbs =               " can will be have do say get make go know take see is are come think look want give use find tell ask work seem feel try leave call am ";
            string SubjectReplacements = " it that this ";
            string Adverbs =             " very ";
            string Directives =          " compare same about ";
