@@ -51,8 +51,9 @@ class c_Brain : public c_Cerebellum
             string FirstPattern = "";
             CommandFound = 0;
             bool OwnerShip,Plural,NeedRerun;
+            NeedRerun = false;
 
-
+           do{
             CommandCheckSentence.Parse(strData);
             CommandFound = CommandTrap();
             Parse(strData);                                                              //break sentence down
@@ -71,6 +72,7 @@ class c_Brain : public c_Cerebellum
                     GatherAndSetAllSentenceData();
                     SaveReceivedInput(strData,true);
                     SaveSentenceInLongTermMemory(strData);
+                    NeedRerun = false;
                    }
                  }
                  SubjectLocation = FindSubject();                                             //try to located subject
@@ -88,22 +90,25 @@ class c_Brain : public c_Cerebellum
                     SubjectLocation = FindSubject();
                     SetSubjectLocation(SubjectLocation);
                  }
-                 DecipherCurrentSentence();                                           //work with sentence
+                 NeedRerun = DecipherCurrentSentence(strData);                                           //work with sentence
+                 if(!NeedRerun){
+                     SubjectLocation = FindSubject();                                                      // need to run this again to see if any indirect objects
+                     SetSubjectLocation(SubjectLocation);                                                  //store the location or -1
+                     StoreNewWords();                                                                  //save any new words in rBrainCells
+                     RebuildPattern();
+                     SaveProcessedPattern(GetPattern());                                                   //update short term memory
+                     if(SubjectLocation >=0)
+                        SetSubjectInStack(GetWordTokens(SubjectLocation),GetWords(SubjectLocation),GetOriginalString());
+                     SavePreAndPostPatternConstruction(FirstPattern,GetPattern());                      //save learned pattern for future// language helper to use this
+                     SaveCurrentSentenceInMap();
+                     }
+                   }
+                   else
+                    if(CommandFound == -1){  //exit commands
+                    strData = "end";}//stop the loop
 
-                 SubjectLocation = FindSubject();                                                      // need to run this again to see if any indirect objects
-                 SetSubjectLocation(SubjectLocation);                                                  //store the location or -1
-                 StoreNewWords();                                                                  //save any new words in rBrainCells
-                 RebuildPattern();
-                 SaveProcessedPattern(GetPattern());                                                   //update short term memory
-                 if(SubjectLocation >=0)
-                    SetSubjectInStack(GetWordTokens(SubjectLocation),GetWords(SubjectLocation),GetOriginalString());
-                 SavePreAndPostPatternConstruction(FirstPattern,GetPattern());                      //save learned pattern for future// language helper to use this
-                 SaveCurrentSentenceInMap();
-               }
-               else
-                if(CommandFound == -1){  //exit commands
-                strData = "end";}//stop the loop
 
+             } while (NeedRerun);
             }
 //-----------------------------------------------END FIRST PROCESSING---------------------------------------------------------------------------------
 
@@ -116,7 +121,8 @@ class c_Brain : public c_Cerebellum
         cout << "Subject location:" << GetSubjectLocation() << "\nIndirect Object Location:" << GetIndirectObjectLocation() << endl;
         for (int x = 0; x < WC; x++){
             cout << x << " " << GetWords(x) << ":" << GetWordTokens(x) <<  " Type:"
-            << GetWordType(x) << " isContraction:" << GetisContraction(x) << " Quote Location:" << GetQuoteLocation(x) << endl;
+            << GetWordType(x) << " isContraction: " << GetisContraction(x) << "\n     Quote Location:" << GetQuoteLocation(x) << "  Plural flag: " <<
+               boolalpha << GetIsPluralWord(x) << " Plural root word:" << GetPluralRoot(x) << endl;
         }
             cout << "Cell Usage(r):" << GetRightLobeCellCount() <<  " Cell Usage(l):" << GetLeftLobeCellCount() << "\n"
                  << " Number of Sentences in LTM:" << GetNumberOfSentencesSaved() << " Sentence Map Count:" << GetSentenceStorageCountInMap() << endl;
@@ -191,6 +197,7 @@ class c_Brain : public c_Cerebellum
                     cout << "Cell Primary Usage:" << GetMemoryCellPurpose(WorkingWord) << endl;
                    // cout << "Cell Root Pointer:" << RightLobeMemory[WorkingWord].GetpNextNoun() << endl;
                     cout << "Cell Data is Set:" << boolalpha << GetMemoryCellIsSet(WorkingWord) << endl;
+                    cout << "Cell Plural flag:" << GetMemoryCellpCellIsSingular("",WorkingWord) << "  Plural Root:" << GetMemoryCellpSingularLocation("",WorkingWord) << endl;
                     cout << "Cell Location by token:" << WorkingWord << endl;
                     cout << "Cell adjectives stored in map:" << GetMemoryCellAdjectives(WorkingWord,AdjectivesInMap) << endl;
                     cout << "Cell verbs stored in map:" << GetMemoryCellVerbs(WorkingWord,VerbsInMap) << endl;
@@ -340,20 +347,30 @@ class c_Brain : public c_Cerebellum
              if((GetWordType(x)=='n') && (Noun1 == -1) ) Noun1 = x; else if((GetWordType(x) == 'n') && (Noun2 == -1))  Noun2 =x;
              if( !( GetMemoryCellIsSet(GetWordTokens(x)) )) //   CheckForKnownWord(GetWords(x))))
                 {NewWords++;}
-                InstallNewWord(GetWords(x),GetWordType(x),'w',true,GetGenderClassInSentence(x),GetContractionLongFormFirst(x),GetContractionLongFormSecond(x));
+                InstallNewWord(GetWords(x),GetWordType(x),'w',true,GetGenderClassInSentence(x),
+                               GetContractionLongFormFirst(x),GetContractionLongFormSecond(x),GetPluralWordFlag(x),Tokenize(GetPluralRoot(x)));
+                if(GetIsPluralWord(x)){ //store the singular root
+                    InstallNewWord(GetPluralRoot(x),GetWordType(x),'w',true,GetGenderClassInSentence(x),
+                                   "","",'s');}
                 //Associate Adjective
                 if(GetWordType(x)=='a'){
-                        if(GetSubjectLocation() >=0 )
+                        if(GetSubjectLocation() >=0 ){
                             if(!AssociateMemoryCellAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(x))){
-                                InstallNewWord(GetWords(GetSubjectLocation()),GetWordType(GetSubjectLocation()),'w',true,GetGenderClassInSentence(GetSubjectLocation()));
+                                InstallNewWord(GetWords(GetSubjectLocation()),GetWordType(GetSubjectLocation()),'w',true,GetGenderClassInSentence(GetSubjectLocation()));}
                                 AssociateMemoryCellAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(x));
+                                if(GetIsPluralWord(GetSubjectLocation())){
+                                    AssociateMemoryCellAdjective(Tokenize(GetPluralRoot(GetSubjectLocation())),GetWordsLC(x));
+                                }
                                 if(Verbose)
                                     cout << "Associating " << GetWords(x) << " with " << GetWords(GetSubjectLocation()) << endl;
                             }
-                            if(GetIndirectObjectLocation() >=0)
+                            if(GetIndirectObjectLocation() >=0){
                                 if(!AssociateMemoryCellAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(x))){
-                                    InstallNewWord(GetWords(GetIndirectObjectLocation()),GetWordType(GetIndirectObjectLocation()),'w',true,GetGenderClassInSentence(GetIndirectObjectLocation()));
+                                    InstallNewWord(GetWords(GetIndirectObjectLocation()),GetWordType(GetIndirectObjectLocation()),'w',true,GetGenderClassInSentence(GetIndirectObjectLocation()));}
                                     AssociateMemoryCellAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(x));
+                                    if(GetIsPluralWord(GetSubjectLocation())){
+                                        AssociateMemoryCellAdjective(Tokenize(GetPluralRoot(GetSubjectLocation())),GetWordsLC(x));
+                                    }
                                     if(Verbose)
                                        cout << "Associating " << GetWords(x) << " with " << GetWords(GetIndirectObjectLocation()) << endl;
                                 }

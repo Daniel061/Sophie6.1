@@ -160,7 +160,8 @@ class c_Language : public c_LongTermMemory
            string ProNounsOutward =     " me mine my I i ";
            string Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
            string Questions =           " what where how when who ";
-           string Verbs =               " can will be have do say get make go know take see is are come think look want give use find tell ask work seem feel try leave call am ";
+           string Verbs =               " can will be have do say get make go know take see is come think look want give use find tell ask work seem feel try leave call am ";
+           string PluralVerbs =         " are ";
            string SubjectReplacements = " it that this ";
            string Adverbs =             " very ";
            string Directives =          " compare same about ";
@@ -173,25 +174,33 @@ class c_Language : public c_LongTermMemory
            string FemaleGenderClass =   " girl female woman women ";
            string GenderDeterminer =    " gender ";
            string GreetingsWord =       " hello hi ";
+           string SingularWord  =       "";
 
-           int isThrowAwayWord     = -1;
-           int isPluralPronoun     = -1;
-           int isDirective         = -1;
-           int isDeterminer        = -1;
-           int isQuestion          = -1;
-           int isVerb              = -1;
-           int isSubRep            = -1;
-           int isAdverb            = -1;
-           int isJoiner            = -1;
-           int isProNounsOther     = -1;
-           int isProNounsInward    = -1;
-           int isProNounsOutward   = -1;
-           int isAssociativeWord   = -1;
-           int isGenderIndicator   = -1;
-           int isGreetingsWord     = -1;
-           int isMaleGenderClass   = -1;
-           int isFemaleGenderClass = -1;
-           int isGenderDeterminer  = -1;
+           int  isThrowAwayWord     = -1;
+           int  isPluralPronoun     = -1;
+           int  isPluralVerb        = -1;
+           int  isDirective         = -1;
+           int  isDeterminer        = -1;
+           int  isQuestion          = -1;
+           int  isVerb              = -1;
+           int  isSubRep            = -1;
+           int  isAdverb            = -1;
+           int  isJoiner            = -1;
+           int  isProNounsOther     = -1;
+           int  isProNounsInward    = -1;
+           int  isProNounsOutward   = -1;
+           int  isAssociativeWord   = -1;
+           int  isGenderIndicator   = -1;
+           int  isGreetingsWord     = -1;
+           int  isMaleGenderClass   = -1;
+           int  isFemaleGenderClass = -1;
+           int  isGenderDeterminer  = -1;
+           int  QuoteMarker         = -1;
+           int  PatternMarker       = -1;
+           bool isContractionWord   = false;
+           bool RuleTesting         = true;
+           bool IsPlural            = false;
+
 
 
 
@@ -200,6 +209,7 @@ class c_Language : public c_LongTermMemory
               OrigWord = tmpWord;
               tmpWord = " " + tmpWord + " ";
 
+                isPluralVerb        = PluralVerbs.find(tmpWord);
                 isGenderDeterminer  = GenderDeterminer.find(tmpWord);
                 isMaleGenderClass   = MaleGenderClass.find(tmpWord);
                 isFemaleGenderClass = FemaleGenderClass.find(tmpWord);
@@ -218,6 +228,7 @@ class c_Language : public c_LongTermMemory
                 isSubRep            = SubjectReplacements.find(tmpWord);
                 isAdverb            = Adverbs.find(tmpWord);
                 isAssociativeWord   = AssociativeWord.find(tmpWord);
+                QuoteMarker         = tmpWord.find("'");
 
                   if (isVerb >= 0){
                       tmpWordType = 'v';}
@@ -260,6 +271,130 @@ class c_Language : public c_LongTermMemory
                         SetGenderClassInSentence(LocationInSentence,'f');}
                   if ((isMaleGenderClass >=0) && (LocationInSentence != -1)){
                         SetGenderClassInSentence(LocationInSentence,'m');}
+
+                  if(isPluralVerb >=0){
+                        tmpWordType = 'v';
+                        SetIsPluralWord(LocationInSentence,true);
+                        SetPluralWordFlag(LocationInSentence,'p');}
+
+                  //***check for plural word and set if so*****
+                  //*rules:
+                  //   1) Must not be a contraction word
+                  //   2) Words ending in -ch, -s, -sh, -x, -z  get -es added
+                  //           i.e. wash - washes, box - boxes,
+                  //   3) Some words ending in f or fe change to ves:
+                  //           knife - knives, life - lives, wife - wives, shelf - shelves
+                  //   4) Words ending in ff add s:
+                  //            cliffs, sniffs, scoffs, toffs stiffs, tiffs
+                  //   5) Change y to ies or s
+                  //        a. If the word ends in a vowel (a,e,i,o,u) + y then just add s:
+                  //             boy - boys, journey - journeys, key - keys, tray - trays
+                  //        b. If the word ends in a consonant + y change y to ies:
+                  //             country - countries, baby - babies, body - bodies, memory - memories
+                  //      ***Exceptions: add s: roof - roofs, proof - proofs, chief - chiefs
+                  //    6) Adding s or es to words ending in O:
+                  //        a. If a word ends in a vowel (a,e,i,o,u) + 'o' then we sometimes add s.
+                  //            radio - radios, stereo - stereos, video - videos
+                  //        b. If a words ends in a consonant + 'o', we sometimes add s, sometimes es. No rules for this
+                  //            kilo - kilos, zero - zeros, piano - pianos, photo - photos
+                  //            ****but hero - heroes, potato - potatoes, volcano - volcanoes, tomato - tomatoes.
+                  //    7) Irregular plurals
+                  //            woman - women, man - men, child - children, person - people, tooth - teeth, foot - feet, mouse - mice, penny - pence
+                  //    8) Regular plurals end in -s
+                  //            i.e. dog-dogs
+
+
+
+
+
+                  //Rule #3 comes before Rule #2 because pattern matching finds es before ves
+                  while (RuleTesting){
+
+                        //Rule #1 Must Not be contraction
+                        if(QuoteMarker >=0){RuleTesting = false; break;}
+
+                        //Rule #3 Some words ending in f or fe change to ves: knife - knives, life - lives, wife - wives, shelf - shelves
+                        PatternMarker = OrigWord.find("ves");
+                        //Location must be the ending
+                        if((PatternMarker >=0)&&((PatternMarker+3)==int(OrigWord.size()))){
+                            SingularWord = OrigWord.substr(0,PatternMarker);
+                            //exceptions
+                            if(SingularWord == "shel")
+                                SingularWord += "f";
+                                else
+                                    SingularWord +="fe";
+                            SetIsPluralWord(LocationInSentence,true);
+                            SetPluralRoot(LocationInSentence,SingularWord);
+                            SetPluralWordFlag(LocationInSentence,'p');
+                            RuleTesting = false;
+                            IsPlural    = true;
+                            break;
+                        }
+
+                        //"ses" Rule Some words ending in s  change to ses: house - houses
+                        PatternMarker = OrigWord.find("ses");
+                        //Location must be the ending
+                        if((PatternMarker >=0)&&((PatternMarker+3)==int(OrigWord.size()))){
+                            SingularWord = OrigWord.substr(0,PatternMarker);
+                            SingularWord +="se";
+                            SetIsPluralWord(LocationInSentence,true);
+                            SetPluralRoot(LocationInSentence,SingularWord);
+                            SetPluralWordFlag(LocationInSentence,'p');
+                            RuleTesting = false;
+                            IsPlural    = true;
+                            break;
+                        }
+
+
+                        //Rule #4 Words ending in ff add s: cliffs, sniffs, scoffs, toffs stiffs, tiffs
+                        PatternMarker = OrigWord.find("ffs");
+                        //Location must be the ending
+                        if((PatternMarker >=0)&&((PatternMarker+3)==int(OrigWord.size()))){
+                            SingularWord = OrigWord.substr(0,PatternMarker);
+                            SingularWord +="ff";
+                            SetIsPluralWord(LocationInSentence,true);
+                            SetPluralRoot(LocationInSentence,SingularWord);
+                            SetPluralWordFlag(LocationInSentence,'p');
+                            RuleTesting = false;
+                            IsPlural    = true;
+                            break;
+                        }
+
+
+                        //Rule #2 Words ending in -ch, -s, -sh, -x, -z  get -es added  i.e. wash - washes, box - boxes
+                        //      NOTE - houses needs fixed
+                        PatternMarker = OrigWord.find("es");
+                        //Location must be the ending
+                        if((PatternMarker >=0)&&((PatternMarker+2)==int(OrigWord.size()))){
+                            SingularWord = OrigWord.substr(0,PatternMarker);
+                            SetIsPluralWord(LocationInSentence,true);
+                            SetPluralRoot(LocationInSentence,SingularWord);
+                            SetPluralWordFlag(LocationInSentence,'p');
+                            RuleTesting = false;
+                            IsPlural    = true;
+                            break;
+                        }
+
+
+                        //Rule #8 Regular Plurals: dogs, cats, cars
+                        //   Last letter = 's'
+                        PatternMarker = OrigWord.size()-1;
+                        if(OrigWord[PatternMarker] == 's'){
+                            SingularWord = OrigWord.substr(0,PatternMarker);
+                            SetIsPluralWord(LocationInSentence,true);
+                            SetPluralRoot(LocationInSentence,SingularWord);
+                            SetPluralWordFlag(LocationInSentence,'p');
+                            RuleTesting = false;
+                            IsPlural    = true;
+                            break;
+                        }
+
+
+                        RuleTesting = false;
+                  }
+                  if(!IsPlural){
+                      SetPluralWordFlag(LocationInSentence,'s');  //set as singular
+                  }
             if(Verbose)
                 cout << "tmpWord " << tmpWord <<" type:" << tmpWordType << endl;
             return tmpWordType;

@@ -437,7 +437,9 @@ class c_Lobes : public c_MemoryCell
           //if so AND Update = true, Updates the data, returns Installed = false.
           //If NewWord doesn't exist,
           //Stores all the data and returns Installed = true.
-          bool InstallNewWord(string NewWord, char WordType, char Purpose, bool Update=false, char GenderClass = 'u', string LongFormFirst = "", string LongFormSecond = ""){     //currently right side only
+          bool InstallNewWord(string NewWord, char WordType, char Purpose, bool Update=false,
+                              char GenderClass = 'u', string LongFormFirst = "", string LongFormSecond = "",
+                              char SingularValue = 'u', int SingularRoot = 0){     //currently right side only
                 if(Verbose)cout << "[c_Lobes.h::InstallNewWord]\n";
                 int tmpToken     = 0;
                 tmpToken         = Tokenize(NewWord);
@@ -454,10 +456,12 @@ class c_Lobes : public c_MemoryCell
                             WorkingCell.SetpGenderClass(GenderClass);                       //store the gender class
                             WorkingCell.SetpCellContractionLongFormFirst(LongFormFirst);    //store the contraction word long form
                             WorkingCell.SetpCellContractionLongFormSecond(LongFormSecond);  //store the contraction word long form
+                            WorkingCell.SetpCellIsSingular(SingularValue);                  //store p - plural s - singular u - undetermined
+                            WorkingCell.SetpSingularLocation(SingularRoot);                 //address of root i.e. address of "color" for "colors"
                             RightLobeMemoryMap.emplace(tmpToken,WorkingCell);               //Add this new cell to map.
                             Installed = true;                                               //flag this operation as happened.
                             if(Verbose)
-                             cout << "Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
+                             cout << "Storing new word-->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
                             }
                         else
                             if(Update){
@@ -468,6 +472,8 @@ class c_Lobes : public c_MemoryCell
                                 mapIT->second.SetpGenderClass(GenderClass);
                                 mapIT->second.SetpCellContractionLongFormFirst(LongFormFirst);
                                 mapIT->second.SetpCellContractionLongFormSecond(LongFormSecond);
+                                mapIT->second.SetpCellIsSingular(SingularValue);
+                                mapIT->second.SetpSingularLocation(SingularRoot);
                                 if(Verbose)
                                     cout << "Updating -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
                             }
@@ -636,7 +642,7 @@ class c_Lobes : public c_MemoryCell
             //can send string data or tokenized string data for address
             //currently right side cells only, don't see a need for left side yet
 
-          int GetpSingularLocation(string strData = "", int Address = 0){
+          int GetMemoryCellpSingularLocation(string strData = "", int Address = 0){
                 bool Result = false;
                 if(Address ==0) Address = Tokenize(strData);
 
@@ -653,7 +659,7 @@ class c_Lobes : public c_MemoryCell
             //send int for new location
             //currently right side cells only, don't see a need for left side yet
 
-          void SetpSingularLocation(int newLocation, string strData = "", int Address = 0){
+          void SetMemoryCellpSingularLocation(int newLocation, string strData = "", int Address = 0){
                 bool Result = false;
                 if(Address ==0) Address = Tokenize(strData);
 

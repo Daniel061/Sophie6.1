@@ -80,7 +80,7 @@ public:
         //     char   GenderClassInSentence[] (SET HERE)
         //     bool   HasContraction (SET HERE)
 
-        for(int x = 0; x  <= LocalWordCount; x++){                                  //***First try to set wordtype
+        for(int x = 0; x  <= LocalWordCount-1; x++){                                //***First try to set wordtype
             LocalWordType    = FindWordType(GetWordsLC(x),x);                       //Get Wordtype from language helper, receives 'u' if can't determine
             MemoryWordType   = GetMemoryCellWordType(GetWordTokens(x));             //Get Wordtype from memory cell, receives NULL if doesn't exist, else returns CellWordType
             SentenceWordType = GetWordType(x);                                      //Get Wordtype from c_sentence

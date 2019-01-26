@@ -48,7 +48,7 @@ class c_Cortex : public c_Language
 
 
     public:
-        void DecipherCurrentSentence(){
+        bool DecipherCurrentSentence(string &strData){
             if(Verbose){cout << "[c_Cortex.h::DeciperCurrentSentence]" << endl;}
 
             SubjectLoc               = GetSubjectLocation();
@@ -181,7 +181,7 @@ class c_Cortex : public c_Language
                    if (Verbose)
                     cout << "[c_Cortex.h::DeciperCurrentSentence] Case 1 - Question trap" << endl;
                    if(!QuestionSentenceBreakDown())
-                   HandleQuestion();
+                   HandleQuestion(strData);
                    break;}
 
                case 2:{ //directive trap
@@ -211,9 +211,11 @@ class c_Cortex : public c_Language
 
                 case 25:{  ///Some understanding but depends on ratio
                    if (Verbose)
-                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 25 - no code here" << endl;
+                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 25 - Missing determiner - add in the help" << endl;
+                    strData = "the " + strData;
+                    return true;
 
-                 SlowSpeak("I don't know "  + GetWords(FirstUnknown)+"?");
+                 //SlowSpeak("I don't know "  + GetWords(FirstUnknown)+"?");
                  break;}
 
                 case 50:{  ///stronger understanding but also depends on ratio
@@ -225,7 +227,7 @@ class c_Cortex : public c_Language
                 case 75:{  ///Much stronger
                    if (Verbose)
                     cout << "[c_Cortex.h::DeciperCurrentSentence] Case 75 - send to Handle75LevelUnderstanding" << endl;
-                 Handle75LevelUnderstanding();
+                 Handle75LevelUnderstanding(strData);
                  break;}
 
                 case 100:{  ///very strong
@@ -250,6 +252,7 @@ class c_Cortex : public c_Language
                  break;}
 
             }
+             return false;
             }
 //--------------------------------------END DECIPHER SENTENCE------------------------------------------------------------------------
 
@@ -289,7 +292,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
         }
        }
 
-
+//cout << "Pattern 1/2 level:" << Pattern << endl;
        while(Testing){
 
          switch (StatementDirection){
@@ -332,7 +335,10 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
                   Testing = false;
                   break;
                 }
-
+            default:
+                {
+                  Testing = false;
+                }
 
 
          SlowSpeak("  Are we talking about a " + GetWords(Determiner + 1) + "?");
@@ -417,7 +423,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
      return 0;
 }//end work with half level
 //---------------------------------------------------------------------------------------------------------------
-int HandleQuestion(){
+int HandleQuestion(string &strData){
     //***TODO**
     //check for multi match and handle
 
@@ -430,7 +436,7 @@ int HandleQuestion(){
     if(Verbose)
         cout << "qLoc:" << QuestionLocation << " Pattern:" << Pattern << " SubjectLoc:" << GetSubjectLocation() << endl;
     if(UnKnownLocation >=0){
-            Handle75LevelUnderstanding(true); //try to find the unknown but run silent.
+            Handle75LevelUnderstanding(strData,true); //try to find the unknown but run silent.
             FindSubject();}
 
    // check for correct form
@@ -467,7 +473,7 @@ int HandleQuestion(){
 //End HandleQuestion-----------------------------------------------------------------------------------------------
 
 //--------------------------------HANDLE75LEVELUNDERSTANDING-------------------------------------------------------
-void Handle75LevelUnderstanding(bool RunSilent = false){
+void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
     bool Testing; Testing       = true;
     int localVerbLocation       = -1;
     int SubjectLocationInCortex = -1;
@@ -522,7 +528,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                     SubjectLocationInCortex = FindSubject();
                     SetSubjectLocation(SubjectLocationInCortex);
                     RebuildPattern();
-                    DecipherCurrentSentence();
+                    DecipherCurrentSentence(strData);
                     Testing = false;
                     break;}
                  else  {
@@ -530,7 +536,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                     SubjectLocationInCortex = FindSubject();
                     SetSubjectLocation(SubjectLocationInCortex);
                     RebuildPattern();
-                    DecipherCurrentSentence();
+                    DecipherCurrentSentence(strData);
                     Testing = false;
                     break;
 
@@ -615,7 +621,10 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
 
     //----------Adjective Test---------
     if(UnKnownLocation >=0){
-        SlowSpeak( "A " + GetWords(UnKnownLocation) + " " + GetWords(NounLocation) + "?");
+       if(GetPluralWordFlag(NounLocation) == 'p'){
+           SlowSpeak(GetWords(UnKnownLocation) + " " + GetWords(NounLocation) + "?");}
+           else{
+                SlowSpeak( "A " + GetWords(UnKnownLocation) + " " + GetWords(NounLocation) + "?");}
         UserResponse = RequestUserResponse();
         if(UserResponse == 1){
             SetWordType('a',UnKnownLocation);  //set word type to adjective
@@ -652,7 +661,6 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
 //-----------------------------END HANDLE75LEVELUNDERSTANDING -------------------------------
 
 //----------------------ISTHISAPROPERNOUN----------------------------------------------------
-
     bool IsThisAPropernoun(string strDataToTest){
         if((strDataToTest[0] >= 'A') && (strDataToTest[0] <= 'Z') )
             return true;
@@ -660,9 +668,6 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
             return false;
 
     }
-
-
-
 //-----------------END ISTHISAPROPERNOUN------------------------------------------------------
 
 
@@ -764,6 +769,7 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
                 LongFormFirst        = "";
                 LongFormSecond       = "";
                 ContractionLocation  = -1;
+
          //error check - ensure a contraction exists
          for(int x = 0; x<= GetWordCount(); x++){
                 if(GetWordType(x) == 'C'){
@@ -878,28 +884,28 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
         char GenderChar         = '\0';
         string WorkingPattern   = GetPattern();
 
-        for(int x =0; x<= GetWordCount(); x++){
-            if((GetWordType(x)== 'm')&&(DirectionOfQuestion == -1)){ DirectionOfQuestion = 0; ToMe = true;}
-             else
-                if((GetWordType(x)=='y')&&(DirectionOfQuestion == -1)) DirectionOfQuestion = 1;
-                  else
-                    if((GetWordType(x)=='B')&&(DirectionOfQuestion == -1)) DirectionOfQuestion = 2;}
-
-
-        if(GetWordType(0) == 'v'){
-            if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") ){
-                DirectionOfQuestion = 3;}}
-
-        PatternMatch = WorkingPattern.find('g');
-        if(PatternMatch >=0) DirectionOfQuestion = 4;
-
-        PatternMatch = WorkingPattern.find("vmv");      //i.e. do you know
-        if (PatternMatch >=0){
-            DirectionOfQuestion = 0;}
-        PatternMatch = WorkingPattern.find("qdnv") + WorkingPattern.find("qvdn") + 1;
-        if (PatternMatch >= 0){
-            DirectionOfQuestion = 2;}
-
+//        for(int x =0; x<= GetWordCount(); x++){
+//            if((GetWordType(x)== 'm')&&(DirectionOfQuestion == -1)){ DirectionOfQuestion = 0; ToMe = true;}
+//             else
+//                if((GetWordType(x)=='y')&&(DirectionOfQuestion == -1)) DirectionOfQuestion = 1;
+//                  else
+//                    if((GetWordType(x)=='B')&&(DirectionOfQuestion == -1)) DirectionOfQuestion = 2;}
+//
+//
+//        if(GetWordType(0) == 'v'){
+//            if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") ){
+//                DirectionOfQuestion = 3;}}
+//
+//        PatternMatch = WorkingPattern.find('g');
+//        if(PatternMatch >=0) DirectionOfQuestion = 4;
+//
+//        PatternMatch = WorkingPattern.find("vmv");      //i.e. do you know
+//        if (PatternMatch >=0){
+//            DirectionOfQuestion = 0;}
+//        PatternMatch = WorkingPattern.find("qdnv") + WorkingPattern.find("qvdn") + 1;
+//        if (PatternMatch >= 0){
+//            DirectionOfQuestion = 2;}
+        DirectionOfQuestion = DetermineDirectionOfPhrase();
         switch (DirectionOfQuestion){
 
             case 0: {
@@ -1166,6 +1172,54 @@ void Handle75LevelUnderstanding(bool RunSilent = false){
  }
  //-----------------------------------END OF CHECK FOR IMPLIED GENDER-------------------------------------------------
 
+
+ //---------------------------------Determine Direction of Phrase---------------------------------------------
+
+    int DetermineDirectionOfPhrase(){
+        if(Verbose)
+            cout << "[c_Cortex.h::DetermineDirectionOfPhrase()]\n";
+
+        //Direction ID
+        //  0  - To the Program
+        //  1  - To the User
+        //  2  - To another pronoun, i.e they them he him she her it we
+        //  3  - First word Question
+        //  4  - name word used in phrase i.e. name set or request
+        //
+        // -1  - Direction not determined
+
+        int    DirectionDetected    = -1;
+        int    PatternMatch         = -1;
+        string WorkingPattern       = GetPattern();
+
+        for(int x =0; x<= GetWordCount(); x++){
+            if((GetWordType(x)== 'm')&&(DirectionDetected == -1)){ DirectionDetected = 0;}
+             else
+                if((GetWordType(x)=='y')&&(DirectionDetected == -1)) DirectionDetected = 1;
+                  else
+                    if((GetWordType(x)=='B')&&(DirectionDetected == -1)) DirectionDetected = 2;}
+
+        if(GetWordType(0) == 'v'){
+            if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") || (GetWordsLC(0)=="are") || (GetWordsLC(0)== "do") ){
+                DirectionDetected = 3;}}
+
+        PatternMatch = WorkingPattern.find('g');
+        if(PatternMatch >=0) DirectionDetected = 4;
+
+        PatternMatch = WorkingPattern.find("vmv");      //i.e. do you know
+        if (PatternMatch >=0){
+            DirectionDetected = 0;}
+        PatternMatch = WorkingPattern.find("qdnv") + WorkingPattern.find("qvdn") + 1;
+        if (PatternMatch >= 0){
+            DirectionDetected = 2;}
+
+
+        if(Verbose)
+            cout << "   Direction of Phrase Detected:" << DirectionDetected << endl;
+        return DirectionDetected;
+    }
+
+//-------------------------------END DETERMINE DIRECTION OF PHRASE------------------------------------------
 };
 
 #endif // C_CORTEX_H

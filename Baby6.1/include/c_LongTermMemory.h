@@ -18,12 +18,13 @@ class c_LongTermMemory : public c_Sentence
     private:
 //        unordered_map <int,string> SentenceStorage;
 //        unordered_map <int,string>::iterator ssIT;
-        map <int,string> SentenceStorage;
-        map <int,string>::iterator ssIT;
-        unordered_map <int,c_Sentence> CopySentenceMap;
+        map <int,string>                         SentenceStorage;
+        map <int,string>::iterator               ssIT;
+        unordered_map <int,c_Sentence>           CopySentenceMap;
         unordered_map <int,c_Sentence>::iterator csIT;
-        vector <int> SentenceOrder;
-        vector <int>::iterator soIT;
+        vector <int>                             SentenceOrder;
+        vector <int>::iterator                   soIT;
+
         c_Sentence  CopySentence;
 
         void CopyCurrentSentence(){
@@ -35,12 +36,14 @@ class c_LongTermMemory : public c_Sentence
                 CopySentence.isContraction[x]             = GetisContraction(x);
                 CopySentence.WordsLC[x]                   = GetWordsLC(x);
                 CopySentence.SubWords[x]                  = GetSubWords(x);
-                CopySentence.WordType[x]                  =GetWordType(x);
-                CopySentence.SecondaryType[x]             =GetSecondaryType(x);
-                CopySentence.AlternateType[x]             =GetAlternateType(x);
-                CopySentence.GenderClassInSentence[x]     =GetGenderClassInSentence(x);
-                CopySentence.ContractionLongFormFirst[x]  =GetContractionLongFormFirst(x);
-                CopySentence.ContractionLongFormSecond[x] =GetContractionLongFormSecond(x);
+                CopySentence.WordType[x]                  = GetWordType(x);
+                CopySentence.SecondaryType[x]             = GetSecondaryType(x);
+                CopySentence.AlternateType[x]             = GetAlternateType(x);
+                CopySentence.GenderClassInSentence[x]     = GetGenderClassInSentence(x);
+                CopySentence.ContractionLongFormFirst[x]  = GetContractionLongFormFirst(x);
+                CopySentence.ContractionLongFormSecond[x] = GetContractionLongFormSecond(x);
+                CopySentence.IsPluralWord[x]              = GetIsPluralWord(x);
+                CopySentence.PluralRoot[x]                = GetPluralRoot(x);
                 }
               CopySentence.WordCount                      =GetWordCount();
               CopySentence.SubjectLocation                =GetSubjectLocation();

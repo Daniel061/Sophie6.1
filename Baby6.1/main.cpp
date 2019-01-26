@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <c_Brain.h>
 #include <time.h>
 
@@ -6,7 +7,7 @@
 using namespace std;
 
 c_Brain Brain;
-string Version = "6.1.004.16";
+string Version = "6.1.005.01";
 bool Verbose;
 int  BaseSpeed = 600000000;
 int  SpeedStandard = 1000;
@@ -17,24 +18,39 @@ clock_t Elapsed;
 int main()
 {
 
-Elapsed = clock();
- for(int t = 0; t<=BaseSpeed;t++);
-Elapsed = clock() - Elapsed;
-//cout << " Elapsed:" << Elapsed << endl;
-CalcSpeed = float(SpeedStandard)/float(Elapsed);
-ThisSpeed = CalcSpeed * RunningStandard;
-if(ThisSpeed == 0) ThisSpeed = RunningStandard;
+//****Calculate machine speed for a constant delay used in SlowSpeak()
+        Elapsed = clock();
+         for(int t = 0; t<=BaseSpeed;t++);
+        Elapsed = clock() - Elapsed;
+        //cout << " Elapsed:" << Elapsed << endl;
+        CalcSpeed = float(SpeedStandard)/float(Elapsed);
+        ThisSpeed = CalcSpeed * RunningStandard;
+        if(ThisSpeed == 0) ThisSpeed = RunningStandard;
+//***********END CALCULATE SPEED***************************************
 
 
-//cout << Elapsed << " This delay count " << ThisSpeed << " Calc Speed " << CalcSpeed << endl;
-Brain.SetMyGender('f');
-Brain.SetMyName("Sophie");
-Brain.FirstRunWelcomeMessage();
-string Raw_Sentence;
-Verbose = false;
+//***SET SOME GLOBAL VARIABLES*****************************************
+        Brain.SetMyGender('f');
+        Brain.SetMyName("Sophie");
+        Brain.FirstRunWelcomeMessage();
+        string Raw_Sentence;
+        Verbose = false;
+//***********END SETTING GLOBALS****************************************
 
-
-
+//****************FOR INPUT TEXT TESTING********************************
+//*****uncomment the following******************************************
+//ifstream myfile ("testtext.txt");
+//  if (myfile.is_open())
+//  {
+//    while ( getline (myfile,Raw_Sentence) )
+//    {
+//      cout << Raw_Sentence << endl;
+//      Brain.ProcessUserInput( Raw_Sentence );
+//    }
+//    myfile.close();
+//  }
+//
+//  else cout << "Unable to open file";
 
 cout << ">>";
 getline (cin,Raw_Sentence);

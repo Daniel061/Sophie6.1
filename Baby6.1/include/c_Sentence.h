@@ -18,6 +18,7 @@ class c_Sentence : public c_SubjectStack
         int    WordTokens[30];                  // dog = 625 initialize to 0
         bool   isContraction[30];               // true / false  initialize to false  initialize to ""
         int    QuoteLocation[30];               // "can't" set to 3 for this, set to -1 for "dog"
+        int    PluralWordFlag[30];              // u - undefined p - plural s - singular
         int    IndirectObjectLocation;          // usually the second noun
         int    AdverbLocation;                  // -1 means none
         int    AdjectiveLocation;               // -1 means none
@@ -29,6 +30,7 @@ class c_Sentence : public c_SubjectStack
         string SubWords[30];                    // replacement words, usually from subject stack
         string ContractionLongFormFirst[30];    // i.e.he's to he
         string ContractionLongFormSecond[30];   // i.e he's  to is
+        string PluralRoot[30];                  // i.e. colors = color
         char   GenderClassInSentence[30];       // i.e m-male f-female n-neutral   initialize to u-undefined
         string OriginalString;                  // the whole unedited string  initialize to ""
         string Pattern;                         // i.e. dnvua  initialize to ""
@@ -41,6 +43,7 @@ class c_Sentence : public c_SubjectStack
         bool   HasGenderReference;              // true / false initialize to false
         bool   HasBeenUnderstood;               // initialized to false, set externally
         bool   HasGenderDeterminer;             // the word 'gender' was used
+        bool   IsPluralWord[30];                // indicates plural - read PluralRoot for base word
         char   WordType[30];                    // n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
                                                 // n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object d(LC) Indirect object
                                                 // initialize to 'u'
@@ -55,6 +58,9 @@ class c_Sentence : public c_SubjectStack
                 WordTokens[x]                 = 0;
                 QuoteLocation[x]              = -1;
                 isContraction[x]              = false;
+                IsPluralWord[x]               = false;
+                PluralWordFlag[x]             = 'u';
+                PluralRoot[x]                 = "";
                 WordsLC[x]                    = "";
                 SubWords[x]                   = "";
                 ContractionLongFormFirst[x]   = "";
@@ -83,6 +89,12 @@ class c_Sentence : public c_SubjectStack
                 NamePointer                   = -1;
                 IndirectObjectLocation        = -1;}
 
+        char   GetPluralWordFlag(int Location){return PluralWordFlag[Location];}
+        void   SetPluralWordFlag(int Location, char newVal){PluralWordFlag[Location]=newVal;}
+        string GetPluralRoot(int Location){return PluralRoot[Location];}
+        void   SetPluralRoot(int Location, string strRoot){PluralRoot[Location]=strRoot;}
+        bool   GetIsPluralWord(int Location){return IsPluralWord[Location];}
+        void   SetIsPluralWord(int Location, bool newVal){IsPluralWord[Location]=newVal;}
         string GetContractionLongFormFirst(int Location){return ContractionLongFormFirst[Location];}
         string GetContractionLongFormSecond(int Location){return ContractionLongFormSecond[Location];}
         void   SetContractionLongFormFirst(int Location,string newVal){ContractionLongFormFirst[Location]=newVal;}
