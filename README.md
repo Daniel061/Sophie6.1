@@ -10,7 +10,9 @@ Ultimately, the program seeks new information by asking the user directly to tea
 
 Current version V6.1.005.01 not for release to the general public. This is a work in progress project.
 
-NOTE: Testers Needed. Please see the issues tab for important information reguarding testers. This project requires input data to push the program to see where improvement or corrections are needed. If you become a Tester, your name will be added to the Contributors list and the help will be greatly appreciated.
+NOTE(1): Testers Needed. Please see the issues tab for important information reguarding testers. This project requires input data to push the program to see where improvement or corrections are needed. If you become a Tester, your name will be added to the Contributors list and the help will be greatly appreciated.
+
+Note(2): You may also refer to the Wiki pages under this project to read about the program operations and development. These are updated as improvements and developments happen.
 
 
 Join us in creating a unique AI program. Thank You!
