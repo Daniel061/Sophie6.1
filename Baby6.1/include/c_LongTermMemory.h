@@ -44,6 +44,7 @@ class c_LongTermMemory : public c_Sentence
                 CopySentence.ContractionLongFormSecond[x] = GetContractionLongFormSecond(x);
                 CopySentence.IsPluralWord[x]              = GetIsPluralWord(x);
                 CopySentence.PluralRoot[x]                = GetPluralRoot(x);
+                CopySentence.PluralWordFlag[x]            = GetPluralWordFlag(x);
                 }
               CopySentence.WordCount                      =GetWordCount();
               CopySentence.SubjectLocation                =GetSubjectLocation();
@@ -51,6 +52,7 @@ class c_LongTermMemory : public c_Sentence
               CopySentence.Pattern                        =GetPattern();
               CopySentence.HasPluralPronoun               =GetHasPluralPronoun();
               CopySentence.HasPunctuation                 =GetHasPunctuation();
+              CopySentence.Punctuation                    =GetPunctuation();
               CopySentence.IsQuestion                     =GetIsQuestion();
               CopySentence.HasContraction                 =GetHasContraction();
               CopySentence.HasGreetingsWord               =GetHasGreetingsWord();

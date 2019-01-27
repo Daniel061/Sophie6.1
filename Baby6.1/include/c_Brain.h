@@ -42,6 +42,7 @@ class c_Brain : public c_Cerebellum
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 //********************************************* First Processing Point / Cortex is Main Processor****************************************************
+//*****************************************THIS IS A PROCESS CONTROL AREA****************************************************************************
 
         void ProcessUserInput(string& strData){
             if(Verbose)cout << "[c_Brain.h::ProcessUserInput]" << endl;
@@ -56,11 +57,11 @@ class c_Brain : public c_Cerebellum
            do{
             CommandCheckSentence.Parse(strData);
             CommandFound = CommandTrap();
-            Parse(strData);                                                              //break sentence down
+            Parse(strData);                                                                             //break sentence down
 
-            if(CommandFound == 0){                                                        //check for command  0 = no command
-                 SaveReceivedInput(strData,true);                                             //update short term memory
-                 SaveSentenceInLongTermMemory(strData);                                       //update Long Term Memory
+            if(CommandFound == 0){                                                                      //check for command  0 = no command
+                 SaveReceivedInput(strData,true);                                                       //update short term memory
+                 SaveSentenceInLongTermMemory(strData);                                                 //update Long Term Memory
                  GatherAndSetAllSentenceData();
                  if(IsThisSentenceDuplicated(strData))
                     SlowSpeak("You said that before.");
@@ -75,11 +76,11 @@ class c_Brain : public c_Cerebellum
                     NeedRerun = false;
                    }
                  }
-                 SubjectLocation = FindSubject();                                             //try to located subject
-                 SetSubjectLocation(SubjectLocation);                                         //set the suggestion
+                 SubjectLocation = FindSubject();                                                           //try to located subject
+                 SetSubjectLocation(SubjectLocation);                                                       //set the suggestion
                  RebuildPattern();
                  FirstPattern = GetPattern();
-                 CheckedPattern = PatternReview(GetPattern(),ConfidenceLevel);                //see if language class can enhance pattern
+                 CheckedPattern = PatternReview(GetPattern(),ConfidenceLevel);                              //see if language class can enhance pattern
                  if(Verbose){
                         cout << "Processed Pattern:" << CheckedPattern << ":" << GetPattern() << "Confidence level: " << ConfidenceLevel << endl;}
                  if(CheckedPattern != GetPattern()){
@@ -90,16 +91,16 @@ class c_Brain : public c_Cerebellum
                     SubjectLocation = FindSubject();
                     SetSubjectLocation(SubjectLocation);
                  }
-                 NeedRerun = DecipherCurrentSentence(strData);                                           //work with sentence
+                 NeedRerun = DecipherCurrentSentence(strData);                                             //work with sentence
                  if(!NeedRerun){
                      SubjectLocation = FindSubject();                                                      // need to run this again to see if any indirect objects
                      SetSubjectLocation(SubjectLocation);                                                  //store the location or -1
-                     StoreNewWords();                                                                  //save any new words in rBrainCells
+                     StoreNewWords();                                                                      //save any new words in rBrainCells
                      RebuildPattern();
                      SaveProcessedPattern(GetPattern());                                                   //update short term memory
                      if(SubjectLocation >=0)
                         SetSubjectInStack(GetWordTokens(SubjectLocation),GetWords(SubjectLocation),GetOriginalString());
-                     SavePreAndPostPatternConstruction(FirstPattern,GetPattern());                      //save learned pattern for future// language helper to use this
+                     SavePreAndPostPatternConstruction(FirstPattern,GetPattern());                         //save learned pattern for future// language helper to use this
                      SaveCurrentSentenceInMap();
                      }
                    }
