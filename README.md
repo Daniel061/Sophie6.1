@@ -1,7 +1,7 @@
 # Baby6.1
 AI/ML Growth and learning project.
 
-Baby6.1 is a Natural English processor that is intended to understand normal phrases or questions and develope proper responses and generate requests for additional information.
+Baby6.1 is a Natural Language Processor (NLP) that is intended to understand normal phrases or questions and develope proper responses and generate requests for additional information.
 Baby6.1 was first conceived in 2011 and has been enhanced since then. This current edition is by far the most advanced but still needs further development to complete the first phase, which is complete Natural English understanding.
 This project is creating a deep learning program that is influenced by emotions, context tracking, subject monitoring and playfulness.
 The program starts with a basic understanding and gets the user to teach it more. 
