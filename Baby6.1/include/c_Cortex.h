@@ -211,11 +211,12 @@ class c_Cortex : public c_Language
 
                 case 25:{  ///Some understanding but depends on ratio
                    if (Verbose)
-                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 25 - Missing determiner - add in the help" << endl;
-                    strData = "the " + strData;
-                    return true;
-
-                 //SlowSpeak("I don't know "  + GetWords(FirstUnknown)+"?");
+                    cout << "[c_Cortex.h::DeciperCurrentSentence] Case 25 - Maybe Missing determiner - add in the help" << endl;
+                    if(GetWordType(0) == 'u'){
+                     strData = "the " + strData;
+                     return true;}
+                     else
+                      SlowSpeak("I don't know "  + GetWords(FirstUnknown)+"?");
                  break;}
 
                 case 50:{  ///stronger understanding but also depends on ratio
@@ -245,6 +246,8 @@ class c_Cortex : public c_Language
                             SetGenderClassInSentence(GetSubjectLocation(),GetGenderClassInSentence(GenderIndicatorLocation));
                         }
                      }
+                     if((JoinerLocation != -1) && (Pattern[JoinerLocation+1]=='a') ){ //associate first adjective to subject, wasn't picked up before
+                        AssociateMemoryCellAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(JoinerLocation-1)); }
                  SlowSpeak("Okay.");
                  IncreaseMoodLevel();
                  SetHasBeenUnderstood(true);
@@ -292,7 +295,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
         }
        }
 
-//cout << "Pattern 1/2 level:" << Pattern << endl;
+cout << "Pattern 1/2 level:" << Pattern << endl;
        while(Testing){
 
          switch (StatementDirection){

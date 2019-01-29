@@ -2,6 +2,7 @@
 #define C_MEMORYCELL_H
 #include <string>
 #include <map>
+#include <iostream>
 
 using namespace std;
 class c_MemoryCell
@@ -40,8 +41,9 @@ class c_MemoryCell
         multimap<int,int> adjDescriptors;        // storage of adjectives                        (Adjective,token)
         multimap<int,int> verbDescriptors;       // storage of verbs associated with adjectives  (Verb,Adjective)
         multimap<int,int> advDescriptors;        // storage of adverbs associated with verbs     (Adverb,Adjective)
-        multimap<int,int> RelatedNouns;          // storage of related nouns   i.e. dog,animal   (Noun(this cell),related noun)
-        multimap<int,int>::iterator mapIT;       // pointer for maps
+        map<int,string> RelatedNouns;            // storage of related nouns   i.e. dog,animal   (tokenized related noun,related noun)
+        multimap<int,int>::iterator mapIT;       // pointer for  int maps
+        multimap<int,string>::iterator strIT;    // pointer for string maps
 
 
 
@@ -54,35 +56,37 @@ class c_MemoryCell
         string GetpCellMiniDefinition(){return pCellMiniDefinition;}
         char   GetpCellIsSingular(){return pCellIsSingular;}
         void   SetpCellIsSingular(char newData){pCellIsSingular = newData;}
-        int    GetpSingularLocation(){return pSingularLocation;}
-        void   SetpSingularLocation(int newLocation){pSingularLocation = newLocation;}
-        int    GetpPointerToNextPattern(){return pPointerToNextPattern;}
-        void   SetpPointerToNextPattern(int NextPattern){pPointerToNextPattern = NextPattern;}
-        char   GetpWordTense() {return pWordTense;}
-        void   SetpWordTense(char newTense){pWordTense = newTense;}
-        char   GetpSecondaryType(){return pSecondaryType;}
-        void   SetpSecondaryType(char Type){pSecondaryType = Type;}
-        char   GetpAlternateType(){return pAlternateType;}
-        void   SetpAlternateType(char Type){pAlternateType = Type;}
+        int    GetpCellSingularLocation(){return pSingularLocation;}
+        void   SetpCellSingularLocation(int newLocation){pSingularLocation = newLocation;}
+        int    GetpCellPointerToNextPattern(){return pPointerToNextPattern;}
+        void   SetpCellPointerToNextPattern(int NextPattern){pPointerToNextPattern = NextPattern;}
+        char   GetpCellWordTense() {return pWordTense;}
+        void   SetpCellWordTense(char newTense){pWordTense = newTense;}
+        char   GetpCellSecondaryType(){return pSecondaryType;}
+        void   SetpCellSecondaryType(char Type){pSecondaryType = Type;}
+        char   GetpCellAlternateType(){return pAlternateType;}
+        void   SetpCellAlternateType(char Type){pAlternateType = Type;}
         string GetpCellDataString(){return pCellData;}
         string GetpCellDataLC(){return pCellDataLC;}
         void   SetpCellDataLC(string newData){pCellDataLC=newData;}
         char   GetpCellPurpose(){return pCellPurpose;}
         void   SetpCellPurpose (char NewData){pCellPurpose = NewData;}
-        char   GetpWordType(){return pWordType;}
-        void   SetpWordType(char NewData){pWordType = NewData;}
-        bool   GetpIsRoot(){return pIsRoot;}
-        void   SetpIsRoot(bool NewVal){pIsRoot = NewVal;}
-        int    GetpNextVerb(){return pNextVerb;}
-        void   SetpNextVerb(int NewVal){pNextVerb = NewVal;}
-        int    GetpNextNoun(){return pNextNoun;}
-        void   SetpToken(int NewVal){pToken=NewVal;}
-        int    GetpToken(){return pToken;}
-        bool   GetpIsSet() {return pIsSet;}
-        void   SetpGenderClass(char NewClass){pGenderClass = NewClass;}
-        char   GetpGenderClass(){return pGenderClass;}
-        string GetpGivenName(){return pGivenName;}
-        void   SetpGivenName(string NewName){pGivenName = NewName;}
+        char   GetpCellWordType(){return pWordType;}
+        void   SetpCellWordType(char NewData){pWordType = NewData;}
+        bool   GetpCellIsRoot(){return pIsRoot;}
+        void   SetpCellIsRoot(bool NewVal){pIsRoot = NewVal;}
+        int    GetpCellNextVerb(){return pNextVerb;}
+        void   SetpCellNextVerb(int NewVal){pNextVerb = NewVal;}
+        int    GetpCellNextNoun(){return pNextNoun;}
+        void   SetpCellNextNoun(int loc){pNextNoun = loc;}
+        void   SetpCellToken(int NewVal){pToken=NewVal;}
+        int    GetpCellToken(){return pToken;}
+        bool   GetpCellIsSet() {return pIsSet;}
+        void   SetpCellIsSet(bool newVal){pIsSet = newVal;}
+        void   SetpCellGenderClass(char NewClass){pGenderClass = NewClass;}
+        char   GetpCellGenderClass(){return pGenderClass;}
+        string GetpCellGivenName(){return pGivenName;}
+        void   SetpCellGivenName(string NewName){pGivenName = NewName;}
         void   SetpCellDataString(string NewData){pCellData = NewData; pIsSet = true;}
 
         void InitializeAll(){
@@ -108,6 +112,7 @@ class c_MemoryCell
                 advDescriptors.clear();
                 verbDescriptors.clear();
                 adjDescriptors.clear();
+                RelatedNouns.clear();
                 pPointerToNextPattern           = 0;
                 pSingularLocation               = 0;
         }
@@ -118,11 +123,14 @@ class c_MemoryCell
             adjDescriptors.emplace(Tokenize(AdjectiveToAssociate),pToken);
        }
 
+//       void AssociateNounInMap(string NounToAssociate){
+//           if(RelatedNouns.find(Tokenize(NounToAssociate)) == RelatedNouns.end())
+//            RelatedNouns.emplace(Tokenize(NounToAssociate),pToken);
+//       }
        void AssociateNounInMap(string NounToAssociate){
-           if(RelatedNouns.find(Tokenize(NounToAssociate)) == RelatedNouns.end())
-            RelatedNouns.emplace(Tokenize(NounToAssociate),pToken);
+           //cout << "Storing " << NounToAssociate << " to " << pCellData << endl;
+            RelatedNouns.emplace(Tokenize(NounToAssociate),NounToAssociate);
        }
-
        void AssociateVerbToAdjectiveInMap(string AdjectiveToAssociate, string VerbToAssociate){
            if(verbDescriptors.find(Tokenize(AdjectiveToAssociate)) == verbDescriptors.end())
             verbDescriptors.emplace(Tokenize(AdjectiveToAssociate),Tokenize(VerbToAssociate));
@@ -176,19 +184,19 @@ class c_MemoryCell
        }
 
         int GetNounFromMap(int Location){
-            mapIT = RelatedNouns.begin();
-            for(int x = 0; x < Location; x++) ++mapIT;
+            strIT = RelatedNouns.begin();
+            for(int x = 0; x < Location; x++) ++strIT;
 
-            if(mapIT == RelatedNouns.end()){
+            if(strIT == RelatedNouns.end()){
                 return -1;}
                 else
-                    return mapIT->first;
+                    return Tokenize(strIT->second);
        }
 
 
        bool IsNounRelatedToMe(string NounToCheck){
-           mapIT = RelatedNouns.find(Tokenize(NounToCheck));
-           if(mapIT == RelatedNouns.end()) return false;
+           strIT = RelatedNouns.find(Tokenize(NounToCheck));
+           if(strIT == RelatedNouns.end()) return false;
            else return true;}
 
 

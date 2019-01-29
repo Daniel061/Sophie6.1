@@ -7,7 +7,7 @@
 using namespace std;
 
 c_Brain Brain;
-string Version = "6.1.005.01";
+string Version = "6.1.006.01";
 bool Verbose;
 int  BaseSpeed = 600000000;
 int  SpeedStandard = 1000;
@@ -32,6 +32,9 @@ int main()
 //***SET SOME GLOBAL VARIABLES*****************************************
         Brain.SetMyGender('f');
         Brain.SetMyName("Sophie");
+        Brain.SlowSpeak("Remembering...",false,0,false);
+        Brain.LTMReadSentencesInFile();
+        Brain.LobesReadTheLearnedWords();
         Brain.FirstRunWelcomeMessage();
         string Raw_Sentence;
         Verbose = false;
@@ -65,5 +68,7 @@ while (Raw_Sentence != "end")
         Raw_Sentence = "";
         getline(cin,Raw_Sentence);}
 }
+    Brain.LTMSaveSentencesInFile();
+    Brain.LobesStoreTheLearnedWords();
     return 0;
 }

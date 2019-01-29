@@ -151,6 +151,7 @@ class c_Language : public c_LongTermMemory
 
 
            string OrigWord;
+           string OrigWordUC;
 
 
            char tmpWordType = 'u';
@@ -206,7 +207,8 @@ class c_Language : public c_LongTermMemory
 
               for(int t = 0; t < int(tmpWord.size()); t++){
                 tmpWord[t] = tolower(tmpWord[t]);}
-              OrigWord = tmpWord;
+              OrigWord     = tmpWord;
+              OrigWordUC   = GetWords(LocationInSentence);
               tmpWord = " " + tmpWord + " ";
 
                 isPluralVerb        = PluralVerbs.find(tmpWord);
@@ -230,6 +232,10 @@ class c_Language : public c_LongTermMemory
                 isAssociativeWord   = AssociativeWord.find(tmpWord);
                 QuoteMarker         = tmpWord.find("'");
 
+
+                  if (QuoteMarker >= 0){
+                      isContractionWord = true;
+                      tmpWordType   = 'C';}
                   if (isVerb >= 0){
                       tmpWordType = 'v';}
                   if (isDeterminer >= 0){
@@ -271,7 +277,6 @@ class c_Language : public c_LongTermMemory
                         SetGenderClassInSentence(LocationInSentence,'f');}
                   if ((isMaleGenderClass >=0) && (LocationInSentence != -1)){
                         SetGenderClassInSentence(LocationInSentence,'m');}
-
                   if(isPluralVerb >=0){
                         tmpWordType = 'v';
                         SetIsPluralWord(LocationInSentence,true);
@@ -279,7 +284,7 @@ class c_Language : public c_LongTermMemory
 
                   //***check for plural word and set if so*****
                   //*rules:
-                  //   1) Must not be a contraction word
+                  //   1) Must not be a verb
                   //   2) Words ending in -ch, -s, -sh, -x, -z  get -es added
                   //           i.e. wash - washes, box - boxes,
                   //   3) Some words ending in f or fe change to ves:
@@ -302,7 +307,8 @@ class c_Language : public c_LongTermMemory
                   //            woman - women, man - men, child - children, person - people, tooth - teeth, foot - feet, mouse - mice, penny - pence
                   //    8) Regular plurals end in -s
                   //            i.e. dog-dogs
-
+                  //    9) Plural proper nouns end in ' if the proper noun ends in s
+                  //            i.e. Jones - Jones' Texas - Texas'
 
 
 
@@ -310,8 +316,20 @@ class c_Language : public c_LongTermMemory
                   //Rule #3 comes before Rule #2 because pattern matching finds es before ves
                   while (RuleTesting){
 
-                        //Rule #1 Must Not be contraction
-                        if(QuoteMarker >=0){RuleTesting = false; break;}
+                        //Rule #1 Must Not be verb
+                        if(tmpWordType == 'v') {RuleTesting = false; break;}
+
+                        //Rule #9 Plural Proper Noun Check
+                        PatternMarker = OrigWord.find("s'");
+                        if ((PatternMarker >=0)&&((PatternMarker+2)==int(OrigWord.size())) && ((OrigWordUC[0]>='A') && (OrigWordUC[0] <= 'Z')) ){
+                            SingularWord = OrigWord.substr(0,PatternMarker+1);
+                            SetIsPluralWord(LocationInSentence,true);
+                            SetPluralRoot(LocationInSentence,SingularWord);
+                            SetPluralWordFlag(LocationInSentence,'p');
+                            tmpWordType = 'P'; //proper noun
+                            RuleTesting = false;
+                            IsPlural    = true;
+                            break; }
 
                         //Rule #3 Some words ending in f or fe change to ves: knife - knives, life - lives, wife - wives, shelf - shelves
                         PatternMarker = OrigWord.find("ves");
@@ -403,7 +421,7 @@ class c_Language : public c_LongTermMemory
 //--------------------------------end Find Word Type--------------------------------------
 
 
-void SlowSpeak(string str_Data, bool Recording = true, int Delay = ThisSpeed ){
+void SlowSpeak(string str_Data, bool Recording = true, int Delay = ThisSpeed, bool CarriageReturn = true ){
      string WorkingWord;
      if(Recording){
         SaveResponsesSent(str_Data);}
@@ -418,7 +436,8 @@ void SlowSpeak(string str_Data, bool Recording = true, int Delay = ThisSpeed ){
         cout  << " ";
 
      }
-     cout << "\b" << SlowSentence.GetPunctuation() << endl;
+     if(CarriageReturn)
+        cout << "\b" << SlowSentence.GetPunctuation() << endl;
 }
 
 int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeResponse = "", string OtherResponse = "")

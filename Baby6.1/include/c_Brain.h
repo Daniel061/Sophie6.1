@@ -353,8 +353,8 @@ class c_Brain : public c_Cerebellum
                 if(GetIsPluralWord(x)){ //store the singular root
                     InstallNewWord(GetPluralRoot(x),GetWordType(x),'w',true,GetGenderClassInSentence(x),
                                    "","",'s');}
-                //Associate Adjective
-                if(GetWordType(x)=='a'){
+                //Associate Adjective if not a question sentence
+                if((GetWordType(x)=='a')&&(!GetIsQuestion()) ){
                         if(GetSubjectLocation() >=0 ){
                             if(!AssociateMemoryCellAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(x))){
                                 InstallNewWord(GetWords(GetSubjectLocation()),GetWordType(GetSubjectLocation()),'w',true,GetGenderClassInSentence(GetSubjectLocation()));}
@@ -365,7 +365,7 @@ class c_Brain : public c_Cerebellum
                                 if(Verbose)
                                     cout << "Associating " << GetWords(x) << " with " << GetWords(GetSubjectLocation()) << endl;
                             }
-                            if(GetIndirectObjectLocation() >=0){
+                            if((GetIndirectObjectLocation() >=0) && (!GetIsQuestion()) ){ //Associate Indirect object if not a question sentence
                                 if(!AssociateMemoryCellAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(x))){
                                     InstallNewWord(GetWords(GetIndirectObjectLocation()),GetWordType(GetIndirectObjectLocation()),'w',true,GetGenderClassInSentence(GetIndirectObjectLocation()));}
                                     AssociateMemoryCellAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(x));
@@ -376,13 +376,13 @@ class c_Brain : public c_Cerebellum
                                        cout << "Associating " << GetWords(x) << " with " << GetWords(GetIndirectObjectLocation()) << endl;
                                 }
                     int z; z = GetVerbPointingToAdjective();
-                    if(z >=0)
+                    if((z >=0) && (!GetIsQuestion()))
                         AssociateMemoryCellVerbToAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(z),GetWordsLC(x));
                         if(GetIndirectObjectLocation()>=0)
                             AssociateMemoryCellVerbToAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(z),GetWordsLC(x));
                 }
-                //Associate Adverb
-                if(GetWordType(x) == 'A')
+                //Associate Adverb if not a question sentence
+                if((GetWordType(x) == 'A') && (!GetIsQuestion()))
                     AssociateMemoryCellAdverbToVerb(GetWordTokens(GetSubjectLocation()),GetWordsLC(GetWordTokens(GetVerbPointingToAdjective())),GetWordsLC(x));
          }
          //Associate two nouns if not a question sentence

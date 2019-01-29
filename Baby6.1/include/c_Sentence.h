@@ -128,16 +128,22 @@ class c_Sentence : public c_SubjectStack
         char   GetAlternateType(int Location){return AlternateType[Location];}
         void   SetAlternateType(char Type,int Location){AlternateType[Location] = Type;}
         int    GetWordCount(){return WordCount;}
+        void   SetWordCount(int newVal){WordCount = newVal;}
         char   GetPunctuation(){return Punctuation;}
+        void   SetPunctuation(char newVal){Punctuation = newVal;}
+        void   SetHasPunctuation(bool newVal){HasPunctuation = newVal;}
         bool   GetHasPunctuation(){return HasPunctuation;}
         bool   GetIsQuestion(){return IsQuestion;}
+        void   SetIsQuestion(bool ISQ){IsQuestion = ISQ;}
         int    GetWordTokens(int loc){return WordTokens[loc];}
+        void   SetWordTokens(int loc, int token){WordTokens[loc]=token;}
         string GetWords(int loc){return Words[loc];}
         string GetWordsLC(int loc){return WordsLC[loc];}
+        void   SetWordsLC(int loc,string newVal){WordsLC[loc]=newVal;}
         string GetOriginalString(){return OriginalString;}
+        void   SetOriginalString(string strData){OriginalString = strData;}
         char   GetWordType(int loc){return WordType[loc];}
         void   SetWordType(char Type, int loc){WordType[loc] = Type;}
-        void   SetIsQuestion(bool ISQ){IsQuestion = ISQ;}
         void   SetSubjectLocation(int newLoc){SubjectLocation = newLoc;}
         int    GetSubjectLocation(){return SubjectLocation;}
         void   SetWords(string strData,int Loc){Words[Loc]=strData;}
@@ -146,7 +152,9 @@ class c_Sentence : public c_SubjectStack
         void   SetPattern(string strData){Pattern = strData;}
         string GetPattern(){return Pattern;}
         bool   GetisContraction(int Location){return isContraction[Location];}
+        void   SetisContraction(int loc, bool newVal){isContraction[loc]=newVal;}
         int    GetQuoteLocation(int Location){return QuoteLocation[Location];}
+        void   SetQuoteLocation(int loc,int newVal){QuoteLocation[loc]=newVal;}
         void   SetAdverbLocation(int newVal){AdverbLocation = newVal;}
         int    GetAdverbLocation(){
           for(int x =0; x < WordCount; x++){
