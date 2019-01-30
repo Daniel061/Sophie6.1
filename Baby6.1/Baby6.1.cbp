@@ -46,6 +46,7 @@
 		<Unit filename="include/c_Personality.h" />
 		<Unit filename="include/c_Sentence.h" />
 		<Unit filename="include/c_ShortTermMemory.h" />
+		<Unit filename="include/c_SubjectData.h" />
 		<Unit filename="include/c_SubjectStack.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/c2_Sentence.cpp" />
@@ -60,6 +61,7 @@
 		<Unit filename="src/c_Personality.cpp" />
 		<Unit filename="src/c_Sentence.cpp" />
 		<Unit filename="src/c_ShortTermMemory.cpp" />
+		<Unit filename="src/c_SubjectData.cpp" />
 		<Unit filename="src/c_SubjectStack.cpp" />
 		<Extensions>
 			<code_completion />

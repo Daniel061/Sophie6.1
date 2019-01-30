@@ -139,6 +139,8 @@ class c_Language : public c_LongTermMemory
       } //end verify pattern
 
      if(Verbose)cout << " Received Pattern:" << Pattern << " Correct Pattern:" << CorrectedPattern << endl;
+
+     //cout << " Received Pattern:" << Pattern << " Correct Pattern:" << CorrectedPattern << endl;
    return CorrectedPattern;
  }
 //--------------------------End Language Review------------------------------------------------
@@ -176,6 +178,7 @@ class c_Language : public c_LongTermMemory
            string GenderDeterminer =    " gender ";
            string GreetingsWord =       " hello hi ";
            string SingularWord  =       "";
+           string UCWord        =       GetWords(LocationInSentence);
 
            int  isThrowAwayWord     = -1;
            int  isPluralPronoun     = -1;
@@ -282,6 +285,9 @@ class c_Language : public c_LongTermMemory
                         SetIsPluralWord(LocationInSentence,true);
                         SetPluralWordFlag(LocationInSentence,'p');}
 
+                  if((UCWord[0] >='A') && (UCWord[0] <='Z') ) {
+                        tmpWordType = 'P';}
+
                   //***check for plural word and set if so*****
                   //*rules:
                   //   1) Must not be a verb
@@ -344,6 +350,8 @@ class c_Language : public c_LongTermMemory
                             SetIsPluralWord(LocationInSentence,true);
                             SetPluralRoot(LocationInSentence,SingularWord);
                             SetPluralWordFlag(LocationInSentence,'p');
+                            SetWordType(GetMemoryCellWordType(Tokenize(SingularWord)),LocationInSentence);
+                            tmpWordType = GetMemoryCellWordType(Tokenize(SingularWord));
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -358,6 +366,8 @@ class c_Language : public c_LongTermMemory
                             SetIsPluralWord(LocationInSentence,true);
                             SetPluralRoot(LocationInSentence,SingularWord);
                             SetPluralWordFlag(LocationInSentence,'p');
+                            tmpWordType = GetMemoryCellWordType(Tokenize(SingularWord));
+                            SetWordType(GetMemoryCellWordType(Tokenize(SingularWord)),LocationInSentence);
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -373,6 +383,8 @@ class c_Language : public c_LongTermMemory
                             SetIsPluralWord(LocationInSentence,true);
                             SetPluralRoot(LocationInSentence,SingularWord);
                             SetPluralWordFlag(LocationInSentence,'p');
+                            SetWordType(GetMemoryCellWordType(Tokenize(SingularWord)),LocationInSentence);
+                            tmpWordType = GetMemoryCellWordType(Tokenize(SingularWord));
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -388,6 +400,8 @@ class c_Language : public c_LongTermMemory
                             SetIsPluralWord(LocationInSentence,true);
                             SetPluralRoot(LocationInSentence,SingularWord);
                             SetPluralWordFlag(LocationInSentence,'p');
+                            SetWordType(GetMemoryCellWordType(Tokenize(SingularWord)),LocationInSentence);
+                            tmpWordType = GetMemoryCellWordType(Tokenize(SingularWord));
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -402,6 +416,8 @@ class c_Language : public c_LongTermMemory
                             SetIsPluralWord(LocationInSentence,true);
                             SetPluralRoot(LocationInSentence,SingularWord);
                             SetPluralWordFlag(LocationInSentence,'p');
+                            SetWordType(GetMemoryCellWordType(Tokenize(SingularWord)),LocationInSentence);
+                            tmpWordType = GetMemoryCellWordType(Tokenize(SingularWord));
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -436,8 +452,8 @@ void SlowSpeak(string str_Data, bool Recording = true, int Delay = ThisSpeed, bo
         cout  << " ";
 
      }
-     if(CarriageReturn)
-        cout << "\b" << SlowSentence.GetPunctuation() << endl;
+        cout << "\b";
+        if(CarriageReturn) cout << SlowSentence.GetPunctuation() << endl;
 }
 
 int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeResponse = "", string OtherResponse = "")

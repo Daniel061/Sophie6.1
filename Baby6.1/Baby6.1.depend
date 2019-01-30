@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1548713316 source:h:\c++projects\baby6.1\baby6.1\main.cpp
+1548803586 source:h:\c++projects\baby6.1\baby6.1\main.cpp
 	<iostream>
 	<fstream>
 	<c_Brain.h>
@@ -22,7 +22,7 @@
 1545435962 source:h:\c++projects\baby6.1\baby6.1\src\c_language.cpp
 	"c_Language.h"
 
-1548720578 h:\c++projects\baby6.1\baby6.1\include\c_language.h
+1548808532 h:\c++projects\baby6.1\baby6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<c_LongTermMemory.h>
@@ -32,9 +32,11 @@
 1544995944 source:h:\c++projects\baby6.1\baby6.1\src\c_subjectstack.cpp
 	"c_SubjectStack.h"
 
-1547860094 h:\c++projects\baby6.1\baby6.1\include\c_subjectstack.h
+1548806360 h:\c++projects\baby6.1\baby6.1\include\c_subjectstack.h
 	<vector>
+	<map>
 	<c_Personality.h>
+	<c_SubjectData.h>
 
 1544996084 source:h:\c++projects\baby6.1\baby6.1\src\c_sentence.cpp
 	"c_Sentence.h"
@@ -45,7 +47,7 @@
 1544997036 source:h:\c++projects\baby6.1\baby6.1\src\c_cortex.cpp
 	"c_Cortex.h"
 
-1548594974 h:\c++projects\baby6.1\baby6.1\include\c_cortex.h
+1548808532 h:\c++projects\baby6.1\baby6.1\include\c_cortex.h
 	<c_Language.h>
 
 1544998330 source:h:\c++projects\baby6.1\baby6.1\src\c_shorttermmemory.cpp
@@ -75,7 +77,7 @@
 1547676280 source:h:\c++projects\baby6.1\baby6.1\src\c_lobes.cpp
 	"c_Lobes.h"
 
-1548720566 h:\c++projects\baby6.1\baby6.1\include\c_lobes.h
+1548804010 h:\c++projects\baby6.1\baby6.1\include\c_lobes.h
 	<c_MemoryCell.h>
 	<unordered_map>
 	<fstream>
@@ -251,7 +253,7 @@
 1544995944 source:e:\c++projects\baby6.1\baby6.1\src\c_subjectstack.cpp
 	"c_SubjectStack.h"
 
-1548720266 h:\c++projects\baby6.1\baby6.1\include\c_longtermmemory.h
+1548804080 h:\c++projects\baby6.1\baby6.1\include\c_longtermmemory.h
 	<c_Sentence.h>
 	<unordered_map>
 	<fstream>
@@ -261,4 +263,11 @@
 
 1547554716 source:h:\c++projects\baby6.1\baby6.1\src\c_longtermmemory.cpp
 	"c_LongTermMemory.h"
+
+1548806008 h:\c++projects\baby6.1\baby6.1\include\c_subjectdata.h
+	<map>
+	<string>
+
+1548763114 source:h:\c++projects\baby6.1\baby6.1\src\c_subjectdata.cpp
+	"c_SubjectData.h"
 

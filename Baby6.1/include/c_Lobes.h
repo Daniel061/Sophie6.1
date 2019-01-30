@@ -531,10 +531,11 @@ class c_Lobes : public c_MemoryCell
           //stores Pre and Post Construction Patterns.
           //if doesn't exist, adds it
           //if does exist, updates it
-          void SavePreAndPostPatternConstruction(string PreConstructionPattern,string PostConstructionPattern){
+          void SavePreAndPostPatternConstruction(string PreConstructionPattern,string PostConstructionPattern, int PostToken = 0){
 
                 int PreToken  = Tokenize(PreConstructionPattern,false);
-                int PostToken = Tokenize(PostConstructionPattern,false);
+                if (PostToken == 0)
+                    PostToken = Tokenize(PostConstructionPattern,false);
                 bool Result   = false;
                 mapIT         = FindAddressInMap(PreToken,Result,'l');
 
@@ -707,11 +708,8 @@ class c_Lobes : public c_MemoryCell
 
         void LobesStoreTheLearnedWords(){
             string Delim            = "\n";
-            int    WordsToStore     = RightLobeMemoryMap.size();
-            int    PatternsToStore  = GetLeftLobeCellCount();
             int    Count            = 0;
             ofstream LearnedDataFile ("LearnedData.dat", ios::out);
-            //cout << "size of map:" << WordsToStore << Delim;
             if (LearnedDataFile.is_open()){
                 for(fileIT = RightLobeMemoryMap.begin(); fileIT != RightLobeMemoryMap.end(); fileIT++ ){
                     LearnedDataFile << "Original string,"     << fileIT->second.GetpCellDataString() << Delim;
@@ -884,7 +882,20 @@ class c_Lobes : public c_MemoryCell
                     }//end while not empty loop
 
                 }//end if open
-            LearnedDataFile.close();
+              LearnedDataFile.close();
+              cout << "..";
+
+              ifstream PatternFile ("PatternWorkLearned.dat", ios::in);
+              string SecondLineData = "";
+              if(PatternFile.is_open()){
+                    getline(LearnedDataFile,strLineData);
+                    while(strLineData != ""){
+                        getline(LearnedDataFile,SecondLineData);
+                        SavePreAndPostPatternConstruction(strLineData,"",stoi(SecondLineData,&decType));
+                        getline(LearnedDataFile,strLineData);
+                    }//end while loop
+              }//end Pattern file
+              PatternFile.close();
             cout << endl;
         }//end function
 };

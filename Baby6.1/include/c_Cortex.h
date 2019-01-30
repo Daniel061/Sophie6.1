@@ -295,7 +295,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
         }
        }
 
-cout << "Pattern 1/2 level:" << Pattern << endl;
+//cout << "Pattern 1/2 level:" << Pattern << endl;
        while(Testing){
 
          switch (StatementDirection){
@@ -602,18 +602,21 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
     //-------Noun to Noun test---------
     //i.e. the dog is an animal
 
-    tmpLocation = Pattern.find("nvdu") + Pattern.find("uvdn") + 1;  //if one .find returns -1 it is removed with the +1, if both return -1, the +1 results in -1
+    tmpLocation = Pattern.find("dnvdu") + Pattern.find("duvdn") + 1;  //if one .find returns -1 it is removed with the +1, if both return -1, the +1 results in -1
     if (tmpLocation>=0){
         if(!RunSilent)
-            SlowSpeak("Okay. Tell me more about " + GetWordsLC(tmpLocation+2) + " " + GetWordsLC(tmpLocation+3) + ".");
+            SlowSpeak("Okay. Tell me more about " + GetWordsLC(UnKnownLocation-1) + " " + GetWordsLC(UnKnownLocation) + ".");
             SetHasBeenUnderstood(true);
-        SetWordType('n',tmpLocation+3);
-        SetWordType('n',tmpLocation);
-
-        AssociateMemoryCellNoun(GetWordTokens(tmpLocation),GetWordsLC(tmpLocation+3));                               //associate first noun to second noun
-        AssociateMemoryCellNoun(GetWordTokens(tmpLocation+3),GetWordsLC(tmpLocation));                               //associate second noun to first noun
-        FindSubject();                                                                                              //Update subject
-        SetSubjectInStack(GetWordTokens(GetSubjectLocation()),GetWords(GetSubjectLocation()),GetOriginalString()); //update subject stack
+        if(Pattern[tmpLocation+1]== 'u'){
+           AssociateMemoryCellNoun(GetWordTokens(tmpLocation),GetWordsLC(tmpLocation+1));                                 //associate first noun to second noun
+           AssociateMemoryCellNoun(GetWordTokens(tmpLocation+3),GetWordsLC(tmpLocation+4));                               //associate second noun to first noun
+           SetWordType('n',tmpLocation+1);}
+         else{
+           AssociateMemoryCellNoun(GetWordTokens(tmpLocation),GetWordsLC(tmpLocation+4));                                 //associate first noun to second noun
+           AssociateMemoryCellNoun(GetWordTokens(tmpLocation+3),GetWordsLC(tmpLocation+1));                               //associate second noun to first noun
+           SetWordType('n',tmpLocation+4);}
+        FindSubject();                                                                                                    //Update subject
+        SetSubjectInStack(GetWordTokens(GetSubjectLocation()),GetWords(GetSubjectLocation()),GetOriginalString());        //update subject stack
         CheckForImpliedName();
         Testing = false;
         break;
@@ -783,7 +786,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
 
          char   FollowingWordType    = GetWordType(ContractionLocation+1);
-         char   PreceedingWordType   = GetWordType(ContractionLocation-1);
+         //char   PreceedingWordType   = GetWordType(ContractionLocation-1);   future use
          bool   Split                = false;
          bool   NeedRerun            = false;
 
@@ -872,7 +875,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 //--------------------Question Sentence Break Down----------------------------------------------------------
     bool QuestionSentenceBreakDown(){
 
-        int PatternMatch        = 0;
+        //int PatternMatch        = 0;
         int DirectionOfQuestion = -1;
         int MatchedAdjective    = -1;
         int Adjectives[20];
@@ -1087,7 +1090,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
     int Response = -1;
     char FirstWordFirstLetter = GetWords(GetSubjectLocation())[0];
-    if (FirstWordFirstLetter >='A' && FirstWordFirstLetter <= 'Z' && GetWordType(GetSubjectLocation()) == 'n'){
+    if ((FirstWordFirstLetter >='A' && FirstWordFirstLetter <= 'Z' && GetWordType(GetSubjectLocation()) == 'n') || (GetWordType(GetSubjectLocation())=='P')){
         SlowSpeak("Is " + GetWords(GetSubjectLocation())+ " the " + GetWords(GetIndirectObjectLocation()) + "'s name?");
         Response = RequestUserResponse();
         if(Response == 1){ // yes

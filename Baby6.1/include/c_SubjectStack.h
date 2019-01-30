@@ -2,7 +2,9 @@
 #define C_SUBJECTSTACK_H
 
 #include <vector>
+#include<map>
 #include <c_Personality.h>
+#include <c_SubjectData.h>
 
 class c_SubjectStack :  public c_Personality
 {
@@ -11,16 +13,19 @@ class c_SubjectStack :  public c_Personality
         virtual ~c_SubjectStack();
     private:
 
-        int Subjects[15];                           //These Subjects are tokenized words
-        string strSubjects[15];
-        string strTmpSubject;
-        int SubjectCount;
-        int tmpSubject;
-        vector <int> SubjectStack;
-        vector <string> strSubjectStack;
-        vector <int>::iterator stackIT;
-        vector <string>::iterator strStackIT;
-        vector <string> strSentenceStack;
+        int                                  Subjects[15];                           //These Subjects are tokenized words
+        string                               strSubjects[15];
+        string                               strTmpSubject;
+        int                                  SubjectCount;
+        int                                  tmpSubject;
+        vector <int>                         SubjectStack;
+        vector <string>                      strSubjectStack;
+        vector <int>::iterator               stackIT;
+        vector <string>::iterator            strStackIT;
+        vector <string>                      strSentenceStack;
+        map<int,c_SubjectData>               SubjectDataMap;
+        map<int,c_SubjectData>::iterator     sbjDataIT;
+
     public:
 
 

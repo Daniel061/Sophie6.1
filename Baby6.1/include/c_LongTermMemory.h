@@ -204,8 +204,6 @@ class c_LongTermMemory : public c_Sentence
 
         void LTMReadSentencesInFile(){
             string strLineData  = "";
-            int    intLineData  = 0;
-            bool   boolLineData = false;
             string::size_type decType;
             cout << "...";
             ifstream SentenceDataFile ("SentenceDataFile.dat");
