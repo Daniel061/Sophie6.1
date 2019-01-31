@@ -57,15 +57,16 @@ class c_Brain : public c_Cerebellum
            do{
             CommandCheckSentence.Parse(strData);
             CommandFound = CommandTrap();
-            Parse(strData);                                                                             //break sentence down
+
 
             if(CommandFound == 0){                                                                      //check for command  0 = no command
+                 Parse(strData);                                                                        //break sentence down
                  SaveReceivedInput(strData,true);                                                       //update short term memory
                  SaveSentenceInLongTermMemory(strData);                                                 //update Long Term Memory
-                 GatherAndSetAllSentenceData();
+                 GatherAndSetAllSentenceData();                                                         //check language helper, memory and pattern review for data
                  if(IsThisSentenceDuplicated(strData))
                     SlowSpeak("You said that before.");
-                 if(GetHasContraction()){
+                 if(GetHasContraction()){                                                               //break contraction apart and rewrite sentence if so, rerun the process
                    NeedRerun = DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,strData);
                    if(NeedRerun){
                     StoreNewWords();
@@ -420,6 +421,7 @@ class c_Brain : public c_Cerebellum
            //Recording turned off for this
             cout << "[Version:" << Version << "]\n";
             SlowSpeak("Hello there!",false);
+            SlowSpeak("I'm Sohpie and I'm a girl.");
             SlowSpeak("Thanks for helping me learn new things.",false);
             SlowSpeak("Right now I don't know much about anything. I need for you to teach me.",false);
             SlowSpeak("I will do my best to understand you but if I don't I may ask you a question about what you said.",false);

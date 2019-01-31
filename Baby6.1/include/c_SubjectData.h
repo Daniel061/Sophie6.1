@@ -34,8 +34,27 @@ class c_SubjectData
 
         map<int,string>   sbjAdjectiveMap;                          // adjectives associated with this subject
         map<int,string>   sbjRelatedNounsMap;                       // nouns related to this subject
+        map<int,string>::iterator   sbjMapIT;                       // iterator for maps
 
+        int Tokenize (string str_Data, bool ForceLowerCase=true){   // private copy of Tokenize()
+            int z;
+            int y;
+            int PlaceValue;
+            int tmpToken;
 
+                z = str_Data.size();
+                PlaceValue = 1;
+                tmpToken = 0;
+                if(ForceLowerCase){
+                    for( y = z; y > 0; y--){
+                    tmpToken = tmpToken + (int(tolower(str_Data[y-1])))*PlaceValue;
+                    PlaceValue ++;}
+                }
+                else{
+                for( y = z; y > 0; y--){
+                    tmpToken = tmpToken + (int(str_Data[y-1]))*PlaceValue;
+                    PlaceValue ++;}}
+            return tmpToken;}
 
     public:
         void InitializeAllSubjectVariables(){
@@ -56,7 +75,6 @@ class c_SubjectData
                 sbjIndirectObjectLocation               = -1;
                 sbjAdjectiveMap.clear();
                 sbjRelatedNounsMap.clear();
-
         }
 
 
@@ -64,6 +82,8 @@ class c_SubjectData
         void    SetsbjSubjectPhrase(string newVal){sbjSubjectPhrase = newVal;}
         string  GetsbjSubjectPhrase(){return sbjSubjectPhrase;}
         void    SetsbjSubjectStringOriginal(string newVal){sbjSubjectStringOriginal = newVal;}
+        string  GetsbjSubjectStringOriginal(){return sbjSubjectStringOriginal;}
+        void    SetsbjSubjectStringLC(string newVal){sbjSubjectStringLC = newVal;}
         string  GetsbjSubjectStringLC(){return sbjSubjectStringLC;}
         void    SetsbjSubjectContractionLongFormFirst(string newVal){sbjSubjectContractionLongFormFirst = newVal;}
         string  GetsbjSubjectContractionLongFormFirst(){return sbjSubjectContractionLongFormFirst;}
@@ -103,6 +123,51 @@ class c_SubjectData
         int     GetsbjAdjectiveMapCount(){return sbjAdjectiveMap.size();}
 
         int     GetsbjRelatedNounsMapCount(){return sbjRelatedNounsMap.size();}
+
+        int     GetsbjAdjectivesFromMap(string AdjectiveArray[]){
+                int Mapsize = sbjAdjectiveMap.size();
+                sbjMapIT    = sbjAdjectiveMap.begin();
+                for(int x = 0; x <= Mapsize-1; x++){
+                    AdjectiveArray[x] = sbjMapIT->second;
+                    sbjMapIT++;
+                }
+                return Mapsize;
+        }
+
+        int     GetsbjRelatedNounsFromMap(string RelatedNounArray[]){
+                int Mapsize = sbjRelatedNounsMap.size();
+                sbjMapIT    = sbjRelatedNounsMap.begin();
+                for(int x = 0; x <= Mapsize-1; x++){
+                    RelatedNounArray[x] = sbjMapIT->second;
+                    sbjMapIT++;
+                }
+                return Mapsize;
+        }
+
+        bool    sbjIsThisAdjectiveInMap(string AdjectiveToCheck){
+                bool Result = false;
+                for (sbjMapIT = sbjAdjectiveMap.begin(); sbjMapIT != sbjAdjectiveMap.end(); sbjMapIT++){
+                    if(AdjectiveToCheck == sbjMapIT->second){
+                        Result = true;
+                        sbjMapIT = sbjAdjectiveMap.end();
+                    }
+                return Result;
+                }
+        }
+
+
+        bool    sbjIsThisNounInMap(string NounToCheck){
+                bool Result = false;
+                for (sbjMapIT = sbjRelatedNounsMap.begin(); sbjMapIT != sbjRelatedNounsMap.end(); sbjMapIT++){
+                    if(NounToCheck == sbjMapIT->second){
+                        Result = true;
+                        sbjMapIT = sbjRelatedNounsMap.end();
+                    }
+                return Result;
+                }
+        }
+
+
 
 };
 

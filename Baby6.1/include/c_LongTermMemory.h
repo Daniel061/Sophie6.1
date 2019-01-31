@@ -1,14 +1,16 @@
 #ifndef C_LONGTERMMEMORY_H
 #define C_LONGTERMMEMORY_H
 #include <c_Sentence.h>
+#include <c_SubjectStack.h>
 #include <unordered_map>
 #include <fstream>
 #include <map>
 #include <vector>
 #include <string>
 
-class c_LongTermMemory : public c_Sentence
+class c_LongTermMemory : public c_SubjectStack
 {
+
     public:
         c_LongTermMemory();
         virtual ~c_LongTermMemory();

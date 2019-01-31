@@ -1,10 +1,9 @@
 #ifndef C_SENTENCE_H
 #define C_SENTENCE_H
 
-#include <c_SubjectStack.h>
+#include <c_Personality.h>
 
-
-class c_Sentence : public c_SubjectStack
+class c_Sentence : public c_Personality
 {
     public:
         c_Sentence();
