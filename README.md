@@ -15,4 +15,4 @@ NOTE(1): Testers Needed. Please see the issues tab for important information reg
 Note(2): You may also refer to the Wiki pages under this project to read about the program operations and development. These are updated as improvements and developments happen.
 
 
-Join us in creating a unique AI program. Thank You!
+Join us in creating a unique NLP->AI program. Thank You!
