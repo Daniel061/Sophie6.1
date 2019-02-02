@@ -177,6 +177,7 @@ class c_Language : public c_LongTermMemory
            string FemaleGenderClass =   " girl female woman women ";
            string GenderDeterminer =    " gender ";
            string GreetingsWord =       " hello hi ";
+           string ConjunctionWords =    " or either ";
            string SingularWord  =       "";
            string UCWord        =       GetWords(LocationInSentence);
 
@@ -196,6 +197,7 @@ class c_Language : public c_LongTermMemory
            int  isAssociativeWord   = -1;
            int  isGenderIndicator   = -1;
            int  isGreetingsWord     = -1;
+           int  isConjunction       = -1;
            int  isMaleGenderClass   = -1;
            int  isFemaleGenderClass = -1;
            int  isGenderDeterminer  = -1;
@@ -214,6 +216,7 @@ class c_Language : public c_LongTermMemory
               OrigWordUC   = GetWords(LocationInSentence);
               tmpWord = " " + tmpWord + " ";
 
+                isConjunction       = ConjunctionWords.find(tmpWord);
                 isPluralVerb        = PluralVerbs.find(tmpWord);
                 isGenderDeterminer  = GenderDeterminer.find(tmpWord);
                 isMaleGenderClass   = MaleGenderClass.find(tmpWord);
@@ -239,6 +242,8 @@ class c_Language : public c_LongTermMemory
                   if (QuoteMarker >= 0){
                       isContractionWord = true;
                       tmpWordType   = 'C';}
+                  if (isConjunction >= 0){
+                      tmpWordType  = 'c';}
                   if (isVerb >= 0){
                       tmpWordType = 'v';}
                   if (isDeterminer >= 0){
