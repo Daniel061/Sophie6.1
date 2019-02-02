@@ -25,6 +25,8 @@ class c_SubjectStack :  public c_Sentence
         vector <string>                      strSentenceStack;
         map<int,c_SubjectData>               SubjectDataMap;                //<Tokenized string strSubject,c_SubjectData>
         map<int,c_SubjectData>::iterator     sbjDataIT;
+        vector<int>::iterator                sbjOrderIT;
+        vector<int>                          SubjectOrder;
         c_SubjectData                        WorkingsbjData;
 
     public:
@@ -47,7 +49,7 @@ class c_SubjectStack :  public c_Sentence
             int RelatedNouns[30];
             int adjCount,nounCount;
             bool Result = false;
-            if(sbjDataIT == SubjectDataMap.end()){
+             if(sbjDataIT == SubjectDataMap.end()){
                 WorkingsbjData.InitializeAllSubjectVariables();
                 WorkingsbjData.SetsbjSubjectPhrase(GetOriginalString());
                 WorkingsbjData.SetsbjSubjectStringOriginal(GetWords(GetSubjectLocation()));
@@ -65,26 +67,224 @@ class c_SubjectStack :  public c_Sentence
                 WorkingsbjData.SetsbjPhraseToken(Tokenize(GetOriginalString(),false));
                 WorkingsbjData.SetsbjSubjectLocation(GetSubjectLocation());
                 WorkingsbjData.SetsbjIndirectObjectLocation(GetIndirectObjectLocation());
+                WorkingsbjData.SetsbjWordToken(GetWordTokens(GetSubjectLocation()));
                 adjCount  = GetMemoryCellAdjectives(GetWordTokens(GetSubjectLocation()),Adjectives);
                 nounCount = GetMemoryCellRelatedNouns(GetWordTokens(GetSubjectLocation()),RelatedNouns);
                 for(int x = 0; x< adjCount; x++){
                     WorkingsbjData.SetsbjAdjectiveInMap(GetMemoryCellRawStringData(Result,"",Adjectives[x]),Adjectives[x]);
                 }
                 for(int x = 0; x< nounCount; x++){
-                    WorkingsbjData.SetsbjRelatedNounInMap(GetMemoryCellRawStringData(Result,"",Adjectives[x]),Adjectives[x]);
+                    WorkingsbjData.SetsbjRelatedNounInMap(GetMemoryCellRawStringData(Result,"",RelatedNouns[x]),RelatedNouns[x]);
                 }
-
+                sbjDataIT = SubjectDataMap.begin();
+                SubjectDataMap.emplace_hint(sbjDataIT,WorkingsbjData.GetsbjWordToken(),WorkingsbjData);
+                sbjOrderIT = SubjectOrder.begin();
+                SubjectOrder.insert(sbjOrderIT,GetWordTokens(GetSubjectLocation()));
+            }
+            else{
+                sbjDataIT->second.SetsbjSubjectPhrase(GetOriginalString());
+                sbjDataIT->second.SetsbjSubjectStringOriginal(GetWords(GetSubjectLocation()));
+                sbjDataIT->second.SetsbjSubjectStringLC(GetWordsLC(GetSubjectLocation()));
+                sbjDataIT->second.SetsbjSubjectContractionLongFormFirst(GetContractionLongFormFirst(GetSubjectLocation()));
+                sbjDataIT->second.SetsbjSubjectContractionLongFormSecond(GetContractionLongFormSecond(GetSubjectLocation()));
+                sbjDataIT->second.SetsbjSubjectPatternResolved(GetPattern());
+                //sbjDataIT->second.SetsbjSubjectPatternBeforeResolution(); //need this sent to me
+                sbjDataIT->second.SetsbjGenderClass(GetGenderClassInSentence(GetSubjectLocation()));
+                sbjDataIT->second.SetsbjWordType(GetWordType(GetSubjectLocation()));
+                // sbjDataIT->second.SetsbjWordTense(getWordTense); // needs to be added to c_Sentence and data storage
+                sbjDataIT->second.SetsbjIsSingular(GetIsPluralWord(GetSubjectLocation()));
+                sbjDataIT->second.SetsbjIsContraction(GetisContraction(GetSubjectLocation()));
+                sbjDataIT->second.SetsbjSingularLocation(Tokenize(GetPluralRoot(GetSubjectLocation())));
+                sbjDataIT->second.SetsbjPhraseToken(Tokenize(GetOriginalString(),false));
+                sbjDataIT->second.SetsbjSubjectLocation(GetSubjectLocation());
+                sbjDataIT->second.SetsbjIndirectObjectLocation(GetIndirectObjectLocation());
+                sbjDataIT->second.SetsbjWordToken(GetWordTokens(GetSubjectLocation()));
+                adjCount  = GetMemoryCellAdjectives(GetWordTokens(GetSubjectLocation()),Adjectives);
+                nounCount = GetMemoryCellRelatedNouns(GetWordTokens(GetSubjectLocation()),RelatedNouns);
+                for(int x = 0; x< adjCount; x++){
+                    sbjDataIT->second.SetsbjAdjectiveInMap(GetMemoryCellRawStringData(Result,"",Adjectives[x]),Adjectives[x]);
+                }
+                for(int x = 0; x< nounCount; x++){
+                    sbjDataIT->second.SetsbjRelatedNounInMap(GetMemoryCellRawStringData(Result,"",RelatedNouns[x]),RelatedNouns[x]);
+                }
+                sbjOrderIT = SubjectOrder.begin();
+                if(*sbjOrderIT != GetWordTokens(GetSubjectLocation())) //not already at the top
+                   SubjectOrder.insert(sbjOrderIT,GetWordTokens(GetSubjectLocation()));
 
             }
 
 
         }
 
-        int GetSubjectInStack(int Location = 0){
-            stackIT = SubjectStack.begin()+Location;
-            return *stackIT;
 
+        //Returns the tokenized subject string from the map
+        //latest subject location = 0
+        //returns -1 if nothing at 0 or the requested location
+        int GetSubjectTokenInMap(int Location = 0){ // 0 = first
+            if(int(SubjectOrder.size()) < Location){
+                return -1;
+            }
+            else{
+            sbjOrderIT = SubjectOrder.begin();
+            sbjOrderIT += Location;
+            if(sbjOrderIT != SubjectOrder.end()){
+                return *sbjOrderIT;}
+            else{
+                return -1;
+            }
+            }
         }
+
+
+        //Returns the subject string from the map
+        //latest subject location = 0
+        //returns empty string if nothing at 0 or the requested location
+        string GetSubjectStringInMap(int Location = 0){ // 0 = first
+            if (int(SubjectOrder.size()) < Location) {
+                return "";
+            }
+            else {
+            sbjOrderIT    = SubjectOrder.begin();
+            for(int x = 0; x < Location; x++){
+                    ++sbjOrderIT;}
+            sbjDataIT     = SubjectDataMap.find(*sbjOrderIT);
+            if(sbjDataIT != SubjectDataMap.end()){
+                return sbjDataIT->second.GetsbjSubjectStringOriginal();
+            }
+            else{
+                return "";
+            }
+            }
+        }
+
+
+        char GetSubjectWordType(int Location = 0){ // 0 = first
+            if (int(SubjectOrder.size()) < Location) {
+                return '\0';
+            }
+            else {
+            sbjOrderIT    = SubjectOrder.begin();
+            for(int x = 0; x < Location; x++){
+                    ++sbjOrderIT;}
+            sbjDataIT     = SubjectDataMap.find(*sbjOrderIT);
+            if(sbjDataIT != SubjectDataMap.end()){
+                return sbjDataIT->second.GetsbjWordType();
+            }
+            else{
+                return '\0';
+            }
+            }
+        }
+
+
+        char GetSubjectGender(int Location = 0){ // 0 = first
+            if (int(SubjectOrder.size()) < Location) {
+                return '\0';
+            }
+            else {
+            sbjOrderIT    = SubjectOrder.begin();
+            for(int x = 0; x < Location; x++){
+                    ++sbjOrderIT;}
+            sbjDataIT     = SubjectDataMap.find(*sbjOrderIT);
+            if(sbjDataIT != SubjectDataMap.end()){
+                return sbjDataIT->second.GetsbjGenderClass();
+            }
+            else{
+                return '\0';
+            }
+            }
+        }
+
+
+        //returns number of subjects in map
+        int GetSubjectMapSize(){
+            return SubjectOrder.size();
+        }
+
+
+        //returns number of adjectives for subject located at Location
+        int GetSubjectAdjectiveCount(int Location = 0){
+            if(int(SubjectOrder.size()) < Location) {
+                return -1;
+            }
+            else {
+                sbjOrderIT  = SubjectOrder.begin() + Location;
+                sbjDataIT   = SubjectDataMap.find(*sbjOrderIT);
+                if(sbjDataIT != SubjectDataMap.end()){
+                    return sbjDataIT->second.GetsbjAdjectiveMapCount();
+                }
+                else{
+                    return -1;
+                }
+            }
+        }
+
+
+        //returns number of nouns for subject located at Location
+        int GetSubjectNounCount(int Location = 0){
+            if(int(SubjectOrder.size()) < Location) {
+                return -1;
+            }
+            else {
+                sbjOrderIT  = SubjectOrder.begin() + Location;
+                sbjDataIT   = SubjectDataMap.find(*sbjOrderIT);
+                if(sbjDataIT != SubjectDataMap.end()){
+                    return sbjDataIT->second.GetsbjRelatedNounsMapCount();
+                }
+                else{
+                    return -1;
+                }
+            }
+        }
+
+
+        //Get adjectives for subject located at Location
+        int GetSubjectAdjectives(string Adjectives[], int Location = 0){
+            if(int(SubjectOrder.size()) < Location) {
+                return -1;
+            }
+            else {
+                sbjOrderIT  = SubjectOrder.begin() + Location;
+                sbjDataIT   = SubjectDataMap.find(*sbjOrderIT);
+                if(sbjDataIT != SubjectDataMap.end()){
+                    return sbjDataIT->second.GetsbjAdjectivesFromMap(Adjectives);
+                }
+                else{
+                    return -1;
+                }
+            }
+        }
+
+
+        //Get related nouns for subject located at Location
+        int GetSubjectRelatedNouns(string Nouns[], int Location = 0){
+            if(int(SubjectOrder.size()) < Location) {
+                return -1;
+            }
+            else {
+                sbjOrderIT  = SubjectOrder.begin() + Location;
+                sbjDataIT   = SubjectDataMap.find(*sbjOrderIT);
+                if(sbjDataIT != SubjectDataMap.end()){
+                    return sbjDataIT->second.GetsbjRelatedNounsFromMap(Nouns);
+                }
+                else{
+                    return -1;
+                }
+            }
+        }
+
+//------------------------------------old subject processing---------------------------------
+        int GetSubjectInStack(int Location = 0){
+            if(int(SubjectDataMap.size()) < Location){
+                return -1;
+            }
+            else{
+            stackIT = SubjectStack.begin()+Location;
+            return *stackIT;}
+        }
+
+
+
         string GetstrSubjectInStack(int Location){
             strStackIT = strSubjectStack.begin()+Location;
             return *strStackIT;

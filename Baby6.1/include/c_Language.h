@@ -527,14 +527,15 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             SetPattern(Pattern);
             if(SecondNounLocation != -1) SetIndirectObjectLocation(SecondNounLocation); else SetIndirectObjectLocation(-1);
             if(SecondNounLocation != -1) SetNounCount(2); else SetNounCount(1);
+
             if( (ProperNounLocation != -1) && (NounLocation != -1) ){
                 SetIndirectObjectLocation(ProperNounLocation);
-                SubLocation = NounLocation;
+                SubLocation = ProperNounLocation;
                 PickingSubject = false;}
             else
                 if ((ProNounLocation != -1) && (NounLocation != -1)){
                     SetIndirectObjectLocation(ProNounLocation);
-                    SubLocation = NounLocation;
+                    SubLocation = ProNounLocation;
                     PickingSubject = false;}
 
             while(PickingSubject){

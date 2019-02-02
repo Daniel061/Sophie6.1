@@ -261,14 +261,45 @@ class c_Brain : public c_Cerebellum
                     break;
                 }
             case 5352:  //subject report
+                //Add a check for three words in CommandCheckSentence, if a third, report all data about it only
+                // otherwise dump the list of subject names and adjective + related noun counts
                 {
-                    Control = 2;
-                    cout << "no.\tToken\tMemory\t\tString\tOriginal sentence string.\n";
-                    for(int x =0; x<GetSubjectStackCount(); x++){
-                        if(GetSubjectInStack(x)>0)
-                            cout << x << ":\t" << GetSubjectInStack(x) << "\t" << GetMemoryCellWordLC("",GetSubjectInStack(x)) << "\t\t" << GetstrSubjectInStack(x) << "\t" << GetOriginalStringInStack(x) << endl;}
+                    string sbjAdjectives[35];
+                    string sbjRelatedNouns[35];
+                    Control = 2; int z;
+                    cout << "Subjects in map:" << GetSubjectMapSize() << endl;
+                    for(int x = 0; x < GetSubjectMapSize(); x++){
+                        if(x == 0){
+                            cout << " Current subject: Token:" << GetSubjectTokenInMap(x) << "  String:" << GetSubjectStringInMap(x) << endl;}
+                        else {
+                            cout << " Subject Token:" << GetSubjectTokenInMap(x) << "  String:" << GetSubjectStringInMap(x) << endl;}
+                        GetSubjectAdjectives(sbjAdjectives,x);
+                        GetSubjectRelatedNouns(sbjRelatedNouns,x);
+                        int adjCount = GetSubjectAdjectiveCount(x);
+                        int nounCount = GetSubjectNounCount(x);
+                        cout << "   Subject Adjective(s):" << GetSubjectAdjectiveCount(x) << "  Related Noun(s):" << nounCount
+                             << "  Word Type:" << GetSubjectWordType(x) << "  Gender:" << GetSubjectGender(x) << endl;
+                        cout << "   Adjectives\tNouns" << endl;
+
+                        for(int t =0; t<= adjCount; t++){
+                            cout << t+1 << "      " << sbjAdjectives[t] << "\t";
+                            if (t <= nounCount){
+                                cout << sbjRelatedNouns[t] << endl;
+                            }
+                            else{
+                                cout << endl;
+                            }
+                            z = t; //save the place
+                            }
+                            z++;
+                            if( z<= nounCount){
+                                cout << z+1 << "      \t\t" << sbjRelatedNouns[z] << endl;
+                                z++;
+                            }
+                    }
                     break;
                 }
+
             case 5365:   // pattern report 'duvu'
                 {
                     Control = 2;
@@ -281,13 +312,13 @@ class c_Brain : public c_Cerebellum
 
 
 
-            }
+            }//end switch command
             if((Control != 0)&(Verbose))
                 cout << "[c_Brain.h::CommandTrap]-successful\n";
             else
                 if(Verbose) cout << "[c_Brain.h::CommandTrap]-no command found\n";
             return Control;
-        }
+        }//end command trap
 
 
       //------------------------SETWORDTYPES---------------------------------------------------------------------------
@@ -421,13 +452,13 @@ class c_Brain : public c_Cerebellum
            //Recording turned off for this
             cout << "[Version:" << Version << "]\n";
             SlowSpeak("Hello there!",false);
-            SlowSpeak("I'm Sohpie and I'm a girl.");
+            SlowSpeak("I'm Sohpie and I'm a girl.",false);
             SlowSpeak("Thanks for helping me learn new things.",false);
             SlowSpeak("Right now I don't know much about anything. I need for you to teach me.",false);
             SlowSpeak("I will do my best to understand you but if I don't I may ask you a question about what you said.",false);
             SlowSpeak("If I do need to ask a question, you will see >? prompt. Please respond with a yes or no answer unless I ask something more specific.",false);
-            SlowSpeak("This will help me to understand.");
-            SlowSpeak("Thank you!");
+            SlowSpeak("This will help me to understand.",false);
+            SlowSpeak("Thank you!",false);
             SlowSpeak(":)",false);
 
 

@@ -29,6 +29,7 @@ class c_SubjectData
         bool              sbjIsContraction;                         // true/false
         int               sbjSingularLocation;                      // address of the singular form if this is plural
         int               sbjPhraseToken;                           // the entire phrased tokenized, not forced lower case
+        int               sbjWordToken;                             // the subject word tokenized forced lower case
         int               sbjSubjectLocation;                       // the location of the subject in the sentence of this subject
         int               sbjIndirectObjectLocation;                // the location of the indirect object in the sentence of the indirection object, -1 = none
 
@@ -71,6 +72,7 @@ class c_SubjectData
                 sbjIsContraction                        = false;
                 sbjSingularLocation                     = -1;
                 sbjPhraseToken                          = 0;
+                sbjWordToken                            = 0;
                 sbjSubjectLocation                      = -1;
                 sbjIndirectObjectLocation               = -1;
                 sbjAdjectiveMap.clear();
@@ -107,10 +109,13 @@ class c_SubjectData
         int     GetsbjSingularLocation(){return sbjSingularLocation;}
         void    SetsbjPhraseToken(int newVal){sbjPhraseToken = newVal;}
         int     GetsbjPhraseToken(){return sbjPhraseToken;}
+        void    SetsbjWordToken(int newVal){sbjWordToken = newVal;}
+        int     GetsbjWordToken(){return sbjWordToken;}
         void    SetsbjSubjectLocation(int newVal){sbjSubjectLocation = newVal;}
         int     GetsbjSubjectLocation(){return sbjSubjectLocation;}
         void    SetsbjIndirectObjectLocation(int newVal){sbjIndirectObjectLocation = newVal;}
         int     GetsbjIndirectObjectLocation(){return sbjIndirectObjectLocation;}
+
 
 
 
