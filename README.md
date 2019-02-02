@@ -2,7 +2,7 @@
 AI/ML Growth and Natural Language Processor (NLP) project.
 
 Sophie6.1 is a Natural Language Processor (NLP) that is intended to understand normal phrases or questions and develop proper responses and generate requests for additional information.
-Most NLP's have a specific purpose like for medical or mental health questioning or even other specific purposes. These are coded with that one specific purpose in mind. Even though NLP is diffacult, having a limited scope can make it easier.
+Most NLP's have a specific purpose like for medical or mental health questioning or even other specific purposes. These are coded with that one specific purpose in mind. Even though NLP is difficult, having a limited scope can make it easier.
 Sophie6.1 is different in that there is no specific purpose or coding directed to it. The whole gamit of the English language must be understood. Whatever you want to say to the program, like you would say to a human, must be dealt with.
 This makes this a large project but totally possible for todays computers. Unlike a Chat Bot, this NLP will be used to drive AI for any purpose needed. The best AI needs a front end NLP like Sophie6.1
 
