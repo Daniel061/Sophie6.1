@@ -33,6 +33,7 @@ class c_Sentence : public c_Personality
         char   GenderClassInSentence[30];       // i.e m-male f-female n-neutral   initialize to u-undefined
         string OriginalString;                  // the whole unedited string  initialize to ""
         string Pattern;                         // i.e. dnvua  initialize to ""
+        string GistOfSentence;                  // the meat of the phrase. i.e the dog is black = is black, initialize to ""
         char   Punctuation;                     // !  initialize to null
         bool   HasPunctuation;                  // true / false initialize to false
         bool   HasPluralPronoun;                // true / false initialize to false
@@ -64,6 +65,7 @@ class c_Sentence : public c_Personality
                 SubWords[x]                   = "";
                 ContractionLongFormFirst[x]   = "";
                 ContractionLongFormSecond[x]  = "";
+                GistOfSentence                = "";
                 WordType[x]                   = 'u';
                 SecondaryType[x]              = 'u';
                 AlternateType[x]              = 'u';
@@ -88,6 +90,8 @@ class c_Sentence : public c_Personality
                 NamePointer                   = -1;
                 IndirectObjectLocation        = -1;}
 
+        void   SetGistOfSentence(string newVal){GistOfSentence = newVal;}
+        string GetGistOfSentence(){return GistOfSentence;}
         char   GetPluralWordFlag(int Location){return PluralWordFlag[Location];}
         void   SetPluralWordFlag(int Location, char newVal){PluralWordFlag[Location]=newVal;}
         string GetPluralRoot(int Location){return PluralRoot[Location];}

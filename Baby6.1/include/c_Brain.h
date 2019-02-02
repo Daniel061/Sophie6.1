@@ -102,6 +102,7 @@ class c_Brain : public c_Cerebellum
                      if(SubjectLocation >=0)
                         SetSubjectInStack(GetWordTokens(SubjectLocation),GetWords(SubjectLocation),GetOriginalString());
                      SavePreAndPostPatternConstruction(FirstPattern,GetPattern());                         //save learned pattern for future// language helper to use this
+                     FindAndSetGistOfSentence();
                      SaveCurrentSentenceInMap();
                      }
                    }
@@ -277,11 +278,11 @@ class c_Brain : public c_Cerebellum
                         GetSubjectRelatedNouns(sbjRelatedNouns,x);
                         int adjCount = GetSubjectAdjectiveCount(x);
                         int nounCount = GetSubjectNounCount(x);
-                        cout << "   Subject Adjective(s):" << GetSubjectAdjectiveCount(x) << "  Related Noun(s):" << nounCount
-                             << "  Word Type:" << GetSubjectWordType(x) << "  Gender:" << GetSubjectGender(x) << endl;
+                        cout << "  Subject Adjective(s):" << GetSubjectAdjectiveCount(x) << "  Related Noun(s):" << nounCount
+                             << "  Word Type:" << GetSubjectWordType(x) << "  Gender:" << GetSubjectGender(x) << " Times used:" << GetsbjSubjectCountInMap(x) << endl;
                         cout << "   Adjectives\tNouns" << endl;
 
-                        for(int t =0; t<= adjCount; t++){
+                        for(int t =0; t<= adjCount-1; t++){
                             cout << t+1 << "      " << sbjAdjectives[t] << "\t";
                             if (t <= nounCount){
                                 cout << sbjRelatedNouns[t] << endl;
@@ -416,7 +417,7 @@ class c_Brain : public c_Cerebellum
                 //Associate Adverb if not a question sentence
                 if((GetWordType(x) == 'A') && (!GetIsQuestion()))
                     AssociateMemoryCellAdverbToVerb(GetWordTokens(GetSubjectLocation()),GetWordsLC(GetWordTokens(GetVerbPointingToAdjective())),GetWordsLC(x));
-         }
+         }//nd for loop
          //Associate two nouns if not a question sentence
          if((GetNounCount() >=2)&& (!GetIsQuestion())){
                 if(Verbose)

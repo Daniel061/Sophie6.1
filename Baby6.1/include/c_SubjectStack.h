@@ -99,6 +99,7 @@ class c_SubjectStack :  public c_Sentence
                 sbjDataIT->second.SetsbjSubjectLocation(GetSubjectLocation());
                 sbjDataIT->second.SetsbjIndirectObjectLocation(GetIndirectObjectLocation());
                 sbjDataIT->second.SetsbjWordToken(GetWordTokens(GetSubjectLocation()));
+                sbjDataIT->second.SetsbjSubjectCountPlusOne();
                 adjCount  = GetMemoryCellAdjectives(GetWordTokens(GetSubjectLocation()),Adjectives);
                 nounCount = GetMemoryCellRelatedNouns(GetWordTokens(GetSubjectLocation()),RelatedNouns);
                 for(int x = 0; x< adjCount; x++){
@@ -273,6 +274,24 @@ class c_SubjectStack :  public c_Sentence
             }
         }
 
+
+        //Get the subject count
+        //returns -1 if subject not found
+        int GetsbjSubjectCountInMap(int Location = 0){
+            if(int(SubjectOrder.size()) < Location) {
+                return -1;
+            }
+            else {
+                sbjOrderIT  = SubjectOrder.begin() + Location;
+                sbjDataIT   = SubjectDataMap.find(*sbjOrderIT);
+                if(sbjDataIT != SubjectDataMap.end()){
+                    return sbjDataIT->second.GetsbjSubjectCount();
+                }
+                else{
+                    return -1;
+                }
+            }
+        }
 //------------------------------------old subject processing---------------------------------
         int GetSubjectInStack(int Location = 0){
             if(int(SubjectDataMap.size()) < Location){

@@ -7,7 +7,7 @@
 using namespace std;
 
 c_Brain Brain;
-string Version = "6.1.006.11";
+string Version = "6.1.006.12";
 bool Verbose;
 int  BaseSpeed = 600000000;
 int  SpeedStandard = 1000;

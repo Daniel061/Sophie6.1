@@ -287,6 +287,9 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
        bool Testing = true;
        if(Verbose)
             cout << "Noun Loc:" << NounLocation << "Unknown Loc:" << UnKnownLocation << "Pattern:" << Pattern << endl;
+
+        ofstream HalfLevelDataFile ("HalfLevelPatternData.dat", ios::out | ios::app);
+        if (HalfLevelDataFile.is_open()){ HalfLevelDataFile << Pattern << "," << GetOriginalString() << endl; HalfLevelDataFile.close();}
        for(int x = 0; x < GetWordCount(); x++){
         if((GetWordType(x) == 'y') || (GetWordType(x) == 'm') || (GetWordType(x) == 'p')){
             if(GetWordType(x)== 'y') StatementDirection = 0; //Statement towards user

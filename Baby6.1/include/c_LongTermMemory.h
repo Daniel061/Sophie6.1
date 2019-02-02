@@ -69,6 +69,7 @@ class c_LongTermMemory : public c_SubjectStack
               CopySentence.NamePointer                    =GetNamePointer();
               CopySentence.IndirectObjectLocation         =GetIndirectObjectLocation();
               CopySentence.HasGenderDeterminer            =GetHasGenderDeterminer();
+              CopySentence.GistOfSentence                 =GetGistOfSentence();
 
 
             }//-------------------END COPYCURRENTSENTENCE----------------------------
@@ -157,6 +158,7 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << csIT->second.GetNamePointer() << Deliminator;
                         SentenceDataFile << csIT->second.GetIndirectObjectLocation() << Deliminator;
                         SentenceDataFile << csIT->second.GetHasGenderDeterminer() << Deliminator;
+                        SentenceDataFile << csIT->second.GetGistOfSentence() << Deliminator;
 
                         for(int x = 0; x <= csIT->second.GetWordCount()-1; x++){
                             SentenceDataFile << csIT->second.GetWords(x) << Deliminator;
@@ -252,7 +254,9 @@ class c_LongTermMemory : public c_SubjectStack
                 CopySentence.SetIndirectObjectLocation(stoi(strLineData,&decType)); //set int IndirectObjectLocation
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetHasGenderDeterminer(stoi(strLineData,&decType));//set bool HasGenderDeterminer
-                //getline (SentenceDataFile,strLineData);                                     //skip past empty line
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetGistOfSentence(strLineData);                    //set Gist data
+
                 for(int x = 0; x<=CopySentence.GetWordCount()-1; x++){
                     getline (SentenceDataFile,strLineData);
                     CopySentence.SetWords(strLineData,x);               //set string Words[x]

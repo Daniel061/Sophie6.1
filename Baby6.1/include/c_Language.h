@@ -562,6 +562,50 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             return SubLocation;
         }
 //--------------------------------------------------end Find Subject----------------------------------------------------------
+
+
+//----------------------------Find and Set Gist of Current Sentence-----------------------------------------------------------
+
+        bool FindAndSetGistOfSentence(){
+            bool   Result       = false;
+            bool   Checking     = true;
+            int    VerbPointer  = -1;
+            string GistString   = "";
+
+            for(int x = 0; x <=int(Pattern.size()); x++){
+                if(Pattern[x] == 'v') VerbPointer = x;
+            }
+
+            if(VerbPointer < 0) Checking = false; //no verb, cannot find gist without it(yet)
+            while (Checking){
+                    if(GetIsQuestion()){
+                        //process gist of question
+
+                        Checking = false;
+                    }
+                    else
+                    {
+                        //process gist of statement
+                        //for now, gist is verb to the end of sentence
+                        for(int x = VerbPointer; x <= GetWordCount(); x++){
+                            GistString += " " + GetWords(x);
+                        }
+                        Result   = true;  //control, Gist was found
+                        Checking = false;
+                    }
+
+            }//end while checking
+
+            if(Result){
+                //store the Gist phrase
+                SetGistOfSentence(GistString);
+            }
+
+
+            return Result;
+
+        }
+//------------------------END of Bool FINDANDSETGISTOFSENTENCE()----------------------------------------------------------------
 };
 
 #endif // C_LANGUAGE_H

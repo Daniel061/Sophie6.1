@@ -32,6 +32,7 @@ class c_SubjectData
         int               sbjWordToken;                             // the subject word tokenized forced lower case
         int               sbjSubjectLocation;                       // the location of the subject in the sentence of this subject
         int               sbjIndirectObjectLocation;                // the location of the indirect object in the sentence of the indirection object, -1 = none
+        int               sbjSubjectCount;                          // the number of times this data has been a subject, initialize to 1
 
         map<int,string>   sbjAdjectiveMap;                          // adjectives associated with this subject
         map<int,string>   sbjRelatedNounsMap;                       // nouns related to this subject
@@ -75,6 +76,7 @@ class c_SubjectData
                 sbjWordToken                            = 0;
                 sbjSubjectLocation                      = -1;
                 sbjIndirectObjectLocation               = -1;
+                sbjSubjectCount                         = 1;
                 sbjAdjectiveMap.clear();
                 sbjRelatedNounsMap.clear();
         }
@@ -115,6 +117,8 @@ class c_SubjectData
         int     GetsbjSubjectLocation(){return sbjSubjectLocation;}
         void    SetsbjIndirectObjectLocation(int newVal){sbjIndirectObjectLocation = newVal;}
         int     GetsbjIndirectObjectLocation(){return sbjIndirectObjectLocation;}
+        void    SetsbjSubjectCountPlusOne(){sbjSubjectCount++;}
+        int     GetsbjSubjectCount(){return sbjSubjectCount;}
 
 
 
