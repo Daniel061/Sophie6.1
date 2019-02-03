@@ -64,6 +64,7 @@ class c_Brain : public c_Cerebellum
                  SaveReceivedInput(strData,true);                                                       //update short term memory
                  SaveSentenceInLongTermMemory(strData);                                                 //update Long Term Memory
                  GatherAndSetAllSentenceData();                                                         //check language helper, memory and pattern review for data
+                 SetPreProcessedPattern(GetPattern());                                                       //save for later review
                  if(IsThisSentenceDuplicated(strData))
                     SlowSpeak("You said that before.");
                  if(GetHasContraction()){                                                               //break contraction apart and rewrite sentence if so, rerun the process
@@ -72,6 +73,7 @@ class c_Brain : public c_Cerebellum
                     StoreNewWords();
                     Parse(strData);
                     GatherAndSetAllSentenceData();
+                    SetPreProcessedPattern(GetPattern());
                     SaveReceivedInput(strData,true);
                     SaveSentenceInLongTermMemory(strData);
                     NeedRerun = false;
@@ -80,7 +82,7 @@ class c_Brain : public c_Cerebellum
                  SubjectLocation = FindSubject();                                                           //try to located subject
                  SetSubjectLocation(SubjectLocation);                                                       //set the suggestion
                  RebuildPattern();
-                 FirstPattern = GetPattern();
+                 FirstPattern = GetPreProcessedPattern();
                  CheckedPattern = PatternReview(GetPattern(),ConfidenceLevel);                              //see if language class can enhance pattern
                  if(Verbose){
                         cout << "Processed Pattern:" << CheckedPattern << ":" << GetPattern() << "Confidence level: " << ConfidenceLevel << endl;}

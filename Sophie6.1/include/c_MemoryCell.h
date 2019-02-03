@@ -199,7 +199,10 @@ class c_MemoryCell
            if(strIT == RelatedNouns.end()) return false;
            else return true;}
 
-
+       bool IsAdjectiveAssociatedToMe(string AdjectiveToCheck){
+           mapIT = adjDescriptors.find(Tokenize(AdjectiveToCheck));
+           if(mapIT == adjDescriptors.end()) return false;
+           else return true;}
 
 
 

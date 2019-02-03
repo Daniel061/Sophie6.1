@@ -21,6 +21,7 @@ class c_Sentence : public c_Personality
         int    IndirectObjectLocation;          // usually the second noun
         int    AdverbLocation;                  // -1 means none
         int    AdjectiveLocation;               // -1 means none
+        int    ConjunctionLocation;             // -1 means none
         int    NounCount;                       // number of nouns in this sentence
         int    VerbLocation;                    // position of verb
         int    NamePointer;                     // position of the word name
@@ -33,6 +34,7 @@ class c_Sentence : public c_Personality
         char   GenderClassInSentence[30];       // i.e m-male f-female n-neutral   initialize to u-undefined
         string OriginalString;                  // the whole unedited string  initialize to ""
         string Pattern;                         // i.e. dnvua  initialize to ""
+        string PreProcessedPattern;             // i.e. duvu
         string GistOfSentence;                  // the meat of the phrase. i.e the dog is black = is black, initialize to ""
         char   Punctuation;                     // !  initialize to null
         bool   HasPunctuation;                  // true / false initialize to false
@@ -75,6 +77,7 @@ class c_Sentence : public c_Personality
                 SubjectLocation               = -1;
                 OriginalString                = "";
                 Pattern                       = "";
+                PreProcessedPattern           = "";
                 HasPluralPronoun              = false;
                 HasPunctuation                = false;
                 IsQuestion                    = false;
@@ -90,6 +93,10 @@ class c_Sentence : public c_Personality
                 NamePointer                   = -1;
                 IndirectObjectLocation        = -1;}
 
+        void   SetConjunctionLocation(int newVal){ConjunctionLocation = newVal;}
+        int    GetConjunctionLocation(){return ConjunctionLocation;}
+        void   SetPreProcessedPattern(string newVal){PreProcessedPattern = newVal;}
+        string GetPreProcessedPattern(){return PreProcessedPattern;}
         void   SetGistOfSentence(string newVal){GistOfSentence = newVal;}
         string GetGistOfSentence(){return GistOfSentence;}
         char   GetPluralWordFlag(int Location){return PluralWordFlag[Location];}

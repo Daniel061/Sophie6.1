@@ -83,6 +83,11 @@ class c_Language : public c_LongTermMemory
      }
 
     else{
+            PatternPointer = GetPattern().find("Aun");
+            if(PatternPointer >= 0){
+                CorrectedPattern                   = GetPattern();
+                CorrectedPattern[PatternPointer+1] = 'a';
+                ConfidenceLevel                    = 100;}
             if(Pattern == "duvu"){
                 CorrectedPattern = "dnvu";
                 ConfidenceLevel = 100;}

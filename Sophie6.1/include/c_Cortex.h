@@ -31,6 +31,7 @@ class c_Cortex : public c_Language
             int QuestionLocation;
             int UserResponse;
             int ContractionLocation;
+            int ConjunctionLocation;
             int AdverbLocation;
             int DirectiveLocation;
             int JoinerLocation;
@@ -55,6 +56,7 @@ class c_Cortex : public c_Language
             AdjectiveLocation        = -1;
             FirstUnknown             = -1;
             ContractionLocation      = -1;
+            ConjunctionLocation      = -1;
             DeterminerLocation       = -1;
             ProNounOtherLocation     = -1;
             ISQ                      = false;
@@ -86,6 +88,7 @@ class c_Cortex : public c_Language
                     Pattern += GetWordType(x);
                     tmpWordType = GetWordType(x);
                     if (tmpWordType == 't') {UnderstandingLevel++;}
+                    if (tmpWordType == 'c') {UnderstandingLevel++; ConjunctionLocation = x;}
                     if (tmpWordType == 'n') {NounLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'd') {DeterminerLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'p') {ProNounOtherLocation = x; UnderstandingLevel++;}
@@ -102,11 +105,12 @@ class c_Cortex : public c_Language
                     if (tmpWordType == 'P') {ProperNounLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'j') {JoinerLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 's') {PluralPossessiveLocation = x; UnderstandingLevel++;}
-                    if (tmpWordType == 'D') {DirectObjectLocation = x; UnderstandingLevel++;}
-                    if (tmpWordType == 'I') {IndirectObjectLocation = x; UnderstandingLevel++;}
+                    //if (tmpWordType == 'D') {DirectObjectLocation = x; UnderstandingLevel++;}
+                    //if (tmpWordType == 'I') {IndirectObjectLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'N') {PluralPronounLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'G') {GenderIndicatorLocation = x; UnderstandingLevel++; isGenderIndicator = true;}
                     if (tmpWordType == 'W') {UnderstandingLevel++;}
+                    if (tmpWordType == 'B') {UnderstandingLevel++;}
                     if (tmpWordType == 'u') {
                             UnknownCount++; UnKnownLocation = x;
                             if(FirstUnknown == -1) FirstUnknown = x;
@@ -998,9 +1002,44 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
             case 3: {
                 if(Verbose)
                     cout << "[c_Cortex::QuestionSentenceBreakDown()] Question direction Yes/No\n";
+                bool   LeftOfConjunctionMatch   = false;
+                bool   RightOfConjunctionMatch  = false;
+                int    LocalConjunctionLocation = GetConjunctionLocation();
+                string ResponseString           = "";
                 //checks for direct comparison i.e. the dog is black.   is the dog black
                 //compares adjective list with the adjective in the sentence
                 //sets MatchedAdjective to the location in the array if matched
+                //First check for Conjunction
+                if(LocalConjunctionLocation >=0){
+                    LeftOfConjunctionMatch = GetIsAdjectiveAssociatedToThisMemoryCell(GetWordTokens(GetSubjectLocation()),GetWords(LocalConjunctionLocation-1));
+                    RightOfConjunctionMatch = GetIsAdjectiveAssociatedToThisMemoryCell(GetWordTokens(GetSubjectLocation()),GetWords(LocalConjunctionLocation+1));
+                    ResponseString = "The " + GetWords(GetSubjectLocation()) + " ";
+                    if(LeftOfConjunctionMatch && RightOfConjunctionMatch){
+                        ResponseString += "is " + GetWords(LocalConjunctionLocation-1) + " and " + GetWords(LocalConjunctionLocation+1) + ".";
+                    }
+                    else{
+                        if(LeftOfConjunctionMatch){
+                            ResponseString += "is " + GetWords(LocalConjunctionLocation-1) + ".";
+                        }
+                        else{
+                            if(RightOfConjunctionMatch){
+                                ResponseString += "is " + GetWords(LocalConjunctionLocation+1) + ".";
+                            }
+                        }
+                    }
+                    if(LeftOfConjunctionMatch || RightOfConjunctionMatch){
+                        SlowSpeak(ResponseString);
+                        Result = true;
+                        break;
+                    }
+                    else{
+                        ResponseString += "is neither " + GetWords(LocalConjunctionLocation-1) + " or " + GetWords(LocalConjunctionLocation+1) + ".";
+                        SlowSpeak(ResponseString);
+                        Result = true;
+                        break;
+                    }
+                }
+
                 for(int x = 0; x <= AdjectiveCount; x++){
                     if(Adjectives[x] == GetWordTokens(GetAdjectiveLocation())) MatchedAdjective = x; }
                 //Checks for direct comparison of linked nouns between the subject and the indirect object

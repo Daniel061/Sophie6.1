@@ -121,6 +121,7 @@ public:
          if(SelectedWordType == 'A') LocalAdverbLocation = x;                       //save the Adverb location
          if(SelectedWordType == 'a') LocalAdjectiveLocation = x;                    //save the adjective location
          if(SelectedWordType == 'C') LocalContractionFlag = true;                   //mark has contraction
+         if(SelectedWordType == 'c') SetConjunctionLocation(x);                     //save the conjunction location
 
          LocalGenderClass = GetMemoryCellGenderClass(GetWordTokens(x));             //take care of GenderClass in sentence
          if(LocalGenderClass != '\0')

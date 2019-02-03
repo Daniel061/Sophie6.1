@@ -53,7 +53,9 @@ class c_LongTermMemory : public c_SubjectStack
               CopySentence.WordCount                      =GetWordCount();
               CopySentence.SubjectLocation                =GetSubjectLocation();
               CopySentence.OriginalString                 =GetOriginalString();
+              CopySentence.ConjunctionLocation            =GetConjunctionLocation();
               CopySentence.Pattern                        =GetPattern();
+              CopySentence.PreProcessedPattern            =GetPreProcessedPattern();
               CopySentence.HasPluralPronoun               =GetHasPluralPronoun();
               CopySentence.HasPunctuation                 =GetHasPunctuation();
               CopySentence.Punctuation                    =GetPunctuation();
@@ -143,6 +145,7 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << csIT->second.GetSubjectLocation() << Deliminator;
                         SentenceDataFile << csIT->second.GetOriginalString() << Deliminator;
                         SentenceDataFile << csIT->second.GetPattern() << Deliminator;
+                        SentenceDataFile << csIT->second.GetPreProcessedPattern()<< Deliminator;
                         SentenceDataFile << csIT->second.GetHasPluralPronoun() << Deliminator;
                         SentenceDataFile << csIT->second.GetHasPunctuation() << Deliminator;
                         SentenceDataFile << csIT->second.GetPunctuation() << Deliminator;
@@ -159,6 +162,7 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << csIT->second.GetIndirectObjectLocation() << Deliminator;
                         SentenceDataFile << csIT->second.GetHasGenderDeterminer() << Deliminator;
                         SentenceDataFile << csIT->second.GetGistOfSentence() << Deliminator;
+                        SentenceDataFile << csIT->second.GetConjunctionLocation() << Deliminator;
 
                         for(int x = 0; x <= csIT->second.GetWordCount()-1; x++){
                             SentenceDataFile << csIT->second.GetWords(x) << Deliminator;
@@ -225,41 +229,45 @@ class c_LongTermMemory : public c_SubjectStack
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetPattern(strLineData);                           //set Pattern
                 getline (SentenceDataFile,strLineData);
+                CopySentence.SetPreProcessedPattern(strLineData);               //set PreProcessedPattern
+                getline (SentenceDataFile,strLineData);
                 CopySentence.SetHasPluralPronoun(stoi(strLineData,&decType));   //set bool HasPluralPronoun
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetHasPunctuation(stoi(strLineData,&decType));   //set bool HasPunctuation
+                CopySentence.SetHasPunctuation(stoi(strLineData,&decType));     //set bool HasPunctuation
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetPunctuation(strLineData[0]);         //set char Punctuation character
+                CopySentence.SetPunctuation(strLineData[0]);                    //set char Punctuation character
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetIsQuestion(stoi(strLineData,&decType));       //set bool isQuestion
+                CopySentence.SetIsQuestion(stoi(strLineData,&decType));         //set bool isQuestion
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetHasContraction(stoi(strLineData,&decType));   //set bool HasContraction
+                CopySentence.SetHasContraction(stoi(strLineData,&decType));     //set bool HasContraction
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetHasGreetingsWord(stoi(strLineData,&decType)); //set bool HasGreetingsWord
+                CopySentence.SetHasGreetingsWord(stoi(strLineData,&decType));   //set bool HasGreetingsWord
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetHasGenderReference(stoi(strLineData,&decType));//set bool HasGenderReference
+                CopySentence.SetHasGenderReference(stoi(strLineData,&decType)); //set bool HasGenderReference
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetHasBeenUnderstood(stoi(strLineData,&decType)); //set bool HasBeenUnderstood
+                CopySentence.SetHasBeenUnderstood(stoi(strLineData,&decType));  //set bool HasBeenUnderstood
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetAdverbLocation(stoi(strLineData,&decType));    //set int AdverbLocation
+                CopySentence.SetAdverbLocation(stoi(strLineData,&decType));     //set int AdverbLocation
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetNounCount(stoi(strLineData,&decType));         //set int NounCount
+                CopySentence.SetNounCount(stoi(strLineData,&decType));          //set int NounCount
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetVerbLocation(stoi(strLineData,&decType));      //set int VerbLocation
+                CopySentence.SetVerbLocation(stoi(strLineData,&decType));       //set int VerbLocation
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetAdjectiveLocation(stoi(strLineData,&decType)); //set int AdjectiveLocation
+                CopySentence.SetAdjectiveLocation(stoi(strLineData,&decType));  //set int AdjectiveLocation
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetNamePointer(stoi(strLineData,&decType));       //set int NamePointer
+                CopySentence.SetNamePointer(stoi(strLineData,&decType));        //set int NamePointer
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetIndirectObjectLocation(stoi(strLineData,&decType)); //set int IndirectObjectLocation
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetHasGenderDeterminer(stoi(strLineData,&decType));//set bool HasGenderDeterminer
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetGistOfSentence(strLineData);                    //set Gist data
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetConjunctionLocation(stoi(strLineData,&decType));//set Conjunction Location
 
                 for(int x = 0; x<=CopySentence.GetWordCount()-1; x++){
                     getline (SentenceDataFile,strLineData);
-                    CopySentence.SetWords(strLineData,x);               //set string Words[x]
+                    CopySentence.SetWords(strLineData,x);                       //set string Words[x]
                     getline (SentenceDataFile,strLineData);
                     CopySentence.SetWordTokens(x,stoi(strLineData,&decType));    //set int WordTokens[x]
                     getline (SentenceDataFile,strLineData);

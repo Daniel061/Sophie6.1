@@ -422,6 +422,17 @@ class c_Lobes : public c_MemoryCell
                return Result;
           }
 
+///====================================================================================
+          //First Checks to see if cell address given exists,
+          //if so, checks to see if AdjectiveToCheck is associated to this cell address.
+          //Returns true if so, false if not or cell doesn't exist
+          bool GetIsAdjectiveAssociatedToThisMemoryCell(int Address, string AdjectiveToCheck){
+               bool Result = false;
+               mapIT       = FindAddressInMap(Address,Result);
+                   if(Result){
+                      Result = mapIT->second.IsAdjectiveAssociatedToMe(AdjectiveToCheck);}
+               return Result;
+          }
 
           //returns the Memory cell count in RightLobe memory map
           int GetRightLobeCellCount(){
