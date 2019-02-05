@@ -152,13 +152,13 @@ class c_Lobes : public c_MemoryCell
                 return Result;
             }
 
-        //Returns NULL if doesn't exist, else returns CellWordType
+        //Returns 'u' if doesn't exist, else returns CellWordType
         char GetMemoryCellWordType(int Address){
             char Result;
             bool SearchResult = false;
             mapIT             = FindAddressInMap(Address,SearchResult);
                 if(!SearchResult){
-                    Result = '\0';}
+                    Result = 'u';}
                 else{
                    Result = mapIT->second.GetpCellWordType();}
             return Result;

@@ -86,7 +86,9 @@ public:
             SentenceWordType = GetWordType(x);                                      //Get Wordtype from c_sentence
             LocalWordCopy    = GetWords(x);                                         //Get a copy of the word
 
-            if(MemoryWordType == 'u'){                                             //Nothing in memory cell
+            if(MemoryWordType == '\0') MemoryWordType = 'u';
+
+            if(MemoryWordType == 'u'){                                              //Nothing in memory cell
                 SelectedWordType = LocalWordType;}                                  //  -use type from language helper, could still be 'u'
             else
                 if(MemoryWordType == LocalWordType){

@@ -142,6 +142,10 @@ class c_Cortex : public c_Language
             if(DirectiveLocation >=0)UnderstandingDegree = 2;     //directive trap
             if(PluralPronounLocation >=0)UnderstandingDegree = 3; //plural pronoun trap
             if(GetHasGreetingsWord())UnderstandingDegree = 4;     //greetings trap
+
+        ofstream PatternDataFile ("PatternData.dat", ios::out | ios::app);
+        if (PatternDataFile.is_open()){ PatternDataFile << Pattern << "," << GetOriginalString() << ",from before Switch(UnderstandingDegree)" << endl; PatternDataFile.close();}
+
             switch (UnderstandingDegree)
             {
                case 0:{  ///All new words, lots of work to do
