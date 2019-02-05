@@ -484,7 +484,10 @@ int HandleQuestion(string &strData){
 
 //--------------------------------HANDLE75LEVELUNDERSTANDING-------------------------------------------------------
 void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
-    bool Testing; Testing       = true;
+    bool Testing                = true;
+    bool NeedNameHandling       = false;
+    bool VerbFollowsNamePtr     = false;
+    int LocalNamePtrLocation    = GetNamePointer();
     int localVerbLocation       = -1;
     int SubjectLocationInCortex = -1;
     //in case of recursive entry, scan for unknown location again
@@ -498,11 +501,35 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         cout << "  Adjective Location:" << AdjectiveLocation << endl;
         cout << "  Verb Location:" << VerbLocation << endl;}
 
+    if(GetNamePointer() >=0){
+        NeedNameHandling = true;
+        if(GetWordType(LocalNamePtrLocation+1)=='v')
+            VerbFollowsNamePtr = true;
+    }
+
 
 //   if(NounLocation == -1){
 //            NounLocation = GetSubjectLocation(); //no noun! How to handle this Kenzie??  she says if pronoun(or Proper noun) use it as noun and subject
 //            ForcedSubjectChange = true;
 //   }
+
+                                                                                 //check for name handling work first
+   if( NeedNameHandling ){                                                       // i.e. my name is ...   or the dog's name is ...
+        Testing = false;                                                         // this is the only work required because of name reference
+        if(VerbFollowsNamePtr){                                                  // try to prevent out of bounds error
+        if(GetWordType(LocalNamePtrLocation-1) == 'y'){                          // the name data refers the the user, REMEMBER - this is a statement, not a question ~ questions trapped elsewhere
+                if(IsThisAPropernoun(GetWords(LocalNamePtrLocation+2))){         // enforce Capital letter usage
+                    SetUserName(GetWords(LocalNamePtrLocation+2));               // Store the user name
+                    SlowSpeak("Hello " + GetWords(LocalNamePtrLocation+2)+"!");  // greet the user
+                    SlowSpeak("Nice to meet you!");
+                    SetWordType('P',LocalNamePtrLocation+2);                     // Make sure word type is set
+                    }
+        }//end outward direction
+        }//end ensure verb follows name
+   }//end name handling
+
+
+
 
    while(Testing && (NounLocation >=0)){
 

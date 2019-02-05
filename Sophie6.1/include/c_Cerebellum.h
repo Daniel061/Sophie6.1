@@ -22,29 +22,29 @@ class c_Cerebellum : public c_Cortex
          int    QuoteMarker            = -1;
          string LocalPattern           = "";
          string LocalWordCopy          = "";
-         char   LocalGenderClass       = '\0';
-         char   LocalWordType          = '\0';
-         char   MemoryWordType         = '\0';
-         char   SentenceWordType       = '\0';
-         char   SelectedWordType       = '\0';
+         char   LocalGenderClass       = 'u';
+         char   LocalWordType          = 'u';
+         char   MemoryWordType         = 'u';
+         char   SentenceWordType       = 'u';
+         char   SelectedWordType       = 'u';
          bool   LocalBoolFlag          = false;
          bool   LocalContractionFlag   = false;
 
          void InitializeAll(){
-                 LocalGenderClass       = '\0';
-                 LocalAdjectiveLocation = 0;
-                 LocalAdverbLocation    = 0;
-                 LocalNamePointer       = 0;
-                 LocalVerbLocation      = 0;
+                 LocalGenderClass       = 'u';
+                 LocalAdjectiveLocation = -1;
+                 LocalAdverbLocation    = -1;
+                 LocalNamePointer       = -1;
+                 LocalVerbLocation      = -1;
                  LocalNounCount         = 0;
                  LocalWordCount         = -1;
                  QuoteMarker            = -1;
                  LocalPattern           = "";
                  LocalWordCopy          = "";
-                 SentenceWordType       = '\0';
-                 LocalWordType          = '\0';
-                 MemoryWordType         = '\0';
-                 SelectedWordType       = '\0';
+                 SentenceWordType       = 'u';
+                 LocalWordType          = 'u';
+                 MemoryWordType         = 'u';
+                 SelectedWordType       = 'u';
                  LocalBoolFlag          = false;
                  LocalContractionFlag   = false;}
 
@@ -86,7 +86,7 @@ public:
             SentenceWordType = GetWordType(x);                                      //Get Wordtype from c_sentence
             LocalWordCopy    = GetWords(x);                                         //Get a copy of the word
 
-            if(MemoryWordType == '\0'){                                             //Nothing in memory cell
+            if(MemoryWordType == 'u'){                                             //Nothing in memory cell
                 SelectedWordType = LocalWordType;}                                  //  -use type from language helper, could still be 'u'
             else
                 if(MemoryWordType == LocalWordType){
@@ -124,7 +124,7 @@ public:
          if(SelectedWordType == 'c') SetConjunctionLocation(x);                     //save the conjunction location
 
          LocalGenderClass = GetMemoryCellGenderClass(GetWordTokens(x));             //take care of GenderClass in sentence
-         if(LocalGenderClass != '\0')
+         if(LocalGenderClass != 'u')
             SetGenderClassInSentence(x,LocalGenderClass);
         }                                                                           //END of for loop to scan sentence
         SetAdjectiveLocation(LocalAdjectiveLocation);                               //store in c_Sentence

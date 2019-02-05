@@ -17,10 +17,11 @@ class c_Sentence : public c_Personality
         int    WordTokens[30];                  // dog = 625 initialize to 0
         bool   isContraction[30];               // true / false  initialize to false  initialize to ""
         int    QuoteLocation[30];               // "can't" set to 3 for this, set to -1 for "dog"
-        int    PluralWordFlag[30];              // u - undefined p - plural s - singular
+        int    PluralWordFlag[30];              // [u] - undefined [p] - plural [s] - singular
         int    IndirectObjectLocation;          // usually the second noun
         int    AdverbLocation;                  // -1 means none
         int    AdjectiveLocation;               // -1 means none
+        char   SentenceDirection;               // [m]-to me(Sophie) [y]-to the user  [n]-no direction  [u]-undeermined
         int    ConjunctionLocation;             // -1 means none
         int    NounCount;                       // number of nouns in this sentence
         int    VerbLocation;                    // position of verb
@@ -86,6 +87,8 @@ class c_Sentence : public c_Personality
                 HasGenderReference            = false;
                 HasBeenUnderstood             = false;
                 HasGenderDeterminer           = false;
+                SentenceDirection             = 'u';
+                ConjunctionLocation           = -1;
                 AdverbLocation                = -1;
                 NounCount                     = -1;
                 VerbLocation                  = -1;
@@ -93,6 +96,9 @@ class c_Sentence : public c_Personality
                 NamePointer                   = -1;
                 IndirectObjectLocation        = -1;}
 
+
+        void   SetSentenceDirection(char newVal){SentenceDirection = newVal;}
+        char   GetSentenceDirection(){return SentenceDirection;}
         void   SetConjunctionLocation(int newVal){ConjunctionLocation = newVal;}
         int    GetConjunctionLocation(){return ConjunctionLocation;}
         void   SetPreProcessedPattern(string newVal){PreProcessedPattern = newVal;}

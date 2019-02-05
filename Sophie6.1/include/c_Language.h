@@ -9,6 +9,19 @@ extern bool Verbose;
 extern int ThisSpeed;
 using namespace std;
 
+/*    Language Helper Class
+
+      This class is responsible for the first setting  of word types
+         (based on a small set of standards, finalizing word type setting is done elsewhere)
+       deconstruction of  plurals,
+       comparing patterns for proper form and/or stored patterns,
+       Finding the subject and/or indirect object of a sentence,
+       Sending responses to the console, delayed to appear as typing,
+       Receiving user responses,
+       and, finding the 'Gist' of the sentence and store that.
+
+*/
+
 class c_Language : public c_LongTermMemory
 {
     public:
@@ -23,7 +36,7 @@ class c_Language : public c_LongTermMemory
        c2_Sentence tmpSentence;
 
     public:
-//-------------------------Pattern Review  i.e. Language Helper ------------------------
+//-------------------------Pattern Review  ------------------------
  string PatternReview(string Pattern, int& ConfidenceLevel){
    if(Verbose)cout << "[c_Language::PatternReview]: " ;
    string CorrectedPattern, LeftOfJoiner, RightOfJoiner; CorrectedPattern = Pattern;
@@ -208,7 +221,6 @@ class c_Language : public c_LongTermMemory
            int  isGenderDeterminer  = -1;
            int  QuoteMarker         = -1;
            int  PatternMarker       = -1;
-           bool isContractionWord   = false;
            bool RuleTesting         = true;
            bool IsPlural            = false;
 
@@ -245,7 +257,6 @@ class c_Language : public c_LongTermMemory
 
 
                   if (QuoteMarker >= 0){
-                      isContractionWord = true;
                       tmpWordType   = 'C';}
                   if (isConjunction >= 0){
                       tmpWordType  = 'c';}
@@ -295,9 +306,13 @@ class c_Language : public c_LongTermMemory
                         SetIsPluralWord(LocationInSentence,true);
                         SetPluralWordFlag(LocationInSentence,'p');}
 
-                  if((UCWord[0] >='A') && (UCWord[0] <='Z') ) {
-                        tmpWordType = 'P';}
+                  //if((UCWord[0] >='A') && (UCWord[0] <='Z') ) {
+                        //tmpWordType = 'P';}
 
+
+
+                  /// **TODO**  Check for plural verbs, i.e. are->is
+                  ///           Try to set tense flag
                   //***check for plural word and set if so*****
                   //*rules:
                   //   1) Must not be a verb
@@ -446,7 +461,7 @@ class c_Language : public c_LongTermMemory
  }
 //--------------------------------end Find Word Type--------------------------------------
 
-
+//-----------------------SlowSpeak--------------------------------------------------------
 void SlowSpeak(string str_Data, bool Recording = true, int Delay = ThisSpeed, bool CarriageReturn = true ){
      string WorkingWord;
      if(Recording){
@@ -465,7 +480,9 @@ void SlowSpeak(string str_Data, bool Recording = true, int Delay = ThisSpeed, bo
         cout << "\b";
         if(CarriageReturn) cout << SlowSentence.GetPunctuation() << endl;
 }
+//--------------------------------End SlowSpeak------------------------------------------
 
+//-------------------------Request User Response-----------------------------------------
 int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeResponse = "", string OtherResponse = "")
 {
     int Matched = -1;
@@ -494,6 +511,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 
     return 0;
 }
+//-------------------------End Request User Response-----------------------------------------
 
 //---------------------------------FINDSUBJECT()--------------------------------------------------
         int FindSubject()
