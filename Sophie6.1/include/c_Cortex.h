@@ -105,12 +105,11 @@ class c_Cortex : public c_Language
                     if (tmpWordType == 'P') {ProperNounLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'j') {JoinerLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 's') {PluralPossessiveLocation = x; UnderstandingLevel++;}
-                    //if (tmpWordType == 'D') {DirectObjectLocation = x; UnderstandingLevel++;}
-                    //if (tmpWordType == 'I') {IndirectObjectLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'N') {PluralPronounLocation = x; UnderstandingLevel++;}
                     if (tmpWordType == 'G') {GenderIndicatorLocation = x; UnderstandingLevel++; isGenderIndicator = true;}
                     if (tmpWordType == 'W') {UnderstandingLevel++;}
                     if (tmpWordType == 'B') {UnderstandingLevel++;}
+                    if (tmpWordType == 'I') {UnderstandingLevel++;}
                     if (tmpWordType == 'u') {
                             UnknownCount++; UnKnownLocation = x;
                             if(FirstUnknown == -1) FirstUnknown = x;

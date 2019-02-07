@@ -26,6 +26,7 @@ class c_Sentence : public c_Personality
         int    NounCount;                       // number of nouns in this sentence
         int    VerbLocation;                    // position of verb
         int    NamePointer;                     // position of the word name
+        int    PrepositionPosition;             // position of preposition
         string Words[30];                       // Dog  i.e. original unedited word  initialize to ""
         string WordsLC[30];                     // dog  initialize to ""
         string SubWords[30];                    // replacement words, usually from subject stack
@@ -37,6 +38,7 @@ class c_Sentence : public c_Personality
         string Pattern;                         // i.e. dnvua  initialize to ""
         string PreProcessedPattern;             // i.e. duvu
         string GistOfSentence;                  // the meat of the phrase. i.e the dog is black = is black, initialize to ""
+        string subGistOfSentence;               // usually follows a preposition to the verb or end of sentence
         char   Punctuation;                     // !  initialize to null
         bool   HasPunctuation;                  // true / false initialize to false
         bool   HasPluralPronoun;                // true / false initialize to false
@@ -44,6 +46,7 @@ class c_Sentence : public c_Personality
         bool   HasContraction;                  // true / false initialize to false
         bool   HasGreetingsWord;                // true / false initialize to false
         bool   HasGenderReference;              // true / false initialize to false
+        bool   HasPreposition;                  // true / false initialize to false
         bool   HasBeenUnderstood;               // initialized to false, set externally
         bool   HasGenderDeterminer;             // the word 'gender' was used
         bool   IsPluralWord[30];                // indicates plural - read PluralRoot for base word
@@ -69,6 +72,7 @@ class c_Sentence : public c_Personality
                 ContractionLongFormFirst[x]   = "";
                 ContractionLongFormSecond[x]  = "";
                 GistOfSentence                = "";
+                subGistOfSentence             = "";
                 WordType[x]                   = 'u';
                 SecondaryType[x]              = 'u';
                 AlternateType[x]              = 'u';
@@ -79,6 +83,7 @@ class c_Sentence : public c_Personality
                 OriginalString                = "";
                 Pattern                       = "";
                 PreProcessedPattern           = "";
+                HasPreposition                = false;
                 HasPluralPronoun              = false;
                 HasPunctuation                = false;
                 IsQuestion                    = false;
@@ -88,15 +93,22 @@ class c_Sentence : public c_Personality
                 HasBeenUnderstood             = false;
                 HasGenderDeterminer           = false;
                 SentenceDirection             = 'u';
+                Punctuation                   = 'x';  //not set
                 ConjunctionLocation           = -1;
                 AdverbLocation                = -1;
                 NounCount                     = -1;
                 VerbLocation                  = -1;
                 AdjectiveLocation             = -1;
                 NamePointer                   = -1;
+                PrepositionPosition           = -1;
                 IndirectObjectLocation        = -1;}
 
-
+        void   SetSubGistOfSentence(string newVal){subGistOfSentence = newVal;}
+        string GetSubGistOfSentence(){return subGistOfSentence;}
+        void   SetPrepositionPosition(int newVal){PrepositionPosition = newVal;}
+        int    GetPrepositionPosition(){return PrepositionPosition;}
+        void   SetHasPreposition(bool newVal){HasPreposition = newVal;}
+        bool   GetHasPreposition(){return HasPreposition;}
         void   SetSentenceDirection(char newVal){SentenceDirection = newVal;}
         char   GetSentenceDirection(){return SentenceDirection;}
         void   SetConjunctionLocation(int newVal){ConjunctionLocation = newVal;}

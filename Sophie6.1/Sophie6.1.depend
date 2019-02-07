@@ -1,27 +1,27 @@
 # depslib dependency file v1.0
-1549325556 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
+1549578146 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
 	<iostream>
 	<fstream>
 	<c_Brain.h>
 	<time.h>
 
-1549221956 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
+1549581456 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
 	<c_Cerebellum.h>
 
 1549366770 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
 	<c_Cortex.h>
 
-1549366774 h:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
+1549580732 h:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
 	<c_Language.h>
 
-1549321068 h:\c++projects\sophie6.1\sophie6.1\include\c_language.h
+1549582800 h:\c++projects\sophie6.1\sophie6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<c_LongTermMemory.h>
 	<string>
 	<iostream>
 
-1549322124 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
+1549578146 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
 	<c_Personality.h>
 
 1548375606 h:\c++projects\sophie6.1\sophie6.1\include\c_personality.h
@@ -49,7 +49,7 @@
 	<string>
 	<iostream>
 
-1549322124 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
+1549494698 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
 	<c_Sentence.h>
 	<c_SubjectStack.h>
 	<unordered_map>
@@ -108,5 +108,116 @@
 	"c_SubjectData.h"
 
 1544995944 source:h:\c++projects\sophie6.1\sophie6.1\src\c_subjectstack.cpp
+	"c_SubjectStack.h"
+
+1549367690 source:d:\c++projects\sophie6.1\sophie6.1\main.cpp
+	<iostream>
+	<fstream>
+	<c_Brain.h>
+	<time.h>
+
+1549221956 d:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
+	<c_Cerebellum.h>
+
+1549366770 d:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
+	<c_Cortex.h>
+
+1549406144 d:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
+	<c_Language.h>
+
+1549406144 d:\c++projects\sophie6.1\sophie6.1\include\c_language.h
+	<c_Sentence.h>
+	<c2_Sentence.h>
+	<c_LongTermMemory.h>
+	<string>
+	<iostream>
+
+1549406144 d:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
+	<c_Personality.h>
+
+1548375606 d:\c++projects\sophie6.1\sophie6.1\include\c_personality.h
+	<c_ShortTermMemory.h>
+
+1546092816 d:\c++projects\sophie6.1\sophie6.1\include\c_shorttermmemory.h
+	<c_Medulla.h>
+
+1546092816 d:\c++projects\sophie6.1\sophie6.1\include\c_medulla.h
+	<c_Lobes.h>
+
+1549367236 d:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
+	<c_MemoryCell.h>
+	<unordered_map>
+	<fstream>
+	<iostream>
+	<string>
+
+1549225240 d:\c++projects\sophie6.1\sophie6.1\include\c_memorycell.h
+	<string>
+	<map>
+	<iostream>
+
+1547397584 d:\c++projects\sophie6.1\sophie6.1\include\c2_sentence.h
+	<string>
+	<iostream>
+
+1549322124 d:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
+	<c_Sentence.h>
+	<c_SubjectStack.h>
+	<unordered_map>
+	<fstream>
+	<map>
+	<vector>
+	<string>
+
+1549107672 d:\c++projects\sophie6.1\sophie6.1\include\c_subjectstack.h
+	<vector>
+	<map>
+	<c_Sentence.h>
+	<c_SubjectData.h>
+
+1549109846 d:\c++projects\sophie6.1\sophie6.1\include\c_subjectdata.h
+	<map>
+	<string>
+
+1545437288 source:d:\c++projects\sophie6.1\sophie6.1\src\c2_sentence.cpp
+	"c2_Sentence.h"
+
+1544998682 source:d:\c++projects\sophie6.1\sophie6.1\src\c_brain.cpp
+	"c_Brain.h"
+
+1544998580 source:d:\c++projects\sophie6.1\sophie6.1\src\c_cerebellum.cpp
+	"c_Cerebellum.h"
+
+1544997036 source:d:\c++projects\sophie6.1\sophie6.1\src\c_cortex.cpp
+	"c_Cortex.h"
+
+1545435962 source:d:\c++projects\sophie6.1\sophie6.1\src\c_language.cpp
+	"c_Language.h"
+
+1547676280 source:d:\c++projects\sophie6.1\sophie6.1\src\c_lobes.cpp
+	"c_Lobes.h"
+
+1547554716 source:d:\c++projects\sophie6.1\sophie6.1\src\c_longtermmemory.cpp
+	"c_LongTermMemory.h"
+
+1544998410 source:d:\c++projects\sophie6.1\sophie6.1\src\c_medulla.cpp
+	"c_Medulla.h"
+
+1547904456 source:d:\c++projects\sophie6.1\sophie6.1\src\c_memorycell.cpp
+	"c_MemoryCell.h"
+
+1544995222 source:d:\c++projects\sophie6.1\sophie6.1\src\c_personality.cpp
+	"c_Personality.h"
+
+1544996084 source:d:\c++projects\sophie6.1\sophie6.1\src\c_sentence.cpp
+	"c_Sentence.h"
+
+1544998330 source:d:\c++projects\sophie6.1\sophie6.1\src\c_shorttermmemory.cpp
+	"c_ShortTermMemory.h"
+
+1548763114 source:d:\c++projects\sophie6.1\sophie6.1\src\c_subjectdata.cpp
+	"c_SubjectData.h"
+
+1544995944 source:d:\c++projects\sophie6.1\sophie6.1\src\c_subjectstack.cpp
 	"c_SubjectStack.h"
 

@@ -63,8 +63,11 @@ class c_Brain : public c_Cerebellum
                  Parse(strData);                                                                        //break sentence down
                  SaveReceivedInput(strData,true);                                                       //update short term memory
                  SaveSentenceInLongTermMemory(strData);                                                 //update Long Term Memory
+
                  GatherAndSetAllSentenceData();                                                         //check language helper, memory and pattern review for data
-                 SetPreProcessedPattern(GetPattern());                                                       //save for later review
+                 ImplyUnknowns();                                                                       //let language try to set some unknowns
+                 SetPreProcessedPattern(GetPattern());                                                  //save for later review
+                 FindAndSetGistOfSentence();                                                            //save phrases of the sentence
                  if(IsThisSentenceDuplicated(strData))
                     SlowSpeak("You said that before.");
                  if(GetHasContraction()){                                                               //break contraction apart and rewrite sentence if so, rerun the process
@@ -74,6 +77,7 @@ class c_Brain : public c_Cerebellum
                     Parse(strData);
                     GatherAndSetAllSentenceData();
                     SetPreProcessedPattern(GetPattern());
+                    FindAndSetGistOfSentence();
                     SaveReceivedInput(strData,true);
                     SaveSentenceInLongTermMemory(strData);
                     NeedRerun = false;
@@ -104,7 +108,6 @@ class c_Brain : public c_Cerebellum
                      if(SubjectLocation >=0)
                         SetSubjectInStack(GetWordTokens(SubjectLocation),GetWords(SubjectLocation),GetOriginalString());
                      SavePreAndPostPatternConstruction(FirstPattern,GetPattern());                         //save learned pattern for future// language helper to use this
-                     FindAndSetGistOfSentence();
                      SaveCurrentSentenceInMap();
                      }
                    }

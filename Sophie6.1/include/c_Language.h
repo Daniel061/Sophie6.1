@@ -181,10 +181,10 @@ class c_Language : public c_LongTermMemory
            string ProNounsOutward =     " me mine my I i ";
            string Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
            string Questions =           " what where how when who ";
-           string Verbs =               " can will be have do say get make go know take see is come think look want give use find tell ask work seem feel try leave call am ";
+           string Verbs =               " can will be have do say get make go know take is see come think look want give use find tell ask work seem feel try leave call am been ";
            string PluralVerbs =         " are ";
            string SubjectReplacements = " it that this ";
-           string Adverbs =             " very ";
+           string Adverbs =             " very again ";
            string Directives =          " compare same about ";
            string JoiningWords =        " and ";
            string AssociativeWord =     " name name's ";
@@ -196,9 +196,11 @@ class c_Language : public c_LongTermMemory
            string GenderDeterminer =    " gender ";
            string GreetingsWord =       " hello hi ";
            string ConjunctionWords =    " or either ";
+           string PrepositionWords =    " in into after to on with within of at until across among throughout during towards upon across ";
            string SingularWord  =       "";
            string UCWord        =       GetWords(LocationInSentence);
 
+           int  isPreposition       = -1;
            int  isThrowAwayWord     = -1;
            int  isPluralPronoun     = -1;
            int  isPluralVerb        = -1;
@@ -233,6 +235,7 @@ class c_Language : public c_LongTermMemory
               OrigWordUC   = GetWords(LocationInSentence);
               tmpWord = " " + tmpWord + " ";
 
+                isPreposition       = PrepositionWords.find(tmpWord);
                 isConjunction       = ConjunctionWords.find(tmpWord);
                 isPluralVerb        = PluralVerbs.find(tmpWord);
                 isGenderDeterminer  = GenderDeterminer.find(tmpWord);
@@ -305,6 +308,10 @@ class c_Language : public c_LongTermMemory
                         tmpWordType = 'v';
                         SetIsPluralWord(LocationInSentence,true);
                         SetPluralWordFlag(LocationInSentence,'p');}
+                  if(isPreposition >=0){
+                        tmpWordType = 'I';
+                        SetHasPreposition(true);
+                        SetPrepositionPosition(LocationInSentence);}
 
                   //if((UCWord[0] >='A') && (UCWord[0] <='Z') ) {
                         //tmpWordType = 'P';}
@@ -434,18 +441,23 @@ class c_Language : public c_LongTermMemory
 
 
                         //Rule #8 Regular Plurals: dogs, cats, cars
-                        //   Last letter = 's'
+                        //   Last letter = 's' must not be 'ss'
                         PatternMarker = OrigWord.size()-1;
                         if(OrigWord[PatternMarker] == 's'){
-                            SingularWord = OrigWord.substr(0,PatternMarker);
-                            SetIsPluralWord(LocationInSentence,true);
-                            SetPluralRoot(LocationInSentence,SingularWord);
-                            SetPluralWordFlag(LocationInSentence,'p');
-                            SetWordType(GetMemoryCellWordType(Tokenize(SingularWord)),LocationInSentence);
-                            tmpWordType = GetMemoryCellWordType(Tokenize(SingularWord));
-                            RuleTesting = false;
-                            IsPlural    = true;
-                            break;
+                            PatternMarker = OrigWord.find("ss");
+                            if((PatternMarker >=0)&&((PatternMarker+2)==int(OrigWord.size()))){
+                              // end in ss don't proceed
+                            }
+                            else{
+                                SingularWord = OrigWord.substr(0,PatternMarker);
+                                SetIsPluralWord(LocationInSentence,true);
+                                SetPluralRoot(LocationInSentence,SingularWord);
+                                SetPluralWordFlag(LocationInSentence,'p');
+                                SetWordType(GetMemoryCellWordType(Tokenize(SingularWord)),LocationInSentence);
+                                tmpWordType = GetMemoryCellWordType(Tokenize(SingularWord));
+                                RuleTesting = false;
+                                IsPlural    = true;
+                                break;}
                         }
 
 
@@ -595,10 +607,14 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 //----------------------------Find and Set Gist of Current Sentence-----------------------------------------------------------
 
         bool FindAndSetGistOfSentence(){
-            bool   Result       = false;
-            bool   Checking     = true;
-            int    VerbPointer  = -1;
-            string GistString   = "";
+            //***TODO*** Find and set subGistOfSentence
+            //  also save and read this new data, plus Preposition flag and position in Long Term Memory
+            bool   Result        = false;
+            bool   Checking      = true;
+            int    VerbPointer   = -1;
+            int    StopPoint     = -1;
+            string GistString    = "";
+            string subGistString = "";
 
             for(int x = 0; x <=int(Pattern.size()); x++){
                 if(Pattern[x] == 'v') VerbPointer = x;
@@ -614,19 +630,40 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                     else
                     {
                         //process gist of statement
-                        //for now, gist is verb to the end of sentence
-                        for(int x = VerbPointer; x <= GetWordCount(); x++){
+                        //for now, gist is verb to the end of sentence or until preposition is found
+                        if(GetHasPreposition()){
+                            StopPoint = GetPrepositionPosition()-1;
+                            if(StopPoint < VerbPointer) StopPoint = GetWordCount();
+                        }
+                        else{
+                            StopPoint = GetWordCount();
+                        }
+                        for(int x = VerbPointer; x <= StopPoint; x++){
                             GistString += " " + GetWords(x);
                         }
                         Result   = true;  //control, Gist was found
                         Checking = false;
+                        //since there is a verb, Get sub-Gist of I type word (preposition)
+                        if(GetHasPreposition()){
+                            //Get sub-Gist including preposition, to verb pointer or end of sentence
+                            if(VerbPointer < GetPrepositionPosition()){
+                               StopPoint = GetWordCount();
+                            }
+                            else{
+                                StopPoint = VerbPointer;
+                            }
+                            for (int x = GetPrepositionPosition(); x < StopPoint; x++){
+                                subGistString += " " + GetWords(x);
+                            }
+                        }
                     }
 
             }//end while checking
 
             if(Result){
-                //store the Gist phrase
+                //store the Gist and subGist phrase
                 SetGistOfSentence(GistString);
+                SetSubGistOfSentence(subGistString);
             }
 
 
@@ -634,6 +671,43 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 
         }
 //------------------------END of Bool FINDANDSETGISTOFSENTENCE()----------------------------------------------------------------
+
+//-------------------------Imply Unknowns()-------------------------------------------------------------------------------------
+
+        void ImplyUnknowns(){
+        //look for unknown word types inside certain patterns and assert their type
+        // note:This pattern work and assumptions comes from observing patterns stored in PatternData.file for this purpose
+        //local vars
+        string    LocalPattern      = GetPattern();
+        bool      SettingPattern    = true;
+        int       PatternPointer    = -1;
+        while(SettingPattern){
+
+            //Check for noun possible in this pattern 'duIduvu'
+            // the unknown follows a determiner and then has a preposition, most likely a noun a position 1
+            PatternPointer = LocalPattern.find("duI");
+            if(PatternPointer >=0){
+                LocalPattern[PatternPointer+1] = 'n';
+                SetWordType('n',PatternPointer+1);
+                SetPattern(LocalPattern);
+                SettingPattern = false;
+                //break;} // allow next pattern check to proceed
+                }
+
+            PatternPointer = LocalPattern.find("duvu");
+            if(PatternPointer >= 0){
+                LocalPattern[PatternPointer+1] = 'n';
+                SetWordType('n',PatternPointer+1);
+                SetPattern(LocalPattern);
+                break;}
+
+         SettingPattern = false;
+        }//end while loop
+
+
+
+    }
+//-------------------------------END IMPLY UNKNOWNS------------------------------------------------------------------------------
 };
 
 #endif // C_LANGUAGE_H
