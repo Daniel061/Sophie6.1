@@ -181,7 +181,7 @@ class c_Language : public c_LongTermMemory
            string ProNounsOutward =     " me mine my I i ";
            string Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
            string Questions =           " what where how when who ";
-           string Verbs =               " can will be have do say get make go know take is see come think look want give use find tell ask work seem feel try leave call am been ";
+           string Verbs =               " go went can will be have do say get make go know take is see come think look want give use find tell ask work seem feel try leave call am been ";
            string PluralVerbs =         " are ";
            string SubjectReplacements = " it that this ";
            string Adverbs =             " very again ";
@@ -313,8 +313,8 @@ class c_Language : public c_LongTermMemory
                         SetHasPreposition(true);
                         SetPrepositionPosition(LocationInSentence);}
 
-                  //if((UCWord[0] >='A') && (UCWord[0] <='Z') ) {
-                        //tmpWordType = 'P';}
+                  if((UCWord[0] >='A') && (UCWord[0] <='Z') &&(tmpWordType == 'u') ) {
+                        tmpWordType = 'P';}
 
 
 
@@ -528,6 +528,8 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 //---------------------------------FINDSUBJECT()--------------------------------------------------
         int FindSubject()
         {
+            //********TODO**********************
+            //  Check for and flag/store dual subjects, i.e. Jack and Jill
             //Order Of Preference:
             //  Proper Noun
             ///  Pronoun   ****TODO***Check and use the other two types of Pronouns; ProNounsInward-m,ProNounsOutward-y, and still use ProNounsOther-p
@@ -686,10 +688,11 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             //Check for noun possible in this pattern 'duIduvu'
             // the unknown follows a determiner and then has a preposition, most likely a noun a position 1
             PatternPointer = LocalPattern.find("duI");
-            if(PatternPointer >=0){
+            while(PatternPointer >=0){
                 LocalPattern[PatternPointer+1] = 'n';
                 SetWordType('n',PatternPointer+1);
                 SetPattern(LocalPattern);
+                PatternPointer = LocalPattern.find("duI");   //check again
                 SettingPattern = false;
                 //break;} // allow next pattern check to proceed
                 }
