@@ -157,6 +157,8 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << csIT->second.GetHasGreetingsWord() << Deliminator;
                         SentenceDataFile << csIT->second.GetHasGenderReference() << Deliminator;
                         SentenceDataFile << csIT->second.GetHasBeenUnderstood() << Deliminator;
+                        SentenceDataFile << csIT->second.GetHasDualSubjects() << Deliminator;
+                        SentenceDataFile << csIT->second.GetSecondSubject() << Deliminator;
                         SentenceDataFile << csIT->second.GetAdverbLocation() << Deliminator;
                         SentenceDataFile << csIT->second.GetNounCount() << Deliminator;
                         SentenceDataFile << csIT->second.GetVerbLocation() << Deliminator;
@@ -251,6 +253,10 @@ class c_LongTermMemory : public c_SubjectStack
                 CopySentence.SetHasGenderReference(stoi(strLineData,&decType)); //set bool HasGenderReference
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetHasBeenUnderstood(stoi(strLineData,&decType));  //set bool HasBeenUnderstood
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetHasDualSubjects(stoi(strLineData,&decType));    //set bool HasDualSubjects
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetSecondSubject(strLineData);                     //set bool HasDualSubjects
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetAdverbLocation(stoi(strLineData,&decType));     //set int AdverbLocation
                 getline (SentenceDataFile,strLineData);

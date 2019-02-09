@@ -154,23 +154,28 @@ void Parse (string str_Sentence_Data)
 
 
 
-        int Tokenize (string str_Data)
+        int Tokenize (string str_Data,bool ForceUpperCase = true)
         {
-            int z;
+            int z          = str_Data.size();
             int y;
-            int PlaceValue;
-            int tmpToken;
+            int PlaceValue = 1;
+            int tmpToken   = 0;
+            int tmpHolder  = 0;
 
-                z = str_Data.size();
-                PlaceValue = 1;
-                tmpToken = 0;
+                if(ForceUpperCase){
+                for( y = z; y > 0; y--){
+                    tmpHolder  = int(toupper(str_Data[y-1]))-64; //'A' to 'Z'
+                    if(tmpHolder <= 0) tmpHolder = str_Data[y-1];
+                    tmpToken   = tmpToken + (tmpHolder*PlaceValue);
+                    PlaceValue = PlaceValue * 10;}}
+                  else {
+                    for( y = z; y > 0; y--){
+                    tmpHolder  = str_Data[y-1] - 64;
+                    if(tmpHolder <= 0) tmpHolder = str_Data[y-1];
+                    tmpToken   = tmpToken + (tmpHolder*PlaceValue);
+                    PlaceValue = PlaceValue * 10;}
+                  }
 
-                for( y = z; y > 0; y--)
-                {
-                    tmpToken = tmpToken + (int(str_Data[y-1]))*PlaceValue;
-
-                    PlaceValue ++;
-                }
             return tmpToken;
 
         }

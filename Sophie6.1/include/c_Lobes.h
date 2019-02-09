@@ -154,7 +154,7 @@ class c_Lobes : public c_MemoryCell
 
         //Returns 'u' if doesn't exist, else returns CellWordType
         char GetMemoryCellWordType(int Address){
-            char Result;
+            char Result = 'u';
             bool SearchResult = false;
             mapIT             = FindAddressInMap(Address,SearchResult);
                 if(!SearchResult){
@@ -201,7 +201,7 @@ class c_Lobes : public c_MemoryCell
         //Returns char cell purpose
         char GetMemoryCellPurpose(int Address){
             bool Result = false;
-            char CellPurpose = '\0';
+            char CellPurpose = 'u';
             mapIT       = FindAddressInMap(Address,Result);
                 if(Result){
                     CellPurpose = mapIT->second.GetpCellPurpose();
@@ -232,7 +232,7 @@ class c_Lobes : public c_MemoryCell
 
         //Returns NULL if cell doesn't exist, else returns char value of WordTense
         char GetMemoryCellWordTense(int Address){
-            char Result       = '\0';
+            char Result       = 'u';
             bool SearchResult = false;
             mapIT             = FindAddressInMap(Address,SearchResult);
                 if(SearchResult){
@@ -263,7 +263,7 @@ class c_Lobes : public c_MemoryCell
         //Returns char GenderClass from memory cell
         char GetMemoryCellGenderClass(int Address){
             bool Result = false;
-            char Gender = '\0';
+            char Gender = 'u';
             mapIT       = FindAddressInMap(Address,Result);
                 if(Result){
                     Gender = mapIT->second.GetpCellGenderClass();
@@ -685,24 +685,26 @@ class c_Lobes : public c_MemoryCell
                 }
                 }
 
-        int Tokenize (string str_Data,bool ForceLowerCase = true)
+        int Tokenize (string str_Data,bool ForceUpperCase = true)
         {
-            int z;
+            int z          = str_Data.size();
             int y;
-            int PlaceValue;
-            int tmpToken;
+            int PlaceValue = 1;
+            int tmpToken   = 0;
+            int tmpHolder  = 0;
 
-                z = str_Data.size();
-                PlaceValue = 1;
-                tmpToken = 0;
-                if(ForceLowerCase){
+                if(ForceUpperCase){
                 for( y = z; y > 0; y--){
-                    tmpToken = tmpToken + (int(tolower(str_Data[y-1])))*PlaceValue;
-                    PlaceValue ++;}}
+                    tmpHolder  = int(toupper(str_Data[y-1]))-64; //'A' to 'Z'
+                    if(tmpHolder <= 0) tmpHolder = str_Data[y-1];
+                    tmpToken   = tmpToken + (tmpHolder*PlaceValue);
+                    PlaceValue = PlaceValue * 10;}}
                   else {
                     for( y = z; y > 0; y--){
-                    tmpToken = tmpToken + (int(str_Data[y-1]))*PlaceValue;
-                    PlaceValue ++;}
+                    tmpHolder  = str_Data[y-1] - 64;
+                    if(tmpHolder <= 0) tmpHolder = str_Data[y-1];
+                    tmpToken   = tmpToken + (tmpHolder*PlaceValue);
+                    PlaceValue = PlaceValue * 10;}
                   }
 
             return tmpToken;

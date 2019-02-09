@@ -5,7 +5,7 @@
 	<c_Brain.h>
 	<time.h>
 
-1549581456 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
+1549726136 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
 	<c_Cerebellum.h>
 
 1549366770 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
@@ -21,7 +21,7 @@
 	<string>
 	<iostream>
 
-1549578146 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
+1549667784 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
 	<c_Personality.h>
 
 1548375606 h:\c++projects\sophie6.1\sophie6.1\include\c_personality.h
@@ -33,23 +33,23 @@
 1546092816 h:\c++projects\sophie6.1\sophie6.1\include\c_medulla.h
 	<c_Lobes.h>
 
-1549367236 h:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
+1549727122 h:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
 	<c_MemoryCell.h>
 	<unordered_map>
 	<fstream>
 	<iostream>
 	<string>
 
-1549225240 h:\c++projects\sophie6.1\sophie6.1\include\c_memorycell.h
+1549725228 h:\c++projects\sophie6.1\sophie6.1\include\c_memorycell.h
 	<string>
 	<map>
 	<iostream>
 
-1547397584 h:\c++projects\sophie6.1\sophie6.1\include\c2_sentence.h
+1549725270 h:\c++projects\sophie6.1\sophie6.1\include\c2_sentence.h
 	<string>
 	<iostream>
 
-1549494698 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
+1549668124 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
 	<c_Sentence.h>
 	<c_SubjectStack.h>
 	<unordered_map>

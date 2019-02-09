@@ -158,31 +158,31 @@ class c_Brain : public c_Cerebellum
             switch (Command)
             {
 
-            case 623: //end
+            case 644: //end
                 {
                     Control = -1;
                     SlowSpeak( "Good Bye!");
                     break;
                 }
-            case 1090: // exit
+            case 7510: // exit 1090
                 {
                     Control =  -1;
                     SlowSpeak( "Good Bye!");
                     break;
                 }
-            case 2699: // mood level
+            case 141916: // mood level
                 {
                     cout << "MoodLevel = " << GetMoodLevel() << endl;
                     Control = 2;
                     break;
                 }
-            case 2979: // goodbye
+            case 8654455: // goodbye
                 {
                     Control =  -1;
                     SlowSpeak( "Good Bye!");
                     break;
                 }
-            case 3337:    // cell report
+            case 1871332:    // cell report
                 {
                     int WorkingWord = CommandCheckSentence.GetWordTokens(2);
                     int AdjectivesInMap[20];
@@ -225,7 +225,7 @@ class c_Brain : public c_Cerebellum
                     Control = 2;
                     break;
                 }
-            case 3058:   //verbose
+            case 22683695:   //verbose
                 {
                     if(Verbose)
                         Verbose = false;
@@ -235,7 +235,7 @@ class c_Brain : public c_Cerebellum
                     Control = 2;
                     break;
                 }
-            case 3109:  //version
+            case 22700064:  //version
                 {
                     cout << "Version:" << Version << endl;
                     Control = 2;
@@ -248,25 +248,25 @@ class c_Brain : public c_Cerebellum
                     break;
                 }
 
-            case 3383:  //report last
+            case 12653322:  //report last
                 {
                     Report();
                     Control = 2;
                     break;
                 }
-            case 4854:  //moodlevel
+            case 1465527262:  //moodlevel
                 {
                     cout << "MoodLevel = " << GetMoodLevel() << endl;
                     Control = 2;
                     break;
                 }
-            case 4981:  //dump sentence
+            case 196606435:  //dump sentence
                 {
                     DumpSentencesInMap();
                     Control = 2;
                     break;
                 }
-            case 5352:  //subject report
+            case 22998250:  //subject report
                 //Add a check for three words in CommandCheckSentence, if a third, report all data about it only
                 // otherwise dump the list of subject names and adjective + related noun counts
                 {
@@ -306,7 +306,7 @@ class c_Brain : public c_Cerebellum
                     break;
                 }
 
-            case 5365:   // pattern report 'duvu'
+            case 18188394:   // pattern report 'duvu'
                 {
                     Control = 2;
                     cout << GetMemoryCellWordLC("",CommandCheckSentence.GetWordTokens(2)) << " points to "

@@ -39,6 +39,7 @@ class c_Sentence : public c_Personality
         string PreProcessedPattern;             // i.e. duvu
         string GistOfSentence;                  // the meat of the phrase. i.e the dog is black = is black, initialize to ""
         string subGistOfSentence;               // usually follows a preposition to the verb or end of sentence
+        string SecondSubject;                   // For DualSubjects
         char   Punctuation;                     // !  initialize to null
         bool   HasPunctuation;                  // true / false initialize to false
         bool   HasPluralPronoun;                // true / false initialize to false
@@ -47,6 +48,7 @@ class c_Sentence : public c_Personality
         bool   HasGreetingsWord;                // true / false initialize to false
         bool   HasGenderReference;              // true / false initialize to false
         bool   HasPreposition;                  // true / false initialize to false
+        bool   HasDualSubjects;                 // i.e. Jack and Jill
         bool   HasBeenUnderstood;               // initialized to false, set externally
         bool   HasGenderDeterminer;             // the word 'gender' was used
         bool   IsPluralWord[30];                // indicates plural - read PluralRoot for base word
@@ -83,6 +85,7 @@ class c_Sentence : public c_Personality
                 OriginalString                = "";
                 Pattern                       = "";
                 PreProcessedPattern           = "";
+                SecondSubject                 = "";
                 HasPreposition                = false;
                 HasPluralPronoun              = false;
                 HasPunctuation                = false;
@@ -92,6 +95,7 @@ class c_Sentence : public c_Personality
                 HasGenderReference            = false;
                 HasBeenUnderstood             = false;
                 HasGenderDeterminer           = false;
+                HasDualSubjects               = false;
                 SentenceDirection             = 'u';
                 Punctuation                   = 'x';  //not set
                 ConjunctionLocation           = -1;
@@ -103,6 +107,11 @@ class c_Sentence : public c_Personality
                 PrepositionPosition           = -1;
                 IndirectObjectLocation        = -1;}
 
+
+        void   SetSecondSubject(string newVal){SecondSubject = newVal;}
+        string GetSecondSubject(){return SecondSubject;}
+        void   SetHasDualSubjects(bool newVal){HasDualSubjects = newVal;}
+        bool   GetHasDualSubjects(){return HasDualSubjects;}
         void   SetSubGistOfSentence(string newVal){subGistOfSentence = newVal;}
         string GetSubGistOfSentence(){return subGistOfSentence;}
         void   SetPrepositionPosition(int newVal){PrepositionPosition = newVal;}
