@@ -40,6 +40,7 @@ class c_Sentence : public c_Personality
         string GistOfSentence;                  // the meat of the phrase. i.e the dog is black = is black, initialize to ""
         string subGistOfSentence;               // usually follows a preposition to the verb or end of sentence
         string SecondSubject;                   // For DualSubjects
+        int    SecondSubjectLocation;           // For Dual subjects
         char   Punctuation;                     // !  initialize to null
         bool   HasPunctuation;                  // true / false initialize to false
         bool   HasPluralPronoun;                // true / false initialize to false
@@ -105,9 +106,13 @@ class c_Sentence : public c_Personality
                 AdjectiveLocation             = -1;
                 NamePointer                   = -1;
                 PrepositionPosition           = -1;
+                SecondSubjectLocation         = -1;
                 IndirectObjectLocation        = -1;}
 
 
+
+        void   SetSecondSubjectLocation(int newVal){SecondSubjectLocation = newVal;}
+        int    GetSecondSubjectLocation(){return SecondSubjectLocation;}
         void   SetSecondSubject(string newVal){SecondSubject = newVal;}
         string GetSecondSubject(){return SecondSubject;}
         void   SetHasDualSubjects(bool newVal){HasDualSubjects = newVal;}

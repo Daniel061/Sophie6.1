@@ -1141,6 +1141,35 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
                  break;
              }
+             case 5:{ //data miner, i.e. Who fell down
+                 if(Verbose)
+                    cout << "[c_Cortex::QuestionSentenceBreakDown()] Case 5 Data Miner\n";
+                  bool   DualSubs      = false;
+                  string SecSub        = "";
+                  string FrstSub       = "";
+                  string strResponse   = "";
+                  if(FindPhraseInSentenceMap(GetGistOfSentence())){
+                    //phrase exists, pull subject for response
+                    FrstSub = GetSubjectWithMatchingPhraseInSentenceMap(GetGistOfSentence(),SecSub,DualSubs);
+                    if(DualSubs){
+                        strResponse = FrstSub + " and " + SecSub + " " + GetGistOfSentence() + ".";
+                    }
+                    else{
+                        strResponse = FrstSub + " " +GetGistOfSentence() + ".";
+                    }
+
+                    SlowSpeak(strResponse);
+                  }
+                  else{
+                    SlowSpeak("I don't know.");
+                    SlowSpeak(":(");
+                  }
+
+
+
+                 Result = true;
+                 break;
+             }
 
             default: if(Verbose) cout << "[c_Cortex::QuestionSentenceBreakDown()] No direction detected.\n";
         }
@@ -1263,7 +1292,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         //  2  - To another pronoun, i.e they them he him she her it we
         //  3  - First word Question
         //  4  - name word used in phrase i.e. name set or request
-        //
+        //  5  - data miner, i.e. who is
         // -1  - Direction not determined
 
         int    DirectionDetected    = -1;
@@ -1290,7 +1319,8 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         PatternMatch = WorkingPattern.find("qdnv") + WorkingPattern.find("qvdn") + 1;
         if (PatternMatch >= 0){
             DirectionDetected = 2;}
-
+        if(GetWordsLC(0) == "who"){
+            DirectionDetected = 5;}   //data miner, i.e. who fell down
 
         if(Verbose)
             cout << "   Direction of Phrase Detected:" << DirectionDetected << endl;

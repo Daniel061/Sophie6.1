@@ -125,8 +125,12 @@ class c_Brain : public c_Cerebellum
         void Report(){
         int WC = GetWordCount();
         cout << "Punctuation Flag:" << boolalpha << GetHasPunctuation() << "  Punctuation Character:" << GetPunctuation() << endl;
-        cout << "Word Count:" << WC << " Pattern:" << GetPattern() << endl;
-        cout << "Subject location:" << GetSubjectLocation() << "\nIndirect Object Location:" << GetIndirectObjectLocation() << endl;
+        cout << "Word Count:" << WC << " Pattern:" << GetPattern() << " Dual Subject Flag:" << boolalpha << GetHasDualSubjects() <<endl;
+        cout << "Subject location:" << GetSubjectLocation() << "\nIndirect Object Location:" << GetIndirectObjectLocation() << " Second Subject:" << GetSecondSubject() << endl;
+        cout << "Gist of sentence:" << GetGistOfSentence() << "\nSubGist of sentence:" << GetSubGistOfSentence() << endl;
+        cout << "Sentence is question flag:" << boolalpha << GetIsQuestion() << endl;
+        cout << "Sentence has preposition flag:" << boolalpha << GetHasPreposition() << endl;
+        cout << "Sentence was understood:" << boolalpha << GetHasBeenUnderstood() << endl;
         for (int x = 0; x < WC; x++){
             cout << x << " " << GetWords(x) << ":" << GetWordTokens(x) <<  " Type:"
             << GetWordType(x) << " isContraction: " << GetisContraction(x) << "\n     Quote Location:" << GetQuoteLocation(x) << "  Plural flag: " <<
@@ -248,7 +252,7 @@ class c_Brain : public c_Cerebellum
                     break;
                 }
 
-            case 12653322:  //report last
+            case 1880010:  //report last
                 {
                     Report();
                     Control = 2;

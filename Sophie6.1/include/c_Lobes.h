@@ -3,11 +3,13 @@
 
 #include <c_MemoryCell.h>
 #include <unordered_map>
+#include <cstdio>
 #include <fstream>
 #include <iostream>
 #include <string>
 
-extern bool Verbose;
+extern bool   Verbose;
+extern string Version;
 
 class c_Lobes : public c_MemoryCell
 {
@@ -685,6 +687,14 @@ class c_Lobes : public c_MemoryCell
                 }
                 }
 
+
+
+        string MakeStringLowerCase(string strData){
+            for(int x =0; x<= int(strData.size()); x++)
+                strData[x] = tolower(strData[x]);
+            return strData;
+        }
+
         int Tokenize (string str_Data,bool ForceUpperCase = true)
         {
             int z          = str_Data.size();
@@ -711,19 +721,12 @@ class c_Lobes : public c_MemoryCell
 
         }
 
-        string MakeStringLowerCase(string strData){
-            for(int x =0; x<= int(strData.size()); x++)
-                strData[x] = tolower(strData[x]);
-            return strData;
-        }
-
-
-
         void LobesStoreTheLearnedWords(){
             string Delim            = "\n";
             int    Count            = 0;
             ofstream LearnedDataFile ("LearnedData.dat", ios::out);
             if (LearnedDataFile.is_open()){
+                    LearnedDataFile << "VERSION " << Version << ", file version" << Delim;
                 for(fileIT = RightLobeMemoryMap.begin(); fileIT != RightLobeMemoryMap.end(); fileIT++ ){
                     LearnedDataFile << "Original string,"     << fileIT->second.GetpCellDataString() << Delim;
                     LearnedDataFile << "Lower Case string,"   << fileIT->second.GetpCellDataLC() << Delim;
@@ -773,6 +776,7 @@ class c_Lobes : public c_MemoryCell
 
           ofstream PatternFile ("PatternWorkLearned.dat", ios::out);
           if(PatternFile.is_open()){
+                PatternFile << "VERSION " << Version << Delim;
                 for(fileIT = LeftLobeMemoryMap.begin(); fileIT != LeftLobeMemoryMap.end(); fileIT++ ){
                     PatternFile << fileIT->second.GetpCellDataString() << Delim;
                     PatternFile << fileIT->second.GetpCellPointerToNextPattern() << Delim;
@@ -784,6 +788,7 @@ class c_Lobes : public c_MemoryCell
 
 
         void LobesReadTheLearnedWords(){
+                //ensure datafile version is the same as our version, if not, delete the file
                 string     strLineData     = "";
                 int        Count           = 0;
                 ifstream LearnedDataFile ("LearnedData.dat");
@@ -791,6 +796,15 @@ class c_Lobes : public c_MemoryCell
                 cout << "..";
                 if(LearnedDataFile.is_open()){
                         getline(LearnedDataFile,strLineData,',');
+                        if(strLineData != "VERSION " + Version){
+                            LearnedDataFile.close();
+                            remove("LearnedData.dat");
+                            strLineData = "";
+                        }
+                        else{ //skip to the data
+                            getline(LearnedDataFile,strLineData);
+                            getline(LearnedDataFile,strLineData,',');
+                        }
                   while(strLineData != ""){
                         WorkingCell.InitializeAll();
                         getline(LearnedDataFile,strLineData);
@@ -902,6 +916,13 @@ class c_Lobes : public c_MemoryCell
               string SecondLineData = "";
               if(PatternFile.is_open()){
                     getline(LearnedDataFile,strLineData);
+                    if(strLineData != "VERSION " + Version){
+                        PatternFile.close();
+                        remove("PatternWorkLearned.dat");
+                    }
+                    else{
+                        getline(LearnedDataFile,strLineData);
+                    }
                     while(strLineData != ""){
                         getline(LearnedDataFile,SecondLineData);
                         SavePreAndPostPatternConstruction(strLineData,"",stoi(SecondLineData,&decType));

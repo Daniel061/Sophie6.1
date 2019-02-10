@@ -3,10 +3,13 @@
 #include <c_Sentence.h>
 #include <c_SubjectStack.h>
 #include <unordered_map>
+#include <cstdio>
 #include <fstream>
 #include <map>
 #include <vector>
 #include <string>
+
+extern string Version;
 
 class c_LongTermMemory : public c_SubjectStack
 {
@@ -75,6 +78,9 @@ class c_LongTermMemory : public c_SubjectStack
               CopySentence.HasGenderDeterminer            =GetHasGenderDeterminer();
               CopySentence.GistOfSentence                 =GetGistOfSentence();
               CopySentence.subGistOfSentence              =GetSubGistOfSentence();
+              CopySentence.HasDualSubjects                =GetHasDualSubjects();
+              CopySentence.SecondSubject                  =GetSecondSubject();
+              CopySentence.SecondSubjectLocation          =GetSecondSubjectLocation();
 
 
             }//-------------------END COPYCURRENTSENTENCE----------------------------
@@ -93,25 +99,57 @@ class c_LongTermMemory : public c_SubjectStack
 
         void SaveCurrentSentenceInMap(){
             int SentenceToken = 0;
-
-            CopyCurrentSentence();
-            SentenceToken = Tokenize(CopySentence.OriginalString);
-            CopySentenceMap.emplace(SentenceToken,CopySentence);
-            soIT = SentenceOrder.begin();
-            SentenceOrder.emplace(soIT,SentenceToken);
+            if(!GetIsQuestion()){
+                CopyCurrentSentence();
+                SentenceToken = Tokenize(CopySentence.OriginalString);
+                CopySentenceMap.emplace(SentenceToken,CopySentence);
+                soIT = SentenceOrder.begin();
+                SentenceOrder.emplace(soIT,SentenceToken);
+            }
         }
 
         bool FindPhraseInSentenceMap(string PhraseToFind){
-            PhraseToFind = " " + PhraseToFind + " ";
-            int MatchedLocation = -1;
+            PhraseToFind = " " + PhraseToFind;
+            //if(PhraseToFind[int(PhraseToFind.size()-1)] != ' '){
+            //    PhraseToFind += " ";
+            //}
+            int    MatchedLocation = -1;
+            bool   ResultOfSearch  = false;
+            string strOrigString   = "";
             csIT = CopySentenceMap.begin();
-            for(int x = 0; x<= int(CopySentenceMap.size()); x++){
-                MatchedLocation = csIT->second.GetOriginalString().find(PhraseToFind);
+            for(int x = 0; x< int(CopySentenceMap.size()); x++){
+                strOrigString = csIT->second.GetOriginalString();
+                MatchedLocation = strOrigString.find(PhraseToFind);
                 if(MatchedLocation >=0){
-                  return true;
+                  ResultOfSearch = true;
                   break;}
                 csIT++;
             }
+            return ResultOfSearch;
+        }
+
+
+        string GetSubjectWithMatchingPhraseInSentenceMap(string PhraseToFind,string &strSecondSubject, bool &HasDualSubs){
+            PhraseToFind = " " + PhraseToFind ;
+            //if(PhraseToFind[int(PhraseToFind.size()-1)] != ' '){
+            //    PhraseToFind += " ";
+            //}
+            int    MatchedLocation = -1;
+            int    SubLoc          = -1;
+            string strOrigString   = "";
+            csIT = CopySentenceMap.begin();
+            for(int x = 0; x< int(CopySentenceMap.size()); x++){
+                strOrigString = csIT->second.GetOriginalString();
+                MatchedLocation = strOrigString.find(PhraseToFind);
+                if(MatchedLocation >=0){
+                  SubLoc = csIT->second.GetSubjectLocation();
+                  strSecondSubject = csIT->second.GetSecondSubject();
+                  HasDualSubs      = csIT->second.GetHasDualSubjects();
+                  return csIT->second.GetWords(SubLoc);
+                  break;}
+                csIT++;
+            }
+            return "";
         }
 
 
@@ -141,9 +179,9 @@ class c_LongTermMemory : public c_SubjectStack
         void LTMSaveSentencesInFile(){
             ofstream SentenceDataFile ("SentenceDataFile.dat", ios::out);
             if (SentenceDataFile.is_open()){
-
+                SentenceDataFile << "VERSION " << Version << Deliminator;
                 for (csIT = CopySentenceMap.begin(); csIT != CopySentenceMap.end(); csIT++){
-
+                      if(!csIT->second.GetIsQuestion()){
                         SentenceDataFile << csIT->second.GetWordCount() << Deliminator;
                         SentenceDataFile << csIT->second.GetSubjectLocation() << Deliminator;
                         SentenceDataFile << csIT->second.GetOriginalString() << Deliminator;
@@ -159,6 +197,7 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << csIT->second.GetHasBeenUnderstood() << Deliminator;
                         SentenceDataFile << csIT->second.GetHasDualSubjects() << Deliminator;
                         SentenceDataFile << csIT->second.GetSecondSubject() << Deliminator;
+                        SentenceDataFile << csIT->second.GetSecondSubjectLocation() << Deliminator;
                         SentenceDataFile << csIT->second.GetAdverbLocation() << Deliminator;
                         SentenceDataFile << csIT->second.GetNounCount() << Deliminator;
                         SentenceDataFile << csIT->second.GetVerbLocation() << Deliminator;
@@ -190,9 +229,9 @@ class c_LongTermMemory : public c_SubjectStack
 
                         }
 
+                      }//end if not question sentence
 
-
-                }
+                }//end for count
             }
             else {
                 cout << "file didn't open" << endl;
@@ -201,6 +240,7 @@ class c_LongTermMemory : public c_SubjectStack
 
             ofstream SentenceDataOrderFile ("SentenceDataOrderFile.dat", ios::out);
             if (SentenceDataOrderFile.is_open()){
+               SentenceDataOrderFile << "VERSION " << Version << Deliminator;
                if(SentenceOrder.size()>=1){
                  soIT = SentenceOrder.end();
                  soIT--;
@@ -224,6 +264,14 @@ class c_LongTermMemory : public c_SubjectStack
             ifstream SentenceDataFile ("SentenceDataFile.dat");
             if (SentenceDataFile.is_open()){
                getline (SentenceDataFile,strLineData);
+               if(strLineData != "VERSION " + Version){
+                SentenceDataFile.close();
+                remove("SentenceDataFile.dat");
+                strLineData = "";
+               }
+               else{
+                getline (SentenceDataFile,strLineData);  //skip past version
+               }
 
               while(strLineData !=""){
 
@@ -256,7 +304,9 @@ class c_LongTermMemory : public c_SubjectStack
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetHasDualSubjects(stoi(strLineData,&decType));    //set bool HasDualSubjects
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetSecondSubject(strLineData);                     //set bool HasDualSubjects
+                CopySentence.SetSecondSubject(strLineData);                     //set second Subject
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetSecondSubjectLocation(stoi(strLineData,&decType));//set Second Subject location
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetAdverbLocation(stoi(strLineData,&decType));     //set int AdverbLocation
                 getline (SentenceDataFile,strLineData);
@@ -323,6 +373,14 @@ class c_LongTermMemory : public c_SubjectStack
             ifstream SentenceDataOrderFile ("SentenceDataOrderFile.dat");
             if (SentenceDataOrderFile.is_open()){
                     getline (SentenceDataOrderFile,strLineData);
+                    if(strLineData != "VERSION " + Version){
+                        SentenceDataOrderFile.close();
+                        remove("SentenceDataOrderFile.dat");
+                        strLineData = "";
+                    }
+                    else{
+                        getline (SentenceDataOrderFile,strLineData);
+                    }
                 while(strLineData != ""){
                     soIT = SentenceOrder.begin();
                     SentenceOrder.emplace(soIT,stoi(strLineData,&decType));

@@ -64,7 +64,7 @@ class c_Language : public c_LongTermMemory
     */
     CorrectedPattern = Pattern;
     JoinerLocation = Pattern.find("j");
-    if((JoinerLocation >=0) & (JoinerLocation < int(Pattern.size()))){
+    if((JoinerLocation >=1) & (JoinerLocation < int(Pattern.size()))){  //not the first word and not the last word
         LeftOfJoiner = Pattern.substr(JoinerLocation + LeftOfJoinerLocation,1);
         RightOfJoiner = Pattern.substr(JoinerLocation + RightOfJoinerLocation,1);
         if(RightOfJoiner == "d"){
@@ -546,6 +546,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             int SecondNounLocation;       SecondNounLocation = -1;
             int ProNounLocation;          ProNounLocation    = -1;
             int ProperNounLocation;       ProperNounLocation = -1;
+            int JoinerLocation;           JoinerLocation     = -1;
             string Pattern;               Pattern            = "";
             bool PickingSubject;          PickingSubject     = true;
 
@@ -562,6 +563,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                 if(GetWordType(x)== 'P')if(ProperNounLocation == -1) ProperNounLocation = x;
                 if(GetWordType(x)== 'm')if(ProNounLocation == -1) ProNounLocation = x;
                 if(GetWordType(x)== 'y')if(ProNounLocation == -1) ProNounLocation = x;
+                if(GetWordType(x)== 'j') JoinerLocation = x;
                 if(GetWordType(x)== 'v'){ SetVerbLocation(x);}
                 if(GetWordType(x)== 'a'){ SetAdjectiveLocation(x);}
                 Pattern += GetWordType(x);
@@ -571,12 +573,12 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             if(SecondNounLocation != -1) SetNounCount(2); else SetNounCount(1);
 
             if( (ProperNounLocation != -1) && (NounLocation != -1) ){
-                SetIndirectObjectLocation(ProperNounLocation);
+                SetIndirectObjectLocation(NounLocation);       //set indirect object
                 SubLocation = ProperNounLocation;
                 PickingSubject = false;}
             else
                 if ((ProNounLocation != -1) && (NounLocation != -1)){
-                    SetIndirectObjectLocation(ProNounLocation);
+                    SetIndirectObjectLocation(NounLocation);
                     SubLocation = ProNounLocation;
                     PickingSubject = false;}
 
@@ -598,6 +600,20 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 
               PickingSubject = false;
             }
+
+                if(JoinerLocation >= 1){                      //check for dual subjects
+                    if((JoinerLocation +1) == SubLocation){
+                        SetHasDualSubjects(true);
+                        SetSecondSubject(GetWords(JoinerLocation - 1));
+                        SetSecondSubjectLocation(JoinerLocation - 1);}
+                     else {
+                        if((JoinerLocation - 1) == SubLocation)
+                        {SetHasDualSubjects(true);
+                         SetSecondSubject(GetWords(JoinerLocation + 1));
+                         SetSecondSubjectLocation(JoinerLocation + 1);}
+                     }
+                }
+
             if(Verbose)
                     cout << "Suggested subject location:" << SubLocation << " Pattern:" << GetPattern() << " Indirect Object Location:" << GetIndirectObjectLocation()<< endl;
             SetSubjectLocation(SubLocation);
@@ -609,24 +625,30 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 //----------------------------Find and Set Gist of Current Sentence-----------------------------------------------------------
 
         bool FindAndSetGistOfSentence(){
+        if(Verbose)cout << "[c_Language::FindAndSetGistOfSentence] :";
             //***TODO*** Find and set subGistOfSentence
             //  also save and read this new data, plus Preposition flag and position in Long Term Memory
-            bool   Result        = false;
-            bool   Checking      = true;
-            int    VerbPointer   = -1;
-            int    StopPoint     = -1;
-            string GistString    = "";
-            string subGistString = "";
+            bool   Result          = false;
+            bool   Checking        = true;
+            int    VerbPointer     = -1;
+            int    QuestionPointer = -1;
+            int    StopPoint       = -1;
+            string GistString      = "";
+            string subGistString   = "";
 
             for(int x = 0; x <=int(Pattern.size()); x++){
                 if(Pattern[x] == 'v') VerbPointer = x;
+                if(Pattern[x] == 'q') QuestionPointer = x;
             }
 
-            if(VerbPointer < 0) Checking = false; //no verb, cannot find gist without it(yet)
+            if( (VerbPointer < 0) && (!GetIsQuestion()) ) Checking = false; //no verb, cannot find gist without it(yet)
             while (Checking){
                     if(GetIsQuestion()){
                         //process gist of question
-
+                        for (int x = QuestionPointer+1; x <= GetWordCount(); x++){
+                            GistString += " " + GetWords(x);
+                        }
+                        Result = true;     //control, Gist was found
                         Checking = false;
                     }
                     else
@@ -664,8 +686,21 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 
             if(Result){
                 //store the Gist and subGist phrase
-                SetGistOfSentence(GistString);
-                SetSubGistOfSentence(subGistString);
+                //  trim leading space
+                string  NewGistString   = "";
+                string  NewSubGist      = "";
+                for(int x = 1; x<= int(GistString.size()-1); x++){
+                    NewGistString += GistString[x];
+                }
+                for(int x = 1; x <=int(subGistString.size()-1); x++){
+                    NewSubGist += subGistString[x];
+                }
+                SetGistOfSentence(NewGistString);
+                SetSubGistOfSentence(NewSubGist);
+                if (Verbose){
+                    cout << "\n  Gist =" << GistString << endl;
+                    cout << "  subGist =" << subGistString << endl;
+                 }
             }
 
 
