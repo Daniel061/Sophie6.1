@@ -38,21 +38,21 @@ class c_LongTermMemory : public c_SubjectStack
         void CopyCurrentSentence(){
             CopySentence.InitializeVars();
             for (int x =0; x<=GetWordCount(); x++){
-                CopySentence.Words[x]                     = GetWords(x);
-                CopySentence.WordTokens[x]                = GetWordTokens(x);
-                CopySentence.QuoteLocation[x]             = GetQuoteLocation(x);
-                CopySentence.isContraction[x]             = GetisContraction(x);
-                CopySentence.WordsLC[x]                   = GetWordsLC(x);
-                CopySentence.SubWords[x]                  = GetSubWords(x);
-                CopySentence.WordType[x]                  = GetWordType(x);
-                CopySentence.SecondaryType[x]             = GetSecondaryType(x);
-                CopySentence.AlternateType[x]             = GetAlternateType(x);
-                CopySentence.GenderClassInSentence[x]     = GetGenderClassInSentence(x);
-                CopySentence.ContractionLongFormFirst[x]  = GetContractionLongFormFirst(x);
-                CopySentence.ContractionLongFormSecond[x] = GetContractionLongFormSecond(x);
-                CopySentence.IsPluralWord[x]              = GetIsPluralWord(x);
-                CopySentence.PluralRoot[x]                = GetPluralRoot(x);
-                CopySentence.PluralWordFlag[x]            = GetPluralWordFlag(x);
+                CopySentence.SetWords(x,GetWords(x));
+                CopySentence.SetWordTokens(x,GetWordTokens(x));
+                CopySentence.SetQuoteLocation(x,GetQuoteLocation(x));
+                CopySentence.SetisContraction(x,GetisContraction(x));
+                CopySentence.SetWordsLC(x,GetWordsLC(x));
+                CopySentence.SetSubWords(x,GetSubWords(x));
+                CopySentence.SetWordType(x,GetWordType(x));
+                CopySentence.SetSecondaryType(x,GetSecondaryType(x));
+                CopySentence.SetAlternateType(x,GetAlternateType(x));
+                CopySentence.SetGenderClassInSentence(x,GetGenderClassInSentence(x));
+                CopySentence.SetContractionLongFormFirst(x,GetContractionLongFormFirst(x));
+                CopySentence.SetContractionLongFormSecond(x,GetContractionLongFormSecond(x));
+                CopySentence.SetIsPluralWord(x,GetIsPluralWord(x));
+                CopySentence.SetPluralRoot(x,GetPluralRoot(x));
+                CopySentence.SetPluralWordFlag(x,GetPluralWordFlag(x));
                 }
               CopySentence.WordCount                      =GetWordCount();
               CopySentence.SubjectLocation                =GetSubjectLocation();
@@ -332,7 +332,7 @@ class c_LongTermMemory : public c_SubjectStack
 
                 for(int x = 0; x<=CopySentence.GetWordCount()-1; x++){
                     getline (SentenceDataFile,strLineData);
-                    CopySentence.SetWords(strLineData,x);                       //set string Words[x]
+                    CopySentence.SetWords(x,strLineData);                       //set string Words[x]
                     getline (SentenceDataFile,strLineData);
                     CopySentence.SetWordTokens(x,stoi(strLineData,&decType));    //set int WordTokens[x]
                     getline (SentenceDataFile,strLineData);

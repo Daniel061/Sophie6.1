@@ -48,6 +48,7 @@
 		<Unit filename="include/c_ShortTermMemory.h" />
 		<Unit filename="include/c_SubjectData.h" />
 		<Unit filename="include/c_SubjectStack.h" />
+		<Unit filename="include/c_Word.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/c2_Sentence.cpp" />
 		<Unit filename="src/c_Brain.cpp" />
@@ -63,6 +64,7 @@
 		<Unit filename="src/c_ShortTermMemory.cpp" />
 		<Unit filename="src/c_SubjectData.cpp" />
 		<Unit filename="src/c_SubjectStack.cpp" />
+		<Unit filename="src/c_Word.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1549813750 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
+1550101184 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
 	<iostream>
 	<fstream>
 	<c_Brain.h>
@@ -21,8 +21,10 @@
 	<string>
 	<iostream>
 
-1549795508 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
+1550101158 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
 	<c_Personality.h>
+	<c_Word.h>
+	<map>
 
 1548375606 h:\c++projects\sophie6.1\sophie6.1\include\c_personality.h
 	<c_ShortTermMemory.h>
@@ -50,7 +52,7 @@
 	<string>
 	<iostream>
 
-1549814126 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
+1550101096 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
 	<c_Sentence.h>
 	<c_SubjectStack.h>
 	<unordered_map>
@@ -222,4 +224,10 @@
 
 1544995944 source:d:\c++projects\sophie6.1\sophie6.1\src\c_subjectstack.cpp
 	"c_SubjectStack.h"
+
+1550013034 h:\c++projects\sophie6.1\sophie6.1\include\c_word.h
+	<string>
+
+1549973678 source:h:\c++projects\sophie6.1\sophie6.1\src\c_word.cpp
+	"c_Word.h"
 

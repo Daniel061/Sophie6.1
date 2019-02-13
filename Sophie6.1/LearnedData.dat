@@ -1,4 +1,4 @@
-VERSION 6.1.008.06, file version
+VERSION 6.1.009.01, file version
 Original string,boy
 Lower Case string,boy
 Given name,
@@ -23,8 +23,8 @@ Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,home
-Lower Case string,home
+Original string,came
+Lower Case string,came
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -41,55 +41,7 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,9635
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,water
-Lower Case string,water
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,u
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,233068
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,broke
-Lower Case string,broke
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,u
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,39615
+Token,3235
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
@@ -143,54 +95,6 @@ Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,is
-Lower Case string,is
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,v
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,109
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,of
-Lower Case string,of
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,I
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,156
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
 Original string,crown
 Lower Case string,crown
 Given name,
@@ -215,8 +119,8 @@ Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,down
-Lower Case string,down
+Original string,cam
+Lower Case string,cam
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -233,62 +137,14 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,5744
+Token,323
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,Jack
-Lower Case string,jack
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,P
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,m
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,10141
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,and
-Lower Case string,and
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,j
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,244
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,up
-Lower Case string,up
+Original string,broke
+Lower Case string,broke
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -305,20 +161,20 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,226
+Token,39615
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,came
-Lower Case string,came
+Original string,a
+Lower Case string,a
 Given name,
 Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
-Word Type,u
+Word Type,d
 Word tense,u
 Secondary type,u
 Alternate type,u
@@ -329,14 +185,38 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,3235
+Token,1
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,pail
-Lower Case string,pail
+Original string,an
+Lower Case string,an
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,d
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,24
+Next Pattern,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,color
+Lower Case string,color
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -353,15 +233,16 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,16202
+Token,46368
 Next Pattern,0
-Number of Adjectives,0
+Number of Adjectives,1
+Adjective,black
 Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,1
-Noun,hill
-Original string,Jill
-Lower Case string,jill
+Number of Adverbs,1
+Adverb,is
+Related Nouns,0
+Original string,Mickey
+Lower Case string,mickey
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -371,19 +252,44 @@ Word Type,P
 Word tense,u
 Secondary type,u
 Alternate type,u
-Gender class,f
+Gender class,u
 Is root,0
 Is Set,1
 Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,11032
+Token,1394175
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
+Original string,animal
+Lower Case string,animal
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,n
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,250322
+Next Pattern,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,1
+Noun,dog
 Original string,tumbling
 Lower Case string,tumbling
 Given name,
@@ -431,9 +337,34 @@ Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
+Related Nouns,1
+Noun,animal
+Original string,Jack
+Lower Case string,jack
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,P
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,m
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,10141
+Next Pattern,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
 Related Nouns,0
-Original string,fell
-Lower Case string,fell
+Original string,down
+Lower Case string,down
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -450,20 +381,20 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,6632
+Token,5744
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,to
-Lower Case string,to
+Original string,dog
+Lower Case string,dog
 Given name,
 Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
-Word Type,I
+Word Type,n
 Word tense,u
 Secondary type,u
 Alternate type,u
@@ -474,20 +405,23 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,215
+Token,557
 Next Pattern,0
-Number of Adjectives,0
+Number of Adjectives,1
+Adjective,black
 Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,what
-Lower Case string,what
+Number of Adverbs,1
+Adverb,is
+Related Nouns,1
+Noun,animal
+Original string,black
+Lower Case string,black
 Given name,
 Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
-Word Type,q
+Word Type,a
 Word tense,u
 Secondary type,u
 Alternate type,u
@@ -498,20 +432,44 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,23830
+Token,32141
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,a
-Lower Case string,a
+Original string,Jill
+Lower Case string,jill
 Given name,
 Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
-Word Type,d
+Word Type,P
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,f
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,11032
+Next Pattern,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,pail
+Lower Case string,pail
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,n
 Word tense,u
 Secondary type,u
 Alternate type,u
@@ -522,7 +480,32 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,1
+Token,16202
+Next Pattern,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,1
+Noun,hill
+Original string,and
+Lower Case string,and
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,j
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,244
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
@@ -644,6 +627,174 @@ Singular location,0
 Next Verb,0
 Next Noun,0
 Token,67038
+Next Pattern,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,up
+Lower Case string,up
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,u
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,226
+Next Pattern,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,to
+Lower Case string,to
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,I
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,215
+Next Pattern,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,fell
+Lower Case string,fell
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,u
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,6632
+Next Pattern,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,is
+Lower Case string,is
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,v
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,109
+Next Pattern,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,of
+Lower Case string,of
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,I
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,156
+Next Pattern,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,can
+Lower Case string,can
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,v
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,324
+Next Pattern,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,water
+Lower Case string,water
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,u
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,233068
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
