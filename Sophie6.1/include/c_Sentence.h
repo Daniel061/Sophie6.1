@@ -19,10 +19,6 @@ class c_Sentence : public c_Personality
     public:
         int    WordCount;                       // no. of words in sentence not counting punctuation  initialize to 0
         int    SubjectLocation;                 // from 0 to WordCount, -1 = subject not located
-        //int    WordTokens[30];                  // dog = 625 initialize to 0
-        //bool   isContraction[30];               // true / false  initialize to false  initialize to ""
-        //int    QuoteLocation[30];               // "can't" set to 3 for this, set to -1 for "dog"
-        //int    PluralWordFlag[30];              // [u] - undefined [p] - plural [s] - singular
         int    IndirectObjectLocation;          // usually the second noun
         int    AdverbLocation;                  // -1 means none
         int    AdjectiveLocation;               // -1 means none
@@ -32,13 +28,6 @@ class c_Sentence : public c_Personality
         int    VerbLocation;                    // position of verb
         int    NamePointer;                     // position of the word name
         int    PrepositionPosition;             // position of preposition
-        //string Words[30];                       // Dog  i.e. original unedited word  initialize to ""
-        //string WordsLC[30];                     // dog  initialize to ""
-        //string SubWords[30];                    // replacement words, usually from subject stack
-        //string ContractionLongFormFirst[30];    // i.e.he's to he
-        //string ContractionLongFormSecond[30];   // i.e he's  to is
-        //string PluralRoot[30];                  // i.e. colors = color
-        //char   GenderClassInSentence[30];       // i.e m-male f-female n-neutral   initialize to u-undefined
         string OriginalString;                  // the whole unedited string  initialize to ""
         string Pattern;                         // i.e. dnvua  initialize to ""
         string PreProcessedPattern;             // i.e. duvu
@@ -57,36 +46,12 @@ class c_Sentence : public c_Personality
         bool   HasDualSubjects;                 // i.e. Jack and Jill
         bool   HasBeenUnderstood;               // initialized to false, set externally
         bool   HasGenderDeterminer;             // the word 'gender' was used
-        //bool   IsPluralWord[30];                // indicates plural - read PluralRoot for base word
-        //char   WordType[30];                    // n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
-                                                // n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object d(LC) Indirect object
-                                                // initialize to 'u'
-        //char   SecondaryType[30];               // same as WordType[]
-        //char   AlternateType[30];               // same as WordType[]
 
 
 
 
     public:
         void InitializeVars(){
-            for(int x =0; x < 30; x++){
-                //Words[x]                      = "";
-                //WordTokens[x]                 = 0;
-                //QuoteLocation[x]              = -1;
-                //isContraction[x]              = false;
-                //IsPluralWord[x]               = false;
-                //PluralWordFlag[x]             = 'u';
-                //PluralRoot[x]                 = "";
-                //WordsLC[x]                    = "";
-                //SubWords[x]                   = "";
-                //ContractionLongFormFirst[x]   = "";
-                //ContractionLongFormSecond[x]  = "";
-                //WordType[x]                   = 'u';
-                //SecondaryType[x]              = 'u';
-                //AlternateType[x]              = 'u';
-                //GenderClassInSentence[x]      = 'u';
-                }
-
                 WordCount                     = 0;
                 SubjectLocation               = -1;
                 OriginalString                = "";
