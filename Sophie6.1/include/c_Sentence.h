@@ -87,60 +87,88 @@ class c_Sentence : public c_Personality
        ///*******************ALL SENTENCE DATA FUNCTIONS***************************
         void   SetSecondSubjectLocation(int newVal){SecondSubjectLocation = newVal;}
         int    GetSecondSubjectLocation(){return SecondSubjectLocation;}
+
         void   SetSecondSubject(string newVal){SecondSubject = newVal;}
         string GetSecondSubject(){return SecondSubject;}
+
         void   SetHasDualSubjects(bool newVal){HasDualSubjects = newVal;}
         bool   GetHasDualSubjects(){return HasDualSubjects;}
+
         void   SetSubGistOfSentence(string newVal){subGistOfSentence = newVal;}
         string GetSubGistOfSentence(){return subGistOfSentence;}
+
         void   SetPrepositionPosition(int newVal){PrepositionPosition = newVal;}
         int    GetPrepositionPosition(){return PrepositionPosition;}
+
         void   SetHasPreposition(bool newVal){HasPreposition = newVal;}
         bool   GetHasPreposition(){return HasPreposition;}
+
         void   SetSentenceDirection(char newVal){SentenceDirection = newVal;}
         char   GetSentenceDirection(){return SentenceDirection;}
+
         void   SetConjunctionLocation(int newVal){ConjunctionLocation = newVal;}
         int    GetConjunctionLocation(){return ConjunctionLocation;}
+
         void   SetPreProcessedPattern(string newVal){PreProcessedPattern = newVal;}
         string GetPreProcessedPattern(){return PreProcessedPattern;}
+
         void   SetGistOfSentence(string newVal){GistOfSentence = newVal;}
         string GetGistOfSentence(){return GistOfSentence;}
+
         bool   GetHasGenderDeterminer(){return HasGenderDeterminer;}
         void   SetHasGenderDeterminer(bool newVal){HasGenderDeterminer = newVal;}
+
         bool   GetHasBeenUnderstood(){return HasBeenUnderstood;}
         void   SetHasBeenUnderstood(bool NewVal){HasBeenUnderstood = NewVal;}
+
         bool   GetHasGenderReference(){return HasGenderReference;}
         void   SetHasGenderReference(bool NewVal){HasGenderReference = NewVal;}
+
         bool   GetHasGreetingsWord(){return HasGreetingsWord;}
         void   SetHasGreetingsWord(bool NewVal){HasGreetingsWord = NewVal;}
+
         bool   GetHasContraction(){return HasContraction;}
         void   SetHasContraction(bool NewVal){HasContraction = NewVal;}
+
         int    GetNamePointer(){return NamePointer;}
         void   SetNamePointer(int NewLocation){NamePointer = NewLocation;}
+
         int    GetAdjectiveLocation(){return AdjectiveLocation;}
         void   SetAdjectiveLocation(int NewVal){AdjectiveLocation = NewVal;}
+
         void   SetVerbLocation(int NewLoc){VerbLocation = NewLoc;}
         int    GetVerbLocation(){return VerbLocation;}
+
         void   SetNounCount(int NewCount){NounCount = NewCount;}
         int    GetNounCount(){return NounCount;}
+
         int    GetIndirectObjectLocation(){return IndirectObjectLocation;}
         void   SetIndirectObjectLocation(int NewVal){IndirectObjectLocation = NewVal;}
+
         bool   GetHasPluralPronoun(){return HasPluralPronoun;}
         void   SetHasPluralPronoun(bool newVal){HasPluralPronoun = newVal;}
+
         int    GetWordCount(){return WordCount;}
         void   SetWordCount(int newVal){WordCount = newVal;}
+
         char   GetPunctuation(){return Punctuation;}
         void   SetPunctuation(char newVal){Punctuation = newVal;}
+
         void   SetHasPunctuation(bool newVal){HasPunctuation = newVal;}
         bool   GetHasPunctuation(){return HasPunctuation;}
+
         bool   GetIsQuestion(){return IsQuestion;}
         void   SetIsQuestion(bool ISQ){IsQuestion = ISQ;}
+
         string GetOriginalString(){return OriginalString;}
         void   SetOriginalString(string strData){OriginalString = strData;}
+
         void   SetSubjectLocation(int newLoc){SubjectLocation = newLoc;}
         int    GetSubjectLocation(){return SubjectLocation;}
+
         void   SetPattern(string strData){Pattern = strData;}
         string GetPattern(){return Pattern;}
+
         void   SetAdverbLocation(int newVal){AdverbLocation = newVal;}
         ///*****************END SENTENCE DATA FUNCTIONS***************************
 

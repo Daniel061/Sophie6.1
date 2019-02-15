@@ -177,13 +177,13 @@ class c_Language : public c_LongTermMemory
            char tmpWordType = 'u';
 
            string ProNounsInward =      " you your yours ";
-           string ProNounsOther =       " they them he him she her it we ";
+           string ProNounsOther =       " they them he him his she her it we ";
            string ProNounsOutward =     " me mine my I i ";
            string Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
            string Questions =           " what where how when who ";
            string Verbs =               " go went can will be have do say get make go know take is see come think look want give use find tell ask work seem feel try leave call am been ";
            string PluralVerbs =         " are ";
-           string SubjectReplacements = " it that this ";
+           string SubjectReplacements = " it that this its ";
            string Adverbs =             " very again ";
            string Directives =          " compare same about ";
            string JoiningWords =        " and ";

@@ -1,994 +1,488 @@
-VERSION 6.1.009.01
-4
-0
-Jack is a boy
-PvdG
-PvdG
-0
-0
-x
-0
-0
-0
-1
-1
-0
-
--1
--1
-1
-1
--1
--1
--1
-0
-is a boy 
-
--1
-u
-Jack
-10141
--1
-0
-jack
-
-u
-u
-u
-m
-
-
-0
-
-s
-is
-109
--1
-0
-is
-
-u
-u
-u
-u
-
-
-0
-
-s
-a
-1
--1
-0
-a
-
-u
-u
-u
-u
-
-
-0
-
-s
-boy
-375
--1
-0
-boy
-
-u
-u
-u
-m
-
-
-0
-
-s
-13
-0
-Jack and Jill went up the hill to fetch a pail of water
-PjPvudnIudnIu
-PjPvudnIudnIu
-0
-0
-x
-0
-0
-0
-0
-0
-1
-Jill
-2
--1
-2
-3
--1
--1
-6
-0
-went up the hill to fetch a pail
-of water
--1
-u
-Jack
-10141
--1
-0
-jack
-
-u
-u
-u
-u
-
-
-0
-
-s
-and
-244
--1
-0
-and
-
-u
-u
-u
-u
-
-
-0
-
-s
-Jill
-11032
--1
-0
-jill
-
-u
-u
-u
-u
-
-
-0
-
-s
-went
-23660
--1
-0
-went
-
-u
-u
-u
-u
-
-
-0
-
-s
-up
-226
--1
-0
-up
-
-u
-u
-u
-u
-
-
-0
-
-s
-the
-2085
--1
-0
-the
-
-u
-u
-u
-u
-
-
-0
-
-s
-hill
-9032
--1
-0
-hill
-
-u
-u
-u
-u
-
-
-0
-
-s
-to
-215
--1
-0
-to
-
-u
-u
-u
-u
-
-
-0
-
-s
-fetch
-67038
--1
-0
-fetch
-
-u
-u
-u
-u
-
-
-0
-
-s
-a
-1
--1
-0
-a
-
-u
-u
-u
-u
-
-
-0
-
-s
-pail
-16202
--1
-0
-pail
-
-u
-u
-u
-u
-
-
-0
-
-s
-of
-156
--1
-0
-of
-
-u
-u
-u
-u
-
-
-0
-
-s
-water
-233068
--1
-0
-water
-
-u
-u
-u
-u
-
-
-0
-
-s
-4
-0
-Jill is a girl
-PvdG
-PvdG
-0
-0
-x
-0
-0
-0
-1
-1
-0
-
--1
--1
-1
-1
--1
--1
--1
-0
-is a girl 
-
--1
-u
-Jill
-11032
--1
-0
-jill
-
-u
-u
-u
-f
-
-
-0
-
-s
-is
-109
--1
-0
-is
-
-u
-u
-u
-u
-
-
-0
-
-s
-a
-1
--1
-0
-a
-
-u
-u
-u
-u
-
-
-0
-
-s
-girl
-8092
--1
-0
-girl
-
-u
-u
-u
-f
-
-
-0
-
-s
-5
-1
-and Jill can tumbling after
-jPvuI
-jPvuI
-0
-0
-x
-0
-0
-0
-0
-0
-0
-
--1
--1
-1
-2
--1
--1
--1
-0
-can tumbling
-after
--1
-u
-and
-244
--1
-0
-and
-
-u
-u
-u
-u
-
-
-0
-
-s
-Jill
-11032
--1
-0
-jill
-
-u
-u
-u
-u
-
-
-0
-
-s
-can
-324
--1
-0
-can
-
-u
-u
-u
-u
-
-
-0
-
-s
-tumbling
-222333047
--1
-0
-tumbling
-
-u
-u
-u
-u
-
-
-0
-
-s
-after
-18068
--1
-0
-after
-
-u
-u
-u
-u
-
-
-0
-
-s
-4
-1
-the dog is black
-dnva
-dnvu
-0
-0
-x
-0
-0
-0
-0
-1
-0
-
--1
--1
-1
-2
-3
--1
--1
-0
-is black 
-
--1
-u
-the
-2085
--1
-0
-the
-
-u
-u
-u
-u
-
-
-0
-
-s
-dog
-557
--1
-0
-dog
-
-u
-u
-u
-u
-
-
-0
-
-s
-is
-109
--1
-0
-is
-
-u
-u
-u
-u
-
-
-0
-
-s
-black
-32141
--1
-0
-black
-
-u
-u
-u
-u
-
-
-0
-
-s
-5
-1
-the dog is an animal
-dnvdn
-dnvdu
-0
-0
-x
-0
-0
-0
-0
-1
-0
-
--1
--1
-2
-2
--1
--1
-4
-0
-is an animal 
-
--1
-u
-the
-2085
--1
-0
-the
-
-u
-u
-u
-u
-
-
-0
-
-s
-dog
-557
--1
-0
-dog
-
-u
-u
-u
-u
-
-
-0
-
-s
-is
-109
--1
-0
-is
-
-u
-u
-u
-u
-
-
-0
-
-s
-an
-24
--1
-0
-an
-
-u
-u
-u
-u
-
-
-0
-
-s
-animal
-250322
--1
-0
-animal
-
-u
-u
-u
-u
-
-
-0
-
-s
-4
-3
-black is a color
-avdn
-avdu
-0
-0
-x
-0
-0
-0
-0
-1
-0
-
--1
--1
-1
-1
-0
--1
--1
-0
-is a color 
-
--1
-u
-black
-32141
--1
-0
-black
-
-u
-u
-u
-u
-
-
-0
-
-s
-is
-109
--1
-0
-is
-
-u
-u
-u
-u
-
-
-0
-
-s
-a
-1
--1
-0
-a
-
-u
-u
-u
-u
-
-
-0
-
-s
-color
-46368
--1
-0
-color
-
-u
-u
-u
-u
-
-
-0
-
-s
-7
-0
-Jack fell down and broke his crown
-Puujuuu
-Puujuuu
-0
-0
-x
-0
-0
-0
-0
-0
-0
-
--1
--1
-1
--1
--1
--1
--1
-0
-
-
--1
-u
-Jack
-10141
--1
-0
-jack
-
-u
-u
-u
-u
-
-
-0
-
-s
-fell
-6632
--1
-0
-fell
-
-u
-u
-u
-u
-
-
-0
-
-s
-down
-5744
--1
-0
-down
-
-u
-u
-u
-u
-
-
-0
-
-s
-and
-244
--1
-0
-and
-
-u
-u
-u
-u
-
-
-0
-
-s
-broke
-39615
--1
-0
-broke
-
-u
-u
-u
-u
-
-
-0
-
-s
-his
-909
--1
-0
-his
-
-u
-u
-u
-u
-
-
-1
-his
-p
-crown
-49744
--1
-0
-crown
-
-u
-u
-u
-u
-
-
-0
-
-s
-4
-0
-Mickey is a dog
-Pvdn
-Pvdn
-0
-0
-x
-0
-0
-0
-0
-1
-0
-
--1
--1
-1
-1
--1
--1
-3
-0
-is a dog 
-
--1
-u
-Mickey
-1394175
--1
-0
-mickey
-
-u
-u
-u
-u
-
-
-0
-
-s
-is
-109
--1
-0
-is
-
-u
-u
-u
-u
-
-
-0
-
-s
-a
-1
--1
-0
-a
-
-u
-u
-u
-u
-
-
-0
-
-s
-dog
-557
--1
-0
-dog
-
-u
-u
-u
-u
-
-
-0
-
-s
+VERSION 6.1.009.03
+Word Count,4
+Subject Location,3
+Original string,black is a color
+Final pattern,avdn
+First pattern,avdu
+bool Has plural pronoun,0
+bool Has punctuation,0
+Punctuation character,x
+bool Is question,0
+bool Has contraction,0
+bool Has greeting word,0
+bool Has gender reference,0
+bool Has been understood,1
+bool Has dual subjects,0
+Second subject string,
+Second subject location,-1
+Adverb location,-1
+Noun count,1
+Verb location,1
+Adjective location,0
+Name pointer,-1
+Indirect object location,-1
+bool Has Gender determiner,0
+Gist of sentence,is a color 
+subGist of sentence,
+Conjunction location,-1
+Sentence direction,u
+Word data,black
+Word token,32141
+Quote Location,-1
+bool is contraction,0
+Word data LC,black
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,is
+Word token,109
+Quote Location,-1
+bool is contraction,0
+Word data LC,is
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,a
+Word token,1
+Quote Location,-1
+bool is contraction,0
+Word data LC,a
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,color
+Word token,46368
+Quote Location,-1
+bool is contraction,0
+Word data LC,color
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word Count,4
+Subject Location,3
+Original string,you can  do that  
+Final pattern,mvvr
+First pattern,mvvr
+bool Has plural pronoun,0
+bool Has punctuation,0
+Punctuation character,x
+bool Is question,0
+bool Has contraction,0
+bool Has greeting word,0
+bool Has gender reference,0
+bool Has been understood,1
+bool Has dual subjects,0
+Second subject string,
+Second subject location,-1
+Adverb location,-1
+Noun count,1
+Verb location,2
+Adjective location,-1
+Name pointer,-1
+Indirect object location,-1
+bool Has Gender determiner,0
+Gist of sentence,do that 
+subGist of sentence,
+Conjunction location,-1
+Sentence direction,u
+Word data,you
+Word token,2671
+Quote Location,-1
+bool is contraction,0
+Word data LC,you
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,can
+Word token,324
+Quote Location,-1
+bool is contraction,0
+Word data LC,can
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,do
+Word token,55
+Quote Location,-1
+bool is contraction,0
+Word data LC,do
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,that
+Word token,20830
+Quote Location,-1
+bool is contraction,0
+Word data LC,that
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word Count,5
+Subject Location,0
+Original string,Jack and Jill are children
+Final pattern,PjPvu
+First pattern,PjPvu
+bool Has plural pronoun,0
+bool Has punctuation,0
+Punctuation character,x
+bool Is question,0
+bool Has contraction,0
+bool Has greeting word,0
+bool Has gender reference,0
+bool Has been understood,0
+bool Has dual subjects,1
+Second subject string,Jill
+Second subject location,2
+Adverb location,-1
+Noun count,1
+Verb location,3
+Adjective location,-1
+Name pointer,-1
+Indirect object location,-1
+bool Has Gender determiner,0
+Gist of sentence,are children 
+subGist of sentence,
+Conjunction location,-1
+Sentence direction,u
+Word data,Jack
+Word token,10141
+Quote Location,-1
+bool is contraction,0
+Word data LC,jack
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,and
+Word token,244
+Quote Location,-1
+bool is contraction,0
+Word data LC,and
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,Jill
+Word token,11032
+Quote Location,-1
+bool is contraction,0
+Word data LC,jill
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,are
+Word token,285
+Quote Location,-1
+bool is contraction,0
+Word data LC,are
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,1
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,children
+Word token,39025864
+Quote Location,-1
+bool is contraction,0
+Word data LC,children
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word Count,5
+Subject Location,1
+Original string,the dog is an animal
+Final pattern,dnvdn
+First pattern,dnvdu
+bool Has plural pronoun,0
+bool Has punctuation,0
+Punctuation character,x
+bool Is question,0
+bool Has contraction,0
+bool Has greeting word,0
+bool Has gender reference,0
+bool Has been understood,1
+bool Has dual subjects,0
+Second subject string,
+Second subject location,-1
+Adverb location,-1
+Noun count,2
+Verb location,2
+Adjective location,-1
+Name pointer,-1
+Indirect object location,4
+bool Has Gender determiner,0
+Gist of sentence,is an animal 
+subGist of sentence,
+Conjunction location,-1
+Sentence direction,u
+Word data,the
+Word token,2085
+Quote Location,-1
+bool is contraction,0
+Word data LC,the
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,dog
+Word token,557
+Quote Location,-1
+bool is contraction,0
+Word data LC,dog
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,is
+Word token,109
+Quote Location,-1
+bool is contraction,0
+Word data LC,is
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,an
+Word token,24
+Quote Location,-1
+bool is contraction,0
+Word data LC,an
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,animal
+Word token,250322
+Quote Location,-1
+bool is contraction,0
+Word data LC,animal
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word Count,4
+Subject Location,1
+Original string,the dog is black
+Final pattern,dnva
+First pattern,dnvu
+bool Has plural pronoun,0
+bool Has punctuation,0
+Punctuation character,x
+bool Is question,0
+bool Has contraction,0
+bool Has greeting word,0
+bool Has gender reference,0
+bool Has been understood,1
+bool Has dual subjects,0
+Second subject string,
+Second subject location,-1
+Adverb location,-1
+Noun count,1
+Verb location,2
+Adjective location,3
+Name pointer,-1
+Indirect object location,-1
+bool Has Gender determiner,0
+Gist of sentence,is black 
+subGist of sentence,
+Conjunction location,-1
+Sentence direction,u
+Word data,the
+Word token,2085
+Quote Location,-1
+bool is contraction,0
+Word data LC,the
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,dog
+Word token,557
+Quote Location,-1
+bool is contraction,0
+Word data LC,dog
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,is
+Word token,109
+Quote Location,-1
+bool is contraction,0
+Word data LC,is
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,black
+Word token,32141
+Quote Location,-1
+bool is contraction,0
+Word data LC,black
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u

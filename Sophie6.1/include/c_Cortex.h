@@ -213,8 +213,8 @@ class c_Cortex : public c_Language
                    if (Verbose)
                     cout << "[c_Cortex.h::DeciperCurrentSentence] Case 10 - no code here" << endl;
 
-                 SlowSpeak("I'm going to have to work on this.");
-                 break;}
+                     SlowSpeak("I'm going to have to work on this.");
+                     break;}
 
                 case 25:{  ///Some understanding but depends on ratio
                    if (Verbose)
@@ -224,19 +224,19 @@ class c_Cortex : public c_Language
                      return true;}
                      else
                       SlowSpeak("I don't know "  + GetWords(FirstUnknown)+"?");
-                 break;}
+                    break;}
 
                 case 50:{  ///stronger understanding but also depends on ratio
                    if (Verbose)
                     cout << "[c_Cortex.h::DeciperCurrentSentence] Case 50 -send to WorkWithHalfLevel()" << endl;
-                 WorkWithHalfLevel(Pattern,DeterminerLocation);
-                 break;}
+                     WorkWithHalfLevel(Pattern,DeterminerLocation);
+                     break;}
 
                 case 75:{  ///Much stronger
                    if (Verbose)
                     cout << "[c_Cortex.h::DeciperCurrentSentence] Case 75 - send to Handle75LevelUnderstanding" << endl;
-                 Handle75LevelUnderstanding(strData);
-                 break;}
+                     Handle75LevelUnderstanding(strData);
+                     break;}
 
                 case 100:{  ///very strong
                    if (Verbose)
@@ -255,11 +255,11 @@ class c_Cortex : public c_Language
                      }
                      if((JoinerLocation != -1) && (Pattern[JoinerLocation+1]=='a') ){ //associate first adjective to subject, wasn't picked up before
                         AssociateMemoryCellAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(JoinerLocation-1)); }
-                 SlowSpeak("Okay.");
-                 IncreaseMoodLevel();
-                 SetHasBeenUnderstood(true);
-                 SlowSpeak(":)");
-                 break;}
+                     SlowSpeak("Okay.");
+                     IncreaseMoodLevel();
+                     SetHasBeenUnderstood(true);
+                     SlowSpeak(":)");
+                     break;}
 
             }
              return false;
