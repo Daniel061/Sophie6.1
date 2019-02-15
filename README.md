@@ -21,7 +21,7 @@ The program starts with a basic understanding and gets the user to teach it more
 If the user speaks too compilcatedly, the program gets frustrated and lets the user know. The user is forced to reword the response until the program understands. After understanding, the program builds on this and becomes less frustrated and eventualy learns more and more.
 Ultimately, the program seeks new information by asking the user directly to teach it about something not mentioned before.
 
-Current version V6.1.007.17 not for release to the general public. This is a work in progress project.
+Current version V6.1.009.03 not for release to the general public. This is a work in progress project.
 
 NOTE(1): ##Testers Needed!## Please see the issues tab for important information reguarding testers. This project requires input data to push the program to see where improvement or corrections are needed. If you become a Tester, your name will be added to the Contributors list and the help will be greatly appreciated.
 
