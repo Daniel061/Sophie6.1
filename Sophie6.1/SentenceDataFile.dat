@@ -1,9 +1,9 @@
-VERSION 6.1.009.12
-Word Count,7
+VERSION 6.1.009.20
+Word Count,4
 Subject Location,1
-Original string,the flowers in the gardin are growing
-Final pattern,dnIduvv
-First pattern,dnIduvv
+Original string,the horse is tall
+Final pattern,dnva
+First pattern,dnvu
 bool Has plural pronoun,0
 bool Has punctuation,0
 Punctuation character,x
@@ -11,29 +11,31 @@ bool Is question,0
 bool Has contraction,0
 bool Has greeting word,0
 bool Has gender reference,0
-bool Has been understood,0
+bool Has been understood,1
 bool Has dual subjects,0
 Second subject string,
 Second subject location,-1
 Adverb location,-1
 Noun count,1
-Verb location,6
-Adjective location,-1
+Verb location,2
+Adjective location,3
 Name pointer,-1
 Indirect object location,-1
 bool Has Gender determiner,0
-Gist of sentence,growing 
-subGist of sentence,in the gardin are
-Supportive phrase,the flowers in the gardin are 
+Gist of sentence,is tall 
+subGist of sentence,
+Supportive phrase,the horse 
 Conjunction location,-1
 Sentence direction,-1
+Days since 2019,46
+Understanding level,75
 Word data,the
 Word token,2085
 Quote Location,-1
 bool is contraction,0
 Word data LC,the
 Subsitute word,
-Word type,u
+Word type,d
 Secondary word type,u
 Alternate word type,u
 Gender class,u
@@ -43,29 +45,13 @@ bool is plural,0
 Plural root,
 Plural word flag,s
 Word tense,u
-Word data,flowers
-Word token,7373699
+Word data,horse
+Word token,96995
 Quote Location,-1
 bool is contraction,0
-Word data LC,flowers
+Word data LC,horse
 Subsitute word,
-Word type,u
-Secondary word type,u
-Alternate word type,u
-Gender class,u
-Contraction root 1st,
-Contraction root 2nd,
-bool is plural,1
-Plural root,flowers
-Plural word flag,p
-Word tense,u
-Word data,in
-Word token,104
-Quote Location,-1
-bool is contraction,0
-Word data LC,in
-Subsitute word,
-Word type,u
+Word type,n
 Secondary word type,u
 Alternate word type,u
 Gender class,u
@@ -75,13 +61,75 @@ bool is plural,0
 Plural root,
 Plural word flag,s
 Word tense,u
+Word data,is
+Word token,109
+Quote Location,-1
+bool is contraction,0
+Word data LC,is
+Subsitute word,
+Word type,v
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,tall
+Word token,20232
+Quote Location,-1
+bool is contraction,0
+Word data LC,tall
+Subsitute word,
+Word type,a
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word Count,4
+Subject Location,1
+Original string,the dog is black
+Final pattern,dnva
+First pattern,dnvu
+bool Has plural pronoun,0
+bool Has punctuation,0
+Punctuation character,x
+bool Is question,0
+bool Has contraction,0
+bool Has greeting word,0
+bool Has gender reference,0
+bool Has been understood,1
+bool Has dual subjects,0
+Second subject string,
+Second subject location,-1
+Adverb location,-1
+Noun count,1
+Verb location,2
+Adjective location,3
+Name pointer,-1
+Indirect object location,-1
+bool Has Gender determiner,0
+Gist of sentence,is black 
+subGist of sentence,
+Supportive phrase,the dog 
+Conjunction location,-1
+Sentence direction,-1
+Days since 2019,46
+Understanding level,75
 Word data,the
 Word token,2085
 Quote Location,-1
 bool is contraction,0
 Word data LC,the
 Subsitute word,
-Word type,u
+Word type,d
 Secondary word type,u
 Alternate word type,u
 Gender class,u
@@ -91,13 +139,13 @@ bool is plural,0
 Plural root,
 Plural word flag,s
 Word tense,u
-Word data,gardin
-Word token,728504
+Word data,dog
+Word token,557
 Quote Location,-1
 bool is contraction,0
-Word data LC,gardin
+Word data LC,dog
 Subsitute word,
-Word type,u
+Word type,n
 Secondary word type,u
 Alternate word type,u
 Gender class,u
@@ -107,29 +155,29 @@ bool is plural,0
 Plural root,
 Plural word flag,s
 Word tense,u
-Word data,are
-Word token,285
+Word data,is
+Word token,109
 Quote Location,-1
 bool is contraction,0
-Word data LC,are
+Word data LC,is
 Subsitute word,
-Word type,u
+Word type,v
 Secondary word type,u
 Alternate word type,u
 Gender class,u
 Contraction root 1st,
 Contraction root 2nd,
-bool is plural,1
+bool is plural,0
 Plural root,
 Plural word flag,s
 Word tense,u
-Word data,growing
-Word token,8974047
+Word data,black
+Word token,32141
 Quote Location,-1
 bool is contraction,0
-Word data LC,growing
+Word data LC,black
 Subsitute word,
-Word type,u
+Word type,a
 Secondary word type,u
 Alternate word type,u
 Gender class,u

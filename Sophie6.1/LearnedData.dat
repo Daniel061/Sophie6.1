@@ -1,12 +1,12 @@
-VERSION 6.1.009.12, file version
-Original string,
-Lower Case string,
+VERSION 6.1.009.20, file version
+Original string,tall
+Lower Case string,tall
 Given name,
 Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
-Word Type,v
+Word Type,a
 Word tense,u
 Secondary type,u
 Alternate type,u
@@ -17,20 +17,20 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,0
+Token,20232
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,are
-Lower Case string,are
+Original string,horse
+Lower Case string,horse
 Given name,
 Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
-Word Type,v
+Word Type,n
 Word tense,u
 Secondary type,u
 Alternate type,u
@@ -41,11 +41,13 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,285
+Token,96995
 Next Pattern,0
-Number of Adjectives,0
+Number of Adjectives,1
+Adjective,tall
 Nunber of Verbs,0
-Number of Adverbs,0
+Number of Adverbs,1
+Adverb,is
 Related Nouns,0
 Original string,the
 Lower Case string,the
@@ -71,8 +73,8 @@ Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,flowers
-Lower Case string,flowers
+Original string,dog
+Lower Case string,dog
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -89,14 +91,16 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,7373699
+Token,557
 Next Pattern,0
-Number of Adjectives,0
+Number of Adjectives,1
+Adjective,black
 Nunber of Verbs,0
-Number of Adverbs,0
+Number of Adverbs,1
+Adverb,is
 Related Nouns,0
-Original string,growing
-Lower Case string,growing
+Original string,is
+Lower Case string,is
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -113,20 +117,20 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,8974047
+Token,109
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,in
-Lower Case string,in
+Original string,black
+Lower Case string,black
 Given name,
 Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
-Word Type,I
+Word Type,a
 Word tense,u
 Secondary type,u
 Alternate type,u
@@ -137,31 +141,7 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,104
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,gardin
-Lower Case string,gardin
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,u
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,728504
+Token,32141
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0

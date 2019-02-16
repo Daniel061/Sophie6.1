@@ -7,8 +7,9 @@
 using namespace std;
 
 c_Brain Brain;
-string Version = "6.1.009.12";
+string Version = "6.1.009.20";
 bool Verbose;
+bool StoryMode = false;
 int  BaseSpeed = 600000000;
 int  SpeedStandard = 1000;
 int  RunningStandard = 9000000;  //adjust up or down to change delay for all machines. up=more delay

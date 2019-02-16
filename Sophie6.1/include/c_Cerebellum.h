@@ -13,40 +13,55 @@ class c_Cerebellum : public c_Cortex
     protected:
 
     private:
-         int    LocalAdjectiveLocation = 0;
-         int    LocalAdverbLocation    = 0;
-         int    LocalNamePointer       = 0;
-         int    LocalVerbLocation      = 0;
-         int    LocalNounCount         = 0;
-         int    LocalWordCount         = -1;
-         int    QuoteMarker            = -1;
-         string LocalPattern           = "";
-         string LocalWordCopy          = "";
-         char   LocalGenderClass       = 'u';
-         char   LocalWordType          = 'u';
-         char   MemoryWordType         = 'u';
-         char   SentenceWordType       = 'u';
-         char   SelectedWordType       = 'u';
-         bool   LocalBoolFlag          = false;
-         bool   LocalContractionFlag   = false;
+         int    LocalAdjectiveLocation   = 0;
+         int    LocalAdverbLocation      = 0;
+         int    LocalNamePointer         = 0;
+         int    LocalVerbLocation        = 0;
+         int    LocalNounCount           = 0;
+         int    LocalUnknownCount        = 0;
+         int    LocalUnderstandingLevel  = 0;
+         int    LocalWordCount           = -1;
+         int    LocalConfidenceLevel     = 0;
+         int    LocalUnderstandingDegree = 0;
+         int    LocalAltLocation         = -1;
+         int    QuoteMarker              = -1;
+         float  LocalUnderstandingRatio  = 0.0;
+         string LocalPattern             = "";
+         string LocalWordCopy            = "";
+         char   LocalAlternateType       = 'u';
+         char   LocalGenderClass         = 'u';
+         char   LocalWordType            = 'u';
+         char   MemoryWordType           = 'u';
+         char   SentenceWordType         = 'u';
+         char   SelectedWordType         = 'u';
+         bool   LocalBoolFlag            = false;
+         bool   LocalContractionFlag     = false;
+         bool   LocalHasAlternateType    = false;
 
          void InitializeAll(){
-                 LocalGenderClass       = 'u';
-                 LocalAdjectiveLocation = -1;
-                 LocalAdverbLocation    = -1;
-                 LocalNamePointer       = -1;
-                 LocalVerbLocation      = -1;
-                 LocalNounCount         = 0;
-                 LocalWordCount         = -1;
-                 QuoteMarker            = -1;
-                 LocalPattern           = "";
-                 LocalWordCopy          = "";
-                 SentenceWordType       = 'u';
-                 LocalWordType          = 'u';
-                 MemoryWordType         = 'u';
-                 SelectedWordType       = 'u';
-                 LocalBoolFlag          = false;
-                 LocalContractionFlag   = false;}
+                 LocalGenderClass         = 'u';
+                 LocalAdjectiveLocation   = -1;
+                 LocalAdverbLocation      = -1;
+                 LocalNamePointer         = -1;
+                 LocalVerbLocation        = -1;
+                 LocalAltLocation         = -1;
+                 LocalNounCount           = 0;
+                 LocalWordCount           = -1;
+                 LocalUnknownCount        = 0;
+                 LocalUnderstandingLevel  = 0;
+                 LocalUnderstandingRatio  = 0.0;
+                 LocalUnderstandingDegree = 0;
+                 QuoteMarker              = -1;
+                 LocalPattern             = "";
+                 LocalWordCopy            = "";
+                 SentenceWordType         = 'u';
+                 LocalWordType            = 'u';
+                 MemoryWordType           = 'u';
+                 SelectedWordType         = 'u';
+                 LocalAlternateType       = 'u';
+                 LocalBoolFlag            = false;
+                 LocalHasAlternateType    = false;
+                 LocalContractionFlag     = false;}
 
 public:
 
@@ -57,7 +72,7 @@ public:
         if(Verbose)
             cout << "[c_Cerebellum.h::GatherAndSetAllSentenceData()]\n";
         InitializeAll();
-        LocalWordCount = GetWordCount();
+        LocalWordCount     = GetWordCount();
         //check for empty sentence
         if(LocalWordCount == 0) return -1;
 
@@ -79,6 +94,8 @@ public:
         //     char   WordType[]  (SET HERE) / checked against Memorycell and Sentence
         //     char   GenderClassInSentence[] (SET HERE)
         //     bool   HasContraction (SET HERE)
+        //     int    sDaysOld (SET HERE)
+        //     int    sUnderstandingLevel (SET HERE)
 
         for(int x = 0; x  <= LocalWordCount-1; x++){                                //***First try to set wordtype
             LocalWordType    = FindWordType(GetWordsLC(x),x);                       //Get Wordtype from language helper, receives 'u' if can't determine
@@ -101,9 +118,13 @@ public:
                             else
                                 if((MemoryWordType != 'u') &&
                                 (LocalWordType != 'u') &&
-                                (MemoryWordType != LocalWordType))
+                                (MemoryWordType != LocalWordType)){
                                    cout << "Disagreement!\n";
                                   //disagreement here!!!                            //We have a disagreement here between memory cell wordtype and language helper
+                                   LocalHasAlternateType = true;
+                                   LocalAlternateType    = LocalWordType;           //Save for alternate type storage
+                                   LocalAltLocation      = x;                       //save x for storage function   ***Possible double disagreement******
+                                   SelectedWordType      = MemoryWordType;}         // use memory type for now ****NEEDS REVIEW*****
                                     else
                                         if(SentenceWordType != 'u'){
                                             SelectedWordType = SentenceWordType;}   //use c_Sentence wordtype
@@ -128,15 +149,50 @@ public:
          LocalGenderClass = GetMemoryCellGenderClass(GetWordTokens(x));             //take care of GenderClass in sentence
          if(LocalGenderClass != 'u')
             SetGenderClassInSentence(x,LocalGenderClass);
-        }                                                                           //END of for loop to scan sentence
+
+        SetWordType(SelectedWordType,x);                                            //update word type in sentence class
+        } //END of for loop to scan sentence
+
         SetAdjectiveLocation(LocalAdjectiveLocation);                               //store in c_Sentence
         SetAdverbLocation(LocalAdverbLocation);                                     //store in c_Sentence
         SetNamePointer(LocalNamePointer);                                           //store in c_Sentence
         SetVerbLocation(LocalVerbLocation);                                         //store in c_Sentence
         SetNounCount(LocalNounCount);                                               //store in c_Sentence
-        SetPattern(LocalPattern);                                                   //store in c_Sentence
+        if(LocalHasAlternateType){
+            SetAlternateType(LocalAlternateType,LocalAltLocation);                  //store in c_Sentence
+        }
         SetHasContraction(LocalContractionFlag);                                    //Store contraction flag
         SetSentenceDirection(DetermineDirectionOfPhrase());                         //Store phrase/question direction in sentence data
+        SetsDaysOld(GetDaysSinceDate());                                            //day stamp this sentence
+        LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);            //Check for corrections
+        SetPattern(LocalPattern);                                                   //store in c_Sentence
+
+        for (int x = 0; x < int(LocalPattern.size()); x++ ){                       //for calc in understanding level
+            if(LocalPattern[x] == 'u')
+              LocalUnknownCount ++;
+            else
+              LocalUnderstandingLevel ++;
+        }
+
+            if(LocalUnderstandingLevel > 0)
+                LocalUnderstandingRatio = float(LocalUnderstandingLevel) / float(GetWordCount());
+
+            ///Set the understanding degree weighted with the ratio
+            if(LocalUnderstandingRatio == 1) LocalUnderstandingDegree = 100;
+             else
+                if(LocalUnderstandingRatio >= .75) LocalUnderstandingDegree = 75;
+             else
+                if(LocalUnderstandingRatio >= .50) LocalUnderstandingDegree = 50;
+             else
+                if(LocalUnderstandingRatio >= .25) LocalUnderstandingDegree = 25;
+             else
+                if(LocalUnderstandingRatio >= .10) LocalUnderstandingDegree = 10;
+             else
+                LocalUnderstandingDegree = 0;
+
+         SetsUnderstandingLevel(LocalUnderstandingDegree);                          //store the understanding degree for c_Cortex to use
+
+
         return LocalWordCount;                                                      //finished
 
     }

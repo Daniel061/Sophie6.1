@@ -44,9 +44,9 @@ class c_LongTermMemory : public c_SubjectStack
                 CopySentence.SetisContraction(x,GetisContraction(x));                       //4
                 CopySentence.SetWordsLC(x,GetWordsLC(x));                                   //5
                 CopySentence.SetSubWords(x,GetSubWords(x));                                 //6
-                CopySentence.SetWordType(x,GetWordType(x));                                 //7
-                CopySentence.SetSecondaryType(x,GetSecondaryType(x));                       //8
-                CopySentence.SetAlternateType(x,GetAlternateType(x));                       //9
+                CopySentence.SetWordType(GetWordType(x),x);                                 //7
+                CopySentence.SetSecondaryType(GetSecondaryType(x),x);                       //8
+                CopySentence.SetAlternateType(GetAlternateType(x),x);                       //9
                 CopySentence.SetGenderClassInSentence(x,GetGenderClassInSentence(x));       //10
                 CopySentence.SetContractionLongFormFirst(x,GetContractionLongFormFirst(x)); //11
                 CopySentence.SetContractionLongFormSecond(x,GetContractionLongFormSecond(x));//12
@@ -83,6 +83,8 @@ class c_LongTermMemory : public c_SubjectStack
               CopySentence.HasDualSubjects                =GetHasDualSubjects();
               CopySentence.SecondSubject                  =GetSecondSubject();
               CopySentence.SecondSubjectLocation          =GetSecondSubjectLocation();
+              CopySentence.sUnderstandingLevel            =GetsUnderstandingLevel();
+              CopySentence.sDaysOld                       =GetsDaysOld();
 
 
             }//-------------------END COPYCURRENTSENTENCE----------------------------
@@ -240,6 +242,10 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << csIT->second.GetConjunctionLocation() << Deliminator;
                         SentenceDataFile << "Sentence direction,";
                         SentenceDataFile << csIT->second.GetSentenceDirection() << Deliminator;
+                        SentenceDataFile << "Days since 2019,";
+                        SentenceDataFile << csIT->second.GetsDaysOld() << Deliminator;
+                        SentenceDataFile << "Understanding level,";
+                        SentenceDataFile << csIT->second.GetsUnderstandingLevel() << Deliminator;
 
                         for(int x = 0; x <= csIT->second.GetWordCount()-1; x++){
                             SentenceDataFile << "Word data,";
@@ -406,7 +412,13 @@ class c_LongTermMemory : public c_SubjectStack
                 CopySentence.SetConjunctionLocation(stoi(strLineData,&decType));//set Conjunction Location
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetSentenceDirection(stoi(strLineData,&decType));              //set Sentence Direction
+                CopySentence.SetSentenceDirection(stoi(strLineData,&decType));  //set Sentence Direction
+                getline (SentenceDataFile,strLineData,',');
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetsDaysOld(stoi(strLineData,&decType));           //set Days since 2019
+                getline (SentenceDataFile,strLineData,',');
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetsUnderstandingLevel(stoi(strLineData,&decType));//set understanding level
                 getline (SentenceDataFile,strLineData,',');
 
                 for(int x = 0; x<=CopySentence.GetWordCount()-1; x++){

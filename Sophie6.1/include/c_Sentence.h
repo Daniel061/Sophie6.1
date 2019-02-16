@@ -47,6 +47,8 @@ class c_Sentence : public c_Personality
         bool   HasDualSubjects;                 // i.e. Jack and Jill
         bool   HasBeenUnderstood;               // initialized to false, set externally
         bool   HasGenderDeterminer;             // the word 'gender' was used
+        int    sDaysOld;                        // day number stamp from 2019 beginning
+        int    sUnderstandingLevel;             // the degree this sentence is known
 
 
 
@@ -83,10 +85,19 @@ class c_Sentence : public c_Personality
                 PrepositionPosition           = -1;
                 SecondSubjectLocation         = -1;
                 IndirectObjectLocation        = -1;
+                sUnderstandingLevel           = -1;
+                sDaysOld                      = 0;
                 WordMap.clear();}
 
 
        ///*******************ALL SENTENCE DATA FUNCTIONS***************************
+
+        int    GetsDaysOld(){return sDaysOld;}
+        void   SetsDaysOld(int newVal){sDaysOld = newVal;}
+
+        int    GetsUnderstandingLevel(){return sUnderstandingLevel;}
+        void   SetsUnderstandingLevel(int newVal){sUnderstandingLevel = newVal;}
+
         void   SetSecondSubjectLocation(int newVal){SecondSubjectLocation = newVal;}
         int    GetSecondSubjectLocation(){return SecondSubjectLocation;}
 

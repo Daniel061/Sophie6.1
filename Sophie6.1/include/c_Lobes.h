@@ -7,9 +7,12 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <time.h>
 
 extern bool   Verbose;
 extern string Version;
+
+
 
 class c_Lobes : public c_MemoryCell
 {
@@ -47,6 +50,26 @@ class c_Lobes : public c_MemoryCell
         }
 
     public:
+
+
+        //returns number of days since beginning of 2019 for a day stamp
+        int GetDaysSinceDate(){
+
+            struct  tm StartDate;
+            time_t  startTime,Finish;
+            time (&Finish);
+            time (&startTime);
+            StartDate           = *localtime(&startTime);
+            StartDate.tm_year   = 2019;
+            StartDate.tm_mon    = 0;
+            StartDate.tm_mday   = 1;
+            StartDate.tm_hour   = 0;
+            StartDate.tm_min    = 0;
+            StartDate.tm_sec    = 0;
+            return StartDate.tm_yday;
+
+        }
+
 
         //Updates ContractionLongFormFirst if exists
         //returns True if added, else false if updated

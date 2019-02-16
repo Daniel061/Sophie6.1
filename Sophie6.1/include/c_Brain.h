@@ -128,6 +128,7 @@ class c_Brain : public c_Cerebellum
         cout << "Word Count:" << WC << " Pattern:" << GetPattern() << " Dual Subject Flag:" << boolalpha << GetHasDualSubjects() <<endl;
         cout << "Subject location:" << GetSubjectLocation() << "\nIndirect Object Location:" << GetIndirectObjectLocation() << " Second Subject:" << GetSecondSubject() << endl;
         cout << "Gist of sentence:" << GetGistOfSentence() << "\nSubGist of sentence:" << GetSubGistOfSentence() << endl;
+        cout << "Supportive phrase:" << GetSupportivePhrase() << endl;
         cout << "Sentence is question flag:" << boolalpha << GetIsQuestion() << endl;
         cout << "Sentence has preposition flag:" << boolalpha << GetHasPreposition() << endl;
         cout << "Sentence was understood:" << boolalpha << GetHasBeenUnderstood() << endl;
@@ -264,7 +265,7 @@ class c_Brain : public c_Cerebellum
                     Control = 2;
                     break;
                 }
-            case 196606435:  //dump sentence
+            case 196612681:  //dump sentence
                 {
                     DumpSentencesInMap();
                     Control = 2;
