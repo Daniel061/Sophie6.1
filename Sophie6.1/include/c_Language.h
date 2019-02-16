@@ -223,6 +223,7 @@ class c_Language : public c_LongTermMemory
            int  isGenderDeterminer  = -1;
            int  QuoteMarker         = -1;
            int  PatternMarker       = -1;
+           int  ActionMarker        = -1;
            bool RuleTesting         = true;
            bool IsPlural            = false;
 
@@ -235,6 +236,7 @@ class c_Language : public c_LongTermMemory
               OrigWordUC   = GetWords(LocationInSentence);
               tmpWord = " " + tmpWord + " ";
 
+                ActionMarker        = tmpWord.find("ing");
                 isPreposition       = PrepositionWords.find(tmpWord);
                 isConjunction       = ConjunctionWords.find(tmpWord);
                 isPluralVerb        = PluralVerbs.find(tmpWord);
@@ -316,6 +318,9 @@ class c_Language : public c_LongTermMemory
                   if((UCWord[0] >='A') && (UCWord[0] <='Z') &&(tmpWordType == 'u') ) {
                         tmpWordType = 'P';}
 
+
+                  if( (ActionMarker >=0) && (tmpWordType == 'u') ) {
+                         tmpWordType = 'v';}
 
 
                   /// **TODO**  Check for plural verbs, i.e. are->is
@@ -633,8 +638,10 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             int    VerbPointer     = -1;
             int    QuestionPointer = -1;
             int    StopPoint       = -1;
+            int    GistStart       = -1;
             string GistString      = "";
             string subGistString   = "";
+            string SupportiveGist  = "";
 
             for(int x = 0; x <=int(Pattern.size()); x++){
                 if(Pattern[x] == 'v') VerbPointer = x;
@@ -645,6 +652,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             while (Checking){
                     if(GetIsQuestion()){
                         //process gist of question
+                        GistStart = QuestionPointer+1;
                         for (int x = QuestionPointer+1; x <= GetWordCount(); x++){
                             GistString += " " + GetWords(x);
                         }
@@ -662,6 +670,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                         else{
                             StopPoint = GetWordCount();
                         }
+                        GistStart = VerbPointer;
                         for(int x = VerbPointer; x <= StopPoint; x++){
                             GistString += " " + GetWords(x);
                         }
@@ -684,17 +693,29 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 
             }//end while checking
 
+            if(Result){ //extract supportive gist to the beginning of the gist
+                    for(int x = 0; x<= GistStart-1; x++){
+                        SupportiveGist += GetWords(x) + " ";
+                    }
+
+            }
+
             if(Result){
                 //store the Gist and subGist phrase
                 //  trim leading space
-                string  NewGistString   = "";
-                string  NewSubGist      = "";
+                string  NewGistString     = "";
+                string  NewSubGist        = "";
+                string  NewSupportiveGist = "";
                 for(int x = 1; x<= int(GistString.size()-1); x++){
                     NewGistString += GistString[x];
                 }
                 for(int x = 1; x <=int(subGistString.size()-1); x++){
                     NewSubGist += subGistString[x];
                 }
+                for(int x = 0; x <=int(SupportiveGist.size()-1); x++){
+                    NewSupportiveGist += SupportiveGist[x];
+                }
+                SetSupportivePhrase(NewSupportiveGist);
                 SetGistOfSentence(NewGistString);
                 SetSubGistOfSentence(NewSubGist);
                 if (Verbose){

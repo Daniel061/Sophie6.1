@@ -22,7 +22,7 @@ class c_Sentence : public c_Personality
         int    IndirectObjectLocation;          // usually the second noun
         int    AdverbLocation;                  // -1 means none
         int    AdjectiveLocation;               // -1 means none
-        char   SentenceDirection;               // [m]-to me(Sophie) [y]-to the user  [n]-no direction  [u]-undetermined
+        int    SentenceDirection;               // [0]-to me(Sophie) [1]-to the user  [6]-no direction  [-1]-undetermined
         int    ConjunctionLocation;             // -1 means none
         int    NounCount;                       // number of nouns in this sentence
         int    VerbLocation;                    // position of verb
@@ -33,6 +33,7 @@ class c_Sentence : public c_Personality
         string PreProcessedPattern;             // i.e. duvu
         string GistOfSentence;                  // the meat of the phrase. i.e the dog is black = is black, initialize to ""
         string subGistOfSentence;               // usually follows a preposition to the verb or end of sentence
+        string SupportivePhrase;                // Data before the verb
         string SecondSubject;                   // For DualSubjects
         int    SecondSubjectLocation;           // For Dual subjects
         char   Punctuation;                     // !  initialize to null
@@ -60,6 +61,7 @@ class c_Sentence : public c_Personality
                 SecondSubject                 = "";
                 GistOfSentence                = "";
                 subGistOfSentence             = "";
+                SupportivePhrase              = "";
                 HasPreposition                = false;
                 HasPluralPronoun              = false;
                 HasPunctuation                = false;
@@ -70,7 +72,7 @@ class c_Sentence : public c_Personality
                 HasBeenUnderstood             = false;
                 HasGenderDeterminer           = false;
                 HasDualSubjects               = false;
-                SentenceDirection             = 'u';
+                SentenceDirection             = -1;
                 Punctuation                   = 'x';  //not set or does not have
                 ConjunctionLocation           = -1;
                 AdverbLocation                = -1;
@@ -103,8 +105,8 @@ class c_Sentence : public c_Personality
         void   SetHasPreposition(bool newVal){HasPreposition = newVal;}
         bool   GetHasPreposition(){return HasPreposition;}
 
-        void   SetSentenceDirection(char newVal){SentenceDirection = newVal;}
-        char   GetSentenceDirection(){return SentenceDirection;}
+        void   SetSentenceDirection(int newVal){SentenceDirection = newVal;}
+        int    GetSentenceDirection(){return SentenceDirection;}
 
         void   SetConjunctionLocation(int newVal){ConjunctionLocation = newVal;}
         int    GetConjunctionLocation(){return ConjunctionLocation;}
@@ -114,6 +116,9 @@ class c_Sentence : public c_Personality
 
         void   SetGistOfSentence(string newVal){GistOfSentence = newVal;}
         string GetGistOfSentence(){return GistOfSentence;}
+
+        void   SetSupportivePhrase(string newVal){SupportivePhrase = newVal;}
+        string GetSupportivePhrase(){return SupportivePhrase;}
 
         bool   GetHasGenderDeterminer(){return HasGenderDeterminer;}
         void   SetHasGenderDeterminer(bool newVal){HasGenderDeterminer = newVal;}

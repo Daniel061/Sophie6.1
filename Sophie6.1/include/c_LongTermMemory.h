@@ -79,6 +79,7 @@ class c_LongTermMemory : public c_SubjectStack
               CopySentence.HasGenderDeterminer            =GetHasGenderDeterminer();
               CopySentence.GistOfSentence                 =GetGistOfSentence();
               CopySentence.subGistOfSentence              =GetSubGistOfSentence();
+              CopySentence.SupportivePhrase               =GetSupportivePhrase();
               CopySentence.HasDualSubjects                =GetHasDualSubjects();
               CopySentence.SecondSubject                  =GetSecondSubject();
               CopySentence.SecondSubjectLocation          =GetSecondSubjectLocation();
@@ -233,6 +234,8 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << csIT->second.GetGistOfSentence() << Deliminator;
                         SentenceDataFile << "subGist of sentence,";
                         SentenceDataFile << csIT->second.GetSubGistOfSentence() << Deliminator;
+                        SentenceDataFile << "Supportive phrase,";
+                        SentenceDataFile << csIT->second.GetSupportivePhrase() << Deliminator;
                         SentenceDataFile << "Conjunction location,";
                         SentenceDataFile << csIT->second.GetConjunctionLocation() << Deliminator;
                         SentenceDataFile << "Sentence direction,";
@@ -397,10 +400,13 @@ class c_LongTermMemory : public c_SubjectStack
                 CopySentence.SetSubGistOfSentence(strLineData);                 //set subGist data
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
+                CopySentence.SetSupportivePhrase(strLineData);                  //set supportive phrase data
+                getline (SentenceDataFile,strLineData,',');
+                getline (SentenceDataFile,strLineData);
                 CopySentence.SetConjunctionLocation(stoi(strLineData,&decType));//set Conjunction Location
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
-                CopySentence.SetSentenceDirection(strLineData[0]);              //set Sentence Direction
+                CopySentence.SetSentenceDirection(stoi(strLineData,&decType));              //set Sentence Direction
                 getline (SentenceDataFile,strLineData,',');
 
                 for(int x = 0; x<=CopySentence.GetWordCount()-1; x++){

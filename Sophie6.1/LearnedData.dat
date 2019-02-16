@@ -1,30 +1,6 @@
-VERSION 6.1.009.03, file version
-Original string,name
-Lower Case string,name
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,g
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,14235
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,do
-Lower Case string,do
+VERSION 6.1.009.12, file version
+Original string,
+Lower Case string,
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -41,7 +17,7 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,55
+Token,0
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
@@ -71,78 +47,6 @@ Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,can
-Lower Case string,can
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,v
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,324
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,your
-Lower Case string,your
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,m
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,26728
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,Jill
-Lower Case string,jill
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,P
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,11032
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
 Original string,the
 Lower Case string,the
 Given name,
@@ -166,34 +70,9 @@ Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
-Related Nouns,1
-Noun,animal
-Original string,can't
-Lower Case string,can't
-Given name,
-Mini Def.,
-Contraction 1st,can
-Contraction 2nd,
-Cell purpose,w
-Word Type,C
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,32810
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
 Related Nouns,0
-Original string,dog
-Lower Case string,dog
+Original string,flowers
+Lower Case string,flowers
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -210,41 +89,14 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,557
-Next Pattern,0
-Number of Adjectives,1
-Adjective,black
-Nunber of Verbs,0
-Number of Adverbs,1
-Adverb,is
-Related Nouns,1
-Noun,animal
-Original string,black
-Lower Case string,black
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,a
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,32141
+Token,7373699
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,is
-Lower Case string,is
+Original string,growing
+Lower Case string,growing
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -261,20 +113,20 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,109
+Token,8974047
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,Jack
-Lower Case string,jack
+Original string,in
+Lower Case string,in
 Given name,
 Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
-Word Type,P
+Word Type,I
 Word tense,u
 Secondary type,u
 Alternate type,u
@@ -285,62 +137,14 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,10141
+Token,104
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,that
-Lower Case string,that
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,r
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,20830
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,and
-Lower Case string,and
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,j
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,244
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,children
-Lower Case string,children
+Original string,gardin
+Lower Case string,gardin
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -357,202 +161,7 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,39025864
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,animal
-Lower Case string,animal
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,n
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,250322
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,1
-Noun,dog
-Original string,
-Lower Case string,
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,v
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,0
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,color
-Lower Case string,color
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,n
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,46368
-Next Pattern,0
-Number of Adjectives,1
-Adjective,black
-Nunber of Verbs,0
-Number of Adverbs,1
-Adverb,is
-Related Nouns,0
-Original string,an
-Lower Case string,an
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,d
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,24
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,what
-Lower Case string,what
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,q
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,23830
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,a
-Lower Case string,a
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,d
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,1
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,you
-Lower Case string,you
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,m
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,2671
-Next Pattern,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,what's
-Lower Case string,what's
-Given name,
-Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,C
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Set,1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,2383409
+Token,728504
 Next Pattern,0
 Number of Adjectives,0
 Nunber of Verbs,0

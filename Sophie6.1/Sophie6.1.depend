@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1550184346 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
+1550276826 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
 	<iostream>
 	<fstream>
 	<c_Brain.h>
@@ -8,20 +8,20 @@
 1549798754 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
 	<c_Cerebellum.h>
 
-1549366770 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
+1550272618 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
 	<c_Cortex.h>
 
-1550147330 h:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
+1550272138 h:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
 	<c_Language.h>
 
-1550147330 h:\c++projects\sophie6.1\sophie6.1\include\c_language.h
+1550278078 h:\c++projects\sophie6.1\sophie6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<c_LongTermMemory.h>
 	<string>
 	<iostream>
 
-1550144838 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
+1550276572 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
 	<c_Personality.h>
 	<c_Word.h>
 	<map>
@@ -52,7 +52,7 @@
 	<string>
 	<iostream>
 
-1550184614 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
+1550276826 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
 	<c_Sentence.h>
 	<c_SubjectStack.h>
 	<unordered_map>

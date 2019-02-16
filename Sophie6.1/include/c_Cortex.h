@@ -927,28 +927,9 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         char GenderChar         = '\0';
         string WorkingPattern   = GetPattern();
 
-//        for(int x =0; x<= GetWordCount(); x++){
-//            if((GetWordType(x)== 'm')&&(DirectionOfQuestion == -1)){ DirectionOfQuestion = 0; ToMe = true;}
-//             else
-//                if((GetWordType(x)=='y')&&(DirectionOfQuestion == -1)) DirectionOfQuestion = 1;
-//                  else
-//                    if((GetWordType(x)=='B')&&(DirectionOfQuestion == -1)) DirectionOfQuestion = 2;}
-//
-//
-//        if(GetWordType(0) == 'v'){
-//            if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") ){
-//                DirectionOfQuestion = 3;}}
-//
-//        PatternMatch = WorkingPattern.find('g');
-//        if(PatternMatch >=0) DirectionOfQuestion = 4;
-//
-//        PatternMatch = WorkingPattern.find("vmv");      //i.e. do you know
-//        if (PatternMatch >=0){
-//            DirectionOfQuestion = 0;}
-//        PatternMatch = WorkingPattern.find("qdnv") + WorkingPattern.find("qvdn") + 1;
-//        if (PatternMatch >= 0){
-//            DirectionOfQuestion = 2;}
-        DirectionOfQuestion = DetermineDirectionOfPhrase();
+
+
+        DirectionOfQuestion = GetSentenceDirection();
         switch (DirectionOfQuestion){
 
             case 0: {
@@ -1251,7 +1232,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         //***TODO***    Check to be sure gender isn't already set
 
         string MaleProNouns      = " he him his ";
-        string FemaleProNouns    = " she her ";
+        string FemaleProNouns    = " she her hers ";
         string SubjectText       = GetMemoryCellWordLC("",GetSubjectInStack(1)); //pronoun has already been set as subject so get next
         string ProNounResolution = "";
         char GenderClass         = '\0';
@@ -1280,54 +1261,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
  //-----------------------------------END OF CHECK FOR IMPLIED GENDER-------------------------------------------------
 
 
- //---------------------------------Determine Direction of Phrase---------------------------------------------
 
-    int DetermineDirectionOfPhrase(){
-        if(Verbose)
-            cout << "[c_Cortex.h::DetermineDirectionOfPhrase()]\n";
-
-        //Direction ID
-        //  0  - To the Program
-        //  1  - To the User
-        //  2  - To another pronoun, i.e they them he him she her it we
-        //  3  - First word Question
-        //  4  - name word used in phrase i.e. name set or request
-        //  5  - data miner, i.e. who is
-        // -1  - Direction not determined
-
-        int    DirectionDetected    = -1;
-        int    PatternMatch         = -1;
-        string WorkingPattern       = GetPattern();
-
-        for(int x =0; x<= GetWordCount(); x++){
-            if((GetWordType(x)== 'm')&&(DirectionDetected == -1)){ DirectionDetected = 0;}
-             else
-                if((GetWordType(x)=='y')&&(DirectionDetected == -1)) DirectionDetected = 1;
-                  else
-                    if((GetWordType(x)=='B')&&(DirectionDetected == -1)) DirectionDetected = 2;}
-
-        if(GetWordType(0) == 'v'){
-            if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") || (GetWordsLC(0)=="are") || (GetWordsLC(0)== "do") ){
-                DirectionDetected = 3;}}
-
-        PatternMatch = WorkingPattern.find('g');
-        if(PatternMatch >=0) DirectionDetected = 4;
-
-        PatternMatch = WorkingPattern.find("vmv");      //i.e. do you know
-        if (PatternMatch >=0){
-            DirectionDetected = 0;}
-        PatternMatch = WorkingPattern.find("qdnv") + WorkingPattern.find("qvdn") + 1;
-        if (PatternMatch >= 0){
-            DirectionDetected = 2;}
-        if(GetWordsLC(0) == "who"){
-            DirectionDetected = 5;}   //data miner, i.e. who fell down
-
-        if(Verbose)
-            cout << "   Direction of Phrase Detected:" << DirectionDetected << endl;
-        return DirectionDetected;
-    }
-
-//-------------------------------END DETERMINE DIRECTION OF PHRASE------------------------------------------
 };
 
 #endif // C_CORTEX_H

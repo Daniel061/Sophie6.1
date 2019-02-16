@@ -136,11 +136,62 @@ public:
         SetNounCount(LocalNounCount);                                               //store in c_Sentence
         SetPattern(LocalPattern);                                                   //store in c_Sentence
         SetHasContraction(LocalContractionFlag);                                    //Store contraction flag
-
+        SetSentenceDirection(DetermineDirectionOfPhrase());                         //Store phrase/question direction in sentence data
         return LocalWordCount;                                                      //finished
 
     }
+//----------------------------------END GATHER AND SET ALL SENTENCE DATA--------------------------------
 
+ //---------------------------------Determine Direction of Phrase---------------------------------------------
+
+    int DetermineDirectionOfPhrase(){
+        if(Verbose)
+            cout << "[c_Cerebellum.h::DetermineDirectionOfPhrase()]\n";
+
+        //Direction ID
+        //  0  - To the Program
+        //  1  - To the User
+        //  2  - To another pronoun, i.e they them he him she her it we
+        //  3  - First word Question
+        //  4  - name word used in phrase i.e. name set or request
+        //  5  - data miner, i.e. who is
+        //  6  - general statement
+        // -1  - Direction not determined
+
+        int    DirectionDetected    = -1;
+        int    PatternMatch         = -1;
+        string WorkingPattern       = GetPattern();
+        string cSentenceDirection   = "muYPMGx";
+
+        for(int x =0; x<= GetWordCount(); x++){
+            if((GetWordType(x)== 'm')&&(DirectionDetected == -1)){ DirectionDetected = 0;}        //mentioned me, so to me
+             else
+                if((GetWordType(x)=='y')&&(DirectionDetected == -1)) DirectionDetected = 1;       //user mentioned self, so to user
+                  else
+                    if((GetWordType(x)=='B')&&(DirectionDetected == -1)) DirectionDetected = 2;}  //user used a pronoun
+
+        if(GetWordType(0) == 'v'){
+            if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") || (GetWordsLC(0)=="are") || (GetWordsLC(0)== "do") ){
+                DirectionDetected = 3;}}                                                          //most likely a question
+
+        PatternMatch = WorkingPattern.find('g');
+        if(PatternMatch >=0) DirectionDetected = 4;                                               //user mentioned 'name' in statement
+
+        PatternMatch = WorkingPattern.find("vmv");      //i.e. do you know
+        if (PatternMatch >=0){
+            DirectionDetected = 0;}
+        PatternMatch = WorkingPattern.find("qdnv") + WorkingPattern.find("qvdn") + 1;
+        if (PatternMatch >= 0){
+            DirectionDetected = 2;}
+        if(GetWordsLC(0) == "who"){
+            DirectionDetected = 5;}                                                               //data miner, i.e. who fell down
+
+        if(Verbose)
+            cout << "   Direction of Phrase Detected:" << DirectionDetected << endl;
+        return DirectionDetected;
+    }
+
+//-------------------------------END DETERMINE DIRECTION OF PHRASE------------------------------------------
 };
 
 #endif // C_CEREBELLUM_H
