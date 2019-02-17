@@ -63,9 +63,7 @@ class c_Brain : public c_Cerebellum
                  Parse(strData);                                                                        //break sentence down
                  SaveReceivedInput(strData,true);                                                       //update short term memory
                  SaveSentenceInLongTermMemory(strData);                                                 //update Long Term Memory
-
                  GatherAndSetAllSentenceData();                                                         //check language helper, memory and pattern review for data
-                 ImplyUnknowns();                                                                       //let language try to set some unknowns
                  SetPreProcessedPattern(GetPattern());                                                  //save for later review
                  FindAndSetGistOfSentence();                                                            //save phrases of the sentence
                  if(IsThisSentenceDuplicated(strData))

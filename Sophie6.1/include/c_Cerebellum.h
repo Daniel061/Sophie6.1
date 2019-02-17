@@ -192,6 +192,7 @@ public:
 
          SetsUnderstandingLevel(LocalUnderstandingDegree);                          //store the understanding degree for c_Cortex to use
 
+         ImplyUnknowns();                                                           //let language try to set some unknowns
 
         return LocalWordCount;                                                      //finished
 

@@ -181,7 +181,7 @@ class c_Language : public c_LongTermMemory
            string ProNounsOutward =     " me mine my I i ";
            string Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
            string Questions =           " what where how when who ";
-           string Verbs =               " go went can will be have do say get make go know take is see come think look want give use find tell ask work seem feel try leave call am been ";
+           string Verbs =               " go went can will be have do say get make go know take is see come fell ran think look want give use find tell ask work seem feel try leave call am been ";
            string PluralVerbs =         " are ";
            string SubjectReplacements = " it that this its ";
            string Adverbs =             " very again ";
@@ -359,8 +359,9 @@ class c_Language : public c_LongTermMemory
                   //Rule #3 comes before Rule #2 because pattern matching finds es before ves
                   while (RuleTesting){
 
-                        //Rule #1 Must Not be verb
+                        //Rule #1 Must Not be verb, must not be preset as pronoun
                         if(tmpWordType == 'v') {RuleTesting = false; break;}
+                        if((tmpWordType == 'p') || (tmpWordType == 'm') || (tmpWordType == 'y')) {SetHasPronoun(true); RuleTesting = false; break;}
 
                         //Rule #9 Plural Proper Noun Check
                         PatternMarker = OrigWord.find("s'");
@@ -471,6 +472,7 @@ class c_Language : public c_LongTermMemory
                   if(!IsPlural){
                       SetPluralWordFlag(LocationInSentence,'s');  //set as singular
                   }
+
             if(Verbose)
                 cout << "tmpWord " << tmpWord <<" type:" << tmpWordType << endl;
             return tmpWordType;
@@ -560,14 +562,14 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             if ((GetWordsLC(0)== "is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)=="will") || (GetWordsLC(0)=="are") ) SetIsQuestion(true);
 
             for(int x = 0; x < WordCount; x++){
-                if(GetWordType(x)== 'd')if(DeterminerLocation == -1) DeterminerLocation = x;
-                if(GetWordType(x)== 'u')if(UnknownLocation == -1)    UnknownLocation    = x;
+                if(GetWordType(x)== 'd') if(DeterminerLocation == -1) DeterminerLocation = x;
+                if(GetWordType(x)== 'u') if(UnknownLocation == -1)    UnknownLocation    = x;
                 if(GetWordType(x)== 'n'){if(NounLocation == -1)    { NounLocation       = x;} else SecondNounLocation = x;}
-                if(GetWordType(x)== 'r')if(SubLocation == -1)        SubLocation        = x;
-                if(GetWordType(x)== 'p')if(ProNounLocation == -1)    ProNounLocation    = x;
-                if(GetWordType(x)== 'P')if(ProperNounLocation == -1) ProperNounLocation = x;
-                if(GetWordType(x)== 'm')if(ProNounLocation == -1) ProNounLocation = x;
-                if(GetWordType(x)== 'y')if(ProNounLocation == -1) ProNounLocation = x;
+                if(GetWordType(x)== 'r') if(SubLocation == -1)        SubLocation        = x;
+                if(GetWordType(x)== 'p') if(ProNounLocation == -1)    ProNounLocation    = x;
+                if(GetWordType(x)== 'P') if(ProperNounLocation == -1) ProperNounLocation = x;
+                if(GetWordType(x)== 'm') if(ProNounLocation == -1) ProNounLocation = x;
+                if(GetWordType(x)== 'y') if(ProNounLocation == -1) ProNounLocation = x;
                 if(GetWordType(x)== 'j') JoinerLocation = x;
                 if(GetWordType(x)== 'v'){ SetVerbLocation(x);}
                 if(GetWordType(x)== 'a'){ SetAdjectiveLocation(x);}
@@ -637,6 +639,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             bool   Checking        = true;
             int    VerbPointer     = -1;
             int    QuestionPointer = -1;
+            int    JoinerPointer   = -1;
             int    StopPoint       = -1;
             int    GistStart       = -1;
             string GistString      = "";
@@ -644,8 +647,9 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             string SupportiveGist  = "";
 
             for(int x = 0; x <=int(Pattern.size()); x++){
-                if(Pattern[x] == 'v') VerbPointer = x;
+                if(Pattern[x] == 'v') VerbPointer     = x;
                 if(Pattern[x] == 'q') QuestionPointer = x;
+                if(Pattern[x] == 'j') JoinerPointer   = x;
             }
 
             if( (VerbPointer < 0) && (!GetIsQuestion()) ) Checking = false; //no verb, cannot find gist without it(yet)
@@ -668,7 +672,10 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                             if(StopPoint < VerbPointer) StopPoint = GetWordCount();
                         }
                         else{
-                            StopPoint = GetWordCount();
+                            if(JoinerPointer >=0)
+                               StopPoint = JoinerPointer-1;
+                            else
+                               StopPoint = GetWordCount();
                         }
                         GistStart = VerbPointer;
                         for(int x = VerbPointer; x <= StopPoint; x++){
@@ -686,6 +693,12 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                                 StopPoint = VerbPointer;
                             }
                             for (int x = GetPrepositionPosition(); x < StopPoint; x++){
+                                subGistString += " " + GetWords(x);
+                            }
+                        }
+                        else
+                        if(JoinerPointer>=0){
+                            for(int x = JoinerPointer+1; x <=GetWordCount(); x++){
                                 subGistString += " " + GetWords(x);
                             }
                         }
@@ -739,6 +752,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
         string    LocalPattern      = GetPattern();
         bool      SettingPattern    = true;
         int       PatternPointer    = -1;
+
         while(SettingPattern){
 
             //Check for noun possible in this pattern 'duIduvu'
@@ -759,6 +773,17 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                 SetWordType('n',PatternPointer+1);
                 SetPattern(LocalPattern);
                 break;}
+
+
+            PatternPointer = LocalPattern.find("pu"); //check for implied noun by ownership, i.e. "his bone"
+            if(PatternPointer >= 0){
+               if((GetWordsLC(PatternPointer) == "his") || (GetWordsLC(PatternPointer) == "her")){
+                   LocalPattern[PatternPointer+1] = 'n';
+                   SetWordType('n',PatternPointer+1);
+                   SetPattern(LocalPattern);
+                   SettingPattern = false;
+                   break;}
+            }
 
          SettingPattern = false;
         }//end while loop

@@ -47,6 +47,7 @@ class c_Sentence : public c_Personality
         bool   HasDualSubjects;                 // i.e. Jack and Jill
         bool   HasBeenUnderstood;               // initialized to false, set externally
         bool   HasGenderDeterminer;             // the word 'gender' was used
+        bool   HasPronoun;                      // flag pronoun usage
         int    sDaysOld;                        // day number stamp from 2019 beginning
         int    sUnderstandingLevel;             // the degree this sentence is known
 
@@ -74,6 +75,7 @@ class c_Sentence : public c_Personality
                 HasBeenUnderstood             = false;
                 HasGenderDeterminer           = false;
                 HasDualSubjects               = false;
+                HasPronoun                    = false;
                 SentenceDirection             = -1;
                 Punctuation                   = 'x';  //not set or does not have
                 ConjunctionLocation           = -1;
@@ -91,6 +93,9 @@ class c_Sentence : public c_Personality
 
 
        ///*******************ALL SENTENCE DATA FUNCTIONS***************************
+
+        bool   GetHasPronoun(){return HasPronoun;}
+        void   SetHasPronoun(bool newVal){HasPronoun = newVal;}
 
         int    GetsDaysOld(){return sDaysOld;}
         void   SetsDaysOld(int newVal){sDaysOld = newVal;}

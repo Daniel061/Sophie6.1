@@ -85,6 +85,7 @@ class c_LongTermMemory : public c_SubjectStack
               CopySentence.SecondSubjectLocation          =GetSecondSubjectLocation();
               CopySentence.sUnderstandingLevel            =GetsUnderstandingLevel();
               CopySentence.sDaysOld                       =GetsDaysOld();
+              CopySentence.HasPronoun                     =GetHasPronoun();
 
 
             }//-------------------END COPYCURRENTSENTENCE----------------------------
@@ -214,6 +215,8 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << csIT->second.GetHasBeenUnderstood() << Deliminator;
                         SentenceDataFile << "bool Has dual subjects,";
                         SentenceDataFile << csIT->second.GetHasDualSubjects() << Deliminator;
+                        SentenceDataFile << "bool Has Pronoun reference,";
+                        SentenceDataFile << csIT->second.GetHasPronoun() << Deliminator;
                         SentenceDataFile << "Second subject string,";
                         SentenceDataFile << csIT->second.GetSecondSubject() << Deliminator;
                         SentenceDataFile << "Second subject location,";
@@ -371,6 +374,9 @@ class c_LongTermMemory : public c_SubjectStack
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetHasDualSubjects(stoi(strLineData,&decType));    //set bool HasDualSubjects
+                getline (SentenceDataFile,strLineData,',');
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetHasPronoun(stoi(strLineData,&decType));         //set bool HasPronoun
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetSecondSubject(strLineData);                     //set second Subject

@@ -20,7 +20,7 @@ class c_Cortex : public c_Language
             int ProNounOutwardLocation;
             int AssociativeWordLocation;
             int VerbLocation;
-            int AdjectiveLocation;
+            //int AdjectiveLocation;
             int SubjectLoc;
             int ReplacementLocation;
             int UnderstandingLevel;
@@ -117,29 +117,29 @@ class c_Cortex : public c_Language
             }
 
 
-            SetPattern(Pattern);
-            ISQ = GetIsQuestion();
-            if(UnderstandingLevel > 0)
-                UnderstandingRatio = float(UnderstandingLevel) / float(GetWordCount());
+//            SetPattern(Pattern);
+//            ISQ = GetIsQuestion();
+//            if(UnderstandingLevel > 0)
+//                UnderstandingRatio = float(UnderstandingLevel) / float(GetWordCount());
+//
+//            ///Set the understanding degree weighted with the ratio
+//            if(UnderstandingRatio == 1) UnderstandingDegree = 100;
+//             else
+//                if(UnderstandingRatio >= .75) UnderstandingDegree = 75;
+//             else
+//                if(UnderstandingRatio >= .50) UnderstandingDegree = 50;
+//             else
+//                if(UnderstandingRatio >= .25) UnderstandingDegree = 25;
+//             else
+//                if(UnderstandingRatio >= .10) UnderstandingDegree = 10;
+//             else
+//                UnderstandingDegree = 0;
 
-            ///Set the understanding degree weighted with the ratio
-            if(UnderstandingRatio == 1) UnderstandingDegree = 100;
-             else
-                if(UnderstandingRatio >= .75) UnderstandingDegree = 75;
-             else
-                if(UnderstandingRatio >= .50) UnderstandingDegree = 50;
-             else
-                if(UnderstandingRatio >= .25) UnderstandingDegree = 25;
-             else
-                if(UnderstandingRatio >= .10) UnderstandingDegree = 10;
-             else
-                UnderstandingDegree = 0;
-            if(Verbose)
-             cout << "Pattern: " + Pattern + " Understanding Level:" << UnderstandingLevel << " Ratio:" << UnderstandingRatio<< " Is Question:" << ISQ << " Degree:" << UnderstandingDegree << " Unknown Count:" << UnknownCount << "\n";
-
-            if(ISQ == true)UnderstandingDegree = 1;               //question trap
+            if(HasPronoun) CheckForImpliedGender();               //see if gender info exist
+            UnderstandingDegree = GetsUnderstandingLevel();
+            if(GetIsQuestion())UnderstandingDegree = 1;           //question trap
             if(DirectiveLocation >=0)UnderstandingDegree = 2;     //directive trap
-            if(PluralPronounLocation >=0)UnderstandingDegree = 3; //plural pronoun trap
+            if(GetHasPluralPronoun())UnderstandingDegree = 3;     //plural pronoun trap
             if(GetHasGreetingsWord())UnderstandingDegree = 4;     //greetings trap
 
         ofstream PatternDataFile ("PatternData.dat", ios::out | ios::app);
@@ -221,7 +221,7 @@ class c_Cortex : public c_Language
                     cout << "[c_Cortex.h::DeciperCurrentSentence] Case 25 - Maybe Missing determiner - add in the help" << endl;
                     if(GetWordType(0) == 'u'){
                      strData = "the " + strData;
-                     return true;}
+                     return true;}   //call for rerun
                      else
                       SlowSpeak("I don't know "  + GetWords(FirstUnknown)+"?");
                     break;}
@@ -1233,30 +1233,57 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
         string MaleProNouns      = " he him his ";
         string FemaleProNouns    = " she her hers ";
-        string SubjectText       = GetMemoryCellWordLC("",GetSubjectInStack(1)); //pronoun has already been set as subject so get next
+        string SubjectText       = GetWords(GetIndirectObjectLocation());
         string ProNounResolution = "";
-        char GenderClass         = '\0';
-        int MatchedM             = MaleProNouns.find(" " + GetWordsLC(GetSubjectLocation())+" ");
-        int MatchedF             = FemaleProNouns.find(" " + GetWordsLC(GetSubjectLocation())+" ");
-        int Response             = -1;
+        char   GenderClass         = '\0';
+        int    MatchedM             = MaleProNouns.find(" " + GetWordsLC(GetSubjectLocation())+" ");
+        int    MatchedF             = FemaleProNouns.find(" " + GetWordsLC(GetSubjectLocation())+" ");
+        int    Response             = -1;
+        int    PronounPosition      = -1;
+        bool   Checking             = true;
 
-        if(MatchedF >=0){
-            ProNounResolution = "girl";
-            GenderClass       = 'G';}
-        else
-            if(MatchedM >=0){
-                ProNounResolution = "boy";
-                GenderClass       = 'M';}
+        for(int x = 0; x <= GetWordCount(); x++){
+            if((GetWordType(x) == 'p')|| (GetWordType(x) == 'm')||(GetWordType(x) == 'y'))PronounPosition = x;}
 
-        if( (GetWordType(GetSubjectLocation()) == 'p') && ((MatchedF + MatchedM +1) >=0) ){
-            SlowSpeak("So " + SubjectText + " is a " + ProNounResolution + "?");
-            Response = RequestUserResponse();
-            if(Response == 1){
-                SetMemoryCellGenderClass(GetSubjectInStack(1),GenderClass);
-                SlowSpeak("Okay."); SlowSpeak(":)"); IncreaseMoodLevel();SetHasBeenUnderstood(true);
-            }
-        }
+        while(Checking){
+                if(MatchedF >=0){
+                    ProNounResolution = "girl";
+                    GenderClass       = 'f';}
+                else
+                    if(MatchedM >=0){
+                        ProNounResolution = "boy";
+                        GenderClass       = 'm';}
 
+                if( (GetWordType(GetSubjectLocation()) == 'p') && ((MatchedF + MatchedM +1) >=0) ){
+                   if(GetMemoryCellGenderClass(GetWordTokens(GetIndirectObjectLocation())) == 'u'){
+                    SlowSpeak("So the " + SubjectText + " is a " + ProNounResolution + "?");
+                    Response = RequestUserResponse();
+                    if(Response == 1){
+                        SetMemoryCellGenderClass(GetWordTokens(GetIndirectObjectLocation()),GenderClass);
+                        SlowSpeak("Okay."); SlowSpeak(":)"); IncreaseMoodLevel();SetHasBeenUnderstood(true);
+                        SetGenderClassInSentence(GetIndirectObjectLocation(),GenderClass);
+                        Checking = false;
+                        break;}
+                   }
+                }
+
+                MatchedM = MaleProNouns.find(" " + GetWordsLC(PronounPosition)+ " ");
+                MatchedF = FemaleProNouns.find(" " + GetWordsLC(PronounPosition)+ " ");
+
+                if(GetGenderClassInSentence(GetSubjectLocation()) == 'u'){
+                    if(MatchedM >=0){
+                        SetGenderClassInSentence(GetSubjectLocation(),'m');
+                        Checking = false;
+                        break;}
+                    else
+                        if(MatchedF >=0){
+                            SetGenderClassInSentence(GetSubjectLocation(),'f');
+                            Checking = false;
+                            break;}
+                }
+
+                Checking = false;
+        }//end while checking
  }
  //-----------------------------------END OF CHECK FOR IMPLIED GENDER-------------------------------------------------
 

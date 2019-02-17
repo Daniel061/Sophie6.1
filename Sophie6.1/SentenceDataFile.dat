@@ -1,9 +1,9 @@
-VERSION 6.1.009.20
-Word Count,4
-Subject Location,1
-Original string,the horse is tall
-Final pattern,dnva
-First pattern,dnvu
+VERSION 6.1.009.25
+Word Count,7
+Subject Location,5
+Original string,the cat ran away with her toy
+Final pattern,dnvuIpu
+First pattern,dnvuIpu
 bool Has plural pronoun,0
 bool Has punctuation,0
 Punctuation character,x
@@ -13,22 +13,23 @@ bool Has greeting word,0
 bool Has gender reference,0
 bool Has been understood,1
 bool Has dual subjects,0
+bool Has Pronoun reference,1
 Second subject string,
 Second subject location,-1
 Adverb location,-1
 Noun count,1
 Verb location,2
-Adjective location,3
+Adjective location,-1
 Name pointer,-1
-Indirect object location,-1
+Indirect object location,1
 bool Has Gender determiner,0
-Gist of sentence,is tall 
-subGist of sentence,
-Supportive phrase,the horse 
+Gist of sentence,ran away
+subGist of sentence,with her toy
+Supportive phrase,the cat 
 Conjunction location,-1
 Sentence direction,-1
-Days since 2019,46
-Understanding level,75
+Days since 2019,47
+Understanding level,50
 Word data,the
 Word token,2085
 Quote Location,-1
@@ -45,27 +46,27 @@ bool is plural,0
 Plural root,
 Plural word flag,s
 Word tense,u
-Word data,horse
-Word token,96995
+Word data,cat
+Word token,330
 Quote Location,-1
 bool is contraction,0
-Word data LC,horse
+Word data LC,cat
 Subsitute word,
 Word type,n
 Secondary word type,u
 Alternate word type,u
-Gender class,u
+Gender class,f
 Contraction root 1st,
 Contraction root 2nd,
 bool is plural,0
 Plural root,
 Plural word flag,s
 Word tense,u
-Word data,is
-Word token,109
+Word data,ran
+Word token,1824
 Quote Location,-1
 bool is contraction,0
-Word data LC,is
+Word data LC,ran
 Subsitute word,
 Word type,v
 Secondary word type,u
@@ -77,13 +78,61 @@ bool is plural,0
 Plural root,
 Plural word flag,s
 Word tense,u
-Word data,tall
-Word token,20232
+Word data,away
+Word token,3335
 Quote Location,-1
 bool is contraction,0
-Word data LC,tall
+Word data LC,away
 Subsitute word,
-Word type,a
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,with
+Word token,24108
+Quote Location,-1
+bool is contraction,0
+Word data LC,with
+Subsitute word,
+Word type,I
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,her
+Word token,868
+Quote Location,-1
+bool is contraction,0
+Word data LC,her
+Subsitute word,
+Word type,p
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,toy
+Word token,2175
+Quote Location,-1
+bool is contraction,0
+Word data LC,toy
+Subsitute word,
+Word type,u
 Secondary word type,u
 Alternate word type,u
 Gender class,u
@@ -95,7 +144,7 @@ Plural word flag,s
 Word tense,u
 Word Count,4
 Subject Location,1
-Original string,the dog is black
+Original string,the cat is black
 Final pattern,dnva
 First pattern,dnvu
 bool Has plural pronoun,0
@@ -107,6 +156,7 @@ bool Has greeting word,0
 bool Has gender reference,0
 bool Has been understood,1
 bool Has dual subjects,0
+bool Has Pronoun reference,0
 Second subject string,
 Second subject location,-1
 Adverb location,-1
@@ -118,10 +168,10 @@ Indirect object location,-1
 bool Has Gender determiner,0
 Gist of sentence,is black 
 subGist of sentence,
-Supportive phrase,the dog 
+Supportive phrase,the cat 
 Conjunction location,-1
 Sentence direction,-1
-Days since 2019,46
+Days since 2019,47
 Understanding level,75
 Word data,the
 Word token,2085
@@ -139,11 +189,11 @@ bool is plural,0
 Plural root,
 Plural word flag,s
 Word tense,u
-Word data,dog
-Word token,557
+Word data,cat
+Word token,330
 Quote Location,-1
 bool is contraction,0
-Word data LC,dog
+Word data LC,cat
 Subsitute word,
 Word type,n
 Secondary word type,u
@@ -178,6 +228,292 @@ bool is contraction,0
 Word data LC,black
 Subsitute word,
 Word type,a
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word Count,7
+Subject Location,5
+Original string,the dog ran off with his bone
+Final pattern,dnvuIpu
+First pattern,dnvuIpu
+bool Has plural pronoun,0
+bool Has punctuation,0
+Punctuation character,x
+bool Is question,0
+bool Has contraction,0
+bool Has greeting word,0
+bool Has gender reference,0
+bool Has been understood,1
+bool Has dual subjects,0
+bool Has Pronoun reference,1
+Second subject string,
+Second subject location,-1
+Adverb location,-1
+Noun count,1
+Verb location,2
+Adjective location,-1
+Name pointer,-1
+Indirect object location,1
+bool Has Gender determiner,0
+Gist of sentence,ran off
+subGist of sentence,with his bone
+Supportive phrase,the dog 
+Conjunction location,-1
+Sentence direction,-1
+Days since 2019,47
+Understanding level,50
+Word data,the
+Word token,2085
+Quote Location,-1
+bool is contraction,0
+Word data LC,the
+Subsitute word,
+Word type,d
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,dog
+Word token,557
+Quote Location,-1
+bool is contraction,0
+Word data LC,dog
+Subsitute word,
+Word type,n
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,ran
+Word token,1824
+Quote Location,-1
+bool is contraction,0
+Word data LC,ran
+Subsitute word,
+Word type,v
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,off
+Word token,1566
+Quote Location,-1
+bool is contraction,0
+Word data LC,off
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,with
+Word token,24108
+Quote Location,-1
+bool is contraction,0
+Word data LC,with
+Subsitute word,
+Word type,I
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,his
+Word token,909
+Quote Location,-1
+bool is contraction,0
+Word data LC,his
+Subsitute word,
+Word type,p
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,bone
+Word token,3645
+Quote Location,-1
+bool is contraction,0
+Word data LC,bone
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word Count,7
+Subject Location,5
+Original string,the cat ran off with her toy
+Final pattern,dnvuIpu
+First pattern,dnvuIpu
+bool Has plural pronoun,0
+bool Has punctuation,0
+Punctuation character,x
+bool Is question,0
+bool Has contraction,0
+bool Has greeting word,0
+bool Has gender reference,0
+bool Has been understood,0
+bool Has dual subjects,0
+bool Has Pronoun reference,1
+Second subject string,
+Second subject location,-1
+Adverb location,-1
+Noun count,1
+Verb location,2
+Adjective location,-1
+Name pointer,-1
+Indirect object location,1
+bool Has Gender determiner,0
+Gist of sentence,ran off
+subGist of sentence,with her toy
+Supportive phrase,the cat 
+Conjunction location,-1
+Sentence direction,-1
+Days since 2019,47
+Understanding level,50
+Word data,the
+Word token,2085
+Quote Location,-1
+bool is contraction,0
+Word data LC,the
+Subsitute word,
+Word type,d
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,cat
+Word token,330
+Quote Location,-1
+bool is contraction,0
+Word data LC,cat
+Subsitute word,
+Word type,n
+Secondary word type,u
+Alternate word type,u
+Gender class,f
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,ran
+Word token,1824
+Quote Location,-1
+bool is contraction,0
+Word data LC,ran
+Subsitute word,
+Word type,v
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,off
+Word token,1566
+Quote Location,-1
+bool is contraction,0
+Word data LC,off
+Subsitute word,
+Word type,u
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,with
+Word token,24108
+Quote Location,-1
+bool is contraction,0
+Word data LC,with
+Subsitute word,
+Word type,I
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,her
+Word token,868
+Quote Location,-1
+bool is contraction,0
+Word data LC,her
+Subsitute word,
+Word type,p
+Secondary word type,u
+Alternate word type,u
+Gender class,f
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+Word data,toy
+Word token,2175
+Quote Location,-1
+bool is contraction,0
+Word data LC,toy
+Subsitute word,
+Word type,u
 Secondary word type,u
 Alternate word type,u
 Gender class,u

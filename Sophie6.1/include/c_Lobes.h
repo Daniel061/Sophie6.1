@@ -488,14 +488,14 @@ class c_Lobes : public c_MemoryCell
                 if (!Result){
                             WorkingCell.InitializeAll();
                             WorkingCell.SetpCellDataString(NewWord);                        //stores raw data
-                            WorkingCell.SetpCellWordType(WordType);                             //stores word type
+                            WorkingCell.SetpCellWordType(WordType);                         //stores word type
                             WorkingCell.SetpCellPurpose(Purpose);                           //store cell purpose i.e 'w' - word
                             WorkingCell.SetpCellDataLC(NewWordLC);                          //store the raw data in lower case
-                            WorkingCell.SetpCellGenderClass(GenderClass);                       //store the gender class
+                            WorkingCell.SetpCellGenderClass(GenderClass);                   //store the gender class
                             WorkingCell.SetpCellContractionLongFormFirst(LongFormFirst);    //store the contraction word long form
                             WorkingCell.SetpCellContractionLongFormSecond(LongFormSecond);  //store the contraction word long form
                             WorkingCell.SetpCellIsSingular(SingularValue);                  //store p - plural s - singular u - undetermined
-                            WorkingCell.SetpCellSingularLocation(SingularRoot);                 //address of root i.e. address of "color" for "colors"
+                            WorkingCell.SetpCellSingularLocation(SingularRoot);             //address of root i.e. address of "color" for "colors"
                             WorkingCell.SetpCellToken(Tokenize(NewWord));                   //store the token value of the word
                             RightLobeMemoryMap.emplace(tmpToken,WorkingCell);               //Add this new cell to map.
                             Installed = true;                                               //flag this operation as happened.
