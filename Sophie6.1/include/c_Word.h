@@ -18,6 +18,8 @@ class c_Word
           string  w_SubWord                 = "";    // replacement word, usually from subject
           bool    w_isContraction           = false; // contraction flag
           bool    w_isPlural                = false; // plural flag
+          bool    w_SingularPossessive      = false; // i.e. cat's
+          bool    w_PluralPossessive        = false; // i.e. cats'
           int     w_QuoteLocation           = -1;    // location of quote if contraction
           int     w_WordTokens              = -1;    // depreciated
           char    w_WordType                = 'u';   // defines word type  u = unknown
@@ -32,6 +34,11 @@ class c_Word
 
 
     public:
+        bool     Getw_PluralPossessive(){return w_PluralPossessive;}
+        void     Setw_PluralPossessive(bool newVal){w_PluralPossessive = newVal;}
+
+        bool     Getw_SingularPossessive(){return w_SingularPossessive;}
+        void     Setw_SingularPossessive(bool newVal){w_SingularPossessive = newVal;}
 
         string   Getw_WordForm(){return w_WordForm;}
         void     Setw_WordForm(string newVal){w_WordForm = newVal;}

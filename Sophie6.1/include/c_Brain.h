@@ -3,6 +3,7 @@
 
 #include <c_Cerebellum.h>
 extern string Version;
+extern bool   StoryMode;
 
 class c_Brain : public c_Cerebellum
 {
@@ -165,6 +166,17 @@ class c_Brain : public c_Cerebellum
                 {
                     Control = -1;
                     SlowSpeak( "Good Bye!");
+                    break;
+                }
+            case 2729: // the end
+                {
+                    if(StoryMode){
+                        StoryMode = false;
+                        SlowSpeak("Thank you for that story. I loved it!");
+                        SlowSpeak(":)");
+                        IncreaseMoodLevel();
+                    }
+                    Control = 2;
                     break;
                 }
             case 7510: // exit 1090

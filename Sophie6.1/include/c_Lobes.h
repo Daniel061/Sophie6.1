@@ -497,6 +497,7 @@ class c_Lobes : public c_MemoryCell
                             WorkingCell.SetpCellIsSingular(SingularValue);                  //store p - plural s - singular u - undetermined
                             WorkingCell.SetpCellSingularLocation(SingularRoot);             //address of root i.e. address of "color" for "colors"
                             WorkingCell.SetpCellToken(Tokenize(NewWord));                   //store the token value of the word
+
                             RightLobeMemoryMap.emplace(tmpToken,WorkingCell);               //Add this new cell to map.
                             Installed = true;                                               //flag this operation as happened.
                             if(Verbose)
@@ -771,6 +772,8 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Next Noun,"           << fileIT->second.GetpCellNextNoun() << Delim;
                     LearnedDataFile << "Token,"               << fileIT->second.GetpCellToken() << Delim;
                     LearnedDataFile << "Next Pattern,"        << fileIT->second.GetpCellPointerToNextPattern() << Delim;
+                    LearnedDataFile << "Is Singular Possessive," << fileIT->second.GetpIsSingularPossessive() << Delim;
+                    LearnedDataFile << "Is Plural Possessive,"<< fileIT->second.GetpIsPluralPossessive() << Delim;
 
                 Count = fileIT->second.GetNumberOfAdjectivesInMap();
                 LearnedDataFile << "Number of Adjectives,"    << Count << Delim;
@@ -819,7 +822,8 @@ class c_Lobes : public c_MemoryCell
                 cout << "..";
                 if(LearnedDataFile.is_open()){
                         getline(LearnedDataFile,strLineData,',');
-                        if(strLineData != "VERSION " + Version){
+                        //if(strLineData != "VERSION " + Version){
+                        if(!VerifyFileVersion(strLineData)){
                             LearnedDataFile.close();
                             remove("LearnedData.dat");
                             strLineData = "";
@@ -891,6 +895,12 @@ class c_Lobes : public c_MemoryCell
                         WorkingCell.SetpCellPointerToNextPattern(stoi(strLineData,&decType)); //set the int pointer to next pattern
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpIsSingularPossessive(stoi(strLineData,&decType));    //set singular possessive
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpIsPluralPossessive(stoi(strLineData,&decType));      //set plural possessive
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
                         Count = stoi(strLineData,&decType);                                  //got number of adjectives
                         //count = adjective count
                         for(int x = 0; x< Count; x++){
@@ -935,11 +945,12 @@ class c_Lobes : public c_MemoryCell
               LearnedDataFile.close();
               cout << "..";
 
-              ifstream PatternFile ("PatternWorkLearned.dat", ios::in);
+              ifstream PatternFile ("PatternWorkLearned.dat");
               string SecondLineData = "";
               if(PatternFile.is_open()){
                     getline(LearnedDataFile,strLineData);
-                    if(strLineData != "VERSION " + Version){
+                    //if(strLineData != "VERSION " + Version){
+                    if(!VerifyFileVersion(strLineData)){
                         PatternFile.close();
                         remove("PatternWorkLearned.dat");
                     }
@@ -955,6 +966,31 @@ class c_Lobes : public c_MemoryCell
               PatternFile.close();
             cout << endl;
         }//end function
+
+
+
+        //Checks the current file version after the second decimal, against the one read.i.e. 6.1.02.009.28  02 is the file version
+        bool VerifyFileVersion(string VersionToCheck){
+            int    DecimalPointer1 = -1;
+            int    DecimalPointer2 = -1;
+            string Extraction1     = "";
+            string Extraction2     = "";
+            bool   Result = false;
+
+
+            DecimalPointer1  = Version.find(".");
+            DecimalPointer1  = Version.find(".",DecimalPointer1+1);
+            Extraction1      = Version.substr(DecimalPointer1+1,2);
+
+            DecimalPointer2  = VersionToCheck.find(".");
+            if(DecimalPointer2 >=0){
+               DecimalPointer2  = VersionToCheck.find(".",DecimalPointer2+1);}
+            if(DecimalPointer2 >=0){
+               Extraction2      = VersionToCheck.substr(DecimalPointer2+1,2);}
+
+            if(Extraction1 == Extraction2) Result = true;
+            return Result;
+        }//end function Verify File Version
 };
 
 

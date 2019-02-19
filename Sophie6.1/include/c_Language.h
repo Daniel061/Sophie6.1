@@ -6,7 +6,9 @@
 #include <string>
 #include <iostream>
 extern bool Verbose;
-extern int ThisSpeed;
+extern int  ThisSpeed;
+extern bool StoryMode;
+
 using namespace std;
 
 /*    Language Helper Class
@@ -158,7 +160,6 @@ class c_Language : public c_LongTermMemory
 
      if(Verbose)cout << " Received Pattern:" << Pattern << " Correct Pattern:" << CorrectedPattern << endl;
 
-     //cout << " Received Pattern:" << Pattern << " Correct Pattern:" << CorrectedPattern << endl;
    return CorrectedPattern;
  }
 //--------------------------End Language Review------------------------------------------------
@@ -482,53 +483,56 @@ class c_Language : public c_LongTermMemory
 
 //-----------------------SlowSpeak--------------------------------------------------------
 void SlowSpeak(string str_Data, bool Recording = true, int Delay = ThisSpeed, bool CarriageReturn = true ){
-     string WorkingWord;
-     if(Recording){
-        SaveResponsesSent(str_Data);}
-     SlowSentence.Parse(str_Data);
-     for(int x = 0; x < SlowSentence.GetWordCount(); x++){
+    if(StoryMode == false){
+             string WorkingWord;
+             if(Recording){
+                SaveResponsesSent(str_Data);}
+             SlowSentence.Parse(str_Data);
+             for(int x = 0; x < SlowSentence.GetWordCount(); x++){
 
-        WorkingWord = SlowSentence.GetWords(x);
-        for(int y = 0; y < int(WorkingWord.size()); y++){
-            cout << WorkingWord[y];
-            for(int dly = 0; dly < Delay; dly++);
-        }
-        cout  << " ";
+                WorkingWord = SlowSentence.GetWords(x);
+                for(int y = 0; y < int(WorkingWord.size()); y++){
+                    cout << WorkingWord[y];
+                    for(int dly = 0; dly < Delay; dly++);
+                }
+                cout  << " ";
 
-     }
-        cout << "\b";
-        if(CarriageReturn) cout << SlowSentence.GetPunctuation() << endl;
+             }
+                cout << "\b";
+                if(CarriageReturn) cout << SlowSentence.GetPunctuation() << endl;
+    }//end Story Mode
 }
 //--------------------------------End SlowSpeak------------------------------------------
 
 //-------------------------Request User Response-----------------------------------------
 int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeResponse = "", string OtherResponse = "")
 {
-    int Matched = -1;
+    if(StoryMode == false){
+            int Matched = -1;
 
-    string PositiveResponse = " yes Yes OK ok Ok correct Correct right Right Exactly exactly ye ";
-    string NegativeResponse = " No no wrong Wrong What what n ";
-    string Response         = "";
-    if(AltPositiveResponse != "") PositiveResponse = AltPositiveResponse;
-    if(AltNegativeResponse != "") NegativeResponse = AltNegativeResponse;
+            string PositiveResponse = " yes Yes OK ok Ok correct Correct right Right Exactly exactly ye ";
+            string NegativeResponse = " No no wrong Wrong What what n ";
+            string Response         = "";
+            if(AltPositiveResponse != "") PositiveResponse = AltPositiveResponse;
+            if(AltNegativeResponse != "") NegativeResponse = AltNegativeResponse;
 
-    while (Response == ""){
-        cout << ">?";
-        getline (cin,Response);}
-    tmpSentence.Parse(Response);
-    Response = tmpSentence.GetWords(0);
-    Matched = PositiveResponse.find(" " + Response + " ");
-    if(Matched >= 0)
-        return 1;
-    Matched = NegativeResponse.find(" " + Response + " ");
-    if(Matched >= 0)
-        return -1;
+            while (Response == ""){
+                cout << ">?";
+                getline (cin,Response);}
+            tmpSentence.Parse(Response);
+            Response = tmpSentence.GetWords(0);
+            Matched = PositiveResponse.find(" " + Response + " ");
+            if(Matched >= 0)
+                return 1;
+            Matched = NegativeResponse.find(" " + Response + " ");
+            if(Matched >= 0)
+                return -1;
 
-    Matched = OtherResponse.find(" " + Response + " ");
-    if(Matched >= 0)
-        return -2;
-
-    return 0;
+            Matched = OtherResponse.find(" " + Response + " ");
+            if(Matched >= 0)
+                return -2;
+    }//end story mode check
+    return 1;
 }
 //-------------------------End Request User Response-----------------------------------------
 

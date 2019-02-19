@@ -32,6 +32,8 @@ class c_MemoryCell
         char pGenderClass;                       // n - neutral e- either m - male only f - female only u - undefined
         bool pIsRoot;                            // the root of a word
         bool pIsSet;                             // Has been set with data before
+        bool pIsPluralPossessive;                // flag
+        bool pIsSingularPossessive;              // flag
         char pCellIsSingular;                    // p = plural s = singular u = undefined
         int  pSingularLocation;                  // if CellIsSingular = p, this points to the memorycell containing the singular version
         int  pNextVerb;                          // pointer to next verb
@@ -48,6 +50,12 @@ class c_MemoryCell
 
 
     public:
+        bool   GetpIsPluralPossessive(){return pIsPluralPossessive;}
+        void   SetpIsPluralPossessive(bool newVal){pIsPluralPossessive = newVal;}
+
+        bool   GetpIsSingularPossessive(){return pIsSingularPossessive;}
+        void   SetpIsSingularPossessive(bool newVal){pIsSingularPossessive = newVal;}
+
         string GetpCellContractionLongFormFirst(){return pCellContractionLongFormFirst;}
         string GetpCellContractionLongFormSecond(){return pCellContractionLongFormSecond;}
         void   SetpCellContractionLongFormFirst(string newVal){pCellContractionLongFormFirst = newVal;}
@@ -106,6 +114,8 @@ class c_MemoryCell
                 pNextNoun                       = 0;
                 pToken                          = 0;
                 pIsSet                          = false;
+                pIsPluralPossessive             = false;
+                pIsSingularPossessive           = false;
                 pGenderClass                    = 'u';
                 pSecondaryType                  = 'u';
                 pAlternateType                  = 'u';

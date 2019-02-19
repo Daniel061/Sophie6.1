@@ -114,26 +114,7 @@ class c_Cortex : public c_Language
                             UnknownCount++; UnKnownLocation = x;
                             if(FirstUnknown == -1) FirstUnknown = x;
                             }
-            }
-
-
-//            SetPattern(Pattern);
-//            ISQ = GetIsQuestion();
-//            if(UnderstandingLevel > 0)
-//                UnderstandingRatio = float(UnderstandingLevel) / float(GetWordCount());
-//
-//            ///Set the understanding degree weighted with the ratio
-//            if(UnderstandingRatio == 1) UnderstandingDegree = 100;
-//             else
-//                if(UnderstandingRatio >= .75) UnderstandingDegree = 75;
-//             else
-//                if(UnderstandingRatio >= .50) UnderstandingDegree = 50;
-//             else
-//                if(UnderstandingRatio >= .25) UnderstandingDegree = 25;
-//             else
-//                if(UnderstandingRatio >= .10) UnderstandingDegree = 10;
-//             else
-//                UnderstandingDegree = 0;
+            }//end for loop to scan sentence
 
             if(HasPronoun) CheckForImpliedGender();               //see if gender info exist
             UnderstandingDegree = GetsUnderstandingLevel();
@@ -921,15 +902,18 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         int IndirectObjectLoc   = GetIndirectObjectLocation();
         int SubjectLocation     = GetSubjectLocation();
         int AdjectiveCount      = GetMemoryCellAdjectives(GetWordTokens(SubjectLocation),Adjectives)-1;
+        int StoryModeDetection  = GetOriginalString().find("story");
         bool ToMe               = false;
         bool Result             = false;
         int Response            = -1;
         char GenderChar         = '\0';
         string WorkingPattern   = GetPattern();
 
+        if(StoryModeDetection >=0)
+            VerifyStoryModeRequest(DirectionOfQuestion,StoryModeDetection);
+        else
+          DirectionOfQuestion = GetSentenceDirection();
 
-
-        DirectionOfQuestion = GetSentenceDirection();
         switch (DirectionOfQuestion){
 
             case 0: {
@@ -1016,6 +1000,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                 bool   LeftOfConjunctionMatch   = false;
                 bool   RightOfConjunctionMatch  = false;
                 int    LocalConjunctionLocation = GetConjunctionLocation();
+
                 string ResponseString           = "";
                 //checks for direct comparison i.e. the dog is black.   is the dog black
                 //compares adjective list with the adjective in the sentence
@@ -1085,7 +1070,9 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
                 if(MatchedAdjective >=0) {SlowSpeak("Yes."); Result = true;} else {SlowSpeak("No."); Result = true;}
 
-                break;}
+                break;}// end yes/no handler
+
+
              case 4: {//Proper noun reference
                 if(Verbose)
                     cout << "[c_Cortex::QuestionSentenceBreakDown()] Question direction Proper noun reference\n";
@@ -1150,7 +1137,16 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
                  Result = true;
                  break;
-             }
+             }// end case 5
+             case 10: // Story mode enabled, verified by another routine
+                {
+                    SlowSpeak("I would love that!");
+                    SlowSpeak("I promise I won't interrupt you.");
+                    SlowSpeak("Just say  the end  when you are done.");
+                    StoryMode = true;
+                    Result = true;
+                    break;
+                }
 
             default: if(Verbose) cout << "[c_Cortex::QuestionSentenceBreakDown()] No direction detected.\n";
         }
@@ -1229,18 +1225,19 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
             cout << "[c_Cortex.h::CheckForImpliedGender\n]";
         //qualification;
         // subject must be pronoun   he,she,her, him
-        //***TODO***    Check to be sure gender isn't already set
+        // Check to be sure gender isn't already set
 
-        string MaleProNouns      = " he him his ";
-        string FemaleProNouns    = " she her hers ";
-        string SubjectText       = GetWords(GetIndirectObjectLocation());
-        string ProNounResolution = "";
-        char   GenderClass         = '\0';
-        int    MatchedM             = MaleProNouns.find(" " + GetWordsLC(GetSubjectLocation())+" ");
-        int    MatchedF             = FemaleProNouns.find(" " + GetWordsLC(GetSubjectLocation())+" ");
-        int    Response             = -1;
-        int    PronounPosition      = -1;
-        bool   Checking             = true;
+        string MaleProNouns          = " he him his ";
+        string FemaleProNouns        = " she her hers ";
+        string SubjectText           = GetWords(GetIndirectObjectLocation());
+        string ProNounResolution     = "";
+        char   GenderClass           = '\0';
+        int    MatchedM              = MaleProNouns.find(" " + GetWordsLC(GetSubjectLocation())+" ");
+        int    MatchedF              = FemaleProNouns.find(" " + GetWordsLC(GetSubjectLocation())+" ");
+        int    Response              = -1;
+        int    PronounPosition       = -1;
+        bool   Checking              = true;
+        if(GetIsQuestion()) Checking = false;
 
         for(int x = 0; x <= GetWordCount(); x++){
             if((GetWordType(x) == 'p')|| (GetWordType(x) == 'm')||(GetWordType(x) == 'y'))PronounPosition = x;}
@@ -1287,8 +1284,26 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
  }
  //-----------------------------------END OF CHECK FOR IMPLIED GENDER-------------------------------------------------
 
+//--------------------------VERIFY STORY MODE REQUEST-----------------------------------------------------------------
+        //rules:
+        // Must be a question. Most likely is or wouldn't be here
+        // -user must ask to tell a story, not just mention the word story
+        // Verify question by either punctuation or the lead in words, i.e can, would etc
+        // User must reference themselves, i.e. can I, or would you like me to tell, or let me tell...
+        // -allowable contraction is Let's, i.e. let us hear a story
 
+        void VerifyStoryModeRequest(int &DirectionOfQuestion, int PointerToStoryWord){
+             int    PatternSearch  = GetPattern().find("y"); //pronoun outward  me mine my I i
+             string GistCheck      = GetGistOfSentence();
+             int    PatternSearch2 = GistCheck.find("tell you a story");
 
+             if((PatternSearch2 >=0) && (PatternSearch>=0)){
+                    DirectionOfQuestion = 10;
+             }
+             else
+                    DirectionOfQuestion = GetSentenceDirection();
+        }
+//--------------------------------End Verify Story Mode request --------------------------------------------------------
 };
 
 #endif // C_CORTEX_H

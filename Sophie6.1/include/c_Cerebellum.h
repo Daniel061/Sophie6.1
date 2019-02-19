@@ -228,7 +228,7 @@ public:
                     if((GetWordType(x)=='B')&&(DirectionDetected == -1)) DirectionDetected = 2;}  //user used a pronoun
 
         if(GetWordType(0) == 'v'){
-            if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") || (GetWordsLC(0)=="are") || (GetWordsLC(0)== "do") ){
+            if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") || (GetWordsLC(0)=="are") || (GetWordsLC(0)== "do") || (GetWordsLC(0)=="would") ){
                 DirectionDetected = 3;}}                                                          //most likely a question
 
         PatternMatch = WorkingPattern.find('g');

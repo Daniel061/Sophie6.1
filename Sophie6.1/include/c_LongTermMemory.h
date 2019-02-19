@@ -54,6 +54,8 @@ class c_LongTermMemory : public c_SubjectStack
                 CopySentence.SetPluralRoot(x,GetPluralRoot(x));                             //14
                 CopySentence.SetPluralWordFlag(x,GetPluralWordFlag(x));                     //15
                 CopySentence.SetWordTense(x,GetWordTense(x));                               //16
+                CopySentence.SetisPluralPossessive(x,GetisPluralPossessive(x));             //17
+                CopySentence.SetisSingularPossessive(x,GetisSingularPossessive(x));         //18
                 }
               CopySentence.WordCount                      =GetWordCount();
               CopySentence.SubjectLocation                =GetSubjectLocation();
@@ -115,16 +117,23 @@ class c_LongTermMemory : public c_SubjectStack
 
         bool FindPhraseInSentenceMap(string PhraseToFind){
             PhraseToFind = " " + PhraseToFind;
-            //if(PhraseToFind[int(PhraseToFind.size()-1)] != ' '){
-            //    PhraseToFind += " ";
-            //}
+            if(PhraseToFind[int(PhraseToFind.size()-1)] != ' '){
+                PhraseToFind += " ";
+            }
             int    MatchedLocation = -1;
             bool   ResultOfSearch  = false;
             string strOrigString   = "";
+            string endPhrase       = "";
+
+            endPhrase = PhraseToFind.substr(0,PhraseToFind.size()-1);
             csIT = CopySentenceMap.begin();
             for(int x = 0; x< int(CopySentenceMap.size()); x++){
                 strOrigString = csIT->second.GetOriginalString();
                 MatchedLocation = strOrigString.find(PhraseToFind);
+                if(MatchedLocation >=0){
+                  ResultOfSearch = true;
+                  break;}
+                MatchedLocation = strOrigString.find(endPhrase);
                 if(MatchedLocation >=0){
                   ResultOfSearch = true;
                   break;}
@@ -136,16 +145,26 @@ class c_LongTermMemory : public c_SubjectStack
 
         string GetSubjectWithMatchingPhraseInSentenceMap(string PhraseToFind,string &strSecondSubject, bool &HasDualSubs){
             PhraseToFind = " " + PhraseToFind ;
-            //if(PhraseToFind[int(PhraseToFind.size()-1)] != ' '){
-            //    PhraseToFind += " ";
-            //}
+            if(PhraseToFind[int(PhraseToFind.size()-1)] != ' '){
+                PhraseToFind += " ";
+            }
             int    MatchedLocation = -1;
             int    SubLoc          = -1;
             string strOrigString   = "";
+            string endPhrase       = "";
+
+            endPhrase = PhraseToFind.substr(0,PhraseToFind.size()-1);
             csIT = CopySentenceMap.begin();
             for(int x = 0; x< int(CopySentenceMap.size()); x++){
                 strOrigString = csIT->second.GetOriginalString();
                 MatchedLocation = strOrigString.find(PhraseToFind);
+                if(MatchedLocation >=0){
+                  SubLoc = csIT->second.GetSubjectLocation();
+                  strSecondSubject = csIT->second.GetSecondSubject();
+                  HasDualSubs      = csIT->second.GetHasDualSubjects();
+                  return csIT->second.GetWords(SubLoc);
+                  break;}
+                MatchedLocation = strOrigString.find(endPhrase);
                 if(MatchedLocation >=0){
                   SubLoc = csIT->second.GetSubjectLocation();
                   strSecondSubject = csIT->second.GetSecondSubject();
@@ -250,6 +269,7 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << "Understanding level,";
                         SentenceDataFile << csIT->second.GetsUnderstandingLevel() << Deliminator;
 
+
                         for(int x = 0; x <= csIT->second.GetWordCount()-1; x++){
                             SentenceDataFile << "Word data,";
                             SentenceDataFile << csIT->second.GetWords(x) << Deliminator;
@@ -283,6 +303,10 @@ class c_LongTermMemory : public c_SubjectStack
                             SentenceDataFile << csIT->second.GetPluralWordFlag(x) << Deliminator;
                             SentenceDataFile << "Word tense,";
                             SentenceDataFile << csIT->second.GetWordTense(x) << Deliminator;
+                            SentenceDataFile << "bool Is SingularPossessive,";
+                            SentenceDataFile << csIT->second.GetisSingularPossessive(x) << Deliminator;
+                            SentenceDataFile << "bool Is Plural Possive,";
+                            SentenceDataFile << csIT->second.GetisPluralPossessive(x) << Deliminator;
 
                         }
 
@@ -321,7 +345,8 @@ class c_LongTermMemory : public c_SubjectStack
             ifstream SentenceDataFile ("SentenceDataFile.dat");
             if (SentenceDataFile.is_open()){
                getline (SentenceDataFile,strLineData);
-               if(strLineData != "VERSION " + Version){
+               //if(strLineData != "VERSION " + Version){
+               if(!VerifyFileVersion(strLineData)){
                 SentenceDataFile.close();
                 remove("SentenceDataFile.dat");
                 strLineData = "";
@@ -476,6 +501,12 @@ class c_LongTermMemory : public c_SubjectStack
                     getline (SentenceDataFile,strLineData);
                     CopySentence.SetWordTense(x,strLineData[0]);        //set char word tense
                     getline (SentenceDataFile,strLineData,',');
+                    getline (SentenceDataFile,strLineData);
+                    CopySentence.SetisSingularPossessive(x,stoi(strLineData,&decType));//set bool IsSingularPossessive
+                    getline (SentenceDataFile,strLineData,',');
+                    getline (SentenceDataFile,strLineData);
+                    CopySentence.SetisPluralPossessive(x,stoi(strLineData,&decType)); //set bool IsPluralPossessive
+                    getline (SentenceDataFile,strLineData,',');
 
                 }//end for loop
                     CopySentenceMap.emplace(Tokenize(CopySentence.GetOriginalString()),CopySentence);  //store in map
@@ -488,7 +519,8 @@ class c_LongTermMemory : public c_SubjectStack
             ifstream SentenceDataOrderFile ("SentenceDataOrderFile.dat");
             if (SentenceDataOrderFile.is_open()){
                     getline (SentenceDataOrderFile,strLineData);
-                    if(strLineData != "VERSION " + Version){
+                    //if(strLineData != "VERSION " + Version){
+                    if(!VerifyFileVersion(strLineData)){
                         SentenceDataOrderFile.close();
                         remove("SentenceDataOrderFile.dat");
                         strLineData = "";

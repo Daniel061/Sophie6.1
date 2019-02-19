@@ -196,6 +196,12 @@ class c_Sentence : public c_Personality
 
 
         ///******************ALL WORD DATA FUNCTIONS GET/SET PAIRS*************************
+        bool   GetisSingularPossessive(int Location){return WordMap[Location].Getw_SingularPossessive();}
+        void   SetisSingularPossessive(int Location, bool newVal){WordMap[Location].Setw_SingularPossessive(newVal);}
+
+        bool   GetisPluralPossessive(int Location){return WordMap[Location].Getw_PluralPossessive();}
+        void   SetisPluralPossessive(int Location, bool newVal){WordMap[Location].Setw_PluralPossessive(newVal);}
+
         char   GetPluralWordFlag(int Location){return WordMap[Location].Getw_PluralWordFlag();}
         void   SetPluralWordFlag(int Location, char newVal){WordMap[Location].Setw_PluralWordFlag(newVal);}
 
@@ -365,8 +371,8 @@ class c_Sentence : public c_Personality
 
 
                 //Words[int_Word_Count] = str_Sentence_Data.substr(x,int_Last_Pos-x);
-                cWords.Setw_WordForm(str_Sentence_Data.substr(x,t-x));      //extract word to cWords class
-                WordMap.emplace(int_Word_Count,cWords);                     //place this word in the map
+                cWords.Setw_WordForm(str_Sentence_Data.substr(x,int_Last_Pos-x)); //extract word to cWords class
+                WordMap.emplace(int_Word_Count,cWords);                           //place this word in the map
                 int_Word_Count++;
 
 

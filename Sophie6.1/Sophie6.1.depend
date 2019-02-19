@@ -1,27 +1,27 @@
 # depslib dependency file v1.0
-1550422016 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
+1550533092 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
 	<iostream>
 	<fstream>
 	<c_Brain.h>
 	<time.h>
 
-1550423140 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
+1550534036 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
 	<c_Cerebellum.h>
 
-1550423140 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
+1550535048 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
 	<c_Cortex.h>
 
-1550422246 h:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
+1550537304 h:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
 	<c_Language.h>
 
-1550422996 h:\c++projects\sophie6.1\sophie6.1\include\c_language.h
+1550535048 h:\c++projects\sophie6.1\sophie6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<c_LongTermMemory.h>
 	<string>
 	<iostream>
 
-1550329124 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
+1550431906 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
 	<c_Personality.h>
 	<c_Word.h>
 	<map>
@@ -35,7 +35,7 @@
 1546092816 h:\c++projects\sophie6.1\sophie6.1\include\c_medulla.h
 	<c_Lobes.h>
 
-1550415670 h:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
+1550532712 h:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
 	<c_MemoryCell.h>
 	<unordered_map>
 	<cstdio>
@@ -44,7 +44,7 @@
 	<string>
 	<time.h>
 
-1549725228 h:\c++projects\sophie6.1\sophie6.1\include\c_memorycell.h
+1550430926 h:\c++projects\sophie6.1\sophie6.1\include\c_memorycell.h
 	<string>
 	<map>
 	<iostream>
@@ -53,7 +53,7 @@
 	<string>
 	<iostream>
 
-1550329136 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
+1550532236 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
 	<c_Sentence.h>
 	<c_SubjectStack.h>
 	<unordered_map>
@@ -226,7 +226,7 @@
 1544995944 source:d:\c++projects\sophie6.1\sophie6.1\src\c_subjectstack.cpp
 	"c_SubjectStack.h"
 
-1550146872 h:\c++projects\sophie6.1\sophie6.1\include\c_word.h
+1550429210 h:\c++projects\sophie6.1\sophie6.1\include\c_word.h
 	<string>
 
 1549973678 source:h:\c++projects\sophie6.1\sophie6.1\src\c_word.cpp
