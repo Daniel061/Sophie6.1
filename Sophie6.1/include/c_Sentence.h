@@ -196,6 +196,12 @@ class c_Sentence : public c_Personality
 
 
         ///******************ALL WORD DATA FUNCTIONS GET/SET PAIRS*************************
+        char   GetPossessiveRootType(int Location){return WordMap[Location].Getw_PossessiveRootType();}
+        void   SetPossessiveRootType(int Location, char newVal){WordMap[Location].Setw_PossessiveRootType(newVal);}
+
+        string GetPossessiveRoot(int Location){return WordMap[Location].Getw_PossessiveRoot();}
+        void   SetPossessiveRoot(int Location,string newVal){WordMap[Location].Setw_PossessiveRoot(newVal);}
+
         bool   GetisSingularPossessive(int Location){return WordMap[Location].Getw_SingularPossessive();}
         void   SetisSingularPossessive(int Location, bool newVal){WordMap[Location].Setw_SingularPossessive(newVal);}
 

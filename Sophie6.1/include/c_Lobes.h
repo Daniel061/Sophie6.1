@@ -3,6 +3,7 @@
 
 #include <c_MemoryCell.h>
 #include <unordered_map>
+#include <map>
 #include <cstdio>
 #include <fstream>
 #include <iostream>
@@ -16,6 +17,7 @@ extern string Version;
 
 class c_Lobes : public c_MemoryCell
 {
+
     public:
         c_Lobes();
         virtual ~c_Lobes();
@@ -27,6 +29,11 @@ class c_Lobes : public c_MemoryCell
         unordered_map <int, c_MemoryCell> LeftLobeMemoryMap;
         unordered_map <int, c_MemoryCell>::iterator mapIT;
         unordered_map <int, c_MemoryCell>::iterator fileIT;
+        //new map form ~ in transition
+        map <string, c_MemoryCell> RightLobeCellMap;
+        map <string, c_MemoryCell> LeftLobeCellMap;
+        map <string, c_MemoryCell>::iterator CellMapIT;
+
         c_MemoryCell WorkingCell;
 
             /* Private Function to search the map to see if
@@ -47,7 +54,34 @@ class c_Lobes : public c_MemoryCell
                 if(mapIT != LeftLobeMemoryMap.end())Result = true;
             }
             return mapIT;
-        }
+            }
+
+
+
+            /* Private Function to search the map to see if
+               the string is indexed.
+               if it is not, modifies the address of the bool at Result to TRUE and
+               ALWAYS returns the iterator.
+               = end() if not found.
+               For use with Pattern data, set UseLowerCase to false
+            */
+
+            map <string, c_MemoryCell>::iterator FindStringInMap(string strToSearch, bool &Result, char SideToCheck = 'r', bool UseLowerCase = true){
+            Result = false;
+            if(UseLowerCase)
+                strToSearch = MakeStringLowerCase(strToSearch);
+            if(SideToCheck == 'r'){
+                CellMapIT = RightLobeCellMap.find(strToSearch);
+                if(CellMapIT != RightLobeCellMap.end())Result = true;
+                }
+            else{
+                CellMapIT = LeftLobeCellMap.find(strToSearch);
+                if(CellMapIT != LeftLobeCellMap.end())Result = true;
+            }
+            return CellMapIT;
+            }
+
+
 
     public:
 
@@ -69,8 +103,47 @@ class c_Lobes : public c_MemoryCell
             return StartDate.tm_yday;
 
         }
+//------------------------NEW STRING INDEXED MEMORY CELL MAP FUNCTIONS----------------
+
+        //Updates or Adds ContractionLongFormFirst if exists
+        //returns True if added, else false if updated
+        //send LongFormFirst data in strData
+        //send Word cell string for index search to apply this to in strSearchBase
+        //  **** to consider -- if it didn't exist, maybe should emplace the strSearchBase first  ****
+        bool SetMemoryCellContractionLongFormFirst(string strData, string strSearchBase){
+           bool Result = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+               if (!Result){
+                  WorkingCell.SetpCellContractionLongFormFirst(strData);
+                  WorkingCell.SetpCellDataString(strSearchBase);
+                  RightLobeCellMap.emplace(strSearchBase,WorkingCell);
+                  Result = true;}
+                  else{
+                    CellMapIT->second.SetpCellContractionLongFormFirst(strData);}
+               return Result;}
 
 
+        //Gets ContractionLongFormFirst if exists
+        //returns True if exists, else false
+        //returns LongFormFirst data in the address of strData
+        //send Word cell string for index search in strSearchBase
+        bool GetMemoryCellContractionLongFormFirst(string &strData, string strSearchBase){
+           bool Result = false;
+           strData     = "";
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                  strData = CellMapIT->second.GetpCellContractionLongFormFirst();}
+
+               return Result;}
+
+
+
+
+
+
+
+
+///-----------------------Old Memory cell map functions-----------------------------///
         //Updates ContractionLongFormFirst if exists
         //returns True if added, else false if updated
         //send LongFormFirst data in strData and the address of the contraction word in Address
@@ -498,6 +571,7 @@ class c_Lobes : public c_MemoryCell
                             WorkingCell.SetpCellSingularLocation(SingularRoot);             //address of root i.e. address of "color" for "colors"
                             WorkingCell.SetpCellToken(Tokenize(NewWord));                   //store the token value of the word
 
+
                             RightLobeMemoryMap.emplace(tmpToken,WorkingCell);               //Add this new cell to map.
                             Installed = true;                                               //flag this operation as happened.
                             if(Verbose)
@@ -774,6 +848,8 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Next Pattern,"        << fileIT->second.GetpCellPointerToNextPattern() << Delim;
                     LearnedDataFile << "Is Singular Possessive," << fileIT->second.GetpIsSingularPossessive() << Delim;
                     LearnedDataFile << "Is Plural Possessive,"<< fileIT->second.GetpIsPluralPossessive() << Delim;
+                    LearnedDataFile << "Possessive Root,"     << fileIT->second.GetpPossessiveRoot() << Delim;
+                    LearnedDataFile << "Possessive Root Type,"<< fileIT->second.GetpPossessiveRootType() << Delim;
 
                 Count = fileIT->second.GetNumberOfAdjectivesInMap();
                 LearnedDataFile << "Number of Adjectives,"    << Count << Delim;
@@ -899,6 +975,12 @@ class c_Lobes : public c_MemoryCell
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpIsPluralPossessive(stoi(strLineData,&decType));      //set plural possessive
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpPossessiveRoot(strLineData);                        //set Possessive root
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpPossessiveRootType(strLineData[0]);                 // set possessive root type
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         Count = stoi(strLineData,&decType);                                  //got number of adjectives

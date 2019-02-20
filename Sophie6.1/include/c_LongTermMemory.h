@@ -200,6 +200,35 @@ class c_LongTermMemory : public c_SubjectStack
             }
         }
 
+
+        //function to ensure all word data gathered and worked on is stored in memory cells
+        //  this should be called when all processing is complete
+        //  Sentence word data has 18 variables
+        void SaveAllSentenceWordDataToMemory(){
+            int     NewWordCount     = 0;
+            int     UpDatedWordCount = 0;
+            bool    Result           = false;
+
+            for(int x = 0; x <= GetWordCount(); x++){
+                //start storing all the word data
+                Result = SetMemoryCellRawStringData(GetWords(x),GetWordTokens(x));                         // 1
+                if(Result)
+                    NewWordCount++;
+                else
+                    UpDatedWordCount++;
+                SetMemoryCellLCStringData(GetWordsLC(x),GetWordTokens(x));                                 // 2
+                SetMemoryCellWordType(GetWordTokens(x),GetWordType(x));                                    // 3
+                SetMemoryCellContractionLongFormFirst(GetContractionLongFormFirst(x),GetWordTokens(x));    // 4
+                SetMemoryCellContractionLongFormSecond(GetContractionLongFormSecond(x),GetWordTokens(x));  // 5
+                SetMemoryCellGenderClass(GetWordTokens(x),GetGenderClassInSentence(x));                    // 6
+                SetMemoryCellpCellIsSingular(GetPluralWordFlag(x),"",GetWordTokens(x));                    // 7    check this lobe function
+                SetMemoryCellpSingularLocation(Tokenize(GetPossessiveRoot(x)));                            // 8    check this lobe function
+
+            }
+
+
+        }
+
         void LTMSaveSentencesInFile(){
             ofstream SentenceDataFile ("SentenceDataFile.dat", ios::out);
             if (SentenceDataFile.is_open()){
@@ -307,6 +336,10 @@ class c_LongTermMemory : public c_SubjectStack
                             SentenceDataFile << csIT->second.GetisSingularPossessive(x) << Deliminator;
                             SentenceDataFile << "bool Is Plural Possive,";
                             SentenceDataFile << csIT->second.GetisPluralPossessive(x) << Deliminator;
+                            SentenceDataFile << "Possessive Root,";
+                            SentenceDataFile << csIT->second.GetPossessiveRoot(x) << Deliminator;
+                            SentenceDataFile << "Possessive Root Type,";
+                            SentenceDataFile << csIT->second.GetPossessiveRootType(x) << Deliminator;
 
                         }
 
@@ -506,6 +539,12 @@ class c_LongTermMemory : public c_SubjectStack
                     getline (SentenceDataFile,strLineData,',');
                     getline (SentenceDataFile,strLineData);
                     CopySentence.SetisPluralPossessive(x,stoi(strLineData,&decType)); //set bool IsPluralPossessive
+                    getline (SentenceDataFile,strLineData,',');
+                    getline (SentenceDataFile,strLineData);
+                    CopySentence.SetPossessiveRoot(x,strLineData);                        // set string possessive root
+                    getline (SentenceDataFile,strLineData,',');
+                    getline (SentenceDataFile,strLineData);
+                    CopySentence.SetPossessiveRootType(x,strLineData[0]);               // set char possessive root type
                     getline (SentenceDataFile,strLineData,',');
 
                 }//end for loop

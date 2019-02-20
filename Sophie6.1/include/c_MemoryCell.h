@@ -14,32 +14,35 @@ class c_MemoryCell
     protected:
 
     private:
-        string pCellData;                        // the raw data
-        string pCellDataLC;                      // raw data in lower case
-        string pGivenName;                       // if this noun or proper noun has a given name
-        string pCellMiniDefinition;              // a short string defining this data
-        string pCellContractionLongFormFirst;    // i.e. he's to he
-        string pCellContractionLongFormSecond;   // i.e. he's to is
-        char pCellPurpose;                       // s-sentence w-word r-response m-memory
-        char pWordType;                          // n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
-                                                 // n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object I(LC) Indirect object
-                                                 // s - plural possessive  X(cap) Directive j-joining word
-                                                 // initialize to 'u'
-        char pWordTense;                         // p-past c-present f-future s-plural
-                                                 // the decision on this word type is made elsewhere
-        char pSecondaryType;                     // Could be used as another type i.e. light-n light red - A box is light -a
-        char pAlternateType;                     // some words without modification could have a third type (All type references conform to pWordType definitions)
-        char pGenderClass;                       // n - neutral e- either m - male only f - female only u - undefined
-        bool pIsRoot;                            // the root of a word
-        bool pIsSet;                             // Has been set with data before
-        bool pIsPluralPossessive;                // flag
-        bool pIsSingularPossessive;              // flag
-        char pCellIsSingular;                    // p = plural s = singular u = undefined
-        int  pSingularLocation;                  // if CellIsSingular = p, this points to the memorycell containing the singular version
-        int  pNextVerb;                          // pointer to next verb
-        int  pNextNoun;                          // pointer to next noun
-        int  pToken;                             // the token value of this data
-        int  pPointerToNextPattern;              // if used as pattern storage, points to constructed pattern or to self if final construction form
+        string pCellData;                          // the raw data
+        string pCellDataLC;                        // the data in lower case
+        string pGivenName;                         // if this noun or proper noun has a given name
+        string pCellMiniDefinition;                // a short string defining this data
+        string pCellContractionLongFormFirst;      // i.e. he's to he
+        string pCellContractionLongFormSecond;     // i.e. he's to is
+        string pPossessiveRoot;                    // i.e. cat's = cat
+        char   pPossessiveRootType;                // usually a 'n' noun type but not always
+        char   pCellPurpose;                       // s-sentence w-word r-response m-memory
+        char   pWordType;                          // n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
+                                                   // n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object I(LC) Indirect object
+                                                   // s - plural possessive  X(cap) Directive j-joining word
+                                                   // initialize to 'u'
+        char   pWordTense;                         // p-past c-present f-future s-plural
+                                                   // the decision on this word type is made elsewhere
+        char   pSecondaryType;                     // Could be used as another type i.e. light-n light red - A box is light -a
+        char   pAlternateType;                     // some words without modification could have a third type (All type references conform to pWordType definitions)
+        char   pGenderClass;                       // n - neutral e- either m - male only f - female only u - undefined
+        bool   pIsRoot;                            // the root of a word
+        bool   pIsSet;                             // Has been set with data before
+        bool   pIsPluralPossessive;                // flag
+        bool   pIsSingularPossessive;              // flag
+        char   pCellIsSingular;                    // p = plural s = singular u = undefined
+        int    pSingularLocation;                  // if CellIsSingular = p, this points to the memorycell containing the singular version
+        int    pNextVerb;                          // pointer to next verb
+        int    pNextNoun;                          // pointer to next noun
+        int    pToken;                             // the token value of this data
+        int    pPointerToNextPattern;              // if used as pattern storage, points to constructed pattern or to self if final construction form
+
         multimap<int,int> adjDescriptors;        // storage of adjectives                        (Adjective,token)
         multimap<int,int> verbDescriptors;       // storage of verbs associated with adjectives  (Verb,Adjective)
         multimap<int,int> advDescriptors;        // storage of adverbs associated with verbs     (Adverb,Adjective)
@@ -55,6 +58,12 @@ class c_MemoryCell
 
         bool   GetpIsSingularPossessive(){return pIsSingularPossessive;}
         void   SetpIsSingularPossessive(bool newVal){pIsSingularPossessive = newVal;}
+
+        string GetpPossessiveRoot(){return pPossessiveRoot;}
+        void   SetpPossessiveRoot(string newVal){pPossessiveRoot = newVal;}
+
+        char   GetpPossessiveRootType(){return pPossessiveRootType;}
+        void   SetpPossessiveRootType(char newVal){pPossessiveRootType = newVal;}
 
         string GetpCellContractionLongFormFirst(){return pCellContractionLongFormFirst;}
         string GetpCellContractionLongFormSecond(){return pCellContractionLongFormSecond;}
@@ -106,7 +115,8 @@ class c_MemoryCell
                 pCellMiniDefinition             = "";
                 pCellContractionLongFormFirst   = "";
                 pCellContractionLongFormSecond  = "";
-
+                pPossessiveRoot                 = "";
+                pPossessiveRootType             = 'u';
                 pCellPurpose                    = 'u'; //undefined
                 pWordType                       = 'u';
                 pIsRoot                         = false;

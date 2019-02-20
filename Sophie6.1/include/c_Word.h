@@ -16,12 +16,14 @@ class c_Word
           string  w_ContractionFormSecond   = "";    // deconstructed contraction what's = is
           string  w_PluralRoot              = "";    // deconstructed plural to the root,cars = car
           string  w_SubWord                 = "";    // replacement word, usually from subject
+          string  w_PossessiveRoot          = "";    // cat's  = cat
           bool    w_isContraction           = false; // contraction flag
           bool    w_isPlural                = false; // plural flag
           bool    w_SingularPossessive      = false; // i.e. cat's
           bool    w_PluralPossessive        = false; // i.e. cats'
           int     w_QuoteLocation           = -1;    // location of quote if contraction
           int     w_WordTokens              = -1;    // depreciated
+          char    w_PossessiveRootType      = 'u';   // usually a 'n' noun but not always
           char    w_WordType                = 'u';   // defines word type  u = unknown
           char    w_GenderClass             = 'u';   // defines gender     u = undefined
           char    w_PluralWordFlag          = 'u';   // s = singular p=plural u = undefined
@@ -88,26 +90,34 @@ class c_Word
         char     Getw_WordTense(){return w_WordTense;}
         void     Setw_WordTense(char newVal){w_WordTense = newVal;}
 
+        string   Getw_PossessiveRoot(){return w_PossessiveRoot;}
+        void     Setw_PossessiveRoot(string newVal){w_PossessiveRoot = newVal;}
+
+        char     Getw_PossessiveRootType(){return w_PossessiveRootType;}
+        void     Setw_PossessiveRootType(char newVal){w_PossessiveRootType = newVal;}
+
 
 
         void c_WordInitializeAll(){
 
-          w_WordForm                 = "";      // the word data in its original form
-          w_WordFormLC               = "";      // the word data in all lowercase
-          w_ContractionFormFirst     = "";      // deconstructed contraction what's = what
-          w_ContractionFormSecond    = "";      // deconstructed contraction what's = is
-          w_PluralRoot               = "";      // deconstructed plural , i.e. cars = car
-          w_SubWord                  = "";      // replacement word,usually from subject
-          w_isContraction            = false;   // contraction flag
-          w_isPlural                 = false;   // plural flag
-          w_QuoteLocation            = -1;      // location of quote if contraction
-          w_WordTokens               = -1;      // depreciated
-          w_WordType                 = 'u';     // defines word type  u = unknown
-          w_GenderClass              = 'u';     // defines gender     u = undefined
-          w_PluralWordFlag           = 'u';     // s = singular  p=plural u = undefined
-          w_SecondaryType            = 'u';     // some words have more than 1 usage
-          w_AlternativeType          = 'u';     // some words have more than 1 usage
-          w_WordTense                = 'u';     // c - present p - past
+          w_WordForm                 = "";      // the word data in its original form           1
+          w_WordFormLC               = "";      // the word data in all lowercase               2
+          w_ContractionFormFirst     = "";      // deconstructed contraction what's = what      3
+          w_ContractionFormSecond    = "";      // deconstructed contraction what's = is        4
+          w_PluralRoot               = "";      // deconstructed plural , i.e. cars = car       5
+          w_SubWord                  = "";      // replacement word,usually from subject        6
+          w_PossessiveRoot           = "";      // cat's = cat                                  7
+          w_isContraction            = false;   // contraction flag                             8
+          w_isPlural                 = false;   // plural flag                                  9
+          w_QuoteLocation            = -1;      // location of quote if contraction/possessive  10
+          w_WordTokens               = -1;      // depreciated                                  11
+          w_WordType                 = 'u';     // defines word type  u = unknown               12
+          w_GenderClass              = 'u';     // defines gender     u = undefined             13
+          w_PluralWordFlag           = 'u';     // s = singular  p=plural u = undefined         14
+          w_SecondaryType            = 'u';     // some words have more than 1 usage            15
+          w_AlternativeType          = 'u';     // some words have more than 1 usage            16
+          w_WordTense                = 'u';     // c - present p - past                         17
+          w_PossessiveRootType       = 'u';     // usually a 'n' noun but not always            18
         }
 
 

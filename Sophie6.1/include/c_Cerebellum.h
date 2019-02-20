@@ -66,8 +66,7 @@ class c_Cerebellum : public c_Cortex
 public:
 
         //*********call this after c_sentence.h::parse() has been run***********************
-        //*****TODO******
-        //   Code for handling disagreement at line 90
+
     int GatherAndSetAllSentenceData(){
         if(Verbose)
             cout << "[c_Cerebellum.h::GatherAndSetAllSentenceData()]\n";
@@ -119,7 +118,7 @@ public:
                                 if((MemoryWordType != 'u') &&
                                 (LocalWordType != 'u') &&
                                 (MemoryWordType != LocalWordType)){
-                                   cout << "Disagreement!\n";
+                                   //cout << "Disagreement!\n";
                                   //disagreement here!!!                            //We have a disagreement here between memory cell wordtype and language helper
                                    LocalHasAlternateType = true;
                                    LocalAlternateType    = LocalWordType;           //Save for alternate type storage
