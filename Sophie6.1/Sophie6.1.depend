@@ -21,7 +21,7 @@
 	<string>
 	<iostream>
 
-1550577668 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
+1550752354 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
 	<c_Personality.h>
 	<c_Word.h>
 	<map>
@@ -35,7 +35,7 @@
 1546092816 h:\c++projects\sophie6.1\sophie6.1\include\c_medulla.h
 	<c_Lobes.h>
 
-1550665362 h:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
+1550792934 h:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
 	<c_MemoryCell.h>
 	<unordered_map>
 	<map>

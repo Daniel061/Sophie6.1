@@ -14,7 +14,7 @@ class c_Sentence : public c_Personality
     protected:
         map <int,c_Word>  WordMap;              // map of words and their data in the sentence
         map <int,c_Word>::iterator WordIT;      // iterator for word map
-        c_Word cWords;                          // word class
+        c_Word cWords;                          // local word class copy
 
     public:
         int    WordCount;                       // no. of words in sentence not counting punctuation  initialize to 0

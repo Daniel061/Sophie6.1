@@ -1,6 +1,90 @@
 VERSION 6.1.02.EN.009.028, file version
-Original string,tall
-Lower Case string,tall
+Original string,it
+Lower Case string,it
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,r
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,110
+Next Pattern,0
+Is Singular Possessive,0
+Is Plural Possessive,0
+Possessive Root,
+Possessive Root Type,u
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,ok
+Lower Case string,ok
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,u
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,161
+Next Pattern,0
+Is Singular Possessive,0
+Is Plural Possessive,0
+Possessive Root,
+Possessive Root Type,u
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,is
+Lower Case string,is
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,v
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,109
+Next Pattern,0
+Is Singular Possessive,0
+Is Plural Possessive,0
+Possessive Root,
+Possessive Root Type,u
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,black
+Lower Case string,black
 Given name,
 Mini Def.,
 Contraction 1st,
@@ -17,7 +101,7 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,20232
+Token,32141
 Next Pattern,0
 Is Singular Possessive,0
 Is Plural Possessive,0
@@ -57,14 +141,14 @@ Nunber of Verbs,0
 Number of Adverbs,1
 Adverb,is
 Related Nouns,0
-Original string,black
-Lower Case string,black
+Original string,nice
+Lower Case string,nice
 Given name,
 Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
-Word Type,a
+Word Type,u
 Word tense,u
 Secondary type,u
 Alternate type,u
@@ -75,7 +159,7 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,32141
+Token,14935
 Next Pattern,0
 Is Singular Possessive,0
 Is Plural Possessive,0
@@ -85,14 +169,14 @@ Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,is
-Lower Case string,is
+Original string,it's
+Lower Case string,it's
 Given name,
 Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
-Word Type,v
+Word Type,C
 Word tense,u
 Secondary type,u
 Alternate type,u
@@ -103,7 +187,7 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,109
+Token,11409
 Next Pattern,0
 Is Singular Possessive,0
 Is Plural Possessive,0
@@ -172,6 +256,34 @@ Number of Adverbs,1
 Adverb,is
 Related Nouns,1
 Noun,animal
+Original string,hello
+Lower Case string,hello
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,W
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,86335
+Next Pattern,0
+Is Singular Possessive,0
+Is Plural Possessive,0
+Possessive Root,
+Possessive Root Type,u
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
 Original string,animal
 Lower Case string,animal
 Given name,
@@ -201,6 +313,34 @@ Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,1
 Noun,dog
+Original string,tall
+Lower Case string,tall
+Given name,
+Mini Def.,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,a
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Set,1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,20232
+Next Pattern,0
+Is Singular Possessive,0
+Is Plural Possessive,0
+Possessive Root,
+Possessive Root Type,u
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
 Original string,the
 Lower Case string,the
 Given name,
