@@ -37,6 +37,7 @@ class c_Cerebellum : public c_Cortex
          bool   LocalBoolFlag            = false;
          bool   LocalContractionFlag     = false;
          bool   LocalHasAlternateType    = false;
+         bool   Result                   = false;
 
          void InitializeAll(){
                  LocalGenderClass         = 'u';
@@ -61,6 +62,7 @@ class c_Cerebellum : public c_Cortex
                  LocalAlternateType       = 'u';
                  LocalBoolFlag            = false;
                  LocalHasAlternateType    = false;
+                 Result                   = false;
                  LocalContractionFlag     = false;}
 
 public:
@@ -98,7 +100,7 @@ public:
 
         for(int x = 0; x  <= LocalWordCount-1; x++){                                //***First try to set wordtype
             LocalWordType    = FindWordType(GetWordsLC(x),x);                       //Get Wordtype from language helper, receives 'u' if can't determine
-            MemoryWordType   = GetMemoryCellWordType(GetWordTokens(x));             //Get Wordtype from memory cell, receives NULL if doesn't exist, else returns CellWordType
+            MemoryWordType   = GetMemoryCellcharWordType(GetWordsLC(x),Result);     //Get Wordtype from memory cell, receives NULL if doesn't exist, else returns CellWordType
             SentenceWordType = GetWordType(x);                                      //Get Wordtype from c_sentence
             LocalWordCopy    = GetWords(x);                                         //Get a copy of the word
 
@@ -145,7 +147,7 @@ public:
          if(SelectedWordType == 'C') LocalContractionFlag = true;                   //mark has contraction
          if(SelectedWordType == 'c') SetConjunctionLocation(x);                     //save the conjunction location
 
-         LocalGenderClass = GetMemoryCellGenderClass(GetWordTokens(x));             //take care of GenderClass in sentence
+         LocalGenderClass = GetMemoryCellcharGenderClass(GetWordsLC(x),Result);     //take care of GenderClass in sentence
          if(LocalGenderClass != 'u')
             SetGenderClassInSentence(x,LocalGenderClass);
 

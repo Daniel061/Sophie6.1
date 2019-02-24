@@ -56,6 +56,7 @@ class c_Sentence : public c_Personality
 
     public:
         void InitializeVars(){
+            //GLOBAL SENTENCE VARIABLES
                 WordCount                     = 0;
                 SubjectLocation               = -1;
                 OriginalString                = "";
@@ -92,7 +93,8 @@ class c_Sentence : public c_Personality
                 WordMap.clear();}
 
 
-       ///*******************ALL SENTENCE DATA FUNCTIONS***************************
+       ///*******************ALL GLOBAL->SENTENCE DATA FUNCTIONS***************************
+
 
         bool   GetHasPronoun(){return HasPronoun;}
         void   SetHasPronoun(bool newVal){HasPronoun = newVal;}
@@ -196,6 +198,14 @@ class c_Sentence : public c_Personality
 
 
         ///******************ALL WORD DATA FUNCTIONS GET/SET PAIRS*************************
+        ///*******Location = which place in the sentence***********************************
+
+        string GetMiniDefinition(int Location){return WordMap[Location].Getw_MiniDefinition();}
+        void   SetMiniDefinition(int Location,string newVal){WordMap[Location].Setw_MiniDefinition(newVal);}
+
+        string GetSingularForm(int Location){return WordMap[Location].Getw_SingularForm();}
+        void   SetSingularForm(int Location, string SingularForm){WordMap[Location].Setw_SingularForm(SingularForm);}
+
         char   GetPossessiveRootType(int Location){return WordMap[Location].Getw_PossessiveRootType();}
         void   SetPossessiveRootType(int Location, char newVal){WordMap[Location].Setw_PossessiveRootType(newVal);}
 
@@ -232,21 +242,21 @@ class c_Sentence : public c_Personality
         char   GetAlternateType(int Location){return WordMap[Location].Getw_AlternateType();}
         void   SetAlternateType(char Type,int Location){WordMap[Location].Setw_AlternateType(Type);}
 
-        int    GetWordTokens(int loc){return WordMap[loc].Getw_WordTokens();}
-        void   SetWordTokens(int loc, int token){WordMap[loc].Setw_WordTokens(token);}
+        int    GetWordTokens(int Location){return WordMap[Location].Getw_WordTokens();}
+        void   SetWordTokens(int Location, int token){WordMap[Location].Setw_WordTokens(token);}
 
-        string GetWords(int loc){return WordMap[loc].Getw_WordForm();}
-        void   SetWords(int loc,string strData){WordMap[loc].Setw_WordForm(strData);}
+        string GetWords(int Location){return WordMap[Location].Getw_WordForm();}
+        void   SetWords(int Location,string strData){WordMap[Location].Setw_WordForm(strData);}
 
-        string GetWordsLC(int loc){return WordMap[loc].Getw_WordFormLC();}
-        void   SetWordsLC(int loc,string newVal){WordMap[loc].Setw_WordFormLC(newVal);}
+        string GetWordsLC(int Location){return WordMap[Location].Getw_WordFormLC();}
+        void   SetWordsLC(int Location,string newVal){WordMap[Location].Setw_WordFormLC(newVal);}
 
-        char   GetWordType(int loc){return WordMap[loc].Getw_WordType();}
-        void   SetWordType(char Type, int loc){WordMap[loc].Setw_WordType(Type);}
+        char   GetWordType(int Location){return WordMap[Location].Getw_WordType();}
+        void   SetWordType(char Type, int Location){WordMap[Location].Setw_WordType(Type);}
 
 
-        void   SetSubWords(int loc,string strData){WordMap[loc].Setw_SubWord(strData);}
-        string GetSubWords(int loc){return WordMap[loc].Getw_SubWord();}
+        void   SetSubWords(int Location,string strData){WordMap[Location].Setw_SubWord(strData);}
+        string GetSubWords(int Location){return WordMap[Location].Getw_SubWord();}
 
         bool   GetisContraction(int Location){return WordMap[Location].Getw_isContraction();}
         void   SetisContraction(int Location, bool newVal){WordMap[Location].Setw_isContraction(newVal);}
@@ -254,8 +264,8 @@ class c_Sentence : public c_Personality
         int    GetQuoteLocation(int Location){return WordMap[Location].Getw_QuoteLocation();}
         void   SetQuoteLocation(int Location,int newVal){WordMap[Location].Setw_QuoteLocation(newVal);}
 
-        char   GetWordTense(int loc){return WordMap[loc].Getw_WordTense();}
-        void   SetWordTense(int loc, char newTense){WordMap[loc].Setw_WordTense(newTense);}
+        char   GetWordTense(int Location){return WordMap[Location].Getw_WordTense();}
+        void   SetWordTense(int Location, char newTense){WordMap[Location].Setw_WordTense(newTense);}
 
         ///*******************END ALL WORD DATA FUNCTIONS*********************
 
@@ -358,7 +368,6 @@ class c_Sentence : public c_Personality
 
                 while ( (t > 0) & (t  < int_Last_Pos))
                 {
-                    //Words[int_Word_Count] = str_Sentence_Data.substr(x,t-x);    //extract word
                     cWords.Setw_WordForm(str_Sentence_Data.substr(x,t-x));      //extract word to c_Words
                     WordMap.emplace(int_Word_Count,cWords);                     //place this word in the map
 
@@ -376,7 +385,6 @@ class c_Sentence : public c_Personality
 
 
 
-                //Words[int_Word_Count] = str_Sentence_Data.substr(x,int_Last_Pos-x);
                 cWords.Setw_WordForm(str_Sentence_Data.substr(x,int_Last_Pos-x)); //extract word to cWords class
                 WordMap.emplace(int_Word_Count,cWords);                           //place this word in the map
                 int_Word_Count++;
@@ -390,19 +398,15 @@ class c_Sentence : public c_Personality
                 for (x = 0; x < int_Word_Count; x++)
                 {
                     tmpWordData = WordMap[x].Getw_WordForm();       //pull the raw word data from the map
-                    //QuoteLoc = Words[x].find('\'');
                     QuoteLoc = tmpWordData.find('\'');
                     if((QuoteLoc >=0)&(QuoteLoc<int_Last_Pos)){
-                        //WordType[x] = 'C';                          //Contraction flag~ Possible plural possessive
                         WordMap[x].Setw_WordType('C');              //Set Contraction flag
-                        //isContraction[x] = true;
                         WordMap[x].Setw_isContraction(true);        //flag the word
                         HasContraction = true;}
-                    //QuoteLocation[x] = QuoteLoc;
                     WordMap[x].Setw_QuoteLocation(QuoteLoc);        //store pointer to quote
                     string tmpWord;
                     tmpWord = WordMap[x].Getw_WordForm();           //retrieve original word
-                    //tmpWord = Words[x];
+
 
                     //WordsLC[x] = "";
                      //Set WordsLC-----------------------------
@@ -412,7 +416,6 @@ class c_Sentence : public c_Personality
                         WordMap[x].Setw_WordFormLC(tmpWord);        //store the lower case version
                         //WordsLC[x] = tmpWord;
                      //----------------------------------------
-                     //WordTokens[x] = Tokenize(WordsLC[x]);
                      WordMap[x].Setw_WordTokens(Tokenize(tmpWord)); //store the tokenized version of the lowercase word
                 }
               //-----------------------------END OF TOKENIZE AND CONTRACTION CHECK----------------------------------------

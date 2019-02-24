@@ -4,10 +4,27 @@
 #include <time.h>
 
 
-using namespace std;
+/** SOPHIE 6.1
+     author - Daniel W. Ankrom ©2019
 
+     GNU General Public License v3.0
+     Permissions of this strong copyleft license are conditioned
+      on making available complete source code of licensed works
+       and modifications, which include larger works using a licensed
+       work, under the same license.
+       Copyright and license notices must be preserved.
+       Contributors provide an express grant of patent rights.
+
+     see - https://github.com/Daniel061/Sophie6.1/blob/master/LICENSE
+*/
+
+
+
+
+
+using namespace std;
 c_Brain Brain;
-string Version = "6.1.02.EN.009.028";
+string Version = "6.1.03.EN.009.028";
 bool Verbose;
 bool StoryMode = false;
 int  BaseSpeed = 600000000;
@@ -19,7 +36,7 @@ clock_t Elapsed;
 int main()
 {
 
-//****Calculate machine speed for a constant delay used in SlowSpeak()
+///****Calculate machine speed for a constant delay used in SlowSpeak()
         Elapsed = clock();
          for(int t = 0; t<=BaseSpeed;t++);
         Elapsed = clock() - Elapsed;
@@ -30,7 +47,7 @@ int main()
 //***********END CALCULATE SPEED***************************************
 
 
-//***SET SOME GLOBAL VARIABLES*****************************************
+///***SET SOME GLOBAL VARIABLES*****************************************
         Brain.SetMyGender('f');
         Brain.SetMyName("Sophie");
         Brain.SlowSpeak("Remembering...",false,0,false);
@@ -44,6 +61,9 @@ int main()
 //****************FOR INPUT TEXT TESTING********************************
 //*****uncomment the following******************************************
 //ifstream myfile ("testtext.txt");
+//testtext.txt file format is single lines terminated by CR
+// -enable StoryMode for no response processing
+// -disable StoryMode when finished
 //  if (myfile.is_open())
 //  {
 //    while ( getline (myfile,Raw_Sentence) )
@@ -58,17 +78,23 @@ int main()
 
 cout << ">>";
 getline (cin,Raw_Sentence);
-while (Raw_Sentence != "end")
-{
-    if(Verbose)cout << "[main.cpp]\n";
-    if(Raw_Sentence != ""){
-       Brain.ProcessUserInput(Raw_Sentence);}
 
-    if(Raw_Sentence != "end"){
-        cout << ">>";
-        Raw_Sentence = "";
-        getline(cin,Raw_Sentence);}
-}
+///  Begin user input loop
+///   Terminates when string raw_Sentence = "end"
+///   input string raw_string can be modified by
+///     internal processes.
+            while (Raw_Sentence != "end")
+            {
+                if(Verbose)cout << "[main.cpp]\n";
+                if(Raw_Sentence != ""){
+                   Brain.ProcessUserInput(Raw_Sentence);} /// First entry point to Brain
+
+                if(Raw_Sentence != "end"){
+                    cout << ">>";
+                    Raw_Sentence = "";
+                    getline(cin,Raw_Sentence);}
+            }
+  /// Save all data learned in files
     Brain.LTMSaveSentencesInFile();
     Brain.LobesStoreTheLearnedWords();
     return 0;

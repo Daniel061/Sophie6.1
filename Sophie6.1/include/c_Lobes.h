@@ -1,6 +1,6 @@
 #ifndef C_LOBES_H
 #define C_LOBES_H
-
+#include <Library.h>
 #include <c_MemoryCell.h>
 #include <unordered_map>
 #include <map>
@@ -65,7 +65,6 @@ class c_Lobes : public c_MemoryCell
                = end() if not found.
                For use with Pattern data, set UseLowerCase to false
             */
-
             map <string, c_MemoryCell>::iterator FindStringInMap(string strToSearch, bool &Result, char SideToCheck = 'r', bool UseLowerCase = true){
             Result = false;
             if(UseLowerCase)
@@ -86,42 +85,54 @@ class c_Lobes : public c_MemoryCell
     public:
 
 
-        //returns number of days since beginning of 2019 for a day stamp
-        int GetDaysSinceDate(){
-
-            struct  tm StartDate;
-            time_t  startTime,Finish;
-            time (&Finish);
-            time (&startTime);
-            StartDate           = *localtime(&startTime);
-            StartDate.tm_year   = 2019;
-            StartDate.tm_mon    = 0;
-            StartDate.tm_mday   = 1;
-            StartDate.tm_hour   = 0;
-            StartDate.tm_min    = 0;
-            StartDate.tm_sec    = 0;
-            return StartDate.tm_yday;
-
-        }
+//        //returns number of days since beginning of 2019 for a day stamp
+//        int GetDaysSinceDate(){
+//
+//            struct  tm StartDate;
+//            time_t  startTime,Finish;
+//            time (&Finish);
+//            time (&startTime);
+//            StartDate           = *localtime(&startTime);
+//            StartDate.tm_year   = 2019;
+//            StartDate.tm_mon    = 0;
+//            StartDate.tm_mday   = 1;
+//            StartDate.tm_hour   = 0;
+//            StartDate.tm_min    = 0;
+//            StartDate.tm_sec    = 0;
+//            return StartDate.tm_yday;
+//
+//        }
 //------------------------NEW STRING INDEXED MEMORY CELL MAP FUNCTIONS----------------
 
-///-----------------SET FUNCTIONS----------------------------------
-        //Sets pPointerToNextPattern if exists
-        //returns True if added, else false if updated
-        //send pPointerToNextPattern data in intData
-        //send owner word in strSearchBase
-        bool SetMemoryCellpPointerToNextPattern(string strSearchBase, int intData ){
+//-----------------SET FUNCTIONS----------------------------------
+
+        /// Sets pDaysOld if strSearchBase exists,
+        ///  returns True if added, else false if updated,
+        ///  send pResolvedPattern data in strData,
+        ///  send owner word in strSearchBase.
+        bool SetMemoryCellpDaysOld(string strSearchBase, int DaysOld){
+           bool Result   = false;
+           CellMapIT     = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                    CellMapIT->second.SetpDaysOld(DaysOld);}
+               return Result;}
+
+        /// Sets pResolvedPattern if exists,
+        ///  returns True if added, else false if updated,
+        ///  send pResolvedPattern data in strData,
+        ///  send owner word in strSearchBase.
+        bool SetMemoryCellpPointerToNextPattern(string strSearchBase, string strData ){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    CellMapIT->second.SetpCellPointerToNextPattern(intData);}
+                    CellMapIT->second.SetpCellResolvedPattern(strData);}
                return Result;}
 
 
-        //Sets pToken if exists
-        //returns True if added, else false if updated
-        //send pToken data in intData
-        //send owner word in strSearchBase
+        /// Sets pToken if exists
+        ///  returns True if added, else false if updated
+        ///  send pToken data in intData
+        ///  send owner word in strSearchBase
         bool SetMemoryCellpToken(string strSearchBase, int intData ){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -130,10 +141,10 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets pNextNoun if exists
-        //returns True if added, else false if updated
-        //send pNextNoun data in intData
-        //send owner word in strSearchBase
+        /// Sets pNextNoun if exists
+        ///  returns True if added, else false if updated
+        ///  send pNextNoun data in intData
+        ///  send owner word in strSearchBase
         bool SetMemoryCellpNextNoun(string strSearchBase, int intData ){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -142,10 +153,10 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets pNextVerb if exists
-        //returns True if added, else false if updated
-        //send pNextVerb data in intData
-        //send owner word in strSearchBase
+        /// Sets pNextVerb if exists
+        ///  returns True if added, else false if updated
+        ///  send pNextVerb data in intData
+        ///  send owner word in strSearchBase
         bool SetMemoryCellpNextVerb(string strSearchBase, int intData ){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -154,10 +165,10 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets pCellSingularLocation if exists
-        //returns True if added, else false if updated
-        //send pCellSingularLocation data in intData
-        //send owner word in strSearchBase
+        /// Sets pCellSingularLocation if exists
+        ///  returns True if added, else false if updated
+        ///  send pCellSingularLocation data in intData
+        ///  send owner word in strSearchBase
         bool SetMemoryCellpCellSingularLocation(string strSearchBase, int intData ){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -166,10 +177,10 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets pCellIsSingular if exists
-        //returns True if added, else false if updated
-        //send pIsSingular data in charData
-        //send owner word in strSearchBase
+        /// Sets pCellIsSingular if exists
+        ///  returns True if added, else false if updated
+        ///  send pIsSingular data in charData
+        ///  send owner word in strSearchBase
         bool SetMemoryCellpCellIsSingular(string strSearchBase, char charData ){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -178,10 +189,10 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets pIsSingularPossessive if exists
-        //returns True if added, else false if updated
-        //send pIsSingularPossessive data in boolData
-        //send owner word in strSearchBase
+        /// Sets pIsSingularPossessive if exists,
+        /// -returns True if added, else false if updated,
+        /// -send pIsSingularPossessive data in boolData,
+        /// -send owner word in strSearchBase.
         bool SetMemoryCellpIsSingularPossessive(string strSearchBase, bool boolData ){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -189,12 +200,23 @@ class c_Lobes : public c_MemoryCell
                     CellMapIT->second.SetpIsSingularPossessive(boolData);}
                return Result;}
 
+        /// Sets pIsPluralPossessive if strSearchBase exists,
+        /// -returns True if added, else false if updated,
+        /// -send pIsPluralPossessive data in boolData,
+        /// -send owner word in strSearchBase.
+        bool SetMemoryCellpIsPluralPossessive(string strSearchBase, bool boolData ){
+           bool Result = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                    CellMapIT->second.SetpIsPluralPossessive(boolData);}
+               return Result;}
 
-        //Sets ContractionLongFormSecond if exists
-        //returns True if added, else false if updated
-        //send LongFormSecond data in strData
-        //send Word cell string for index search to apply this to in strSearchBase
-        bool SetMemoryCellContractionLongFormSecond(string strSearchBase, string strData ){
+
+        /// Sets ContractionLongFormSecond if exists
+        ///  returns True if added, else false if updated
+        ///  send LongFormSecond data in strData
+        ///  send Word cell string for index search to apply this to in strSearchBase
+        bool SetMemoryCellContractionLongSecond(string strSearchBase, string strData ){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
@@ -202,11 +224,11 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets ContractionLongFormFirst if exists
-        //returns True if added, else false if updated
-        //send LongFormFirst data in strData
-        //send Word cell string for index search to apply this to in strSearchBase
-        bool SetMemoryCellContractionLongFormFirst(string strSearchBase, string strData){
+        /// Sets ContractionLongFormFirst if exists
+        ///  returns True if added, else false if updated
+        ///  send LongFormFirst data in strData
+        ///  send Word cell string for index search to apply this to in strSearchBase
+        bool SetMemoryCellContractionLongFirst(string strSearchBase, string strData){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
@@ -214,11 +236,10 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets pCellMiniDefinition if strSearchBase exists
-        //returns True if set, else false
-        //send pCellMiniDefinition data in strMiniDefinition
-        //send owner word in strSearchBase
-
+        /// Sets pCellMiniDefinition if strSearchBase exists
+        ///  returns True if set, else false
+        ///  send pCellMiniDefinition data in strMiniDefinition
+        ///  send owner word in strSearchBase
         bool SetMemorypCellMiniDefinition(string strSearchBase, string strMiniDefinition){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -227,11 +248,10 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets pGivenName if strSearchBase exists
-        //returns True if set, else false
-        //send pGivenName data in strGivenName
-        //send owner word in strSearchBase
-
+        /// Sets pGivenName if strSearchBase exists
+        ///  returns True if set, else false
+        ///  send pGivenName data in strGivenName
+        ///  send owner word in strSearchBase
         bool SetMemorypGivenName(string strSearchBase, string strGivenName){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -241,11 +261,10 @@ class c_Lobes : public c_MemoryCell
 
 
 
-        //Sets pIsPluralPossessive if strSearchBase exists
-        //returns True if set, else false
-        //send pIsPluralPossessive data in boolIsPluralPossessive
-        //send owner word in strSearchBase
-
+        /// Sets pIsPluralPossessive if strSearchBase exists
+        ///  returns True if set, else false
+        ///  send pIsPluralPossessive data in boolIsPluralPossessive
+        ///  send owner word in strSearchBase
         bool SetMemorypIsPluralPossessive(string strSearchBase, bool boolIsPluralPossessive){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -254,11 +273,10 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets pIsRoot if strSearchBase exists
-        //returns True if set, else false
-        //send pIsRoot data in boolIsRoot
-        //send owner word in strSearchBase
-
+        /// Sets pIsRoot if strSearchBase exists
+        ///  returns True if set, else false
+        ///  send pIsRoot data in boolIsRoot
+        ///  send owner word in strSearchBase
         bool SetMemorypIsRoot(string strSearchBase, bool boolIsRoot){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -268,11 +286,10 @@ class c_Lobes : public c_MemoryCell
 
 
 
-        //Sets pGenderClass if strSearchBase exists
-        //returns True if set, else false
-        //send pGenderClass data in charGenderClass
-        //send owner word in strSearchBase
-
+        /// Sets pGenderClass if strSearchBase exists
+        ///  returns True if set, else false
+        ///  send pGenderClass data in charGenderClass
+        ///  send owner word in strSearchBase
         bool SetMemorypGenderClass(string strSearchBase, char charGenderClass){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -281,11 +298,10 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets pAlternateType if strSearchBase exists
-        //returns True if set, else false
-        //send pAlternateType data in charAlternateType
-        //send owner word in strSearchBase
-
+        /// Sets pAlternateType if strSearchBase exists
+        ///  returns True if set, else false
+        ///  send pAlternateType data in charAlternateType
+        ///  send owner word in strSearchBase
         bool SetMemorypAlternateType(string strSearchBase, char charAlternateType){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -294,10 +310,10 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets pSecondaryType if strSearchBase exists
-        //returns True if set, else false
-        //send pSecondaryType data in charSecondaryType
-        //send owner word in strSearchBase
+        /// Sets pSecondaryType if strSearchBase exists
+        ///  returns True if set, else false
+        ///  send pSecondaryType data in charSecondaryType
+        ///  send owner word in strSearchBase
 
         bool SetMemorypSecondaryType(string strSearchBase, char charSecondaryType){
            bool Result = false;
@@ -307,11 +323,10 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets pWordTense if strSearchBase exists
-        //returns True if set, else false
-        //send pWordTense data in charWordTense
-        //send owner word in strSearchBase
-
+        /// Sets pWordTense if strSearchBase exists
+        ///  returns True if set, else false
+        ///  send pWordTense data in charWordTense
+        ///  send owner word in strSearchBase
         bool SetMemorypWordTense(string strSearchBase, char charWordTense){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -320,25 +335,24 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets pWordType if strSearchBase exists
-        //returns True if set, else false
-        //send pWordType data in charWordType
-        //send owner word in strSearchBase
+        /// Sets pWordType if strSearchBase exists,
+        ///  -returns True if set, else false
+        ///  -send pWordType data in charWordType
+        ///  -send owner word in strSearchBase
 
         bool SetMemorypWordType(string strSearchBase, char charWordType){
            bool Result = false;
-           CellMapIT   = FindStringInMap(strSearchBase, Result);
+           CellMapIT   = FindStringInMap(strSearchBase, Result);     /// find it
                if (Result){
-                  CellMapIT->second.SetpCellPurpose(charWordType);}
+                  CellMapIT->second.SetpCellWordType(charWordType);} /// store it
                return Result;}
 
 
 
-        //Sets pCellPurpose if strSearchBase exists
-        //returns True if set, else false
-        //send pCellPurpose data in charCellPurpose
-        //send owner word in strSearchBase
-
+        /// Sets pCellPurpose if strSearchBase exists
+        ///  returns True if set, else false
+        ///  send pCellPurpose data in charCellPurpose
+        ///  send owner word in strSearchBase
         bool SetMemorypCellPurpose(string strSearchBase, char charCellPurpose){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -348,11 +362,10 @@ class c_Lobes : public c_MemoryCell
 
 
 
-        //Sets PossessiveRootType if strSearchBase exists
-        //returns True if set, else false
-        //send PossessiveRootType data in charPossessiveRootDataType
-        //send owner word in strSearchBase
-
+        /// Sets PossessiveRootType if strSearchBase exists
+        ///  returns True if set, else false
+        ///  send PossessiveRootType data in charPossessiveRootDataType
+        ///  send owner word in strSearchBase
         bool SetMemoryCellPossessiveRootType(string strSearchBase, char charPossessiveRootDataType){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -361,11 +374,10 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Sets PossessiveRoot if strSearchBase exists
-        //returns True if added, else false
-        //send pPossessiveRoot data in strPossessiveRootData
-        //send owner word in strSearchBase
-
+        /// Sets PossessiveRoot if strSearchBase exists
+        ///  returns True if added, else false
+        ///  send pPossessiveRoot data in strPossessiveRootData
+        ///  send owner word in strSearchBase
         bool SetMemoryCellPossessiveRoot(string strSearchBase, string strPossessiveRootData){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -375,10 +387,9 @@ class c_Lobes : public c_MemoryCell
 
 
 
-        //Updates or Adds pCellData if exists
-        //returns True if added, else false if updated
-        //send pCellData data in strSearchBase
-
+        /// Updates or Adds pCellData if exists
+        ///  returns True if added, else false if updated
+        ///  send pCellData data in strSearchBase
         bool SetMemoryCellpCellData(string strSearchBase){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -392,11 +403,13 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
-        //Updates or Adds pCellDataLC if exists
-        //returns True if added, else false if updated
-        //send pCellDataLC data in strSearchBase
 
-        bool SetMemoryCellDataLC(string strSearchBase){
+        /// Updates or Adds pCellDataLC if strSearchBase exists,
+        ///  -returns True if added, else false if updated,
+        ///  -send [pCellDataLC] in strSearchBase,
+        ///  -strSearchBase will be made lowercase before storage.
+        //
+        bool SetMemoryCellpCellDataLC(string strSearchBase){
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (!Result){
@@ -407,13 +420,29 @@ class c_Lobes : public c_MemoryCell
                   else{
                     CellMapIT->second.SetpCellDataLC(MakeStringLowerCase(strSearchBase));}
                return Result;}
+
+
+
+
 ///---------------------END SET FUNCTIONS---------------------------------------
 
 ///------------------------GET FUNCTIONS----------------------------------------
 
-        //Gets pCellData if exists, else return ""
-        //Returns True in the address of &Result if exists
-        //Returns pCellData
+        /// Gets pDaysOld if strSearchBase exists, else return 0,
+        ///  Returns True in the address of &Result if exists
+        ///  Returns pDaysOld
+        int GetMemoryCellpDaysOld(string strSearchBase, bool &Result){
+           Result = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                    return CellMapIT->second.GetpDaysOld();}
+               else
+                    return 0;}
+
+
+        /// Gets pCellData if exists, else return ""
+        ///  Returns True in the address of &Result if exists
+        ///  Returns pCellData
         string GetMemoryCellRawData(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -423,11 +452,10 @@ class c_Lobes : public c_MemoryCell
                     return "";}
 
 
-        //Gets pCellDataLC if exists, else return ""
-        //Returns True in the address of &Result if exists
-        //Returns pCellDataLC
-        //Send owner word in strSearchBase
-
+        /// Gets pCellDataLC if exists, else return ""
+        ///  Returns True in the address of &Result if exists
+        ///  Returns pCellDataLC
+        ///  Send owner word in strSearchBase
         string GetMemoryCellDataLC(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -436,10 +464,10 @@ class c_Lobes : public c_MemoryCell
                else
                     return "";}
 
-        //Gets pCellGivenName if exists, else return ""
-        //Returns True in the address of &Result if exists
-        //Returns pCellGivenName
-        //Send owner word in strSearchBase
+        /// Gets pCellGivenName if exists, else return ""
+        ///  Returns True in the address of &Result if exists
+        ///  Returns pCellGivenName
+        ///  Send owner word in strSearchBase
 
         string GetMemoryCellGivenName(string strSearchBase, bool &Result){
            Result = false;
@@ -450,11 +478,10 @@ class c_Lobes : public c_MemoryCell
                     return "";}
 
 
-        //Gets pCellMiniDefinition if exists, else return ""
-        //Returns True in the address of &Result if exists
-        //Returns pCellMiniDefinition
-        //Send owner word in strSearchBase
-
+        /// Gets pCellMiniDefinition if exists, else return ""
+        ///  Returns True in the address of &Result if exists
+        ///  Returns pCellMiniDefinition
+        ///  Send owner word in strSearchBase
         string GetMemoryCellMiniDef(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -464,11 +491,10 @@ class c_Lobes : public c_MemoryCell
                     return "";}
 
 
-        //Gets Contraction first form if exists, else return ""
-        //Returns True in the address of &Result if exists
-        //Returns Contraction First
-        //Send owner word in strSearchBase
-
+        /// Gets Contraction first form if exists, else return ""
+        ///  Returns True in the address of &Result if exists
+        ///  Returns Contraction First
+        ///  Send owner word in strSearchBase
         string GetMemoryCellContractionFirst(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -478,11 +504,10 @@ class c_Lobes : public c_MemoryCell
                     return "";}
 
 
-        //Gets Contraction Second form if exists, else return ""
-        //Returns True in the address of &Result if exists
-        //Returns Contraction First
-        //Send owner word in strSearchBase
-
+        /// Gets Contraction Second form if exists, else return ""
+        ///  Returns True in the address of &Result if exists
+        ///  Returns Contraction First
+        ///  Send owner word in strSearchBase
         string GetMemoryCellContractionSecond(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -491,11 +516,10 @@ class c_Lobes : public c_MemoryCell
                else
                     return "";}
 
-        //Gets PossessiveRoot if exists, else return ""
-        //Returns True in the address of &Result if exists
-        //Returns PossessiveRoot
-        //Send owner word in strSearchBase
-
+        /// Gets PossessiveRoot if exists, else return ""
+        ///  Returns True in the address of &Result if exists
+        ///  Returns PossessiveRoot
+        ///  Send owner word in strSearchBase
         string GetMemoryCellPossessiveRoot(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -505,11 +529,10 @@ class c_Lobes : public c_MemoryCell
                     return "";}
 
 
-        //Gets PossessiveRootType if exists, else return 'u' - default
-        //Returns True in the address of &Result if exists
-        //Returns PossessiveRootType
-        //Send owner word in strSearchBase
-
+        /// Gets PossessiveRootType if exists, else return 'u' - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns PossessiveRootType
+        ///  Send owner word in strSearchBase
         char GetMemoryCellPossessiveRootType(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -519,11 +542,10 @@ class c_Lobes : public c_MemoryCell
                     return 'u';}
 
 
-        //Gets CellPurpose if exists, else return 'u' - default
-        //Returns True in the address of &Result if exists
-        //Returns CellPurpose
-        //Send owner word in strSearchBase
-
+        /// Gets CellPurpose if exists, else return 'u' - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns CellPurpose
+        ///  Send owner word in strSearchBase
         char GetMemoryCellcharPurpose(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -533,11 +555,10 @@ class c_Lobes : public c_MemoryCell
                     return 'u';}
 
 
-        //Gets CellWordType if exists, else return 'u' - default
-        //Returns True in the address of &Result if exists
-        //Returns CellWordType
-        //Send owner word in strSearchBase
-
+        /// Gets CellWordType if exists, else return 'u' - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns CellWordType
+        ///  Send owner word in strSearchBase
         char GetMemoryCellcharWordType(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -547,11 +568,10 @@ class c_Lobes : public c_MemoryCell
                     return 'u';}
 
 
-        //Gets CellWordTense if exists, else return 'u' - default
-        //Returns True in the address of &Result if exists
-        //Returns CellWordTense
-        //Send owner word in strSearchBase
-
+        /// Gets CellWordTense if exists, else return 'u' - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns CellWordTense
+        ///  Send owner word in strSearchBase
         char GetMemoryCellcharWordTense(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -561,11 +581,10 @@ class c_Lobes : public c_MemoryCell
                     return 'u';}
 
 
-        //Gets CellSecondaryType if exists, else return 'u' - default
-        //Returns True in the address of &Result if exists
-        //Returns CellSecondaryType
-        //Send owner word in strSearchBase
-
+        /// Gets CellSecondaryType if exists, else return 'u' - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns CellSecondaryType
+        ///  Send owner word in strSearchBase
         char GetMemoryCellcharSecondaryWordType(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -575,11 +594,10 @@ class c_Lobes : public c_MemoryCell
                     return 'u';}
 
 
-        //Gets CellAlternateType if exists, else return 'u' - default
-        //Returns True in the address of &Result if exists
-        //Returns CellAlternateType
-        //Send owner word in strSearchBase
-
+        /// Gets CellAlternateType if exists, else return 'u' - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns CellAlternateType
+        ///  Send owner word in strSearchBase
         char GetMemoryCellcharAlternateWordType(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -589,11 +607,10 @@ class c_Lobes : public c_MemoryCell
                     return 'u';}
 
 
-        //Gets CellGenderClass if exists, else return 'u' - default
-        //Returns True in the address of &Result if exists
-        //Returns CellGenderClass
-        //Send owner word in strSearchBase
-
+        /// Gets CellGenderClass if exists, else return 'u' - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns CellGenderClass
+        ///  Send owner word in strSearchBase
         char GetMemoryCellcharGenderClass(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -603,11 +620,10 @@ class c_Lobes : public c_MemoryCell
                     return 'u';}
 
 
-        //Gets pCellIsRoot if exists, else false
-        //Returns True in the address of &Result if exists
-        //Returns bool pCellIsRoot
-        //Send owner word in strSearchBase
-
+        /// Gets pCellIsRoot if exists, else false
+        ///  Returns True in the address of &Result if exists
+        ///  Returns bool pCellIsRoot
+        ///  Send owner word in strSearchBase
         bool GetMemoryCellpIsRoot(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -617,11 +633,10 @@ class c_Lobes : public c_MemoryCell
                     return Result;}
 
 
-        //Gets isPluralPossessive if exists, else false
-        //Returns True in the address of &Result if exists
-        //Returns bool isPluralPossessive
-        //Send owner word in strSearchBase
-
+        /// Gets isPluralPossessive if exists, else false
+        ///  Returns True in the address of &Result if exists
+        ///  Returns bool isPluralPossessive
+        ///  Send owner word in strSearchBase
         bool GetMemoryCellIsPluralPossessive(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -631,11 +646,10 @@ class c_Lobes : public c_MemoryCell
                     return Result;}
 
 
-        //Gets isSingularPossessive if exists, else false
-        //Returns True in the address of &Result if exists
-        //Returns bool isSingularPossessive
-        //Send owner word in strSearchBase
-
+        /// Gets isSingularPossessive if exists, else false
+        ///  Returns True in the address of &Result if exists
+        ///  Returns bool isSingularPossessive
+        ///  Send owner word in strSearchBase
         bool GetMemoryCellIsSingularPossessive(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -645,11 +659,10 @@ class c_Lobes : public c_MemoryCell
                     return Result;}
 
 
-        //Gets IsSingular if exists, else return 'u' - default
-        //Returns True in the address of &Result if exists
-        //Returns IsSingular
-        //Send owner word in strSearchBase
-
+        /// Gets IsSingular if exists, else return 'u' - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns IsSingular
+        ///  Send owner word in strSearchBase
         char GetMemoryCellcharIsSingular(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -659,11 +672,10 @@ class c_Lobes : public c_MemoryCell
                     return 'u';}
 
 
-        //Gets Singular Location if exists, else return -1 - default
-        //Returns True in the address of &Result if exists
-        //Returns Singular Location
-        //Send owner word in strSearchBase
-
+        /// Gets Singular Location if exists, else return -1 - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns Singular Location
+        ///  Send owner word in strSearchBase
         int GetMemoryCellintSingularLocation(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -673,11 +685,10 @@ class c_Lobes : public c_MemoryCell
                     return -1;}
 
 
-        //Gets Next Verb Location if exists, else return -1 - default
-        //Returns True in the address of &Result if exists
-        //Returns Next Verb Location Location
-        //Send owner word in strSearchBase
-
+        /// Gets Next Verb Location if exists, else return -1 - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns Next Verb Location Location
+        ///  Send owner word in strSearchBase
         int GetMemoryCellintNextVerbLocation(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -688,11 +699,10 @@ class c_Lobes : public c_MemoryCell
 
 
 
-        //Gets Next Noun Location if exists, else return -1 - default
-        //Returns True in the address of &Result if exists
-        //Returns Next Noun Location Location
-        //Send owner word in strSearchBase
-
+        /// Gets Next Noun Location if exists, else return -1 - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns Next Noun Location Location
+        ///  Send owner word in strSearchBase
         int GetMemoryCellintNextNounLocation(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -702,11 +712,10 @@ class c_Lobes : public c_MemoryCell
                     return -1;}
 
 
-        //Gets pToken if exists, else return -1 - default
-        //Returns True in the address of &Result if exists
-        //Returns pToken
-        //Send owner word in strSearchBase
-
+        /// Gets pToken if exists, else return -1 - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns pToken
+        ///  Send owner word in strSearchBase
         int GetMemoryCellintpToken(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
@@ -717,260 +726,38 @@ class c_Lobes : public c_MemoryCell
 
 
 
-        //Gets pointer to next pattern if exists, else return -1 - default
-        //Returns True in the address of &Result if exists
-        //Returns pointer to next pattern
-        //Send owner word in strSearchBase
+        /// Gets pResolvedPattern if strSearch base exists, else return -1 - default
+        /// Returns True in the address of &Result if exists
+        /// Returns pResolvedPattern
+        /// Send owner word in strSearchBase
 
-        int GetMemoryCellintPointerToNextPattern(string strSearchBase, bool &Result){
+        string GetMemoryCellpResolvedPattern(string strSearchBase, bool &Result){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    return CellMapIT->second.GetpCellPointerToNextPattern();}
+                    return CellMapIT->second.GetpCellResolvedPattern();}
                else
-                    return -1;}
+                    return "";}
 
 ///-----------------------Old Memory cell map functions-----------------------------///
-        //Updates ContractionLongFormFirst if exists
-        //returns True if added, else false if updated
-        //send LongFormFirst data in strData and the address of the contraction word in Address
-        bool SetMemoryCellContractionLongFormFirst(string strData,int Address, char SideToCheck = 'r'){
-           bool Result = false;
-           mapIT       = FindAddressInMap(Address, Result, SideToCheck);
-               if (!Result){
-                  WorkingCell.SetpCellContractionLongFormFirst(strData);
-                  RightLobeMemoryMap.emplace(Address,WorkingCell);
-                  Result = true;}
-                  else{
-                    mapIT->second.SetpCellContractionLongFormFirst(strData);}
-               return Result;
-        }
 
-
-        //Updates ContractionLongFormSecond if exists
-        //returns True if added, else false if updated
-        //send LongFormSecond data in strData and the address of the contraction word in Address
-        bool SetMemoryCellContractionLongFormSecond(string strData,int Address, char SideToCheck = 'r'){
-           bool Result = false;
-           mapIT       = FindAddressInMap(Address, Result, SideToCheck);
-               if (!Result){
-                  WorkingCell.SetpCellContractionLongFormSecond(strData);
-                  RightLobeMemoryMap.emplace(Address,WorkingCell);
-                  Result = true;}
-                  else{
-                    mapIT->second.SetpCellContractionLongFormSecond(strData);}
-               return Result;
-        }
-
-
-
-        //Gets ContractionLongFormFirst if exists
-        //returns the data if exits, else "" if not found
-        //send the address of the contraction word in Address
-        string GetMemoryCellContractionLongFormFirst(int Address, char SideToCheck = 'r'){
-           bool Result    = false;
-           string strData = "";
-           mapIT       = FindAddressInMap(Address, Result, SideToCheck);
-               if (Result){
-                 strData =  mapIT->second.GetpCellContractionLongFormFirst();}
-                return strData;
-
-        }
-
-
-        //Gets ContractionLongFormSecond if exists
-        //returns the data if exits, else "" if not found
-        //send the address of the contraction word in Address
-        string GetMemoryCellContractionLongFormSecond(int Address, char SideToCheck = 'r'){
-           bool Result    = false;
-           string strData = "";
-           mapIT       = FindAddressInMap(Address, Result, SideToCheck);
-               if (Result){
-                 strData =  mapIT->second.GetpCellContractionLongFormSecond();}
-                return strData;
-
-        }
-
-
-        //Updates the RawStringData if exists, adds it if it doesn't exist
-        //returns True if added, else false if updated
-        bool SetMemoryCellRawStringData(string strData, int Address, char SideToCheck = 'r'){
-            bool Result = false;
-            mapIT       = FindAddressInMap(Address, Result, SideToCheck);
-                if(!Result){
-                    WorkingCell.SetpCellDataString(strData);
-                    RightLobeMemoryMap.emplace(Address,WorkingCell);
-                    Result = true;}
-                else{
-                    mapIT->second.SetpCellDataString(strData);}
-                return Result;
-            }
-
-        //Gets the RawStringData if exists,
-        //returns the string value, else bool address of Result modified to false if not found
-        string GetMemoryCellRawStringData( bool &Result, string strData = "", int Address = -1, char SideToCheck = 'r'){
-            Result           = false;
-            string RawString = "";
-                if(Address != -1){
-                    mapIT        = FindAddressInMap(Address,Result,SideToCheck);}
-                else{
-                    mapIT        = FindAddressInMap(Tokenize(strData), Result, SideToCheck);}
-                if(Result){
-                    RawString = mapIT->second.GetpCellDataString(); // WorkingCell.GetpCellDataString();
-                    Result = true;}
-
-                return RawString;
-            }
-
-        //Updates the LowerCaseStringData if exists, adds it if it doesn't exist
-        //returns True if added, else false if updated
-        bool SetMemoryCellLCStringData(string strData, int Address, char SideToCheck = 'r'){
-            bool Result = false;
-            mapIT       = FindAddressInMap(Address,Result,SideToCheck);
-                if(!Result){
-                    WorkingCell.InitializeAll();
-                    WorkingCell.SetpCellDataString(strData);
-                    RightLobeMemoryMap.emplace(Address,WorkingCell);
-                    Result = true;}
-                else{
-                    mapIT->second.SetpCellDataString(strData);}
-                return Result;
-            }
-
-        //Returns 'u' if doesn't exist, else returns CellWordType
-        char GetMemoryCellWordType(int Address){
-            char Result = 'u';
-            bool SearchResult = false;
-            mapIT             = FindAddressInMap(Address,SearchResult);
-                if(!SearchResult){
-                    Result = 'u';}
-                else{
-                   Result = mapIT->second.GetpCellWordType();}
-            return Result;
-        }
-
-
-        //Returns NULL if doesn't exist, else returns CellWordDataLC
-        string GetMemoryCellWordLC(string WordInUC, int Address = -1, char SideToCheck = 'r'){
-            if(Address == -1) Address = Tokenize(WordInUC);
-            string Result = "";
-            bool SearchResult = false;
-            mapIT             = FindAddressInMap(Address,SearchResult,SideToCheck);
-                if(!SearchResult){
-                    Result = "";}
-                else{
-                   Result = mapIT->second.GetpCellDataLC();}
-            return Result;
-        }
-
-        //Returns TRUE if exist and the the WordType was set, else returns false
-        bool SetMemoryCellWordType(int Address,char WordTypeToSet){
-            bool Result = false;
-            mapIT       = FindAddressInMap(Address,Result);
-                if(Result){
-                    mapIT->second.SetpCellWordType(WordTypeToSet);
-                    Result = true;}
-            return Result;
-        }
-
-        //Returns TRUE if exist and the the Purpose was set, else returns false
-        bool SetMemoryCellPurpose(int Address,char CellPurpose){
-            bool Result = false;
-            mapIT       = FindAddressInMap(Address,Result);
-                if(Result){
-                    mapIT->second.SetpCellPurpose (CellPurpose);
-                    Result = true;}
-            return Result;
-        }
-
-        //Returns char cell purpose
-        char GetMemoryCellPurpose(int Address){
-            bool Result = false;
-            char CellPurpose = 'u';
-            mapIT       = FindAddressInMap(Address,Result);
-                if(Result){
-                    CellPurpose = mapIT->second.GetpCellPurpose();
-                    Result      = true;}
-            return CellPurpose;
-        }
-
-        //Returns -1 if cell doesn't exist else returns pointer to next pattern;
-        int GetMemoryCellPointerToNextPattern(int Address,char SideToCheck = 'l'){
+        /// Returns -1 if doesn't exist, else returns adjective count
+        ///  CORRECTED/UPDATED
+        int GetMemoryCellAdjectiveCount(string strSearchBase){
             int Result        = -1;
             bool SearchResult = false;
-            mapIT             = FindAddressInMap(Address,SearchResult,SideToCheck);
+            CellMapIT             = FindStringInMap(strSearchBase,SearchResult);
                 if(SearchResult){
-                    Result = mapIT->second.GetpCellPointerToNextPattern();}
+                    Result = CellMapIT->second.GetNumberOfAdjectivesInList();}
             return Result;
         }
 
-        //Returns -1 if cell doesn't exist else sets the data and returns 0
-        int SetMemoryCellPointerToNextPattern(int Address, int PointerToNextAddress, char SideToCheck = 'l'){
-            int Result        = -1;
-            bool SearchResult = false;
-            mapIT = FindAddressInMap(Address,SearchResult,SideToCheck);
-                if(SearchResult){
-                    mapIT->second.SetpCellPointerToNextPattern(PointerToNextAddress);
-                    Result = 0;}
-            return Result;
-        }
-
-        //Returns NULL if cell doesn't exist, else returns char value of WordTense
-        char GetMemoryCellWordTense(int Address){
-            char Result       = 'u';
-            bool SearchResult = false;
-            mapIT             = FindAddressInMap(Address,SearchResult);
-                if(SearchResult){
-                    Result = mapIT->second.GetpCellWordTense();}
-            return Result;
-        }
-
-        //Returns TRUE if exists and data is set, else returns false
-        bool SetMemoryCellWordTense(int Address, char TenseToSet){
-            bool Result = false;
-            mapIT       = FindAddressInMap(Address,Result);
-                if(Result){
-                    mapIT->second. SetpCellWordTense(TenseToSet);
-                    Result = true;}
-            return Result;
-        }
-
-        //Returns TRUE if exists and data is set, else returns false
-        bool SetMemoryCellGenderClass(int Address, char GenderToSet){
-            bool Result = false;
-            mapIT       = FindAddressInMap(Address,Result);
-                if(Result){
-                    mapIT->second.SetpCellGenderClass(GenderToSet);
-                    Result = true;}
-            return Result;
-        }
-
-        //Returns char GenderClass from memory cell
-        char GetMemoryCellGenderClass(int Address){
-            bool Result = false;
-            char Gender = 'u';
-            mapIT       = FindAddressInMap(Address,Result);
-                if(Result){
-                    Gender = mapIT->second.GetpCellGenderClass();
-                    Result = true;}
-            return Gender;
-        }
-
-        //Returns -1 if doesn't exist, else returns adjective count
-        int GetMemoryCellAdjectiveCount(int Address){
-            int Result        = -1;
-            bool SearchResult = false;
-            mapIT             = FindAddressInMap(Address,SearchResult);
-                if(SearchResult){
-                    Result = mapIT->second.GetNumberOfAdjectivesInMap();}
-            return Result;
-        }
-
-        //Checks to see if there is a memorycell for the Address given.
-        //returns true if so, if not returns false.
-        bool GetMemoryCellIsSet(int Address,char SideToCheck = 'r'){
-            bool Result = false;
-            FindAddressInMap(Address,Result,SideToCheck);
+        /// Checks to see if there is a memorycell for the Address given.
+        ///  returns true if so, if not returns false.
+        ///   CORRECTED/UPDATED
+        bool GetMemoryCellIsSet(string strSearchBase,bool &Result, char SideToCheck = 'r'){
+            Result = false;
+            FindStringInMap(strSearchBase,Result,SideToCheck);
             return Result;
         }
 
@@ -979,14 +766,15 @@ class c_Lobes : public c_MemoryCell
         //if not, returns -1.
         //otherwise, returns the Adjective count and
         //by reference, the tokenized adjective value in the array Adjectives[]
+        ///   NOT CORRECTED/UPDATED
         int GetMemoryCellAdjectives(int Address,int Adjectives[]){
             bool Result  = false;
             int  Count   = -1;
             mapIT        = FindAddressInMap(Address,Result);
                 if(Result){
-                   Count = mapIT->second.GetNumberOfAdjectivesInMap();
+                   Count = mapIT->second.GetNumberOfAdjectivesInList();
                    for(int x = 0; x<=(Count-1); x++){
-                    Adjectives[x] = mapIT->second.GetAdjectiveFromMap(x);
+                    Adjectives[x] = Tokenize(mapIT->second.GetAdjectiveFromList(x));
                    }}
                  return Count;
         }
@@ -996,14 +784,15 @@ class c_Lobes : public c_MemoryCell
         //if not, returns -1.
         //otherwise, returns the RelatedNoun count and
         //by reference, the tokenized RelatedNoun value in the array RelatedNouns[]
+        ///   NOT CORRECTED/UPDATED
         int GetMemoryCellRelatedNouns(int Address,int RelatedNouns[]){
             bool Result  = false;
             int  Count   = -1;
             mapIT        = FindAddressInMap(Address,Result);
                 if(Result){
-                   Count = mapIT->second.GetNumberOfRelatedNounsInMap();
+                   Count = mapIT->second.GetNumberOfRelatedNounsInList();
                    for(int x = 0; x<=(Count-1); x++){
-                    RelatedNouns[x] = mapIT->second.GetNounFromMap(x);
+                    RelatedNouns[x] = Tokenize(mapIT->second.GetNounFromList(x));
                    }}
                  return Count;
         }
@@ -1015,14 +804,15 @@ class c_Lobes : public c_MemoryCell
         //if not, returns -1.
         //otherwise, returns the Verb count and
         //by reference, the tokenized Verb value in the array Verbs[]
+        ///   NOT CORRECTED/UPDATED
         int GetMemoryCellVerbs(int Address,int Verbs[]){
             bool Result  = false;
             int  Count   = -1;
             mapIT        = FindAddressInMap(Address,Result);
                 if(Result){
-                   Count = mapIT->second.GetNumberOfVerbsInMap();
+                   Count = mapIT->second.GetNumberOfVerbsInList();
                    for(int x = 0; x<=(Count-1); x++){
-                    Verbs[x] = mapIT->second.GetVerbFromMap(x);
+                    Verbs[x] = Tokenize(mapIT->second.GetVerbFromList(x));
                    }}
                  return Count;
         }
@@ -1032,14 +822,15 @@ class c_Lobes : public c_MemoryCell
          //if not, returns -1.
          //otherwise, returns the Adverb count and
          //by reference, the tokenized Adverb value in the array Adverbs[]
+         ///   NOT CORRECTED/UPDATED
          int GetMemoryCellAdverbs(int Address,int Adverbs[]){
              bool Result  = false;
              int  Count   = -1;
              mapIT        = FindAddressInMap(Address,Result);
                   if(Result){
-                     Count = mapIT->second.GetNumberOfAdverbsInMap();
+                     Count = mapIT->second.GetNumberOfAdverbsInList();
                      for(int x = 0; x<=(Count-1); x++){
-                      Adverbs[x] = mapIT->second.GetAdverbFromMap(x);
+                      Adverbs[x] = Tokenize(mapIT->second.GetAdverbFromList(x));
                      }}
                    return Count;
           }
@@ -1049,6 +840,7 @@ class c_Lobes : public c_MemoryCell
           //First makes sure the address given exists,
           //then associates adjective to the address given.
           //NOTE:will not duplicate Adjectives.
+          ///   NOT CORRECTED/UPDATED
           bool AssociateMemoryCellAdjective(int Address, string AdjectiveToAssociate){
                bool Result = false;
                mapIT = FindAddressInMap(Address,Result);
@@ -1061,6 +853,7 @@ class c_Lobes : public c_MemoryCell
           //First makes sure the address given exists,
           //then associates Noun to the address given.
           //NOTE:will not duplicate Nouns.
+          ///   NOT CORRECTED/UPDATED
           bool AssociateMemoryCellNoun(int Address, string NounToAssociate){
                bool Result = false;
                mapIT = FindAddressInMap(Address,Result);
@@ -1074,6 +867,7 @@ class c_Lobes : public c_MemoryCell
           //First makes sure the address given exists,
           //then associates Adverb to verb in the address given.
           //NOTE:will not duplicate Adverbs.
+          ///   NOT CORRECTED/UPDATED
           bool AssociateMemoryCellAdverbToVerb(int Address, string AdverbToAssociate, string VerbToAssociate){
                bool Result = false;
                mapIT = FindAddressInMap(Address,Result);
@@ -1087,6 +881,7 @@ class c_Lobes : public c_MemoryCell
           //First makes sure the address given exists,
           //then associates Verb to adjective in the address given.
           //NOTE:will not duplicate Adverbs.
+          ///   NOT CORRECTED/UPDATED
           bool AssociateMemoryCellVerbToAdjective(int Address, string AdverbToAssociate, string VerbToAssociate){
                bool Result = false;
                mapIT = FindAddressInMap(Address,Result);
@@ -1099,6 +894,7 @@ class c_Lobes : public c_MemoryCell
           //First Checks to see if cell address given exists,
           //if so, checks to see if NounToCheck is related to this cell address.
           //Returns true if so, false if not or cell doesn't exist
+          ///   NOT CORRECTED/UPDATED
           bool GetIsNounRelatedToThisMemoryCell(int Address, string NounToCheck){
                bool Result = false;
                mapIT       = FindAddressInMap(Address,Result);
@@ -1107,10 +903,11 @@ class c_Lobes : public c_MemoryCell
                return Result;
           }
 
-///====================================================================================
-          //First Checks to see if cell address given exists,
-          //if so, checks to see if AdjectiveToCheck is associated to this cell address.
-          //Returns true if so, false if not or cell doesn't exist
+//====================================================================================
+          /// First Checks to see if cell address given exists,
+          ///  if so, checks to see if AdjectiveToCheck is associated to this cell address.
+          ///  Returns true if so, false if not or cell doesn't exist
+          ///   NOT CORRECTED/UPDATED
           bool GetIsAdjectiveAssociatedToThisMemoryCell(int Address, string AdjectiveToCheck){
                bool Result = false;
                mapIT       = FindAddressInMap(Address,Result);
@@ -1119,22 +916,23 @@ class c_Lobes : public c_MemoryCell
                return Result;
           }
 
-          //returns the Memory cell count in RightLobe memory map
+          /// Returns the Memory cell count in RightLobe memory map
           int GetRightLobeCellCount(){
               return RightLobeMemoryMap.size();
           }
 
-          //returns the Memory cell count in LeftLobe memory map
+          /// Returns the Memory cell count in LeftLobe memory map
           int GetLeftLobeCellCount(){
               return LeftLobeMemoryMap.size();
           }
 
 
 
-          //Checks to see if the NewWord exists first,
-          //if so AND Update = true, Updates the data, returns Installed = false.
-          //If NewWord doesn't exist,
-          //Stores all the data and returns Installed = true.
+          /**Checks to see if the NewWord exists first,
+            * if so AND Update = true, Updates the data, returns Installed = false.
+            * If NewWord doesn't exist,
+            *Stores all the data and returns Installed = true.
+           */
           bool InstallNewWord(string NewWord, char WordType, char Purpose, bool Update=false,
                               char GenderClass = 'u', string LongFormFirst = "", string LongFormSecond = "",
                               char SingularValue = 'u', int SingularRoot = 0){     //currently right side only
@@ -1215,7 +1013,7 @@ class c_Lobes : public c_MemoryCell
                             if(AdjectivesFirstNoun[x] == AdjectivesSecondNoun[y]){
                                 Result                                = true;
                                 //intMatchedAdjective                   = AdjectivesFirstNoun[x];
-                                MatchedAdjective[AdjectiveMatches]    = GetMemoryCellWordLC("",AdjectivesFirstNoun[x]);
+                                MatchedAdjective[AdjectiveMatches]    = GetMemoryCellDataLC(FirstNoun,Result);
                                 //intVerbUsage                          = GetMemoryCellVerbs(intMatchedAdjective,Verbs);
                                 VerbUsage                             = Verbs[0];
                                 AdjectiveMatches++;}
@@ -1226,9 +1024,10 @@ class c_Lobes : public c_MemoryCell
 
 
 
-          //stores Pre and Post Construction Patterns.
-          //if doesn't exist, adds it
-          //if does exist, updates it
+          /// Stores Pre and Post Construction Patterns.
+          ///  if doesn't exist, adds it
+          ///  if does exist, updates it
+          ///   CORRECTED/UPDATED - NEEDS VERIFICATION
           void SavePreAndPostPatternConstruction(string PreConstructionPattern,string PostConstructionPattern, int PostToken = 0){
 
                 int PreToken  = Tokenize(PreConstructionPattern,false);
@@ -1242,34 +1041,34 @@ class c_Lobes : public c_MemoryCell
                     WorkingCell.SetpCellDataString(PreConstructionPattern);
                     WorkingCell.SetpCellPurpose('1');    // pattern storage
                     WorkingCell.SetpCellToken(PreToken);
-                    WorkingCell.SetpCellPointerToNextPattern(PostToken);
+                    WorkingCell.SetpCellResolvedPattern(PostConstructionPattern);
                     LeftLobeMemoryMap.emplace(PreToken,WorkingCell);
                     mapIT  = FindAddressInMap(PostToken,Result,'l');
                     WorkingCell.InitializeAll();
                     WorkingCell.SetpCellDataString(PostConstructionPattern);
                     WorkingCell.SetpCellPurpose('1');    //pattern storage
                     WorkingCell.SetpCellToken(PostToken);
-                    WorkingCell.SetpCellPointerToNextPattern(PostToken);
+                    WorkingCell.SetpCellResolvedPattern(PostConstructionPattern);
                     LeftLobeMemoryMap.emplace(PostToken,WorkingCell);
                 }
                 else{
                      mapIT->second.SetpCellDataString(PreConstructionPattern);
                      mapIT->second.SetpCellPurpose('1');    // pattern storage
                      mapIT->second.SetpCellToken(PreToken);
-                     mapIT->second.SetpCellPointerToNextPattern(PostToken);
+                     mapIT->second.SetpCellResolvedPattern(PostConstructionPattern);
 
                      mapIT  = FindAddressInMap(PostToken,Result,'l');
                      if(Result){
                          mapIT->second.SetpCellDataString(PostConstructionPattern);
                          mapIT->second.SetpCellPurpose('1');    //pattern storage
                          mapIT->second.SetpCellToken(PostToken);
-                         mapIT->second.SetpCellPointerToNextPattern(PostToken);}
+                         mapIT->second.SetpCellResolvedPattern(PostConstructionPattern);}
                          else{
                             WorkingCell.InitializeAll();
                             WorkingCell.SetpCellDataString(PostConstructionPattern);
                             WorkingCell.SetpCellPurpose('1');    //pattern storage
                             WorkingCell.SetpCellToken(PostToken);
-                            WorkingCell.SetpCellPointerToNextPattern(PostToken);
+                            WorkingCell.SetpCellResolvedPattern(PostConstructionPattern);
                             LeftLobeMemoryMap.emplace(PostToken,WorkingCell);
                          }
 
@@ -1278,11 +1077,11 @@ class c_Lobes : public c_MemoryCell
 
     }
 
-            //Returns miniDefinition from memorycell
-            //Returns "" if memorycell doesn't exist
-            //can send string data or tokenized string data for address
-            //currently rightside cells only, don't see a need for leftside yet
-
+            /// Returns miniDefinition from memorycell,
+            /// Returns "" if memorycell doesn't exist,
+            /// can send string data or tokenized string data for address,
+            /// currently rightside cells only, don't see a need for leftside yet.
+            ///   OLD-DEPRECIATED
           string GetMemoryCellMiniDefinition(string strData = "", int Address = 0){
                 bool Result = false;
                 if(Address ==0) Address = Tokenize(strData);
@@ -1295,48 +1094,41 @@ class c_Lobes : public c_MemoryCell
                             return "";
           }
 
-            //Sets the memorycell minidefinition if the memorycell exists
-            //can send string data or the tokenized version of the string data for the address
-          void SetMemoryCellMiniDefinition(string Definition, string strData = "", int Address = 0){
+            /// Sets the memorycell minidefinition if the strSearchBase exists
+            ///  send minidefinition string data in strDefinition
+            ///    OLD-DEPRECIATED
+          void SetMemoryCellMiniDefinition(string strSearchBase, string strDefinition){
                bool Result = false;
-               if (Address ==0) Address = Tokenize(strData);
-
-               mapIT       = FindAddressInMap(Address,Result);
+               CellMapIT       = FindStringInMap(strSearchBase,Result);
                if(Result){
-                   mapIT->second.SetpCellMiniDefinition(Definition);
+                   CellMapIT->second.SetpCellMiniDefinition(strDefinition);
                }
 
           }
 
 
-            //Returns pCellIsSingular from memorycell
-            //Returns '\0' null, if memorycell doesn't exist
-            //can send string data or tokenized string data for address
-            //currently right side cells only, don't see a need for left side yet
-
-          char GetMemoryCellpCellIsSingular(string strData = "", int Address = 0){
+            /// Returns pCellSingularForm from memorycell
+            ///  Returns "" null, if memorycell doesn't exist
+            ///  Send owner string data in strSearchBase
+            ///   currently right side cells only, don't see a need for left side yet
+          string GetMemoryCellpSingularForm(string strSearchBase){
                 bool Result = false;
-                if(Address ==0) Address = Tokenize(strData);
-
-                mapIT       = FindAddressInMap(Address,Result);
+                CellMapIT       = FindStringInMap(strSearchBase,Result);
                 if(Result){
-                    return mapIT->second.GetpCellIsSingular();
+                    return CellMapIT->second.GetpSingularForm();
                 }
                 else
-                return '\0';}
+                return "";}
 
-            //Sets pCellIsSingular in memorycell
-            //if memorycell exist
-            //can send string data or tokenized string data for address
-            //currently right side cells only, don't see a need for left side yet
-
-          void SetMemoryCellpCellIsSingular(char newData, string strData = "", int Address = 0){
+            /// Sets pCellIsSingular in memorycell
+            ///  if memorycell exist
+            ///  can send string data or tokenized string data for address
+            ///  currently right side cells only, don't see a need for left side yet
+          void SetMemoryCellpCellSingularForm(string strSearchBase, string SingularForm){
                 bool Result = false;
-                if(Address ==0) Address = Tokenize(strData);
-
-                mapIT       = FindAddressInMap(Address,Result);
+                CellMapIT       = FindStringInMap(strSearchBase,Result);
                 if(Result){
-                    return mapIT->second.SetpCellIsSingular(newData);
+                    return CellMapIT->second.SetpSingularForm(SingularForm);
                 }}
 
 
@@ -1345,16 +1137,16 @@ class c_Lobes : public c_MemoryCell
             //can send string data or tokenized string data for address
             //currently right side cells only, don't see a need for left side yet
 
-          int GetMemoryCellpSingularLocation(string strData = "", int Address = 0){
-                bool Result = false;
-                if(Address ==0) Address = Tokenize(strData);
-
-                mapIT       = FindAddressInMap(Address,Result);
-                if(Result){
-                    return mapIT->second.GetpCellSingularLocation();
-                }
-                else
-                return 0;}
+//          int GetMemoryCellpSingularLocation(string strData = "", int Address = 0){
+//                bool Result = false;
+//                if(Address ==0) Address = Tokenize(strData);
+//
+//                mapIT       = FindAddressInMap(Address,Result);
+//                if(Result){
+//                    return mapIT->second.GetpCellSingularLocation();
+//                }
+//                else
+//                return 0;}
 
             //Sets pSingularLocation from memorycell
             //if memorycell exist
@@ -1362,49 +1154,50 @@ class c_Lobes : public c_MemoryCell
             //send int for new location
             //currently right side cells only, don't see a need for left side yet
 
-          void SetMemoryCellpSingularLocation(int newLocation, string strData = "", int Address = 0){
-                bool Result = false;
-                if(Address ==0) Address = Tokenize(strData);
+//          void SetMemoryCellpSingularLocation(int newLocation, string strData = "", int Address = 0){
+//                bool Result = false;
+//                if(Address ==0) Address = Tokenize(strData);
+//
+//                mapIT       = FindAddressInMap(Address,Result);
+//                if(Result){
+//                    return mapIT->second.SetpCellSingularLocation(newLocation);
+//                }
+//                }
 
-                mapIT       = FindAddressInMap(Address,Result);
-                if(Result){
-                    return mapIT->second.SetpCellSingularLocation(newLocation);
-                }
-                }
 
 
+//        string MakeStringLowerCase(string strData){
+//            for(int x =0; x<= int(strData.size()); x++)
+//                strData[x] = tolower(strData[x]);
+//            return strData;
+//        }
 
-        string MakeStringLowerCase(string strData){
-            for(int x =0; x<= int(strData.size()); x++)
-                strData[x] = tolower(strData[x]);
-            return strData;
-        }
-
-        int Tokenize (string str_Data,bool ForceUpperCase = true)
-        {
-            int z          = str_Data.size();
-            int y;
-            int PlaceValue = 1;
-            int tmpToken   = 0;
-            int tmpHolder  = 0;
-
-                if(ForceUpperCase){
-                for( y = z; y > 0; y--){
-                    tmpHolder  = int(toupper(str_Data[y-1]))-64; //'A' to 'Z'
-                    if(tmpHolder <= 0) tmpHolder = str_Data[y-1];
-                    tmpToken   = tmpToken + (tmpHolder*PlaceValue);
-                    PlaceValue = PlaceValue * 10;}}
-                  else {
-                    for( y = z; y > 0; y--){
-                    tmpHolder  = str_Data[y-1] - 64;
-                    if(tmpHolder <= 0) tmpHolder = str_Data[y-1];
-                    tmpToken   = tmpToken + (tmpHolder*PlaceValue);
-                    PlaceValue = PlaceValue * 10;}
-                  }
-
-            return tmpToken;
-
-        }
+//        ///DEPRECIATED - in LOBES
+//        int Tokenize (string str_Data,bool ForceUpperCase = true)
+//        {
+//            int z          = str_Data.size();
+//            int y;
+//            int PlaceValue = 1;
+//            int tmpToken   = 0;
+//            int tmpHolder  = 0;
+//
+//                if(ForceUpperCase){
+//                for( y = z; y > 0; y--){
+//                    tmpHolder  = int(toupper(str_Data[y-1]))-64; //'A' to 'Z'
+//                    if(tmpHolder <= 0) tmpHolder = str_Data[y-1];
+//                    tmpToken   = tmpToken + (tmpHolder*PlaceValue);
+//                    PlaceValue = PlaceValue * 10;}}
+//                  else {
+//                    for( y = z; y > 0; y--){
+//                    tmpHolder  = str_Data[y-1] - 64;
+//                    if(tmpHolder <= 0) tmpHolder = str_Data[y-1];
+//                    tmpToken   = tmpToken + (tmpHolder*PlaceValue);
+//                    PlaceValue = PlaceValue * 10;}
+//                  }
+//
+//            return tmpToken;
+//
+//        }
 
         void LobesStoreTheLearnedWords(){
             string Delim            = "\n";
@@ -1412,51 +1205,52 @@ class c_Lobes : public c_MemoryCell
             ofstream LearnedDataFile ("LearnedData.dat", ios::out);
             if (LearnedDataFile.is_open()){
                     LearnedDataFile << "VERSION " << Version << ", file version" << Delim;
-                for(fileIT = RightLobeMemoryMap.begin(); fileIT != RightLobeMemoryMap.end(); fileIT++ ){
-                    LearnedDataFile << "Original string,"     << fileIT->second.GetpCellDataString() << Delim;
-                    LearnedDataFile << "Lower Case string,"   << fileIT->second.GetpCellDataLC() << Delim;
-                    LearnedDataFile << "Given name,"          << fileIT->second.GetpCellGivenName() << Delim;
-                    LearnedDataFile << "Mini Def.,"           << fileIT->second.GetpCellMiniDefinition() << Delim;
-                    LearnedDataFile << "Contraction 1st,"     << fileIT->second.GetpCellContractionLongFormFirst() << Delim;
-                    LearnedDataFile << "Contraction 2nd,"     << fileIT->second.GetpCellContractionLongFormSecond() << Delim;
-                    LearnedDataFile << "Cell purpose,"        << fileIT->second.GetpCellPurpose() << Delim;
-                    LearnedDataFile << "Word Type,"           << fileIT->second.GetpCellWordType() << Delim;
-                    LearnedDataFile << "Word tense,"          << fileIT->second.GetpCellWordTense() << Delim;
-                    LearnedDataFile << "Secondary type,"      << fileIT->second.GetpCellSecondaryType() << Delim;
-                    LearnedDataFile << "Alternate type,"      << fileIT->second.GetpCellAlternateType() << Delim;
-                    LearnedDataFile << "Gender class,"        << fileIT->second.GetpCellGenderClass() << Delim;
-                    LearnedDataFile << "Is root,"             << fileIT->second.GetpCellIsRoot() << Delim;
-                    LearnedDataFile << "Is Set,"              << fileIT->second.GetpCellIsSet() << Delim;
-                    LearnedDataFile << "Is Singular,"         << fileIT->second.GetpCellIsSingular() << Delim;
-                    LearnedDataFile << "Singular location,"   << fileIT->second.GetpCellSingularLocation() << Delim;
-                    LearnedDataFile << "Next Verb,"           << fileIT->second.GetpCellNextVerb() << Delim;
-                    LearnedDataFile << "Next Noun,"           << fileIT->second.GetpCellNextNoun() << Delim;
-                    LearnedDataFile << "Token,"               << fileIT->second.GetpCellToken() << Delim;
-                    LearnedDataFile << "Next Pattern,"        << fileIT->second.GetpCellPointerToNextPattern() << Delim;
-                    LearnedDataFile << "Is Singular Possessive," << fileIT->second.GetpIsSingularPossessive() << Delim;
-                    LearnedDataFile << "Is Plural Possessive,"<< fileIT->second.GetpIsPluralPossessive() << Delim;
-                    LearnedDataFile << "Possessive Root,"     << fileIT->second.GetpPossessiveRoot() << Delim;
-                    LearnedDataFile << "Possessive Root Type,"<< fileIT->second.GetpPossessiveRootType() << Delim;
+                for(CellMapIT = RightLobeCellMap.begin(); CellMapIT != RightLobeCellMap.end(); CellMapIT++ ){
+                    LearnedDataFile << "Original string,"     << CellMapIT->second.GetpCellDataString() << Delim;
+                    LearnedDataFile << "Lower Case string,"   << CellMapIT->second.GetpCellDataLC() << Delim;
+                    LearnedDataFile << "Given name,"          << CellMapIT->second.GetpCellGivenName() << Delim;
+                    LearnedDataFile << "Mini Def.,"           << CellMapIT->second.GetpCellMiniDefinition() << Delim;
+                    LearnedDataFile << "Contraction 1st,"     << CellMapIT->second.GetpCellContractionLongFormFirst() << Delim;
+                    LearnedDataFile << "Contraction 2nd,"     << CellMapIT->second.GetpCellContractionLongFormSecond() << Delim;
+                    LearnedDataFile << "Cell purpose,"        << CellMapIT->second.GetpCellPurpose() << Delim;
+                    LearnedDataFile << "Word Type,"           << CellMapIT->second.GetpCellWordType() << Delim;
+                    LearnedDataFile << "Word tense,"          << CellMapIT->second.GetpCellWordTense() << Delim;
+                    LearnedDataFile << "Secondary type,"      << CellMapIT->second.GetpCellSecondaryType() << Delim;
+                    LearnedDataFile << "Alternate type,"      << CellMapIT->second.GetpCellAlternateType() << Delim;
+                    LearnedDataFile << "Gender class,"        << CellMapIT->second.GetpCellGenderClass() << Delim;
+                    LearnedDataFile << "Is root,"             << CellMapIT->second.GetpCellIsRoot() << Delim;
+                    LearnedDataFile << "Is Locked(old is set)," << CellMapIT->second.GetpCellIsLocked() << Delim;
+                    LearnedDataFile << "Is Singular,"         << CellMapIT->second.GetpCellIsSingular() << Delim;
+                    LearnedDataFile << "Singular location,"   << CellMapIT->second.GetpCellSingularLocation() << Delim;
+                    LearnedDataFile << "Next Verb,"           << CellMapIT->second.GetpCellNextVerb() << Delim;
+                    LearnedDataFile << "Next Noun,"           << CellMapIT->second.GetpCellNextNoun() << Delim;
+                    LearnedDataFile << "Token,"               << CellMapIT->second.GetpCellToken() << Delim;
+                    LearnedDataFile << "Resolved Pattern,"    << CellMapIT->second.GetpCellResolvedPattern() << Delim;
+                    LearnedDataFile << "Is Singular Possessive," << CellMapIT->second.GetpIsSingularPossessive() << Delim;
+                    LearnedDataFile << "Is Plural Possessive,"<< CellMapIT->second.GetpIsPluralPossessive() << Delim;
+                    LearnedDataFile << "Possessive Root,"     << CellMapIT->second.GetpPossessiveRoot() << Delim;
+                    LearnedDataFile << "Possessive Root Type,"<< CellMapIT->second.GetpPossessiveRootType() << Delim;
+                    LearnedDataFile << "Day stamp,"           << CellMapIT->second.GetpDaysOld() << Delim;
 
-                Count = fileIT->second.GetNumberOfAdjectivesInMap();
+                Count = CellMapIT->second.GetNumberOfAdjectivesInList();
                 LearnedDataFile << "Number of Adjectives,"    << Count << Delim;
                 for (int x = 0; x <= Count-1; x++){
-                    LearnedDataFile << "Adjective,"           << GetMemoryCellWordLC("",fileIT->second.GetAdjectiveFromMap(x)) << Delim;
+                    LearnedDataFile << "Adjective,"          << CellMapIT->second.GetAdjectiveFromList(x) << Delim;
                 }
-                Count = fileIT->second.GetNumberOfVerbsInMap();
+                Count = CellMapIT->second.GetNumberOfVerbsInList();
                 LearnedDataFile << "Nunber of Verbs,"         << Count << Delim;
                 for (int x = 0; x<=Count-1; x++){
-                    LearnedDataFile << "Verb,"                << GetMemoryCellWordLC("",fileIT->second.GetVerbFromMap(x)) << Delim;
+                    LearnedDataFile << "Verb,"                << CellMapIT->second.GetVerbFromList(x) << Delim;
                 }
-                Count = fileIT->second.GetNumberOfAdverbsInMap();
+                Count = CellMapIT->second.GetNumberOfAdverbsInList();
                 LearnedDataFile << "Number of Adverbs,"       << Count << Delim;
                 for (int x = 0; x<=Count-1; x++){
-                    LearnedDataFile << "Adverb,"              << GetMemoryCellWordLC("",fileIT->second.GetAdverbFromMap(x)) << Delim;
+                    LearnedDataFile << "Adverb,"              << CellMapIT->second.GetAdverbFromList(x) << Delim;
                 }
-                Count = fileIT->second.GetNumberOfRelatedNounsInMap();
+                Count = CellMapIT->second.GetNumberOfRelatedNounsInList();
                 LearnedDataFile << "Related Nouns,"           << Count << Delim;
                 for (int x = 0; x<=Count-1; x++){
-                    LearnedDataFile << "Noun,"                << GetMemoryCellWordLC("", fileIT->second.GetNounFromMap(x)) << Delim;
+                    LearnedDataFile << "Noun,"                << CellMapIT->second.GetNounFromList(x) << Delim;
                 }
                  //++mapIT;
                 }//end of loop of Words to store
@@ -1468,7 +1262,7 @@ class c_Lobes : public c_MemoryCell
                 PatternFile << "VERSION " << Version << Delim;
                 for(fileIT = LeftLobeMemoryMap.begin(); fileIT != LeftLobeMemoryMap.end(); fileIT++ ){
                     PatternFile << fileIT->second.GetpCellDataString() << Delim;
-                    PatternFile << fileIT->second.GetpCellPointerToNextPattern() << Delim;
+                    PatternFile << fileIT->second.GetpCellResolvedPattern() << Delim;
                 }
           }
           PatternFile.close();
@@ -1537,7 +1331,7 @@ class c_Lobes : public c_MemoryCell
                         WorkingCell.SetpCellIsRoot(stoi(strLineData,&decType));             //set the bool cell is root
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpCellIsSet(stoi(strLineData,&decType));              //set the bool pcellisSet
+                        WorkingCell.SetpCellIsLocked(stoi(strLineData,&decType));           //set the bool pcellisSet
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellIsSingular(strLineData[0]);                     //set the char cell is singular
@@ -1555,7 +1349,7 @@ class c_Lobes : public c_MemoryCell
                         WorkingCell.SetpCellToken(stoi(strLineData,&decType));              //set the int Token
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpCellPointerToNextPattern(stoi(strLineData,&decType)); //set the int pointer to next pattern
+                        WorkingCell.SetpCellResolvedPattern(strLineData);                    //set the int pointer to next pattern
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpIsSingularPossessive(stoi(strLineData,&decType));    //set singular possessive
@@ -1568,6 +1362,9 @@ class c_Lobes : public c_MemoryCell
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpPossessiveRootType(strLineData[0]);                 // set possessive root type
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpDaysOld(stoi(strLineData,&decType));                //set day stamp
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         Count = stoi(strLineData,&decType);                                  //got number of adjectives
@@ -1607,6 +1404,7 @@ class c_Lobes : public c_MemoryCell
                         }//end for nouns loop
                     getline(LearnedDataFile,strLineData,',');
                     RightLobeMemoryMap.emplace(WorkingCell.GetpCellToken(),WorkingCell);
+                    RightLobeCellMap.emplace(WorkingCell.GetpCellDataString(),WorkingCell);
 
                     }//end while not empty loop
 
@@ -1636,30 +1434,6 @@ class c_Lobes : public c_MemoryCell
             cout << endl;
         }//end function
 
-
-
-        //Checks the current file version after the second decimal, against the one read.i.e. 6.1.02.009.28  02 is the file version
-        bool VerifyFileVersion(string VersionToCheck){
-            int    DecimalPointer1 = -1;
-            int    DecimalPointer2 = -1;
-            string Extraction1     = "";
-            string Extraction2     = "";
-            bool   Result = false;
-
-
-            DecimalPointer1  = Version.find(".");
-            DecimalPointer1  = Version.find(".",DecimalPointer1+1);
-            Extraction1      = Version.substr(DecimalPointer1+1,2);
-
-            DecimalPointer2  = VersionToCheck.find(".");
-            if(DecimalPointer2 >=0){
-               DecimalPointer2  = VersionToCheck.find(".",DecimalPointer2+1);}
-            if(DecimalPointer2 >=0){
-               Extraction2      = VersionToCheck.substr(DecimalPointer2+1,2);}
-
-            if(Extraction1 == Extraction2) Result = true;
-            return Result;
-        }//end function Verify File Version
 };
 
 

@@ -13,17 +13,15 @@ c_MemoryCell::c_MemoryCell()
     pNextVerb             = 0;
     pNextNoun             = 0;
     pToken                = 0;
-    pIsSet                = false;
+    pDaysOld              = 0;
+    pIsLocked             = false;
     pGenderClass          = 'u';
     pSecondaryType        = 'u';
     pAlternateType        = 'u';
     pCellIsSingular       = 'u';
     pWordTense            = 'u';
     pSingularLocation     = 0;
-    advDescriptors.clear();
-    verbDescriptors.clear();
-    adjDescriptors.clear();
-    pPointerToNextPattern = 0;
+    pResolvedPattern      = "";
 }
 
 c_MemoryCell::~c_MemoryCell()

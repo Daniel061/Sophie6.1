@@ -14,9 +14,11 @@ class c_Word
           string  w_WordFormLC              = "";    // the word data in all lowercase
           string  w_ContractionFormFirst    = "";    // deconstructed contraction what's = what
           string  w_ContractionFormSecond   = "";    // deconstructed contraction what's = is
+          string  w_SingularForm            = "";    // i.e. cats = cat
           string  w_PluralRoot              = "";    // deconstructed plural to the root,cars = car
           string  w_SubWord                 = "";    // replacement word, usually from subject
           string  w_PossessiveRoot          = "";    // cat's  = cat
+          string  w_MiniDefinition          = "";    // usually Gist of sentence if used as subject
           bool    w_isContraction           = false; // contraction flag
           bool    w_isPlural                = false; // plural flag
           bool    w_SingularPossessive      = false; // i.e. cat's
@@ -36,6 +38,13 @@ class c_Word
 
 
     public:
+
+        string   Getw_MiniDefinition(){return w_MiniDefinition;}
+        void     Setw_MiniDefinition(string newVal){w_MiniDefinition = newVal;}
+
+        string   Getw_SingularForm(){return w_SingularForm;}
+        void     Setw_SingularForm(string newVal){w_SingularForm = newVal;}
+
         bool     Getw_PluralPossessive(){return w_PluralPossessive;}
         void     Setw_PluralPossessive(bool newVal){w_PluralPossessive = newVal;}
 
@@ -118,6 +127,8 @@ class c_Word
           w_AlternativeType          = 'u';     // some words have more than 1 usage            16
           w_WordTense                = 'u';     // c - present p - past                         17
           w_PossessiveRootType       = 'u';     // usually a 'n' noun but not always            18
+          w_SingularForm             = "";      // i.e. cats = cat                              19
+          w_MiniDefinition           = "";      // usually Gist of sentence if used as subject  20
         }
 
 

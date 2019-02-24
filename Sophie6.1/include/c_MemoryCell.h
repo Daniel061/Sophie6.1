@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <unordered_set>
 
 using namespace std;
 class c_MemoryCell
@@ -21,6 +22,8 @@ class c_MemoryCell
         string pCellContractionLongFormFirst;      // i.e. he's to he
         string pCellContractionLongFormSecond;     // i.e. he's to is
         string pPossessiveRoot;                    // i.e. cat's = cat
+        string pSingularForm;                      // i.e. cats  = cat
+        string pResolvedPattern;                   // if used as pattern storage, contains constructed pattern or to self if final construction form
         char   pPossessiveRootType;                // usually a 'n' noun type but not always
         char   pCellPurpose;                       // s-sentence w-word r-response m-memory
         char   pWordType;                          // n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
@@ -33,7 +36,7 @@ class c_MemoryCell
         char   pAlternateType;                     // some words without modification could have a third type (All type references conform to pWordType definitions)
         char   pGenderClass;                       // n - neutral e- either m - male only f - female only u - undefined
         bool   pIsRoot;                            // the root of a word
-        bool   pIsSet;                             // Has been set with data before
+        bool   pIsLocked;                          // this data is locked
         bool   pIsPluralPossessive;                // flag
         bool   pIsSingularPossessive;              // flag
         char   pCellIsSingular;                    // p = plural s = singular u = undefined
@@ -41,18 +44,23 @@ class c_MemoryCell
         int    pNextVerb;                          // pointer to next verb
         int    pNextNoun;                          // pointer to next noun
         int    pToken;                             // the token value of this data
-        int    pPointerToNextPattern;              // if used as pattern storage, points to constructed pattern or to self if final construction form
+        int    pDaysOld;                           // day stamp
 
-        multimap<int,int> adjDescriptors;        // storage of adjectives                        (Adjective,token)
-        multimap<int,int> verbDescriptors;       // storage of verbs associated with adjectives  (Verb,Adjective)
-        multimap<int,int> advDescriptors;        // storage of adverbs associated with verbs     (Adverb,Adjective)
-        map<int,string> RelatedNouns;            // storage of related nouns   i.e. dog,animal   (tokenized related noun,related noun)
-        multimap<int,int>::iterator mapIT;       // pointer for  int maps
-        multimap<int,string>::iterator strIT;    // pointer for string maps
+
+
+        unordered_set <string>   adjectiveList;    // Adjective List for this word
+        unordered_set <string>   verbList;         // Verbs used with this word
+        unordered_set <string>   adverbList;       // Adverbs used with this word
+        unordered_set <string>   relatedNounList;  // Nouns related to this word
+        unordered_set <string>::iterator SetIT;    // iterator for this set
+
 
 
 
     public:
+        string GetpSingularForm(){return pSingularForm;}
+        void   SetpSingularForm(string newVal){pSingularForm = newVal;}
+
         bool   GetpIsPluralPossessive(){return pIsPluralPossessive;}
         void   SetpIsPluralPossessive(bool newVal){pIsPluralPossessive = newVal;}
 
@@ -69,42 +77,65 @@ class c_MemoryCell
         string GetpCellContractionLongFormSecond(){return pCellContractionLongFormSecond;}
         void   SetpCellContractionLongFormFirst(string newVal){pCellContractionLongFormFirst = newVal;}
         void   SetpCellContractionLongFormSecond(string newVal){pCellContractionLongFormSecond = newVal;}
+
         void   SetpCellMiniDefinition(string newData){pCellMiniDefinition=newData;}
         string GetpCellMiniDefinition(){return pCellMiniDefinition;}
+
         char   GetpCellIsSingular(){return pCellIsSingular;}
         void   SetpCellIsSingular(char newData){pCellIsSingular = newData;}
+
         int    GetpCellSingularLocation(){return pSingularLocation;}
         void   SetpCellSingularLocation(int newLocation){pSingularLocation = newLocation;}
-        int    GetpCellPointerToNextPattern(){return pPointerToNextPattern;}
-        void   SetpCellPointerToNextPattern(int NextPattern){pPointerToNextPattern = NextPattern;}
+
+        string GetpCellResolvedPattern(){return pResolvedPattern;}
+        void   SetpCellResolvedPattern(string strPattern){pResolvedPattern = strPattern;}
+
         char   GetpCellWordTense() {return pWordTense;}
         void   SetpCellWordTense(char newTense){pWordTense = newTense;}
+
         char   GetpCellSecondaryType(){return pSecondaryType;}
         void   SetpCellSecondaryType(char Type){pSecondaryType = Type;}
+
         char   GetpCellAlternateType(){return pAlternateType;}
         void   SetpCellAlternateType(char Type){pAlternateType = Type;}
+
         string GetpCellDataString(){return pCellData;}
+        void   SetpCellDataString(string NewData){pCellData = NewData; pIsLocked = true;}
+
         string GetpCellDataLC(){return pCellDataLC;}
         void   SetpCellDataLC(string newData){pCellDataLC=newData;}
+
         char   GetpCellPurpose(){return pCellPurpose;}
         void   SetpCellPurpose (char NewData){pCellPurpose = NewData;}
+
         char   GetpCellWordType(){return pWordType;}
         void   SetpCellWordType(char NewData){pWordType = NewData;}
+
         bool   GetpCellIsRoot(){return pIsRoot;}
         void   SetpCellIsRoot(bool NewVal){pIsRoot = NewVal;}
+
         int    GetpCellNextVerb(){return pNextVerb;}
         void   SetpCellNextVerb(int NewVal){pNextVerb = NewVal;}
+
         int    GetpCellNextNoun(){return pNextNoun;}
         void   SetpCellNextNoun(int loc){pNextNoun = loc;}
+
         void   SetpCellToken(int NewVal){pToken=NewVal;}
         int    GetpCellToken(){return pToken;}
-        bool   GetpCellIsSet() {return pIsSet;}
-        void   SetpCellIsSet(bool newVal){pIsSet = newVal;}
+
+        bool   GetpCellIsLocked() {return pIsLocked;}
+        void   SetpCellIsLocked(bool newVal){pIsLocked = newVal;}
+
         void   SetpCellGenderClass(char NewClass){pGenderClass = NewClass;}
         char   GetpCellGenderClass(){return pGenderClass;}
+
         string GetpCellGivenName(){return pGivenName;}
         void   SetpCellGivenName(string NewName){pGivenName = NewName;}
-        void   SetpCellDataString(string NewData){pCellData = NewData; pIsSet = true;}
+
+        int    GetpDaysOld(){return pDaysOld;}
+        void   SetpDaysOld(int newVal){pDaysOld = newVal;}
+
+
 
         void InitializeAll(){
                 pCellIsSingular                 = 'u';
@@ -116,6 +147,7 @@ class c_MemoryCell
                 pCellContractionLongFormFirst   = "";
                 pCellContractionLongFormSecond  = "";
                 pPossessiveRoot                 = "";
+                pSingularForm                   = "";
                 pPossessiveRootType             = 'u';
                 pCellPurpose                    = 'u'; //undefined
                 pWordType                       = 'u';
@@ -123,110 +155,114 @@ class c_MemoryCell
                 pNextVerb                       = 0;
                 pNextNoun                       = 0;
                 pToken                          = 0;
-                pIsSet                          = false;
+                pDaysOld                        = 0;
+                pIsLocked                       = false;
                 pIsPluralPossessive             = false;
                 pIsSingularPossessive           = false;
                 pGenderClass                    = 'u';
                 pSecondaryType                  = 'u';
                 pAlternateType                  = 'u';
-                advDescriptors.clear();
-                verbDescriptors.clear();
-                adjDescriptors.clear();
-                RelatedNouns.clear();
-                pPointerToNextPattern           = 0;
+                adjectiveList.clear();
+                adverbList.clear();
+                verbList.clear();
+                relatedNounList.clear();
+                pResolvedPattern                = "";
                 pSingularLocation               = 0;
         }
 
 
        void AssociateAdjectiveInMap(string AdjectiveToAssociate){
-           if(adjDescriptors.find(Tokenize(AdjectiveToAssociate)) == adjDescriptors.end())
-            adjDescriptors.emplace(Tokenize(AdjectiveToAssociate),pToken);
+           ///new set usage  Store ADJECTIVE
+            adjectiveList.emplace(AdjectiveToAssociate);  //will not duplicate
        }
 
-//       void AssociateNounInMap(string NounToAssociate){
-//           if(RelatedNouns.find(Tokenize(NounToAssociate)) == RelatedNouns.end())
-//            RelatedNouns.emplace(Tokenize(NounToAssociate),pToken);
-//       }
+
        void AssociateNounInMap(string NounToAssociate){
-           //cout << "Storing " << NounToAssociate << " to " << pCellData << endl;
-            RelatedNouns.emplace(Tokenize(NounToAssociate),NounToAssociate);
+           ///new set usage Store NOUN
+            relatedNounList.emplace(NounToAssociate);   //will not duplicate
        }
+
+
        void AssociateVerbToAdjectiveInMap(string AdjectiveToAssociate, string VerbToAssociate){
-           if(verbDescriptors.find(Tokenize(AdjectiveToAssociate)) == verbDescriptors.end())
-            verbDescriptors.emplace(Tokenize(AdjectiveToAssociate),Tokenize(VerbToAssociate));
+           ///new set usage Store VERB
+           verbList.emplace(VerbToAssociate);           //will not duplicate
        }
 
        void AssociateAdverbToVerbInMap(string AdverbToAssociate,string VerbToAssociate){
-           if(advDescriptors.find(Tokenize(AdverbToAssociate)) == advDescriptors.end())
-            advDescriptors.emplace(Tokenize(AdverbToAssociate),Tokenize(VerbToAssociate));
+           ///new set usage Store ADVERB
+           adverbList.emplace(AdverbToAssociate);      // will not duplicate
        }
 
-       int GetNumberOfAdjectivesInMap(){
-           return adjDescriptors.size();}
+       ///NEXT 4 FUNCTIONS USING NEW SET LIST
+       int GetNumberOfAdjectivesInList(){
+           return adjectiveList.size();}
 
-       int GetNumberOfVerbsInMap(){
-           return verbDescriptors.size();}
+       int GetNumberOfVerbsInList(){
+           return verbList.size();}
 
-       int GetNumberOfAdverbsInMap(){
-           return advDescriptors.size();}
+       int GetNumberOfAdverbsInList(){
+           return adverbList.size();}
 
-       int GetNumberOfRelatedNounsInMap(){
-           return RelatedNouns.size();}
+       int GetNumberOfRelatedNounsInList(){
+           return relatedNounList.size();}
 
-       int GetAdjectiveFromMap(int Location){
-            mapIT = adjDescriptors.begin();
-            for(int x = 0; x < Location; x++) ++mapIT;
+       ///________________________________///
 
-            if(mapIT == adjDescriptors.end()){
-                return -1;}
-                else
-                    return mapIT->first;
-       }
-
-       int GetVerbFromMap(int Location){
-            mapIT = verbDescriptors.begin();
-            for(int x = 0; x < Location; x++) ++mapIT;
-
-            if(mapIT == verbDescriptors.end()){
-                return -1;}
-                else
-                    return mapIT->first;
-       }
-
-        int GetAdverbFromMap(int Location){
-            mapIT = advDescriptors.begin();
-            for(int x = 0; x < Location; x++) ++mapIT;
-
-            if(mapIT == advDescriptors.end()){
-                return -1;}
-                else
-                    return mapIT->first;
-       }
-
-        int GetNounFromMap(int Location){
-            strIT = RelatedNouns.begin();
-            for(int x = 0; x < Location; x++) ++strIT;
-
-            if(strIT == RelatedNouns.end()){
-                return -1;}
-                else
-                    return Tokenize(strIT->second);
-       }
+       string GetAdjectiveFromList(int Location){
+            SetIT = adjectiveList.begin();
+            for(int x = 0; x < Location; x++) ++SetIT;
+            if(SetIT == adjectiveList.end())
+                return "";
+            else
+                return *SetIT;}
 
 
+       string GetVerbFromList(int Location){
+            SetIT = verbList.begin();
+            for(int x = 0; x < Location; x++) ++SetIT;
+            if(SetIT == verbList.end())
+                return "";
+            else
+                return *SetIT;}
+
+
+       string GetAdverbFromList(int Location){
+            SetIT = adverbList.begin();
+            for(int x = 0; x < Location; x++) ++SetIT;
+            if(SetIT == adverbList.end())
+                return "";
+            else
+                return *SetIT;}
+
+
+        string GetNounFromList(int Location){
+            SetIT = relatedNounList.begin();
+            for(int x = 0; x < Location; x++) ++SetIT;
+            if(SetIT == relatedNounList.end())
+                return "";
+            else
+                return *SetIT;}
+
+
+       /// USING NEW SET LIST
        bool IsNounRelatedToMe(string NounToCheck){
-           strIT = RelatedNouns.find(Tokenize(NounToCheck));
-           if(strIT == RelatedNouns.end()) return false;
-           else return true;}
+           SetIT = relatedNounList.find(NounToCheck);
+           if(SetIT == relatedNounList.end())
+            return false;
+           else
+            return true;}
 
+
+       /// USING NEW SET LIST
        bool IsAdjectiveAssociatedToMe(string AdjectiveToCheck){
-           mapIT = adjDescriptors.find(Tokenize(AdjectiveToCheck));
-           if(mapIT == adjDescriptors.end()) return false;
-           else return true;}
+           if(SetIT == adjectiveList.end())
+            return false;
+           else
+            return true;}
 
 
 
-
+        ///depreciated
         int Tokenize (string str_Data,bool ForceUpperCase = true)
         {
             int z          = str_Data.size();

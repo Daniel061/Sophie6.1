@@ -90,11 +90,11 @@ class c_Language : public c_LongTermMemory
        pull it into CorrectPattern
    */
 
-
-     if(GetMemoryCellIsSet(Tokenize(CorrectedPattern,false),'l')==true){  //seen this pattern before
-            PatternPointer       = GetMemoryCellPointerToNextPattern(Tokenize(CorrectedPattern,false),'l');
-            CorrectedPattern     = GetMemoryCellRawStringData(Result,"",PatternPointer,'l');
-            VerifyPattern        = true;
+///*************CHANGE PATTERN STORAGE TO STRING STRING - no tokens
+     if(GetMemoryCellIsSet(CorrectedPattern,Result,'l')==true){  //seen this pattern before
+            //PatternPointer       = GetMemoryCellPointerToNextPattern(Tokenize(CorrectedPattern,false),'l');
+            //CorrectedPattern     = GetMemoryCellRawData(Result,"",PatternPointer,'l');
+            //VerifyPattern        = true;
      }
 
     else{
@@ -227,6 +227,7 @@ class c_Language : public c_LongTermMemory
            int  ActionMarker        = -1;
            bool RuleTesting         = true;
            bool IsPlural            = false;
+           bool Result              = false;
 
 
 
@@ -389,8 +390,8 @@ class c_Language : public c_LongTermMemory
                             SetIsPluralWord(LocationInSentence,true);
                             SetPluralRoot(LocationInSentence,SingularWord);
                             SetPluralWordFlag(LocationInSentence,'p');
-                            SetWordType(GetMemoryCellWordType(Tokenize(SingularWord)),LocationInSentence);
-                            tmpWordType = GetMemoryCellWordType(Tokenize(SingularWord));
+                            SetWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
+                            tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -405,8 +406,8 @@ class c_Language : public c_LongTermMemory
                             SetIsPluralWord(LocationInSentence,true);
                             SetPluralRoot(LocationInSentence,SingularWord);
                             SetPluralWordFlag(LocationInSentence,'p');
-                            tmpWordType = GetMemoryCellWordType(Tokenize(SingularWord));
-                            SetWordType(GetMemoryCellWordType(Tokenize(SingularWord)),LocationInSentence);
+                            tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
+                            SetWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -422,8 +423,8 @@ class c_Language : public c_LongTermMemory
                             SetIsPluralWord(LocationInSentence,true);
                             SetPluralRoot(LocationInSentence,SingularWord);
                             SetPluralWordFlag(LocationInSentence,'p');
-                            SetWordType(GetMemoryCellWordType(Tokenize(SingularWord)),LocationInSentence);
-                            tmpWordType = GetMemoryCellWordType(Tokenize(SingularWord));
+                            SetWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
+                            tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -439,8 +440,8 @@ class c_Language : public c_LongTermMemory
                             SetIsPluralWord(LocationInSentence,true);
                             SetPluralRoot(LocationInSentence,SingularWord);
                             SetPluralWordFlag(LocationInSentence,'p');
-                            SetWordType(GetMemoryCellWordType(Tokenize(SingularWord)),LocationInSentence);
-                            tmpWordType = GetMemoryCellWordType(Tokenize(SingularWord));
+                            SetWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
+                            tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -460,8 +461,8 @@ class c_Language : public c_LongTermMemory
                                 SetIsPluralWord(LocationInSentence,true);
                                 SetPluralRoot(LocationInSentence,SingularWord);
                                 SetPluralWordFlag(LocationInSentence,'p');
-                                SetWordType(GetMemoryCellWordType(Tokenize(SingularWord)),LocationInSentence);
-                                tmpWordType = GetMemoryCellWordType(Tokenize(SingularWord));
+                                SetWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
+                                tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
                                 RuleTesting = false;
                                 IsPlural    = true;
                                 break;}

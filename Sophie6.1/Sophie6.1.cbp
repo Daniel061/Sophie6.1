@@ -34,6 +34,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Library.cpp" />
+		<Unit filename="include/Library.h" />
 		<Unit filename="include/c2_Sentence.h" />
 		<Unit filename="include/c_Brain.h" />
 		<Unit filename="include/c_Cerebellum.h" />

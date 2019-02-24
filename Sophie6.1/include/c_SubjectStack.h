@@ -48,7 +48,7 @@ class c_SubjectStack :  public c_Sentence
             int Adjectives[30];
             int RelatedNouns[30];
             int adjCount,nounCount;
-            bool Result = false;
+            //bool Result = false;
              if(sbjDataIT == SubjectDataMap.end()){
                 WorkingsbjData.InitializeAllSubjectVariables();
                 WorkingsbjData.SetsbjSubjectPhrase(GetOriginalString());
@@ -71,10 +71,11 @@ class c_SubjectStack :  public c_Sentence
                 adjCount  = GetMemoryCellAdjectives(GetWordTokens(GetSubjectLocation()),Adjectives);
                 nounCount = GetMemoryCellRelatedNouns(GetWordTokens(GetSubjectLocation()),RelatedNouns);
                 for(int x = 0; x< adjCount; x++){
-                    WorkingsbjData.SetsbjAdjectiveInMap(GetMemoryCellRawStringData(Result,"",Adjectives[x]),Adjectives[x]);
+                        ///***********************NEEDS FIXED************************************* remove tokens!!
+                  //  WorkingsbjData.SetsbjAdjectiveInMap(GetMemoryCellRawStringData(Result,"",Adjectives[x]),Adjectives[x]);
                 }
                 for(int x = 0; x< nounCount; x++){
-                    WorkingsbjData.SetsbjRelatedNounInMap(GetMemoryCellRawStringData(Result,"",RelatedNouns[x]),RelatedNouns[x]);
+                  //  WorkingsbjData.SetsbjRelatedNounInMap(GetMemoryCellRawStringData(Result,"",RelatedNouns[x]),RelatedNouns[x]);
                 }
                 sbjDataIT = SubjectDataMap.begin();
                 SubjectDataMap.emplace_hint(sbjDataIT,WorkingsbjData.GetsbjWordToken(),WorkingsbjData);
@@ -102,11 +103,12 @@ class c_SubjectStack :  public c_Sentence
                 sbjDataIT->second.SetsbjSubjectCountPlusOne();
                 adjCount  = GetMemoryCellAdjectives(GetWordTokens(GetSubjectLocation()),Adjectives);
                 nounCount = GetMemoryCellRelatedNouns(GetWordTokens(GetSubjectLocation()),RelatedNouns);
+                ///************************NEEDS FIXED  remove token based search*************************************
                 for(int x = 0; x< adjCount; x++){
-                    sbjDataIT->second.SetsbjAdjectiveInMap(GetMemoryCellRawStringData(Result,"",Adjectives[x]),Adjectives[x]);
+                  //  sbjDataIT->second.SetsbjAdjectiveInMap(GetMemoryCellRawStringData(Result,"",Adjectives[x]),Adjectives[x]);
                 }
                 for(int x = 0; x< nounCount; x++){
-                    sbjDataIT->second.SetsbjRelatedNounInMap(GetMemoryCellRawStringData(Result,"",RelatedNouns[x]),RelatedNouns[x]);
+                  //  sbjDataIT->second.SetsbjRelatedNounInMap(GetMemoryCellRawStringData(Result,"",RelatedNouns[x]),RelatedNouns[x]);
                 }
                 sbjOrderIT = SubjectOrder.begin();
                 if(*sbjOrderIT != GetWordTokens(GetSubjectLocation())) //not already at the top

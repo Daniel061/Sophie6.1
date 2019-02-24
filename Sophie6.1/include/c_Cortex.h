@@ -984,7 +984,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                     cout << "[c_Cortex::QuestionSentenceBreakDown()] Question direction to Report\n";
 
                 if(GetHasGenderDeterminer()){
-                    GenderChar = GetMemoryCellGenderClass(GetWordTokens(GetSubjectLocation()));
+                    GenderChar = GetMemoryCellcharGenderClass(GetWordsLC(GetSubjectLocation()),Result);
                     if(GenderChar == 'f'){SlowSpeak("Girl."); Result = true; SetHasBeenUnderstood(true);}
                        else
                           if(GenderChar == 'm') {SlowSpeak("Boy.");Result = true; SetHasBeenUnderstood(true);}
@@ -1047,9 +1047,10 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                 //sets MatchedAdjective if found
                 LinkedNounCount = GetMemoryCellRelatedNouns(GetWordTokens(GetSubjectLocation()),LinkedNouns);
                 for(int x =0; x < LinkedNounCount; x++){
-                    if(GetIsNounRelatedToThisMemoryCell(GetWordTokens(GetIndirectObjectLocation()),GetMemoryCellWordLC("",LinkedNouns[x]))){
-                        MatchedAdjective = x;
-                    }
+                        ///*************NEEDS FIXED, won't work because of tokens
+//                    if(GetIsNounRelatedToThisMemoryCell(GetWordTokens(GetIndirectObjectLocation()),GetMemoryCellDataLC("",LinkedNouns[x]))){
+//                        MatchedAdjective = x;
+//                    }
                 }
 
                 //Checks for gender class request
@@ -1080,19 +1081,19 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                  bool    OwnerShip,Plural;
                  string  Root,LongFormFirst,LongFormSecond;
                  string  strData = "";
-                 int     RelatedNouns[20];
-                 int     RelatedNounCount = -1;
+                 //int     RelatedNouns[20];
+                 //int     RelatedNounCount = -1;
 
                  if(GetWordType(GetSubjectLocation())=='C'){
                      DeconstructContractions(OwnerShip,Plural,ReferenceWord,LongFormFirst,LongFormSecond,strData);}
 
-                 RelatedNounCount = GetMemoryCellRelatedNouns(Tokenize(ReferenceWord),RelatedNouns);
+                 //RelatedNounCount = GetMemoryCellRelatedNouns(Tokenize(ReferenceWord),RelatedNouns);
 
-                 for(int x = 0; x < RelatedNounCount; x++){
-                    if(GetMemoryCellWordType(RelatedNouns[x])== 'P')
-                        SlowSpeak(GetMemoryCellRawStringData(Result,"",RelatedNouns[x]));
-                        Result = true;
-                 }
+//                 for(int x = 0; x < RelatedNounCount; x++){
+//                    if(GetMemoryCellWordType(RelatedNouns[x])== 'P')
+//                        //SlowSpeak(GetMemoryCellRawStringData(Result,"",RelatedNouns[x]));
+//                        Result = true;
+//                 }
 
                    if((GetWordsLC(0)=="what")&&
                       (GetWordsLC(GetVerbLocation()) == "is")&&
@@ -1237,6 +1238,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         int    Response              = -1;
         int    PronounPosition       = -1;
         bool   Checking              = true;
+        bool   Result                = false;
         if(GetIsQuestion()) Checking = false;
 
         for(int x = 0; x <= GetWordCount(); x++){
@@ -1252,11 +1254,11 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                         GenderClass       = 'm';}
 
                 if( (GetWordType(GetSubjectLocation()) == 'p') && ((MatchedF + MatchedM +1) >=0) ){
-                   if(GetMemoryCellGenderClass(GetWordTokens(GetIndirectObjectLocation())) == 'u'){
+                   if(GetMemoryCellcharGenderClass(GetWordsLC(GetIndirectObjectLocation()),Result) == 'u'){
                     SlowSpeak("So the " + SubjectText + " is a " + ProNounResolution + "?");
                     Response = RequestUserResponse();
                     if(Response == 1){
-                        SetMemoryCellGenderClass(GetWordTokens(GetIndirectObjectLocation()),GenderClass);
+                        SetMemorypGenderClass(GetWordsLC(GetIndirectObjectLocation()),GenderClass);
                         SlowSpeak("Okay."); SlowSpeak(":)"); IncreaseMoodLevel();SetHasBeenUnderstood(true);
                         SetGenderClassInSentence(GetIndirectObjectLocation(),GenderClass);
                         Checking = false;

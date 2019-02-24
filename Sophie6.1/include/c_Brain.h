@@ -102,6 +102,7 @@ class c_Brain : public c_Cerebellum
                      SubjectLocation = FindSubject();                                                      // need to run this again to see if any indirect objects
                      SetSubjectLocation(SubjectLocation);                                                  //store the location or -1
                      StoreNewWords();                                                                      //save any new words in rBrainCells
+                     SaveAllSentenceWordDataToMemory();                                                    //new function to save all to memory
                      RebuildPattern();
                      SaveProcessedPattern(GetPattern());                                                   //update short term memory
                      if(SubjectLocation >=0)
@@ -200,42 +201,50 @@ class c_Brain : public c_Cerebellum
             case 1871332:    // cell report
                 {
                     int WorkingWord = CommandCheckSentence.GetWordTokens(2);
+                    string strWorkingWord = CommandCheckSentence.GetWordsLC(2);
                     int AdjectivesInMap[20];
                     int AdverbsInMap[20];
                     int VerbsInMap[20];
                     int RelatedNounsInMap[20];
                     int y = 0;
                     bool Result = false;
-                    cout << "Cell Report:Right Brain" << endl << endl;
-                    cout << "Cell String:" << GetMemoryCellRawStringData(Result,"",WorkingWord)<< endl;
-                    cout << "Cell String (LC):" << GetMemoryCellWordLC("",WorkingWord) << endl;
-                    cout << "Cell Word Type:" << GetMemoryCellWordType(WorkingWord) << endl;
-                    if(GetMemoryCellWordType(WorkingWord)=='C'){
-                        cout << "  Contraction Word Long Form First:" << GetMemoryCellContractionLongFormFirst(WorkingWord) << endl;
-                        cout << "  Contraction Word Long Form Second:" << GetMemoryCellContractionLongFormSecond(WorkingWord) << endl;
-                    }
-                    //cout << "Cell Secondary Word Type:" << RightLobeMemory[WorkingWord].GetSecondaryType() << endl;
-                    //cout << "Cell Alternate Word Type:" << RightLobeMemory[WorkingWord].GetAlternateType() << endl;
-                    cout << "Cell Gender:" << GetMemoryCellGenderClass(WorkingWord) << endl;
-                    cout << "Cell Primary Usage:" << GetMemoryCellPurpose(WorkingWord) << endl;
-                   // cout << "Cell Root Pointer:" << RightLobeMemory[WorkingWord].GetpNextNoun() << endl;
-                    cout << "Cell Data is Set:" << boolalpha << GetMemoryCellIsSet(WorkingWord) << endl;
-                    cout << "Cell Plural flag:" << GetMemoryCellpCellIsSingular("",WorkingWord) << "  Plural Root:" << GetMemoryCellpSingularLocation("",WorkingWord) << endl;
-                    cout << "Cell Location by token:" << WorkingWord << endl;
-                    cout << "Cell adjectives stored in map:" << GetMemoryCellAdjectives(WorkingWord,AdjectivesInMap) << endl;
-                    cout << "Cell verbs stored in map:" << GetMemoryCellVerbs(WorkingWord,VerbsInMap) << endl;
-                    cout << "Cell adverbs stored in map:" << GetMemoryCellAdverbs(WorkingWord,AdverbsInMap) << endl;
-                    cout << "Cell Adjectives, Verbs, Adverbs:\n";
-                       for(int x = 0; x< GetMemoryCellAdjectiveCount(WorkingWord); x++){
-                         cout  << "   " << GetMemoryCellWordLC("",AdjectivesInMap[x]) << " " << GetMemoryCellWordLC("",VerbsInMap[x]) << " " << GetMemoryCellWordLC("",AdverbsInMap[x]) << endl;
-                       }
-                    cout << endl;
-                    y = GetMemoryCellRelatedNouns(WorkingWord,RelatedNounsInMap);
-                    cout << "Cell related Nouns("  << y << "):\n";
 
-                       for(int x = 0; x< y;x++){
-                         cout << "   " << GetMemoryCellWordLC("",RelatedNounsInMap[x]) << endl;
-                       }
+                    GetMemoryCellRawData(strWorkingWord,Result);
+                    if(Result){
+                            cout << "Cell Report:Right Brain" << endl << endl;
+                            cout << "Cell String:" << GetMemoryCellRawData(strWorkingWord,Result)<< endl;
+                            cout << "Cell String (LC):" << GetMemoryCellDataLC(strWorkingWord,Result) << endl;
+                            cout << "Cell Word Type:" << GetMemoryCellcharWordType(strWorkingWord,Result) << endl;
+                            if(GetMemoryCellcharWordType(strWorkingWord,Result)=='C'){
+                                cout << "  Contraction Word Long Form First:" << GetMemoryCellContractionFirst(strWorkingWord,Result) << endl;
+                                cout << "  Contraction Word Long Form Second:" << GetMemoryCellContractionSecond(strWorkingWord,Result) << endl;
+                            }
+                            //cout << "Cell Secondary Word Type:" << RightLobeMemory[WorkingWord].GetSecondaryType() << endl;
+                            //cout << "Cell Alternate Word Type:" << RightLobeMemory[WorkingWord].GetAlternateType() << endl;
+                            cout << "Cell Gender:" << GetMemoryCellcharGenderClass(strWorkingWord,Result) << endl;
+                            cout << "Cell Primary Usage:" << GetMemoryCellcharPurpose(strWorkingWord,Result) << endl;
+                           // cout << "Cell Root Pointer:" << RightLobeMemory[WorkingWord].GetpNextNoun() << endl;
+                            cout << "Cell Data is Set:" << boolalpha << GetMemoryCellIsSet(strWorkingWord,Result) << endl;
+                           // cout << "Cell Plural flag:" << GetMemoryCellpCellIsSingular("",WorkingWord) << "  Plural Root:" << GetMemoryCellpSingularLocation("",WorkingWord) << endl;
+                            cout << "Cell Location by token:" << WorkingWord << endl;
+                            cout << "Cell adjectives stored in map:" << GetMemoryCellAdjectives(WorkingWord,AdjectivesInMap) << endl;
+                            cout << "Cell verbs stored in map:" << GetMemoryCellVerbs(WorkingWord,VerbsInMap) << endl;
+                            cout << "Cell adverbs stored in map:" << GetMemoryCellAdverbs(WorkingWord,AdverbsInMap) << endl;
+                            cout << "Cell Adjectives, Verbs, Adverbs:\n";
+        //                       for(int x = 0; x< GetMemoryCellAdjectiveCount(WorkingWord); x++){
+        //                         cout  << "   " << GetMemoryCellDataLC(AdjectivesInMap[x],Result) << " " << GetMemoryCellDataLC(VerbsInMap[x],Result) << " " << GetMemoryCellDataLC(AdverbsInMap[x],Result) << endl;
+        //                       }
+                            cout << endl;
+                            y = GetMemoryCellRelatedNouns(WorkingWord,RelatedNounsInMap);
+                            cout << "Cell related Nouns("  << y << "):\n";
+
+        //                       for(int x = 0; x< y;x++){
+        //                         cout << "   " << GetMemoryCellWordLC("",RelatedNounsInMap[x]) << endl;
+        //                       }
+
+                    }//end if result
+                    else
+                        cout << strWorkingWord << " not in memory!\n";
 
                     Control = 2;
                     break;
@@ -324,8 +333,8 @@ class c_Brain : public c_Cerebellum
             case 18188394:   // pattern report 'duvu'
                 {
                     Control = 2;
-                    cout << GetMemoryCellWordLC("",CommandCheckSentence.GetWordTokens(2)) << " points to "
-                         << GetMemoryCellWordLC("",GetMemoryCellPointerToNextPattern(CommandCheckSentence.GetWordTokens(2))) << endl;
+//                    cout << GetMemoryCellWordLC("",CommandCheckSentence.GetWordTokens(2)) << " points to "
+//                         << GetMemoryCellWordLC("",GetMemoryCellPointerToNextPattern(CommandCheckSentence.GetWordTokens(2))) << endl;
 
                     break;
 
@@ -355,12 +364,13 @@ class c_Brain : public c_Cerebellum
             char tmpTypeInSentence, tmpTypeInMemoryCell, tmpTypeFromLanguageHelper;
             char tmpGenderClassFromMemoryCell;
             bool isSetInMemory;
+            bool Result = false;
             for(int x = 0; x < GetWordCount(); x++){
                     tmpTypeInSentence            = GetWordType(x);
-                    tmpTypeInMemoryCell          = GetMemoryCellWordType(GetWordTokens(x));
+                    tmpTypeInMemoryCell          = GetMemoryCellcharWordType(GetWordsLC(x),Result);
                     tmpTypeFromLanguageHelper    = FindWordType(GetWordsLC(x),x);
-                    isSetInMemory                = GetMemoryCellIsSet(GetWordTokens(x));
-                    tmpGenderClassFromMemoryCell = GetMemoryCellGenderClass(GetWordTokens(x));
+                    isSetInMemory                = GetMemoryCellIsSet(GetWordsLC(x),Result);
+                    tmpGenderClassFromMemoryCell = GetMemoryCellcharGenderClass(GetWordsLC(x),Result);
                     if(tmpGenderClassFromMemoryCell != '\0')
                         SetGenderClassInSentence(x,tmpGenderClassFromMemoryCell);
                     if(Verbose){
@@ -392,14 +402,15 @@ class c_Brain : public c_Cerebellum
         int StoreNewWords()
         {
          if(Verbose)cout << "[c_Brain.h::StoreNewWords]" << endl;
-         int NewWords; NewWords = 0;
-         int Noun1 = -1;
-         int Noun2 = -1;
+         int  NewWords; NewWords = 0;
+         int  Noun1 = -1;
+         int  Noun2 = -1;
+         bool Result = false;
 
          for (int x = 0; x < GetWordCount(); x++)
          {
              if((GetWordType(x)=='n') && (Noun1 == -1) ) Noun1 = x; else if((GetWordType(x) == 'n') && (Noun2 == -1))  Noun2 =x;
-             if( !( GetMemoryCellIsSet(GetWordTokens(x)) )) //   CheckForKnownWord(GetWords(x))))
+             if( !( GetMemoryCellIsSet(GetWordsLC(x),Result) )) //   CheckForKnownWord(GetWords(x))))
                 {NewWords++;}
                 InstallNewWord(GetWords(x),GetWordType(x),'w',true,GetGenderClassInSentence(x),
                                GetContractionLongFormFirst(x),GetContractionLongFormSecond(x),GetPluralWordFlag(x),Tokenize(GetPluralRoot(x)));

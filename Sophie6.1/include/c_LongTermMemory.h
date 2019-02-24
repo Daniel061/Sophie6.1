@@ -38,24 +38,24 @@ class c_LongTermMemory : public c_SubjectStack
         void CopyCurrentSentence(){
             CopySentence.InitializeVars();
             for (int x =0; x<=GetWordCount(); x++){
-                CopySentence.SetWords(x,GetWords(x));                                       //1
-                CopySentence.SetWordTokens(x,GetWordTokens(x));                             //2
-                CopySentence.SetQuoteLocation(x,GetQuoteLocation(x));                       //3
-                CopySentence.SetisContraction(x,GetisContraction(x));                       //4
-                CopySentence.SetWordsLC(x,GetWordsLC(x));                                   //5
-                CopySentence.SetSubWords(x,GetSubWords(x));                                 //6
-                CopySentence.SetWordType(GetWordType(x),x);                                 //7
-                CopySentence.SetSecondaryType(GetSecondaryType(x),x);                       //8
-                CopySentence.SetAlternateType(GetAlternateType(x),x);                       //9
-                CopySentence.SetGenderClassInSentence(x,GetGenderClassInSentence(x));       //10
-                CopySentence.SetContractionLongFormFirst(x,GetContractionLongFormFirst(x)); //11
-                CopySentence.SetContractionLongFormSecond(x,GetContractionLongFormSecond(x));//12
-                CopySentence.SetIsPluralWord(x,GetIsPluralWord(x));                         //13
-                CopySentence.SetPluralRoot(x,GetPluralRoot(x));                             //14
-                CopySentence.SetPluralWordFlag(x,GetPluralWordFlag(x));                     //15
-                CopySentence.SetWordTense(x,GetWordTense(x));                               //16
-                CopySentence.SetisPluralPossessive(x,GetisPluralPossessive(x));             //17
-                CopySentence.SetisSingularPossessive(x,GetisSingularPossessive(x));         //18
+                CopySentence.SetWords(x,GetWords(x));                                         //1
+                CopySentence.SetWordTokens(x,GetWordTokens(x));                               //2
+                CopySentence.SetQuoteLocation(x,GetQuoteLocation(x));                         //3
+                CopySentence.SetisContraction(x,GetisContraction(x));                         //4
+                CopySentence.SetWordsLC(x,GetWordsLC(x));                                     //5
+                CopySentence.SetSubWords(x,GetSubWords(x));                                   //6
+                CopySentence.SetWordType(GetWordType(x),x);                                   //7
+                CopySentence.SetSecondaryType(GetSecondaryType(x),x);                         //8
+                CopySentence.SetAlternateType(GetAlternateType(x),x);                         //9
+                CopySentence.SetGenderClassInSentence(x,GetGenderClassInSentence(x));         //10
+                CopySentence.SetContractionLongFormFirst(x,GetContractionLongFormFirst(x));   //11
+                CopySentence.SetContractionLongFormSecond(x,GetContractionLongFormSecond(x)); //12
+                CopySentence.SetIsPluralWord(x,GetIsPluralWord(x));                           //13
+                CopySentence.SetPluralRoot(x,GetPluralRoot(x));                               //14
+                CopySentence.SetPluralWordFlag(x,GetPluralWordFlag(x));                       //15
+                CopySentence.SetWordTense(x,GetWordTense(x));                                 //16
+                CopySentence.SetisPluralPossessive(x,GetisPluralPossessive(x));               //17
+                CopySentence.SetisSingularPossessive(x,GetisSingularPossessive(x));           //18
                 }
               CopySentence.WordCount                      =GetWordCount();
               CopySentence.SubjectLocation                =GetSubjectLocation();
@@ -201,9 +201,10 @@ class c_LongTermMemory : public c_SubjectStack
         }
 
 
-        //function to ensure all word data gathered and worked on is stored in memory cells
-        //  this should be called when all processing is complete
-        //  Sentence word data has 18 variables
+        /// Function to ensure all word data gathered and worked on is stored in memory cells,
+        ///  this should be called when all processing is complete,
+        ///  Sentence word data has 20 variables,
+        ///  Memory Cell has 25 variables.
         void SaveAllSentenceWordDataToMemory(){
             int     NewWordCount     = 0;
             int     UpDatedWordCount = 0;
@@ -211,18 +212,36 @@ class c_LongTermMemory : public c_SubjectStack
 
             for(int x = 0; x <= GetWordCount(); x++){
                 //start storing all the word data
-                Result = SetMemoryCellRawStringData(GetWords(x),GetWordTokens(x));                         // 1
+                Result = SetMemoryCellpCellData(GetWords(x));                                              /// 1   raw data
                 if(Result)
                     NewWordCount++;
                 else
                     UpDatedWordCount++;
-                SetMemoryCellLCStringData(GetWordsLC(x),GetWordTokens(x));                                 // 2
-                SetMemoryCellWordType(GetWordTokens(x),GetWordType(x));                                    // 3
-                SetMemoryCellContractionLongFormFirst(GetContractionLongFormFirst(x),GetWordTokens(x));    // 4
-                SetMemoryCellContractionLongFormSecond(GetContractionLongFormSecond(x),GetWordTokens(x));  // 5
-                SetMemoryCellGenderClass(GetWordTokens(x),GetGenderClassInSentence(x));                    // 6
-                SetMemoryCellpCellIsSingular(GetPluralWordFlag(x),"",GetWordTokens(x));                    // 7    check this lobe function
-                SetMemoryCellpSingularLocation(Tokenize(GetPossessiveRoot(x)));                            // 8    check this lobe function
+                SetMemoryCellpCellDataLC(GetWordsLC(x));                                                   /// 2   LC data
+                SetMemorypWordType(GetWordsLC(x),GetWordType(x));                                          /// 3   Word type
+                SetMemoryCellContractionLongFirst(GetWordsLC(x),GetContractionLongFormFirst(x));           /// 4   Contraction first form
+                SetMemoryCellContractionLongSecond(GetWordsLC(x),GetContractionLongFormSecond(x));         /// 5   Contraction second form
+                SetMemorypGenderClass(GetWordsLC(x),GetGenderClassInSentence(x));                          /// 6   Gender class
+                SetMemoryCellpCellIsSingular(GetWordsLC(x),GetPluralWordFlag(x));                          /// 7   plural word flag
+                SetMemoryCellpCellSingularForm(GetWordsLC(x),GetSingularForm(x));                          /// 8   singular form
+                SetMemoryCellpIsSingularPossessive(GetWordsLC(x),GetisSingularPossessive(x));              /// 9   singular possessive-bool
+                SetMemorypCellPurpose(GetWordsLC(x),'w');                                                  /// 10  cell purpose
+                SetMemoryCellpIsPluralPossessive(GetWordsLC(x),GetisPluralPossessive(x));                  /// 11  plural possessive-bool
+                SetMemoryCellPossessiveRoot(GetWordsLC(x),GetPossessiveRoot(x));                           /// 12  possessive root
+                SetMemoryCellPossessiveRootType(GetWordsLC(x),GetPossessiveRootType(x));                   /// 13  possessive root type
+                SetMemorypWordTense(GetWordsLC(x),GetWordTense(x));                                        /// 14  word tense
+                SetMemorypSecondaryType(GetWordsLC(x),GetSecondaryType(x));                                /// 15  secondary type
+                SetMemorypAlternateType(GetWordsLC(x),GetAlternateType(x));                                /// 16  alternate type
+                if((x == GetSubjectLocation()) && (!GetIsQuestion()) ){
+                    SetMemorypCellMiniDefinition(GetWordsLC(x),GetGistOfSentence());}                      //use gist if subject & not a question sentence
+                else{
+                    SetMemorypCellMiniDefinition(GetWordsLC(x),GetMiniDefinition(x));}                     /// 17  minidefinition
+                GetMemoryCellpDaysOld(GetWordsLC(x),Result);
+                if(Result){
+                    SetMemoryCellpDaysOld(GetWordsLC(x),GetDaysSinceDate());}                              /// 18  pDaysOld
+
+
+
 
             }
 
