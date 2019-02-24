@@ -5,7 +5,6 @@ c_MemoryCell::c_MemoryCell()
     //ctor
     pCellData             = "";
     pCellDataLC           = "";
-    pCellMiniDefinition   = "";
     pGivenName            = "";
     pCellPurpose          = 'u'; //undefined
     pWordType             = 'u';
@@ -22,6 +21,7 @@ c_MemoryCell::c_MemoryCell()
     pWordTense            = 'u';
     pSingularLocation     = 0;
     pResolvedPattern      = "";
+    pCellMiniDefinition.clear();
 }
 
 c_MemoryCell::~c_MemoryCell()

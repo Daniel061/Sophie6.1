@@ -1,8 +1,7 @@
-VERSION 6.1.03.EN.009.028, file version
+VERSION 6.1.04.EN.009.028, file version
 Original string,
 Lower Case string,
 Given name,
-Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
@@ -24,35 +23,8 @@ Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
 Day stamp,54
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,a
-Lower Case string,a
-Given name,
+Number of Mini Defs,1
 Mini Def.,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,d
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Locked(old is set),1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,1
-Resolved Pattern,
-Is Singular Possessive,0
-Is Plural Possessive,0
-Possessive Root,
-Possessive Root Type,u
-Day stamp,54
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
@@ -60,7 +32,6 @@ Related Nouns,0
 Original string,an
 Lower Case string,an
 Given name,
-Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
@@ -82,6 +53,8 @@ Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
 Day stamp,54
+Number of Mini Defs,1
+Mini Def.,
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
@@ -89,7 +62,6 @@ Related Nouns,0
 Original string,animal
 Lower Case string,animal
 Given name,
-Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
@@ -111,6 +83,8 @@ Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
 Day stamp,54
+Number of Mini Defs,1
+Mini Def.,
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
@@ -118,7 +92,6 @@ Related Nouns,0
 Original string,black
 Lower Case string,black
 Given name,
-Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
@@ -140,14 +113,15 @@ Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
 Day stamp,54
+Number of Mini Defs,1
+Mini Def.,
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
 Related Nouns,0
-Original string,color
-Lower Case string,color
+Original string,cat
+Lower Case string,cat
 Given name,
-Mini Def.,is a color 
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
@@ -162,13 +136,15 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,1
+Token,24
 Resolved Pattern,
 Is Singular Possessive,0
 Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
 Day stamp,54
+Number of Mini Defs,1
+Mini Def.,is an animal 
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
@@ -176,7 +152,6 @@ Related Nouns,0
 Original string,dog
 Lower Case string,dog
 Given name,
-Mini Def.,is an animal 
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
@@ -198,6 +173,9 @@ Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
 Day stamp,54
+Number of Mini Defs,2
+Mini Def.,is black 
+Mini Def.,is an animal 
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
@@ -205,7 +183,6 @@ Related Nouns,0
 Original string,is
 Lower Case string,is
 Given name,
-Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
@@ -227,6 +204,8 @@ Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
 Day stamp,54
+Number of Mini Defs,1
+Mini Def.,
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
@@ -234,7 +213,6 @@ Related Nouns,0
 Original string,the
 Lower Case string,the
 Given name,
-Mini Def.,
 Contraction 1st,
 Contraction 2nd,
 Cell purpose,w
@@ -256,6 +234,8 @@ Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
 Day stamp,54
+Number of Mini Defs,1
+Mini Def.,
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0

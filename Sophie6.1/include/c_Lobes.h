@@ -482,11 +482,12 @@ class c_Lobes : public c_MemoryCell
         ///  Returns True in the address of &Result if exists
         ///  Returns pCellMiniDefinition
         ///  Send owner word in strSearchBase
-        string GetMemoryCellMiniDef(string strSearchBase, bool &Result){
+        ///  Send which minidef to get in intWhich
+        string GetMemoryCellMiniDef(string strSearchBase, bool &Result, int intWhich){
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    return CellMapIT->second.GetpCellMiniDefinition();}
+                    return CellMapIT->second.GetpCellMiniDefinition(intWhich);}
                else
                     return "";}
 
@@ -1081,14 +1082,14 @@ class c_Lobes : public c_MemoryCell
             /// Returns "" if memorycell doesn't exist,
             /// can send string data or tokenized string data for address,
             /// currently rightside cells only, don't see a need for leftside yet.
-            ///   OLD-DEPRECIATED
+            ///   OLD-DEPRECIATED VERIFY NOT IN USE!!
           string GetMemoryCellMiniDefinition(string strData = "", int Address = 0){
                 bool Result = false;
                 if(Address ==0) Address = Tokenize(strData);
 
                 mapIT       = FindAddressInMap(Address,Result);
                 if(Result){
-                    return mapIT->second.GetpCellMiniDefinition();
+                    return mapIT->second.GetpCellMiniDefinition(0);
                 }
                 else
                             return "";
@@ -1209,7 +1210,7 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Original string,"     << CellMapIT->second.GetpCellDataString() << Delim;
                     LearnedDataFile << "Lower Case string,"   << CellMapIT->second.GetpCellDataLC() << Delim;
                     LearnedDataFile << "Given name,"          << CellMapIT->second.GetpCellGivenName() << Delim;
-                    LearnedDataFile << "Mini Def.,"           << CellMapIT->second.GetpCellMiniDefinition() << Delim;
+                    //LearnedDataFile << "Mini Def.,"           << CellMapIT->second.GetpCellMiniDefinition() << Delim;
                     LearnedDataFile << "Contraction 1st,"     << CellMapIT->second.GetpCellContractionLongFormFirst() << Delim;
                     LearnedDataFile << "Contraction 2nd,"     << CellMapIT->second.GetpCellContractionLongFormSecond() << Delim;
                     LearnedDataFile << "Cell purpose,"        << CellMapIT->second.GetpCellPurpose() << Delim;
@@ -1231,6 +1232,12 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Possessive Root,"     << CellMapIT->second.GetpPossessiveRoot() << Delim;
                     LearnedDataFile << "Possessive Root Type,"<< CellMapIT->second.GetpPossessiveRootType() << Delim;
                     LearnedDataFile << "Day stamp,"           << CellMapIT->second.GetpDaysOld() << Delim;
+
+                Count = CellMapIT->second.GetpCellMiniDefinitionCount();
+                LearnedDataFile << "Number of Mini Defs,"    << Count << Delim;
+                for (int x = 0; x <= Count-1; x++){
+                    LearnedDataFile << "Mini Def.,"          << CellMapIT->second.GetpCellMiniDefinition(x) << Delim;
+                }
 
                 Count = CellMapIT->second.GetNumberOfAdjectivesInList();
                 LearnedDataFile << "Number of Adjectives,"    << Count << Delim;
@@ -1299,9 +1306,9 @@ class c_Lobes : public c_MemoryCell
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellGivenName(strLineData);                         //set the given name string
-                        getline(LearnedDataFile,strLineData,',');
-                        getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpCellMiniDefinition(strLineData);                    //set the minidefinition string
+//                        getline(LearnedDataFile,strLineData,',');
+//                        getline(LearnedDataFile,strLineData);
+//                        WorkingCell.SetpCellMiniDefinition(strLineData);                    //set the minidefinition string
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellContractionLongFormFirst(strLineData);          //set the Contraction long form first string
@@ -1365,6 +1372,18 @@ class c_Lobes : public c_MemoryCell
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpDaysOld(stoi(strLineData,&decType));                //set day stamp
+
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        Count = stoi(strLineData,&decType);                                  //got number of mini defs
+                        //count = mini def count
+                        for(int x = 0; x< Count; x++){
+                            getline(LearnedDataFile,strLineData,',');
+                            getline(LearnedDataFile,strLineData);                           //next store requires a string
+                            WorkingCell.SetpCellMiniDefinition(strLineData);
+                        }//end for mini def loop
+
+
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         Count = stoi(strLineData,&decType);                                  //got number of adjectives

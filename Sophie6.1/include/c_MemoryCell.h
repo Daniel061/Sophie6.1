@@ -18,7 +18,6 @@ class c_MemoryCell
         string pCellData;                          // the raw data
         string pCellDataLC;                        // the data in lower case
         string pGivenName;                         // if this noun or proper noun has a given name
-        string pCellMiniDefinition;                // a short string defining this data
         string pCellContractionLongFormFirst;      // i.e. he's to he
         string pCellContractionLongFormSecond;     // i.e. he's to is
         string pPossessiveRoot;                    // i.e. cat's = cat
@@ -46,12 +45,13 @@ class c_MemoryCell
         int    pToken;                             // the token value of this data
         int    pDaysOld;                           // day stamp
 
+        unordered_set <string> pCellMiniDefinition;// from GistOfSentence if this word was a subject
+                                                   // can use list count as number of times used as subject
 
-
-        unordered_set <string>   adjectiveList;    // Adjective List for this word
-        unordered_set <string>   verbList;         // Verbs used with this word
-        unordered_set <string>   adverbList;       // Adverbs used with this word
-        unordered_set <string>   relatedNounList;  // Nouns related to this word
+        unordered_set <string> adjectiveList;      // Adjective List for this word
+        unordered_set <string> verbList;           // Verbs used with this word
+        unordered_set <string> adverbList;         // Adverbs used with this word
+        unordered_set <string> relatedNounList;    // Nouns related to this word
         unordered_set <string>::iterator SetIT;    // iterator for this set
 
 
@@ -78,8 +78,15 @@ class c_MemoryCell
         void   SetpCellContractionLongFormFirst(string newVal){pCellContractionLongFormFirst = newVal;}
         void   SetpCellContractionLongFormSecond(string newVal){pCellContractionLongFormSecond = newVal;}
 
-        void   SetpCellMiniDefinition(string newData){pCellMiniDefinition=newData;}
-        string GetpCellMiniDefinition(){return pCellMiniDefinition;}
+        void   SetpCellMiniDefinition(string newData){pCellMiniDefinition.emplace(newData);}
+        string GetpCellMiniDefinition(int Which){
+               SetIT = pCellMiniDefinition.begin();
+               for(int x = 0; x<Which; x++) ++SetIT;
+               if(SetIT != pCellMiniDefinition.end())
+                return *SetIT;
+               else
+                return "";}
+        int    GetpCellMiniDefinitionCount(){return pCellMiniDefinition.size(); }
 
         char   GetpCellIsSingular(){return pCellIsSingular;}
         void   SetpCellIsSingular(char newData){pCellIsSingular = newData;}
@@ -143,7 +150,6 @@ class c_MemoryCell
                 pCellData                       = "";
                 pCellDataLC                     = "";
                 pGivenName                      = "";
-                pCellMiniDefinition             = "";
                 pCellContractionLongFormFirst   = "";
                 pCellContractionLongFormSecond  = "";
                 pPossessiveRoot                 = "";
@@ -166,6 +172,7 @@ class c_MemoryCell
                 adverbList.clear();
                 verbList.clear();
                 relatedNounList.clear();
+                pCellMiniDefinition.clear();
                 pResolvedPattern                = "";
                 pSingularLocation               = 0;
         }

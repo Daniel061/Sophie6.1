@@ -24,7 +24,7 @@
 
 using namespace std;
 c_Brain Brain;
-string Version = "6.1.03.EN.009.028";
+string Version = "6.1.04.EN.009.028";
 bool Verbose;
 bool StoryMode = false;
 int  BaseSpeed = 600000000;
@@ -82,7 +82,7 @@ getline (cin,Raw_Sentence);
 ///  Begin user input loop
 ///   Terminates when string raw_Sentence = "end"
 ///   input string raw_string can be modified by
-///     internal processes.
+///     internal processes to end the program.
             while (Raw_Sentence != "end")
             {
                 if(Verbose)cout << "[main.cpp]\n";
