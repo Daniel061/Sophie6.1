@@ -2,6 +2,7 @@
 #define C_WORD_H
 
 #include <string>
+#include <unordered_set>
 using namespace std;
 class c_Word
 {
@@ -18,7 +19,7 @@ class c_Word
           string  w_PluralRoot              = "";    // deconstructed plural to the root,cars = car
           string  w_SubWord                 = "";    // replacement word, usually from subject
           string  w_PossessiveRoot          = "";    // cat's  = cat
-          string  w_MiniDefinition          = "";    // usually Gist of sentence if used as subject
+          //string  w_MiniDefinition          = "";    // usually Gist of sentence if used as subject
           bool    w_isContraction           = false; // contraction flag
           bool    w_isPlural                = false; // plural flag
           bool    w_SingularPossessive      = false; // i.e. cat's
@@ -33,14 +34,25 @@ class c_Word
           char    w_AlternativeType         = 'u';   // some words have more than 1 usage
           char    w_WordTense               = 'u';   // c - present p - past
 
+          unordered_set <string> w_MiniDefinition;
+          unordered_set <string>::iterator SetIT;
+
 
     private:
 
 
     public:
 
-        string   Getw_MiniDefinition(){return w_MiniDefinition;}
-        void     Setw_MiniDefinition(string newVal){w_MiniDefinition = newVal;}
+        //string   Getw_MiniDefinition(){return w_MiniDefinition;}
+        void     Setw_MiniDefinition(string newVal){w_MiniDefinition.emplace(newVal);}
+        int      Getw_MiniDefinitionCount(){return w_MiniDefinition.size();}
+        string   Getw_MiniDefinition(int intWhich){
+                 SetIT = w_MiniDefinition.begin();
+                 for(int x = 0; x<=intWhich; x++) ++SetIT;
+                 if(SetIT == w_MiniDefinition.end())
+                    return "";
+                 else
+                    return *SetIT;}
 
         string   Getw_SingularForm(){return w_SingularForm;}
         void     Setw_SingularForm(string newVal){w_SingularForm = newVal;}
@@ -128,7 +140,8 @@ class c_Word
           w_WordTense                = 'u';     // c - present p - past                         17
           w_PossessiveRootType       = 'u';     // usually a 'n' noun but not always            18
           w_SingularForm             = "";      // i.e. cats = cat                              19
-          w_MiniDefinition           = "";      // usually Gist of sentence if used as subject  20
+          //w_MiniDefinition           = "";      // usually Gist of sentence if used as subject  20
+          w_MiniDefinition.clear();
         }
 
 

@@ -241,6 +241,117 @@ bool Is SingularPossessive,0
 bool Is Plural Possive,0
 Possessive Root,
 Possessive Root Type,u
+Word Count,4
+Subject Location,1
+Original string,the dog is wet
+Final pattern,dnva
+First pattern,dnvu
+bool Has plural pronoun,0
+bool Has punctuation,0
+Punctuation character,x
+bool Is question,0
+bool Has contraction,0
+bool Has greeting word,0
+bool Has gender reference,0
+bool Has been understood,1
+bool Has dual subjects,0
+bool Has Pronoun reference,0
+Second subject string,
+Second subject location,-1
+Adverb location,-1
+Noun count,1
+Verb location,2
+Adjective location,3
+Name pointer,-1
+Indirect object location,-1
+bool Has Gender determiner,0
+Gist of sentence,is wet 
+subGist of sentence,
+Supportive phrase,the dog 
+Conjunction location,-1
+Sentence direction,-1
+Days since 2019,54
+Understanding level,75
+Word data,the
+Word token,2085
+Quote Location,-1
+bool is contraction,0
+Word data LC,the
+Subsitute word,
+Word type,d
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+bool Is SingularPossessive,0
+bool Is Plural Possive,0
+Possessive Root,
+Possessive Root Type,u
+Word data,dog
+Word token,557
+Quote Location,-1
+bool is contraction,0
+Word data LC,dog
+Subsitute word,
+Word type,n
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+bool Is SingularPossessive,0
+bool Is Plural Possive,0
+Possessive Root,
+Possessive Root Type,u
+Word data,is
+Word token,109
+Quote Location,-1
+bool is contraction,0
+Word data LC,is
+Subsitute word,
+Word type,v
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+bool Is SingularPossessive,0
+bool Is Plural Possive,0
+Possessive Root,
+Possessive Root Type,u
+Word data,wet
+Word token,2370
+Quote Location,-1
+bool is contraction,0
+Word data LC,wet
+Subsitute word,
+Word type,a
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+bool Is SingularPossessive,0
+bool Is Plural Possive,0
+Possessive Root,
+Possessive Root Type,u
 Word Count,5
 Subject Location,1
 Original string,the dog is an animal
@@ -359,6 +470,117 @@ bool is contraction,0
 Word data LC,animal
 Subsitute word,
 Word type,n
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+bool Is SingularPossessive,0
+bool Is Plural Possive,0
+Possessive Root,
+Possessive Root Type,u
+Word Count,4
+Subject Location,1
+Original string,the dog is cold
+Final pattern,dnva
+First pattern,dnvu
+bool Has plural pronoun,0
+bool Has punctuation,0
+Punctuation character,x
+bool Is question,0
+bool Has contraction,0
+bool Has greeting word,0
+bool Has gender reference,0
+bool Has been understood,1
+bool Has dual subjects,0
+bool Has Pronoun reference,0
+Second subject string,
+Second subject location,-1
+Adverb location,-1
+Noun count,1
+Verb location,2
+Adjective location,3
+Name pointer,-1
+Indirect object location,-1
+bool Has Gender determiner,0
+Gist of sentence,is cold 
+subGist of sentence,
+Supportive phrase,the dog 
+Conjunction location,-1
+Sentence direction,-1
+Days since 2019,54
+Understanding level,75
+Word data,the
+Word token,2085
+Quote Location,-1
+bool is contraction,0
+Word data LC,the
+Subsitute word,
+Word type,d
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+bool Is SingularPossessive,0
+bool Is Plural Possive,0
+Possessive Root,
+Possessive Root Type,u
+Word data,dog
+Word token,557
+Quote Location,-1
+bool is contraction,0
+Word data LC,dog
+Subsitute word,
+Word type,n
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+bool Is SingularPossessive,0
+bool Is Plural Possive,0
+Possessive Root,
+Possessive Root Type,u
+Word data,is
+Word token,109
+Quote Location,-1
+bool is contraction,0
+Word data LC,is
+Subsitute word,
+Word type,v
+Secondary word type,u
+Alternate word type,u
+Gender class,u
+Contraction root 1st,
+Contraction root 2nd,
+bool is plural,0
+Plural root,
+Plural word flag,s
+Word tense,u
+bool Is SingularPossessive,0
+bool Is Plural Possive,0
+Possessive Root,
+Possessive Root Type,u
+Word data,cold
+Word token,4624
+Quote Location,-1
+bool is contraction,0
+Word data LC,cold
+Subsitute word,
+Word type,a
 Secondary word type,u
 Alternate word type,u
 Gender class,u

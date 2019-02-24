@@ -85,23 +85,7 @@ class c_Lobes : public c_MemoryCell
     public:
 
 
-//        //returns number of days since beginning of 2019 for a day stamp
-//        int GetDaysSinceDate(){
-//
-//            struct  tm StartDate;
-//            time_t  startTime,Finish;
-//            time (&Finish);
-//            time (&startTime);
-//            StartDate           = *localtime(&startTime);
-//            StartDate.tm_year   = 2019;
-//            StartDate.tm_mon    = 0;
-//            StartDate.tm_mday   = 1;
-//            StartDate.tm_hour   = 0;
-//            StartDate.tm_min    = 0;
-//            StartDate.tm_sec    = 0;
-//            return StartDate.tm_yday;
-//
-//        }
+
 //------------------------NEW STRING INDEXED MEMORY CELL MAP FUNCTIONS----------------
 
 //-----------------SET FUNCTIONS----------------------------------
@@ -742,20 +726,20 @@ class c_Lobes : public c_MemoryCell
 
 ///-----------------------Old Memory cell map functions-----------------------------///
 
-        /// Returns -1 if doesn't exist, else returns adjective count
-        ///  CORRECTED/UPDATED
-        int GetMemoryCellAdjectiveCount(string strSearchBase){
-            int Result        = -1;
-            bool SearchResult = false;
-            CellMapIT             = FindStringInMap(strSearchBase,SearchResult);
-                if(SearchResult){
-                    Result = CellMapIT->second.GetNumberOfAdjectivesInList();}
-            return Result;
-        }
+//        /// Returns -1 if doesn't exist, else returns adjective count
+//        ///  CORRECTED/UPDATED  FOUND NO CALLS TO HERE
+//        int GetMemoryXellAdjectiveCount(string strSearchBase){
+//            int Result        = -1;
+//            bool SearchResult = false;
+//            CellMapIT             = FindStringInMap(strSearchBase,SearchResult);
+//                if(SearchResult){
+//                    Result = CellMapIT->second.GetNumberOfAdjectivesInList();}
+//            return Result;
+//        }
 
         /// Checks to see if there is a memorycell for the Address given.
         ///  returns true if so, if not returns false.
-        ///   CORRECTED/UPDATED
+        ///   CORRECTED/UPDATED  LANGUAGE AND BRAIN ARE USING THIS
         bool GetMemoryCellIsSet(string strSearchBase,bool &Result, char SideToCheck = 'r'){
             Result = false;
             FindStringInMap(strSearchBase,Result,SideToCheck);
@@ -767,7 +751,7 @@ class c_Lobes : public c_MemoryCell
         //if not, returns -1.
         //otherwise, returns the Adjective count and
         //by reference, the tokenized adjective value in the array Adjectives[]
-        ///   NOT CORRECTED/UPDATED
+        ///   NOT CORRECTED/UPDATED  MULTIPLE FUNCTIONS CALLING THIS
         int GetMemoryCellAdjectives(int Address,int Adjectives[]){
             bool Result  = false;
             int  Count   = -1;
@@ -1133,72 +1117,6 @@ class c_Lobes : public c_MemoryCell
                 }}
 
 
-            //Returns pSingularLocation from memorycell
-            //Returns 0 , if memorycell doesn't exist
-            //can send string data or tokenized string data for address
-            //currently right side cells only, don't see a need for left side yet
-
-//          int GetMemoryCellpSingularLocation(string strData = "", int Address = 0){
-//                bool Result = false;
-//                if(Address ==0) Address = Tokenize(strData);
-//
-//                mapIT       = FindAddressInMap(Address,Result);
-//                if(Result){
-//                    return mapIT->second.GetpCellSingularLocation();
-//                }
-//                else
-//                return 0;}
-
-            //Sets pSingularLocation from memorycell
-            //if memorycell exist
-            //can send string data or tokenized string data for address
-            //send int for new location
-            //currently right side cells only, don't see a need for left side yet
-
-//          void SetMemoryCellpSingularLocation(int newLocation, string strData = "", int Address = 0){
-//                bool Result = false;
-//                if(Address ==0) Address = Tokenize(strData);
-//
-//                mapIT       = FindAddressInMap(Address,Result);
-//                if(Result){
-//                    return mapIT->second.SetpCellSingularLocation(newLocation);
-//                }
-//                }
-
-
-
-//        string MakeStringLowerCase(string strData){
-//            for(int x =0; x<= int(strData.size()); x++)
-//                strData[x] = tolower(strData[x]);
-//            return strData;
-//        }
-
-//        ///DEPRECIATED - in LOBES
-//        int Tokenize (string str_Data,bool ForceUpperCase = true)
-//        {
-//            int z          = str_Data.size();
-//            int y;
-//            int PlaceValue = 1;
-//            int tmpToken   = 0;
-//            int tmpHolder  = 0;
-//
-//                if(ForceUpperCase){
-//                for( y = z; y > 0; y--){
-//                    tmpHolder  = int(toupper(str_Data[y-1]))-64; //'A' to 'Z'
-//                    if(tmpHolder <= 0) tmpHolder = str_Data[y-1];
-//                    tmpToken   = tmpToken + (tmpHolder*PlaceValue);
-//                    PlaceValue = PlaceValue * 10;}}
-//                  else {
-//                    for( y = z; y > 0; y--){
-//                    tmpHolder  = str_Data[y-1] - 64;
-//                    if(tmpHolder <= 0) tmpHolder = str_Data[y-1];
-//                    tmpToken   = tmpToken + (tmpHolder*PlaceValue);
-//                    PlaceValue = PlaceValue * 10;}
-//                  }
-//
-//            return tmpToken;
-//
-//        }
 
         void LobesStoreTheLearnedWords(){
             string Delim            = "\n";
@@ -1210,7 +1128,6 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Original string,"     << CellMapIT->second.GetpCellDataString() << Delim;
                     LearnedDataFile << "Lower Case string,"   << CellMapIT->second.GetpCellDataLC() << Delim;
                     LearnedDataFile << "Given name,"          << CellMapIT->second.GetpCellGivenName() << Delim;
-                    //LearnedDataFile << "Mini Def.,"           << CellMapIT->second.GetpCellMiniDefinition() << Delim;
                     LearnedDataFile << "Contraction 1st,"     << CellMapIT->second.GetpCellContractionLongFormFirst() << Delim;
                     LearnedDataFile << "Contraction 2nd,"     << CellMapIT->second.GetpCellContractionLongFormSecond() << Delim;
                     LearnedDataFile << "Cell purpose,"        << CellMapIT->second.GetpCellPurpose() << Delim;
@@ -1286,7 +1203,6 @@ class c_Lobes : public c_MemoryCell
                 cout << "..";
                 if(LearnedDataFile.is_open()){
                         getline(LearnedDataFile,strLineData,',');
-                        //if(strLineData != "VERSION " + Version){
                         if(!VerifyFileVersion(strLineData)){
                             LearnedDataFile.close();
                             remove("LearnedData.dat");
@@ -1306,9 +1222,6 @@ class c_Lobes : public c_MemoryCell
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellGivenName(strLineData);                         //set the given name string
-//                        getline(LearnedDataFile,strLineData,',');
-//                        getline(LearnedDataFile,strLineData);
-//                        WorkingCell.SetpCellMiniDefinition(strLineData);                    //set the minidefinition string
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellContractionLongFormFirst(strLineData);          //set the Contraction long form first string

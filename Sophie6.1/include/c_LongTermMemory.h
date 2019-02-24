@@ -56,6 +56,7 @@ class c_LongTermMemory : public c_SubjectStack
                 CopySentence.SetWordTense(x,GetWordTense(x));                                 //16
                 CopySentence.SetisPluralPossessive(x,GetisPluralPossessive(x));               //17
                 CopySentence.SetisSingularPossessive(x,GetisSingularPossessive(x));           //18
+                //                                                                            //lacking mini def but not a problem, stored in memory cell file
                 }
               CopySentence.WordCount                      =GetWordCount();
               CopySentence.SubjectLocation                =GetSubjectLocation();
@@ -234,8 +235,7 @@ class c_LongTermMemory : public c_SubjectStack
                 SetMemorypAlternateType(GetWordsLC(x),GetAlternateType(x));                                /// 16  alternate type
                 if((x == GetSubjectLocation()) && (!GetIsQuestion()) ){
                     SetMemorypCellMiniDefinition(GetWordsLC(x),GetGistOfSentence());}                      //use gist if subject & not a question sentence
-                else{
-                    SetMemorypCellMiniDefinition(GetWordsLC(x),GetMiniDefinition(x));}                     /// 17  minidefinition
+                                                                                                           /// 17  mini def
                 GetMemoryCellpDaysOld(GetWordsLC(x),Result);
                 if(Result){
                     SetMemoryCellpDaysOld(GetWordsLC(x),GetDaysSinceDate());}                              /// 18  pDaysOld

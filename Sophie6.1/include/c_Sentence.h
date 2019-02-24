@@ -200,7 +200,7 @@ class c_Sentence : public c_Personality
         ///******************ALL WORD DATA FUNCTIONS GET/SET PAIRS*************************
         ///*******Location = which place in the sentence***********************************
 
-        string GetMiniDefinition(int Location){return WordMap[Location].Getw_MiniDefinition();}
+        string GetMiniDefinition(int Location, int intWhich){return WordMap[Location].Getw_MiniDefinition(intWhich);}
         void   SetMiniDefinition(int Location,string newVal){WordMap[Location].Setw_MiniDefinition(newVal);}
 
         string GetSingularForm(int Location){return WordMap[Location].Getw_SingularForm();}
