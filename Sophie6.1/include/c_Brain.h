@@ -65,17 +65,17 @@ class c_Brain : public c_Cerebellum
                  SaveReceivedInput(strData,true);                                                       //update short term memory
                  SaveSentenceInLongTermMemory(strData);                                                 //update Long Term Memory
                  GatherAndSetAllSentenceData();                                                         //check language helper, memory and pattern review for data
-                 SetPreProcessedPattern(GetPattern());                                                  //save for later review
+                 SetInSentencePreProcessedPattern(GetFromSentencePattern());                            //save for later review
                  FindAndSetGistOfSentence();                                                            //save phrases of the sentence
                  if(IsThisSentenceDuplicated(strData))
                     SlowSpeak("You said that before.");
-                 if(GetHasContraction()){                                                               //break contraction apart and rewrite sentence if so, rerun the process
+                 if(GetFromSentenceHasContraction()){                                                               //break contraction apart and rewrite sentence if so, rerun the process
                    NeedRerun = DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,strData);
                    if(NeedRerun){
                     StoreNewWords();
                     Parse(strData);
                     GatherAndSetAllSentenceData();
-                    SetPreProcessedPattern(GetPattern());
+                    SetInSentencePreProcessedPattern(GetFromSentencePattern());
                     FindAndSetGistOfSentence();
                     SaveReceivedInput(strData,true);
                     SaveSentenceInLongTermMemory(strData);
@@ -83,31 +83,31 @@ class c_Brain : public c_Cerebellum
                    }
                  }
                  SubjectLocation = FindSubject();                                                           //try to located subject
-                 SetSubjectLocation(SubjectLocation);                                                       //set the suggestion
+                 SetInSentenceSubjectLocation(SubjectLocation);                                                       //set the suggestion
                  RebuildPattern();
-                 FirstPattern = GetPreProcessedPattern();
-                 CheckedPattern = PatternReview(GetPattern(),ConfidenceLevel);                              //see if language class can enhance pattern
+                 FirstPattern = GetFromSentencePreProcessedPattern();
+                 CheckedPattern = PatternReview(GetFromSentencePattern(),ConfidenceLevel);                              //see if language class can enhance pattern
                  if(Verbose){
-                        cout << "Processed Pattern:" << CheckedPattern << ":" << GetPattern() << "Confidence level: " << ConfidenceLevel << endl;}
-                 if(CheckedPattern != GetPattern()){
-                    SetPattern(CheckedPattern);
-                    for(int x = 0; x < GetWordCount(); x++){
+                        cout << "Processed Pattern:" << CheckedPattern << ":" << GetFromSentencePattern() << "Confidence level: " << ConfidenceLevel << endl;}
+                 if(CheckedPattern != GetFromSentencePattern()){
+                    SetInSentencePattern(CheckedPattern);
+                    for(int x = 0; x < GetFromSentenceWordCount(); x++){
                         SetWordType(CheckedPattern[x],x);
                     }
                     SubjectLocation = FindSubject();
-                    SetSubjectLocation(SubjectLocation);
+                    SetInSentenceSubjectLocation(SubjectLocation);
                  }
                  NeedRerun = DecipherCurrentSentence(strData);                                             //work with sentence
                  if(!NeedRerun){
                      SubjectLocation = FindSubject();                                                      // need to run this again to see if any indirect objects
-                     SetSubjectLocation(SubjectLocation);                                                  //store the location or -1
+                     SetInSentenceSubjectLocation(SubjectLocation);                                                  //store the location or -1
                      StoreNewWords();                                                                      //save any new words in rBrainCells
                      SaveAllSentenceWordDataToMemory();                                                    //new function to save all to memory
                      RebuildPattern();
-                     SaveProcessedPattern(GetPattern());                                                   //update short term memory
+                     SaveProcessedPattern(GetFromSentencePattern());                                                   //update short term memory
                      if(SubjectLocation >=0)
-                        SetSubjectInStack(GetWordTokens(SubjectLocation),GetWords(SubjectLocation),GetOriginalString());
-                     SavePreAndPostPatternConstruction(FirstPattern,GetPattern());                         //save learned pattern for future// language helper to use this
+                        SetSubjectInStack(GetWordTokens(SubjectLocation),GetWords(SubjectLocation),GetFromSentenceOriginalString());
+                     SavePreAndPostPatternConstruction(FirstPattern,GetFromSentencePattern());                         //save learned pattern for future// language helper to use this
                      SaveCurrentSentenceInMap();
                      }
                    }
@@ -123,15 +123,15 @@ class c_Brain : public c_Cerebellum
 
 
         void Report(){
-        int WC = GetWordCount();
-        cout << "Punctuation Flag:" << boolalpha << GetHasPunctuation() << "  Punctuation Character:" << GetPunctuation() << endl;
-        cout << "Word Count:" << WC << " Pattern:" << GetPattern() << " Dual Subject Flag:" << boolalpha << GetHasDualSubjects() <<endl;
-        cout << "Subject location:" << GetSubjectLocation() << "\nIndirect Object Location:" << GetIndirectObjectLocation() << " Second Subject:" << GetSecondSubject() << endl;
-        cout << "Gist of sentence:" << GetGistOfSentence() << "\nSubGist of sentence:" << GetSubGistOfSentence() << endl;
-        cout << "Supportive phrase:" << GetSupportivePhrase() << endl;
-        cout << "Sentence is question flag:" << boolalpha << GetIsQuestion() << endl;
-        cout << "Sentence has preposition flag:" << boolalpha << GetHasPreposition() << endl;
-        cout << "Sentence was understood:" << boolalpha << GetHasBeenUnderstood() << endl;
+        int WC = GetFromSentenceWordCount();
+        cout << "Punctuation Flag:" << boolalpha << GetFromSentenceHasPunctuation() << "  Punctuation Character:" << GetFromSentencePunctuation() << endl;
+        cout << "Word Count:" << WC << " Pattern:" << GetFromSentencePattern() << " Dual Subject Flag:" << boolalpha << GetFromSentenceHasDualSubjects() <<endl;
+        cout << "Subject location:" << GetFromSentenceSubjectLocation() << "\nIndirect Object Location:" << GetFromSentenceIndirectObjectLocation() << " Second Subject:" << GetFromSentenceSecondSubject() << endl;
+        cout << "Gist of sentence:" << GetFromSentenceGistOfSentence() << "\nSubGist of sentence:" << GetFromSentenceSubGistOfSentence() << endl;
+        cout << "Supportive phrase:" << GetFromSentenceSupportivePhrase() << endl;
+        cout << "Sentence is question flag:" << boolalpha << GetFromSentenceIsQuestion() << endl;
+        cout << "Sentence has preposition flag:" << boolalpha << GetFromSentenceHasPreposition() << endl;
+        cout << "Sentence was understood:" << boolalpha << GetFromSentenceHasBeenUnderstood() << endl;
         for (int x = 0; x < WC; x++){
             cout << x << " " << GetWords(x) << ":" << GetWordTokens(x) <<  " Type:"
             << GetWordType(x) << " isContraction: " << GetisContraction(x) << "\n     Quote Location:" << GetQuoteLocation(x) << "  Plural flag: " <<
@@ -153,7 +153,7 @@ class c_Brain : public c_Cerebellum
             int Count;
             Command = 0;
             int Control; Control =0;
-            Count   = CommandCheckSentence.GetWordCount();
+            Count   = CommandCheckSentence.GetFromSentenceWordCount();
             Command = CommandCheckSentence.GetWordTokens(0);
             if(Count >1)
              Command = Command + CommandCheckSentence.GetWordTokens(1);
@@ -365,7 +365,7 @@ class c_Brain : public c_Cerebellum
             char tmpGenderClassFromMemoryCell;
             bool isSetInMemory;
             bool Result = false;
-            for(int x = 0; x < GetWordCount(); x++){
+            for(int x = 0; x < GetFromSentenceWordCount(); x++){
                     tmpTypeInSentence            = GetWordType(x);
                     tmpTypeInMemoryCell          = GetMemoryCellcharWordType(GetWordsLC(x),Result);
                     tmpTypeFromLanguageHelper    = FindWordType(GetWordsLC(x),x);
@@ -388,9 +388,9 @@ class c_Brain : public c_Cerebellum
                     else{
                         SetWordType(tmpTypeInMemoryCell,x);}
 
-                     if( GetWordType(x) == 'q') SetIsQuestion(true);
-                     if( GetWordType(x) == 'g') SetNamePointer(x);
-                     if( GetWordType(x) == 'C') SetHasContraction(true);
+                     if( GetWordType(x) == 'q') SetInSentenceIsQuestion(true);
+                     if( GetWordType(x) == 'g') SetInSentenceNamePointer(x);
+                     if( GetWordType(x) == 'C') SetInSentenceHasContraction(true);
 
             }
         }//------END SET WORD TYPES---------------------------------------------------------------
@@ -407,7 +407,7 @@ class c_Brain : public c_Cerebellum
          int  Noun2 = -1;
          bool Result = false;
 
-         for (int x = 0; x < GetWordCount(); x++)
+         for (int x = 0; x < GetFromSentenceWordCount(); x++)
          {
              if((GetWordType(x)=='n') && (Noun1 == -1) ) Noun1 = x; else if((GetWordType(x) == 'n') && (Noun2 == -1))  Noun2 =x;
              if( !( GetMemoryCellIsSet(GetWordsLC(x),Result) )) //   CheckForKnownWord(GetWords(x))))
@@ -418,39 +418,39 @@ class c_Brain : public c_Cerebellum
                     InstallNewWord(GetPluralRoot(x),GetWordType(x),'w',true,GetGenderClassInSentence(x),
                                    "","",'s');}
                 //Associate Adjective if not a question sentence
-                if((GetWordType(x)=='a')&&(!GetIsQuestion()) ){
-                        if(GetSubjectLocation() >=0 ){
-                            if(!AssociateMemoryCellAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(x))){
-                                InstallNewWord(GetWords(GetSubjectLocation()),GetWordType(GetSubjectLocation()),'w',true,GetGenderClassInSentence(GetSubjectLocation()));}
-                                AssociateMemoryCellAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(x));
-                                if(GetIsPluralWord(GetSubjectLocation())){
-                                    AssociateMemoryCellAdjective(Tokenize(GetPluralRoot(GetSubjectLocation())),GetWordsLC(x));
+                if((GetWordType(x)=='a')&&(!GetFromSentenceIsQuestion()) ){
+                        if(GetFromSentenceSubjectLocation() >=0 ){
+                            if(!AssociateMemoryCellAdjective(GetWordTokens(GetFromSentenceSubjectLocation()),GetWordsLC(x))){
+                                InstallNewWord(GetWords(GetFromSentenceSubjectLocation()),GetWordType(GetFromSentenceSubjectLocation()),'w',true,GetGenderClassInSentence(GetFromSentenceSubjectLocation()));}
+                                AssociateMemoryCellAdjective(GetWordTokens(GetFromSentenceSubjectLocation()),GetWordsLC(x));
+                                if(GetIsPluralWord(GetFromSentenceSubjectLocation())){
+                                    AssociateMemoryCellAdjective(Tokenize(GetPluralRoot(GetFromSentenceSubjectLocation())),GetWordsLC(x));
                                 }
                                 if(Verbose)
-                                    cout << "Associating " << GetWords(x) << " with " << GetWords(GetSubjectLocation()) << endl;
+                                    cout << "Associating " << GetWords(x) << " with " << GetWords(GetFromSentenceSubjectLocation()) << endl;
                             }
-                            if((GetIndirectObjectLocation() >=0) && (!GetIsQuestion()) ){ //Associate Indirect object if not a question sentence
-                                if(!AssociateMemoryCellAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(x))){
-                                    InstallNewWord(GetWords(GetIndirectObjectLocation()),GetWordType(GetIndirectObjectLocation()),'w',true,GetGenderClassInSentence(GetIndirectObjectLocation()));}
-                                    AssociateMemoryCellAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(x));
-                                    if(GetIsPluralWord(GetSubjectLocation())){
-                                        AssociateMemoryCellAdjective(Tokenize(GetPluralRoot(GetSubjectLocation())),GetWordsLC(x));
+                            if((GetFromSentenceIndirectObjectLocation() >=0) && (!GetFromSentenceIsQuestion()) ){ //Associate Indirect object if not a question sentence
+                                if(!AssociateMemoryCellAdjective(GetWordTokens(GetFromSentenceIndirectObjectLocation()),GetWordsLC(x))){
+                                    InstallNewWord(GetWords(GetFromSentenceIndirectObjectLocation()),GetWordType(GetFromSentenceIndirectObjectLocation()),'w',true,GetGenderClassInSentence(GetFromSentenceIndirectObjectLocation()));}
+                                    AssociateMemoryCellAdjective(GetWordTokens(GetFromSentenceIndirectObjectLocation()),GetWordsLC(x));
+                                    if(GetIsPluralWord(GetFromSentenceSubjectLocation())){
+                                        AssociateMemoryCellAdjective(Tokenize(GetPluralRoot(GetFromSentenceSubjectLocation())),GetWordsLC(x));
                                     }
                                     if(Verbose)
-                                       cout << "Associating " << GetWords(x) << " with " << GetWords(GetIndirectObjectLocation()) << endl;
+                                       cout << "Associating " << GetWords(x) << " with " << GetWords(GetFromSentenceIndirectObjectLocation()) << endl;
                                 }
                     int z; z = GetVerbPointingToAdjective();
-                    if((z >=0) && (!GetIsQuestion()))
-                        AssociateMemoryCellVerbToAdjective(GetWordTokens(GetSubjectLocation()),GetWordsLC(z),GetWordsLC(x));
-                        if(GetIndirectObjectLocation()>=0)
-                            AssociateMemoryCellVerbToAdjective(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(z),GetWordsLC(x));
+                    if((z >=0) && (!GetFromSentenceIsQuestion()))
+                        AssociateMemoryCellVerbToAdjective(GetWordTokens(GetFromSentenceSubjectLocation()),GetWordsLC(z),GetWordsLC(x));
+                        if(GetFromSentenceIndirectObjectLocation()>=0)
+                            AssociateMemoryCellVerbToAdjective(GetWordTokens(GetFromSentenceIndirectObjectLocation()),GetWordsLC(z),GetWordsLC(x));
                 }
                 //Associate Adverb if not a question sentence
-                if((GetWordType(x) == 'A') && (!GetIsQuestion()))
-                    AssociateMemoryCellAdverbToVerb(GetWordTokens(GetSubjectLocation()),GetWordsLC(GetWordTokens(GetVerbPointingToAdjective())),GetWordsLC(x));
+                if((GetWordType(x) == 'A') && (!GetFromSentenceIsQuestion()))
+                    AssociateMemoryCellAdverbToVerb(GetWordTokens(GetFromSentenceSubjectLocation()),GetWordsLC(GetWordTokens(GetVerbPointingToAdjective())),GetWordsLC(x));
          }//nd for loop
          //Associate two nouns if not a question sentence
-         if((GetNounCount() >=2)&& (!GetIsQuestion())){
+         if((GetFromSentenceNounCount() >=2)&& (!GetFromSentenceIsQuestion())){
                 if(Verbose)
                    cout << "Associating " << GetWords(Noun1) << " with " << GetWords(Noun2) << endl;
                 AssociateMemoryCellNoun(GetWordTokens(Noun1),GetWordsLC(Noun2));
@@ -458,15 +458,15 @@ class c_Brain : public c_Cerebellum
 
          }
           //Associate Proper Noun to noun and vice versa
-          if((GetWordType(GetIndirectObjectLocation())=='P') && (!GetIsQuestion()) ){
-                AssociateMemoryCellNoun(GetWordTokens(GetSubjectLocation()),GetWordsLC(GetIndirectObjectLocation()));
-                AssociateMemoryCellNoun(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(GetSubjectLocation()));
+          if((GetWordType(GetFromSentenceIndirectObjectLocation())=='P') && (!GetFromSentenceIsQuestion()) ){
+                AssociateMemoryCellNoun(GetWordTokens(GetFromSentenceSubjectLocation()),GetWordsLC(GetFromSentenceIndirectObjectLocation()));
+                AssociateMemoryCellNoun(GetWordTokens(GetFromSentenceIndirectObjectLocation()),GetWordsLC(GetFromSentenceSubjectLocation()));
           }
 
           //Associate Noun to gender word and vice versa
-          if((GetWordType(GetIndirectObjectLocation())=='P') && (!GetIsQuestion()) ){
-                AssociateMemoryCellNoun(GetWordTokens(GetSubjectLocation()),GetWordsLC(GetIndirectObjectLocation()));
-                AssociateMemoryCellNoun(GetWordTokens(GetIndirectObjectLocation()),GetWordsLC(GetSubjectLocation()));
+          if((GetWordType(GetFromSentenceIndirectObjectLocation())=='P') && (!GetFromSentenceIsQuestion()) ){
+                AssociateMemoryCellNoun(GetWordTokens(GetFromSentenceSubjectLocation()),GetWordsLC(GetFromSentenceIndirectObjectLocation()));
+                AssociateMemoryCellNoun(GetWordTokens(GetFromSentenceIndirectObjectLocation()),GetWordsLC(GetFromSentenceSubjectLocation()));
           }
 
             return NewWords;

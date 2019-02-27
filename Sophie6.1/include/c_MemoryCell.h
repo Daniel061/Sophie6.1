@@ -214,7 +214,7 @@ class c_MemoryCell
            return relatedNounList.size();}
 
        ///________________________________///
-
+       /// USING NEW SET LIST
        string GetAdjectiveFromList(int Location){
             SetIT = adjectiveList.begin();
             for(int x = 0; x < Location; x++) ++SetIT;
@@ -223,7 +223,7 @@ class c_MemoryCell
             else
                 return *SetIT;}
 
-
+       /// USING NEW SET LIST
        string GetVerbFromList(int Location){
             SetIT = verbList.begin();
             for(int x = 0; x < Location; x++) ++SetIT;
@@ -232,7 +232,7 @@ class c_MemoryCell
             else
                 return *SetIT;}
 
-
+       /// USING NEW SET LIST
        string GetAdverbFromList(int Location){
             SetIT = adverbList.begin();
             for(int x = 0; x < Location; x++) ++SetIT;
@@ -241,7 +241,7 @@ class c_MemoryCell
             else
                 return *SetIT;}
 
-
+        /// USING NEW SET LIST
         string GetNounFromList(int Location){
             SetIT = relatedNounList.begin();
             for(int x = 0; x < Location; x++) ++SetIT;

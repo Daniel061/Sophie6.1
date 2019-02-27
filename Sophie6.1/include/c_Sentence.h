@@ -96,103 +96,103 @@ class c_Sentence : public c_Personality
        ///*******************ALL GLOBAL->SENTENCE DATA FUNCTIONS***************************
 
 
-        bool   GetHasPronoun(){return HasPronoun;}
-        void   SetHasPronoun(bool newVal){HasPronoun = newVal;}
+        bool   GetFromSentenceHasPronoun(){return HasPronoun;}
+        void   SetInSentenceHasPronoun(bool newVal){HasPronoun = newVal;}
 
-        int    GetsDaysOld(){return sDaysOld;}
-        void   SetsDaysOld(int newVal){sDaysOld = newVal;}
+        int    GetFromSentencesDaysOld(){return sDaysOld;}
+        void   SetInSentencesDaysOld(int newVal){sDaysOld = newVal;}
 
-        int    GetsUnderstandingLevel(){return sUnderstandingLevel;}
-        void   SetsUnderstandingLevel(int newVal){sUnderstandingLevel = newVal;}
+        int    GetFromSentencesUnderstandingLevel(){return sUnderstandingLevel;}
+        void   SetInSentencesUnderstandingLevel(int newVal){sUnderstandingLevel = newVal;}
 
-        void   SetSecondSubjectLocation(int newVal){SecondSubjectLocation = newVal;}
-        int    GetSecondSubjectLocation(){return SecondSubjectLocation;}
+        void   SetInSentenceSecondSubjectLocation(int newVal){SecondSubjectLocation = newVal;}
+        int    GetFromSentenceSecondSubjectLocation(){return SecondSubjectLocation;}
 
-        void   SetSecondSubject(string newVal){SecondSubject = newVal;}
-        string GetSecondSubject(){return SecondSubject;}
+        void   SetInSentenceSecondSubject(string newVal){SecondSubject = newVal;}
+        string GetFromSentenceSecondSubject(){return SecondSubject;}
 
-        void   SetHasDualSubjects(bool newVal){HasDualSubjects = newVal;}
-        bool   GetHasDualSubjects(){return HasDualSubjects;}
+        void   SetInSentenceHasDualSubjects(bool newVal){HasDualSubjects = newVal;}
+        bool   GetFromSentenceHasDualSubjects(){return HasDualSubjects;}
 
-        void   SetSubGistOfSentence(string newVal){subGistOfSentence = newVal;}
-        string GetSubGistOfSentence(){return subGistOfSentence;}
+        void   SetInSentenceSubGistOfSentence(string newVal){subGistOfSentence = newVal;}
+        string GetFromSentenceSubGistOfSentence(){return subGistOfSentence;}
 
-        void   SetPrepositionPosition(int newVal){PrepositionPosition = newVal;}
-        int    GetPrepositionPosition(){return PrepositionPosition;}
+        void   SetInSentencePrepositionPosition(int newVal){PrepositionPosition = newVal;}
+        int    GetFromSentencePrepositionPosition(){return PrepositionPosition;}
 
-        void   SetHasPreposition(bool newVal){HasPreposition = newVal;}
-        bool   GetHasPreposition(){return HasPreposition;}
+        void   SetInSentenceHasPreposition(bool newVal){HasPreposition = newVal;}
+        bool   GetFromSentenceHasPreposition(){return HasPreposition;}
 
-        void   SetSentenceDirection(int newVal){SentenceDirection = newVal;}
-        int    GetSentenceDirection(){return SentenceDirection;}
+        void   SetInSentenceSentenceDirection(int newVal){SentenceDirection = newVal;}
+        int    GetFromSentenceSentenceDirection(){return SentenceDirection;}
 
-        void   SetConjunctionLocation(int newVal){ConjunctionLocation = newVal;}
-        int    GetConjunctionLocation(){return ConjunctionLocation;}
+        void   SetInSentenceConjunctionLocation(int newVal){ConjunctionLocation = newVal;}
+        int    GetFromSentenceConjunctionLocation(){return ConjunctionLocation;}
 
-        void   SetPreProcessedPattern(string newVal){PreProcessedPattern = newVal;}
-        string GetPreProcessedPattern(){return PreProcessedPattern;}
+        void   SetInSentencePreProcessedPattern(string newVal){PreProcessedPattern = newVal;}
+        string GetFromSentencePreProcessedPattern(){return PreProcessedPattern;}
 
-        void   SetGistOfSentence(string newVal){GistOfSentence = newVal;}
-        string GetGistOfSentence(){return GistOfSentence;}
+        void   SetInSentenceGistOfSentence(string newVal){GistOfSentence = newVal;}
+        string GetFromSentenceGistOfSentence(){return GistOfSentence;}
 
-        void   SetSupportivePhrase(string newVal){SupportivePhrase = newVal;}
-        string GetSupportivePhrase(){return SupportivePhrase;}
+        void   SetInSentenceSupportivePhrase(string newVal){SupportivePhrase = newVal;}
+        string GetFromSentenceSupportivePhrase(){return SupportivePhrase;}
 
-        bool   GetHasGenderDeterminer(){return HasGenderDeterminer;}
-        void   SetHasGenderDeterminer(bool newVal){HasGenderDeterminer = newVal;}
+        bool   GetFromSentenceHasGenderDeterminer(){return HasGenderDeterminer;}
+        void   SetInSentenceHasGenderDeterminer(bool newVal){HasGenderDeterminer = newVal;}
 
-        bool   GetHasBeenUnderstood(){return HasBeenUnderstood;}
-        void   SetHasBeenUnderstood(bool NewVal){HasBeenUnderstood = NewVal;}
+        bool   GetFromSentenceHasBeenUnderstood(){return HasBeenUnderstood;}
+        void   SetInSentenceHasBeenUnderstood(bool NewVal){HasBeenUnderstood = NewVal;}
 
-        bool   GetHasGenderReference(){return HasGenderReference;}
-        void   SetHasGenderReference(bool NewVal){HasGenderReference = NewVal;}
+        bool   GetFromSentenceHasGenderReference(){return HasGenderReference;}
+        void   SetInSentenceHasGenderReference(bool NewVal){HasGenderReference = NewVal;}
 
-        bool   GetHasGreetingsWord(){return HasGreetingsWord;}
-        void   SetHasGreetingsWord(bool NewVal){HasGreetingsWord = NewVal;}
+        bool   GetFromSentenceHasGreetingsWord(){return HasGreetingsWord;}
+        void   SetInSentenceHasGreetingsWord(bool NewVal){HasGreetingsWord = NewVal;}
 
-        bool   GetHasContraction(){return HasContraction;}
-        void   SetHasContraction(bool NewVal){HasContraction = NewVal;}
+        bool   GetFromSentenceHasContraction(){return HasContraction;}
+        void   SetInSentenceHasContraction(bool NewVal){HasContraction = NewVal;}
 
-        int    GetNamePointer(){return NamePointer;}
-        void   SetNamePointer(int NewLocation){NamePointer = NewLocation;}
+        int    GetFromSentenceNamePointer(){return NamePointer;}
+        void   SetInSentenceNamePointer(int NewLocation){NamePointer = NewLocation;}
 
-        int    GetAdjectiveLocation(){return AdjectiveLocation;}
-        void   SetAdjectiveLocation(int NewVal){AdjectiveLocation = NewVal;}
+        int    GetFromSentenceAdjectiveLocation(){return AdjectiveLocation;}
+        void   SetInSentenceAdjectiveLocation(int NewVal){AdjectiveLocation = NewVal;}
 
-        void   SetVerbLocation(int NewLoc){VerbLocation = NewLoc;}
-        int    GetVerbLocation(){return VerbLocation;}
+        void   SetInSentenceVerbLocation(int NewLoc){VerbLocation = NewLoc;}
+        int    GetFromSentenceVerbLocation(){return VerbLocation;}
 
-        void   SetNounCount(int NewCount){NounCount = NewCount;}
-        int    GetNounCount(){return NounCount;}
+        void   SetInSentenceNounCount(int NewCount){NounCount = NewCount;}
+        int    GetFromSentenceNounCount(){return NounCount;}
 
-        int    GetIndirectObjectLocation(){return IndirectObjectLocation;}
-        void   SetIndirectObjectLocation(int NewVal){IndirectObjectLocation = NewVal;}
+        int    GetFromSentenceIndirectObjectLocation(){return IndirectObjectLocation;}
+        void   SetInSentenceIndirectObjectLocation(int NewVal){IndirectObjectLocation = NewVal;}
 
-        bool   GetHasPluralPronoun(){return HasPluralPronoun;}
-        void   SetHasPluralPronoun(bool newVal){HasPluralPronoun = newVal;}
+        bool   GetFromSentenceHasPluralPronoun(){return HasPluralPronoun;}
+        void   SetInSentenceHasPluralPronoun(bool newVal){HasPluralPronoun = newVal;}
 
-        int    GetWordCount(){return WordCount;}
-        void   SetWordCount(int newVal){WordCount = newVal;}
+        int    GetFromSentenceWordCount(){return WordCount;}
+        void   SetInSentenceWordCount(int newVal){WordCount = newVal;}
 
-        char   GetPunctuation(){return Punctuation;}
-        void   SetPunctuation(char newVal){Punctuation = newVal;}
+        char   GetFromSentencePunctuation(){return Punctuation;}
+        void   SetInSentencePunctuation(char newVal){Punctuation = newVal;}
 
-        void   SetHasPunctuation(bool newVal){HasPunctuation = newVal;}
-        bool   GetHasPunctuation(){return HasPunctuation;}
+        void   SetInSentenceHasPunctuation(bool newVal){HasPunctuation = newVal;}
+        bool   GetFromSentenceHasPunctuation(){return HasPunctuation;}
 
-        bool   GetIsQuestion(){return IsQuestion;}
-        void   SetIsQuestion(bool ISQ){IsQuestion = ISQ;}
+        bool   GetFromSentenceIsQuestion(){return IsQuestion;}
+        void   SetInSentenceIsQuestion(bool ISQ){IsQuestion = ISQ;}
 
-        string GetOriginalString(){return OriginalString;}
-        void   SetOriginalString(string strData){OriginalString = strData;}
+        string GetFromSentenceOriginalString(){return OriginalString;}
+        void   SetInSentenceOriginalString(string strData){OriginalString = strData;}
 
-        void   SetSubjectLocation(int newLoc){SubjectLocation = newLoc;}
-        int    GetSubjectLocation(){return SubjectLocation;}
+        void   SetInSentenceSubjectLocation(int newLoc){SubjectLocation = newLoc;}
+        int    GetFromSentenceSubjectLocation(){return SubjectLocation;}
 
-        void   SetPattern(string strData){Pattern = strData;}
-        string GetPattern(){return Pattern;}
+        void   SetInSentencePattern(string strData){Pattern = strData;}
+        string GetFromSentencePattern(){return Pattern;}
 
-        void   SetAdverbLocation(int newVal){AdverbLocation = newVal;}
+        void   SetInSentenceAdverbLocation(int newVal){AdverbLocation = newVal;}
         ///*****************END SENTENCE DATA FUNCTIONS***************************
 
 
@@ -202,6 +202,7 @@ class c_Sentence : public c_Personality
 
         string GetMiniDefinition(int Location, int intWhich){return WordMap[Location].Getw_MiniDefinition(intWhich);}
         void   SetMiniDefinition(int Location,string newVal){WordMap[Location].Setw_MiniDefinition(newVal);}
+        int    GetMiniDefinitionCount(int Location){return WordMap[Location].Getw_MiniDefinitionCount();}
 
         string GetSingularForm(int Location){return WordMap[Location].Getw_SingularForm();}
         void   SetSingularForm(int Location, string SingularForm){WordMap[Location].Setw_SingularForm(SingularForm);}
@@ -267,6 +268,18 @@ class c_Sentence : public c_Personality
         char   GetWordTense(int Location){return WordMap[Location].Getw_WordTense();}
         void   SetWordTense(int Location, char newTense){WordMap[Location].Setw_WordTense(newTense);}
 
+        void   SetAdverbToWord(int Location, string AdverbToSet){WordMap[Location].Setw_Adverb(AdverbToSet);}
+        string GetAdverbFromWord(int Location, int WhichAdverb){return WordMap[Location].Getw_Adverb(WhichAdverb);}
+        int    GetAdverbFromWordCount(int Location){return WordMap[Location].Getw_AdverbCount();}
+
+        void   SetAdjectiveToWord(int Location, string AdjectiveToSet){WordMap[Location].Setw_Adjective(AdjectiveToSet);}
+        string GetAdjectiveFromWord(int Location, int WhichAdjective){return WordMap[Location].Getw_Adjective(WhichAdjective);}
+        int    GetAdjectiveFromWordCount(int Location){return WordMap[Location].Getw_AdjectiveCount();}
+
+        void   SetNounToWord(int Location, string RelatedNoun){WordMap[Location].Setw_RelatedNoun(RelatedNoun);}
+        string GetNounFromWord(int Location, int WhichNoun){return WordMap[Location].Getw_RelatedNoun(WhichNoun);}
+        int    GetNounFromWordCount(int Location){return WordMap[Location].Getw_RelatedNounCount();}
+
         ///*******************END ALL WORD DATA FUNCTIONS*********************
 
 
@@ -281,16 +294,16 @@ class c_Sentence : public c_Personality
 
         void RebuildPattern(){
             Pattern = "";
-            for(int x =0; x < GetWordCount(); x++) Pattern += GetWordType(x);}
+            for(int x =0; x < GetFromSentenceWordCount(); x++) Pattern += GetWordType(x);}
 
 
 
         int GetVerbPointingToAdjective(){
             int VerbLoc; VerbLoc = -1;
-            for(int x = 0; x < GetWordCount(); x++)
+            for(int x = 0; x < GetFromSentenceWordCount(); x++)
                 if((GetWordType(x)=='v') & (GetWordType(x+1)=='a')) VerbLoc = x;
             if(VerbLoc == -1){
-                for(int x = 0; x< GetWordCount(); x++){
+                for(int x = 0; x< GetFromSentenceWordCount(); x++){
                     if(GetWordType(x) == 'v')VerbLoc = x;}}
             return VerbLoc;
             }
@@ -407,10 +420,6 @@ class c_Sentence : public c_Personality
                     string tmpWord;
                     tmpWord = WordMap[x].Getw_WordForm();           //retrieve original word
 
-
-                    //WordsLC[x] = "";
-                     //Set WordsLC-----------------------------
-                        //for(int t = 0; t < int(Words[x].size()); t++)
                         for(int t = 0; t < int(tmpWord.size()); t++)
                             tmpWord[t] =  tolower(tmpWord[t]);
                         WordMap[x].Setw_WordFormLC(tmpWord);        //store the lower case version

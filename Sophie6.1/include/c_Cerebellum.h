@@ -73,7 +73,7 @@ public:
         if(Verbose)
             cout << "[c_Cerebellum.h::GatherAndSetAllSentenceData()]\n";
         InitializeAll();
-        LocalWordCount     = GetWordCount();
+        LocalWordCount     = GetFromSentenceWordCount();
         //check for empty sentence
         if(LocalWordCount == 0) return -1;
 
@@ -145,7 +145,7 @@ public:
          if(SelectedWordType == 'A') LocalAdverbLocation = x;                       //save the Adverb location
          if(SelectedWordType == 'a') LocalAdjectiveLocation = x;                    //save the adjective location
          if(SelectedWordType == 'C') LocalContractionFlag = true;                   //mark has contraction
-         if(SelectedWordType == 'c') SetConjunctionLocation(x);                     //save the conjunction location
+         if(SelectedWordType == 'c') SetInSentenceConjunctionLocation(x);                     //save the conjunction location
 
          LocalGenderClass = GetMemoryCellcharGenderClass(GetWordsLC(x),Result);     //take care of GenderClass in sentence
          if(LocalGenderClass != 'u')
@@ -154,19 +154,19 @@ public:
         SetWordType(SelectedWordType,x);                                            //update word type in sentence class
         } //END of for loop to scan sentence
 
-        SetAdjectiveLocation(LocalAdjectiveLocation);                               //store in c_Sentence
-        SetAdverbLocation(LocalAdverbLocation);                                     //store in c_Sentence
-        SetNamePointer(LocalNamePointer);                                           //store in c_Sentence
-        SetVerbLocation(LocalVerbLocation);                                         //store in c_Sentence
-        SetNounCount(LocalNounCount);                                               //store in c_Sentence
+        SetInSentenceAdjectiveLocation(LocalAdjectiveLocation);                               //store in c_Sentence
+        SetInSentenceAdverbLocation(LocalAdverbLocation);                                     //store in c_Sentence
+        SetInSentenceNamePointer(LocalNamePointer);                                           //store in c_Sentence
+        SetInSentenceVerbLocation(LocalVerbLocation);                                         //store in c_Sentence
+        SetInSentenceNounCount(LocalNounCount);                                               //store in c_Sentence
         if(LocalHasAlternateType){
             SetAlternateType(LocalAlternateType,LocalAltLocation);                  //store in c_Sentence
         }
-        SetHasContraction(LocalContractionFlag);                                    //Store contraction flag
-        SetSentenceDirection(DetermineDirectionOfPhrase());                         //Store phrase/question direction in sentence data
-        SetsDaysOld(GetDaysSinceDate());                                            //day stamp this sentence
+        SetInSentenceHasContraction(LocalContractionFlag);                                    //Store contraction flag
+        SetInSentenceSentenceDirection(DetermineDirectionOfPhrase());                         //Store phrase/question direction in sentence data
+        SetInSentencesDaysOld(GetDaysSinceDate());                                  //day stamp this sentence
         LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);            //Check for corrections
-        SetPattern(LocalPattern);                                                   //store in c_Sentence
+        SetInSentencePattern(LocalPattern);                                                   //store in c_Sentence
 
         for (int x = 0; x < int(LocalPattern.size()); x++ ){                       //for calc in understanding level
             if(LocalPattern[x] == 'u')
@@ -176,7 +176,7 @@ public:
         }
 
             if(LocalUnderstandingLevel > 0)
-                LocalUnderstandingRatio = float(LocalUnderstandingLevel) / float(GetWordCount());
+                LocalUnderstandingRatio = float(LocalUnderstandingLevel) / float(GetFromSentenceWordCount());
 
             ///Set the understanding degree weighted with the ratio
             if(LocalUnderstandingRatio == 1) LocalUnderstandingDegree = 100;
@@ -191,7 +191,29 @@ public:
              else
                 LocalUnderstandingDegree = 0;
 
-         SetsUnderstandingLevel(LocalUnderstandingDegree);                          //store the understanding degree for c_Cortex to use
+         SetInSentencesUnderstandingLevel(LocalUnderstandingDegree);                          //store the understanding degree for c_Cortex to use
+
+         //Pull from memory cells and set all word data
+         for(int x =0; x <= LocalWordCount; x++){
+          for(int y = 0; y < GetAdjectiveFromWordCount(x); y++){
+            SetAdjectiveToWord(x,GetAdjectiveFromList(y));}
+          for(int y = 0; y < GetAdverbFromWordCount(x); y++){
+            SetAdverbToWord(x,GetAdverbFromList(y));}
+          for(int y = 0; y < GetNounFromWordCount(x); y++){
+            SetNounToWord(x,GetNounFromList(y));}
+          for(int y = 0; y < GetMiniDefinitionCount(x); y++){
+            SetMiniDefinition(x,GetMemoryCellMiniDef(GetWordsLC(x),Result,y));}
+
+          SetSingularForm(x,GetMemoryCellpSingularForm(GetWordsLC(x)));
+          SetPossessiveRootType(x,GetMemoryCellPossessiveRootType(GetWordsLC(x),Result));
+          SetPossessiveRoot(x,GetMemoryCellPossessiveRoot(GetWordsLC(x),Result));
+          SetisSingularPossessive(x,GetMemoryCellIsSingularPossessive(GetWordsLC(x),Result));
+          SetisPluralPossessive(x,GetMemoryCellIsPluralPossessive(GetWordsLC(x),Result));
+          //SetPluralWordFlag(x,Getmemorycell)   correct this all the way to memory cell
+          SetPluralRoot(x,GetMemoryCellpSingularForm(GetWordsLC(x)));
+          //SetIsPluralWord(x,Getmemorycell)   memory cell doesn't agree with this type
+          //Finish all word data transfer
+         }//end of all words for loop
 
          ImplyUnknowns();                                                           //let language try to set some unknowns
 
@@ -218,10 +240,10 @@ public:
 
         int    DirectionDetected    = -1;
         int    PatternMatch         = -1;
-        string WorkingPattern       = GetPattern();
+        string WorkingPattern       = GetFromSentencePattern();
         string cSentenceDirection   = "muYPMGx";
 
-        for(int x =0; x<= GetWordCount(); x++){
+        for(int x =0; x<= GetFromSentenceWordCount(); x++){
             if((GetWordType(x)== 'm')&&(DirectionDetected == -1)){ DirectionDetected = 0;}        //mentioned me, so to me
              else
                 if((GetWordType(x)=='y')&&(DirectionDetected == -1)) DirectionDetected = 1;       //user mentioned self, so to user

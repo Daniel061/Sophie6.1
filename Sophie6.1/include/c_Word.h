@@ -19,7 +19,6 @@ class c_Word
           string  w_PluralRoot              = "";    // deconstructed plural to the root,cars = car
           string  w_SubWord                 = "";    // replacement word, usually from subject
           string  w_PossessiveRoot          = "";    // cat's  = cat
-          //string  w_MiniDefinition          = "";    // usually Gist of sentence if used as subject
           bool    w_isContraction           = false; // contraction flag
           bool    w_isPlural                = false; // plural flag
           bool    w_SingularPossessive      = false; // i.e. cat's
@@ -34,9 +33,11 @@ class c_Word
           char    w_AlternativeType         = 'u';   // some words have more than 1 usage
           char    w_WordTense               = 'u';   // c - present p - past
 
-          unordered_set <string> w_MiniDefinition;
-          unordered_set <string>::iterator SetIT;
-
+          unordered_set <string> w_MiniDefinition;   // if this word is a subject, gist of sentence is here too
+          unordered_set <string>::iterator SetIT;    // iterator
+          unordered_set <string> w_Adjectives;       // adjectives used towards this word
+          unordered_set <string> w_Adverbs;          // adverbs used towards this word
+          unordered_set <string> w_RelatedNouns;     // Nouns related to this word
 
     private:
 
@@ -117,7 +118,41 @@ class c_Word
         char     Getw_PossessiveRootType(){return w_PossessiveRootType;}
         void     Setw_PossessiveRootType(char newVal){w_PossessiveRootType = newVal;}
 
+        string   Getw_RelatedNoun(int Location){
+                 SetIT == w_RelatedNouns.begin();
+                 for(int x =0; x <= Location; x++) ++SetIT;
+                 if(SetIT == w_RelatedNouns.end())
+                    return "";
+                 else
+                    return *SetIT;}
 
+        string   Getw_Adjective(int Location){
+                 SetIT == w_Adjectives.begin();
+                 for(int x =0; x <= Location; x++) ++SetIT;
+                 if(SetIT == w_Adjectives.end())
+                    return "";
+                 else
+                    return *SetIT;}
+
+        string   Getw_Adverb(int Location){
+                 SetIT == w_Adverbs.begin();
+                 for(int x =0; x <= Location; x++) ++SetIT;
+                 if(SetIT == w_Adverbs.end())
+                    return "";
+                 else
+                    return *SetIT;}
+
+         void    Setw_RelatedNoun(string newVal){w_RelatedNouns.emplace(newVal);}
+
+         void    Setw_Adjective(string newVal){w_Adjectives.emplace(newVal);}
+
+         void    Setw_Adverb(string newVal){w_Adverbs.emplace(newVal);}
+
+         int     Getw_RelatedNounCount(){return w_RelatedNouns.size();}
+
+         int     Getw_AdjectiveCount(){return w_Adjectives.size();}
+
+         int     Getw_AdverbCount(){return w_Adverbs.size();}
 
         void c_WordInitializeAll(){
 
@@ -140,8 +175,11 @@ class c_Word
           w_WordTense                = 'u';     // c - present p - past                         17
           w_PossessiveRootType       = 'u';     // usually a 'n' noun but not always            18
           w_SingularForm             = "";      // i.e. cats = cat                              19
-          //w_MiniDefinition           = "";      // usually Gist of sentence if used as subject  20
-          w_MiniDefinition.clear();
+
+          w_MiniDefinition.clear();             // usually Gist of sentence if used as subject  20
+          w_Adjectives.clear();                 // adjectives used towards this word            21
+          w_Adverbs.clear();                    // adverbs used towards this word               22
+          w_RelatedNouns.clear();               // nouns related to this word                   23
         }
 
 
