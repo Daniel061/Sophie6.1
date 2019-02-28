@@ -94,6 +94,7 @@ class c_Sentence : public c_Personality
 
 
        ///*******************ALL GLOBAL->SENTENCE DATA FUNCTIONS***************************
+       ///**********'InSentence/FromSentence' is the function source flag******************
 
 
         bool   GetFromSentenceHasPronoun(){return HasPronoun;}
@@ -198,87 +199,88 @@ class c_Sentence : public c_Personality
 
 
         ///******************ALL WORD DATA FUNCTIONS GET/SET PAIRS*************************
+        ///+++++++++++++++++++++++++'sw' is the function source flag***********************
         ///*******Location = which place in the sentence***********************************
 
-        string GetMiniDefinition(int Location, int intWhich){return WordMap[Location].Getw_MiniDefinition(intWhich);}
-        void   SetMiniDefinition(int Location,string newVal){WordMap[Location].Setw_MiniDefinition(newVal);}
-        int    GetMiniDefinitionCount(int Location){return WordMap[Location].Getw_MiniDefinitionCount();}
+        string GetswMiniDefinition(int Location, int intWhich){return WordMap[Location].Getw_MiniDefinition(intWhich);}
+        void   SetswMiniDefinition(int Location,string newVal){WordMap[Location].Setw_MiniDefinition(newVal);}
+        int    GetswMiniDefinitionCount(int Location){return WordMap[Location].Getw_MiniDefinitionCount();}
 
-        string GetSingularForm(int Location){return WordMap[Location].Getw_SingularForm();}
-        void   SetSingularForm(int Location, string SingularForm){WordMap[Location].Setw_SingularForm(SingularForm);}
+        string GetswSingularForm(int Location){return WordMap[Location].Getw_SingularForm();}
+        void   SetswSingularForm(int Location, string SingularForm){WordMap[Location].Setw_SingularForm(SingularForm);}
 
-        char   GetPossessiveRootType(int Location){return WordMap[Location].Getw_PossessiveRootType();}
-        void   SetPossessiveRootType(int Location, char newVal){WordMap[Location].Setw_PossessiveRootType(newVal);}
+        char   GetswPossessiveRootType(int Location){return WordMap[Location].Getw_PossessiveRootType();}
+        void   SetswPossessiveRootType(int Location, char newVal){WordMap[Location].Setw_PossessiveRootType(newVal);}
 
-        string GetPossessiveRoot(int Location){return WordMap[Location].Getw_PossessiveRoot();}
-        void   SetPossessiveRoot(int Location,string newVal){WordMap[Location].Setw_PossessiveRoot(newVal);}
+        string GetswPossessiveRoot(int Location){return WordMap[Location].Getw_PossessiveRoot();}
+        void   SetswPossessiveRoot(int Location,string newVal){WordMap[Location].Setw_PossessiveRoot(newVal);}
 
-        bool   GetisSingularPossessive(int Location){return WordMap[Location].Getw_SingularPossessive();}
-        void   SetisSingularPossessive(int Location, bool newVal){WordMap[Location].Setw_SingularPossessive(newVal);}
+        bool   GetswisSingularPossessive(int Location){return WordMap[Location].Getw_SingularPossessive();}
+        void   SetswisSingularPossessive(int Location, bool newVal){WordMap[Location].Setw_SingularPossessive(newVal);}
 
-        bool   GetisPluralPossessive(int Location){return WordMap[Location].Getw_PluralPossessive();}
-        void   SetisPluralPossessive(int Location, bool newVal){WordMap[Location].Setw_PluralPossessive(newVal);}
+        bool   GetswisPluralPossessive(int Location){return WordMap[Location].Getw_PluralPossessive();}
+        void   SetswisPluralPossessive(int Location, bool newVal){WordMap[Location].Setw_PluralPossessive(newVal);}
 
-        char   GetPluralWordFlag(int Location){return WordMap[Location].Getw_PluralWordFlag();}
-        void   SetPluralWordFlag(int Location, char newVal){WordMap[Location].Setw_PluralWordFlag(newVal);}
+        char   GetswPluralWordFlag(int Location){return WordMap[Location].Getw_PluralWordFlag();}
+        void   SetswPluralWordFlag(int Location, char newVal){WordMap[Location].Setw_PluralWordFlag(newVal);}
 
-        string GetPluralRoot(int Location){return WordMap[Location].Getw_PluralRoot();}
-        void   SetPluralRoot(int Location, string strRoot){WordMap[Location].Setw_PluralRoot(strRoot);}
+        string GetswPluralRoot(int Location){return WordMap[Location].Getw_PluralRoot();}
+        void   SetswPluralRoot(int Location, string strRoot){WordMap[Location].Setw_PluralRoot(strRoot);}
 
-        bool   GetIsPluralWord(int Location){return WordMap[Location].Getw_isPlural();}
-        void   SetIsPluralWord(int Location, bool newVal){WordMap[Location].Setw_isPlural(newVal);}
+        bool   GetswIsPluralWord(int Location){return WordMap[Location].Getw_isPlural();}
+        void   SetswIsPluralWord(int Location, bool newVal){WordMap[Location].Setw_isPlural(newVal);}
 
-        string GetContractionLongFormFirst(int Location){return WordMap[Location].Getw_ContractionFormFirst();}
-        void   SetContractionLongFormFirst(int Location,string newVal){WordMap[Location].Setw_ContractionFormFirst(newVal);}
+        string GetswContractionLongFormFirst(int Location){return WordMap[Location].Getw_ContractionFormFirst();}
+        void   SetswContractionLongFormFirst(int Location,string newVal){WordMap[Location].Setw_ContractionFormFirst(newVal);}
 
-        string GetContractionLongFormSecond(int Location){return WordMap[Location].Getw_ContractionFormSecond();}
-        void   SetContractionLongFormSecond(int Location,string newVal){WordMap[Location].Setw_ContractionFormSecond(newVal);}
+        string GetswContractionLongFormSecond(int Location){return WordMap[Location].Getw_ContractionFormSecond();}
+        void   SetswContractionLongFormSecond(int Location,string newVal){WordMap[Location].Setw_ContractionFormSecond(newVal);}
 
-        char   GetGenderClassInSentence(int Location){return WordMap[Location].Getw_GenderClass();}
-        void   SetGenderClassInSentence(int Location, char NewGenderClass){WordMap[Location].Setw_GenderClass(NewGenderClass);}
+        char   GetswGenderClassInSentence(int Location){return WordMap[Location].Getw_GenderClass();}
+        void   SetswGenderClassInSentence(int Location, char NewGenderClass){WordMap[Location].Setw_GenderClass(NewGenderClass);}
 
-        char   GetSecondaryType(int Location){return WordMap[Location].Getw_SecondaryType();}
-        void   SetSecondaryType(char Type,int Location){WordMap[Location].Setw_SecondaryType(Type);}
+        char   GetswSecondaryType(int Location){return WordMap[Location].Getw_SecondaryType();}
+        void   SetswSecondaryType(char Type,int Location){WordMap[Location].Setw_SecondaryType(Type);}
 
-        char   GetAlternateType(int Location){return WordMap[Location].Getw_AlternateType();}
-        void   SetAlternateType(char Type,int Location){WordMap[Location].Setw_AlternateType(Type);}
+        char   GetswAlternateType(int Location){return WordMap[Location].Getw_AlternateType();}
+        void   SetswAlternateType(char Type,int Location){WordMap[Location].Setw_AlternateType(Type);}
 
-        int    GetWordTokens(int Location){return WordMap[Location].Getw_WordTokens();}
-        void   SetWordTokens(int Location, int token){WordMap[Location].Setw_WordTokens(token);}
+        int    GetswWordTokens(int Location){return WordMap[Location].Getw_WordTokens();}
+        void   SetswWordTokens(int Location, int token){WordMap[Location].Setw_WordTokens(token);}
 
-        string GetWords(int Location){return WordMap[Location].Getw_WordForm();}
-        void   SetWords(int Location,string strData){WordMap[Location].Setw_WordForm(strData);}
+        string GetswWords(int Location){return WordMap[Location].Getw_WordForm();}
+        void   SetswWords(int Location,string strData){WordMap[Location].Setw_WordForm(strData);}
 
-        string GetWordsLC(int Location){return WordMap[Location].Getw_WordFormLC();}
-        void   SetWordsLC(int Location,string newVal){WordMap[Location].Setw_WordFormLC(newVal);}
+        string GetswWordsLC(int Location){return WordMap[Location].Getw_WordFormLC();}
+        void   SetswWordsLC(int Location,string newVal){WordMap[Location].Setw_WordFormLC(newVal);}
 
-        char   GetWordType(int Location){return WordMap[Location].Getw_WordType();}
-        void   SetWordType(char Type, int Location){WordMap[Location].Setw_WordType(Type);}
+        char   GetswWordType(int Location){return WordMap[Location].Getw_WordType();}
+        void   SetswWordType(char Type, int Location){WordMap[Location].Setw_WordType(Type);}
 
 
-        void   SetSubWords(int Location,string strData){WordMap[Location].Setw_SubWord(strData);}
-        string GetSubWords(int Location){return WordMap[Location].Getw_SubWord();}
+        void   SetswSubWords(int Location,string strData){WordMap[Location].Setw_SubWord(strData);}
+        string GetswSubWords(int Location){return WordMap[Location].Getw_SubWord();}
 
-        bool   GetisContraction(int Location){return WordMap[Location].Getw_isContraction();}
-        void   SetisContraction(int Location, bool newVal){WordMap[Location].Setw_isContraction(newVal);}
+        bool   GetswisContraction(int Location){return WordMap[Location].Getw_isContraction();}
+        void   SetswisContraction(int Location, bool newVal){WordMap[Location].Setw_isContraction(newVal);}
 
-        int    GetQuoteLocation(int Location){return WordMap[Location].Getw_QuoteLocation();}
-        void   SetQuoteLocation(int Location,int newVal){WordMap[Location].Setw_QuoteLocation(newVal);}
+        int    GetswQuoteLocation(int Location){return WordMap[Location].Getw_QuoteLocation();}
+        void   SetswQuoteLocation(int Location,int newVal){WordMap[Location].Setw_QuoteLocation(newVal);}
 
-        char   GetWordTense(int Location){return WordMap[Location].Getw_WordTense();}
-        void   SetWordTense(int Location, char newTense){WordMap[Location].Setw_WordTense(newTense);}
+        char   GetswWordTense(int Location){return WordMap[Location].Getw_WordTense();}
+        void   SetswWordTense(int Location, char newTense){WordMap[Location].Setw_WordTense(newTense);}
 
-        void   SetAdverbToWord(int Location, string AdverbToSet){WordMap[Location].Setw_Adverb(AdverbToSet);}
-        string GetAdverbFromWord(int Location, int WhichAdverb){return WordMap[Location].Getw_Adverb(WhichAdverb);}
-        int    GetAdverbFromWordCount(int Location){return WordMap[Location].Getw_AdverbCount();}
+        void   SetswAdverbToWord(int Location, string AdverbToSet){WordMap[Location].Setw_Adverb(AdverbToSet);}
+        string GetswAdverbFromWord(int Location, int WhichAdverb){return WordMap[Location].Getw_Adverb(WhichAdverb);}
+        int    GetswAdverbFromWordCount(int Location){return WordMap[Location].Getw_AdverbCount();}
 
-        void   SetAdjectiveToWord(int Location, string AdjectiveToSet){WordMap[Location].Setw_Adjective(AdjectiveToSet);}
-        string GetAdjectiveFromWord(int Location, int WhichAdjective){return WordMap[Location].Getw_Adjective(WhichAdjective);}
-        int    GetAdjectiveFromWordCount(int Location){return WordMap[Location].Getw_AdjectiveCount();}
+        void   SetswAdjectiveToWord(int Location, string AdjectiveToSet){WordMap[Location].Setw_Adjective(AdjectiveToSet);}
+        string GetswAdjectiveFromWord(int Location, int WhichAdjective){return WordMap[Location].Getw_Adjective(WhichAdjective);}
+        int    GetswAdjectiveFromWordCount(int Location){return WordMap[Location].Getw_AdjectiveCount();}
 
-        void   SetNounToWord(int Location, string RelatedNoun){WordMap[Location].Setw_RelatedNoun(RelatedNoun);}
-        string GetNounFromWord(int Location, int WhichNoun){return WordMap[Location].Getw_RelatedNoun(WhichNoun);}
-        int    GetNounFromWordCount(int Location){return WordMap[Location].Getw_RelatedNounCount();}
+        void   SetswNounToWord(int Location, string RelatedNoun){WordMap[Location].Setw_RelatedNoun(RelatedNoun);}
+        string GetswNounFromWord(int Location, int WhichNoun){return WordMap[Location].Getw_RelatedNoun(WhichNoun);}
+        int    GetswNounFromWordCount(int Location){return WordMap[Location].Getw_RelatedNounCount();}
 
         ///*******************END ALL WORD DATA FUNCTIONS*********************
 
@@ -286,7 +288,7 @@ class c_Sentence : public c_Personality
 
         int    GetAdverbLocation(){
           for(int x =0; x < WordCount; x++){
-            if(GetWordType(x)=='A')AdverbLocation = x;}
+            if(GetswWordType(x)=='A')AdverbLocation = x;}
             return AdverbLocation;
           }
 
@@ -294,17 +296,17 @@ class c_Sentence : public c_Personality
 
         void RebuildPattern(){
             Pattern = "";
-            for(int x =0; x < GetFromSentenceWordCount(); x++) Pattern += GetWordType(x);}
+            for(int x =0; x < GetFromSentenceWordCount(); x++) Pattern += GetswWordType(x);}
 
 
 
         int GetVerbPointingToAdjective(){
             int VerbLoc; VerbLoc = -1;
             for(int x = 0; x < GetFromSentenceWordCount(); x++)
-                if((GetWordType(x)=='v') & (GetWordType(x+1)=='a')) VerbLoc = x;
+                if((GetswWordType(x)=='v') & (GetswWordType(x+1)=='a')) VerbLoc = x;
             if(VerbLoc == -1){
                 for(int x = 0; x< GetFromSentenceWordCount(); x++){
-                    if(GetWordType(x) == 'v')VerbLoc = x;}}
+                    if(GetswWordType(x) == 'v')VerbLoc = x;}}
             return VerbLoc;
             }
 

@@ -44,7 +44,7 @@ class c_Word
 
     public:
 
-        //string   Getw_MiniDefinition(){return w_MiniDefinition;}
+
         void     Setw_MiniDefinition(string newVal){w_MiniDefinition.emplace(newVal);}
         int      Getw_MiniDefinitionCount(){return w_MiniDefinition.size();}
         string   Getw_MiniDefinition(int intWhich){

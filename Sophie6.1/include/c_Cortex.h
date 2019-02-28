@@ -85,8 +85,8 @@ class c_Cortex : public c_Language
             isGenderIndicator        = false;
 
             for(int x =0; x < GetFromSentenceWordCount(); x++){                                                                  // Build pattern string i.e. duvu  4 word sentence
-                    Pattern += GetWordType(x);
-                    tmpWordType = GetWordType(x);
+                    Pattern += GetswWordType(x);
+                    tmpWordType = GetswWordType(x);
                     if (tmpWordType == 't') {UnderstandingLevel++;}
                     if (tmpWordType == 'c') {UnderstandingLevel++; ConjunctionLocation = x;}
                     if (tmpWordType == 'n') {NounLocation = x; UnderstandingLevel++;}
@@ -152,7 +152,7 @@ class c_Cortex : public c_Language
                       DecreaseMoodLevel();
                       break;
                      case 3:{
-                       SlowSpeak("I don't know what " + GetWords(0)+ " is.");
+                       SlowSpeak("I don't know what " + GetswWords(0)+ " is.");
                        SlowSpeak(":{");
                        DecreaseMoodLevel();
                        break;
@@ -200,11 +200,11 @@ class c_Cortex : public c_Language
                 case 25:{  ///Some understanding but depends on ratio
                    if (Verbose)
                     cout << "[c_Cortex.h::DeciperCurrentSentence] Case 25 - Maybe Missing determiner - add in the help" << endl;
-                    if(GetWordType(0) == 'u'){
+                    if(GetswWordType(0) == 'u'){
                      strData = "the " + strData;
                      return true;}   //call for rerun
                      else
-                      SlowSpeak("I don't know "  + GetWords(FirstUnknown)+"?");
+                      SlowSpeak("I don't know "  + GetswWords(FirstUnknown)+"?");
                     break;}
 
                 case 50:{  ///stronger understanding but also depends on ratio
@@ -224,18 +224,18 @@ class c_Cortex : public c_Language
                     cout << "[c_Cortex.h::DeciperCurrentSentence] Case 100 - inside logic" << endl;
                     string tmpSubject;
                     if(GetFromSentenceSubjectLocation() != -1){
-                         tmpSubject = GetWords(SubjectLoc);
-                         SetSubjectInStack(GetWordTokens(SubjectLoc),tmpSubject,GetFromSentenceOriginalString());
-                         if(GetWordType(GetFromSentenceSubjectLocation())=='p'){
+                         tmpSubject = GetswWords(SubjectLoc);
+                         SetSubjectInStack(GetswWordTokens(SubjectLoc),tmpSubject,GetFromSentenceOriginalString());
+                         if(GetswWordType(GetFromSentenceSubjectLocation())=='p'){
                             CheckForImpliedGender();}}
                      if((GetFromSentenceHasGenderReference()) && (GetFromSentenceSubjectLocation()!=-1)){
                         //assign Gender to subject
                         if(GenderIndicatorLocation != -1){
-                            SetGenderClassInSentence(GetFromSentenceSubjectLocation(),GetGenderClassInSentence(GenderIndicatorLocation));
+                            SetswGenderClassInSentence(GetFromSentenceSubjectLocation(),GetswGenderClassInSentence(GenderIndicatorLocation));
                         }
                      }
                      if((JoinerLocation != -1) && (Pattern[JoinerLocation+1]=='a') ){ //associate first adjective to subject, wasn't picked up before
-                        AssociateMemoryCellAdjective(GetWordTokens(GetFromSentenceSubjectLocation()),GetWordsLC(JoinerLocation-1)); }
+                        AssociateMemoryCellAdjective(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(JoinerLocation-1)); }
                      SlowSpeak("Okay.");
                      IncreaseMoodLevel();
                      SetInSentenceHasBeenUnderstood(true);
@@ -250,7 +250,7 @@ class c_Cortex : public c_Language
 //-------------------------------------Check for greetings---------------------------------------------------------------------------
 int CheckForGreetings(bool& Greeting){
     string FirstWord;
-    FirstWord = GetWordsLC(0);
+    FirstWord = GetswWordsLC(0);
     Greeting = false;
     if((FirstWord == "hello") | (FirstWord == "hi")){
         SlowSpeak("Hi!");
@@ -279,10 +279,10 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
         ofstream HalfLevelDataFile ("HalfLevelPatternData.dat", ios::out | ios::app);
         if (HalfLevelDataFile.is_open()){ HalfLevelDataFile << Pattern << "," << GetFromSentenceOriginalString() << endl; HalfLevelDataFile.close();}
        for(int x = 0; x < GetFromSentenceWordCount(); x++){
-        if((GetWordType(x) == 'y') || (GetWordType(x) == 'm') || (GetWordType(x) == 'p')){
-            if(GetWordType(x)== 'y') StatementDirection = 0; //Statement towards user
-            if(GetWordType(x)== 'm') StatementDirection = 1; //Statement towards program
-            if(GetWordType(x)== 'p') StatementDirection = 2; //Statement towards other
+        if((GetswWordType(x) == 'y') || (GetswWordType(x) == 'm') || (GetswWordType(x) == 'p')){
+            if(GetswWordType(x)== 'y') StatementDirection = 0; //Statement towards user
+            if(GetswWordType(x)== 'm') StatementDirection = 1; //Statement towards program
+            if(GetswWordType(x)== 'p') StatementDirection = 2; //Statement towards other
         }
        }
 
@@ -293,15 +293,15 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
 
             case 0: //Statement towards user
                 {
-                  if((GetWords(UnKnownLocation)[0]>='A') && (GetWords(UnKnownLocation)[0]<='Z')) {
+                  if((GetswWords(UnKnownLocation)[0]>='A') && (GetswWords(UnKnownLocation)[0]<='Z')) {
                     //Proper noun is unknown word - user might be naming self
-                    SetWordType('P',UnKnownLocation);
-                    SlowSpeak("Hello " + GetWords(UnKnownLocation) + "!");
+                    SetswWordType('P',UnKnownLocation);
+                    SlowSpeak("Hello " + GetswWords(UnKnownLocation) + "!");
                     SlowSpeak("Nice to meet you.");
                     SlowSpeak(":)");
                     IncreaseMoodLevel();
                     SetInSentenceHasBeenUnderstood(true);
-                    SetUserName(GetWords(UnKnownLocation));
+                    SetUserName(GetswWords(UnKnownLocation));
 
                   }
                   else
@@ -335,36 +335,36 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
                 }
 
 
-         SlowSpeak("  Are we talking about a " + GetWords(Determiner + 1) + "?");
+         SlowSpeak("  Are we talking about a " + GetswWords(Determiner + 1) + "?");
          Response = RequestUserResponse();
          if(Response == 1){  //yes answer
             //set subject to this
             //set wordtype to noun if it isn't
             //see if this is a known word
             IncreaseMoodLevel();
-            SetWordType('n',Determiner+1);
-            SetSubjectInStack(Tokenize(GetWords(Determiner+1)),GetWords(Determiner+1),GetFromSentenceOriginalString());
+            SetswWordType('n',Determiner+1);
+            SetSubjectInStack(Tokenize(GetswWords(Determiner+1)),GetswWords(Determiner+1),GetFromSentenceOriginalString());
             for(int x =0; x < GetFromSentenceWordCount(); x++){
-                if (GetWordType(x)=='u'){
-                    tmpAdjective = GetWords(x);
+                if (GetswWordType(x)=='u'){
+                    tmpAdjective = GetswWords(x);
                     tmpAdjectiveLoc = x;
                 }
             }
             SlowSpeak("Great!");
-            SlowSpeak("But I don't know much about a " + GetWords(Determiner +1)+ " yet.");
-            SlowSpeak("And, is " + tmpAdjective + " describing " + GetWords(Determiner +1)+ "?");
+            SlowSpeak("But I don't know much about a " + GetswWords(Determiner +1)+ " yet.");
+            SlowSpeak("And, is " + tmpAdjective + " describing " + GetswWords(Determiner +1)+ "?");
             Response = RequestUserResponse();
             if(Response == 1){
                     SlowSpeak("Perfect!");
                     IncreaseMoodLevel();
-                    SlowSpeak("So a " + tmpAdjective + " " + GetWords(Determiner+1) + ". Ha!");
-                    SlowSpeak("Can you tell me more about " + GetWords(Determiner +1)+ "?");
+                    SlowSpeak("So a " + tmpAdjective + " " + GetswWords(Determiner+1) + ". Ha!");
+                    SlowSpeak("Can you tell me more about " + GetswWords(Determiner +1)+ "?");
                     SlowSpeak("I want to learn more!");
                     SlowSpeak(":)");
                     IncreaseMoodLevel();
                     SetInSentenceHasBeenUnderstood(true);
-                    SetWordType('a',tmpAdjectiveLoc);
-                    SetWordType('n',Determiner+1);
+                    SetswWordType('a',tmpAdjectiveLoc);
+                    SetswWordType('n',Determiner+1);
                     RebuildPattern();
                     Testing = false;
 
@@ -378,14 +378,14 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
             //release control back for more user input
          }
          else{
-            SlowSpeak("  Are we talking about a " + GetWords(Determiner + 2) + "?");
+            SlowSpeak("  Are we talking about a " + GetswWords(Determiner + 2) + "?");
             Response = RequestUserResponse();
             if(Response == -1){
-                SlowSpeak("  Are we talking about a " + GetWords(Determiner + 3) + "?");
+                SlowSpeak("  Are we talking about a " + GetswWords(Determiner + 3) + "?");
                 DecreaseMoodLevel();
                 Response = RequestUserResponse();
                 if(Response == 1){
-                    SlowSpeak("I will need to learn about " + GetWords(Determiner + 3)+".");
+                    SlowSpeak("I will need to learn about " + GetswWords(Determiner + 3)+".");
                     SlowSpeak("Please tell me more.");
                     IncreaseMoodLevel();
                     SetInSentenceHasBeenUnderstood(true);
@@ -402,9 +402,9 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
             }
             else{
                 SlowSpeak("Ok");
-                SlowSpeak("You'll have to tell me more about a " + GetWords(Determiner+2)+ ".");
-                SetWordType('n',Determiner+2);
-                SetSubjectInStack(Tokenize(GetWords(Determiner+2)),GetWords(Determiner+2),GetFromSentenceOriginalString());
+                SlowSpeak("You'll have to tell me more about a " + GetswWords(Determiner+2)+ ".");
+                SetswWordType('n',Determiner+2);
+                SetSubjectInStack(Tokenize(GetswWords(Determiner+2)),GetswWords(Determiner+2),GetFromSentenceOriginalString());
                 IncreaseMoodLevel();
                 SetInSentenceHasBeenUnderstood(true);
                 Testing = false;
@@ -436,12 +436,12 @@ int HandleQuestion(string &strData){
    // check for correct form
    //actually need to compare indirect object to subject
     if(GetFromSentenceIndirectObjectLocation() != -1)
-    Matched = CheckLinkOfTwoNounsWithAdjectives(GetWords(GetFromSentenceIndirectObjectLocation()),GetWords(GetFromSentenceSubjectLocation()),VerbUsed,MatchedAdjective,MatchedCount);
+    Matched = CheckLinkOfTwoNounsWithAdjectives(GetswWords(GetFromSentenceIndirectObjectLocation()),GetswWords(GetFromSentenceSubjectLocation()),VerbUsed,MatchedAdjective,MatchedCount);
     if (Matched){
             if(MatchedCount > 1){
-                AnswerString = "The " +  GetWordsLC(GetFromSentenceSubjectLocation()) + " of ";
-                if(!(GetWordType(GetFromSentenceIndirectObjectLocation())== 'P') || (GetWordType(GetFromSentenceIndirectObjectLocation())== 'p')) AnswerString += "the ";
-                AnswerString +=  GetWords(GetFromSentenceIndirectObjectLocation()) + " can be ";
+                AnswerString = "The " +  GetswWordsLC(GetFromSentenceSubjectLocation()) + " of ";
+                if(!(GetswWordType(GetFromSentenceIndirectObjectLocation())== 'P') || (GetswWordType(GetFromSentenceIndirectObjectLocation())== 'p')) AnswerString += "the ";
+                AnswerString +=  GetswWords(GetFromSentenceIndirectObjectLocation()) + " can be ";
                 for(int x = 0; x < MatchedCount; x++){
                         AnswerString = AnswerString + MatchedAdjective[x];
                         if(!(x+1==MatchedCount)) AnswerString += " or ";}
@@ -450,9 +450,9 @@ int HandleQuestion(string &strData){
                 SetInSentenceHasBeenUnderstood(true);
             }
             else{
-               AnswerString = "The " +  GetWordsLC(GetFromSentenceSubjectLocation()) + " of ";
-               if(!(GetWordType(GetFromSentenceIndirectObjectLocation())== 'P') || (GetWordType(GetFromSentenceIndirectObjectLocation())== 'p')) AnswerString += "the ";
-               AnswerString +=  GetWords(GetFromSentenceIndirectObjectLocation())+ " is " + MatchedAdjective[0] + ".";
+               AnswerString = "The " +  GetswWordsLC(GetFromSentenceSubjectLocation()) + " of ";
+               if(!(GetswWordType(GetFromSentenceIndirectObjectLocation())== 'P') || (GetswWordType(GetFromSentenceIndirectObjectLocation())== 'p')) AnswerString += "the ";
+               AnswerString +=  GetswWords(GetFromSentenceIndirectObjectLocation())+ " is " + MatchedAdjective[0] + ".";
                SlowSpeak(AnswerString);
                SetInSentenceHasBeenUnderstood(true);
             }
@@ -487,7 +487,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
     if(GetFromSentenceNamePointer() >=0){
         NeedNameHandling = true;
-        if(GetWordType(LocalNamePtrLocation+1)=='v')
+        if(GetswWordType(LocalNamePtrLocation+1)=='v')
             VerbFollowsNamePtr = true;
     }
 
@@ -501,12 +501,12 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
    if( NeedNameHandling ){                                                       // i.e. my name is ...   or the dog's name is ...
         Testing = false;                                                         // this is the only work required because of name reference
         if(VerbFollowsNamePtr){                                                  // try to prevent out of bounds error
-        if(GetWordType(LocalNamePtrLocation-1) == 'y'){                          // the name data refers the the user, REMEMBER - this is a statement, not a question ~ questions trapped elsewhere
-                if(IsThisAPropernoun(GetWords(LocalNamePtrLocation+2))){         // enforce Capital letter usage
-                    SetUserName(GetWords(LocalNamePtrLocation+2));               // Store the user name
-                    SlowSpeak("Hello " + GetWords(LocalNamePtrLocation+2)+"!");  // greet the user
+        if(GetswWordType(LocalNamePtrLocation-1) == 'y'){                          // the name data refers the the user, REMEMBER - this is a statement, not a question ~ questions trapped elsewhere
+                if(IsThisAPropernoun(GetswWords(LocalNamePtrLocation+2))){         // enforce Capital letter usage
+                    SetUserName(GetswWords(LocalNamePtrLocation+2));               // Store the user name
+                    SlowSpeak("Hello " + GetswWords(LocalNamePtrLocation+2)+"!");  // greet the user
                     SlowSpeak("Nice to meet you!");
-                    SetWordType('P',LocalNamePtrLocation+2);                     // Make sure word type is set
+                    SetswWordType('P',LocalNamePtrLocation+2);                     // Make sure word type is set
                     }
         }//end outward direction
         }//end ensure verb follows name
@@ -519,10 +519,10 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
     //----------Missing Noun Test------
     if((NounLocation == -1) && (VerbLocation >=0) && (DeterminerLocation >=0) && (AdjectiveLocation >=0)){ //no noun but has verb, determiner and adjective
-        SlowSpeak("So " + GetWords(DeterminerLocation+1)+ " can be " + GetWords(AdjectiveLocation) + "?");
+        SlowSpeak("So " + GetswWords(DeterminerLocation+1)+ " can be " + GetswWords(AdjectiveLocation) + "?");
         UserResponse = RequestUserResponse();
         if(UserResponse == 1){
-            SetWordType('n',DeterminerLocation+1);    //set the noun
+            SetswWordType('n',DeterminerLocation+1);    //set the noun
             SetInSentenceSubjectLocation(DeterminerLocation+1); //be sure subject location is newly found noun
             SlowSpeak(":)"); IncreaseMoodLevel();
             SetInSentenceHasBeenUnderstood(true);
@@ -531,10 +531,10 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
     }
     else{
         if( (NounLocation == -1) && (VerbLocation >=0) && (DeterminerLocation >=0) ){    // no noun but has verb and determiner
-            SlowSpeak(" Are we talking about a" + GetWords(DeterminerLocation+1) + "?");
+            SlowSpeak(" Are we talking about a" + GetswWords(DeterminerLocation+1) + "?");
             UserResponse = RequestUserResponse();
             if(UserResponse == 1){
-                SetWordType('n',DeterminerLocation+1);
+                SetswWordType('n',DeterminerLocation+1);
                 SetInSentenceSubjectLocation(DeterminerLocation+1);
                 SlowSpeak(":)");
                 IncreaseMoodLevel();
@@ -544,8 +544,8 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
             }
          else{
              if( (NounLocation == -1) && (VerbLocation >=0) && (GetFromSentenceHasGenderReference()) ){  // no noun but has verb and gender reference
-                if(IsThisAPropernoun(GetWords(UnKnownLocation))){
-                    SetWordType('P',UnKnownLocation);
+                if(IsThisAPropernoun(GetswWords(UnKnownLocation))){
+                    SetswWordType('P',UnKnownLocation);
                     SubjectLocationInCortex = FindSubject();
                     SetInSentenceSubjectLocation(SubjectLocationInCortex);
                     RebuildPattern();
@@ -553,7 +553,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                     Testing = false;
                     break;}
                  else  {
-                    SetWordType('n',UnKnownLocation);
+                    SetswWordType('n',UnKnownLocation);
                     SubjectLocationInCortex = FindSubject();
                     SetInSentenceSubjectLocation(SubjectLocationInCortex);
                     RebuildPattern();
@@ -570,12 +570,12 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
     // --TEST FOR MISSING VERB--------------
     for(int x= 0; x < GetFromSentenceWordCount(); x++){
-        if(GetWordType(x)=='v') localVerbLocation = x;}
+        if(GetswWordType(x)=='v') localVerbLocation = x;}
 
 
     if(localVerbLocation == -1 ){
         if(UnKnownLocation != -1){
-            SetWordType('v',UnKnownLocation);
+            SetswWordType('v',UnKnownLocation);
             Testing = false;
             SlowSpeak("Okay.");
             SetInSentenceHasBeenUnderstood(true);
@@ -592,12 +592,12 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
     if(tmpLocation >= 0){
 
 
-        SlowSpeak("So " + GetWords(NounLocation)+" can be " +
-                  GetWords(tmpLocation)+ " "+
-                  GetWords(AdjectiveLocation)+ "?");
+        SlowSpeak("So " + GetswWords(NounLocation)+" can be " +
+                  GetswWords(tmpLocation)+ " "+
+                  GetswWords(AdjectiveLocation)+ "?");
                   UserResponse = RequestUserResponse();
                   if(UserResponse == 1){ //tmpLocation has to be adverb(A)
-                        SetWordType('A',tmpLocation);
+                        SetswWordType('A',tmpLocation);
                         SlowSpeak(":)"); IncreaseMoodLevel();
                         SetInSentenceHasBeenUnderstood(true);
                   }
@@ -623,18 +623,18 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
     tmpLocation = Pattern.find("dnvdu") + Pattern.find("duvdn") + 1;  //if one .find returns -1 it is removed with the +1, if both return -1, the +1 results in -1
     if (tmpLocation>=0){
         if(!RunSilent)
-            SlowSpeak("Okay. Tell me more about " + GetWordsLC(UnKnownLocation-1) + " " + GetWordsLC(UnKnownLocation) + ".");
+            SlowSpeak("Okay. Tell me more about " + GetswWordsLC(UnKnownLocation-1) + " " + GetswWordsLC(UnKnownLocation) + ".");
             SetInSentenceHasBeenUnderstood(true);
         if(Pattern[tmpLocation+1]== 'u'){
-           AssociateMemoryCellNoun(GetWordTokens(tmpLocation),GetWordsLC(tmpLocation+1));                                 //associate first noun to second noun
-           AssociateMemoryCellNoun(GetWordTokens(tmpLocation+3),GetWordsLC(tmpLocation+4));                               //associate second noun to first noun
-           SetWordType('n',tmpLocation+1);}
+           AssociateMemoryCellNoun(GetswWordTokens(tmpLocation),GetswWordsLC(tmpLocation+1));                                 //associate first noun to second noun
+           AssociateMemoryCellNoun(GetswWordTokens(tmpLocation+3),GetswWordsLC(tmpLocation+4));                               //associate second noun to first noun
+           SetswWordType('n',tmpLocation+1);}
          else{
-           AssociateMemoryCellNoun(GetWordTokens(tmpLocation),GetWordsLC(tmpLocation+4));                                 //associate first noun to second noun
-           AssociateMemoryCellNoun(GetWordTokens(tmpLocation+3),GetWordsLC(tmpLocation+1));                               //associate second noun to first noun
-           SetWordType('n',tmpLocation+4);}
+           AssociateMemoryCellNoun(GetswWordTokens(tmpLocation),GetswWordsLC(tmpLocation+4));                                 //associate first noun to second noun
+           AssociateMemoryCellNoun(GetswWordTokens(tmpLocation+3),GetswWordsLC(tmpLocation+1));                               //associate second noun to first noun
+           SetswWordType('n',tmpLocation+4);}
         FindSubject();                                                                                                    //Update subject
-        SetSubjectInStack(GetWordTokens(GetFromSentenceSubjectLocation()),GetWords(GetFromSentenceSubjectLocation()),GetFromSentenceOriginalString());        //update subject stack
+        SetSubjectInStack(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWords(GetFromSentenceSubjectLocation()),GetFromSentenceOriginalString());        //update subject stack
         CheckForImpliedName();
         Testing = false;
         break;
@@ -645,13 +645,13 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
     //----------Adjective Test---------
     if(UnKnownLocation >=0){
-       if(GetPluralWordFlag(NounLocation) == 'p'){
-           SlowSpeak(GetWords(UnKnownLocation) + " " + GetWords(NounLocation) + "?");}
+       if(GetswPluralWordFlag(NounLocation) == 'p'){
+           SlowSpeak(GetswWords(UnKnownLocation) + " " + GetswWords(NounLocation) + "?");}
            else{
-                SlowSpeak( "A " + GetWords(UnKnownLocation) + " " + GetWords(NounLocation) + "?");}
+                SlowSpeak( "A " + GetswWords(UnKnownLocation) + " " + GetswWords(NounLocation) + "?");}
         UserResponse = RequestUserResponse();
         if(UserResponse == 1){
-            SetWordType('a',UnKnownLocation);  //set word type to adjective
+            SetswWordType('a',UnKnownLocation);  //set word type to adjective
             SlowSpeak(":)"); IncreaseMoodLevel();
             SetInSentenceHasBeenUnderstood(true);
             Testing = false;
@@ -666,7 +666,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
     //-- DNVUA -- Test for u = Adverb -----
     // the dog is very fast.
-    SlowSpeak("A " + GetWords(UnKnownLocation) + " " + GetWords(AdjectiveLocation) + " " + GetWords(GetFromSentenceSubjectLocation()) + "?");
+    SlowSpeak("A " + GetswWords(UnKnownLocation) + " " + GetswWords(AdjectiveLocation) + " " + GetswWords(GetFromSentenceSubjectLocation()) + "?");
     UserResponse = RequestUserResponse();
 
 
@@ -708,7 +708,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
 
 
-        if((GetWordTokens(DirectiveLocation) == 2972) || (GetWordTokens(DirectiveLocation)==1070)){
+        if((GetswWordTokens(DirectiveLocation) == 2972) || (GetswWordTokens(DirectiveLocation)==1070)){
             if(Verbose) cout << "compare/same directive ";
             //extract determiners 'd' from pattern
             WorkingPattern = Pattern;
@@ -735,9 +735,9 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                     case 3: //noun to noun
                         {
                             for(int x =0; x < GetFromSentenceWordCount(); x++){
-                                if((GetWordType(x)=='n')&&(Noun1 == "")) Noun1 = GetWordsLC(x);
+                                if((GetswWordType(x)=='n')&&(Noun1 == "")) Noun1 = GetswWordsLC(x);
                                 else
-                                    if(GetWordType(x)=='n') Noun2 = GetWordsLC(x);}
+                                    if(GetswWordType(x)=='n') Noun2 = GetswWordsLC(x);}
 
                              if(Verbose) cout << "Noun to Noun :" << Noun1 << " " << Noun2 << endl;
 
@@ -796,20 +796,20 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
          //error check - ensure a contraction exists
          for(int x = 0; x<= GetFromSentenceWordCount(); x++){
-                if(GetWordType(x) == 'C'){
+                if(GetswWordType(x) == 'C'){
                    if(ContractionLocation == -1)     //process first contraction only  ***TODO*** work with the others if exists
                       ContractionLocation = x;
                    ContractionCount++;}}
          if(ContractionLocation == -1) return false;
 
 
-         char   FollowingWordType    = GetWordType(ContractionLocation+1);
+         char   FollowingWordType    = GetswWordType(ContractionLocation+1);
          //char   PreceedingWordType   = GetWordType(ContractionLocation-1);   future use
          bool   Split                = false;
          bool   NeedRerun            = false;
 
-         WorkingWord           = GetWordsLC(ContractionLocation);
-         ContractionPointer    = GetQuoteLocation(ContractionLocation);
+         WorkingWord           = GetswWordsLC(ContractionLocation);
+         ContractionPointer    = GetswQuoteLocation(ContractionLocation);
          PreceedingCharacters  = WorkingWord.substr(0,ContractionPointer);
          TrailingCharacters    = WorkingWord.substr(ContractionPointer+1);
          Root                  = PreceedingCharacters;
@@ -830,12 +830,12 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
             if(TrailingCharacters == "re"){LongFormSecond = "are";}
 
          for(int x =0; x<ContractionLocation; x++){
-            NewSentence += GetWords(x) + " ";}
+            NewSentence += GetswWords(x) + " ";}
             NewSentence += LongFormFirst + " ";
             NewSentence += LongFormSecond + " ";
 
          for(int x = ContractionLocation+1; x<= GetFromSentenceWordCount(); x++){
-            NewSentence += GetWords(x)+ " ";}
+            NewSentence += GetswWords(x)+ " ";}
             strData = NewSentence;
             NeedRerun    = true;}
 
@@ -849,8 +849,8 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
             cout << "  " << "Long Form second:" << LongFormSecond << endl;
             cout << "   New Sentence:" << NewSentence << endl;}
 
-         SetContractionLongFormFirst(ContractionLocation,LongFormFirst);
-         SetContractionLongFormSecond(ContractionLocation,LongFormSecond);
+         SetswContractionLongFormFirst(ContractionLocation,LongFormFirst);
+         SetswContractionLongFormSecond(ContractionLocation,LongFormSecond);
 
           return NeedRerun;
     }
@@ -871,16 +871,16 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         int JoinerLocation = 0;
 
         for(int x = 0; x < GetFromSentenceWordCount(); x++){
-           if(GetWordType(x)=='n'){
+           if(GetswWordType(x)=='n'){
                 NounCount++;
-                if(Noun1 =="")Noun1 = GetWordsLC(x); else Noun2 = GetWordsLC(x);}
-            if(GetWordType(x)=='j') JoinerLocation = x;}
+                if(Noun1 =="")Noun1 = GetswWordsLC(x); else Noun2 = GetswWordsLC(x);}
+            if(GetswWordType(x)=='j') JoinerLocation = x;}
 
 
          if((JoinerLocation >0)&(NounCount==2)){ //two nouns with joiner
-                AssociateMemoryCellAdjective(Tokenize(Noun1),GetWordsLC(PluralPronounLocation+1));
-                AssociateMemoryCellAdjective(Tokenize(Noun2),GetWordsLC(PluralPronounLocation+1));
-                SetWordType('a',PluralPronounLocation+1);
+                AssociateMemoryCellAdjective(Tokenize(Noun1),GetswWordsLC(PluralPronounLocation+1));
+                AssociateMemoryCellAdjective(Tokenize(Noun2),GetswWordsLC(PluralPronounLocation+1));
+                SetswWordType('a',PluralPronounLocation+1);
                 SlowSpeak("Alright.");
                 SlowSpeak(":)");
                 SetInSentenceHasBeenUnderstood(true);
@@ -901,7 +901,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         int LinkedNounCount     = -1;
         int IndirectObjectLoc   = GetFromSentenceIndirectObjectLocation();
         int SubjectLocation     = GetFromSentenceSubjectLocation();
-        int AdjectiveCount      = GetMemoryCellAdjectives(GetWordTokens(SubjectLocation),Adjectives)-1;
+        int AdjectiveCount      = GetMemoryCellAdjectives(GetswWordTokens(SubjectLocation),Adjectives)-1;
         int StoryModeDetection  = GetFromSentenceOriginalString().find("story");
         bool ToMe               = false;
         bool Result             = false;
@@ -931,7 +931,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                     break;
                 }
 
-                if((GetWordsLC(0)=="how")&& (GetWordsLC(GetFromSentenceVerbLocation()) == "are") && (GetFromSentenceSubjectLocation() == -1)){
+                if((GetswWordsLC(0)=="how")&& (GetswWordsLC(GetFromSentenceVerbLocation()) == "are") && (GetFromSentenceSubjectLocation() == -1)){
                     SlowSpeak("I'm fine thanks!");
                     SlowSpeak("But I want to learn all that I can. Will you teach me something please?");
                     Response = RequestUserResponse();
@@ -944,16 +944,16 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                             SlowSpeak(":(");
                             Result = true;
                             break;}}
-                   if((GetWordsLC(0)=="how")&& (GetWordsLC(GetFromSentenceVerbLocation()) == "are") && (GetFromSentenceSubjectLocation() != -1)) {
-                      if(GetWordType(GetFromSentenceSubjectLocation())=='r'){ //this
+                   if((GetswWordsLC(0)=="how")&& (GetswWordsLC(GetFromSentenceVerbLocation()) == "are") && (GetFromSentenceSubjectLocation() != -1)) {
+                      if(GetswWordType(GetFromSentenceSubjectLocation())=='r'){ //this
                         SlowSpeak("I'm learning, just like you do.");
                         SlowSpeak("I hope that I am doing a good job.");
                         SlowSpeak(":)");
                         SetInSentenceHasBeenUnderstood(true);
                         Result = true;
                         break;}}
-                   if((GetWordsLC(0)=="how")&& (GetWordsLC(GetFromSentenceVerbLocation()) == "do") && (GetFromSentenceSubjectLocation() != -1)) {
-                      if(GetWordType(GetFromSentenceSubjectLocation())=='r'){ //this
+                   if((GetswWordsLC(0)=="how")&& (GetswWordsLC(GetFromSentenceVerbLocation()) == "do") && (GetFromSentenceSubjectLocation() != -1)) {
+                      if(GetswWordType(GetFromSentenceSubjectLocation())=='r'){ //this
                         SlowSpeak("I try.");
                         SlowSpeak(":)");
                         SetInSentenceHasBeenUnderstood(true);
@@ -961,7 +961,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                         break;}}
 
                     if(GetFromSentenceHasGenderReference()){
-                        if(GetMyGender() == GetGenderClassInSentence(GetFromSentenceSubjectLocation())){
+                        if(GetMyGender() == GetswGenderClassInSentence(GetFromSentenceSubjectLocation())){
                             SlowSpeak("Yes.");
                             Result = true;
                             SetInSentenceHasBeenUnderstood(true);
@@ -984,7 +984,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                     cout << "[c_Cortex::QuestionSentenceBreakDown()] Question direction to Report\n";
 
                 if(GetFromSentenceHasGenderDeterminer()){
-                    GenderChar = GetMemoryCellcharGenderClass(GetWordsLC(GetFromSentenceSubjectLocation()),Result);
+                    GenderChar = GetMemoryCellcharGenderClass(GetswWordsLC(GetFromSentenceSubjectLocation()),Result);
                     if(GenderChar == 'f'){SlowSpeak("Girl."); Result = true; SetInSentenceHasBeenUnderstood(true);}
                        else
                           if(GenderChar == 'm') {SlowSpeak("Boy.");Result = true; SetInSentenceHasBeenUnderstood(true);}
@@ -1007,19 +1007,19 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                 //sets MatchedAdjective to the location in the array if matched
                 //First check for Conjunction
                 if(LocalConjunctionLocation >=0){
-                    LeftOfConjunctionMatch = GetIsAdjectiveAssociatedToThisMemoryCell(GetWordTokens(GetFromSentenceSubjectLocation()),GetWords(LocalConjunctionLocation-1));
-                    RightOfConjunctionMatch = GetIsAdjectiveAssociatedToThisMemoryCell(GetWordTokens(GetFromSentenceSubjectLocation()),GetWords(LocalConjunctionLocation+1));
-                    ResponseString = "The " + GetWords(GetFromSentenceSubjectLocation()) + " ";
+                    LeftOfConjunctionMatch = GetIsAdjectiveAssociatedToThisMemoryCell(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWords(LocalConjunctionLocation-1));
+                    RightOfConjunctionMatch = GetIsAdjectiveAssociatedToThisMemoryCell(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWords(LocalConjunctionLocation+1));
+                    ResponseString = "The " + GetswWords(GetFromSentenceSubjectLocation()) + " ";
                     if(LeftOfConjunctionMatch && RightOfConjunctionMatch){
-                        ResponseString += "is " + GetWords(LocalConjunctionLocation-1) + " and " + GetWords(LocalConjunctionLocation+1) + ".";
+                        ResponseString += "is " + GetswWords(LocalConjunctionLocation-1) + " and " + GetswWords(LocalConjunctionLocation+1) + ".";
                     }
                     else{
                         if(LeftOfConjunctionMatch){
-                            ResponseString += "is " + GetWords(LocalConjunctionLocation-1) + ".";
+                            ResponseString += "is " + GetswWords(LocalConjunctionLocation-1) + ".";
                         }
                         else{
                             if(RightOfConjunctionMatch){
-                                ResponseString += "is " + GetWords(LocalConjunctionLocation+1) + ".";
+                                ResponseString += "is " + GetswWords(LocalConjunctionLocation+1) + ".";
                             }
                         }
                     }
@@ -1029,7 +1029,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                         break;
                     }
                     else{
-                        ResponseString += "is neither " + GetWords(LocalConjunctionLocation-1) + " or " + GetWords(LocalConjunctionLocation+1) + ".";
+                        ResponseString += "is neither " + GetswWords(LocalConjunctionLocation-1) + " or " + GetswWords(LocalConjunctionLocation+1) + ".";
                         SlowSpeak(ResponseString);
                         Result = true;
                         break;
@@ -1037,15 +1037,15 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                 }
 
                 for(int x = 0; x <= AdjectiveCount; x++){
-                    if(Adjectives[x] == GetWordTokens(GetFromSentenceAdjectiveLocation())) MatchedAdjective = x; }
+                    if(Adjectives[x] == GetswWordTokens(GetFromSentenceAdjectiveLocation())) MatchedAdjective = x; }
                 //Checks for direct comparison of linked nouns between the subject and the indirect object
                 //sets MatchedAdjective is found
                 if(IndirectObjectLoc >=0){
-                    if(GetIsNounRelatedToThisMemoryCell(GetWordTokens(SubjectLocation),GetWordsLC(IndirectObjectLoc))==true) MatchedAdjective = 1;
+                    if(GetIsNounRelatedToThisMemoryCell(GetswWordTokens(SubjectLocation),GetswWordsLC(IndirectObjectLoc))==true) MatchedAdjective = 1;
                 }
                 //checks for an indirect comparison between the subjects linked nouns and the indirect object linked nouns
                 //sets MatchedAdjective if found
-                LinkedNounCount = GetMemoryCellRelatedNouns(GetWordTokens(GetFromSentenceSubjectLocation()),LinkedNouns);
+                LinkedNounCount = GetMemoryCellRelatedNouns(GetswWordTokens(GetFromSentenceSubjectLocation()),LinkedNouns);
                 for(int x =0; x < LinkedNounCount; x++){
                         ///*************NEEDS FIXED, won't work because of tokens
 //                    if(GetIsNounRelatedToThisMemoryCell(GetWordTokens(GetIndirectObjectLocation()),GetMemoryCellDataLC("",LinkedNouns[x]))){
@@ -1056,14 +1056,14 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                 //Checks for gender class request
                 if(isGenderIndicator){
                     string FemaleIndicators = " girl female woman women ";
-                    int    LocatorPlace     = FemaleIndicators.find(GetWordsLC(GenderIndicatorLocation));
-                    char   SubjectsGender   = GetGenderClassInSentence(GetFromSentenceSubjectLocation());
+                    int    LocatorPlace     = FemaleIndicators.find(GetswWordsLC(GenderIndicatorLocation));
+                    char   SubjectsGender   = GetswGenderClassInSentence(GetFromSentenceSubjectLocation());
 
                     if( (SubjectsGender == 'f') && (LocatorPlace >=0) ){
                         MatchedAdjective = 3;  //just using the variable as a control here
                     }
 
-                    if( SubjectsGender == GetGenderClassInSentence(GenderIndicatorLocation)){
+                    if( SubjectsGender == GetswGenderClassInSentence(GenderIndicatorLocation)){
                         MatchedAdjective = 3;  //just using the variable as a control here
                     }
 
@@ -1077,14 +1077,14 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
              case 4: {//Proper noun reference
                 if(Verbose)
                     cout << "[c_Cortex::QuestionSentenceBreakDown()] Question direction Proper noun reference\n";
-                 string  ReferenceWord = GetWordsLC(GetFromSentenceSubjectLocation());
+                 string  ReferenceWord = GetswWordsLC(GetFromSentenceSubjectLocation());
                  bool    OwnerShip,Plural;
                  string  Root,LongFormFirst,LongFormSecond;
                  string  strData = "";
                  //int     RelatedNouns[20];
                  //int     RelatedNounCount = -1;
 
-                 if(GetWordType(GetFromSentenceSubjectLocation())=='C'){
+                 if(GetswWordType(GetFromSentenceSubjectLocation())=='C'){
                      DeconstructContractions(OwnerShip,Plural,ReferenceWord,LongFormFirst,LongFormSecond,strData);}
 
                  //RelatedNounCount = GetMemoryCellRelatedNouns(Tokenize(ReferenceWord),RelatedNouns);
@@ -1095,8 +1095,8 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 //                        Result = true;
 //                 }
 
-                   if((GetWordsLC(0)=="what")&&
-                      (GetWordsLC(GetFromSentenceVerbLocation()) == "is")&&
+                   if((GetswWordsLC(0)=="what")&&
+                      (GetswWordsLC(GetFromSentenceVerbLocation()) == "is")&&
                       (GetFromSentenceNamePointer() != -1) && (ToMe) ) {
                         SlowSpeak(GetMyName());
                         SlowSpeak(":)");
@@ -1168,14 +1168,14 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
     // must also start with capital letter
 
     int Response = -1;
-    char FirstWordFirstLetter = GetWords(GetFromSentenceSubjectLocation())[0];
-    if ((FirstWordFirstLetter >='A' && FirstWordFirstLetter <= 'Z' && GetWordType(GetFromSentenceSubjectLocation()) == 'n') || (GetWordType(GetFromSentenceSubjectLocation())=='P')){
-        SlowSpeak("Is " + GetWords(GetFromSentenceSubjectLocation())+ " the " + GetWords(GetFromSentenceIndirectObjectLocation()) + "'s name?");
+    char FirstWordFirstLetter = GetswWords(GetFromSentenceSubjectLocation())[0];
+    if ((FirstWordFirstLetter >='A' && FirstWordFirstLetter <= 'Z' && GetswWordType(GetFromSentenceSubjectLocation()) == 'n') || (GetswWordType(GetFromSentenceSubjectLocation())=='P')){
+        SlowSpeak("Is " + GetswWords(GetFromSentenceSubjectLocation())+ " the " + GetswWords(GetFromSentenceIndirectObjectLocation()) + "'s name?");
         Response = RequestUserResponse();
         if(Response == 1){ // yes
             //set subject to Proper Noun
-            SetWordType('P',GetFromSentenceSubjectLocation());
-            SetSubjectInStack(GetWordTokens(GetFromSentenceSubjectLocation()),GetWords(GetFromSentenceSubjectLocation()),GetFromSentenceOriginalString());
+            SetswWordType('P',GetFromSentenceSubjectLocation());
+            SetSubjectInStack(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWords(GetFromSentenceSubjectLocation()),GetFromSentenceOriginalString());
             IncreaseMoodLevel();
             SetInSentenceHasBeenUnderstood(true);
             QuizForGenderInformation();
@@ -1199,22 +1199,22 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         string OtherString      = " neither none not no ";
         int    Response         = -4;
 
-        if(GetGenderClassInSentence(GetFromSentenceSubjectLocation())=='u'){
-            SlowSpeak("Is " + GetWords(GetFromSentenceSubjectLocation()) + " a boy or girl?");
+        if(GetswGenderClassInSentence(GetFromSentenceSubjectLocation())=='u'){
+            SlowSpeak("Is " + GetswWords(GetFromSentenceSubjectLocation()) + " a boy or girl?");
             Response = RequestUserResponse(PositiveString,NegativeString,OtherString);
             if(Response == 1){ // boy
-                SetGenderClassInSentence(GetFromSentenceSubjectLocation(),'m');
+                SetswGenderClassInSentence(GetFromSentenceSubjectLocation(),'m');
                 SlowSpeak("Ok");
                 SetInSentenceHasBeenUnderstood(true);}
                 else
                 if(Response == -1){ // girl
-                    SetGenderClassInSentence(GetFromSentenceSubjectLocation(),'f');
+                    SetswGenderClassInSentence(GetFromSentenceSubjectLocation(),'f');
                     SlowSpeak("Like me!");
                     SlowSpeak(":)");
                     SetInSentenceHasBeenUnderstood(true);}
                     else
                     if(Response == -2){ //neither
-                        SetGenderClassInSentence(GetFromSentenceSubjectLocation(),'n');}
+                        SetswGenderClassInSentence(GetFromSentenceSubjectLocation(),'n');}
         }
     }
 
@@ -1230,11 +1230,11 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
 
         string MaleProNouns          = " he him his ";
         string FemaleProNouns        = " she her hers ";
-        string SubjectText           = GetWords(GetFromSentenceIndirectObjectLocation());
+        string SubjectText           = GetswWords(GetFromSentenceIndirectObjectLocation());
         string ProNounResolution     = "";
         char   GenderClass           = '\0';
-        int    MatchedM              = MaleProNouns.find(" " + GetWordsLC(GetFromSentenceSubjectLocation())+" ");
-        int    MatchedF              = FemaleProNouns.find(" " + GetWordsLC(GetFromSentenceSubjectLocation())+" ");
+        int    MatchedM              = MaleProNouns.find(" " + GetswWordsLC(GetFromSentenceSubjectLocation())+" ");
+        int    MatchedF              = FemaleProNouns.find(" " + GetswWordsLC(GetFromSentenceSubjectLocation())+" ");
         int    Response              = -1;
         int    PronounPosition       = -1;
         bool   Checking              = true;
@@ -1242,7 +1242,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         if(GetFromSentenceIsQuestion()) Checking = false;
 
         for(int x = 0; x <= GetFromSentenceWordCount(); x++){
-            if((GetWordType(x) == 'p')|| (GetWordType(x) == 'm')||(GetWordType(x) == 'y'))PronounPosition = x;}
+            if((GetswWordType(x) == 'p')|| (GetswWordType(x) == 'm')||(GetswWordType(x) == 'y'))PronounPosition = x;}
 
         while(Checking){
                 if(MatchedF >=0){
@@ -1253,30 +1253,30 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                         ProNounResolution = "boy";
                         GenderClass       = 'm';}
 
-                if( (GetWordType(GetFromSentenceSubjectLocation()) == 'p') && ((MatchedF + MatchedM +1) >=0) ){
-                   if(GetMemoryCellcharGenderClass(GetWordsLC(GetFromSentenceIndirectObjectLocation()),Result) == 'u'){
+                if( (GetswWordType(GetFromSentenceSubjectLocation()) == 'p') && ((MatchedF + MatchedM +1) >=0) ){
+                   if(GetMemoryCellcharGenderClass(GetswWordsLC(GetFromSentenceIndirectObjectLocation()),Result) == 'u'){
                     SlowSpeak("So the " + SubjectText + " is a " + ProNounResolution + "?");
                     Response = RequestUserResponse();
                     if(Response == 1){
-                        SetMemorypGenderClass(GetWordsLC(GetFromSentenceIndirectObjectLocation()),GenderClass);
+                        SetMemorypGenderClass(GetswWordsLC(GetFromSentenceIndirectObjectLocation()),GenderClass);
                         SlowSpeak("Okay."); SlowSpeak(":)"); IncreaseMoodLevel();SetInSentenceHasBeenUnderstood(true);
-                        SetGenderClassInSentence(GetFromSentenceIndirectObjectLocation(),GenderClass);
+                        SetswGenderClassInSentence(GetFromSentenceIndirectObjectLocation(),GenderClass);
                         Checking = false;
                         break;}
                    }
                 }
 
-                MatchedM = MaleProNouns.find(" " + GetWordsLC(PronounPosition)+ " ");
-                MatchedF = FemaleProNouns.find(" " + GetWordsLC(PronounPosition)+ " ");
+                MatchedM = MaleProNouns.find(" " + GetswWordsLC(PronounPosition)+ " ");
+                MatchedF = FemaleProNouns.find(" " + GetswWordsLC(PronounPosition)+ " ");
 
-                if(GetGenderClassInSentence(GetFromSentenceSubjectLocation()) == 'u'){
+                if(GetswGenderClassInSentence(GetFromSentenceSubjectLocation()) == 'u'){
                     if(MatchedM >=0){
-                        SetGenderClassInSentence(GetFromSentenceSubjectLocation(),'m');
+                        SetswGenderClassInSentence(GetFromSentenceSubjectLocation(),'m');
                         Checking = false;
                         break;}
                     else
                         if(MatchedF >=0){
-                            SetGenderClassInSentence(GetFromSentenceSubjectLocation(),'f');
+                            SetswGenderClassInSentence(GetFromSentenceSubjectLocation(),'f');
                             Checking = false;
                             break;}
                 }

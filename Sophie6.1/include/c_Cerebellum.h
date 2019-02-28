@@ -77,6 +77,11 @@ public:
         //check for empty sentence
         if(LocalWordCount == 0) return -1;
 
+        for (int x = 0; x <= LocalWordCount; x++) FindWordType(GetswWordsLC(x),x);
+        FindSubject();
+        FindAndSetGistOfSentence();
+
+
         //*******NOTE: c_Language.h::FindWordType() sets the follow in c_Sentence.h private variables
         //     bool   IsQuestion
         //     bool   HasPluralPronoun
@@ -99,10 +104,10 @@ public:
         //     int    sUnderstandingLevel (SET HERE)
 
         for(int x = 0; x  <= LocalWordCount-1; x++){                                //***First try to set wordtype
-            LocalWordType    = FindWordType(GetWordsLC(x),x);                       //Get Wordtype from language helper, receives 'u' if can't determine
-            MemoryWordType   = GetMemoryCellcharWordType(GetWordsLC(x),Result);     //Get Wordtype from memory cell, receives NULL if doesn't exist, else returns CellWordType
-            SentenceWordType = GetWordType(x);                                      //Get Wordtype from c_sentence
-            LocalWordCopy    = GetWords(x);                                         //Get a copy of the word
+            LocalWordType    = FindWordType(GetswWordsLC(x),x);                       //Get Wordtype from language helper, receives 'u' if can't determine
+            MemoryWordType   = GetMemoryCellcharWordType(GetswWordsLC(x),Result);     //Get Wordtype from memory cell, receives NULL if doesn't exist, else returns CellWordType
+            SentenceWordType = GetswWordType(x);                                      //Get Wordtype from c_sentence
+            LocalWordCopy    = GetswWords(x);                                         //Get a copy of the word
 
             if(MemoryWordType == '\0') MemoryWordType = 'u';
 
@@ -138,37 +143,37 @@ public:
          if(QuoteMarker >=0) SelectedWordType = 'C';                                //Mark the word type
 
          LocalPattern += SelectedWordType;                                          //build the pattern as we go
-         SetWordType(SelectedWordType,x);                                           //set the selected word type in the sentence
+         SetswWordType(SelectedWordType,x);                                         //set the selected word type in the sentence
          if(SelectedWordType == 'n') LocalNounCount++;                              //count the nouns
          if(SelectedWordType == 'v') LocalVerbLocation = x;                         //save the verb location
          if(SelectedWordType == 'g') LocalNamePointer = x;                          //save the name pointer
          if(SelectedWordType == 'A') LocalAdverbLocation = x;                       //save the Adverb location
          if(SelectedWordType == 'a') LocalAdjectiveLocation = x;                    //save the adjective location
          if(SelectedWordType == 'C') LocalContractionFlag = true;                   //mark has contraction
-         if(SelectedWordType == 'c') SetInSentenceConjunctionLocation(x);                     //save the conjunction location
+         if(SelectedWordType == 'c') SetInSentenceConjunctionLocation(x);           //save the conjunction location
 
-         LocalGenderClass = GetMemoryCellcharGenderClass(GetWordsLC(x),Result);     //take care of GenderClass in sentence
+         LocalGenderClass = GetMemoryCellcharGenderClass(GetswWordsLC(x),Result);     //take care of GenderClass in sentence
          if(LocalGenderClass != 'u')
-            SetGenderClassInSentence(x,LocalGenderClass);
+            SetswGenderClassInSentence(x,LocalGenderClass);
 
-        SetWordType(SelectedWordType,x);                                            //update word type in sentence class
+        SetswWordType(SelectedWordType,x);                                            //update word type in sentence class
         } //END of for loop to scan sentence
 
-        SetInSentenceAdjectiveLocation(LocalAdjectiveLocation);                               //store in c_Sentence
-        SetInSentenceAdverbLocation(LocalAdverbLocation);                                     //store in c_Sentence
-        SetInSentenceNamePointer(LocalNamePointer);                                           //store in c_Sentence
-        SetInSentenceVerbLocation(LocalVerbLocation);                                         //store in c_Sentence
-        SetInSentenceNounCount(LocalNounCount);                                               //store in c_Sentence
+        SetInSentenceAdjectiveLocation(LocalAdjectiveLocation);                               //store  ADJECTIVE LOCATION in c_Sentence
+        SetInSentenceAdverbLocation(LocalAdverbLocation);                                     //store  ADVERB LOCATION in c_Sentence
+        SetInSentenceNamePointer(LocalNamePointer);                                           //store  NAME POINTER in c_Sentence
+        SetInSentenceVerbLocation(LocalVerbLocation);                                         //store  VERB LOCATION in c_Sentence
+        SetInSentenceNounCount(LocalNounCount);                                               //store  NOUN COUNT in c_Sentence
         if(LocalHasAlternateType){
-            SetAlternateType(LocalAlternateType,LocalAltLocation);                  //store in c_Sentence
+            SetswAlternateType(LocalAlternateType,LocalAltLocation);                          //store in c_Sentence
         }
         SetInSentenceHasContraction(LocalContractionFlag);                                    //Store contraction flag
         SetInSentenceSentenceDirection(DetermineDirectionOfPhrase());                         //Store phrase/question direction in sentence data
-        SetInSentencesDaysOld(GetDaysSinceDate());                                  //day stamp this sentence
-        LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);            //Check for corrections
+        SetInSentencesDaysOld(GetDaysSinceDate());                                            //day stamp this sentence
+        LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);                      //Check for corrections
         SetInSentencePattern(LocalPattern);                                                   //store in c_Sentence
 
-        for (int x = 0; x < int(LocalPattern.size()); x++ ){                       //for calc in understanding level
+        for (int x = 0; x < int(LocalPattern.size()); x++ ){                                  //for calc in understanding level
             if(LocalPattern[x] == 'u')
               LocalUnknownCount ++;
             else
@@ -195,22 +200,22 @@ public:
 
          //Pull from memory cells and set all word data
          for(int x =0; x <= LocalWordCount; x++){
-          for(int y = 0; y < GetAdjectiveFromWordCount(x); y++){
-            SetAdjectiveToWord(x,GetAdjectiveFromList(y));}
-          for(int y = 0; y < GetAdverbFromWordCount(x); y++){
-            SetAdverbToWord(x,GetAdverbFromList(y));}
-          for(int y = 0; y < GetNounFromWordCount(x); y++){
-            SetNounToWord(x,GetNounFromList(y));}
-          for(int y = 0; y < GetMiniDefinitionCount(x); y++){
-            SetMiniDefinition(x,GetMemoryCellMiniDef(GetWordsLC(x),Result,y));}
+          for(int y = 0; y < GetswAdjectiveFromWordCount(x); y++){        //fix this count source
+            SetswAdjectiveToWord(x,GetAdjectiveFromList(y));}
+          for(int y = 0; y < GetswAdverbFromWordCount(x); y++){          //fix this count source
+            SetswAdverbToWord(x,GetAdverbFromList(y));}
+          for(int y = 0; y < GetswNounFromWordCount(x); y++){        //fix this count source
+            SetswNounToWord(x,GetNounFromList(y));}
+          for(int y = 0; y < GetswMiniDefinitionCount(x); y++){  //fix this count source
+            SetswMiniDefinition(x,GetMemoryCellMiniDef(GetswWordsLC(x),Result,y));}
 
-          SetSingularForm(x,GetMemoryCellpSingularForm(GetWordsLC(x)));
-          SetPossessiveRootType(x,GetMemoryCellPossessiveRootType(GetWordsLC(x),Result));
-          SetPossessiveRoot(x,GetMemoryCellPossessiveRoot(GetWordsLC(x),Result));
-          SetisSingularPossessive(x,GetMemoryCellIsSingularPossessive(GetWordsLC(x),Result));
-          SetisPluralPossessive(x,GetMemoryCellIsPluralPossessive(GetWordsLC(x),Result));
+          SetswSingularForm(x,GetMemoryCellpSingularForm(GetswWordsLC(x)));
+          SetswPossessiveRootType(x,GetMemoryCellPossessiveRootType(GetswWordsLC(x),Result));
+          SetswPossessiveRoot(x,GetMemoryCellPossessiveRoot(GetswWordsLC(x),Result));
+          SetswisSingularPossessive(x,GetMemoryCellIsSingularPossessive(GetswWordsLC(x),Result));
+          SetswisPluralPossessive(x,GetMemoryCellIsPluralPossessive(GetswWordsLC(x),Result));
           //SetPluralWordFlag(x,Getmemorycell)   correct this all the way to memory cell
-          SetPluralRoot(x,GetMemoryCellpSingularForm(GetWordsLC(x)));
+          SetswPluralRoot(x,GetMemoryCellpSingularForm(GetswWordsLC(x)));
           //SetIsPluralWord(x,Getmemorycell)   memory cell doesn't agree with this type
           //Finish all word data transfer
          }//end of all words for loop
@@ -244,14 +249,14 @@ public:
         string cSentenceDirection   = "muYPMGx";
 
         for(int x =0; x<= GetFromSentenceWordCount(); x++){
-            if((GetWordType(x)== 'm')&&(DirectionDetected == -1)){ DirectionDetected = 0;}        //mentioned me, so to me
+            if((GetswWordType(x)== 'm')&&(DirectionDetected == -1)){ DirectionDetected = 0;}        //mentioned me, so to me
              else
-                if((GetWordType(x)=='y')&&(DirectionDetected == -1)) DirectionDetected = 1;       //user mentioned self, so to user
+                if((GetswWordType(x)=='y')&&(DirectionDetected == -1)) DirectionDetected = 1;       //user mentioned self, so to user
                   else
-                    if((GetWordType(x)=='B')&&(DirectionDetected == -1)) DirectionDetected = 2;}  //user used a pronoun
+                    if((GetswWordType(x)=='B')&&(DirectionDetected == -1)) DirectionDetected = 2;}  //user used a pronoun
 
-        if(GetWordType(0) == 'v'){
-            if( (GetWordsLC(0)=="is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)== "will") || (GetWordsLC(0)=="are") || (GetWordsLC(0)== "do") || (GetWordsLC(0)=="would") ){
+        if(GetswWordType(0) == 'v'){
+            if( (GetswWordsLC(0)=="is") || (GetswWordsLC(0)=="can") || (GetswWordsLC(0)== "will") || (GetswWordsLC(0)=="are") || (GetswWordsLC(0)== "do") || (GetswWordsLC(0)=="would") ){
                 DirectionDetected = 3;}}                                                          //most likely a question
 
         PatternMatch = WorkingPattern.find('g');
@@ -263,7 +268,7 @@ public:
         PatternMatch = WorkingPattern.find("qdnv") + WorkingPattern.find("qvdn") + 1;
         if (PatternMatch >= 0){
             DirectionDetected = 2;}
-        if(GetWordsLC(0) == "who"){
+        if(GetswWordsLC(0) == "who"){
             DirectionDetected = 5;}                                                               //data miner, i.e. who fell down
 
         if(Verbose)

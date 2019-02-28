@@ -142,7 +142,7 @@ class c_Language : public c_LongTermMemory
         //(1)
         PatternPointer = CorrectedPattern.find('P');
         if(PatternPointer >=0){
-            WorkingWord = GetWords(PatternPointer);
+            WorkingWord = GetswWords(PatternPointer);
             if((WorkingWord[0]>='A') && (WorkingWord[0]<='Z')){
                 //rule passed
                 if(Verbose)
@@ -199,7 +199,7 @@ class c_Language : public c_LongTermMemory
            string ConjunctionWords =    " or either ";
            string PrepositionWords =    " in into after to on with within of at until across among throughout during towards upon across ";
            string SingularWord  =       "";
-           string UCWord        =       GetWords(LocationInSentence);
+           string UCWord        =       GetswWords(LocationInSentence);
 
            int  isPreposition       = -1;
            int  isThrowAwayWord     = -1;
@@ -235,7 +235,7 @@ class c_Language : public c_LongTermMemory
               for(int t = 0; t < int(tmpWord.size()); t++){
                 tmpWord[t] = tolower(tmpWord[t]);}
               OrigWord     = tmpWord;
-              OrigWordUC   = GetWords(LocationInSentence);
+              OrigWordUC   = GetswWords(LocationInSentence);
               tmpWord = " " + tmpWord + " ";
 
                 ActionMarker        = tmpWord.find("ing");
@@ -305,13 +305,13 @@ class c_Language : public c_LongTermMemory
                         tmpWordType = 'B';
                         SetInSentenceHasGenderDeterminer(true);}
                   if ((isFemaleGenderClass >=0) && (LocationInSentence != -1)){
-                        SetGenderClassInSentence(LocationInSentence,'f');}
+                        SetswGenderClassInSentence(LocationInSentence,'f');}
                   if ((isMaleGenderClass >=0) && (LocationInSentence != -1)){
-                        SetGenderClassInSentence(LocationInSentence,'m');}
+                        SetswGenderClassInSentence(LocationInSentence,'m');}
                   if(isPluralVerb >=0){
                         tmpWordType = 'v';
-                        SetIsPluralWord(LocationInSentence,true);
-                        SetPluralWordFlag(LocationInSentence,'p');}
+                        SetswIsPluralWord(LocationInSentence,true);
+                        SetswPluralWordFlag(LocationInSentence,'p');}
                   if(isPreposition >=0){
                         tmpWordType = 'I';
                         SetInSentenceHasPreposition(true);
@@ -369,9 +369,9 @@ class c_Language : public c_LongTermMemory
                         PatternMarker = OrigWord.find("s'");
                         if ((PatternMarker >=0)&&((PatternMarker+2)==int(OrigWord.size())) && ((OrigWordUC[0]>='A') && (OrigWordUC[0] <= 'Z')) ){
                             SingularWord = OrigWord.substr(0,PatternMarker+1);
-                            SetIsPluralWord(LocationInSentence,true);
-                            SetPluralRoot(LocationInSentence,SingularWord);
-                            SetPluralWordFlag(LocationInSentence,'p');
+                            SetswIsPluralWord(LocationInSentence,true);
+                            SetswPluralRoot(LocationInSentence,SingularWord);
+                            SetswPluralWordFlag(LocationInSentence,'p');
                             tmpWordType = 'P'; //proper noun
                             RuleTesting = false;
                             IsPlural    = true;
@@ -387,10 +387,10 @@ class c_Language : public c_LongTermMemory
                                 SingularWord += "f";
                                 else
                                     SingularWord +="fe";
-                            SetIsPluralWord(LocationInSentence,true);
-                            SetPluralRoot(LocationInSentence,SingularWord);
-                            SetPluralWordFlag(LocationInSentence,'p');
-                            SetWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
+                            SetswIsPluralWord(LocationInSentence,true);
+                            SetswPluralRoot(LocationInSentence,SingularWord);
+                            SetswPluralWordFlag(LocationInSentence,'p');
+                            SetswWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
                             tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
                             RuleTesting = false;
                             IsPlural    = true;
@@ -403,11 +403,11 @@ class c_Language : public c_LongTermMemory
                         if((PatternMarker >=0)&&((PatternMarker+3)==int(OrigWord.size()))){
                             SingularWord = OrigWord.substr(0,PatternMarker);
                             SingularWord +="se";
-                            SetIsPluralWord(LocationInSentence,true);
-                            SetPluralRoot(LocationInSentence,SingularWord);
-                            SetPluralWordFlag(LocationInSentence,'p');
+                            SetswIsPluralWord(LocationInSentence,true);
+                            SetswPluralRoot(LocationInSentence,SingularWord);
+                            SetswPluralWordFlag(LocationInSentence,'p');
                             tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
-                            SetWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
+                            SetswWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -420,10 +420,10 @@ class c_Language : public c_LongTermMemory
                         if((PatternMarker >=0)&&((PatternMarker+3)==int(OrigWord.size()))){
                             SingularWord = OrigWord.substr(0,PatternMarker);
                             SingularWord +="ff";
-                            SetIsPluralWord(LocationInSentence,true);
-                            SetPluralRoot(LocationInSentence,SingularWord);
-                            SetPluralWordFlag(LocationInSentence,'p');
-                            SetWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
+                            SetswIsPluralWord(LocationInSentence,true);
+                            SetswPluralRoot(LocationInSentence,SingularWord);
+                            SetswPluralWordFlag(LocationInSentence,'p');
+                            SetswWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
                             tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
                             RuleTesting = false;
                             IsPlural    = true;
@@ -437,10 +437,10 @@ class c_Language : public c_LongTermMemory
                         //Location must be the ending
                         if((PatternMarker >=0)&&((PatternMarker+2)==int(OrigWord.size()))){
                             SingularWord = OrigWord.substr(0,PatternMarker);
-                            SetIsPluralWord(LocationInSentence,true);
-                            SetPluralRoot(LocationInSentence,SingularWord);
-                            SetPluralWordFlag(LocationInSentence,'p');
-                            SetWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
+                            SetswIsPluralWord(LocationInSentence,true);
+                            SetswPluralRoot(LocationInSentence,SingularWord);
+                            SetswPluralWordFlag(LocationInSentence,'p');
+                            SetswWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
                             tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
                             RuleTesting = false;
                             IsPlural    = true;
@@ -458,10 +458,10 @@ class c_Language : public c_LongTermMemory
                             }
                             else{
                                 SingularWord = OrigWord.substr(0,PatternMarker);
-                                SetIsPluralWord(LocationInSentence,true);
-                                SetPluralRoot(LocationInSentence,SingularWord);
-                                SetPluralWordFlag(LocationInSentence,'p');
-                                SetWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
+                                SetswIsPluralWord(LocationInSentence,true);
+                                SetswPluralRoot(LocationInSentence,SingularWord);
+                                SetswPluralWordFlag(LocationInSentence,'p');
+                                SetswWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
                                 tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
                                 RuleTesting = false;
                                 IsPlural    = true;
@@ -472,7 +472,7 @@ class c_Language : public c_LongTermMemory
                         RuleTesting = false;
                   }
                   if(!IsPlural){
-                      SetPluralWordFlag(LocationInSentence,'s');  //set as singular
+                      SetswPluralWordFlag(LocationInSentence,'s');  //set as singular
                   }
 
             if(Verbose)
@@ -564,21 +564,22 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 
             WordCount = GetFromSentenceWordCount();
 
-            if ((GetWordsLC(0)== "is") || (GetWordsLC(0)=="can") || (GetWordsLC(0)=="will") || (GetWordsLC(0)=="are") ) SetInSentenceIsQuestion(true);
+            if ((GetswWordsLC(0)== "is") || (GetswWordsLC(0)=="can") || (GetswWordsLC(0)=="will") || (GetswWordsLC(0)=="are") ) SetInSentenceIsQuestion(true);
 
             for(int x = 0; x < WordCount; x++){
-                if(GetWordType(x)== 'd') if(DeterminerLocation == -1) DeterminerLocation = x;
-                if(GetWordType(x)== 'u') if(UnknownLocation == -1)    UnknownLocation    = x;
-                if(GetWordType(x)== 'n'){if(NounLocation == -1)    { NounLocation       = x;} else SecondNounLocation = x;}
-                if(GetWordType(x)== 'r') if(SubLocation == -1)        SubLocation        = x;
-                if(GetWordType(x)== 'p') if(ProNounLocation == -1)    ProNounLocation    = x;
-                if(GetWordType(x)== 'P') if(ProperNounLocation == -1) ProperNounLocation = x;
-                if(GetWordType(x)== 'm') if(ProNounLocation == -1) ProNounLocation = x;
-                if(GetWordType(x)== 'y') if(ProNounLocation == -1) ProNounLocation = x;
-                if(GetWordType(x)== 'j') JoinerLocation = x;
-                if(GetWordType(x)== 'v'){ SetInSentenceVerbLocation(x);}
-                if(GetWordType(x)== 'a'){ SetInSentenceAdjectiveLocation(x);}
-                Pattern += GetWordType(x);
+                if(GetswWordType(x)== 'd') if(DeterminerLocation == -1) DeterminerLocation = x;
+                if(GetswWordType(x)== 'u') if(UnknownLocation == -1)    UnknownLocation    = x;
+                if(GetswWordType(x)== 'n'){if(NounLocation == -1)    { NounLocation       = x;} else SecondNounLocation = x;}
+                if(GetswWordType(x)== 'r') if(SubLocation == -1)        SubLocation        = x;
+                if(GetswWordType(x)== 'p') if(ProNounLocation == -1)    ProNounLocation    = x;
+                if(GetswWordType(x)== 'P') if(ProperNounLocation == -1) ProperNounLocation = x;
+                if(GetswWordType(x)== 'm') if(ProNounLocation == -1) ProNounLocation = x;
+                if(GetswWordType(x)== 'y') if(ProNounLocation == -1) ProNounLocation = x;
+                if(GetswWordType(x)== 'j') JoinerLocation = x;
+                if(GetswWordType(x)== 'v'){ SetInSentenceVerbLocation(x);}
+                if(GetswWordType(x)== 'a'){ SetInSentenceAdjectiveLocation(x);}
+                if(GetswWordType(x)== 'A'){ SetInSentenceAdverbLocation(x);}
+                Pattern += GetswWordType(x);
             }
             SetInSentencePattern(Pattern);
             if(SecondNounLocation != -1) SetInSentenceIndirectObjectLocation(SecondNounLocation); else SetInSentenceIndirectObjectLocation(-1);
@@ -616,12 +617,12 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                 if(JoinerLocation >= 1){                      //check for dual subjects
                     if((JoinerLocation +1) == SubLocation){
                         SetInSentenceHasDualSubjects(true);
-                        SetInSentenceSecondSubject(GetWords(JoinerLocation - 1));
+                        SetInSentenceSecondSubject(GetswWords(JoinerLocation - 1));
                         SetInSentenceSecondSubjectLocation(JoinerLocation - 1);}
                      else {
                         if((JoinerLocation - 1) == SubLocation)
                         {SetInSentenceHasDualSubjects(true);
-                         SetInSentenceSecondSubject(GetWords(JoinerLocation + 1));
+                         SetInSentenceSecondSubject(GetswWords(JoinerLocation + 1));
                          SetInSentenceSecondSubjectLocation(JoinerLocation + 1);}
                      }
                 }
@@ -663,7 +664,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                         //process gist of question
                         GistStart = QuestionPointer+1;
                         for (int x = QuestionPointer+1; x <= GetFromSentenceWordCount(); x++){
-                            GistString += " " + GetWords(x);
+                            GistString += " " + GetswWords(x);
                         }
                         Result = true;     //control, Gist was found
                         Checking = false;
@@ -684,7 +685,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                         }
                         GistStart = VerbPointer;
                         for(int x = VerbPointer; x <= StopPoint; x++){
-                            GistString += " " + GetWords(x);
+                            GistString += " " + GetswWords(x);
                         }
                         Result   = true;  //control, Gist was found
                         Checking = false;
@@ -698,13 +699,13 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                                 StopPoint = VerbPointer;
                             }
                             for (int x = GetFromSentencePrepositionPosition(); x < StopPoint; x++){
-                                subGistString += " " + GetWords(x);
+                                subGistString += " " + GetswWords(x);
                             }
                         }
                         else
                         if(JoinerPointer>=0){
                             for(int x = JoinerPointer+1; x <=GetFromSentenceWordCount(); x++){
-                                subGistString += " " + GetWords(x);
+                                subGistString += " " + GetswWords(x);
                             }
                         }
                     }
@@ -713,7 +714,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 
             if(Result){ //extract supportive gist to the beginning of the gist
                     for(int x = 0; x<= GistStart-1; x++){
-                        SupportiveGist += GetWords(x) + " ";
+                        SupportiveGist += GetswWords(x) + " ";
                     }
 
             }
@@ -765,7 +766,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             PatternPointer = LocalPattern.find("duI");
             while(PatternPointer >=0){
                 LocalPattern[PatternPointer+1] = 'n';
-                SetWordType('n',PatternPointer+1);
+                SetswWordType('n',PatternPointer+1);
                 SetInSentencePattern(LocalPattern);
                 PatternPointer = LocalPattern.find("duI");   //check again
                 SettingPattern = false;
@@ -775,16 +776,16 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             PatternPointer = LocalPattern.find("duvu");
             if(PatternPointer >= 0){
                 LocalPattern[PatternPointer+1] = 'n';
-                SetWordType('n',PatternPointer+1);
+                SetswWordType('n',PatternPointer+1);
                 SetInSentencePattern(LocalPattern);
                 break;}
 
 
             PatternPointer = LocalPattern.find("pu"); //check for implied noun by ownership, i.e. "his bone"
             if(PatternPointer >= 0){
-               if((GetWordsLC(PatternPointer) == "his") || (GetWordsLC(PatternPointer) == "her")){
+               if((GetswWordsLC(PatternPointer) == "his") || (GetswWordsLC(PatternPointer) == "her")){
                    LocalPattern[PatternPointer+1] = 'n';
-                   SetWordType('n',PatternPointer+1);
+                   SetswWordType('n',PatternPointer+1);
                    SetInSentencePattern(LocalPattern);
                    SettingPattern = false;
                    break;}

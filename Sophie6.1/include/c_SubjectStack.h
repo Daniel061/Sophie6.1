@@ -52,24 +52,24 @@ class c_SubjectStack :  public c_Sentence
              if(sbjDataIT == SubjectDataMap.end()){
                 WorkingsbjData.InitializeAllSubjectVariables();
                 WorkingsbjData.SetsbjSubjectPhrase(GetFromSentenceOriginalString());
-                WorkingsbjData.SetsbjSubjectStringOriginal(GetWords(GetFromSentenceSubjectLocation()));
-                WorkingsbjData.SetsbjSubjectStringLC(GetWordsLC(GetFromSentenceSubjectLocation()));
-                WorkingsbjData.SetsbjSubjectContractionLongFormFirst(GetContractionLongFormFirst(GetFromSentenceSubjectLocation()));
-                WorkingsbjData.SetsbjSubjectContractionLongFormSecond(GetContractionLongFormSecond(GetFromSentenceSubjectLocation()));
+                WorkingsbjData.SetsbjSubjectStringOriginal(GetswWords(GetFromSentenceSubjectLocation()));
+                WorkingsbjData.SetsbjSubjectStringLC(GetswWordsLC(GetFromSentenceSubjectLocation()));
+                WorkingsbjData.SetsbjSubjectContractionLongFormFirst(GetswContractionLongFormFirst(GetFromSentenceSubjectLocation()));
+                WorkingsbjData.SetsbjSubjectContractionLongFormSecond(GetswContractionLongFormSecond(GetFromSentenceSubjectLocation()));
                 WorkingsbjData.SetsbjSubjectPatternResolved(GetFromSentencePattern());
                 //WorkingsbjData.SetsbjSubjectPatternBeforeResolution(); //need this sent to me
-                WorkingsbjData.SetsbjGenderClass(GetGenderClassInSentence(GetFromSentenceSubjectLocation()));
-                WorkingsbjData.SetsbjWordType(GetWordType(GetFromSentenceSubjectLocation()));
+                WorkingsbjData.SetsbjGenderClass(GetswGenderClassInSentence(GetFromSentenceSubjectLocation()));
+                WorkingsbjData.SetsbjWordType(GetswWordType(GetFromSentenceSubjectLocation()));
                 //WorkingsbjData.SetsbjWordTense(getWordTense); // needs to be added to c_Sentence and data storage
-                WorkingsbjData.SetsbjIsSingular(GetIsPluralWord(GetFromSentenceSubjectLocation()));
-                WorkingsbjData.SetsbjIsContraction(GetisContraction(GetFromSentenceSubjectLocation()));
-                WorkingsbjData.SetsbjSingularLocation(Tokenize(GetPluralRoot(GetFromSentenceSubjectLocation())));
+                WorkingsbjData.SetsbjIsSingular(GetswIsPluralWord(GetFromSentenceSubjectLocation()));
+                WorkingsbjData.SetsbjIsContraction(GetswisContraction(GetFromSentenceSubjectLocation()));
+                WorkingsbjData.SetsbjSingularLocation(Tokenize(GetswPluralRoot(GetFromSentenceSubjectLocation())));
                 WorkingsbjData.SetsbjPhraseToken(Tokenize(GetFromSentenceOriginalString(),false));
                 WorkingsbjData.SetsbjSubjectLocation(GetFromSentenceSubjectLocation());
                 WorkingsbjData.SetsbjIndirectObjectLocation(GetFromSentenceIndirectObjectLocation());
-                WorkingsbjData.SetsbjWordToken(GetWordTokens(GetFromSentenceSubjectLocation()));
-                adjCount  = GetMemoryCellAdjectives(GetWordTokens(GetFromSentenceSubjectLocation()),Adjectives);
-                nounCount = GetMemoryCellRelatedNouns(GetWordTokens(GetFromSentenceSubjectLocation()),RelatedNouns);
+                WorkingsbjData.SetsbjWordToken(GetswWordTokens(GetFromSentenceSubjectLocation()));
+                adjCount  = GetMemoryCellAdjectives(GetswWordTokens(GetFromSentenceSubjectLocation()),Adjectives);
+                nounCount = GetMemoryCellRelatedNouns(GetswWordTokens(GetFromSentenceSubjectLocation()),RelatedNouns);
                 for(int x = 0; x< adjCount; x++){
                         ///***********************NEEDS FIXED************************************* remove tokens!!
                   //  WorkingsbjData.SetsbjAdjectiveInMap(GetMemoryCellRawStringData(Result,"",Adjectives[x]),Adjectives[x]);
@@ -80,29 +80,29 @@ class c_SubjectStack :  public c_Sentence
                 sbjDataIT = SubjectDataMap.begin();
                 SubjectDataMap.emplace_hint(sbjDataIT,WorkingsbjData.GetsbjWordToken(),WorkingsbjData);
                 sbjOrderIT = SubjectOrder.begin();
-                SubjectOrder.insert(sbjOrderIT,GetWordTokens(GetFromSentenceSubjectLocation()));
+                SubjectOrder.insert(sbjOrderIT,GetswWordTokens(GetFromSentenceSubjectLocation()));
             }
             else{
                 sbjDataIT->second.SetsbjSubjectPhrase(GetFromSentenceOriginalString());
-                sbjDataIT->second.SetsbjSubjectStringOriginal(GetWords(GetFromSentenceSubjectLocation()));
-                sbjDataIT->second.SetsbjSubjectStringLC(GetWordsLC(GetFromSentenceSubjectLocation()));
-                sbjDataIT->second.SetsbjSubjectContractionLongFormFirst(GetContractionLongFormFirst(GetFromSentenceSubjectLocation()));
-                sbjDataIT->second.SetsbjSubjectContractionLongFormSecond(GetContractionLongFormSecond(GetFromSentenceSubjectLocation()));
+                sbjDataIT->second.SetsbjSubjectStringOriginal(GetswWords(GetFromSentenceSubjectLocation()));
+                sbjDataIT->second.SetsbjSubjectStringLC(GetswWordsLC(GetFromSentenceSubjectLocation()));
+                sbjDataIT->second.SetsbjSubjectContractionLongFormFirst(GetswContractionLongFormFirst(GetFromSentenceSubjectLocation()));
+                sbjDataIT->second.SetsbjSubjectContractionLongFormSecond(GetswContractionLongFormSecond(GetFromSentenceSubjectLocation()));
                 sbjDataIT->second.SetsbjSubjectPatternResolved(GetFromSentencePattern());
                 //sbjDataIT->second.SetsbjSubjectPatternBeforeResolution(); //need this sent to me
-                sbjDataIT->second.SetsbjGenderClass(GetGenderClassInSentence(GetFromSentenceSubjectLocation()));
-                sbjDataIT->second.SetsbjWordType(GetWordType(GetFromSentenceSubjectLocation()));
+                sbjDataIT->second.SetsbjGenderClass(GetswGenderClassInSentence(GetFromSentenceSubjectLocation()));
+                sbjDataIT->second.SetsbjWordType(GetswWordType(GetFromSentenceSubjectLocation()));
                 // sbjDataIT->second.SetsbjWordTense(getWordTense); // needs to be added to c_Sentence and data storage
-                sbjDataIT->second.SetsbjIsSingular(GetIsPluralWord(GetFromSentenceSubjectLocation()));
-                sbjDataIT->second.SetsbjIsContraction(GetisContraction(GetFromSentenceSubjectLocation()));
-                sbjDataIT->second.SetsbjSingularLocation(Tokenize(GetPluralRoot(GetFromSentenceSubjectLocation())));
+                sbjDataIT->second.SetsbjIsSingular(GetswIsPluralWord(GetFromSentenceSubjectLocation()));
+                sbjDataIT->second.SetsbjIsContraction(GetswisContraction(GetFromSentenceSubjectLocation()));
+                sbjDataIT->second.SetsbjSingularLocation(Tokenize(GetswPluralRoot(GetFromSentenceSubjectLocation())));
                 sbjDataIT->second.SetsbjPhraseToken(Tokenize(GetFromSentenceOriginalString(),false));
                 sbjDataIT->second.SetsbjSubjectLocation(GetFromSentenceSubjectLocation());
                 sbjDataIT->second.SetsbjIndirectObjectLocation(GetFromSentenceIndirectObjectLocation());
-                sbjDataIT->second.SetsbjWordToken(GetWordTokens(GetFromSentenceSubjectLocation()));
+                sbjDataIT->second.SetsbjWordToken(GetswWordTokens(GetFromSentenceSubjectLocation()));
                 sbjDataIT->second.SetsbjSubjectCountPlusOne();
-                adjCount  = GetMemoryCellAdjectives(GetWordTokens(GetFromSentenceSubjectLocation()),Adjectives);
-                nounCount = GetMemoryCellRelatedNouns(GetWordTokens(GetFromSentenceSubjectLocation()),RelatedNouns);
+                adjCount  = GetMemoryCellAdjectives(GetswWordTokens(GetFromSentenceSubjectLocation()),Adjectives);
+                nounCount = GetMemoryCellRelatedNouns(GetswWordTokens(GetFromSentenceSubjectLocation()),RelatedNouns);
                 ///************************NEEDS FIXED  remove token based search*************************************
                 for(int x = 0; x< adjCount; x++){
                   //  sbjDataIT->second.SetsbjAdjectiveInMap(GetMemoryCellRawStringData(Result,"",Adjectives[x]),Adjectives[x]);
@@ -111,8 +111,8 @@ class c_SubjectStack :  public c_Sentence
                   //  sbjDataIT->second.SetsbjRelatedNounInMap(GetMemoryCellRawStringData(Result,"",RelatedNouns[x]),RelatedNouns[x]);
                 }
                 sbjOrderIT = SubjectOrder.begin();
-                if(*sbjOrderIT != GetWordTokens(GetFromSentenceSubjectLocation())) //not already at the top
-                   SubjectOrder.insert(sbjOrderIT,GetWordTokens(GetFromSentenceSubjectLocation()));
+                if(*sbjOrderIT != GetswWordTokens(GetFromSentenceSubjectLocation())) //not already at the top
+                   SubjectOrder.insert(sbjOrderIT,GetswWordTokens(GetFromSentenceSubjectLocation()));
 
             }
 
