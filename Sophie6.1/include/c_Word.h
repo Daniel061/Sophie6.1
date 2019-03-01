@@ -37,6 +37,7 @@ class c_Word
           unordered_set <string>::iterator SetIT;    // iterator
           unordered_set <string> w_Adjectives;       // adjectives used towards this word
           unordered_set <string> w_Adverbs;          // adverbs used towards this word
+          unordered_set <string> w_Verbs;            // verbs used towards this word
           unordered_set <string> w_RelatedNouns;     // Nouns related to this word
 
     private:
@@ -142,17 +143,29 @@ class c_Word
                  else
                     return *SetIT;}
 
+        string   Getw_Verb(int Location){
+                 SetIT == w_Verbs.begin();
+                 for(int x =0; x <= Location; x++) ++SetIT;
+                 if(SetIT == w_Verbs.end())
+                    return "";
+                 else
+                    return *SetIT;}
+
          void    Setw_RelatedNoun(string newVal){w_RelatedNouns.emplace(newVal);}
 
          void    Setw_Adjective(string newVal){w_Adjectives.emplace(newVal);}
 
          void    Setw_Adverb(string newVal){w_Adverbs.emplace(newVal);}
 
+         void    Setw_Verb(string newVal){w_Verbs.emplace(newVal);}
+
          int     Getw_RelatedNounCount(){return w_RelatedNouns.size();}
 
          int     Getw_AdjectiveCount(){return w_Adjectives.size();}
 
          int     Getw_AdverbCount(){return w_Adverbs.size();}
+
+         int     Getw_VerbCount(){return w_Verbs.size();}
 
         void c_WordInitializeAll(){
 

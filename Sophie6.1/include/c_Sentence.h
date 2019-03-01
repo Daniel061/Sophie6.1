@@ -282,6 +282,9 @@ class c_Sentence : public c_Personality
         string GetswNounFromWord(int Location, int WhichNoun){return WordMap[Location].Getw_RelatedNoun(WhichNoun);}
         int    GetswNounFromWordCount(int Location){return WordMap[Location].Getw_RelatedNounCount();}
 
+        void   SetswVerbToWord(int Location, string VerbToSet){WordMap[Location].Setw_Verb(VerbToSet);}
+        string GetswVerbFromWord(int Location, int WhichVerb){return WordMap[Location].Getw_Verb(WhichVerb);}
+        int    GetswVerbFromWordCount(int Location){return WordMap[Location].Getw_VerbCount();}
         ///*******************END ALL WORD DATA FUNCTIONS*********************
 
 

@@ -205,7 +205,10 @@ class c_LongTermMemory : public c_SubjectStack
         /// Function to ensure all word data gathered and worked on is stored in memory cells,
         ///  this should be called when all processing is complete,
         ///  Sentence word data has 20 variables,
+        ///  Word.h has 23 variables,
         ///  Memory Cell has 25 variables.
+// TODO (Dan#1#): finish saving all word and sentence data to memory
+
         void SaveAllSentenceWordDataToMemory(){
             int     NewWordCount     = 0;
             int     UpDatedWordCount = 0;
@@ -213,7 +216,7 @@ class c_LongTermMemory : public c_SubjectStack
 
             for(int x = 0; x <= GetFromSentenceWordCount(); x++){
                 //start storing all the word data
-                Result = SetMemoryCellpCellData(GetswWords(x));                                            /// 1   raw data
+                Result = SetMemoryCellpCellData(GetswWords(x));                                              /// 1   raw data
                 if(Result)
                     NewWordCount++;
                 else
@@ -235,7 +238,7 @@ class c_LongTermMemory : public c_SubjectStack
                 SetMemorypAlternateType(GetswWordsLC(x),GetswAlternateType(x));                              /// 16  alternate type
                 if((x == GetFromSentenceSubjectLocation()) && (!GetFromSentenceIsQuestion()) ){
                     SetMemorypCellMiniDefinition(GetswWordsLC(x),GetFromSentenceGistOfSentence());}                      //use gist if subject & not a question sentence
-                                                                                                           /// 17  mini def
+                                                                                                             /// 17  mini def
                 GetMemoryCellpDaysOld(GetswWordsLC(x),Result);
                 if(Result){
                     SetMemoryCellpDaysOld(GetswWordsLC(x),GetDaysSinceDate());}                              /// 18  pDaysOld

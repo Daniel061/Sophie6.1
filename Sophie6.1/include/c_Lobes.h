@@ -475,6 +475,14 @@ class c_Lobes : public c_MemoryCell
                else
                     return "";}
 
+        /// Gets pCellMiniDefinitionCount
+        int  GetMemoryCellMiniDefinitionCount(string strSearchBase, bool &Result){
+            Result    = false;
+            CellMapIT = FindStringInMap(strSearchBase, Result);
+            if(Result){
+                return CellMapIT->second.GetpCellMiniDefinitionCount();}
+            else
+                return -1;}
 
         /// Gets Contraction first form if exists, else return ""
         ///  Returns True in the address of &Result if exists
@@ -715,13 +723,107 @@ class c_Lobes : public c_MemoryCell
         /// Returns True in the address of &Result if exists
         /// Returns pResolvedPattern
         /// Send owner word in strSearchBase
-
         string GetMemoryCellpResolvedPattern(string strSearchBase, bool &Result){
-           Result = false;
+           Result      = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
                     return CellMapIT->second.GetpCellResolvedPattern();}
                else
+                    return "";}
+
+        /// Gets number of adjectives if strSearch base exists, else return -1 - default
+        /// Returns True in the address of &Result if exists
+        /// Returns int number of adjectives
+        /// Send owner word in strSearchBase
+       int     GetMemoryCellNumberOfAdjectives(string strSearchBase, bool &Result){
+           Result      = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+                if(Result){
+                    return CellMapIT->second.GetNumberOfAdjectivesInList();}
+                else{
+                    return -1;}}
+
+        /// Gets number of adverbs if strSearch base exists, else return -1 - default
+        /// Returns True in the address of &Result if exists
+        /// Returns int number of adverbs
+        /// Send owner word in strSearchBase
+       int     GetMemoryCellNumberOfAdVerbs(string strSearchBase, bool &Result){
+           Result      = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+                if(Result){
+                    return CellMapIT->second.GetNumberOfAdverbsInList();}
+                else{
+                    return -1;}}
+
+        /// Gets number of verbs if strSearch base exists, else return -1 - default
+        /// Returns True in the address of &Result if exists
+        /// Returns int number of verbs
+        /// Send owner word in strSearchBase
+       int     GetMemoryCellNumberOfVerbs(string strSearchBase, bool &Result){
+           Result      = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+                if(Result){
+                    return CellMapIT->second.GetNumberOfVerbsInList();}
+                else{
+                    return -1;}}
+
+        /// Gets number of related nouns if strSearch base exists, else return -1 - default
+        /// Returns True in the address of &Result if exists
+        /// Returns int number of related nouns
+        /// Send owner word in strSearchBase
+       int     GetMemoryCellNumberOfRelatedNouns(string strSearchBase, bool &Result){
+           Result      = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+                if(Result){
+                    return CellMapIT->second.GetNumberOfRelatedNounsInList();}
+                else{
+                    return -1;}}
+
+         /// Get adjective from memory cell list if strSearchBase exists
+         /// Returns string adjective and true in address of Result if exists,
+         /// otherwise returns "" and false;
+        string  GetMemoryCellAdjectiveFromList(string strSearchBase, int intWhich, bool &Result){
+            Result     = false;
+            CellMapIT  = FindStringInMap(strSearchBase,Result);
+                 if(Result){
+                    return CellMapIT->second.GetAdjectiveFromList(intWhich);}
+                 else
+                    return "";}
+
+         /// Get adverb from memory cell list if strSearchBase exists
+         /// Returns string adverb and true in address of Result if exists,
+         /// otherwise returns "" and false;
+        string  GetMemoryCellAdverbFromList(string strSearchBase, int intWhich, bool &Result){
+            Result     = false;
+            CellMapIT  = FindStringInMap(strSearchBase,Result);
+                 if(Result){
+                    return CellMapIT->second.GetAdverbFromList(intWhich);}
+                 else
+                    return "";}
+
+
+         /// Get Verb from memory cell list if strSearchBase exists
+         /// Returns string Verb and true in address of Result if exists,
+         /// otherwise returns "" and false;
+        string  GetMemoryCellVerbFromList(string strSearchBase, int intWhich, bool &Result){
+            Result     = false;
+            CellMapIT  = FindStringInMap(strSearchBase,Result);
+                 if(Result){
+                    return CellMapIT->second.GetVerbFromList(intWhich);}
+                 else
+                    return "";}
+
+
+
+         /// Get Noun from memory cell list if strSearchBase exists
+         /// Returns string Noun and true in address of Result if exists,
+         /// otherwise returns "" and false;
+        string  GetMemoryCellNounFromList(string strSearchBase, int intWhich, bool &Result){
+            Result     = false;
+            CellMapIT  = FindStringInMap(strSearchBase,Result);
+                 if(Result){
+                    return CellMapIT->second.GetNounFromList(intWhich);}
+                 else
                     return "";}
 
 ///-----------------------Old Memory cell map functions-----------------------------///

@@ -10,4 +10,6 @@ string  MakeStringLowerCase(string);
 int     Tokenize (string,bool);
 int     GetDaysSinceDate();
 
+// TODO (Dan#1#): transfer SlowSpeak and RequestUserResponse to here
+
 #endif // LIBRARY_H_INCLUDED

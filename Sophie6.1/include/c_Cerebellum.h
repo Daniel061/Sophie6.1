@@ -199,14 +199,18 @@ public:
          SetInSentencesUnderstandingLevel(LocalUnderstandingDegree);                          //store the understanding degree for c_Cortex to use
 
          //Pull from memory cells and set all word data
+
+
          for(int x =0; x <= LocalWordCount; x++){
-          for(int y = 0; y < GetswAdjectiveFromWordCount(x); y++){        //fix this count source
-            SetswAdjectiveToWord(x,GetAdjectiveFromList(y));}
-          for(int y = 0; y < GetswAdverbFromWordCount(x); y++){          //fix this count source
-            SetswAdverbToWord(x,GetAdverbFromList(y));}
-          for(int y = 0; y < GetswNounFromWordCount(x); y++){        //fix this count source
-            SetswNounToWord(x,GetNounFromList(y));}
-          for(int y = 0; y < GetswMiniDefinitionCount(x); y++){  //fix this count source
+          for(int y = 0; y < GetMemoryCellNumberOfAdjectives(GetswWordsLC(x),Result); y++){
+            SetswAdjectiveToWord(x,GetMemoryCellAdjectiveFromList(GetswWordsLC(x),y,Result));}
+          for(int y = 0; y < GetMemoryCellNumberOfAdVerbs(GetswWordsLC(x),Result); y++){
+            SetswAdverbToWord(x,GetMemoryCellAdverbFromList(GetswWordsLC(x),y,Result));}
+          for(int y = 0; y < GetMemoryCellNumberOfVerbs(GetswWordsLC(x),Result); y++){
+            SetswVerbToWord(x,GetMemoryCellVerbFromList(GetswWordsLC(x),y,Result));}
+          for(int y = 0; y < GetMemoryCellNumberOfRelatedNouns(GetswWordsLC(x),Result); y++){
+            SetswNounToWord(x,GetMemoryCellNounFromList(GetswWordsLC(x),y,Result));}
+          for(int y = 0; y < GetMemoryCellMiniDefinitionCount(GetswWordsLC(x),Result); y++){
             SetswMiniDefinition(x,GetMemoryCellMiniDef(GetswWordsLC(x),Result,y));}
 
           SetswSingularForm(x,GetMemoryCellpSingularForm(GetswWordsLC(x)));
@@ -214,6 +218,9 @@ public:
           SetswPossessiveRoot(x,GetMemoryCellPossessiveRoot(GetswWordsLC(x),Result));
           SetswisSingularPossessive(x,GetMemoryCellIsSingularPossessive(GetswWordsLC(x),Result));
           SetswisPluralPossessive(x,GetMemoryCellIsPluralPossessive(GetswWordsLC(x),Result));
+          SetswContractionLongFormFirst(x,GetMemoryCellContractionFirst(GetswWordsLC(x),Result));
+          SetswContractionLongFormSecond(x,GetMemoryCellContractionSecond(GetswWordsLC(x),Result));
+          //SetswSubWords(x,Getmemorycellsubwords)
           //SetPluralWordFlag(x,Getmemorycell)   correct this all the way to memory cell
           SetswPluralRoot(x,GetMemoryCellpSingularForm(GetswWordsLC(x)));
           //SetIsPluralWord(x,Getmemorycell)   memory cell doesn't agree with this type
