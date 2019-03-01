@@ -406,7 +406,40 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
+        bool  SetMemoryCellAdjectiveInList(string strSearchBase, string AdjectiveToSet){
+            bool Result   = false;
+            CellMapIT     = FindStringInMap(strSearchBase,Result);
+            if(Result){
+                CellMapIT->second.AssociateAdjectiveInMap(AdjectiveToSet);}
+            return Result;
+        }
 
+
+        bool  SetMemoryCellAdverbInList(string strSearchBase, string AdverbToSet){
+            bool Result   = false;
+            CellMapIT     = FindStringInMap(strSearchBase,Result);
+            if(Result){
+                CellMapIT->second.AssociateAdverbToVerbInMap(AdverbToSet,"");}
+            return Result;
+        }
+
+
+        bool  SetMemoryCellVerbInList(string strSearchBase, string VerbToSet){
+            bool Result   = false;
+            CellMapIT     = FindStringInMap(strSearchBase,Result);
+            if(Result){
+                CellMapIT->second.AssociateVerbToAdjectiveInMap(VerbToSet,"");}
+            return Result;
+        }
+
+
+         bool  SetMemoryCellNounInList(string strSearchBase, string NounToSet){
+            bool Result   = false;
+            CellMapIT     = FindStringInMap(strSearchBase,Result);
+            if(Result){
+                CellMapIT->second.AssociateNounInMap(NounToSet);}
+            return Result;
+        }
 
 ///---------------------END SET FUNCTIONS---------------------------------------
 

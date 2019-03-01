@@ -66,10 +66,10 @@ class c_Brain : public c_Cerebellum
                  SaveSentenceInLongTermMemory(strData);                                                 //update Long Term Memory
                  GatherAndSetAllSentenceData();                                                         //check language helper, memory and pattern review for data
                  SetInSentencePreProcessedPattern(GetFromSentencePattern());                            //save for later review
-                 //FindAndSetGistOfSentence();                                                            //save phrases of the sentence
+                 //FindAndSetGistOfSentence();                                                          //save phrases of the sentence
                  if(IsThisSentenceDuplicated(strData))
                     SlowSpeak("You said that before.");
-                 if(GetFromSentenceHasContraction()){                                                               //break contraction apart and rewrite sentence if so, rerun the process
+                 if(GetFromSentenceHasContraction()){                                                   //break contraction apart and rewrite sentence if so, rerun the process
                    NeedRerun = DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,strData);
                    if(NeedRerun){
                     StoreNewWords();
@@ -83,10 +83,10 @@ class c_Brain : public c_Cerebellum
                    }
                  }
                  SubjectLocation = FindSubject();                                                           //try to located subject
-                 SetInSentenceSubjectLocation(SubjectLocation);                                                       //set the suggestion
+                 SetInSentenceSubjectLocation(SubjectLocation);                                             //set the suggestion
                  RebuildPattern();
                  FirstPattern = GetFromSentencePreProcessedPattern();
-                 CheckedPattern = PatternReview(GetFromSentencePattern(),ConfidenceLevel);                              //see if language class can enhance pattern
+                 CheckedPattern = PatternReview(GetFromSentencePattern(),ConfidenceLevel);                  //see if language class can enhance pattern
                  if(Verbose){
                         cout << "Processed Pattern:" << CheckedPattern << ":" << GetFromSentencePattern() << "Confidence level: " << ConfidenceLevel << endl;}
                  if(CheckedPattern != GetFromSentencePattern()){
@@ -100,15 +100,16 @@ class c_Brain : public c_Cerebellum
                  NeedRerun = DecipherCurrentSentence(strData);                                             //work with sentence
                  if(!NeedRerun){
                      SubjectLocation = FindSubject();                                                      // need to run this again to see if any indirect objects
-                     SetInSentenceSubjectLocation(SubjectLocation);                                                  //store the location or -1
+                     SetInSentenceSubjectLocation(SubjectLocation);                                        //store the location or -1
                      StoreNewWords();                                                                      //save any new words in rBrainCells
                      SaveAllSentenceWordDataToMemory();                                                    //new function to save all to memory
                      RebuildPattern();
-                     SaveProcessedPattern(GetFromSentencePattern());                                                   //update short term memory
+                     SaveProcessedPattern(GetFromSentencePattern());                                       //update short term memory
                      if(SubjectLocation >=0)
                         SetSubjectInStack(GetswWordTokens(SubjectLocation),GetswWords(SubjectLocation),GetFromSentenceOriginalString());
-                     SavePreAndPostPatternConstruction(FirstPattern,GetFromSentencePattern());                         //save learned pattern for future// language helper to use this
+                     SavePreAndPostPatternConstruction(FirstPattern,GetFromSentencePattern());             //save learned pattern for future// language helper to use this
                      SaveCurrentSentenceInMap();
+                     SaveAllSentenceWordDataToMemory();
                      }
                    }
                    else

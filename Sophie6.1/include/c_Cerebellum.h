@@ -79,7 +79,6 @@ public:
 
         for (int x = 0; x <= LocalWordCount; x++) FindWordType(GetswWordsLC(x),x);
         FindSubject();
-        FindAndSetGistOfSentence();
 
 
         //*******NOTE: c_Language.h::FindWordType() sets the follow in c_Sentence.h private variables
@@ -224,11 +223,15 @@ public:
           //SetPluralWordFlag(x,Getmemorycell)   correct this all the way to memory cell
           SetswPluralRoot(x,GetMemoryCellpSingularForm(GetswWordsLC(x)));
           //SetIsPluralWord(x,Getmemorycell)   memory cell doesn't agree with this type
-          //Finish all word data transfer
+          //SetswisContraction(x,getmemorycellisContraction)
+          SetswWordTense(x,GetMemoryCellcharWordTense(GetswWordsLC(x),Result));
+
+
+          //Finished all word data transfer
          }//end of all words for loop
 
          ImplyUnknowns();                                                           //let language try to set some unknowns
-
+         FindAndSetGistOfSentence();
         return LocalWordCount;                                                      //finished
 
     }

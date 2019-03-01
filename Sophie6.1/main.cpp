@@ -24,7 +24,7 @@
 
 using namespace std;
 c_Brain Brain;
-string Version = "6.1.04.EN.009.028";
+string Version = "6.1.05.EN.009.028";
 bool Verbose;
 bool StoryMode = false;
 int  BaseSpeed = 600000000;

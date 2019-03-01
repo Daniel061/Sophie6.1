@@ -243,10 +243,19 @@ class c_LongTermMemory : public c_SubjectStack
                 if(Result){
                     SetMemoryCellpDaysOld(GetswWordsLC(x),GetDaysSinceDate());}                              /// 18  pDaysOld
 
+                for(int y = 0; y < GetswAdjectiveFromWordCount(x); y++){
+                    SetMemoryCellAdjectiveInList(GetswWordsLC(x),GetswAdjectiveFromWord(x,y));}
+
+                for(int y = 0; y < GetswAdverbFromWordCount(x); y++){
+                    SetMemoryCellAdverbInList(GetswWordsLC(x),GetswAdverbFromWord(x,y));}
+
+                for(int y = 0; y < GetswNounFromWordCount(x); y++){
+                    SetMemoryCellNounInList(GetswWordsLC(x),GetswNounFromWord(x,y));}
+
+// TODO (Dan#1#): find storing to memory cells the remaining lists
 
 
-
-            }
+            }// end for word count loop
 
 
         }

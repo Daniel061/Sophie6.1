@@ -1,4 +1,4 @@
-VERSION 6.1.04.EN.009.028, file version
+VERSION 6.1.05.EN.009.028, file version
 Original string,
 Lower Case string,
 Given name,
@@ -22,9 +22,8 @@ Is Singular Possessive,0
 Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
-Day stamp,58
-Number of Mini Defs,1
-Mini Def.,
+Day stamp,59
+Number of Mini Defs,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
@@ -46,13 +45,13 @@ Is Singular,s
 Singular location,0
 Next Verb,0
 Next Noun,0
-Token,1
+Token,1670
 Resolved Pattern,
 Is Singular Possessive,0
 Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
-Day stamp,55
+Day stamp,59
 Number of Mini Defs,0
 Number of Adjectives,0
 Nunber of Verbs,0
@@ -81,9 +80,8 @@ Is Singular Possessive,0
 Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
-Day stamp,54
-Number of Mini Defs,1
-Mini Def.,
+Day stamp,59
+Number of Mini Defs,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
@@ -111,9 +109,8 @@ Is Singular Possessive,0
 Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
-Day stamp,54
-Number of Mini Defs,1
-Mini Def.,
+Day stamp,59
+Number of Mini Defs,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
@@ -141,98 +138,8 @@ Is Singular Possessive,0
 Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
-Day stamp,58
-Number of Mini Defs,1
-Mini Def.,
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,cat
-Lower Case string,cat
-Given name,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,n
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Locked(old is set),1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,24
-Resolved Pattern,
-Is Singular Possessive,0
-Is Plural Possessive,0
-Possessive Root,
-Possessive Root Type,u
-Day stamp,54
-Number of Mini Defs,1
-Mini Def.,is an animal 
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,cold
-Lower Case string,cold
-Given name,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,a
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Locked(old is set),1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,4624
-Resolved Pattern,
-Is Singular Possessive,0
-Is Plural Possessive,0
-Possessive Root,
-Possessive Root Type,u
-Day stamp,54
+Day stamp,59
 Number of Mini Defs,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,color
-Lower Case string,color
-Given name,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,n
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Locked(old is set),1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,1
-Resolved Pattern,
-Is Singular Possessive,0
-Is Plural Possessive,0
-Possessive Root,
-Possessive Root Type,u
-Day stamp,55
-Number of Mini Defs,1
-Mini Def.,is a color 
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
@@ -260,13 +167,11 @@ Is Singular Possessive,0
 Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
-Day stamp,58
-Number of Mini Defs,5
+Day stamp,59
+Number of Mini Defs,3
+Mini Def.,is a pet 
 Mini Def.,is black 
 Mini Def.,
-Mini Def.,is wet 
-Mini Def.,is cold 
-Mini Def.,is an animal 
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
@@ -294,9 +199,37 @@ Is Singular Possessive,0
 Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
-Day stamp,58
-Number of Mini Defs,1
-Mini Def.,
+Day stamp,59
+Number of Mini Defs,0
+Number of Adjectives,0
+Nunber of Verbs,0
+Number of Adverbs,0
+Related Nouns,0
+Original string,pet
+Lower Case string,pet
+Given name,
+Contraction 1st,
+Contraction 2nd,
+Cell purpose,w
+Word Type,n
+Word tense,u
+Secondary type,u
+Alternate type,u
+Gender class,u
+Is root,0
+Is Locked(old is set),1
+Is Singular,s
+Singular location,0
+Next Verb,0
+Next Noun,0
+Token,1670
+Resolved Pattern,
+Is Singular Possessive,0
+Is Plural Possessive,0
+Possessive Root,
+Possessive Root Type,u
+Day stamp,59
+Number of Mini Defs,0
 Number of Adjectives,0
 Nunber of Verbs,0
 Number of Adverbs,0
@@ -324,66 +257,7 @@ Is Singular Possessive,0
 Is Plural Possessive,0
 Possessive Root,
 Possessive Root Type,u
-Day stamp,58
-Number of Mini Defs,1
-Mini Def.,
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,wet
-Lower Case string,wet
-Given name,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,a
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Locked(old is set),1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,2370
-Resolved Pattern,
-Is Singular Possessive,0
-Is Plural Possessive,0
-Possessive Root,
-Possessive Root Type,u
-Day stamp,54
-Number of Mini Defs,0
-Number of Adjectives,0
-Nunber of Verbs,0
-Number of Adverbs,0
-Related Nouns,0
-Original string,what
-Lower Case string,what
-Given name,
-Contraction 1st,
-Contraction 2nd,
-Cell purpose,w
-Word Type,q
-Word tense,u
-Secondary type,u
-Alternate type,u
-Gender class,u
-Is root,0
-Is Locked(old is set),1
-Is Singular,s
-Singular location,0
-Next Verb,0
-Next Noun,0
-Token,23830
-Resolved Pattern,
-Is Singular Possessive,0
-Is Plural Possessive,0
-Possessive Root,
-Possessive Root Type,u
-Day stamp,55
+Day stamp,59
 Number of Mini Defs,0
 Number of Adjectives,0
 Nunber of Verbs,0
