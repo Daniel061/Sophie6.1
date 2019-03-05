@@ -32,6 +32,9 @@ class c_Word
           char    w_SecondaryType           = 'u';   // some words have more than 1 usage
           char    w_AlternativeType         = 'u';   // some words have more than 1 usage
           char    w_WordTense               = 'u';   // c - present p - past
+          char    w_Polarity                = 'u';   // positive/negative
+//TODO: Store w_Polarity in files
+//TODO: Add Gets/Sets
 
           unordered_set <string> w_MiniDefinition;   // if this word is a subject, gist of sentence is here too
           unordered_set <string>::iterator SetIT;    // iterator
@@ -120,7 +123,7 @@ class c_Word
         void     Setw_PossessiveRootType(char newVal){w_PossessiveRootType = newVal;}
 
         string   Getw_RelatedNoun(int Location){
-                 SetIT == w_RelatedNouns.begin();
+                 SetIT = w_RelatedNouns.begin();
                  for(int x =0; x <= Location; x++) ++SetIT;
                  if(SetIT == w_RelatedNouns.end())
                     return "";
@@ -128,7 +131,7 @@ class c_Word
                     return *SetIT;}
 
         string   Getw_Adjective(int Location){
-                 SetIT == w_Adjectives.begin();
+                 SetIT = w_Adjectives.begin();
                  for(int x =0; x <= Location; x++) ++SetIT;
                  if(SetIT == w_Adjectives.end())
                     return "";
@@ -136,7 +139,7 @@ class c_Word
                     return *SetIT;}
 
         string   Getw_Adverb(int Location){
-                 SetIT == w_Adverbs.begin();
+                 SetIT = w_Adverbs.begin();
                  for(int x =0; x <= Location; x++) ++SetIT;
                  if(SetIT == w_Adverbs.end())
                     return "";
@@ -144,7 +147,7 @@ class c_Word
                     return *SetIT;}
 
         string   Getw_Verb(int Location){
-                 SetIT == w_Verbs.begin();
+                 SetIT = w_Verbs.begin();
                  for(int x =0; x <= Location; x++) ++SetIT;
                  if(SetIT == w_Verbs.end())
                     return "";

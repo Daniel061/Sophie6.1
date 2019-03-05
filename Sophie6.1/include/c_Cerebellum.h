@@ -200,15 +200,25 @@ public:
          //Pull from memory cells and set all word data
 
 
-         for(int x =0; x <= LocalWordCount; x++){
+         for(int x =0; x < LocalWordCount; x++){
+
           for(int y = 0; y < GetMemoryCellNumberOfAdjectives(GetswWordsLC(x),Result); y++){
-            SetswAdjectiveToWord(x,GetMemoryCellAdjectiveFromList(GetswWordsLC(x),y,Result));}
+            if (Verbose)
+                cout << "Setting adjective " << GetMemoryCellAdjectiveFromList(GetswWordsLC(x),y,Result) << " to " << GetswWordsLC(x) << endl;
+            SetswAdjectiveToWord(x,GetMemoryCellAdjectiveFromList(GetswWordsLC(x),y,Result));
+            if (Verbose)
+                cout << "Completed " << boolalpha << Result << endl;
+          }
+
           for(int y = 0; y < GetMemoryCellNumberOfAdVerbs(GetswWordsLC(x),Result); y++){
             SetswAdverbToWord(x,GetMemoryCellAdverbFromList(GetswWordsLC(x),y,Result));}
+
           for(int y = 0; y < GetMemoryCellNumberOfVerbs(GetswWordsLC(x),Result); y++){
             SetswVerbToWord(x,GetMemoryCellVerbFromList(GetswWordsLC(x),y,Result));}
+
           for(int y = 0; y < GetMemoryCellNumberOfRelatedNouns(GetswWordsLC(x),Result); y++){
             SetswNounToWord(x,GetMemoryCellNounFromList(GetswWordsLC(x),y,Result));}
+
           for(int y = 0; y < GetMemoryCellMiniDefinitionCount(GetswWordsLC(x),Result); y++){
             SetswMiniDefinition(x,GetMemoryCellMiniDef(GetswWordsLC(x),Result,y));}
 

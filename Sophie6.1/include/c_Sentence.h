@@ -16,89 +16,93 @@ class c_Sentence : public c_Personality
         map <int,c_Word>::iterator WordIT;      // iterator for word map
         c_Word cWords;                          // local word class copy
 
-    public:
-        int    WordCount;                       // no. of words in sentence not counting punctuation  initialize to 0
-        int    SubjectLocation;                 // from 0 to WordCount, -1 = subject not located
-        int    IndirectObjectLocation;          // usually the second noun
-        int    AdverbLocation;                  // -1 means none
-        int    AdjectiveLocation;               // -1 means none
-        int    SentenceDirection;               // [0]-to me(Sophie) [1]-to the user  [6]-no direction  [-1]-undetermined
-        int    ConjunctionLocation;             // -1 means none
-        int    NounCount;                       // number of nouns in this sentence
-        int    VerbLocation;                    // position of verb
-        int    NamePointer;                     // position of the word name
-        int    PrepositionPosition;             // position of preposition
-        string OriginalString;                  // the whole unedited string  initialize to ""
-        string Pattern;                         // i.e. dnvua  initialize to ""
-        string PreProcessedPattern;             // i.e. duvu
-        string GistOfSentence;                  // the meat of the phrase. i.e the dog is black = is black, initialize to ""
-        string subGistOfSentence;               // usually follows a preposition to the verb or end of sentence
-        string SupportivePhrase;                // Data before the verb
-        string SecondSubject;                   // For DualSubjects
-        int    SecondSubjectLocation;           // For Dual subjects
-        char   Punctuation;                     // !  initialize to null
-        bool   HasPunctuation;                  // true / false initialize to false
-        bool   HasPluralPronoun;                // true / false initialize to false
-        bool   IsQuestion;                      // true / false initialize to false
-        bool   HasContraction;                  // true / false initialize to false
-        bool   HasGreetingsWord;                // true / false initialize to false
-        bool   HasGenderReference;              // true / false initialize to false
-        bool   HasPreposition;                  // true / false initialize to false
-        bool   HasDualSubjects;                 // i.e. Jack and Jill
-        bool   HasBeenUnderstood;               // initialized to false, set externally
-        bool   HasGenderDeterminer;             // the word 'gender' was used
-        bool   HasPronoun;                      // flag pronoun usage
-        int    sDaysOld;                        // day number stamp from 2019 beginning
-        int    sUnderstandingLevel;             // the degree this sentence is known
+    private:
+        int    sWordCount;                       // no. of words in sentence not counting punctuation  initialize to 0
+        int    sSubjectLocation;                 // from 0 to WordCount, -1 = subject not located
+        int    sIndirectObjectLocation;          // usually the second noun
+        int    sDirectObjectLocation;            // verb acting on this
+        int    sAdverbLocation;                  // -1 means none
+        int    sAdjectiveLocation;               // -1 means none
+        int    sSentenceDirection;               // [0]-to me(Sophie) [1]-to the user  [6]-no direction  [-1]-undetermined
+        int    sConjunctionLocation;             // -1 means none
+        int    sNounCount;                       // number of nouns in this sentence
+        int    sVerbLocation;                    // position of verb
+        int    sNamePointer;                     // position of the word name
+        int    sPrepositionPosition;             // position of preposition
+        string sOriginalString;                  // the whole unedited string  initialize to ""
+        string sPatternString;                   // i.e. dnvua  initialize to ""
+        string sPreProcessedPattern;             // i.e. duvu
+        string sGistOfSentence;                  // the meat of the phrase. i.e the dog is black = is black, initialize to ""
+        string sSubGistOfSentence;               // usually follows a preposition to the verb or end of sentence
+        string sSupportivePhrase;                // Data before the verb
+        string sSecondSubject;                   // For DualSubjects
+        int    sSecondSubjectLocation;           // For Dual subjects
+        char   sPunctuation;                     // !  initialize to null
+        bool   sHasPunctuation;                  // true / false initialize to false
+        bool   sHasPluralPronoun;                // true / false initialize to false
+        bool   sIsQuestion;                      // true / false initialize to false
+        bool   sHasContraction;                  // true / false initialize to false
+        bool   sHasGreetingsWord;                // true / false initialize to false
+        bool   sHasGenderReference;              // true / false initialize to false
+        bool   sHasPreposition;                  // true / false initialize to false
+        bool   sHasDualSubjects;                 // i.e. Jack and Jill
+        bool   sHasBeenUnderstood;               // initialized to false, set externally
+        bool   sHasGenderDeterminer;             // the word 'gender' was used
+        bool   sHasPronoun;                      // flag pronoun usage
+        int    sDaysOld;                         // day number stamp from 2019 beginning
+        int    sUnderstandingLevel;              // the degree this sentence is known
 
-
+//TODO: Set variable sPolarity, store in files
 
 
     public:
         void InitializeVars(){
             //GLOBAL SENTENCE VARIABLES
-                WordCount                     = 0;
-                SubjectLocation               = -1;
-                OriginalString                = "";
-                Pattern                       = "";
-                PreProcessedPattern           = "";
-                SecondSubject                 = "";
-                GistOfSentence                = "";
-                subGistOfSentence             = "";
-                SupportivePhrase              = "";
-                HasPreposition                = false;
-                HasPluralPronoun              = false;
-                HasPunctuation                = false;
-                IsQuestion                    = false;
-                HasContraction                = false;
-                HasGreetingsWord              = false;
-                HasGenderReference            = false;
-                HasBeenUnderstood             = false;
-                HasGenderDeterminer           = false;
-                HasDualSubjects               = false;
-                HasPronoun                    = false;
-                SentenceDirection             = -1;
-                Punctuation                   = 'x';  //not set or does not have
-                ConjunctionLocation           = -1;
-                AdverbLocation                = -1;
-                NounCount                     = -1;
-                VerbLocation                  = -1;
-                AdjectiveLocation             = -1;
-                NamePointer                   = -1;
-                PrepositionPosition           = -1;
-                SecondSubjectLocation         = -1;
-                IndirectObjectLocation        = -1;
-                sUnderstandingLevel           = -1;
-                sDaysOld                      = 0;
+                sWordCount                     = 0;
+                sSubjectLocation               = -1;
+                sOriginalString                = "";
+                sPatternString                 = "";
+                sPreProcessedPattern           = "";
+                sSecondSubject                 = "";
+                sGistOfSentence                = "";
+                sSubGistOfSentence             = "";
+                sSupportivePhrase              = "";
+                sHasPreposition                = false;
+                sHasPluralPronoun              = false;
+                sHasPunctuation                = false;
+                sIsQuestion                    = false;
+                sHasContraction                = false;
+                sHasGreetingsWord              = false;
+                sHasGenderReference            = false;
+                sHasBeenUnderstood             = false;
+                sHasGenderDeterminer           = false;
+                sHasDualSubjects               = false;
+                sHasPronoun                    = false;
+                sSentenceDirection             = -1;
+                sPunctuation                   = 'x';  //not set or does not have
+                sConjunctionLocation           = -1;
+                sAdverbLocation                = -1;
+                sNounCount                     = -1;
+                sVerbLocation                  = -1;
+                sAdjectiveLocation             = -1;
+                sNamePointer                   = -1;
+                sPrepositionPosition           = -1;
+                sSecondSubjectLocation         = -1;
+                sIndirectObjectLocation        = -1;
+                sDirectObjectLocation          = -1;
+                sUnderstandingLevel            = -1;
+                sDaysOld                       = 0;
                 WordMap.clear();}
 
 
        ///*******************ALL GLOBAL->SENTENCE DATA FUNCTIONS***************************
        ///**********'InSentence/FromSentence' is the function source flag******************
 
+        int    GetFromSentenceDirectObjectLocation(){return sDirectObjectLocation;}
+        void   SetInSentenceDirectObjectLocation(int newVal){sDirectObjectLocation = newVal;}
 
-        bool   GetFromSentenceHasPronoun(){return HasPronoun;}
-        void   SetInSentenceHasPronoun(bool newVal){HasPronoun = newVal;}
+        bool   GetFromSentenceHasPronoun(){return sHasPronoun;}
+        void   SetInSentenceHasPronoun(bool newVal){sHasPronoun = newVal;}
 
         int    GetFromSentencesDaysOld(){return sDaysOld;}
         void   SetInSentencesDaysOld(int newVal){sDaysOld = newVal;}
@@ -106,94 +110,94 @@ class c_Sentence : public c_Personality
         int    GetFromSentencesUnderstandingLevel(){return sUnderstandingLevel;}
         void   SetInSentencesUnderstandingLevel(int newVal){sUnderstandingLevel = newVal;}
 
-        void   SetInSentenceSecondSubjectLocation(int newVal){SecondSubjectLocation = newVal;}
-        int    GetFromSentenceSecondSubjectLocation(){return SecondSubjectLocation;}
+        void   SetInSentenceSecondSubjectLocation(int newVal){sSecondSubjectLocation = newVal;}
+        int    GetFromSentenceSecondSubjectLocation(){return sSecondSubjectLocation;}
 
-        void   SetInSentenceSecondSubject(string newVal){SecondSubject = newVal;}
-        string GetFromSentenceSecondSubject(){return SecondSubject;}
+        void   SetInSentenceSecondSubject(string newVal){sSecondSubject = newVal;}
+        string GetFromSentenceSecondSubject(){return sSecondSubject;}
 
-        void   SetInSentenceHasDualSubjects(bool newVal){HasDualSubjects = newVal;}
-        bool   GetFromSentenceHasDualSubjects(){return HasDualSubjects;}
+        void   SetInSentenceHasDualSubjects(bool newVal){sHasDualSubjects = newVal;}
+        bool   GetFromSentenceHasDualSubjects(){return sHasDualSubjects;}
 
-        void   SetInSentenceSubGistOfSentence(string newVal){subGistOfSentence = newVal;}
-        string GetFromSentenceSubGistOfSentence(){return subGistOfSentence;}
+        void   SetInSentenceSubGistOfSentence(string newVal){sSubGistOfSentence = newVal;}
+        string GetFromSentenceSubGistOfSentence(){return sSubGistOfSentence;}
 
-        void   SetInSentencePrepositionPosition(int newVal){PrepositionPosition = newVal;}
-        int    GetFromSentencePrepositionPosition(){return PrepositionPosition;}
+        void   SetInSentencePrepositionPosition(int newVal){sPrepositionPosition = newVal;}
+        int    GetFromSentencePrepositionPosition(){return sPrepositionPosition;}
 
-        void   SetInSentenceHasPreposition(bool newVal){HasPreposition = newVal;}
-        bool   GetFromSentenceHasPreposition(){return HasPreposition;}
+        void   SetInSentenceHasPreposition(bool newVal){sHasPreposition = newVal;}
+        bool   GetFromSentenceHasPreposition(){return sHasPreposition;}
 
-        void   SetInSentenceSentenceDirection(int newVal){SentenceDirection = newVal;}
-        int    GetFromSentenceSentenceDirection(){return SentenceDirection;}
+        void   SetInSentenceSentenceDirection(int newVal){sSentenceDirection = newVal;}
+        int    GetFromSentenceSentenceDirection(){return sSentenceDirection;}
 
-        void   SetInSentenceConjunctionLocation(int newVal){ConjunctionLocation = newVal;}
-        int    GetFromSentenceConjunctionLocation(){return ConjunctionLocation;}
+        void   SetInSentenceConjunctionLocation(int newVal){sConjunctionLocation = newVal;}
+        int    GetFromSentenceConjunctionLocation(){return sConjunctionLocation;}
 
-        void   SetInSentencePreProcessedPattern(string newVal){PreProcessedPattern = newVal;}
-        string GetFromSentencePreProcessedPattern(){return PreProcessedPattern;}
+        void   SetInSentencePreProcessedPattern(string newVal){sPreProcessedPattern = newVal;}
+        string GetFromSentencePreProcessedPattern(){return sPreProcessedPattern;}
 
-        void   SetInSentenceGistOfSentence(string newVal){GistOfSentence = newVal;}
-        string GetFromSentenceGistOfSentence(){return GistOfSentence;}
+        void   SetInSentenceGistOfSentence(string newVal){sGistOfSentence = newVal;}
+        string GetFromSentenceGistOfSentence(){return sGistOfSentence;}
 
-        void   SetInSentenceSupportivePhrase(string newVal){SupportivePhrase = newVal;}
-        string GetFromSentenceSupportivePhrase(){return SupportivePhrase;}
+        void   SetInSentenceSupportivePhrase(string newVal){sSupportivePhrase = newVal;}
+        string GetFromSentenceSupportivePhrase(){return sSupportivePhrase;}
 
-        bool   GetFromSentenceHasGenderDeterminer(){return HasGenderDeterminer;}
-        void   SetInSentenceHasGenderDeterminer(bool newVal){HasGenderDeterminer = newVal;}
+        bool   GetFromSentenceHasGenderDeterminer(){return sHasGenderDeterminer;}
+        void   SetInSentenceHasGenderDeterminer(bool newVal){sHasGenderDeterminer = newVal;}
 
-        bool   GetFromSentenceHasBeenUnderstood(){return HasBeenUnderstood;}
-        void   SetInSentenceHasBeenUnderstood(bool NewVal){HasBeenUnderstood = NewVal;}
+        bool   GetFromSentenceHasBeenUnderstood(){return sHasBeenUnderstood;}
+        void   SetInSentenceHasBeenUnderstood(bool NewVal){sHasBeenUnderstood = NewVal;}
 
-        bool   GetFromSentenceHasGenderReference(){return HasGenderReference;}
-        void   SetInSentenceHasGenderReference(bool NewVal){HasGenderReference = NewVal;}
+        bool   GetFromSentenceHasGenderReference(){return sHasGenderReference;}
+        void   SetInSentenceHasGenderReference(bool NewVal){sHasGenderReference = NewVal;}
 
-        bool   GetFromSentenceHasGreetingsWord(){return HasGreetingsWord;}
-        void   SetInSentenceHasGreetingsWord(bool NewVal){HasGreetingsWord = NewVal;}
+        bool   GetFromSentenceHasGreetingsWord(){return sHasGreetingsWord;}
+        void   SetInSentenceHasGreetingsWord(bool NewVal){sHasGreetingsWord = NewVal;}
 
-        bool   GetFromSentenceHasContraction(){return HasContraction;}
-        void   SetInSentenceHasContraction(bool NewVal){HasContraction = NewVal;}
+        bool   GetFromSentenceHasContraction(){return sHasContraction;}
+        void   SetInSentenceHasContraction(bool NewVal){sHasContraction = NewVal;}
 
-        int    GetFromSentenceNamePointer(){return NamePointer;}
-        void   SetInSentenceNamePointer(int NewLocation){NamePointer = NewLocation;}
+        int    GetFromSentenceNamePointer(){return sNamePointer;}
+        void   SetInSentenceNamePointer(int NewLocation){sNamePointer = NewLocation;}
 
-        int    GetFromSentenceAdjectiveLocation(){return AdjectiveLocation;}
-        void   SetInSentenceAdjectiveLocation(int NewVal){AdjectiveLocation = NewVal;}
+        int    GetFromSentenceAdjectiveLocation(){return sAdjectiveLocation;}
+        void   SetInSentenceAdjectiveLocation(int NewVal){sAdjectiveLocation = NewVal;}
 
-        void   SetInSentenceVerbLocation(int NewLoc){VerbLocation = NewLoc;}
-        int    GetFromSentenceVerbLocation(){return VerbLocation;}
+        void   SetInSentenceVerbLocation(int NewLoc){sVerbLocation = NewLoc;}
+        int    GetFromSentenceVerbLocation(){return sVerbLocation;}
 
-        void   SetInSentenceNounCount(int NewCount){NounCount = NewCount;}
-        int    GetFromSentenceNounCount(){return NounCount;}
+        void   SetInSentenceNounCount(int NewCount){sNounCount = NewCount;}
+        int    GetFromSentenceNounCount(){return sNounCount;}
 
-        int    GetFromSentenceIndirectObjectLocation(){return IndirectObjectLocation;}
-        void   SetInSentenceIndirectObjectLocation(int NewVal){IndirectObjectLocation = NewVal;}
+        int    GetFromSentenceIndirectObjectLocation(){return sIndirectObjectLocation;}
+        void   SetInSentenceIndirectObjectLocation(int NewVal){sIndirectObjectLocation = NewVal;}
 
-        bool   GetFromSentenceHasPluralPronoun(){return HasPluralPronoun;}
-        void   SetInSentenceHasPluralPronoun(bool newVal){HasPluralPronoun = newVal;}
+        bool   GetFromSentenceHasPluralPronoun(){return sHasPluralPronoun;}
+        void   SetInSentenceHasPluralPronoun(bool newVal){sHasPluralPronoun = newVal;}
 
-        int    GetFromSentenceWordCount(){return WordCount;}
-        void   SetInSentenceWordCount(int newVal){WordCount = newVal;}
+        int    GetFromSentenceWordCount(){return sWordCount;}
+        void   SetInSentenceWordCount(int newVal){sWordCount = newVal;}
 
-        char   GetFromSentencePunctuation(){return Punctuation;}
-        void   SetInSentencePunctuation(char newVal){Punctuation = newVal;}
+        char   GetFromSentencePunctuation(){return sPunctuation;}
+        void   SetInSentencePunctuation(char newVal){sPunctuation = newVal;}
 
-        void   SetInSentenceHasPunctuation(bool newVal){HasPunctuation = newVal;}
-        bool   GetFromSentenceHasPunctuation(){return HasPunctuation;}
+        void   SetInSentenceHasPunctuation(bool newVal){sHasPunctuation = newVal;}
+        bool   GetFromSentenceHasPunctuation(){return sHasPunctuation;}
 
-        bool   GetFromSentenceIsQuestion(){return IsQuestion;}
-        void   SetInSentenceIsQuestion(bool ISQ){IsQuestion = ISQ;}
+        bool   GetFromSentenceIsQuestion(){return sIsQuestion;}
+        void   SetInSentenceIsQuestion(bool ISQ){sIsQuestion = ISQ;}
 
-        string GetFromSentenceOriginalString(){return OriginalString;}
-        void   SetInSentenceOriginalString(string strData){OriginalString = strData;}
+        string GetFromSentenceOriginalString(){return sOriginalString;}
+        void   SetInSentenceOriginalString(string strData){sOriginalString = strData;}
 
-        void   SetInSentenceSubjectLocation(int newLoc){SubjectLocation = newLoc;}
-        int    GetFromSentenceSubjectLocation(){return SubjectLocation;}
+        void   SetInSentenceSubjectLocation(int newLoc){sSubjectLocation = newLoc;}
+        int    GetFromSentenceSubjectLocation(){return sSubjectLocation;}
 
-        void   SetInSentencePattern(string strData){Pattern = strData;}
-        string GetFromSentencePattern(){return Pattern;}
+        void   SetInSentencePattern(string strData){sPatternString = strData;}
+        string GetFromSentencePattern(){return sPatternString;}
 
-        void   SetInSentenceAdverbLocation(int newVal){AdverbLocation = newVal;}
+        void   SetInSentenceAdverbLocation(int newVal){sAdverbLocation = newVal;}
         ///*****************END SENTENCE DATA FUNCTIONS***************************
 
 
@@ -290,16 +294,17 @@ class c_Sentence : public c_Personality
 
 
         int    GetAdverbLocation(){
-          for(int x =0; x < WordCount; x++){
-            if(GetswWordType(x)=='A')AdverbLocation = x;}
-            return AdverbLocation;
+          for(int x =0; x < sWordCount; x++){
+            if(GetswWordType(x)=='A') sAdverbLocation = x;}
+            return sAdverbLocation;
           }
 
 
 
         void RebuildPattern(){
-            Pattern = "";
-            for(int x =0; x < GetFromSentenceWordCount(); x++) Pattern += GetswWordType(x);}
+            string LocalPattern = "";
+            for(int x =0; x < GetFromSentenceWordCount(); x++) LocalPattern += GetswWordType(x);
+            SetInSentencePattern(LocalPattern);}
 
 
 
@@ -333,7 +338,7 @@ class c_Sentence : public c_Personality
     //----------------------Initialize-------------------------------------------------------------------------------------------------
                 if(Verbose)cout << "[c_Sentence.h::Parse] " << str_Sentence_Data << endl;
                 InitializeVars();
-                OriginalString = str_Sentence_Data;
+                sOriginalString = str_Sentence_Data;
                 int int_Word_Count;
                 int_Word_Count = 0;
                 int x; x = 0; int int_Sentence_Length;
@@ -361,17 +366,17 @@ class c_Sentence : public c_Personality
             //--------------------------Punctuation Check----------------------------------------------------------------
                 char c_tmp_char;
                 char c_Punctuation;
-                IsQuestion = false;
+                sIsQuestion = false;
                 c_tmp_char = str_Sentence_Data[int_Last_Pos-1];
                 if( !(((c_tmp_char >= 'A') & (c_tmp_char <= 'Z')) |
                         ((c_tmp_char >= 'a') & (c_tmp_char <= 'z')))
                    )
                   {
 
-                    HasPunctuation = true;                                                                                          //SET Public Variable
+                    sHasPunctuation = true;                                                                                          //SET Public Variable
                     c_Punctuation = str_Sentence_Data[int_Last_Pos-1];
-                    Punctuation = c_Punctuation;
-                    if(Punctuation == '?') IsQuestion = true;
+                    sPunctuation = c_Punctuation;
+                    if(sPunctuation == '?') sIsQuestion = true;
                                                                                                                                     //SET Public Variable
                     int_Last_Pos --;
                   }
@@ -408,7 +413,7 @@ class c_Sentence : public c_Personality
                 int_Word_Count++;
 
 
-                WordCount = int_Word_Count;
+                sWordCount = int_Word_Count;
 
             //-----------------------------------------TOKENIZE ALL WORDS AND CHECK FOR CONTRACTION WORDS-------------
                 int     QuoteLoc    = -1;
@@ -420,7 +425,7 @@ class c_Sentence : public c_Personality
                     if((QuoteLoc >=0)&(QuoteLoc<int_Last_Pos)){
                         WordMap[x].Setw_WordType('C');              //Set Contraction flag
                         WordMap[x].Setw_isContraction(true);        //flag the word
-                        HasContraction = true;}
+                        sHasContraction = true;}
                     WordMap[x].Setw_QuoteLocation(QuoteLoc);        //store pointer to quote
                     string tmpWord;
                     tmpWord = WordMap[x].Getw_WordForm();           //retrieve original word
@@ -428,7 +433,6 @@ class c_Sentence : public c_Personality
                         for(int t = 0; t < int(tmpWord.size()); t++)
                             tmpWord[t] =  tolower(tmpWord[t]);
                         WordMap[x].Setw_WordFormLC(tmpWord);        //store the lower case version
-                        //WordsLC[x] = tmpWord;
                      //----------------------------------------
                      WordMap[x].Setw_WordTokens(Tokenize(tmpWord)); //store the tokenized version of the lowercase word
                 }

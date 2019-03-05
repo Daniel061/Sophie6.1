@@ -421,21 +421,21 @@ class c_Brain : public c_Cerebellum
                 //Associate Adjective if not a question sentence
                 if((GetswWordType(x)=='a')&&(!GetFromSentenceIsQuestion()) ){
                         if(GetFromSentenceSubjectLocation() >=0 ){
-                            if(!AssociateMemoryCellAdjective(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(x))){
+                            if(!SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceSubjectLocation()),GetswWordsLC(x))){ //NOTE: Adjective Storage to Memory
                                 InstallNewWord(GetswWords(GetFromSentenceSubjectLocation()),GetswWordType(GetFromSentenceSubjectLocation()),'w',true,GetswGenderClassInSentence(GetFromSentenceSubjectLocation()));}
-                                AssociateMemoryCellAdjective(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(x));
+                                SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceSubjectLocation()),GetswWordsLC(x));  //NOTE: Adjective Storage to Memory
                                 if(GetswIsPluralWord(GetFromSentenceSubjectLocation())){
-                                    AssociateMemoryCellAdjective(Tokenize(GetswPluralRoot(GetFromSentenceSubjectLocation())),GetswWordsLC(x));
+                                    SetMemoryCellAdjectiveInList(GetswPluralRoot(GetFromSentenceSubjectLocation()),GetswWordsLC(x)); //NOTE Adjective Storage to Memory
                                 }
                                 if(Verbose)
                                     cout << "Associating " << GetswWords(x) << " with " << GetswWords(GetFromSentenceSubjectLocation()) << endl;
                             }
                             if((GetFromSentenceIndirectObjectLocation() >=0) && (!GetFromSentenceIsQuestion()) ){ //Associate Indirect object if not a question sentence
-                                if(!AssociateMemoryCellAdjective(GetswWordTokens(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(x))){
+                                if(!SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(x))){  //NOTE: Adjective Storage to Memory
                                     InstallNewWord(GetswWords(GetFromSentenceIndirectObjectLocation()),GetswWordType(GetFromSentenceIndirectObjectLocation()),'w',true,GetswGenderClassInSentence(GetFromSentenceIndirectObjectLocation()));}
-                                    AssociateMemoryCellAdjective(GetswWordTokens(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(x));
+                                    SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(x));   //NOTE: Adjective Storage to Memory
                                     if(GetswIsPluralWord(GetFromSentenceSubjectLocation())){
-                                        AssociateMemoryCellAdjective(Tokenize(GetswPluralRoot(GetFromSentenceSubjectLocation())),GetswWordsLC(x));
+                                        SetMemoryCellAdjectiveInList(GetswPluralRoot(GetFromSentenceSubjectLocation()),GetswWordsLC(x));   //NOTE: Adjective Storage to Memory
                                     }
                                     if(Verbose)
                                        cout << "Associating " << GetswWords(x) << " with " << GetswWords(GetFromSentenceIndirectObjectLocation()) << endl;
@@ -454,8 +454,8 @@ class c_Brain : public c_Cerebellum
          if((GetFromSentenceNounCount() >=2)&& (!GetFromSentenceIsQuestion())){
                 if(Verbose)
                    cout << "Associating " << GetswWords(Noun1) << " with " << GetswWords(Noun2) << endl;
-                AssociateMemoryCellNoun(GetswWordTokens(Noun1),GetswWordsLC(Noun2));
-                AssociateMemoryCellNoun(GetswWordTokens(Noun2),GetswWordsLC(Noun1));
+                SetMemoryCellNounInList(GetswWordsLC(Noun1),GetswWordsLC(Noun2));
+                SetMemoryCellNounInList(GetswWordsLC(Noun2),GetswWordsLC(Noun1));
 
          }
           //Associate Proper Noun to noun and vice versa

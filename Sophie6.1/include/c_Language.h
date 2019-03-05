@@ -39,9 +39,10 @@ class c_Language : public c_LongTermMemory
 
     public:
 //-------------------------Pattern Review  ------------------------
- string PatternReview(string Pattern, int& ConfidenceLevel){
+ string PatternReview(string LocPattern, int& ConfidenceLevel){
    if(Verbose)cout << "[c_Language::PatternReview]: " ;
-   string CorrectedPattern, LeftOfJoiner, RightOfJoiner; CorrectedPattern = Pattern;
+   string CorrectedPattern, LeftOfJoiner, RightOfJoiner;
+   CorrectedPattern = GetFromSentencePattern();
    string WorkingWord = "";
    ConfidenceLevel = -1;  // no suggestion
    int LeftOfJoinerLocation,RightOfJoinerLocation;
@@ -64,14 +65,14 @@ class c_Language : public c_LongTermMemory
         Possible exception~ The cat is fast and the dog is too.  The joining word 'and' would trigger this routine to match dog and fast as the same word types
 
     */
-    CorrectedPattern = Pattern;
-    JoinerLocation = Pattern.find("j");
-    if((JoinerLocation >=1) & (JoinerLocation < int(Pattern.size()))){  //not the first word and not the last word
-        LeftOfJoiner = Pattern.substr(JoinerLocation + LeftOfJoinerLocation,1);
-        RightOfJoiner = Pattern.substr(JoinerLocation + RightOfJoinerLocation,1);
+    CorrectedPattern = GetFromSentencePattern();
+    JoinerLocation = LocPattern.find("j");
+    if((JoinerLocation >=1) & (JoinerLocation < int(LocPattern.size()))){  //not the first word and not the last word
+        LeftOfJoiner = LocPattern.substr(JoinerLocation + LeftOfJoinerLocation,1);
+        RightOfJoiner = LocPattern.substr(JoinerLocation + RightOfJoinerLocation,1);
         if(RightOfJoiner == "d"){
             RightOfJoinerLocation++; //move past determiner
-            RightOfJoiner[0] = Pattern[JoinerLocation + RightOfJoinerLocation];} //get new character
+            RightOfJoiner[0] = LocPattern[JoinerLocation + RightOfJoinerLocation];} //get new character
 
         if(LeftOfJoiner == RightOfJoiner){ // if both known-type or unknown-type  cannot help
 
@@ -103,31 +104,31 @@ class c_Language : public c_LongTermMemory
                 CorrectedPattern                   = GetFromSentencePattern();
                 CorrectedPattern[PatternPointer+1] = 'a';
                 ConfidenceLevel                    = 100;}
-            if(Pattern == "duvu"){
+            if(LocPattern == "duvu"){
                 CorrectedPattern = "dnvu";
                 ConfidenceLevel = 100;}
-            if(Pattern == "dun"){
+            if(LocPattern == "dun"){
                 CorrectedPattern = "dan";
                 ConfidenceLevel = 100;}
-            if(Pattern == "duva"){
+            if(LocPattern == "duva"){
                 CorrectedPattern = "dnva";
                 ConfidenceLevel = 100;}
-            if(Pattern == "uuv"){
+            if(LocPattern == "uuv"){
                 CorrectedPattern = "dnv";
                 ConfidenceLevel = 100;}
-            if(Pattern == "dvdun"){
+            if(LocPattern == "dvdun"){
                 CorrectedPattern = "dvdan";
                 ConfidenceLevel = 100;}
-            if(Pattern == "dvdu"){
+            if(LocPattern == "dvdu"){
                 CorrectedPattern = "dvdn";
                 ConfidenceLevel = 100;}
-            if(Pattern == "dnup"){
+            if(LocPattern == "dnup"){
                 CorrectedPattern = "dnvp";
                 ConfidenceLevel = 100;}
-            if(Pattern == "avdu"){
+            if(LocPattern == "avdu"){
                 CorrectedPattern = "avdn";
                 ConfidenceLevel = 100;}
-            if (Pattern == "dntua"){
+            if (LocPattern == "dntua"){
                 CorrectedPattern = "dntva";
                 ConfidenceLevel = 100;}
           }
@@ -150,7 +151,7 @@ class c_Language : public c_LongTermMemory
                  }
               else
                 //rule failed
-                {CorrectedPattern = Pattern;
+                {CorrectedPattern = GetFromSentencePattern();
                 ConfidenceLevel = -1;
                 if(Verbose)
                     cout << "[c_Language.h::PatternReview] Pattern rejected,\n    proper noun indicated but did not start with a capital!\n";
@@ -158,7 +159,7 @@ class c_Language : public c_LongTermMemory
         }
       } //end verify pattern
 
-     if(Verbose)cout << " Received Pattern:" << Pattern << " Correct Pattern:" << CorrectedPattern << endl;
+     if(Verbose)cout << " Received Pattern:" << GetFromSentencePattern() << " Correct Pattern:" << CorrectedPattern << endl;
 
    return CorrectedPattern;
  }
@@ -197,7 +198,7 @@ class c_Language : public c_LongTermMemory
            string GenderDeterminer =    " gender ";
            string GreetingsWord =       " hello hi ";
            string ConjunctionWords =    " or either ";
-           string PrepositionWords =    " in into after to on with within of at until across among throughout during towards upon across ";
+           string PrepositionWords =    " in into after to on with within of at until over across among throughout during towards upon across ";
            string SingularWord  =       "";
            string UCWord        =       GetswWords(LocationInSentence);
 
@@ -579,6 +580,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                 if(GetswWordType(x)== 'v'){ SetInSentenceVerbLocation(x);}
                 if(GetswWordType(x)== 'a'){ SetInSentenceAdjectiveLocation(x);}
                 if(GetswWordType(x)== 'A'){ SetInSentenceAdverbLocation(x);}
+                if(GetswWordType(x)== 'I'){ SetInSentencePrepositionPosition(x);}
                 Pattern += GetswWordType(x);
             }
             SetInSentencePattern(Pattern);
@@ -651,11 +653,12 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             string GistString      = "";
             string subGistString   = "";
             string SupportiveGist  = "";
+            string LocalPattern    =GetFromSentencePattern();
 
-            for(int x = 0; x <=int(Pattern.size()); x++){
-                if(Pattern[x] == 'v') VerbPointer     = x;
-                if(Pattern[x] == 'q') QuestionPointer = x;
-                if(Pattern[x] == 'j') JoinerPointer   = x;
+            for(int x = 0; x <=int(LocalPattern.size()); x++){
+                if(LocalPattern[x] == 'v') VerbPointer     = x;
+                if(LocalPattern[x] == 'q') QuestionPointer = x;
+                if(LocalPattern[x] == 'j') JoinerPointer   = x;
             }
 
             if( (VerbPointer < 0) && (!GetFromSentenceIsQuestion()) ) Checking = false; //no verb, cannot find gist without it(yet)

@@ -20,7 +20,7 @@ class c_Cortex : public c_Language
             int ProNounOutwardLocation;
             int AssociativeWordLocation;
             int VerbLocation;
-            //int AdjectiveLocation;
+            int AdjectiveLocation;
             int SubjectLoc;
             int ReplacementLocation;
             int UnderstandingLevel;
@@ -116,10 +116,10 @@ class c_Cortex : public c_Language
                             }
             }//end for loop to scan sentence
 
-            if(HasPronoun) CheckForImpliedGender();               //see if gender info exist
+            if(GetFromSentenceHasPronoun()) CheckForImpliedGender();          //see if gender info exist
             UnderstandingDegree = GetFromSentencesUnderstandingLevel();
             if(GetFromSentenceIsQuestion())UnderstandingDegree = 1;           //question trap
-            if(DirectiveLocation >=0)UnderstandingDegree = 2;     //directive trap
+            if(DirectiveLocation >=0)UnderstandingDegree = 2;                 //directive trap
             if(GetFromSentenceHasPluralPronoun())UnderstandingDegree = 3;     //plural pronoun trap
             if(GetFromSentenceHasGreetingsWord())UnderstandingDegree = 4;     //greetings trap
 
@@ -235,7 +235,9 @@ class c_Cortex : public c_Language
                         }
                      }
                      if((JoinerLocation != -1) && (Pattern[JoinerLocation+1]=='a') ){ //associate first adjective to subject, wasn't picked up before
-                        AssociateMemoryCellAdjective(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(JoinerLocation-1)); }
+                        SetswAdjectiveToWord(GetFromSentenceSubjectLocation(),GetswWordsLC(JoinerLocation-1));} //NOTE: Adjective Storage To Word
+                        //SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceSubjectLocation()),GetswWordsLC(JoinerLocation-1));}
+                        //AssociateMemoryCellAdjective(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(JoinerLocation-1)); }
                      SlowSpeak("Okay.");
                      IncreaseMoodLevel();
                      SetInSentenceHasBeenUnderstood(true);
@@ -274,10 +276,10 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
        int tmpAdjectiveLoc;
        bool Testing = true;
        if(Verbose)
-            cout << "Noun Loc:" << NounLocation << "Unknown Loc:" << UnKnownLocation << "Pattern:" << Pattern << endl;
+            cout << "Noun Loc:" << NounLocation << "Unknown Loc:" << UnKnownLocation << "Pattern:" << GetFromSentencePattern() << endl;
 
         ofstream HalfLevelDataFile ("HalfLevelPatternData.dat", ios::out | ios::app);
-        if (HalfLevelDataFile.is_open()){ HalfLevelDataFile << Pattern << "," << GetFromSentenceOriginalString() << endl; HalfLevelDataFile.close();}
+        if (HalfLevelDataFile.is_open()){ HalfLevelDataFile << GetFromSentencePattern() << "," << GetFromSentenceOriginalString() << endl; HalfLevelDataFile.close();}
        for(int x = 0; x < GetFromSentenceWordCount(); x++){
         if((GetswWordType(x) == 'y') || (GetswWordType(x) == 'm') || (GetswWordType(x) == 'p')){
             if(GetswWordType(x)== 'y') StatementDirection = 0; //Statement towards user
@@ -286,7 +288,7 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
         }
        }
 
-//cout << "Pattern 1/2 level:" << Pattern << endl;
+
        while(Testing){
 
          switch (StatementDirection){
@@ -428,7 +430,7 @@ int HandleQuestion(string &strData){
     string AnswerString;
     bool Matched = false;
     if(Verbose)
-        cout << "qLoc:" << QuestionLocation << " Pattern:" << Pattern << " SubjectLoc:" << GetFromSentenceSubjectLocation() << endl;
+        cout << "qLoc:" << QuestionLocation << " Pattern:" << GetFromSentencePattern() << " SubjectLoc:" << GetFromSentenceSubjectLocation() << endl;
     if(UnKnownLocation >=0){
             Handle75LevelUnderstanding(strData,true); //try to find the unknown but run silent.
             FindSubject();}
@@ -475,10 +477,10 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
     int localVerbLocation       = -1;
     int SubjectLocationInCortex = -1;
     //in case of recursive entry, scan for unknown location again
-//cout << "at 757Levelunderstanding with pattern of:" << Pattern << endl;
+
     if(Verbose){
         cout << "[c_Cortex.h::Handle75LevelUnderstanding]\n";
-        cout << "  Pattern:" << Pattern << endl;
+        cout << "  Pattern:" << GetFromSentencePattern() << endl;
         cout << "  Run Silent:" << boolalpha << RunSilent << endl;
         cout << "  Subject Location:" << GetFromSentenceSubjectLocation() << endl;
         cout << "  Noun Location:" << NounLocation << endl;
@@ -704,14 +706,14 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         int MatchedCount;
         string Noun1,Noun2,VerbUsage,MatchedAdjective[15],WorkingPattern, ResponseString;
         Noun1 = ""; Noun2 = "";
-        if(Verbose)cout << "[c_Cortex.h::Directive Trap] Pattern:" << Pattern << " ";
+        if(Verbose)cout << "[c_Cortex.h::Directive Trap] Pattern:" << GetFromSentencePattern() << " ";
 
 
 
         if((GetswWordTokens(DirectiveLocation) == 2972) || (GetswWordTokens(DirectiveLocation)==1070)){
             if(Verbose) cout << "compare/same directive ";
             //extract determiners 'd' from pattern
-            WorkingPattern = Pattern;
+            WorkingPattern = GetFromSentencePattern();
             dLoc = WorkingPattern.find('d');
             while((dLoc >=0) & (dLoc <= int(WorkingPattern.size()))){
                 WorkingPattern = WorkingPattern.substr(0,dLoc) + WorkingPattern.substr(dLoc+1);
@@ -865,21 +867,28 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         //Check the word type after PluralPronounLocation
         // could be adverb
 
-        string Noun1       = "";
-        string Noun2       = "";
-        int NounCount      = 0;
-        int JoinerLocation = 0;
+        string Noun1          = "";
+        string Noun2          = "";
+        int    Noun1Loc       = -1;
+        int    Noun2Loc       = -1;
+        int    NounCount      = 0;
+        int    JoinerLocation = 0;
 
         for(int x = 0; x < GetFromSentenceWordCount(); x++){
            if(GetswWordType(x)=='n'){
                 NounCount++;
+                if(Noun1Loc == -1) Noun1Loc = x; else Noun2Loc = x;
                 if(Noun1 =="")Noun1 = GetswWordsLC(x); else Noun2 = GetswWordsLC(x);}
             if(GetswWordType(x)=='j') JoinerLocation = x;}
 
 
          if((JoinerLocation >0)&(NounCount==2)){ //two nouns with joiner
-                AssociateMemoryCellAdjective(Tokenize(Noun1),GetswWordsLC(PluralPronounLocation+1));
-                AssociateMemoryCellAdjective(Tokenize(Noun2),GetswWordsLC(PluralPronounLocation+1));
+                SetswAdjectiveToWord(Noun1Loc,GetswWordsLC(PluralPronounLocation+1)); //NOTE: Adjective Storage To Word
+                SetswAdjectiveToWord(Noun2Loc,GetswWordsLC(PluralPronounLocation+1)); //NOTE: Adjective Storage To Word
+                //SetMemoryCellAdjectiveInList(Noun1,GetswWordsLC(PluralPronounLocation+1));
+                //SetMemoryCellAdjectiveInList(Noun2,GetswWordsLC(PluralPronounLocation+1));
+                //AssociateMemoryCellAdjective(Tokenize(Noun1),GetswWordsLC(PluralPronounLocation+1));
+                //AssociateMemoryCellAdjective(Tokenize(Noun2),GetswWordsLC(PluralPronounLocation+1));
                 SetswWordType('a',PluralPronounLocation+1);
                 SlowSpeak("Alright.");
                 SlowSpeak(":)");

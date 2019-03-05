@@ -4,7 +4,7 @@
 #include <map>
 #include <iostream>
 #include <unordered_set>
-
+extern bool Verbose;
 using namespace std;
 class c_MemoryCell
 {
@@ -34,6 +34,7 @@ class c_MemoryCell
         char   pSecondaryType;                     // Could be used as another type i.e. light-n light red - A box is light -a
         char   pAlternateType;                     // some words without modification could have a third type (All type references conform to pWordType definitions)
         char   pGenderClass;                       // n - neutral e- either m - male only f - female only u - undefined
+        char   pPolarity;                          // Positive/Negative
         bool   pIsRoot;                            // the root of a word
         bool   pIsLocked;                          // this data is locked
         bool   pIsPluralPossessive;                // flag
@@ -58,6 +59,9 @@ class c_MemoryCell
 
 
     public:
+        char   GetpPolarity(){return pPolarity;}
+        void   SetpPolarity(char newVal){pPolarity = newVal;}
+
         string GetpSingularForm(){return pSingularForm;}
         void   SetpSingularForm(string newVal){pSingularForm = newVal;}
 
@@ -155,6 +159,7 @@ class c_MemoryCell
                 pPossessiveRoot                 = "";
                 pSingularForm                   = "";
                 pPossessiveRootType             = 'u';
+                pPolarity                       = 'u';
                 pCellPurpose                    = 'u'; //undefined
                 pWordType                       = 'u';
                 pIsRoot                         = false;
@@ -180,13 +185,21 @@ class c_MemoryCell
 
        void AssociateAdjectiveInMap(string AdjectiveToAssociate){
            ///new set usage  Store ADJECTIVE
-            adjectiveList.emplace(AdjectiveToAssociate);  //will not duplicate
+            if(Verbose){
+                cout << "[c_MemoryCell::AssociateAdjectiveInMap]\n";
+                cout << "Associating " << pCellDataLC << " with " << AdjectiveToAssociate << " if not empty\n";}
+            if(AdjectiveToAssociate != "")
+                adjectiveList.emplace(AdjectiveToAssociate);  //will not duplicate
        }
 
 
        void AssociateNounInMap(string NounToAssociate){
            ///new set usage Store NOUN
-            relatedNounList.emplace(NounToAssociate);   //will not duplicate
+           if(Verbose){
+            cout << "[c_MemoryCell::AssociateNounInMap]\n";
+            cout << "Associating " << pCellData << " with " << NounToAssociate << " if not empty\n";}
+            if(NounToAssociate != "")
+               relatedNounList.emplace(NounToAssociate);   //will not duplicate
        }
 
 
@@ -221,6 +234,8 @@ class c_MemoryCell
             if(SetIT == adjectiveList.end())
                 return "";
             else
+                if(Verbose)
+                    cout << "[c_MemoryCell::GetAdjectiveFromList] Returned adjective:" << *SetIT << endl;
                 return *SetIT;}
 
        /// USING NEW SET LIST

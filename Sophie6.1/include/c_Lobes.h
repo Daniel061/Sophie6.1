@@ -173,6 +173,18 @@ class c_Lobes : public c_MemoryCell
                return Result;}
 
 
+        /// Sets pPolarity if exists
+        ///  returns True if added, else false if updated
+        ///  send pPolarity data in charData
+        ///  send owner word in strSearchBase
+        bool SetMemoryCellpPolarity(string strSearchBase, char charData ){
+           bool Result = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                    CellMapIT->second.SetpPolarity(charData);}
+               return Result;}
+
+
         /// Sets pIsSingularPossessive if exists,
         /// -returns True if added, else false if updated,
         /// -send pIsSingularPossessive data in boolData,
@@ -564,6 +576,18 @@ class c_Lobes : public c_MemoryCell
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
                     return CellMapIT->second.GetpPossessiveRootType();}
+               else
+                    return 'u';}
+
+        /// Gets pPolarity if exists, else return 'u' - default
+        ///  Returns True in the address of &Result if exists
+        ///  Returns pPolarity
+        ///  Send owner word in strSearchBase
+        char GetMemoryCellpPolarity(string strSearchBase, bool &Result){
+           Result = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                    return CellMapIT->second.GetpPolarity();}
                else
                     return 'u';}
 
@@ -961,7 +985,7 @@ class c_Lobes : public c_MemoryCell
           //then associates adjective to the address given.
           //NOTE:will not duplicate Adjectives.
           ///   NOT CORRECTED/UPDATED
-          bool AssociateMemoryCellAdjective(int Address, string AdjectiveToAssociate){
+          bool xAssociateMemoryCellAdjective(int Address, string AdjectiveToAssociate){
                bool Result = false;
                mapIT = FindAddressInMap(Address,Result);
                if(Result){
@@ -1106,7 +1130,7 @@ class c_Lobes : public c_MemoryCell
         }
 
 
-          bool CheckLinkOfTwoNounsWithAdjectives(string FirstNoun,string SecondNoun, string& VerbUsage, string MatchedAdjective[], int& MatchedCount){
+          bool CheckLinkOfTwoNounsWithAdjectives(string FirstNoun,string SecondNoun, string& VerbUsage, string MatchedAdjective[], int& MatchedCount){ //NOTE: NEEDS REWRITE FOR NEW LISTS
 
 
                    VerbUsage           = "";
@@ -1258,58 +1282,59 @@ class c_Lobes : public c_MemoryCell
             int    Count            = 0;
             ofstream LearnedDataFile ("LearnedData.dat", ios::out);
             if (LearnedDataFile.is_open()){
-                    LearnedDataFile << "VERSION " << Version << ", file version" << Delim;
+                    LearnedDataFile << "VERSION " << Version << ", file version-Memory Cells" << Delim;
                 for(CellMapIT = RightLobeCellMap.begin(); CellMapIT != RightLobeCellMap.end(); CellMapIT++ ){
-                    LearnedDataFile << "Original string,"     << CellMapIT->second.GetpCellDataString() << Delim;
-                    LearnedDataFile << "Lower Case string,"   << CellMapIT->second.GetpCellDataLC() << Delim;
-                    LearnedDataFile << "Given name,"          << CellMapIT->second.GetpCellGivenName() << Delim;
-                    LearnedDataFile << "Contraction 1st,"     << CellMapIT->second.GetpCellContractionLongFormFirst() << Delim;
-                    LearnedDataFile << "Contraction 2nd,"     << CellMapIT->second.GetpCellContractionLongFormSecond() << Delim;
-                    LearnedDataFile << "Cell purpose,"        << CellMapIT->second.GetpCellPurpose() << Delim;
-                    LearnedDataFile << "Word Type,"           << CellMapIT->second.GetpCellWordType() << Delim;
-                    LearnedDataFile << "Word tense,"          << CellMapIT->second.GetpCellWordTense() << Delim;
-                    LearnedDataFile << "Secondary type,"      << CellMapIT->second.GetpCellSecondaryType() << Delim;
-                    LearnedDataFile << "Alternate type,"      << CellMapIT->second.GetpCellAlternateType() << Delim;
-                    LearnedDataFile << "Gender class,"        << CellMapIT->second.GetpCellGenderClass() << Delim;
-                    LearnedDataFile << "Is root,"             << CellMapIT->second.GetpCellIsRoot() << Delim;
-                    LearnedDataFile << "Is Locked(old is set)," << CellMapIT->second.GetpCellIsLocked() << Delim;
-                    LearnedDataFile << "Is Singular,"         << CellMapIT->second.GetpCellIsSingular() << Delim;
-                    LearnedDataFile << "Singular location,"   << CellMapIT->second.GetpCellSingularLocation() << Delim;
-                    LearnedDataFile << "Next Verb,"           << CellMapIT->second.GetpCellNextVerb() << Delim;
-                    LearnedDataFile << "Next Noun,"           << CellMapIT->second.GetpCellNextNoun() << Delim;
-                    LearnedDataFile << "Token,"               << CellMapIT->second.GetpCellToken() << Delim;
-                    LearnedDataFile << "Resolved Pattern,"    << CellMapIT->second.GetpCellResolvedPattern() << Delim;
-                    LearnedDataFile << "Is Singular Possessive," << CellMapIT->second.GetpIsSingularPossessive() << Delim;
-                    LearnedDataFile << "Is Plural Possessive,"<< CellMapIT->second.GetpIsPluralPossessive() << Delim;
-                    LearnedDataFile << "Possessive Root,"     << CellMapIT->second.GetpPossessiveRoot() << Delim;
-                    LearnedDataFile << "Possessive Root Type,"<< CellMapIT->second.GetpPossessiveRootType() << Delim;
-                    LearnedDataFile << "Day stamp,"           << CellMapIT->second.GetpDaysOld() << Delim;
+                    LearnedDataFile << "Original string----------,"<< CellMapIT->second.GetpCellDataString() << Delim;
+                    LearnedDataFile << "Lower Case string      ," << CellMapIT->second.GetpCellDataLC() << Delim;
+                    LearnedDataFile << "Given name             ," << CellMapIT->second.GetpCellGivenName() << Delim;
+                    LearnedDataFile << "Contraction 1st        ," << CellMapIT->second.GetpCellContractionLongFormFirst() << Delim;
+                    LearnedDataFile << "Contraction 2nd        ," << CellMapIT->second.GetpCellContractionLongFormSecond() << Delim;
+                    LearnedDataFile << "Cell purpose           ," << CellMapIT->second.GetpCellPurpose() << Delim;
+                    LearnedDataFile << "Word Type              ," << CellMapIT->second.GetpCellWordType() << Delim;
+                    LearnedDataFile << "Word tense             ," << CellMapIT->second.GetpCellWordTense() << Delim;
+                    LearnedDataFile << "Polarity               ," << CellMapIT->second.GetpPolarity() << Delim;
+                    LearnedDataFile << "Secondary type         ," << CellMapIT->second.GetpCellSecondaryType() << Delim;
+                    LearnedDataFile << "Alternate type         ," << CellMapIT->second.GetpCellAlternateType() << Delim;
+                    LearnedDataFile << "Gender class           ," << CellMapIT->second.GetpCellGenderClass() << Delim;
+                    LearnedDataFile << "Is root                ," << CellMapIT->second.GetpCellIsRoot() << Delim;
+                    LearnedDataFile << "Is Locked(old is set)  ," << CellMapIT->second.GetpCellIsLocked() << Delim;
+                    LearnedDataFile << "Is Singular            ," << CellMapIT->second.GetpCellIsSingular() << Delim;
+                    LearnedDataFile << "Singular location      ," << CellMapIT->second.GetpCellSingularLocation() << Delim;
+                    LearnedDataFile << "Next Verb              ," << CellMapIT->second.GetpCellNextVerb() << Delim;
+                    LearnedDataFile << "Next Noun              ," << CellMapIT->second.GetpCellNextNoun() << Delim;
+                    LearnedDataFile << "Token                  ," << CellMapIT->second.GetpCellToken() << Delim;
+                    LearnedDataFile << "Resolved Pattern       ," << CellMapIT->second.GetpCellResolvedPattern() << Delim;
+                    LearnedDataFile << "Is Singular Possessive ," << CellMapIT->second.GetpIsSingularPossessive() << Delim;
+                    LearnedDataFile << "Is Plural Possessive   ," << CellMapIT->second.GetpIsPluralPossessive() << Delim;
+                    LearnedDataFile << "Possessive Root        ," << CellMapIT->second.GetpPossessiveRoot() << Delim;
+                    LearnedDataFile << "Possessive Root Type   ," << CellMapIT->second.GetpPossessiveRootType() << Delim;
+                    LearnedDataFile << "Day stamp              ," << CellMapIT->second.GetpDaysOld() << Delim;
 
                 Count = CellMapIT->second.GetpCellMiniDefinitionCount();
-                LearnedDataFile << "Number of Mini Defs,"    << Count << Delim;
-                for (int x = 0; x <= Count-1; x++){
-                    LearnedDataFile << "Mini Def.,"          << CellMapIT->second.GetpCellMiniDefinition(x) << Delim;
+                LearnedDataFile << "Number of Mini Defs          ," << Count << Delim;
+                for (int x = 0; x < Count; x++){
+                    LearnedDataFile << "Mini Def.                ," << CellMapIT->second.GetpCellMiniDefinition(x) << Delim;
                 }
 
                 Count = CellMapIT->second.GetNumberOfAdjectivesInList();
-                LearnedDataFile << "Number of Adjectives,"    << Count << Delim;
-                for (int x = 0; x <= Count-1; x++){
-                    LearnedDataFile << "Adjective,"          << CellMapIT->second.GetAdjectiveFromList(x) << Delim;
+                LearnedDataFile << "Number of Adjectives         ," << Count << Delim;
+                for (int x = 0; x < Count; x++){
+                    LearnedDataFile << "Adjective                ," << CellMapIT->second.GetAdjectiveFromList(x) << Delim; //NOTE: Adjective Storage to FILE
                 }
                 Count = CellMapIT->second.GetNumberOfVerbsInList();
-                LearnedDataFile << "Nunber of Verbs,"         << Count << Delim;
-                for (int x = 0; x<=Count-1; x++){
-                    LearnedDataFile << "Verb,"                << CellMapIT->second.GetVerbFromList(x) << Delim;
+                LearnedDataFile << "Nunber of Verbs              ," << Count << Delim;
+                for (int x = 0; x<Count; x++){
+                    LearnedDataFile << "Verb                     ," << CellMapIT->second.GetVerbFromList(x) << Delim;
                 }
                 Count = CellMapIT->second.GetNumberOfAdverbsInList();
-                LearnedDataFile << "Number of Adverbs,"       << Count << Delim;
-                for (int x = 0; x<=Count-1; x++){
-                    LearnedDataFile << "Adverb,"              << CellMapIT->second.GetAdverbFromList(x) << Delim;
+                LearnedDataFile << "Number of Adverbs            ," << Count << Delim;
+                for (int x = 0; x<Count; x++){
+                    LearnedDataFile << "Adverb                   ," << CellMapIT->second.GetAdverbFromList(x) << Delim;
                 }
                 Count = CellMapIT->second.GetNumberOfRelatedNounsInList();
-                LearnedDataFile << "Related Nouns,"           << Count << Delim;
-                for (int x = 0; x<=Count-1; x++){
-                    LearnedDataFile << "Noun,"                << CellMapIT->second.GetNounFromList(x) << Delim;
+                LearnedDataFile << "Related Nouns                ," << Count << Delim;
+                for (int x = 0; x<Count; x++){
+                    LearnedDataFile << "Noun                     ," << CellMapIT->second.GetNounFromList(x) << Delim;
                 }
                  //++mapIT;
                 }//end of loop of Words to store
@@ -1372,6 +1397,9 @@ class c_Lobes : public c_MemoryCell
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellWordTense(strLineData[0]);                      //set the char wordtense
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpPolarity(strLineData[0]);                           //set the char polarity
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellSecondaryType(strLineData[0]);                  //set the char secondary type

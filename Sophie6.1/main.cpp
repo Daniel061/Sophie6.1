@@ -24,7 +24,7 @@
 
 using namespace std;
 c_Brain Brain;
-string Version = "6.1.05.EN.009.028";
+string Version = "6.1.0b.EN.009.028";
 bool Verbose;
 bool StoryMode = false;
 int  BaseSpeed = 600000000;
@@ -60,22 +60,23 @@ int main()
 
 //****************FOR INPUT TEXT TESTING********************************
 //*****uncomment the following******************************************
-//ifstream myfile ("testtext.txt");
+ifstream myfile ("trainingdata.dat");
 //testtext.txt file format is single lines terminated by CR
 // -enable StoryMode for no response processing
 // -disable StoryMode when finished
-//  if (myfile.is_open())
-//  {
-//    while ( getline (myfile,Raw_Sentence) )
-//    {
-//      cout << Raw_Sentence << endl;
-//      Brain.ProcessUserInput( Raw_Sentence );
-//    }
-//    myfile.close();
-//  }
-//
-//  else cout << "Unable to open file";
+StoryMode = true;
+  if (myfile.is_open())
+  {
+    while ( getline (myfile,Raw_Sentence) )
+    {
+      cout << Raw_Sentence << endl;
+      Brain.ProcessUserInput( Raw_Sentence );
+    }
+    myfile.close();
+  }
 
+  else cout << "Unable to open file";
+StoryMode = false;
 cout << ">>";
 getline (cin,Raw_Sentence);
 
