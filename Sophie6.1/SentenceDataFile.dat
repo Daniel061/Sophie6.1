@@ -1,15 +1,129 @@
-VERSION 6.1.0b.EN.009.028
+VERSION 6.1.0t.EN.009.030
+Original string           ,black is a color
+Gist of sentence          ,is a color 
+subGist of sentence       ,
+Supportive phrase         ,black 
+Word Count                ,4
+Subject Location          ,3
+Indirect object location  ,-1
+Direct Object Location    ,-1
+Preposition Position      ,-1
+Final pattern             ,avdn
+First pattern             ,avdn
+bool Has plural pronoun   ,0
+bool Has punctuation      ,0
+Punctuation character     ,x
+bool Is question          ,0
+bool Has contraction      ,0
+bool Has greeting word    ,0
+bool Has gender reference ,0
+bool Has been understood  ,1
+bool Has dual subjects    ,0
+bool Has Pronoun reference,0
+Second subject string     ,
+Second subject location   ,-1
+Adverb location           ,-1
+Noun count                ,1
+Verb location             ,1
+Adjective location        ,0
+Name pointer              ,-1
+bool Has Gender determiner,0
+Conjunction location      ,-1
+Sentence direction        ,-1
+Sentence polarity         ,p
+Days since 2019           ,66
+Understanding level       ,100
+Word data                    ,black
+Word token                ,32141
+Quote Location            ,-1
+bool is contraction       ,0
+Word data LC              ,black
+Substitute word           ,
+Word type                 ,a
+Secondary word type       ,u
+Alternate word type       ,u
+Gender class              ,u
+Contraction root 1st      ,
+Contraction root 2nd      ,
+bool is plural            ,0
+Plural root               ,
+Plural word flag          ,s
+Word tense                ,u
+bool Is SingularPossessive,0
+bool Is Plural Possive    ,0
+Possessive Root           ,
+Possessive Root Type      ,u
+Word data                    ,is
+Word token                ,109
+Quote Location            ,-1
+bool is contraction       ,0
+Word data LC              ,is
+Substitute word           ,
+Word type                 ,v
+Secondary word type       ,u
+Alternate word type       ,u
+Gender class              ,u
+Contraction root 1st      ,
+Contraction root 2nd      ,
+bool is plural            ,0
+Plural root               ,
+Plural word flag          ,s
+Word tense                ,u
+bool Is SingularPossessive,0
+bool Is Plural Possive    ,0
+Possessive Root           ,
+Possessive Root Type      ,u
+Word data                    ,a
+Word token                ,1
+Quote Location            ,-1
+bool is contraction       ,0
+Word data LC              ,a
+Substitute word           ,
+Word type                 ,d
+Secondary word type       ,u
+Alternate word type       ,u
+Gender class              ,u
+Contraction root 1st      ,
+Contraction root 2nd      ,
+bool is plural            ,0
+Plural root               ,
+Plural word flag          ,s
+Word tense                ,u
+bool Is SingularPossessive,0
+bool Is Plural Possive    ,0
+Possessive Root           ,
+Possessive Root Type      ,u
+Word data                    ,color
+Word token                ,46368
+Quote Location            ,-1
+bool is contraction       ,0
+Word data LC              ,color
+Substitute word           ,
+Word type                 ,n
+Secondary word type       ,u
+Alternate word type       ,u
+Gender class              ,u
+Contraction root 1st      ,
+Contraction root 2nd      ,
+bool is plural            ,0
+Plural root               ,
+Plural word flag          ,s
+Word tense                ,u
+bool Is SingularPossessive,0
+bool Is Plural Possive    ,0
+Possessive Root           ,
+Possessive Root Type      ,u
 Original string           ,The boy threw the ball over the fence
 Gist of sentence          ,
 subGist of sentence       ,
 Supportive phrase         ,
 Word Count                ,8
-Subject Location          ,1
+Subject Location          ,4
 Indirect object location  ,-1
 Direct Object Location    ,-1
 Preposition Position      ,5
-Final pattern             ,dGuduIdu
-First pattern             ,uuuuuuuu
+Final pattern             ,dGadnIdn
+First pattern             ,dGuduIdu
 bool Has plural pronoun   ,0
 bool Has punctuation      ,0
 Punctuation character     ,x
@@ -17,7 +131,7 @@ bool Is question          ,0
 bool Has contraction      ,0
 bool Has greeting word    ,0
 bool Has gender reference ,1
-bool Has been understood  ,0
+bool Has been understood  ,1
 bool Has dual subjects    ,0
 bool Has Pronoun reference,0
 Second subject string     ,
@@ -30,8 +144,9 @@ Name pointer              ,-1
 bool Has Gender determiner,0
 Conjunction location      ,-1
 Sentence direction        ,-1
-Days since 2019           ,62
-Understanding level       ,0
+Sentence polarity         ,p
+Days since 2019           ,66
+Understanding level       ,50
 Word data                    ,The
 Word token                ,2085
 Quote Location            ,-1
@@ -78,7 +193,7 @@ Quote Location            ,-1
 bool is contraction       ,0
 Word data LC              ,threw
 Substitute word           ,
-Word type                 ,u
+Word type                 ,a
 Secondary word type       ,u
 Alternate word type       ,u
 Gender class              ,u
@@ -118,7 +233,7 @@ Quote Location            ,-1
 bool is contraction       ,0
 Word data LC              ,ball
 Substitute word           ,
-Word type                 ,u
+Word type                 ,n
 Secondary word type       ,u
 Alternate word type       ,u
 Gender class              ,u
@@ -178,7 +293,7 @@ Quote Location            ,-1
 bool is contraction       ,0
 Word data LC              ,fence
 Substitute word           ,
-Word type                 ,u
+Word type                 ,n
 Secondary word type       ,u
 Alternate word type       ,u
 Gender class              ,u
@@ -223,7 +338,8 @@ Name pointer              ,-1
 bool Has Gender determiner,0
 Conjunction location      ,-1
 Sentence direction        ,-1
-Days since 2019           ,62
+Sentence polarity         ,p
+Days since 2019           ,66
 Understanding level       ,75
 Word data                    ,the
 Word token                ,2085
@@ -306,16 +422,16 @@ bool Is Plural Possive    ,0
 Possessive Root           ,
 Possessive Root Type      ,u
 Original string           ,the dog is an animal
-Gist of sentence          ,
+Gist of sentence          ,is an animal 
 subGist of sentence       ,
-Supportive phrase         ,
+Supportive phrase         ,the dog 
 Word Count                ,5
 Subject Location          ,1
-Indirect object location  ,-1
+Indirect object location  ,4
 Direct Object Location    ,-1
 Preposition Position      ,-1
-Final pattern             ,dnvdu
-First pattern             ,uuuuu
+Final pattern             ,dnvdn
+First pattern             ,dnvdu
 bool Has plural pronoun   ,0
 bool Has punctuation      ,0
 Punctuation character     ,x
@@ -323,21 +439,22 @@ bool Is question          ,0
 bool Has contraction      ,0
 bool Has greeting word    ,0
 bool Has gender reference ,0
-bool Has been understood  ,0
+bool Has been understood  ,1
 bool Has dual subjects    ,0
 bool Has Pronoun reference,0
 Second subject string     ,
 Second subject location   ,-1
 Adverb location           ,-1
-Noun count                ,1
+Noun count                ,2
 Verb location             ,2
 Adjective location        ,-1
 Name pointer              ,-1
 bool Has Gender determiner,0
 Conjunction location      ,-1
 Sentence direction        ,-1
-Days since 2019           ,62
-Understanding level       ,0
+Sentence polarity         ,p
+Days since 2019           ,66
+Understanding level       ,75
 Word data                    ,the
 Word token                ,2085
 Quote Location            ,-1
@@ -424,7 +541,7 @@ Quote Location            ,-1
 bool is contraction       ,0
 Word data LC              ,animal
 Substitute word           ,
-Word type                 ,u
+Word type                 ,n
 Secondary word type       ,u
 Alternate word type       ,u
 Gender class              ,u
@@ -439,16 +556,16 @@ bool Is Plural Possive    ,0
 Possessive Root           ,
 Possessive Root Type      ,u
 Original string           ,the dog is a pet
-Gist of sentence          ,
+Gist of sentence          ,is a pet 
 subGist of sentence       ,
-Supportive phrase         ,
+Supportive phrase         ,the dog 
 Word Count                ,5
 Subject Location          ,1
-Indirect object location  ,-1
+Indirect object location  ,4
 Direct Object Location    ,-1
 Preposition Position      ,-1
-Final pattern             ,dnvdu
-First pattern             ,uuuuu
+Final pattern             ,dnvdn
+First pattern             ,dnvdn
 bool Has plural pronoun   ,0
 bool Has punctuation      ,0
 Punctuation character     ,x
@@ -456,21 +573,22 @@ bool Is question          ,0
 bool Has contraction      ,0
 bool Has greeting word    ,0
 bool Has gender reference ,0
-bool Has been understood  ,0
+bool Has been understood  ,1
 bool Has dual subjects    ,0
 bool Has Pronoun reference,0
 Second subject string     ,
 Second subject location   ,-1
 Adverb location           ,-1
-Noun count                ,1
+Noun count                ,2
 Verb location             ,2
 Adjective location        ,-1
 Name pointer              ,-1
 bool Has Gender determiner,0
 Conjunction location      ,-1
 Sentence direction        ,-1
-Days since 2019           ,62
-Understanding level       ,0
+Sentence polarity         ,p
+Days since 2019           ,66
+Understanding level       ,100
 Word data                    ,the
 Word token                ,2085
 Quote Location            ,-1
@@ -556,119 +674,6 @@ Word token                ,1670
 Quote Location            ,-1
 bool is contraction       ,0
 Word data LC              ,pet
-Substitute word           ,
-Word type                 ,u
-Secondary word type       ,u
-Alternate word type       ,u
-Gender class              ,u
-Contraction root 1st      ,
-Contraction root 2nd      ,
-bool is plural            ,0
-Plural root               ,
-Plural word flag          ,s
-Word tense                ,u
-bool Is SingularPossessive,0
-bool Is Plural Possive    ,0
-Possessive Root           ,
-Possessive Root Type      ,u
-Original string           ,black is a color
-Gist of sentence          ,is a color 
-subGist of sentence       ,
-Supportive phrase         ,black 
-Word Count                ,4
-Subject Location          ,3
-Indirect object location  ,-1
-Direct Object Location    ,-1
-Preposition Position      ,-1
-Final pattern             ,avdn
-First pattern             ,avdn
-bool Has plural pronoun   ,0
-bool Has punctuation      ,0
-Punctuation character     ,x
-bool Is question          ,0
-bool Has contraction      ,0
-bool Has greeting word    ,0
-bool Has gender reference ,0
-bool Has been understood  ,1
-bool Has dual subjects    ,0
-bool Has Pronoun reference,0
-Second subject string     ,
-Second subject location   ,-1
-Adverb location           ,-1
-Noun count                ,1
-Verb location             ,1
-Adjective location        ,0
-Name pointer              ,-1
-bool Has Gender determiner,0
-Conjunction location      ,-1
-Sentence direction        ,-1
-Days since 2019           ,62
-Understanding level       ,100
-Word data                    ,black
-Word token                ,32141
-Quote Location            ,-1
-bool is contraction       ,0
-Word data LC              ,black
-Substitute word           ,
-Word type                 ,a
-Secondary word type       ,u
-Alternate word type       ,u
-Gender class              ,u
-Contraction root 1st      ,
-Contraction root 2nd      ,
-bool is plural            ,0
-Plural root               ,
-Plural word flag          ,s
-Word tense                ,u
-bool Is SingularPossessive,0
-bool Is Plural Possive    ,0
-Possessive Root           ,
-Possessive Root Type      ,u
-Word data                    ,is
-Word token                ,109
-Quote Location            ,-1
-bool is contraction       ,0
-Word data LC              ,is
-Substitute word           ,
-Word type                 ,v
-Secondary word type       ,u
-Alternate word type       ,u
-Gender class              ,u
-Contraction root 1st      ,
-Contraction root 2nd      ,
-bool is plural            ,0
-Plural root               ,
-Plural word flag          ,s
-Word tense                ,u
-bool Is SingularPossessive,0
-bool Is Plural Possive    ,0
-Possessive Root           ,
-Possessive Root Type      ,u
-Word data                    ,a
-Word token                ,1
-Quote Location            ,-1
-bool is contraction       ,0
-Word data LC              ,a
-Substitute word           ,
-Word type                 ,d
-Secondary word type       ,u
-Alternate word type       ,u
-Gender class              ,u
-Contraction root 1st      ,
-Contraction root 2nd      ,
-bool is plural            ,0
-Plural root               ,
-Plural word flag          ,s
-Word tense                ,u
-bool Is SingularPossessive,0
-bool Is Plural Possive    ,0
-Possessive Root           ,
-Possessive Root Type      ,u
-Word data                    ,color
-Word token                ,46368
-Quote Location            ,-1
-bool is contraction       ,0
-Word data LC              ,color
 Substitute word           ,
 Word type                 ,n
 Secondary word type       ,u

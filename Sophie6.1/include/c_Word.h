@@ -3,6 +3,21 @@
 
 #include <string>
 #include <unordered_set>
+
+/** SOPHIE 6.1
+     author - Daniel W. Ankrom ©2019
+
+     GNU General Public License v3.0
+     Permissions of this strong copyleft license are conditioned
+      on making available complete source code of licensed works
+       and modifications, which include larger works using a licensed
+       work, under the same license.
+       Copyright and license notices must be preserved.
+       Contributors provide an express grant of patent rights.
+
+     see - https://github.com/Daniel061/Sophie6.1/blob/master/LICENSE
+*/
+
 using namespace std;
 class c_Word
 {
@@ -32,9 +47,9 @@ class c_Word
           char    w_SecondaryType           = 'u';   // some words have more than 1 usage
           char    w_AlternativeType         = 'u';   // some words have more than 1 usage
           char    w_WordTense               = 'u';   // c - present p - past
-          char    w_Polarity                = 'u';   // positive/negative
+          char    w_Polarity                = 'p';   // positive/negative
 //TODO: Store w_Polarity in files
-//TODO: Add Gets/Sets
+
 
           unordered_set <string> w_MiniDefinition;   // if this word is a subject, gist of sentence is here too
           unordered_set <string>::iterator SetIT;    // iterator
@@ -47,9 +62,10 @@ class c_Word
 
 
     public:
+        char     Getw_Polarity(){return w_Polarity;}
+        void     Setw_Polarity(char newVal){w_Polarity = newVal;}
 
-
-        void     Setw_MiniDefinition(string newVal){w_MiniDefinition.emplace(newVal);}
+        void     Setw_MiniDefinition(string newVal){if(newVal != "") w_MiniDefinition.emplace(newVal);}
         int      Getw_MiniDefinitionCount(){return w_MiniDefinition.size();}
         string   Getw_MiniDefinition(int intWhich){
                  SetIT = w_MiniDefinition.begin();
@@ -124,7 +140,7 @@ class c_Word
 
         string   Getw_RelatedNoun(int Location){
                  SetIT = w_RelatedNouns.begin();
-                 for(int x =0; x <= Location; x++) ++SetIT;
+                 for(int x =0; x < Location; x++) ++SetIT;
                  if(SetIT == w_RelatedNouns.end())
                     return "";
                  else
@@ -132,7 +148,7 @@ class c_Word
 
         string   Getw_Adjective(int Location){
                  SetIT = w_Adjectives.begin();
-                 for(int x =0; x <= Location; x++) ++SetIT;
+                 for(int x =0; x < Location; x++) ++SetIT;
                  if(SetIT == w_Adjectives.end())
                     return "";
                  else
@@ -140,7 +156,7 @@ class c_Word
 
         string   Getw_Adverb(int Location){
                  SetIT = w_Adverbs.begin();
-                 for(int x =0; x <= Location; x++) ++SetIT;
+                 for(int x =0; x < Location; x++) ++SetIT;
                  if(SetIT == w_Adverbs.end())
                     return "";
                  else
@@ -148,19 +164,19 @@ class c_Word
 
         string   Getw_Verb(int Location){
                  SetIT = w_Verbs.begin();
-                 for(int x =0; x <= Location; x++) ++SetIT;
+                 for(int x =0; x < Location; x++) ++SetIT;
                  if(SetIT == w_Verbs.end())
                     return "";
                  else
                     return *SetIT;}
 
-         void    Setw_RelatedNoun(string newVal){w_RelatedNouns.emplace(newVal);}
+         void    Setw_RelatedNoun(string newVal){if(newVal != "") w_RelatedNouns.emplace(newVal);}
 
-         void    Setw_Adjective(string newVal){w_Adjectives.emplace(newVal);}
+         void    Setw_Adjective(string newVal){if(newVal != "") w_Adjectives.emplace(newVal);}
 
-         void    Setw_Adverb(string newVal){w_Adverbs.emplace(newVal);}
+         void    Setw_Adverb(string newVal){if(newVal != "") w_Adverbs.emplace(newVal);}
 
-         void    Setw_Verb(string newVal){w_Verbs.emplace(newVal);}
+         void    Setw_Verb(string newVal){if(newVal != "") w_Verbs.emplace(newVal);}
 
          int     Getw_RelatedNounCount(){return w_RelatedNouns.size();}
 
@@ -190,12 +206,13 @@ class c_Word
           w_AlternativeType          = 'u';     // some words have more than 1 usage            16
           w_WordTense                = 'u';     // c - present p - past                         17
           w_PossessiveRootType       = 'u';     // usually a 'n' noun but not always            18
-          w_SingularForm             = "";      // i.e. cats = cat                              19
+          w_Polarity                 = 'p';     // positive / negative                          19
+          w_SingularForm             = "";      // i.e. cats = cat                              20
 
-          w_MiniDefinition.clear();             // usually Gist of sentence if used as subject  20
-          w_Adjectives.clear();                 // adjectives used towards this word            21
-          w_Adverbs.clear();                    // adverbs used towards this word               22
-          w_RelatedNouns.clear();               // nouns related to this word                   23
+          w_MiniDefinition.clear();             // usually Gist of sentence if used as subject  21
+          w_Adjectives.clear();                 // adjectives used towards this word            22
+          w_Adverbs.clear();                    // adverbs used towards this word               23
+          w_RelatedNouns.clear();               // nouns related to this word                   24
         }
 
 

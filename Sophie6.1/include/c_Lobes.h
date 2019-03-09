@@ -10,6 +10,21 @@
 #include <string>
 #include <time.h>
 
+/** SOPHIE 6.1
+     author - Daniel W. Ankrom ©2019
+
+     GNU General Public License v3.0
+     Permissions of this strong copyleft license are conditioned
+      on making available complete source code of licensed works
+       and modifications, which include larger works using a licensed
+       work, under the same license.
+       Copyright and license notices must be preserved.
+       Contributors provide an express grant of patent rights.
+
+     see - https://github.com/Daniel061/Sophie6.1/blob/master/LICENSE
+*/
+
+
 extern bool   Verbose;
 extern string Version;
 
@@ -63,7 +78,7 @@ class c_Lobes : public c_MemoryCell
                if it is not, modifies the address of the bool at Result to TRUE and
                ALWAYS returns the iterator.
                = end() if not found.
-               For use with Pattern data, set UseLowerCase to false
+               For use with Pattern data, set UseLowerCase to false and sidetocheck = 'l'
             */
             map <string, c_MemoryCell>::iterator FindStringInMap(string strToSearch, bool &Result, char SideToCheck = 'r', bool UseLowerCase = true){
             Result = false;
@@ -90,6 +105,15 @@ class c_Lobes : public c_MemoryCell
 
 //-----------------SET FUNCTIONS----------------------------------
 
+        /// Advances pTimesUsedAsSubject is strSearchBase Exists
+        bool SetMemoryCellSubjectUsageCounterUpOne(string strSearchBase){
+          bool Result = false;
+          CellMapIT   = FindStringInMap(strSearchBase,Result);
+               if(Result){
+                   CellMapIT->second.IncrementpTimesUsedAsSubject();}
+               return Result;}
+//TODO: Finish the other counters
+
         /// Sets pDaysOld if strSearchBase exists,
         ///  returns True if added, else false if updated,
         ///  send pResolvedPattern data in strData,
@@ -105,9 +129,9 @@ class c_Lobes : public c_MemoryCell
         ///  returns True if added, else false if updated,
         ///  send pResolvedPattern data in strData,
         ///  send owner word in strSearchBase.
-        bool SetMemoryCellpPointerToNextPattern(string strSearchBase, string strData ){
+        bool SetMemoryCellpPointerToNextPattern(string strSearchBase, string strData, char SideToCheck = 'r', bool UseLowerCase = true ){
            bool Result = false;
-           CellMapIT   = FindStringInMap(strSearchBase, Result);
+           CellMapIT   = FindStringInMap(strSearchBase, Result, SideToCheck, UseLowerCase);
                if (Result){
                     CellMapIT->second.SetpCellResolvedPattern(strData);}
                return Result;}
@@ -386,16 +410,23 @@ class c_Lobes : public c_MemoryCell
         /// Updates or Adds pCellData if exists
         ///  returns True if added, else false if updated
         ///  send pCellData data in strSearchBase
-        bool SetMemoryCellpCellData(string strSearchBase){
+        bool SetMemoryCellpCellData(string strSearchBase,char SideToStore = 'r', bool UseLowerCase = true){
            bool Result = false;
-           CellMapIT   = FindStringInMap(strSearchBase, Result);
+           CellMapIT   = FindStringInMap(strSearchBase, Result, SideToStore, UseLowerCase);
                if (!Result){
+                  WorkingCell.InitializeAll();
                   WorkingCell.SetpCellDataString(strSearchBase);
                   WorkingCell.SetpCellDataLC(MakeStringLowerCase(strSearchBase));
-                  RightLobeCellMap.emplace(strSearchBase,WorkingCell);
-                  Result = true;}
+                      if(SideToStore == 'r'){
+                        RightLobeCellMap.emplace(strSearchBase,WorkingCell);
+                        Result = true;}
+                      else{
+                        LeftLobeCellMap.emplace(strSearchBase,WorkingCell);
+                        Result = true;}
+                  }
                   else{
-                    CellMapIT->second.SetpCellDataString(strSearchBase);}
+                    CellMapIT->second.SetpCellDataString(strSearchBase);
+                    CellMapIT->second.SetpCellDataLC(MakeStringLowerCase(strSearchBase));}
                return Result;}
 
 
@@ -472,9 +503,9 @@ class c_Lobes : public c_MemoryCell
         /// Gets pCellData if exists, else return ""
         ///  Returns True in the address of &Result if exists
         ///  Returns pCellData
-        string GetMemoryCellRawData(string strSearchBase, bool &Result){
+        string GetMemoryCellRawData(string strSearchBase, bool &Result, char SideToCheck = 'r', bool UseLowerCase = true){
            Result = false;
-           CellMapIT   = FindStringInMap(strSearchBase, Result);
+           CellMapIT   = FindStringInMap(strSearchBase, Result, SideToCheck, UseLowerCase);
                if (Result){
                     return CellMapIT->second.GetpCellDataString();}
                else
@@ -780,9 +811,9 @@ class c_Lobes : public c_MemoryCell
         /// Returns True in the address of &Result if exists
         /// Returns pResolvedPattern
         /// Send owner word in strSearchBase
-        string GetMemoryCellpResolvedPattern(string strSearchBase, bool &Result){
+        string GetMemoryCellpResolvedPattern(string strSearchBase, bool &Result, char SideToCheck = 'r', bool UseLowerCase = true){
            Result      = false;
-           CellMapIT   = FindStringInMap(strSearchBase, Result);
+           CellMapIT   = FindStringInMap(strSearchBase, Result, SideToCheck, UseLowerCase);
                if (Result){
                     return CellMapIT->second.GetpCellResolvedPattern();}
                else
@@ -981,17 +1012,7 @@ class c_Lobes : public c_MemoryCell
 
 
 
-          //First makes sure the address given exists,
-          //then associates adjective to the address given.
-          //NOTE:will not duplicate Adjectives.
-          ///   NOT CORRECTED/UPDATED
-          bool xAssociateMemoryCellAdjective(int Address, string AdjectiveToAssociate){
-               bool Result = false;
-               mapIT = FindAddressInMap(Address,Result);
-               if(Result){
-                    mapIT->second.AssociateAdjectiveInMap(AdjectiveToAssociate);}
-               return Result;
-          }
+
 
 
           //First makes sure the address given exists,
@@ -1174,52 +1195,8 @@ class c_Lobes : public c_MemoryCell
           ///   CORRECTED/UPDATED - NEEDS VERIFICATION
           void SavePreAndPostPatternConstruction(string PreConstructionPattern,string PostConstructionPattern, int PostToken = 0){
 
-                int PreToken  = Tokenize(PreConstructionPattern,false);
-                if (PostToken == 0)
-                    PostToken = Tokenize(PostConstructionPattern,false);
-                bool Result   = false;
-                mapIT         = FindAddressInMap(PreToken,Result,'l');
-
-                if(!Result){
-                    WorkingCell.InitializeAll();
-                    WorkingCell.SetpCellDataString(PreConstructionPattern);
-                    WorkingCell.SetpCellPurpose('1');    // pattern storage
-                    WorkingCell.SetpCellToken(PreToken);
-                    WorkingCell.SetpCellResolvedPattern(PostConstructionPattern);
-                    LeftLobeMemoryMap.emplace(PreToken,WorkingCell);
-                    mapIT  = FindAddressInMap(PostToken,Result,'l');
-                    WorkingCell.InitializeAll();
-                    WorkingCell.SetpCellDataString(PostConstructionPattern);
-                    WorkingCell.SetpCellPurpose('1');    //pattern storage
-                    WorkingCell.SetpCellToken(PostToken);
-                    WorkingCell.SetpCellResolvedPattern(PostConstructionPattern);
-                    LeftLobeMemoryMap.emplace(PostToken,WorkingCell);
-                }
-                else{
-                     mapIT->second.SetpCellDataString(PreConstructionPattern);
-                     mapIT->second.SetpCellPurpose('1');    // pattern storage
-                     mapIT->second.SetpCellToken(PreToken);
-                     mapIT->second.SetpCellResolvedPattern(PostConstructionPattern);
-
-                     mapIT  = FindAddressInMap(PostToken,Result,'l');
-                     if(Result){
-                         mapIT->second.SetpCellDataString(PostConstructionPattern);
-                         mapIT->second.SetpCellPurpose('1');    //pattern storage
-                         mapIT->second.SetpCellToken(PostToken);
-                         mapIT->second.SetpCellResolvedPattern(PostConstructionPattern);}
-                         else{
-                            WorkingCell.InitializeAll();
-                            WorkingCell.SetpCellDataString(PostConstructionPattern);
-                            WorkingCell.SetpCellPurpose('1');    //pattern storage
-                            WorkingCell.SetpCellToken(PostToken);
-                            WorkingCell.SetpCellResolvedPattern(PostConstructionPattern);
-                            LeftLobeMemoryMap.emplace(PostToken,WorkingCell);
-                         }
-
-
-                }
-
-    }
+              SetMemoryCellpCellData(PreConstructionPattern,'l',false);
+              SetMemoryCellpPointerToNextPattern(PreConstructionPattern,PostConstructionPattern,'l',false);}
 
             /// Returns miniDefinition from memorycell,
             /// Returns "" if memorycell doesn't exist,
@@ -1309,6 +1286,9 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Possessive Root        ," << CellMapIT->second.GetpPossessiveRoot() << Delim;
                     LearnedDataFile << "Possessive Root Type   ," << CellMapIT->second.GetpPossessiveRootType() << Delim;
                     LearnedDataFile << "Day stamp              ," << CellMapIT->second.GetpDaysOld() << Delim;
+                    LearnedDataFile << "Times used as sbj      ," << CellMapIT->second.GetpTimesUsedAsSubject() << Delim;
+                    LearnedDataFile << "Times used as ind obj  ," << CellMapIT->second.GetpTimesUsedAsIndirectObject() << Delim;
+                    LearnedDataFile << "Times used as dir obj  ," << CellMapIT->second.GetpTimesUsedAsDirectObject() << Delim;
 
                 Count = CellMapIT->second.GetpCellMiniDefinitionCount();
                 LearnedDataFile << "Number of Mini Defs          ," << Count << Delim;
@@ -1344,9 +1324,9 @@ class c_Lobes : public c_MemoryCell
           ofstream PatternFile ("PatternWorkLearned.dat", ios::out);
           if(PatternFile.is_open()){
                 PatternFile << "VERSION " << Version << Delim;
-                for(fileIT = LeftLobeMemoryMap.begin(); fileIT != LeftLobeMemoryMap.end(); fileIT++ ){
-                    PatternFile << fileIT->second.GetpCellDataString() << Delim;
-                    PatternFile << fileIT->second.GetpCellResolvedPattern() << Delim;
+                for(CellMapIT = LeftLobeCellMap.begin(); CellMapIT != LeftLobeCellMap.end(); CellMapIT++ ){
+                    PatternFile << CellMapIT->second.GetpCellDataString() << Delim;
+                    PatternFile << CellMapIT->second.GetpCellResolvedPattern() << Delim;
                 }
           }
           PatternFile.close();
@@ -1448,7 +1428,15 @@ class c_Lobes : public c_MemoryCell
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpDaysOld(stoi(strLineData,&decType));                //set day stamp
-
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpTimesUsedAsSubject(stoi(strLineData,&decType));     //set times used as subject
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpTimesUsedAsIndirectObject(stoi(strLineData,&decType));//set times used as indirect object
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpTimesUsedAsDirectObject(stoi(strLineData,&decType)); //set times used as direct object
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         Count = stoi(strLineData,&decType);                                  //got number of mini defs

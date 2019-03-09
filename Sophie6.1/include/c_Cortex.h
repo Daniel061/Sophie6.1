@@ -2,6 +2,20 @@
 #define C_CORTEX_H
 #include <c_Language.h>
 
+/** SOPHIE 6.1
+     author - Daniel W. Ankrom ©2019
+
+     GNU General Public License v3.0
+     Permissions of this strong copyleft license are conditioned
+      on making available complete source code of licensed works
+       and modifications, which include larger works using a licensed
+       work, under the same license.
+       Copyright and license notices must be preserved.
+       Contributors provide an express grant of patent rights.
+
+     see - https://github.com/Daniel061/Sophie6.1/blob/master/LICENSE
+*/
+
 class c_Cortex : public c_Language
 {
     public:
@@ -125,7 +139,7 @@ class c_Cortex : public c_Language
 
         ofstream PatternDataFile ("PatternData.dat", ios::out | ios::app);
         if (PatternDataFile.is_open()){ PatternDataFile << Pattern << "," << GetFromSentenceOriginalString() << ",from before Switch(UnderstandingDegree)" << endl; PatternDataFile.close();}
-
+        SetInSentencePattern(Pattern);
             switch (UnderstandingDegree)
             {
                case 0:{  ///All new words, lots of work to do
@@ -630,7 +644,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
         if(Pattern[tmpLocation+1]== 'u'){
            AssociateMemoryCellNoun(GetswWordTokens(tmpLocation),GetswWordsLC(tmpLocation+1));                                 //associate first noun to second noun
            AssociateMemoryCellNoun(GetswWordTokens(tmpLocation+3),GetswWordsLC(tmpLocation+4));                               //associate second noun to first noun
-           SetswWordType('n',tmpLocation+1);}
+           SetswWordType('n',tmpLocation+1);}  //TODO: Fix noun association in new lists
          else{
            AssociateMemoryCellNoun(GetswWordTokens(tmpLocation),GetswWordsLC(tmpLocation+4));                                 //associate first noun to second noun
            AssociateMemoryCellNoun(GetswWordTokens(tmpLocation+3),GetswWordsLC(tmpLocation+1));                               //associate second noun to first noun
@@ -653,7 +667,9 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                 SlowSpeak( "A " + GetswWords(UnKnownLocation) + " " + GetswWords(NounLocation) + "?");}
         UserResponse = RequestUserResponse();
         if(UserResponse == 1){
-            SetswWordType('a',UnKnownLocation);  //set word type to adjective
+            SetswWordType('a',UnKnownLocation);              //set word type to adjective
+            SetInSentenceAdjectiveLocation(UnKnownLocation); // store location of this new adjective
+            SetswAdjectiveToWord(GetFromSentenceSubjectLocation(),GetswWordsLC(UnKnownLocation)); // associate adjective
             SlowSpeak(":)"); IncreaseMoodLevel();
             SetInSentenceHasBeenUnderstood(true);
             Testing = false;
@@ -757,7 +773,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                               else{
 
 
-                                  if(GetIsNounRelatedToThisMemoryCell(Tokenize(Noun1),Noun2)){
+                                  if(GetIsNounRelatedToThisMemoryCell(Tokenize(Noun1),Noun2)){ //TODO: Fix proper function call
                                     SlowSpeak("A " + Noun1 + " is a " + Noun2 + ".");
                                     SetInSentenceHasBeenUnderstood(true);}
                                  else{
@@ -1015,7 +1031,7 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
                 //compares adjective list with the adjective in the sentence
                 //sets MatchedAdjective to the location in the array if matched
                 //First check for Conjunction
-                if(LocalConjunctionLocation >=0){
+                if(LocalConjunctionLocation >=0){ //TODO: Fix proper function call
                     LeftOfConjunctionMatch = GetIsAdjectiveAssociatedToThisMemoryCell(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWords(LocalConjunctionLocation-1));
                     RightOfConjunctionMatch = GetIsAdjectiveAssociatedToThisMemoryCell(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWords(LocalConjunctionLocation+1));
                     ResponseString = "The " + GetswWords(GetFromSentenceSubjectLocation()) + " ";

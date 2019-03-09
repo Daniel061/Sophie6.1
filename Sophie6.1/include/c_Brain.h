@@ -5,6 +5,20 @@
 extern string Version;
 extern bool   StoryMode;
 
+/** SOPHIE 6.1
+     author - Daniel W. Ankrom ©2019
+
+     GNU General Public License v3.0
+     Permissions of this strong copyleft license are conditioned
+      on making available complete source code of licensed works
+       and modifications, which include larger works using a licensed
+       work, under the same license.
+       Copyright and license notices must be preserved.
+       Contributors provide an express grant of patent rights.
+
+     see - https://github.com/Daniel061/Sophie6.1/blob/master/LICENSE
+*/
+
 class c_Brain : public c_Cerebellum
 {
     public:
@@ -36,7 +50,37 @@ class c_Brain : public c_Cerebellum
 
 
 
+        void ControlProcessingUserInput(string &strData){
+            if(Verbose)cout << "[c_Brain.h::ControlProcessingUserInput]" << endl;
+            int    CommandFound   = -1;
+            string tmpInputData = strData;
+            bool   OwnerShip,Plural;
+            string Root,LongFormFirst,LongFormSecond;
 
+            CommandCheckSentence.InitializeVars();
+            CommandCheckSentence.Parse(strData);
+            CommandFound     = CommandTrap();
+
+            if(CommandFound == 0){
+              Parse(strData);                               // c_Sentence parse this data
+              SaveSentenceInLongTermMemory(strData);        // update Long term memory
+              GatherAndSetAllSentenceData();                // pull all data into c_sentence and c_words
+                                                            //  from memory and language helper
+              FindAndSetGistOfSentence();                   // extract gist of sentence
+              DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,tmpInputData);
+              DecipherCurrentSentence(strData);             // Work with what is known at this point
+              RebuildPattern();                             // Updated corrected pattern
+              ReVerseBuildPattern();                        // push pattern data to word type
+              //TODO: word data and/or pattern data is not being updated after the previous call
+              LinkRelatedWords();
+              SaveAllSentenceWordDataToMemory();
+              SaveCurrentSentenceInMap();
+              SavePreAndPostPatternConstruction(GetFromSentencePreProcessedPattern(),GetFromSentencePattern());
+
+            }
+            else{
+              if(CommandFound == -1)strData = "end";}
+        } //End of ControlProcessingUserInput
 
 
 
@@ -51,9 +95,9 @@ class c_Brain : public c_Cerebellum
             string CheckedPattern,Root,LongFormFirst,LongFormSecond;
             int SubjectLocation;
             string FirstPattern = "";
-            CommandFound = 0;
+            CommandFound        = 0;
             bool OwnerShip,Plural,NeedRerun;
-            NeedRerun = false;
+            NeedRerun           = false;
 
            do{
             CommandCheckSentence.Parse(strData);
@@ -109,7 +153,6 @@ class c_Brain : public c_Cerebellum
                         SetSubjectInStack(GetswWordTokens(SubjectLocation),GetswWords(SubjectLocation),GetFromSentenceOriginalString());
                      SavePreAndPostPatternConstruction(FirstPattern,GetFromSentencePattern());             //save learned pattern for future// language helper to use this
                      SaveCurrentSentenceInMap();
-                     SaveAllSentenceWordDataToMemory();
                      }
                    }
                    else
@@ -442,13 +485,13 @@ class c_Brain : public c_Cerebellum
                                 }
                     int z; z = GetVerbPointingToAdjective();
                     if((z >=0) && (!GetFromSentenceIsQuestion()))
-                        AssociateMemoryCellVerbToAdjective(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(z),GetswWordsLC(x));
+                        AssociateMemoryCellVerbToAdjective(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(z),GetswWordsLC(x)); //TODO: Fix association
                         if(GetFromSentenceIndirectObjectLocation()>=0)
                             AssociateMemoryCellVerbToAdjective(GetswWordTokens(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(z),GetswWordsLC(x));
                 }
                 //Associate Adverb if not a question sentence
                 if((GetswWordType(x) == 'A') && (!GetFromSentenceIsQuestion()))
-                    AssociateMemoryCellAdverbToVerb(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(GetswWordTokens(GetVerbPointingToAdjective())),GetswWordsLC(x));
+                    AssociateMemoryCellAdverbToVerb(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(GetswWordTokens(GetVerbPointingToAdjective())),GetswWordsLC(x)); //TODO: Fix association
          }//nd for loop
          //Associate two nouns if not a question sentence
          if((GetFromSentenceNounCount() >=2)&& (!GetFromSentenceIsQuestion())){

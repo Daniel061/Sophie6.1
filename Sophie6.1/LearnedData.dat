@@ -1,4 +1,4 @@
-VERSION 6.1.0b.EN.009.028, file version-Memory Cells
+VERSION 6.1.0t.EN.009.030, file version-Memory Cells
 Original string----------,a
 Lower Case string      ,a
 Given name             ,
@@ -7,7 +7,7 @@ Contraction 2nd        ,
 Cell purpose           ,w
 Word Type              ,d
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,u
@@ -17,13 +17,16 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,1
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
+Day stamp              ,66
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
 Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
@@ -37,7 +40,7 @@ Contraction 2nd        ,
 Cell purpose           ,w
 Word Type              ,d
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,u
@@ -47,13 +50,16 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,250322
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
+Day stamp              ,66
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
 Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
@@ -65,9 +71,9 @@ Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
+Word Type              ,n
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,u
@@ -77,48 +83,57 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,250322
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
+Day stamp              ,66
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
 Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,0
+Related Nouns                ,1
+Noun                     ,dog
 Original string----------,ball
 Lower Case string      ,ball
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
+Word Type              ,n
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
-Gender class           ,u
+Gender class           ,m
 Is root                ,0
 Is Locked(old is set)  ,1
 Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,66435
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
+Day stamp              ,66
+Times used as sbj      ,1
+Times used as ind obj  ,0
+Times used as dir obj  ,0
 Number of Mini Defs          ,0
-Number of Adjectives         ,0
+Number of Adjectives         ,1
+Adjective                ,threw
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,0
+Related Nouns                ,1
+Noun                     ,fence
 Original string----------,black
 Lower Case string      ,black
 Given name             ,
@@ -127,7 +142,7 @@ Contraction 2nd        ,
 Cell purpose           ,w
 Word Type              ,a
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,u
@@ -137,13 +152,16 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,32141
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
+Day stamp              ,66
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
 Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
@@ -157,7 +175,7 @@ Contraction 2nd        ,
 Cell purpose           ,w
 Word Type              ,G
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,m
@@ -167,15 +185,17 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,66435
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
-Number of Mini Defs          ,1
-Mini Def.                ,
+Day stamp              ,66
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
+Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
@@ -188,7 +208,7 @@ Contraction 2nd        ,
 Cell purpose           ,w
 Word Type              ,n
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,u
@@ -198,16 +218,20 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,1
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
+Day stamp              ,66
+Times used as sbj      ,1
+Times used as ind obj  ,0
+Times used as dir obj  ,0
 Number of Mini Defs          ,1
 Mini Def.                ,is a color 
-Number of Adjectives         ,0
+Number of Adjectives         ,1
+Adjective                ,black
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
@@ -219,7 +243,7 @@ Contraction 2nd        ,
 Cell purpose           ,w
 Word Type              ,n
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,u
@@ -229,29 +253,36 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,32141
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
-Number of Mini Defs          ,2
-Mini Def.                ,
+Day stamp              ,66
+Times used as sbj      ,3
+Times used as ind obj  ,0
+Times used as dir obj  ,0
+Number of Mini Defs          ,3
 Mini Def.                ,is black 
-Number of Adjectives         ,0
+Mini Def.                ,is an animal 
+Mini Def.                ,is a pet 
+Number of Adjectives         ,1
+Adjective                ,black
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,0
+Related Nouns                ,2
+Noun                     ,animal
+Noun                     ,pet
 Original string----------,fence
 Lower Case string      ,fence
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
+Word Type              ,n
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,u
@@ -261,18 +292,22 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,66435
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
+Day stamp              ,66
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
 Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,0
+Related Nouns                ,1
+Noun                     ,ball
 Original string----------,is
 Lower Case string      ,is
 Given name             ,
@@ -281,7 +316,7 @@ Contraction 2nd        ,
 Cell purpose           ,w
 Word Type              ,v
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,u
@@ -291,13 +326,16 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,32141
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
+Day stamp              ,66
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
 Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
@@ -311,7 +349,7 @@ Contraction 2nd        ,
 Cell purpose           ,w
 Word Type              ,I
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,u
@@ -321,13 +359,16 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,66435
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
+Day stamp              ,66
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
 Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
@@ -339,9 +380,9 @@ Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
+Word Type              ,n
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,u
@@ -351,18 +392,22 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,1670
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
+Day stamp              ,66
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
 Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,0
+Related Nouns                ,1
+Noun                     ,dog
 Original string----------,the
 Lower Case string      ,the
 Given name             ,
@@ -371,7 +416,7 @@ Contraction 2nd        ,
 Cell purpose           ,w
 Word Type              ,d
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,u
@@ -381,13 +426,16 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,32141
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
+Day stamp              ,66
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
 Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
@@ -399,9 +447,9 @@ Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
+Word Type              ,a
 Word tense             ,u
-Polarity               ,u
+Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
 Gender class           ,u
@@ -411,13 +459,16 @@ Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
-Token                  ,66435
+Token                  ,0
 Resolved Pattern       ,
 Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,62
+Day stamp              ,66
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
 Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0

@@ -4,6 +4,21 @@
 #include <map>
 #include <iostream>
 #include <unordered_set>
+
+/** SOPHIE 6.1
+     author - Daniel W. Ankrom ©2019
+
+     GNU General Public License v3.0
+     Permissions of this strong copyleft license are conditioned
+      on making available complete source code of licensed works
+       and modifications, which include larger works using a licensed
+       work, under the same license.
+       Copyright and license notices must be preserved.
+       Contributors provide an express grant of patent rights.
+
+     see - https://github.com/Daniel061/Sophie6.1/blob/master/LICENSE
+*/
+
 extern bool Verbose;
 using namespace std;
 class c_MemoryCell
@@ -15,50 +30,69 @@ class c_MemoryCell
     protected:
 
     private:
-        string pCellData;                          // the raw data
-        string pCellDataLC;                        // the data in lower case
-        string pGivenName;                         // if this noun or proper noun has a given name
-        string pCellContractionLongFormFirst;      // i.e. he's to he
-        string pCellContractionLongFormSecond;     // i.e. he's to is
-        string pPossessiveRoot;                    // i.e. cat's = cat
-        string pSingularForm;                      // i.e. cats  = cat
-        string pResolvedPattern;                   // if used as pattern storage, contains constructed pattern or to self if final construction form
-        char   pPossessiveRootType;                // usually a 'n' noun type but not always
-        char   pCellPurpose;                       // s-sentence w-word r-response m-memory
-        char   pWordType;                          // n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
-                                                   // n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object I(LC) Indirect object
-                                                   // s - plural possessive  X(cap) Directive j-joining word
-                                                   // initialize to 'u'
-        char   pWordTense;                         // p-past c-present f-future s-plural
-                                                   // the decision on this word type is made elsewhere
-        char   pSecondaryType;                     // Could be used as another type i.e. light-n light red - A box is light -a
-        char   pAlternateType;                     // some words without modification could have a third type (All type references conform to pWordType definitions)
-        char   pGenderClass;                       // n - neutral e- either m - male only f - female only u - undefined
-        char   pPolarity;                          // Positive/Negative
-        bool   pIsRoot;                            // the root of a word
-        bool   pIsLocked;                          // this data is locked
-        bool   pIsPluralPossessive;                // flag
-        bool   pIsSingularPossessive;              // flag
-        char   pCellIsSingular;                    // p = plural s = singular u = undefined
-        int    pSingularLocation;                  // if CellIsSingular = p, this points to the memorycell containing the singular version
-        int    pNextVerb;                          // pointer to next verb
-        int    pNextNoun;                          // pointer to next noun
-        int    pToken;                             // the token value of this data
-        int    pDaysOld;                           // day stamp
+        string pCellData;                          // 1)  the raw data
+        string pCellDataLC;                        // 2)  the data in lower case
+        string pGivenName;                         // 3)  if this noun or proper noun has a given name
+        string pCellContractionLongFormFirst;      // 4)  i.e. he's to he
+        string pCellContractionLongFormSecond;     // 5)  i.e. he's to is
+        string pPossessiveRoot;                    // 6)  i.e. cat's = cat
+        string pSingularForm;                      // 7)  i.e. cats  = cat
+        string pResolvedPattern;                   // 8)  if used as pattern storage, contains constructed pattern or to self if final construction form
+        char   pPossessiveRootType;                // 9)  usually a 'n' noun type but not always
+        char   pCellPurpose;                       // 10) s-sentence w-word r-response m-memory
+        char   pWordType;                          //     n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
+                                                   //     n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object I(LC) Indirect object
+                                                   //     s - plural possessive  X(cap) Directive j-joining word
+                                                   //     initialize to 'u'
+        char   pWordTense;                         // 11) p-past c-present f-future s-plural
+                                                   //      the decision on this word type is made elsewhere
+        char   pSecondaryType;                     // 12) Could be used as another type i.e. light-n light red - A box is light -a
+        char   pAlternateType;                     // 13) some words without modification could have a third type (All type references conform to pWordType definitions)
+        char   pGenderClass;                       // 14) n - neutral e- either m - male only f - female only u - undefined
+        char   pPolarity;                          // 15) Positive/Negative
+        bool   pIsRoot;                            // 16) the root of a word
+        bool   pIsLocked;                          // 17) this data is locked
+        bool   pIsPluralPossessive;                // 18) flag
+        bool   pIsSingularPossessive;              // 19) flag
+        char   pCellIsSingular;                    // 20) p = plural s = singular u = undefined
+        int    pSingularLocation;                  // 21) if CellIsSingular = p, this points to the memorycell containing the singular version
+        int    pNextVerb;                          // 22) pointer to next verb
+        int    pNextNoun;                          // 23) pointer to next noun
+        int    pToken;                             // 24) the token value of this data
+        int    pDaysOld;                           // 25) day stamp
+        int    pTimesUsedAsSubject;                // 26) Subject usage count, int to 0
+        int    pTimesUsedAsIndirectObject;         // 27) Indirect object usage count, int to 0
+        int    pTimesUsedAsDirectObject;           // 28) Direct Object usage count, int to 0
 
-        unordered_set <string> pCellMiniDefinition;// from GistOfSentence if this word was a subject
-                                                   // can use list count as number of times used as subject
+        //TODO: Add int pTimesUsedAsSubject
+        //TODO: Add int pTimesUsedAsIndirectobject
+        //TODO: Add int pTimesUsedAsDirectObject
 
-        unordered_set <string> adjectiveList;      // Adjective List for this word
-        unordered_set <string> verbList;           // Verbs used with this word
-        unordered_set <string> adverbList;         // Adverbs used with this word
-        unordered_set <string> relatedNounList;    // Nouns related to this word
-        unordered_set <string>::iterator SetIT;    // iterator for this set
+        unordered_set <string> pCellMiniDefinition;// 29) from GistOfSentence if this word was a subject
+                                                   //      can use list count as number of times used as subject
+
+        unordered_set <string> adjectiveList;      // 30) Adjective List for this word
+        unordered_set <string> verbList;           // 31) Verbs used with this word
+        unordered_set <string> adverbList;         // 32) Adverbs used with this word
+        unordered_set <string> relatedNounList;    // 33) Nouns related to this word
+        unordered_set <string>::iterator SetIT;    // Local iterator for this set
 
 
 
 
     public:
+        int    GetpTimesUsedAsSubject(){return pTimesUsedAsSubject;}
+        void   IncrementpTimesUsedAsSubject(){pTimesUsedAsSubject++;}
+        void   SetpTimesUsedAsSubject(int newVal){pTimesUsedAsSubject = newVal;}
+
+        int    GetpTimesUsedAsIndirectObject(){return pTimesUsedAsIndirectObject;}
+        void   IncrementpTimesUsedAsIndirectObject(){pTimesUsedAsIndirectObject++;}
+        void   SetpTimesUsedAsIndirectObject(int newVal){pTimesUsedAsIndirectObject = newVal;}
+
+        int    GetpTimesUsedAsDirectObject(){return pTimesUsedAsDirectObject;}
+        void   IncrementpTimesUsedAsDirectObject(){pTimesUsedAsDirectObject++;}
+        void   SetpTimesUsedAsDirectObject(int newVal){pTimesUsedAsDirectObject = newVal;}
+
         char   GetpPolarity(){return pPolarity;}
         void   SetpPolarity(char newVal){pPolarity = newVal;}
 
@@ -82,7 +116,7 @@ class c_MemoryCell
         void   SetpCellContractionLongFormFirst(string newVal){pCellContractionLongFormFirst = newVal;}
         void   SetpCellContractionLongFormSecond(string newVal){pCellContractionLongFormSecond = newVal;}
 
-        void   SetpCellMiniDefinition(string newData){pCellMiniDefinition.emplace(newData);}
+        void   SetpCellMiniDefinition(string newData){if(newData != "") pCellMiniDefinition.emplace(newData);}
         string GetpCellMiniDefinition(int Which){
                SetIT = pCellMiniDefinition.begin();
                for(int x = 0; x<Which; x++) ++SetIT;
@@ -205,12 +239,14 @@ class c_MemoryCell
 
        void AssociateVerbToAdjectiveInMap(string AdjectiveToAssociate, string VerbToAssociate){
            ///new set usage Store VERB
-           verbList.emplace(VerbToAssociate);           //will not duplicate
+           if(VerbToAssociate != "")
+              verbList.emplace(VerbToAssociate);           //will not duplicate
        }
 
        void AssociateAdverbToVerbInMap(string AdverbToAssociate,string VerbToAssociate){
            ///new set usage Store ADVERB
-           adverbList.emplace(AdverbToAssociate);      // will not duplicate
+           if(AdverbToAssociate != "")
+              adverbList.emplace(AdverbToAssociate);      // will not duplicate
        }
 
        ///NEXT 4 FUNCTIONS USING NEW SET LIST
@@ -233,10 +269,10 @@ class c_MemoryCell
             for(int x = 0; x < Location; x++) ++SetIT;
             if(SetIT == adjectiveList.end())
                 return "";
-            else
+            else{
                 if(Verbose)
                     cout << "[c_MemoryCell::GetAdjectiveFromList] Returned adjective:" << *SetIT << endl;
-                return *SetIT;}
+                return *SetIT;}}
 
        /// USING NEW SET LIST
        string GetVerbFromList(int Location){

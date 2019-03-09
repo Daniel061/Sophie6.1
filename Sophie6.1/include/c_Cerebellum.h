@@ -3,6 +3,19 @@
 
 #include <c_Cortex.h>
 
+/** SOPHIE 6.1
+     author - Daniel W. Ankrom ©2019
+
+     GNU General Public License v3.0
+     Permissions of this strong copyleft license are conditioned
+      on making available complete source code of licensed works
+       and modifications, which include larger works using a licensed
+       work, under the same license.
+       Copyright and license notices must be preserved.
+       Contributors provide an express grant of patent rights.
+
+     see - https://github.com/Daniel061/Sophie6.1/blob/master/LICENSE
+*/
 
 class c_Cerebellum : public c_Cortex
 {
@@ -72,16 +85,22 @@ public:
     int GatherAndSetAllSentenceData(){
         if(Verbose)
             cout << "[c_Cerebellum.h::GatherAndSetAllSentenceData()]\n";
+
         InitializeAll();
         LocalWordCount     = GetFromSentenceWordCount();
         //check for empty sentence
         if(LocalWordCount == 0) return -1;
 
-        for (int x = 0; x <= LocalWordCount; x++) FindWordType(GetswWordsLC(x),x);
-        FindSubject();
+//        for (int x = 0; x < LocalWordCount; x++){
+//            LocalWordType  = FindWordType(GetswWordsLC(x),x);
+//            SetswWordType(LocalWordType,x);
+//            LocalPattern  += LocalWordType;}
+//            SetInSentencePreProcessedPattern(LocalPattern);
 
 
-        //*******NOTE: c_Language.h::FindWordType() sets the follow in c_Sentence.h private variables
+
+
+        //*******NOTE: c_Language.h::FindWordType() sets the following in c_Sentence.h private variables
         //     bool   IsQuestion
         //     bool   HasPluralPronoun
         //     bool   HasGenderReference
@@ -151,28 +170,30 @@ public:
          if(SelectedWordType == 'C') LocalContractionFlag = true;                   //mark has contraction
          if(SelectedWordType == 'c') SetInSentenceConjunctionLocation(x);           //save the conjunction location
 
-         LocalGenderClass = GetMemoryCellcharGenderClass(GetswWordsLC(x),Result);     //take care of GenderClass in sentence
+         LocalGenderClass = GetMemoryCellcharGenderClass(GetswWordsLC(x),Result);   //take care of GenderClass in sentence
          if(LocalGenderClass != 'u')
             SetswGenderClassInSentence(x,LocalGenderClass);
 
-        SetswWordType(SelectedWordType,x);                                            //update word type in sentence class
+        SetswWordType(SelectedWordType,x);                                          //update word type in sentence class
         } //END of for loop to scan sentence
 
-        SetInSentenceAdjectiveLocation(LocalAdjectiveLocation);                               //store  ADJECTIVE LOCATION in c_Sentence
-        SetInSentenceAdverbLocation(LocalAdverbLocation);                                     //store  ADVERB LOCATION in c_Sentence
-        SetInSentenceNamePointer(LocalNamePointer);                                           //store  NAME POINTER in c_Sentence
-        SetInSentenceVerbLocation(LocalVerbLocation);                                         //store  VERB LOCATION in c_Sentence
-        SetInSentenceNounCount(LocalNounCount);                                               //store  NOUN COUNT in c_Sentence
+        SetInSentenceAdjectiveLocation(LocalAdjectiveLocation);                     //store  ADJECTIVE LOCATION in c_Sentence
+        SetInSentenceAdverbLocation(LocalAdverbLocation);                           //store  ADVERB LOCATION in c_Sentence
+        SetInSentenceNamePointer(LocalNamePointer);                                 //store  NAME POINTER in c_Sentence
+        SetInSentenceVerbLocation(LocalVerbLocation);                               //store  VERB LOCATION in c_Sentence
+        SetInSentenceNounCount(LocalNounCount);                                     //store  NOUN COUNT in c_Sentence
         if(LocalHasAlternateType){
-            SetswAlternateType(LocalAlternateType,LocalAltLocation);                          //store in c_Sentence
+            SetswAlternateType(LocalAlternateType,LocalAltLocation);                //store in c_Sentence
         }
-        SetInSentenceHasContraction(LocalContractionFlag);                                    //Store contraction flag
-        SetInSentenceSentenceDirection(DetermineDirectionOfPhrase());                         //Store phrase/question direction in sentence data
-        SetInSentencesDaysOld(GetDaysSinceDate());                                            //day stamp this sentence
-        LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);                      //Check for corrections
-        SetInSentencePattern(LocalPattern);                                                   //store in c_Sentence
+        SetInSentenceHasContraction(LocalContractionFlag);                          //Store contraction flag
+        SetInSentenceSentenceDirection(DetermineDirectionOfPhrase());               //Store phrase/question direction in sentence data
+        SetInSentencesDaysOld(GetDaysSinceDate());                                  //day stamp this sentence
+        LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);            //Check for corrections
+        SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
+        SetInSentencePreProcessedPattern(LocalPattern);
+        ReVerseBuildPattern();                                                      //push from pattern to word types
 
-        for (int x = 0; x < int(LocalPattern.size()); x++ ){                                  //for calc in understanding level
+        for (int x = 0; x < int(LocalPattern.size()); x++ ){                         //for calc in understanding level
             if(LocalPattern[x] == 'u')
               LocalUnknownCount ++;
             else
@@ -242,6 +263,7 @@ public:
 
          ImplyUnknowns();                                                           //let language try to set some unknowns
          FindAndSetGistOfSentence();
+         FindSubject();
         return LocalWordCount;                                                      //finished
 
     }

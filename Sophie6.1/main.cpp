@@ -24,9 +24,11 @@
 
 using namespace std;
 c_Brain Brain;
-string Version = "6.1.0b.EN.009.028";
-bool Verbose;
+string Version = "6.1.0t.EN.009.030";
+bool Verbose   = false;
 bool StoryMode = false;
+int  BlockID   = -1;
+
 int  BaseSpeed = 600000000;
 int  SpeedStandard = 1000;
 int  RunningStandard = 9000000;  //adjust up or down to change delay for all machines. up=more delay
@@ -66,13 +68,15 @@ ifstream myfile ("trainingdata.dat");
 // -disable StoryMode when finished
 StoryMode = true;
   if (myfile.is_open())
-  {
+  { Elapsed = clock();
     while ( getline (myfile,Raw_Sentence) )
     {
       cout << Raw_Sentence << endl;
-      Brain.ProcessUserInput( Raw_Sentence );
+      Brain.ControlProcessingUserInput( Raw_Sentence );
     }
     myfile.close();
+    Elapsed = clock() - Elapsed;
+    cout << "Training file processed in " << Elapsed << " milliseconds.\n";
   }
 
   else cout << "Unable to open file";
@@ -88,7 +92,7 @@ getline (cin,Raw_Sentence);
             {
                 if(Verbose)cout << "[main.cpp]\n";
                 if(Raw_Sentence != ""){
-                   Brain.ProcessUserInput(Raw_Sentence);} /// First entry point to Brain
+                   Brain.ControlProcessingUserInput(Raw_Sentence);} /// First entry point to Brain
 
                 if(Raw_Sentence != "end"){
                     cout << ">>";

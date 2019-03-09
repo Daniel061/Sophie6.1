@@ -5,6 +5,21 @@
 #include <c_LongTermMemory.h>
 #include <string>
 #include <iostream>
+
+/** SOPHIE 6.1
+     author - Daniel W. Ankrom ©2019
+
+     GNU General Public License v3.0
+     Permissions of this strong copyleft license are conditioned
+      on making available complete source code of licensed works
+       and modifications, which include larger works using a licensed
+       work, under the same license.
+       Copyright and license notices must be preserved.
+       Contributors provide an express grant of patent rights.
+
+     see - https://github.com/Daniel061/Sophie6.1/blob/master/LICENSE
+*/
+
 extern bool Verbose;
 extern int  ThisSpeed;
 extern bool StoryMode;
@@ -42,11 +57,11 @@ class c_Language : public c_LongTermMemory
  string PatternReview(string LocPattern, int& ConfidenceLevel){
    if(Verbose)cout << "[c_Language::PatternReview]: " ;
    string CorrectedPattern, LeftOfJoiner, RightOfJoiner;
-   CorrectedPattern = GetFromSentencePattern();
-   string WorkingWord = "";
-   ConfidenceLevel = -1;  // no suggestion
+   CorrectedPattern        = LocPattern;
+   string WorkingWord      = "";
+   ConfidenceLevel         = -1;  // no suggestion
    int LeftOfJoinerLocation,RightOfJoinerLocation;
-   LeftOfJoinerLocation = -1; RightOfJoinerLocation = 1;
+   LeftOfJoinerLocation    = -1; RightOfJoinerLocation = 1;
    int  JoinerLocation     = -1;
    bool Result             = false;
    bool VerifyPattern      = false;
@@ -65,7 +80,7 @@ class c_Language : public c_LongTermMemory
         Possible exception~ The cat is fast and the dog is too.  The joining word 'and' would trigger this routine to match dog and fast as the same word types
 
     */
-    CorrectedPattern = GetFromSentencePattern();
+    //CorrectedPattern = GetFromSentencePattern();
     JoinerLocation = LocPattern.find("j");
     if((JoinerLocation >=1) & (JoinerLocation < int(LocPattern.size()))){  //not the first word and not the last word
         LeftOfJoiner = LocPattern.substr(JoinerLocation + LeftOfJoinerLocation,1);
@@ -92,16 +107,16 @@ class c_Language : public c_LongTermMemory
    */
 
 ///*************CHANGE PATTERN STORAGE TO STRING STRING - no tokens
-     if(GetMemoryCellIsSet(CorrectedPattern,Result,'l')==true){  //seen this pattern before
-            //PatternPointer       = GetMemoryCellPointerToNextPattern(Tokenize(CorrectedPattern,false),'l');
-            //CorrectedPattern     = GetMemoryCellRawData(Result,"",PatternPointer,'l');
-            //VerifyPattern        = true;
+     GetMemoryCellRawData(CorrectedPattern, Result, 'l', false);
+     if(Result == true){  //seen this pattern before
+            CorrectedPattern     = GetMemoryCellpResolvedPattern(CorrectedPattern,Result,'l',false);
+            VerifyPattern        = true;
      }
 
     else{
-            PatternPointer = GetFromSentencePattern().find("Aun");
+            PatternPointer = LocPattern.find("Aun");
             if(PatternPointer >= 0){
-                CorrectedPattern                   = GetFromSentencePattern();
+                CorrectedPattern                   = LocPattern;
                 CorrectedPattern[PatternPointer+1] = 'a';
                 ConfidenceLevel                    = 100;}
             if(LocPattern == "duvu"){
@@ -135,7 +150,7 @@ class c_Language : public c_LongTermMemory
 
       if(VerifyPattern){
         //check rules
-
+//TODO: Finish rule checking in Pattern Review
         //(1) first check proper noun rule of must start with a capital letter
         //(2) Sentence should not start with adjective
         //(3) there should be a verb in the sentence
@@ -151,7 +166,7 @@ class c_Language : public c_LongTermMemory
                  }
               else
                 //rule failed
-                {CorrectedPattern = GetFromSentencePattern();
+                {CorrectedPattern = LocPattern;
                 ConfidenceLevel = -1;
                 if(Verbose)
                     cout << "[c_Language.h::PatternReview] Pattern rejected,\n    proper noun indicated but did not start with a capital!\n";
@@ -159,7 +174,7 @@ class c_Language : public c_LongTermMemory
         }
       } //end verify pattern
 
-     if(Verbose)cout << " Received Pattern:" << GetFromSentencePattern() << " Correct Pattern:" << CorrectedPattern << endl;
+     if(Verbose)cout << " Received Pattern:" << LocPattern << " Correct Pattern:" << CorrectedPattern << endl;
 
    return CorrectedPattern;
  }

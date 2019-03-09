@@ -9,6 +9,20 @@
 #include <vector>
 #include <string>
 
+/** SOPHIE 6.1
+     author - Daniel W. Ankrom ©2019
+
+     GNU General Public License v3.0
+     Permissions of this strong copyleft license are conditioned
+      on making available complete source code of licensed works
+       and modifications, which include larger works using a licensed
+       work, under the same license.
+       Copyright and license notices must be preserved.
+       Contributors provide an express grant of patent rights.
+
+     see - https://github.com/Daniel061/Sophie6.1/blob/master/LICENSE
+*/
+
 extern string Version;
 
 class c_LongTermMemory : public c_SubjectStack
@@ -38,25 +52,27 @@ class c_LongTermMemory : public c_SubjectStack
         void CopyCurrentSentence(){
             CopySentence.InitializeVars();
             for (int x =0; x<GetFromSentenceWordCount(); x++){
-                CopySentence.SetswWords(x,GetswWords(x));                                         //1
-                CopySentence.SetswWordTokens(x,GetswWordTokens(x));                               //2
-                CopySentence.SetswQuoteLocation(x,GetswQuoteLocation(x));                         //3
-                CopySentence.SetswisContraction(x,GetswisContraction(x));                         //4
-                CopySentence.SetswWordsLC(x,GetswWordsLC(x));                                     //5
-                CopySentence.SetswSubWords(x,GetswSubWords(x));                                   //6
-                CopySentence.SetswWordType(GetswWordType(x),x);                                   //7
-                CopySentence.SetswSecondaryType(GetswSecondaryType(x),x);                        //8
-                CopySentence.SetswAlternateType(GetswAlternateType(x),x);                        //9
-                CopySentence.SetswGenderClassInSentence(x,GetswGenderClassInSentence(x));        //10
-                CopySentence.SetswContractionLongFormFirst(x,GetswContractionLongFormFirst(x));  //11
-                CopySentence.SetswContractionLongFormSecond(x,GetswContractionLongFormSecond(x));//12
-                CopySentence.SetswIsPluralWord(x,GetswIsPluralWord(x));                          //13
-                CopySentence.SetswPluralRoot(x,GetswPluralRoot(x));                              //14
-                CopySentence.SetswPluralWordFlag(x,GetswPluralWordFlag(x));                      //15
-                CopySentence.SetswWordTense(x,GetswWordTense(x));                                 //16
-                CopySentence.SetswisPluralPossessive(x,GetswisPluralPossessive(x));              //17
-                CopySentence.SetswisSingularPossessive(x,GetswisSingularPossessive(x));          //18
-                //                                                                            //lacking mini def but not a problem, stored in memory cell file
+                CopySentence.SetswWords(x,GetswWords(x));                                         //1  raw data
+                CopySentence.SetswWordTokens(x,GetswWordTokens(x));                               //2  token
+                CopySentence.SetswQuoteLocation(x,GetswQuoteLocation(x));                         //3  quote location
+                CopySentence.SetswisContraction(x,GetswisContraction(x));                         //4  is contraction
+                CopySentence.SetswWordsLC(x,GetswWordsLC(x));                                     //5  lower case data
+                CopySentence.SetswSubWords(x,GetswSubWords(x));                                   //6  sub word
+                CopySentence.SetswWordType(GetswWordType(x),x);                                   //7  word type
+                CopySentence.SetswSecondaryType(GetswSecondaryType(x),x);                         //8  secondary type
+                CopySentence.SetswAlternateType(GetswAlternateType(x),x);                         //9  alternate type
+                CopySentence.SetswGenderClassInSentence(x,GetswGenderClassInSentence(x));         //10 gender class
+                CopySentence.SetswContractionLongFormFirst(x,GetswContractionLongFormFirst(x));   //11 contraction long form first
+                CopySentence.SetswContractionLongFormSecond(x,GetswContractionLongFormSecond(x)); //12 contraction long form second
+                CopySentence.SetswIsPluralWord(x,GetswIsPluralWord(x));                           //13 is plural
+                CopySentence.SetswPluralRoot(x,GetswPluralRoot(x));                               //14 plural root
+                CopySentence.SetswPluralWordFlag(x,GetswPluralWordFlag(x));                       //15 plural word flag
+                CopySentence.SetswWordTense(x,GetswWordTense(x));                                 //16 word tense
+                CopySentence.SetswisPluralPossessive(x,GetswisPluralPossessive(x));               //17 is plural possessive
+                CopySentence.SetswisSingularPossessive(x,GetswisSingularPossessive(x));           //18 is singular possessive
+                CopySentence.SetswPolarity(x,GetswPolarity(x));                                   //19 polarity
+                CopySentence.SetswSingularForm(x,GetswSingularForm(x));                           //20 singular form
+                //                                                                                //lacking mini def but not a problem, stored in memory cell file
                 }
               CopySentence.SetInSentenceWordCount(GetFromSentenceWordCount());
               CopySentence.SetInSentenceSubjectLocation(GetFromSentenceSubjectLocation());
@@ -96,7 +112,33 @@ class c_LongTermMemory : public c_SubjectStack
 
 
     public:
+        void LinkRelatedWords(){
+         if(Verbose)
+                cout << "[c_LongTermMemory::LinkRelatedWords()]\n";
+             int   LocalSubjectPos         = GetFromSentenceSubjectLocation();
+             int   LocalSecondSubjectPos   = GetFromSentenceSecondSubjectLocation();
+             int   LocalNounCount          = GetFromSentenceNounCount();
+             int   LocalIndirectObjectPos  = GetFromSentenceIndirectObjectLocation();
+             int   LocalDirectObjectPos    = GetFromSentenceDirectObjectLocation();
+             int   LocalWordCount          = GetFromSentenceWordCount();
+             int   LocalVerbPos            = GetFromSentenceVerbLocation();
+             int   SecondNounPos           = -1;
+             int   LocalAdjectivePos       = GetFromSentenceAdjectiveLocation();
+             bool  LocalDualSubjects       = GetFromSentenceHasDualSubjects();
 
+             if(LocalNounCount >1){
+                if(Verbose) cout << "Linking " << GetswWordsLC(LocalIndirectObjectPos) << " with " << GetswWordsLC(LocalSubjectPos) << endl;
+                SetswNounToWord(LocalSubjectPos,GetswWordsLC(LocalIndirectObjectPos));  // Link Subject to noun
+                SetswNounToWord(LocalIndirectObjectPos,GetswWordsLC(LocalSubjectPos));  // link noun to subject
+                if(LocalDualSubjects) SetswNounToWord(LocalSecondSubjectPos,GetswWordsLC(LocalIndirectObjectPos));}
+
+
+                SetswAdjectiveToWord(LocalSubjectPos,GetswWordsLC(LocalAdjectivePos));  // link adjective to subject
+                //FIXME   link not working
+                SetswVerbToWord(LocalSubjectPos,GetswWordsLC(LocalVerbPos));            // link verb to subject
+
+
+        }//End LinkRelatedWords
 
         void SaveSentenceInLongTermMemory(string strData){
              SentenceStorage.emplace(Tokenize(strData),strData);
@@ -246,20 +288,23 @@ class c_LongTermMemory : public c_SubjectStack
                 GetMemoryCellpDaysOld(GetswWordsLC(x),Result);
                 if(Result){
                     SetMemoryCellpDaysOld(GetswWordsLC(x),GetDaysSinceDate());}                              /// 18  pDaysOld
+                SetMemoryCellpPolarity(GetswWordsLC(x),GetswPolarity(x));                                    /// 19  polarity
 
+                if (Verbose)
+                    cout << "Adjective count for " << GetswWords(x) << " is " << GetswAdjectiveFromWordCount(x) << endl;
                 for(int y = 0; y < GetswAdjectiveFromWordCount(x); y++){
-                    if (Verbose)
-                        cout << "Adjective count for " << GetswWords(x) << " is " << GetswAdjectiveFromWordCount(x) << endl;
+
                     SetMemoryCellAdjectiveInList(GetswWordsLC(x),GetswAdjectiveFromWord(x,y));}
 
                 for(int y = 0; y < GetswAdverbFromWordCount(x); y++){
                     SetMemoryCellAdverbInList(GetswWordsLC(x),GetswAdverbFromWord(x,y));}
-
+                if (Verbose)
+                    cout << "Noun count for " << GetswWords(x) << " is " << GetswNounFromWordCount(x) << endl;
                 for(int y = 0; y < GetswNounFromWordCount(x); y++){
                     SetMemoryCellNounInList(GetswWordsLC(x),GetswNounFromWord(x,y));}
 
 // TODO (Dan#1#): finish storing to memory cells the remaining lists
-
+                if(GetFromSentenceSubjectLocation()==x) SetMemoryCellSubjectUsageCounterUpOne(GetswWordsLC(x));
 
             }// end for word count loop x iterator
 
@@ -319,7 +364,7 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << "Second subject location   ,";
                         SentenceDataFile << csIT->second.GetFromSentenceSecondSubjectLocation() << Deliminator;
                         SentenceDataFile << "Adverb location           ,";
-                        SentenceDataFile << csIT->second.GetAdverbLocation() << Deliminator;
+                        SentenceDataFile << csIT->second.GetFromSentenceAdverbLocation() << Deliminator;
                         SentenceDataFile << "Noun count                ,";
                         SentenceDataFile << csIT->second.GetFromSentenceNounCount() << Deliminator;
                         SentenceDataFile << "Verb location             ,";
@@ -334,6 +379,8 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << csIT->second.GetFromSentenceConjunctionLocation() << Deliminator;
                         SentenceDataFile << "Sentence direction        ,";
                         SentenceDataFile << csIT->second.GetFromSentenceSentenceDirection() << Deliminator;
+                        SentenceDataFile << "Sentence polarity         ,";
+                        SentenceDataFile << csIT->second.GetFromSentencesPolarity() << Deliminator;
                         SentenceDataFile << "Days since 2019           ,";
                         SentenceDataFile << csIT->second.GetFromSentencesDaysOld() << Deliminator;
                         SentenceDataFile << "Understanding level       ,";
@@ -524,6 +571,9 @@ class c_LongTermMemory : public c_SubjectStack
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetInSentenceSentenceDirection(stoi(strLineData,&decType));  //set Sentence Direction
+                getline (SentenceDataFile,strLineData,',');
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetInSentencesPolarity(strLineData[0]);                      //set Sentence Polarity
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetInSentencesDaysOld(stoi(strLineData,&decType)); //set Days since 2019

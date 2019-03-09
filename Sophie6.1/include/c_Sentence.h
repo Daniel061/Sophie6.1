@@ -5,6 +5,20 @@
 #include <c_Word.h>
 #include <map>
 
+/** SOPHIE 6.1
+     author - Daniel W. Ankrom ©2019
+
+     GNU General Public License v3.0
+     Permissions of this strong copyleft license are conditioned
+      on making available complete source code of licensed works
+       and modifications, which include larger works using a licensed
+       work, under the same license.
+       Copyright and license notices must be preserved.
+       Contributors provide an express grant of patent rights.
+
+     see - https://github.com/Daniel061/Sophie6.1/blob/master/LICENSE
+*/
+
 class c_Sentence : public c_Personality
 {
     public:
@@ -38,6 +52,7 @@ class c_Sentence : public c_Personality
         string sSecondSubject;                   // For DualSubjects
         int    sSecondSubjectLocation;           // For Dual subjects
         char   sPunctuation;                     // !  initialize to null
+        char   sPolarity;                        // positive / negative sentence
         bool   sHasPunctuation;                  // true / false initialize to false
         bool   sHasPluralPronoun;                // true / false initialize to false
         bool   sIsQuestion;                      // true / false initialize to false
@@ -80,6 +95,7 @@ class c_Sentence : public c_Personality
                 sHasPronoun                    = false;
                 sSentenceDirection             = -1;
                 sPunctuation                   = 'x';  //not set or does not have
+                sPolarity                      = 'p';
                 sConjunctionLocation           = -1;
                 sAdverbLocation                = -1;
                 sNounCount                     = -1;
@@ -93,10 +109,13 @@ class c_Sentence : public c_Personality
                 sUnderstandingLevel            = -1;
                 sDaysOld                       = 0;
                 WordMap.clear();}
-
+//TODO: Add Set/Get function   Add file storage
 
        ///*******************ALL GLOBAL->SENTENCE DATA FUNCTIONS***************************
        ///**********'InSentence/FromSentence' is the function source flag******************
+
+        char   GetFromSentencesPolarity(){return sPolarity;}
+        void   SetInSentencesPolarity(char newVal){sPolarity = newVal;}
 
         int    GetFromSentenceDirectObjectLocation(){return sDirectObjectLocation;}
         void   SetInSentenceDirectObjectLocation(int newVal){sDirectObjectLocation = newVal;}
@@ -198,6 +217,7 @@ class c_Sentence : public c_Personality
         string GetFromSentencePattern(){return sPatternString;}
 
         void   SetInSentenceAdverbLocation(int newVal){sAdverbLocation = newVal;}
+        int    GetFromSentenceAdverbLocation(){return sAdverbLocation;}
         ///*****************END SENTENCE DATA FUNCTIONS***************************
 
 
@@ -274,6 +294,9 @@ class c_Sentence : public c_Personality
         char   GetswWordTense(int Location){return WordMap[Location].Getw_WordTense();}
         void   SetswWordTense(int Location, char newTense){WordMap[Location].Setw_WordTense(newTense);}
 
+        char   GetswPolarity(int Location){return WordMap[Location].Getw_Polarity();}
+        void   SetswPolarity(int Location, char newVal){WordMap[Location].Setw_Polarity(newVal);}
+
         void   SetswAdverbToWord(int Location, string AdverbToSet){WordMap[Location].Setw_Adverb(AdverbToSet);}
         string GetswAdverbFromWord(int Location, int WhichAdverb){return WordMap[Location].Getw_Adverb(WhichAdverb);}
         int    GetswAdverbFromWordCount(int Location){return WordMap[Location].Getw_AdverbCount();}
@@ -306,7 +329,10 @@ class c_Sentence : public c_Personality
             for(int x =0; x < GetFromSentenceWordCount(); x++) LocalPattern += GetswWordType(x);
             SetInSentencePattern(LocalPattern);}
 
-
+        void ReVerseBuildPattern(){
+            for(int x = 0; x < GetFromSentenceWordCount(); x++)
+                SetswWordType(GetFromSentencePattern()[x],x);
+        }
 
         int GetVerbPointingToAdjective(){
             int VerbLoc; VerbLoc = -1;
