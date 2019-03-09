@@ -411,22 +411,24 @@ class c_Lobes : public c_MemoryCell
         ///  returns True if added, else false if updated
         ///  send pCellData data in strSearchBase
         bool SetMemoryCellpCellData(string strSearchBase,char SideToStore = 'r', bool UseLowerCase = true){
-           bool Result = false;
+           bool Result            = false;
+           string strSearchBaseLC = MakeStringLowerCase(strSearchBase);
+
            CellMapIT   = FindStringInMap(strSearchBase, Result, SideToStore, UseLowerCase);
                if (!Result){
                   WorkingCell.InitializeAll();
                   WorkingCell.SetpCellDataString(strSearchBase);
-                  WorkingCell.SetpCellDataLC(MakeStringLowerCase(strSearchBase));
+                  WorkingCell.SetpCellDataLC(strSearchBaseLC);
                       if(SideToStore == 'r'){
-                        RightLobeCellMap.emplace(strSearchBase,WorkingCell);
+                        RightLobeCellMap.emplace(strSearchBaseLC,WorkingCell);
                         Result = true;}
                       else{
-                        LeftLobeCellMap.emplace(strSearchBase,WorkingCell);
+                        LeftLobeCellMap.emplace(strSearchBase,WorkingCell);  //left lobe is pattern data so need upper and lower case
                         Result = true;}
                   }
                   else{
                     CellMapIT->second.SetpCellDataString(strSearchBase);
-                    CellMapIT->second.SetpCellDataLC(MakeStringLowerCase(strSearchBase));}
+                    CellMapIT->second.SetpCellDataLC(strSearchBaseLC);}
                return Result;}
 
 
@@ -437,15 +439,17 @@ class c_Lobes : public c_MemoryCell
         ///  -strSearchBase will be made lowercase before storage.
         //
         bool SetMemoryCellpCellDataLC(string strSearchBase){
-           bool Result = false;
+           bool   Result          = false;
+           string strSearchBaseLC = MakeStringLowerCase(strSearchBase);
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (!Result){
+                  WorkingCell.InitializeAll();
                   WorkingCell.SetpCellDataString(strSearchBase);
-                  WorkingCell.SetpCellDataLC(MakeStringLowerCase(strSearchBase));
-                  RightLobeCellMap.emplace(strSearchBase,WorkingCell);
+                  WorkingCell.SetpCellDataLC(strSearchBaseLC);
+                  RightLobeCellMap.emplace(strSearchBaseLC,WorkingCell);
                   Result = true;}
                   else{
-                    CellMapIT->second.SetpCellDataLC(MakeStringLowerCase(strSearchBase));}
+                    CellMapIT->second.SetpCellDataLC(strSearchBaseLC);}
                return Result;}
 
 
@@ -471,7 +475,7 @@ class c_Lobes : public c_MemoryCell
             bool Result   = false;
             CellMapIT     = FindStringInMap(strSearchBase,Result);
             if(Result){
-                CellMapIT->second.AssociateVerbToAdjectiveInMap(VerbToSet,"");}
+                CellMapIT->second.AssociateVerbInMap(VerbToSet);}
             return Result;
         }
 
@@ -487,6 +491,43 @@ class c_Lobes : public c_MemoryCell
 ///---------------------END SET FUNCTIONS---------------------------------------
 
 ///------------------------GET FUNCTIONS----------------------------------------
+
+        /// Gets RightLobeCellMap summary
+        int GetRightLobeCellMapSummary(int &VerbCount, int &NounCount, int &AdjectiveCount,
+                                       int &AdverbCount, int &PronounCount, int &PropernounCount, int &UnknownCount){
+          CellMapIT       = RightLobeCellMap.begin();
+          VerbCount       = 0;
+          NounCount       = 0;
+          AdjectiveCount  = 0;
+          AdverbCount     = 0;
+          PronounCount    = 0;
+          PropernounCount = 0;
+          UnknownCount    = 0;
+          for(int x = 0; x < int(RightLobeCellMap.size()); x++){
+            if(CellMapIT->second.GetpCellWordType() == 'n') NounCount ++;
+            if(CellMapIT->second.GetpCellWordType() == 'v') VerbCount ++;
+            if(CellMapIT->second.GetpCellWordType() == 'A') AdverbCount ++;
+            if(CellMapIT->second.GetpCellWordType() == 'a') AdjectiveCount ++;
+            if(CellMapIT->second.GetpCellWordType() == 'p') PronounCount ++;
+            if(CellMapIT->second.GetpCellWordType() == 'P') PropernounCount ++;
+            if(CellMapIT->second.GetpCellWordType() == 'u') UnknownCount ++;
+
+            CellMapIT++;
+          }
+          return RightLobeCellMap.size();
+        }
+
+
+        /// Gets pTimesUsedAsSubject if strSearchBase exists, else return 0,
+        ///  Returns True in the address of &Result if exists
+        ///  Returns pTimesUsedAsSubject
+        int GetMemoryCellpTimesUsedAsSubject(string strSearchBase, bool &Result){
+           Result = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                    return CellMapIT->second.GetpTimesUsedAsSubject();}
+               else
+                    return 0;}
 
         /// Gets pDaysOld if strSearchBase exists, else return 0,
         ///  Returns True in the address of &Result if exists
@@ -914,6 +955,25 @@ class c_Lobes : public c_MemoryCell
                  else
                     return "";}
 
+
+        int     GetRightLobeCellMapCount(){
+            return RightLobeCellMap.size();
+        }
+
+        int     GetLeftLobeCellMapCount(){
+            return LeftLobeCellMap.size();
+        }
+
+
+        /// Checks to see if there is a memorycell for the Address given.
+        ///  returns true if so, if not returns false.
+        ///   CORRECTED/UPDATED  LANGUAGE AND BRAIN ARE USING THIS
+        bool GetMemoryCellIsSet(string strSearchBase,bool &Result, char SideToCheck = 'r'){
+            Result = false;
+            FindStringInMap(strSearchBase,Result,SideToCheck);
+            return Result;
+        }
+
 ///-----------------------Old Memory cell map functions-----------------------------///
 
 //        /// Returns -1 if doesn't exist, else returns adjective count
@@ -927,14 +987,7 @@ class c_Lobes : public c_MemoryCell
 //            return Result;
 //        }
 
-        /// Checks to see if there is a memorycell for the Address given.
-        ///  returns true if so, if not returns false.
-        ///   CORRECTED/UPDATED  LANGUAGE AND BRAIN ARE USING THIS
-        bool GetMemoryCellIsSet(string strSearchBase,bool &Result, char SideToCheck = 'r'){
-            Result = false;
-            FindStringInMap(strSearchBase,Result,SideToCheck);
-            return Result;
-        }
+
 
 
         //First checks to see if the cell at the address given exist.
@@ -942,6 +995,7 @@ class c_Lobes : public c_MemoryCell
         //otherwise, returns the Adjective count and
         //by reference, the tokenized adjective value in the array Adjectives[]
         ///   NOT CORRECTED/UPDATED  MULTIPLE FUNCTIONS CALLING THIS
+        //*********To remove this function, rewrite CheckLinkOfTwoNounsWithAdjectives
         int GetMemoryCellAdjectives(int Address,int Adjectives[]){
             bool Result  = false;
             int  Count   = -1;
@@ -1012,50 +1066,6 @@ class c_Lobes : public c_MemoryCell
 
 
 
-
-
-
-          //First makes sure the address given exists,
-          //then associates Noun to the address given.
-          //NOTE:will not duplicate Nouns.
-          ///   NOT CORRECTED/UPDATED
-          bool AssociateMemoryCellNoun(int Address, string NounToAssociate){
-               bool Result = false;
-               mapIT = FindAddressInMap(Address,Result);
-               if(Result){
-                    mapIT->second.AssociateNounInMap(NounToAssociate);}
-               return Result;
-          }
-
-
-
-          //First makes sure the address given exists,
-          //then associates Adverb to verb in the address given.
-          //NOTE:will not duplicate Adverbs.
-          ///   NOT CORRECTED/UPDATED
-          bool AssociateMemoryCellAdverbToVerb(int Address, string AdverbToAssociate, string VerbToAssociate){
-               bool Result = false;
-               mapIT = FindAddressInMap(Address,Result);
-               if(Result){
-                    mapIT->second.AssociateAdverbToVerbInMap(AdverbToAssociate,VerbToAssociate);}
-               return Result;
-
-          }
-
-
-          //First makes sure the address given exists,
-          //then associates Verb to adjective in the address given.
-          //NOTE:will not duplicate Adverbs.
-          ///   NOT CORRECTED/UPDATED
-          bool AssociateMemoryCellVerbToAdjective(int Address, string AdverbToAssociate, string VerbToAssociate){
-               bool Result = false;
-               mapIT = FindAddressInMap(Address,Result);
-               if(Result){
-                    mapIT->second.AssociateAdverbToVerbInMap(AdverbToAssociate,VerbToAssociate);}
-               return Result;
-          }
-
-
           //First Checks to see if cell address given exists,
           //if so, checks to see if NounToCheck is related to this cell address.
           //Returns true if so, false if not or cell doesn't exist
@@ -1093,62 +1103,62 @@ class c_Lobes : public c_MemoryCell
 
 
 
-          /**Checks to see if the NewWord exists first,
-            * if so AND Update = true, Updates the data, returns Installed = false.
-            * If NewWord doesn't exist,
-            *Stores all the data and returns Installed = true.
-           */
-          bool InstallNewWord(string NewWord, char WordType, char Purpose, bool Update=false,
-                              char GenderClass = 'u', string LongFormFirst = "", string LongFormSecond = "",
-                              char SingularValue = 'u', int SingularRoot = 0){     //currently right side only
-                if(Verbose)cout << "[c_Lobes.h::InstallNewWord]\n";
-                int tmpToken     = 0;
-                tmpToken         = Tokenize(NewWord);
-                bool Result      = false;
-                bool Installed   = false;
-                string NewWordLC = MakeStringLowerCase(NewWord);
-                mapIT            = FindAddressInMap(tmpToken,Result);
-                if (!Result){
-                            WorkingCell.InitializeAll();
-                            WorkingCell.SetpCellDataString(NewWord);                        //stores raw data
-                            WorkingCell.SetpCellWordType(WordType);                         //stores word type
-                            WorkingCell.SetpCellPurpose(Purpose);                           //store cell purpose i.e 'w' - word
-                            WorkingCell.SetpCellDataLC(NewWordLC);                          //store the raw data in lower case
-                            WorkingCell.SetpCellGenderClass(GenderClass);                   //store the gender class
-                            WorkingCell.SetpCellContractionLongFormFirst(LongFormFirst);    //store the contraction word long form
-                            WorkingCell.SetpCellContractionLongFormSecond(LongFormSecond);  //store the contraction word long form
-                            WorkingCell.SetpCellIsSingular(SingularValue);                  //store p - plural s - singular u - undetermined
-                            WorkingCell.SetpCellSingularLocation(SingularRoot);             //address of root i.e. address of "color" for "colors"
-                            WorkingCell.SetpCellToken(Tokenize(NewWord));                   //store the token value of the word
-
-
-                            RightLobeMemoryMap.emplace(tmpToken,WorkingCell);               //Add this new cell to map.
-                            Installed = true;                                               //flag this operation as happened.
-                            if(Verbose)
-                             cout << "Storing new word-->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
-                            }
-                        else
-                            if(Update){
-                                mapIT->second.SetpCellDataString(NewWord);
-                                mapIT->second.SetpCellWordType(WordType);
-                                mapIT->second.SetpCellPurpose(Purpose);
-                                mapIT->second.SetpCellDataLC(NewWordLC);
-                                mapIT->second.SetpCellGenderClass(GenderClass);
-                                mapIT->second.SetpCellContractionLongFormFirst(LongFormFirst);
-                                mapIT->second.SetpCellContractionLongFormSecond(LongFormSecond);
-                                mapIT->second.SetpCellIsSingular(SingularValue);
-                                mapIT->second.SetpCellSingularLocation(SingularRoot);
-                                mapIT->second.SetpCellToken(Tokenize(NewWord));
-                                if(Verbose)
-                                    cout << "Updating -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
-                            }
-                            else
-                                if(Verbose)
-                                 cout << "Not Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
-
-
-                         return Installed;
-        }
+//          /**Checks to see if the NewWord exists first,
+//            * if so AND Update = true, Updates the data, returns Installed = false.
+//            * If NewWord doesn't exist,
+//            *Stores all the data and returns Installed = true.
+//           */
+//          bool InstallNewWord(string NewWord, char WordType, char Purpose, bool Update=false,
+//                              char GenderClass = 'u', string LongFormFirst = "", string LongFormSecond = "",
+//                              char SingularValue = 'u', int SingularRoot = 0){     //currently right side only
+//                if(Verbose)cout << "[c_Lobes.h::InstallNewWord]\n";
+//                int tmpToken     = 0;
+//                tmpToken         = Tokenize(NewWord);
+//                bool Result      = false;
+//                bool Installed   = false;
+//                string NewWordLC = MakeStringLowerCase(NewWord);
+//                mapIT            = FindAddressInMap(tmpToken,Result);
+//                if (!Result){
+//                            WorkingCell.InitializeAll();
+//                            WorkingCell.SetpCellDataString(NewWord);                        //stores raw data
+//                            WorkingCell.SetpCellWordType(WordType);                         //stores word type
+//                            WorkingCell.SetpCellPurpose(Purpose);                           //store cell purpose i.e 'w' - word
+//                            WorkingCell.SetpCellDataLC(NewWordLC);                          //store the raw data in lower case
+//                            WorkingCell.SetpCellGenderClass(GenderClass);                   //store the gender class
+//                            WorkingCell.SetpCellContractionLongFormFirst(LongFormFirst);    //store the contraction word long form
+//                            WorkingCell.SetpCellContractionLongFormSecond(LongFormSecond);  //store the contraction word long form
+//                            WorkingCell.SetpCellIsSingular(SingularValue);                  //store p - plural s - singular u - undetermined
+//                            WorkingCell.SetpCellSingularLocation(SingularRoot);             //address of root i.e. address of "color" for "colors"
+//                            WorkingCell.SetpCellToken(Tokenize(NewWord));                   //store the token value of the word
+//
+//
+//                            RightLobeMemoryMap.emplace(tmpToken,WorkingCell);               //Add this new cell to map.
+//                            Installed = true;                                               //flag this operation as happened.
+//                            if(Verbose)
+//                             cout << "Storing new word-->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
+//                            }
+//                        else
+//                            if(Update){
+//                                mapIT->second.SetpCellDataString(NewWord);
+//                                mapIT->second.SetpCellWordType(WordType);
+//                                mapIT->second.SetpCellPurpose(Purpose);
+//                                mapIT->second.SetpCellDataLC(NewWordLC);
+//                                mapIT->second.SetpCellGenderClass(GenderClass);
+//                                mapIT->second.SetpCellContractionLongFormFirst(LongFormFirst);
+//                                mapIT->second.SetpCellContractionLongFormSecond(LongFormSecond);
+//                                mapIT->second.SetpCellIsSingular(SingularValue);
+//                                mapIT->second.SetpCellSingularLocation(SingularRoot);
+//                                mapIT->second.SetpCellToken(Tokenize(NewWord));
+//                                if(Verbose)
+//                                    cout << "Updating -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
+//                            }
+//                            else
+//                                if(Verbose)
+//                                 cout << "Not Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
+//
+//
+//                         return Installed;
+//        }
 
 
           bool CheckLinkOfTwoNounsWithAdjectives(string FirstNoun,string SecondNoun, string& VerbUsage, string MatchedAdjective[], int& MatchedCount){ //NOTE: NEEDS REWRITE FOR NEW LISTS
@@ -1262,6 +1272,7 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "VERSION " << Version << ", file version-Memory Cells" << Delim;
                 for(CellMapIT = RightLobeCellMap.begin(); CellMapIT != RightLobeCellMap.end(); CellMapIT++ ){
                     LearnedDataFile << "Original string----------,"<< CellMapIT->second.GetpCellDataString() << Delim;
+                    LearnedDataFile << "Index  , ["                << CellMapIT->first << "]" << Delim;
                     LearnedDataFile << "Lower Case string      ," << CellMapIT->second.GetpCellDataLC() << Delim;
                     LearnedDataFile << "Given name             ," << CellMapIT->second.GetpCellGivenName() << Delim;
                     LearnedDataFile << "Contraction 1st        ," << CellMapIT->second.GetpCellContractionLongFormFirst() << Delim;
@@ -1356,6 +1367,8 @@ class c_Lobes : public c_MemoryCell
                         WorkingCell.InitializeAll();
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellDataString(strLineData);                        //set the original string data
+                        getline(LearnedDataFile,strLineData,',');                           //
+                        getline(LearnedDataFile,strLineData);                               //skip index
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellDataLC(strLineData);                            //set the lower case string data
@@ -1464,7 +1477,7 @@ class c_Lobes : public c_MemoryCell
                         for(int x = 0; x< Count; x++){
                             getline(LearnedDataFile,strLineData,',');
                             getline(LearnedDataFile,strLineData);
-                            WorkingCell.AssociateVerbToAdjectiveInMap("",strLineData);
+                            WorkingCell.AssociateVerbInMap(strLineData);
                         }//end for verbs loop
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
@@ -1487,7 +1500,7 @@ class c_Lobes : public c_MemoryCell
                         }//end for nouns loop
                     getline(LearnedDataFile,strLineData,',');
                     RightLobeMemoryMap.emplace(WorkingCell.GetpCellToken(),WorkingCell);
-                    RightLobeCellMap.emplace(WorkingCell.GetpCellDataString(),WorkingCell);
+                    RightLobeCellMap.emplace(WorkingCell.GetpCellDataLC(),WorkingCell);
 
                     }//end while not empty loop
 

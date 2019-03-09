@@ -132,9 +132,13 @@ class c_LongTermMemory : public c_SubjectStack
                 SetswNounToWord(LocalIndirectObjectPos,GetswWordsLC(LocalSubjectPos));  // link noun to subject
                 if(LocalDualSubjects) SetswNounToWord(LocalSecondSubjectPos,GetswWordsLC(LocalIndirectObjectPos));}
 
+            if( (LocalNounCount >= 1) && (GetswWordType(LocalSubjectPos)== 'P') ) {
+                SetswNounToWord(LocalSubjectPos,GetswWordsLC(LocalIndirectObjectPos));  // link proper noun to indirect object
+                SetswNounToWord(LocalIndirectObjectPos,GetswWordsLC(LocalSubjectPos));  // link indirect object to proper noun
+            }
+
 
                 SetswAdjectiveToWord(LocalSubjectPos,GetswWordsLC(LocalAdjectivePos));  // link adjective to subject
-                //FIXME   link not working
                 SetswVerbToWord(LocalSubjectPos,GetswWordsLC(LocalVerbPos));            // link verb to subject
 
 
@@ -292,19 +296,22 @@ class c_LongTermMemory : public c_SubjectStack
 
                 if (Verbose)
                     cout << "Adjective count for " << GetswWords(x) << " is " << GetswAdjectiveFromWordCount(x) << endl;
-                for(int y = 0; y < GetswAdjectiveFromWordCount(x); y++){
+                for(int y = 0; y < GetswAdjectiveFromWordCount(x); y++){                                     /// 20  adjective list
 
                     SetMemoryCellAdjectiveInList(GetswWordsLC(x),GetswAdjectiveFromWord(x,y));}
 
-                for(int y = 0; y < GetswAdverbFromWordCount(x); y++){
+                for(int y = 0; y < GetswAdverbFromWordCount(x); y++){                                        /// 21  adverb list
                     SetMemoryCellAdverbInList(GetswWordsLC(x),GetswAdverbFromWord(x,y));}
                 if (Verbose)
                     cout << "Noun count for " << GetswWords(x) << " is " << GetswNounFromWordCount(x) << endl;
-                for(int y = 0; y < GetswNounFromWordCount(x); y++){
+                for(int y = 0; y < GetswNounFromWordCount(x); y++){                                          /// 22  noun list
                     SetMemoryCellNounInList(GetswWordsLC(x),GetswNounFromWord(x,y));}
 
+                for(int y = 0; y < GetswVerbFromWordCount(x); y++){                                          /// 23  verb list
+                    SetMemoryCellVerbInList(GetswWordsLC(x),GetswVerbFromWord(x,y));}
+
 // TODO (Dan#1#): finish storing to memory cells the remaining lists
-                if(GetFromSentenceSubjectLocation()==x) SetMemoryCellSubjectUsageCounterUpOne(GetswWordsLC(x));
+                if(GetFromSentenceSubjectLocation()==x) SetMemoryCellSubjectUsageCounterUpOne(GetswWordsLC(x));/// 24 subject usage count
 
             }// end for word count loop x iterator
 
@@ -387,49 +394,49 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << csIT->second.GetFromSentencesUnderstandingLevel() << Deliminator;
 
 
-                        for(int x = 0; x <= csIT->second.GetFromSentenceWordCount()-1; x++){
-                            SentenceDataFile << "Word data                    ,";
-                            SentenceDataFile << csIT->second.GetswWords(x) << Deliminator;
-                            SentenceDataFile << "Word token                ,";
-                            SentenceDataFile << csIT->second.GetswWordTokens(x) << Deliminator;
-                            SentenceDataFile << "Quote Location            ,";
-                            SentenceDataFile << csIT->second.GetswQuoteLocation(x) << Deliminator;
-                            SentenceDataFile << "bool is contraction       ,";
-                            SentenceDataFile << csIT->second.GetswisContraction(x) << Deliminator;
-                            SentenceDataFile << "Word data LC              ,";
-                            SentenceDataFile << csIT->second.GetswWordsLC(x) << Deliminator;
-                            SentenceDataFile << "Substitute word           ,";
-                            SentenceDataFile << csIT->second.GetswSubWords(x) << Deliminator;
-                            SentenceDataFile << "Word type                 ,";
-                            SentenceDataFile << csIT->second.GetswWordType(x) << Deliminator;
-                            SentenceDataFile << "Secondary word type       ,";
-                            SentenceDataFile << csIT->second.GetswSecondaryType(x) << Deliminator;
-                            SentenceDataFile << "Alternate word type       ,";
-                            SentenceDataFile << csIT->second.GetswAlternateType(x) << Deliminator;
-                            SentenceDataFile << "Gender class              ,";
-                            SentenceDataFile << csIT->second.GetswGenderClassInSentence(x) << Deliminator;
-                            SentenceDataFile << "Contraction root 1st      ,";
-                            SentenceDataFile << csIT->second.GetswContractionLongFormFirst(x) << Deliminator;
-                            SentenceDataFile << "Contraction root 2nd      ,";
-                            SentenceDataFile << csIT->second.GetswContractionLongFormSecond(x) << Deliminator;
-                            SentenceDataFile << "bool is plural            ,";
-                            SentenceDataFile << csIT->second.GetswIsPluralWord(x) << Deliminator;
-                            SentenceDataFile << "Plural root               ,";
-                            SentenceDataFile << csIT->second.GetswPluralRoot(x) << Deliminator;
-                            SentenceDataFile << "Plural word flag          ,";
-                            SentenceDataFile << csIT->second.GetswPluralWordFlag(x) << Deliminator;
-                            SentenceDataFile << "Word tense                ,";
-                            SentenceDataFile << csIT->second.GetswWordTense(x) << Deliminator;
-                            SentenceDataFile << "bool Is SingularPossessive,";
-                            SentenceDataFile << csIT->second.GetswisSingularPossessive(x) << Deliminator;
-                            SentenceDataFile << "bool Is Plural Possive    ,";
-                            SentenceDataFile << csIT->second.GetswisPluralPossessive(x) << Deliminator;
-                            SentenceDataFile << "Possessive Root           ,";
-                            SentenceDataFile << csIT->second.GetswPossessiveRoot(x) << Deliminator;
-                            SentenceDataFile << "Possessive Root Type      ,";
-                            SentenceDataFile << csIT->second.GetswPossessiveRootType(x) << Deliminator;
-
-                        }
+//                        for(int x = 0; x <= csIT->second.GetFromSentenceWordCount()-1; x++){
+//                            SentenceDataFile << "Word data                    ,";
+//                            SentenceDataFile << csIT->second.GetswWords(x) << Deliminator;
+//                            SentenceDataFile << "Word token                ,";
+//                            SentenceDataFile << csIT->second.GetswWordTokens(x) << Deliminator;
+//                            SentenceDataFile << "Quote Location            ,";
+//                            SentenceDataFile << csIT->second.GetswQuoteLocation(x) << Deliminator;
+//                            SentenceDataFile << "bool is contraction       ,";
+//                            SentenceDataFile << csIT->second.GetswisContraction(x) << Deliminator;
+//                            SentenceDataFile << "Word data LC              ,";
+//                            SentenceDataFile << csIT->second.GetswWordsLC(x) << Deliminator;
+//                            SentenceDataFile << "Substitute word           ,";
+//                            SentenceDataFile << csIT->second.GetswSubWords(x) << Deliminator;
+//                            SentenceDataFile << "Word type                 ,";
+//                            SentenceDataFile << csIT->second.GetswWordType(x) << Deliminator;
+//                            SentenceDataFile << "Secondary word type       ,";
+//                            SentenceDataFile << csIT->second.GetswSecondaryType(x) << Deliminator;
+//                            SentenceDataFile << "Alternate word type       ,";
+//                            SentenceDataFile << csIT->second.GetswAlternateType(x) << Deliminator;
+//                            SentenceDataFile << "Gender class              ,";
+//                            SentenceDataFile << csIT->second.GetswGenderClassInSentence(x) << Deliminator;
+//                            SentenceDataFile << "Contraction root 1st      ,";
+//                            SentenceDataFile << csIT->second.GetswContractionLongFormFirst(x) << Deliminator;
+//                            SentenceDataFile << "Contraction root 2nd      ,";
+//                            SentenceDataFile << csIT->second.GetswContractionLongFormSecond(x) << Deliminator;
+//                            SentenceDataFile << "bool is plural            ,";
+//                            SentenceDataFile << csIT->second.GetswIsPluralWord(x) << Deliminator;
+//                            SentenceDataFile << "Plural root               ,";
+//                            SentenceDataFile << csIT->second.GetswPluralRoot(x) << Deliminator;
+//                            SentenceDataFile << "Plural word flag          ,";
+//                            SentenceDataFile << csIT->second.GetswPluralWordFlag(x) << Deliminator;
+//                            SentenceDataFile << "Word tense                ,";
+//                            SentenceDataFile << csIT->second.GetswWordTense(x) << Deliminator;
+//                            SentenceDataFile << "bool Is SingularPossessive,";
+//                            SentenceDataFile << csIT->second.GetswisSingularPossessive(x) << Deliminator;
+//                            SentenceDataFile << "bool Is Plural Possive    ,";
+//                            SentenceDataFile << csIT->second.GetswisPluralPossessive(x) << Deliminator;
+//                            SentenceDataFile << "Possessive Root           ,";
+//                            SentenceDataFile << csIT->second.GetswPossessiveRoot(x) << Deliminator;
+//                            SentenceDataFile << "Possessive Root Type      ,";
+//                            SentenceDataFile << csIT->second.GetswPossessiveRootType(x) << Deliminator;
+//
+//                        }
 
                       }//end if not question sentence
 
@@ -582,69 +589,69 @@ class c_LongTermMemory : public c_SubjectStack
                 CopySentence.SetInSentencesUnderstandingLevel(stoi(strLineData,&decType));//set understanding level
                 getline (SentenceDataFile,strLineData,',');
 
-                for(int x = 0; x<=CopySentence.GetFromSentenceWordCount()-1; x++){
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswWords(x,strLineData);                       //set string Words[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswWordTokens(x,stoi(strLineData,&decType));    //set int WordTokens[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswQuoteLocation(x,stoi(strLineData,&decType)); //set int QuoteLocation[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswisContraction(x,stoi(strLineData,&decType)); //set bool isContraction[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswWordsLC(x,strLineData);             //set string WordsLC[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswSubWords(x,strLineData);            //set string SubWords[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswWordType(strLineData[0],x);         //set char WordType[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswSecondaryType(strLineData[0],x);    //set char SecondaryType[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswAlternateType(strLineData[0],x);    //set char AlternateType[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswGenderClassInSentence(x,strLineData[0]); //set char GenderClassInSentence[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswContractionLongFormFirst(x,strLineData); //set string ContractionLongFormFirst[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswContractionLongFormSecond(x,strLineData);//set string ContractionLongFormSecond[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswIsPluralWord(x,stoi(strLineData,&decType));  //set bool IsPluralWord[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswPluralRoot(x,strLineData);          //set string PluralRoot[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswPluralWordFlag(x,strLineData[0]);   //set char PluralWordFlag[x]
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswWordTense(x,strLineData[0]);        //set char word tense
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswisSingularPossessive(x,stoi(strLineData,&decType));//set bool IsSingularPossessive
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswisPluralPossessive(x,stoi(strLineData,&decType)); //set bool IsPluralPossessive
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswPossessiveRoot(x,strLineData);                        // set string possessive root
-                    getline (SentenceDataFile,strLineData,',');
-                    getline (SentenceDataFile,strLineData);
-                    CopySentence.SetswPossessiveRootType(x,strLineData[0]);               // set char possessive root type
-                    getline (SentenceDataFile,strLineData,',');
-
-                }//end for loop
+//                for(int x = 0; x<=CopySentence.GetFromSentenceWordCount()-1; x++){
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswWords(x,strLineData);                       //set string Words[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswWordTokens(x,stoi(strLineData,&decType));    //set int WordTokens[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswQuoteLocation(x,stoi(strLineData,&decType)); //set int QuoteLocation[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswisContraction(x,stoi(strLineData,&decType)); //set bool isContraction[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswWordsLC(x,strLineData);             //set string WordsLC[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswSubWords(x,strLineData);            //set string SubWords[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswWordType(strLineData[0],x);         //set char WordType[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswSecondaryType(strLineData[0],x);    //set char SecondaryType[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswAlternateType(strLineData[0],x);    //set char AlternateType[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswGenderClassInSentence(x,strLineData[0]); //set char GenderClassInSentence[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswContractionLongFormFirst(x,strLineData); //set string ContractionLongFormFirst[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswContractionLongFormSecond(x,strLineData);//set string ContractionLongFormSecond[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswIsPluralWord(x,stoi(strLineData,&decType));  //set bool IsPluralWord[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswPluralRoot(x,strLineData);          //set string PluralRoot[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswPluralWordFlag(x,strLineData[0]);   //set char PluralWordFlag[x]
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswWordTense(x,strLineData[0]);        //set char word tense
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswisSingularPossessive(x,stoi(strLineData,&decType));//set bool IsSingularPossessive
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswisPluralPossessive(x,stoi(strLineData,&decType)); //set bool IsPluralPossessive
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswPossessiveRoot(x,strLineData);                        // set string possessive root
+//                    getline (SentenceDataFile,strLineData,',');
+//                    getline (SentenceDataFile,strLineData);
+//                    CopySentence.SetswPossessiveRootType(x,strLineData[0]);               // set char possessive root type
+//                    getline (SentenceDataFile,strLineData,',');
+//
+//                }//end for loop
                     CopySentenceMap.emplace(Tokenize(CopySentence.GetFromSentenceOriginalString()),CopySentence);  //store in map
                     getline (SentenceDataFile,strLineData);
                 }//end while loop

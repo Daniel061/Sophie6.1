@@ -72,9 +72,9 @@ class c_Brain : public c_Cerebellum
               RebuildPattern();                             // Updated corrected pattern
               ReVerseBuildPattern();                        // push pattern data to word type
               //TODO: word data and/or pattern data is not being updated after the previous call
-              LinkRelatedWords();
-              SaveAllSentenceWordDataToMemory();
-              SaveCurrentSentenceInMap();
+              LinkRelatedWords();                           // link related words together in word class
+              SaveAllSentenceWordDataToMemory();            // push sentence and word data to memory cells
+              SaveCurrentSentenceInMap();                   // push sentence class to map
               SavePreAndPostPatternConstruction(GetFromSentencePreProcessedPattern(),GetFromSentencePattern());
 
             }
@@ -116,7 +116,7 @@ class c_Brain : public c_Cerebellum
                  if(GetFromSentenceHasContraction()){                                                   //break contraction apart and rewrite sentence if so, rerun the process
                    NeedRerun = DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,strData);
                    if(NeedRerun){
-                    StoreNewWords();
+                    //StoreNewWords();
                     Parse(strData);
                     GatherAndSetAllSentenceData();
                     SetInSentencePreProcessedPattern(GetFromSentencePattern());
@@ -145,7 +145,7 @@ class c_Brain : public c_Cerebellum
                  if(!NeedRerun){
                      SubjectLocation = FindSubject();                                                      // need to run this again to see if any indirect objects
                      SetInSentenceSubjectLocation(SubjectLocation);                                        //store the location or -1
-                     StoreNewWords();                                                                      //save any new words in rBrainCells
+                     //StoreNewWords();                                                                      //save any new words in rBrainCells
                      SaveAllSentenceWordDataToMemory();                                                    //new function to save all to memory
                      RebuildPattern();
                      SaveProcessedPattern(GetFromSentencePattern());                                       //update short term memory
@@ -256,35 +256,36 @@ class c_Brain : public c_Cerebellum
                     GetMemoryCellRawData(strWorkingWord,Result);
                     if(Result){
                             cout << "Cell Report:Right Brain" << endl << endl;
-                            cout << "Cell String:" << GetMemoryCellRawData(strWorkingWord,Result)<< endl;
+                            cout << "Cell String     :" << GetMemoryCellRawData(strWorkingWord,Result)<< endl;
                             cout << "Cell String (LC):" << GetMemoryCellDataLC(strWorkingWord,Result) << endl;
-                            cout << "Cell Word Type:" << GetMemoryCellcharWordType(strWorkingWord,Result) << endl;
+                            cout << "Cell Word Type  :" << GetMemoryCellcharWordType(strWorkingWord,Result) << endl;
                             if(GetMemoryCellcharWordType(strWorkingWord,Result)=='C'){
                                 cout << "  Contraction Word Long Form First:" << GetMemoryCellContractionFirst(strWorkingWord,Result) << endl;
                                 cout << "  Contraction Word Long Form Second:" << GetMemoryCellContractionSecond(strWorkingWord,Result) << endl;
                             }
-                            //cout << "Cell Secondary Word Type:" << RightLobeMemory[WorkingWord].GetSecondaryType() << endl;
-                            //cout << "Cell Alternate Word Type:" << RightLobeMemory[WorkingWord].GetAlternateType() << endl;
-                            cout << "Cell Gender:" << GetMemoryCellcharGenderClass(strWorkingWord,Result) << endl;
-                            cout << "Cell Primary Usage:" << GetMemoryCellcharPurpose(strWorkingWord,Result) << endl;
-                           // cout << "Cell Root Pointer:" << RightLobeMemory[WorkingWord].GetpNextNoun() << endl;
-                            cout << "Cell Data is Set:" << boolalpha << GetMemoryCellIsSet(strWorkingWord,Result) << endl;
-                           // cout << "Cell Plural flag:" << GetMemoryCellpCellIsSingular("",WorkingWord) << "  Plural Root:" << GetMemoryCellpSingularLocation("",WorkingWord) << endl;
-                            cout << "Cell Location by token:" << WorkingWord << endl;
-                            cout << "Cell adjectives stored in map:" << GetMemoryCellAdjectives(WorkingWord,AdjectivesInMap) << endl;
-                            cout << "Cell verbs stored in map:" << GetMemoryCellVerbs(WorkingWord,VerbsInMap) << endl;
-                            cout << "Cell adverbs stored in map:" << GetMemoryCellAdverbs(WorkingWord,AdverbsInMap) << endl;
+                            cout << "Cell Secondary Word Type  :" << GetMemoryCellcharSecondaryWordType(strWorkingWord,Result) << endl;
+                            cout << "Cell Alternate Word Type  :" << GetMemoryCellcharAlternateWordType(strWorkingWord,Result) << endl;
+                            cout << "Cell Gender               :" << GetMemoryCellcharGenderClass(strWorkingWord,Result) << endl;
+                            cout << "Cell Primary Usage        :" << GetMemoryCellcharPurpose(strWorkingWord,Result) << endl;
+                            cout << "Cell Data is Set          :" << boolalpha << GetMemoryCellIsSet(strWorkingWord,Result) << endl;
+                            cout << "Cell Plural flag          :" << GetMemoryCellcharIsSingular(strWorkingWord,Result) << endl;
+                            cout << "Plural Root               :" << GetMemoryCellpSingularForm(strWorkingWord) << endl;
+                            cout << "Cell used as subject count:" << GetMemoryCellpTimesUsedAsSubject(strWorkingWord,Result) << endl;
+                            cout << "Cell adjectives stored in map:" << GetMemoryCellNumberOfAdjectives(strWorkingWord,Result) << endl;
+                            cout << "Cell verbs stored in map     :" << GetMemoryCellNumberOfVerbs(strWorkingWord,Result) << endl;
+                            cout << "Cell adverbs stored in map   :" << GetMemoryCellNumberOfAdVerbs(strWorkingWord,Result) << endl;
                             cout << "Cell Adjectives, Verbs, Adverbs:\n";
-        //                       for(int x = 0; x< GetMemoryCellAdjectiveCount(WorkingWord); x++){
-        //                         cout  << "   " << GetMemoryCellDataLC(AdjectivesInMap[x],Result) << " " << GetMemoryCellDataLC(VerbsInMap[x],Result) << " " << GetMemoryCellDataLC(AdverbsInMap[x],Result) << endl;
-        //                       }
+                              for(int x = 0; x< GetMemoryCellNumberOfAdjectives(strWorkingWord,Result); x++){
+                                 cout  << "   " << GetMemoryCellAdjectiveFromList(strWorkingWord,x,Result) << " " << GetMemoryCellVerbFromList(strWorkingWord,x,Result)
+                                       << " " << GetMemoryCellAdverbFromList(strWorkingWord,x,Result) << endl;
+                               }
                             cout << endl;
-                            y = GetMemoryCellRelatedNouns(WorkingWord,RelatedNounsInMap);
+                            y = GetMemoryCellNumberOfRelatedNouns(strWorkingWord,Result);
                             cout << "Cell related Nouns("  << y << "):\n";
 
-        //                       for(int x = 0; x< y;x++){
-        //                         cout << "   " << GetMemoryCellWordLC("",RelatedNounsInMap[x]) << endl;
-        //                       }
+                               for(int x = 0; x< y;x++){
+                                 cout << "   " << GetMemoryCellNounFromList(strWorkingWord,x,Result) << endl;
+                               }
 
                     }//end if result
                     else
@@ -293,6 +294,23 @@ class c_Brain : public c_Cerebellum
                     Control = 2;
                     break;
                 }
+
+            case 21244631:   // map summary
+                {
+                    int NounCount,VerbCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,WordCount,UnknownCount;
+                    WordCount = GetRightLobeCellMapSummary(VerbCount,NounCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,UnknownCount);
+                    cout << "Total Words in memory cells:" << WordCount <<  "  Total in Left Lobes:" << GetLeftLobeCellMapCount() << endl;
+                    cout << " Nouns        :" << NounCount << endl;
+                    cout << " Verbs        :" << VerbCount << endl;
+                    cout << " Adjectives   :" << AdjectiveCount << endl;
+                    cout << " Adverbs      :" << AdverbCount << endl;
+                    cout << " Pronouns     :" << PronounCount << endl;
+                    cout << " Proper Nouns :" << PropernounCount << endl;
+                    cout << " Unknown Words:" << UnknownCount << endl;
+                    Control = 2;
+                    break;
+                }
+
             case 22683695:   //verbose
                 {
                     if(Verbose)
@@ -443,79 +461,79 @@ class c_Brain : public c_Cerebellum
 
 
 //------------------------------STORE NEW WORDS-----------------------------------------------------------------
-        int StoreNewWords()
-        {
-         if(Verbose)cout << "[c_Brain.h::StoreNewWords]" << endl;
-         int  NewWords; NewWords = 0;
-         int  Noun1 = -1;
-         int  Noun2 = -1;
-         bool Result = false;
-
-         for (int x = 0; x < GetFromSentenceWordCount(); x++)
-         {
-             if((GetswWordType(x)=='n') && (Noun1 == -1) ) Noun1 = x; else if((GetswWordType(x) == 'n') && (Noun2 == -1))  Noun2 =x;
-             if( !( GetMemoryCellIsSet(GetswWordsLC(x),Result) )) //   CheckForKnownWord(GetWords(x))))
-                {NewWords++;}
-                InstallNewWord(GetswWords(x),GetswWordType(x),'w',true,GetswGenderClassInSentence(x),
-                               GetswContractionLongFormFirst(x),GetswContractionLongFormSecond(x),GetswPluralWordFlag(x),Tokenize(GetswPluralRoot(x)));
-                if(GetswIsPluralWord(x)){ //store the singular root
-                    InstallNewWord(GetswPluralRoot(x),GetswWordType(x),'w',true,GetswGenderClassInSentence(x),
-                                   "","",'s');}
-                //Associate Adjective if not a question sentence
-                if((GetswWordType(x)=='a')&&(!GetFromSentenceIsQuestion()) ){
-                        if(GetFromSentenceSubjectLocation() >=0 ){
-                            if(!SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceSubjectLocation()),GetswWordsLC(x))){ //NOTE: Adjective Storage to Memory
-                                InstallNewWord(GetswWords(GetFromSentenceSubjectLocation()),GetswWordType(GetFromSentenceSubjectLocation()),'w',true,GetswGenderClassInSentence(GetFromSentenceSubjectLocation()));}
-                                SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceSubjectLocation()),GetswWordsLC(x));  //NOTE: Adjective Storage to Memory
-                                if(GetswIsPluralWord(GetFromSentenceSubjectLocation())){
-                                    SetMemoryCellAdjectiveInList(GetswPluralRoot(GetFromSentenceSubjectLocation()),GetswWordsLC(x)); //NOTE Adjective Storage to Memory
-                                }
-                                if(Verbose)
-                                    cout << "Associating " << GetswWords(x) << " with " << GetswWords(GetFromSentenceSubjectLocation()) << endl;
-                            }
-                            if((GetFromSentenceIndirectObjectLocation() >=0) && (!GetFromSentenceIsQuestion()) ){ //Associate Indirect object if not a question sentence
-                                if(!SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(x))){  //NOTE: Adjective Storage to Memory
-                                    InstallNewWord(GetswWords(GetFromSentenceIndirectObjectLocation()),GetswWordType(GetFromSentenceIndirectObjectLocation()),'w',true,GetswGenderClassInSentence(GetFromSentenceIndirectObjectLocation()));}
-                                    SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(x));   //NOTE: Adjective Storage to Memory
-                                    if(GetswIsPluralWord(GetFromSentenceSubjectLocation())){
-                                        SetMemoryCellAdjectiveInList(GetswPluralRoot(GetFromSentenceSubjectLocation()),GetswWordsLC(x));   //NOTE: Adjective Storage to Memory
-                                    }
-                                    if(Verbose)
-                                       cout << "Associating " << GetswWords(x) << " with " << GetswWords(GetFromSentenceIndirectObjectLocation()) << endl;
-                                }
-                    int z; z = GetVerbPointingToAdjective();
-                    if((z >=0) && (!GetFromSentenceIsQuestion()))
-                        AssociateMemoryCellVerbToAdjective(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(z),GetswWordsLC(x)); //TODO: Fix association
-                        if(GetFromSentenceIndirectObjectLocation()>=0)
-                            AssociateMemoryCellVerbToAdjective(GetswWordTokens(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(z),GetswWordsLC(x));
-                }
-                //Associate Adverb if not a question sentence
-                if((GetswWordType(x) == 'A') && (!GetFromSentenceIsQuestion()))
-                    AssociateMemoryCellAdverbToVerb(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(GetswWordTokens(GetVerbPointingToAdjective())),GetswWordsLC(x)); //TODO: Fix association
-         }//nd for loop
-         //Associate two nouns if not a question sentence
-         if((GetFromSentenceNounCount() >=2)&& (!GetFromSentenceIsQuestion())){
-                if(Verbose)
-                   cout << "Associating " << GetswWords(Noun1) << " with " << GetswWords(Noun2) << endl;
-                SetMemoryCellNounInList(GetswWordsLC(Noun1),GetswWordsLC(Noun2));
-                SetMemoryCellNounInList(GetswWordsLC(Noun2),GetswWordsLC(Noun1));
-
-         }
-          //Associate Proper Noun to noun and vice versa
-          if((GetswWordType(GetFromSentenceIndirectObjectLocation())=='P') && (!GetFromSentenceIsQuestion()) ){
-                AssociateMemoryCellNoun(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(GetFromSentenceIndirectObjectLocation()));
-                AssociateMemoryCellNoun(GetswWordTokens(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(GetFromSentenceSubjectLocation()));
-          }
-
-          //Associate Noun to gender word and vice versa
-          if((GetswWordType(GetFromSentenceIndirectObjectLocation())=='P') && (!GetFromSentenceIsQuestion()) ){
-                AssociateMemoryCellNoun(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(GetFromSentenceIndirectObjectLocation()));
-                AssociateMemoryCellNoun(GetswWordTokens(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(GetFromSentenceSubjectLocation()));
-          }
-
-            return NewWords;
-
-        }
+//        int StoreNewWords()
+//        {
+//         if(Verbose)cout << "[c_Brain.h::StoreNewWords]" << endl;
+//         int  NewWords; NewWords = 0;
+//         int  Noun1 = -1;
+//         int  Noun2 = -1;
+//         bool Result = false;
+//
+//         for (int x = 0; x < GetFromSentenceWordCount(); x++)
+//         {
+//             if((GetswWordType(x)=='n') && (Noun1 == -1) ) Noun1 = x; else if((GetswWordType(x) == 'n') && (Noun2 == -1))  Noun2 =x;
+//             if( !( GetMemoryCellIsSet(GetswWordsLC(x),Result) )) //   CheckForKnownWord(GetWords(x))))
+//                {NewWords++;}
+//                InstallNewWord(GetswWords(x),GetswWordType(x),'w',true,GetswGenderClassInSentence(x),
+//                               GetswContractionLongFormFirst(x),GetswContractionLongFormSecond(x),GetswPluralWordFlag(x),Tokenize(GetswPluralRoot(x)));
+//                if(GetswIsPluralWord(x)){ //store the singular root
+//                    InstallNewWord(GetswPluralRoot(x),GetswWordType(x),'w',true,GetswGenderClassInSentence(x),
+//                                   "","",'s');}
+//                //Associate Adjective if not a question sentence
+//                if((GetswWordType(x)=='a')&&(!GetFromSentenceIsQuestion()) ){
+//                        if(GetFromSentenceSubjectLocation() >=0 ){
+//                            if(!SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceSubjectLocation()),GetswWordsLC(x))){ //NOTE: Adjective Storage to Memory
+//                                InstallNewWord(GetswWords(GetFromSentenceSubjectLocation()),GetswWordType(GetFromSentenceSubjectLocation()),'w',true,GetswGenderClassInSentence(GetFromSentenceSubjectLocation()));}
+//                                SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceSubjectLocation()),GetswWordsLC(x));  //NOTE: Adjective Storage to Memory
+//                                if(GetswIsPluralWord(GetFromSentenceSubjectLocation())){
+//                                    SetMemoryCellAdjectiveInList(GetswPluralRoot(GetFromSentenceSubjectLocation()),GetswWordsLC(x)); //NOTE Adjective Storage to Memory
+//                                }
+//                                if(Verbose)
+//                                    cout << "Associating " << GetswWords(x) << " with " << GetswWords(GetFromSentenceSubjectLocation()) << endl;
+//                            }
+//                            if((GetFromSentenceIndirectObjectLocation() >=0) && (!GetFromSentenceIsQuestion()) ){ //Associate Indirect object if not a question sentence
+//                                if(!SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(x))){  //NOTE: Adjective Storage to Memory
+//                                    InstallNewWord(GetswWords(GetFromSentenceIndirectObjectLocation()),GetswWordType(GetFromSentenceIndirectObjectLocation()),'w',true,GetswGenderClassInSentence(GetFromSentenceIndirectObjectLocation()));}
+//                                    SetMemoryCellAdjectiveInList(GetswWordsLC(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(x));   //NOTE: Adjective Storage to Memory
+//                                    if(GetswIsPluralWord(GetFromSentenceSubjectLocation())){
+//                                        SetMemoryCellAdjectiveInList(GetswPluralRoot(GetFromSentenceSubjectLocation()),GetswWordsLC(x));   //NOTE: Adjective Storage to Memory
+//                                    }
+//                                    if(Verbose)
+//                                       cout << "Associating " << GetswWords(x) << " with " << GetswWords(GetFromSentenceIndirectObjectLocation()) << endl;
+//                                }
+//                    int z; z = GetVerbPointingToAdjective();
+//                    if((z >=0) && (!GetFromSentenceIsQuestion()))
+//                        AssociateMemoryCellVerbToAdjective(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(z),GetswWordsLC(x)); //TODO: Fix association
+//                        if(GetFromSentenceIndirectObjectLocation()>=0)
+//                            AssociateMemoryCellVerbToAdjective(GetswWordTokens(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(z),GetswWordsLC(x));
+//                }
+//                //Associate Adverb if not a question sentence
+//                if((GetswWordType(x) == 'A') && (!GetFromSentenceIsQuestion()))
+//                    AssociateMemoryCellAdverbToVerb(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(GetswWordTokens(GetVerbPointingToAdjective())),GetswWordsLC(x)); //TODO: Fix association
+//         }//nd for loop
+//         //Associate two nouns if not a question sentence
+//         if((GetFromSentenceNounCount() >=2)&& (!GetFromSentenceIsQuestion())){
+//                if(Verbose)
+//                   cout << "Associating " << GetswWords(Noun1) << " with " << GetswWords(Noun2) << endl;
+//                SetMemoryCellNounInList(GetswWordsLC(Noun1),GetswWordsLC(Noun2));
+//                SetMemoryCellNounInList(GetswWordsLC(Noun2),GetswWordsLC(Noun1));
+//
+//         }
+//          //Associate Proper Noun to noun and vice versa
+//          if((GetswWordType(GetFromSentenceIndirectObjectLocation())=='P') && (!GetFromSentenceIsQuestion()) ){
+//                AssociateMemoryCellNoun(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(GetFromSentenceIndirectObjectLocation()));
+//                AssociateMemoryCellNoun(GetswWordTokens(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(GetFromSentenceSubjectLocation()));
+//          }
+//
+//          //Associate Noun to gender word and vice versa
+//          if((GetswWordType(GetFromSentenceIndirectObjectLocation())=='P') && (!GetFromSentenceIsQuestion()) ){
+//                AssociateMemoryCellNoun(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWordsLC(GetFromSentenceIndirectObjectLocation()));
+//                AssociateMemoryCellNoun(GetswWordTokens(GetFromSentenceIndirectObjectLocation()),GetswWordsLC(GetFromSentenceSubjectLocation()));
+//          }
+//
+//            return NewWords;
+//
+//        }
 
 
 

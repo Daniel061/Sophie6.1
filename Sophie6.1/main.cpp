@@ -24,13 +24,14 @@
 
 using namespace std;
 c_Brain Brain;
-string Version = "6.1.0t.EN.009.030";
-bool Verbose   = false;
-bool StoryMode = false;
-int  BlockID   = -1;
+string Version       = "6.1.03.EN.009.030";
+string ReleaseMode   = "debug";
+bool Verbose         = false;
+bool StoryMode       = false;
+int  BlockID         = -1;
 
-int  BaseSpeed = 600000000;
-int  SpeedStandard = 1000;
+int  BaseSpeed       = 600000000;
+int  SpeedStandard   = 1000;
 int  RunningStandard = 9000000;  //adjust up or down to change delay for all machines. up=more delay
 int  ThisSpeed;
 float CalcSpeed;
@@ -66,21 +67,31 @@ ifstream myfile ("trainingdata.dat");
 //testtext.txt file format is single lines terminated by CR
 // -enable StoryMode for no response processing
 // -disable StoryMode when finished
-StoryMode = true;
+   StoryMode         = true;
+   Elapsed           = clock();
+   string CommentTag = "";
   if (myfile.is_open())
-  { Elapsed = clock();
+  {
     while ( getline (myfile,Raw_Sentence) )
     {
+      CommentTag =  Raw_Sentence[0];
+      CommentTag += Raw_Sentence[1];
+      if(!( CommentTag == "//") ){  //training file comment
       cout << Raw_Sentence << endl;
-      Brain.ControlProcessingUserInput( Raw_Sentence );
+      Brain.ControlProcessingUserInput( Raw_Sentence );}
+      CommentTag = "";
     }
-    myfile.close();
     Elapsed = clock() - Elapsed;
+    myfile.close();
+
     cout << "Training file processed in " << Elapsed << " milliseconds.\n";
   }
 
-  else cout << "Unable to open file";
+  else cout << "No training file found.";
 StoryMode = false;
+//*******************END TRAINING FILE READ****************************
+
+
 cout << ">>";
 getline (cin,Raw_Sentence);
 

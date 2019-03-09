@@ -642,12 +642,12 @@ void Handle75LevelUnderstanding(string &strData, bool RunSilent = false){
             SlowSpeak("Okay. Tell me more about " + GetswWordsLC(UnKnownLocation-1) + " " + GetswWordsLC(UnKnownLocation) + ".");
             SetInSentenceHasBeenUnderstood(true);
         if(Pattern[tmpLocation+1]== 'u'){
-           AssociateMemoryCellNoun(GetswWordTokens(tmpLocation),GetswWordsLC(tmpLocation+1));                                 //associate first noun to second noun
-           AssociateMemoryCellNoun(GetswWordTokens(tmpLocation+3),GetswWordsLC(tmpLocation+4));                               //associate second noun to first noun
-           SetswWordType('n',tmpLocation+1);}  //TODO: Fix noun association in new lists
+           SetMemoryCellNounInList(GetswWordsLC(tmpLocation),GetswWordsLC(tmpLocation+1));                                 //associate first noun to second noun
+           SetMemoryCellNounInList(GetswWordsLC(tmpLocation+3),GetswWordsLC(tmpLocation+4));                               //associate second noun to first noun
+           SetswWordType('n',tmpLocation+1);}
          else{
-           AssociateMemoryCellNoun(GetswWordTokens(tmpLocation),GetswWordsLC(tmpLocation+4));                                 //associate first noun to second noun
-           AssociateMemoryCellNoun(GetswWordTokens(tmpLocation+3),GetswWordsLC(tmpLocation+1));                               //associate second noun to first noun
+           SetMemoryCellNounInList(GetswWordsLC(tmpLocation),GetswWordsLC(tmpLocation+4));                                 //associate first noun to second noun
+           SetMemoryCellNounInList(GetswWordsLC(tmpLocation+3),GetswWordsLC(tmpLocation+1));                               //associate second noun to first noun
            SetswWordType('n',tmpLocation+4);}
         FindSubject();                                                                                                    //Update subject
         SetSubjectInStack(GetswWordTokens(GetFromSentenceSubjectLocation()),GetswWords(GetFromSentenceSubjectLocation()),GetFromSentenceOriginalString());        //update subject stack

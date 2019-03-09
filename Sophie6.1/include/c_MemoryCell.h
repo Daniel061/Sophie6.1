@@ -214,6 +214,9 @@ class c_MemoryCell
                 pCellMiniDefinition.clear();
                 pResolvedPattern                = "";
                 pSingularLocation               = 0;
+                pTimesUsedAsSubject             = 0;
+                pTimesUsedAsIndirectObject      = 0;
+                pTimesUsedAsDirectObject        = 0;
         }
 
 
@@ -237,7 +240,7 @@ class c_MemoryCell
        }
 
 
-       void AssociateVerbToAdjectiveInMap(string AdjectiveToAssociate, string VerbToAssociate){
+       void AssociateVerbInMap(string VerbToAssociate){
            ///new set usage Store VERB
            if(VerbToAssociate != "")
               verbList.emplace(VerbToAssociate);           //will not duplicate
