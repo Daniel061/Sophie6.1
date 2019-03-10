@@ -119,6 +119,31 @@ class c_Language : public c_LongTermMemory
                 CorrectedPattern                   = LocPattern;
                 CorrectedPattern[PatternPointer+1] = 'a';
                 ConfidenceLevel                    = 100;}
+
+            PatternPointer = LocPattern.find("Gu");
+            if(PatternPointer >= 0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+1] = 'v';
+                ConfidenceLevel                    = 100;}
+
+            PatternPointer = LocPattern.find("Idau");
+            if(PatternPointer >= 0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+3] = 'n';
+                ConfidenceLevel                    = 100;}
+
+            PatternPointer = LocPattern.find("Idvu");
+            if(PatternPointer >= 0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+3] = 'n';
+                ConfidenceLevel                    = 100;}
+
+            PatternPointer = LocPattern.find("Idu");
+            if(PatternPointer >= 0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+2] = 'n';
+                ConfidenceLevel                    = 100;}
+
             if(LocPattern == "duvu"){
                 CorrectedPattern = "dnvu";
                 ConfidenceLevel = 100;}
@@ -199,6 +224,7 @@ class c_Language : public c_LongTermMemory
            string Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
            string Questions =           " what where how when who ";
            string Verbs =               " go went can will be have do say get make go know take is see come fell ran think look want give use find tell ask work seem feel try leave call am been ";
+           string PastTenseVerbs =      " came went gone ";
            string PluralVerbs =         " are ";
            string SubjectReplacements = " it that this its ";
            string Adverbs =             " very again ";
@@ -217,6 +243,8 @@ class c_Language : public c_LongTermMemory
            string SingularWord  =       "";
            string UCWord        =       GetswWords(LocationInSentence);
 
+
+           int  isPastTenseVerb     = -1;
            int  isPreposition       = -1;
            int  isThrowAwayWord     = -1;
            int  isPluralPronoun     = -1;
@@ -254,6 +282,7 @@ class c_Language : public c_LongTermMemory
               OrigWordUC   = GetswWords(LocationInSentence);
               tmpWord = " " + tmpWord + " ";
 
+                isPastTenseVerb     = PastTenseVerbs.find(tmpWord);
                 ActionMarker        = tmpWord.find("ing");
                 isPreposition       = PrepositionWords.find(tmpWord);
                 isConjunction       = ConjunctionWords.find(tmpWord);
@@ -278,6 +307,11 @@ class c_Language : public c_LongTermMemory
                 isAssociativeWord   = AssociativeWord.find(tmpWord);
                 QuoteMarker         = tmpWord.find("'");
 
+
+
+                  if (isPastTenseVerb >= 0){
+                      tmpWordType = 'v';
+                      SetswWordTense(LocationInSentence,'p');}
 
                   if (QuoteMarker >= 0){
                       tmpWordType   = 'C';}
@@ -566,17 +600,18 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             //  Unknown word
 
             if(Verbose)cout << "[c_Language.h::FindSubject]" << endl;
-            int DeterminerLocation;       DeterminerLocation = -1;
-            int UnknownLocation;          UnknownLocation    = -1;
-            int WordCount;                WordCount          =  0;
-            int SubLocation;              SubLocation        = -1;
-            int NounLocation;             NounLocation       = -1;
-            int SecondNounLocation;       SecondNounLocation = -1;
-            int ProNounLocation;          ProNounLocation    = -1;
-            int ProperNounLocation;       ProperNounLocation = -1;
-            int JoinerLocation;           JoinerLocation     = -1;
-            string Pattern;               Pattern            = "";
-            bool PickingSubject;          PickingSubject     = true;
+            int DeterminerLocation;       DeterminerLocation   = -1;
+            int UnknownLocation;          UnknownLocation      = -1;
+            int WordCount;                WordCount            =  0;
+            int SubLocation;              SubLocation          = -1;
+            int NounLocation;             NounLocation         = -1;
+            int SecondNounLocation;       SecondNounLocation   = -1;
+            int ProNounLocation;          ProNounLocation      = -1;
+            int ProperNounLocation;       ProperNounLocation   = -1;
+            int ProNounOtherLocation;     ProNounOtherLocation = -1;
+            int JoinerLocation;           JoinerLocation       = -1;
+            string Pattern;               Pattern              = "";
+            bool PickingSubject;          PickingSubject       = true;
 
             WordCount = GetFromSentenceWordCount();
 
@@ -591,6 +626,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                 if(GetswWordType(x)== 'P') if(ProperNounLocation == -1) ProperNounLocation = x;
                 if(GetswWordType(x)== 'm') if(ProNounLocation == -1) ProNounLocation = x;
                 if(GetswWordType(x)== 'y') if(ProNounLocation == -1) ProNounLocation = x;
+                if(GetswWordType(x)== 'G') if(ProNounOtherLocation == -1) ProNounOtherLocation = x;
                 if(GetswWordType(x)== 'j') JoinerLocation = x;
                 if(GetswWordType(x)== 'v'){ SetInSentenceVerbLocation(x);}
                 if(GetswWordType(x)== 'a'){ SetInSentenceAdjectiveLocation(x);}
@@ -618,6 +654,9 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                 else
                     if((SubLocation == -1) && (ProNounLocation !=-1))
                         SubLocation = ProNounLocation;
+                else
+                    if((SubLocation == -1) && (ProNounOtherLocation != -1))
+                        SubLocation = ProNounOtherLocation;
                 else
                     if((SubLocation == -1) && (NounLocation !=-1))
                         SubLocation = NounLocation;
@@ -756,12 +795,10 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                 SetInSentenceGistOfSentence(NewGistString);
                 SetInSentenceSubGistOfSentence(NewSubGist);
                 if (Verbose){
-                    cout << "\n  Gist =" << GistString << endl;
-                    cout << "  subGist =" << subGistString << endl;
+                    cout << "\n  Gist =" << NewGistString << endl;
+                    cout << "  subGist =" << NewSubGist << endl;
                  }
             }
-
-
             return Result;
 
         }
@@ -770,12 +807,16 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 //-------------------------Imply Unknowns()-------------------------------------------------------------------------------------
 
         void ImplyUnknowns(){
+        if(Verbose)
+           cout << "[c_Language::ImplyUnknowns]\n";
         //look for unknown word types inside certain patterns and assert their type
         // note:This pattern work and assumptions comes from observing patterns stored in PatternData.file for this purpose
         //local vars
         string    LocalPattern      = GetFromSentencePattern();
         bool      SettingPattern    = true;
         int       PatternPointer    = -1;
+        if(Verbose)
+           cout << "Beginning pattern:" << LocalPattern << endl;
 
         while(SettingPattern){
 
@@ -813,7 +854,8 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
         }//end while loop
 
 
-
+        if(Verbose)
+           cout << "Ending pattern:" << LocalPattern << endl;
     }
 //-------------------------------END IMPLY UNKNOWNS------------------------------------------------------------------------------
 };

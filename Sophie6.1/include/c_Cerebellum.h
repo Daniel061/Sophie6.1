@@ -37,6 +37,7 @@ class c_Cerebellum : public c_Cortex
          int    LocalConfidenceLevel     = 0;
          int    LocalUnderstandingDegree = 0;
          int    LocalAltLocation         = -1;
+         int    LocalPastTenseWords      = -1;
          int    QuoteMarker              = -1;
          float  LocalUnderstandingRatio  = 0.0;
          string LocalPattern             = "";
@@ -50,6 +51,7 @@ class c_Cerebellum : public c_Cortex
          bool   LocalBoolFlag            = false;
          bool   LocalContractionFlag     = false;
          bool   LocalHasAlternateType    = false;
+         bool   LocalSentenceTense       = false;
          bool   Result                   = false;
 
          void InitializeAll(){
@@ -59,6 +61,7 @@ class c_Cerebellum : public c_Cortex
                  LocalNamePointer         = -1;
                  LocalVerbLocation        = -1;
                  LocalAltLocation         = -1;
+                 LocalPastTenseWords      = -1;
                  LocalNounCount           = 0;
                  LocalWordCount           = -1;
                  LocalUnknownCount        = 0;
@@ -76,6 +79,7 @@ class c_Cerebellum : public c_Cortex
                  LocalBoolFlag            = false;
                  LocalHasAlternateType    = false;
                  Result                   = false;
+                 LocalSentenceTense       = false;
                  LocalContractionFlag     = false;}
 
 public:
@@ -90,15 +94,6 @@ public:
         LocalWordCount     = GetFromSentenceWordCount();
         //check for empty sentence
         if(LocalWordCount == 0) return -1;
-
-//        for (int x = 0; x < LocalWordCount; x++){
-//            LocalWordType  = FindWordType(GetswWordsLC(x),x);
-//            SetswWordType(LocalWordType,x);
-//            LocalPattern  += LocalWordType;}
-//            SetInSentencePreProcessedPattern(LocalPattern);
-
-
-
 
         //*******NOTE: c_Language.h::FindWordType() sets the following in c_Sentence.h private variables
         //     bool   IsQuestion
@@ -169,6 +164,7 @@ public:
          if(SelectedWordType == 'a') LocalAdjectiveLocation = x;                    //save the adjective location
          if(SelectedWordType == 'C') LocalContractionFlag = true;                   //mark has contraction
          if(SelectedWordType == 'c') SetInSentenceConjunctionLocation(x);           //save the conjunction location
+         if(SelectedWordType == 'I') SetInSentenceHasPreposition(true);             //flag preposition in sentence
 
          LocalGenderClass = GetMemoryCellcharGenderClass(GetswWordsLC(x),Result);   //take care of GenderClass in sentence
          if(LocalGenderClass != 'u')
@@ -176,7 +172,10 @@ public:
 
         SetswWordType(SelectedWordType,x);                                          //update word type in sentence class
         } //END of for loop to scan sentence
+        if(Verbose)
+            cout << "[GatherAndSet]:LocalPattern " << LocalPattern;
 
+        SetInSentencePreProcessedPattern(LocalPattern);
         SetInSentenceAdjectiveLocation(LocalAdjectiveLocation);                     //store  ADJECTIVE LOCATION in c_Sentence
         SetInSentenceAdverbLocation(LocalAdverbLocation);                           //store  ADVERB LOCATION in c_Sentence
         SetInSentenceNamePointer(LocalNamePointer);                                 //store  NAME POINTER in c_Sentence
@@ -190,15 +189,31 @@ public:
         SetInSentencesDaysOld(GetDaysSinceDate());                                  //day stamp this sentence
         LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);            //Check for corrections
         SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
-        SetInSentencePreProcessedPattern(LocalPattern);
+        LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);            //Check for corrections   do this twice
+        SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
+        ImplyUnknowns();                                                            //let language try to set some unknowns
         ReVerseBuildPattern();                                                      //push from pattern to word types
+        FindAndSetGistOfSentence();                                                 //store gist,subgist and supportive phrase in sentence
 
-        for (int x = 0; x < int(LocalPattern.size()); x++ ){                         //for calc in understanding level
+        for (int x = 0; x < int(LocalPattern.size()); x++ ){                        //for calc in understanding level
             if(LocalPattern[x] == 'u')
               LocalUnknownCount ++;
             else
               LocalUnderstandingLevel ++;
-        }
+
+            if(GetswWordTense(x)=='p'){                                             //set sentence tense to past if one word tense is past
+                LocalPastTenseWords++;}
+        }//end for loop to scan pattern
+
+            if(LocalPastTenseWords != -1){
+                if(Verbose)
+                   cout << "Setting sentence tense to past.\n";
+                SetInSentencesSentenceTense('p');}
+            else{
+                if(Verbose)
+                   cout << "Setting sentence tense to current.\n";
+                SetInSentencesSentenceTense('c');}
+
 
             if(LocalUnderstandingLevel > 0)
                 LocalUnderstandingRatio = float(LocalUnderstandingLevel) / float(GetFromSentenceWordCount());
@@ -255,14 +270,16 @@ public:
           SetswPluralRoot(x,GetMemoryCellpSingularForm(GetswWordsLC(x)));
           //SetIsPluralWord(x,Getmemorycell)   memory cell doesn't agree with this type
           //SetswisContraction(x,getmemorycellisContraction)
-          SetswWordTense(x,GetMemoryCellcharWordTense(GetswWordsLC(x),Result));
+
+          if(GetMemoryCellcharWordTense(GetswWordsLC(x),Result)!='u')            //set swWordTense if not unknown
+                SetswWordTense(x,GetMemoryCellcharWordTense(GetswWordsLC(x),Result));
 
 
           //Finished all word data transfer
          }//end of all words for loop
 
-         ImplyUnknowns();                                                           //let language try to set some unknowns
-         FindAndSetGistOfSentence();
+
+         //FindAndSetGistOfSentence();
          FindSubject();
         return LocalWordCount;                                                      //finished
 

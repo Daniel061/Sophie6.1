@@ -494,7 +494,8 @@ class c_Lobes : public c_MemoryCell
 
         /// Gets RightLobeCellMap summary
         int GetRightLobeCellMapSummary(int &VerbCount, int &NounCount, int &AdjectiveCount,
-                                       int &AdverbCount, int &PronounCount, int &PropernounCount, int &UnknownCount){
+                                       int &AdverbCount, int &PronounCount, int &PropernounCount,
+                                       int &UnknownCount, int &KnownCount){
           CellMapIT       = RightLobeCellMap.begin();
           VerbCount       = 0;
           NounCount       = 0;
@@ -503,6 +504,7 @@ class c_Lobes : public c_MemoryCell
           PronounCount    = 0;
           PropernounCount = 0;
           UnknownCount    = 0;
+          KnownCount      = 0;
           for(int x = 0; x < int(RightLobeCellMap.size()); x++){
             if(CellMapIT->second.GetpCellWordType() == 'n') NounCount ++;
             if(CellMapIT->second.GetpCellWordType() == 'v') VerbCount ++;
@@ -511,6 +513,7 @@ class c_Lobes : public c_MemoryCell
             if(CellMapIT->second.GetpCellWordType() == 'p') PronounCount ++;
             if(CellMapIT->second.GetpCellWordType() == 'P') PropernounCount ++;
             if(CellMapIT->second.GetpCellWordType() == 'u') UnknownCount ++;
+            if(CellMapIT->second.GetpCellWordType() != 'u') KnownCount ++;
 
             CellMapIT++;
           }
@@ -1522,7 +1525,7 @@ class c_Lobes : public c_MemoryCell
                     }
                     while(strLineData != ""){
                         getline(LearnedDataFile,SecondLineData);
-                        SavePreAndPostPatternConstruction(strLineData,"",stoi(SecondLineData,&decType));
+                        SavePreAndPostPatternConstruction(strLineData,SecondLineData);
                         getline(LearnedDataFile,strLineData);
                     }//end while loop
               }//end Pattern file

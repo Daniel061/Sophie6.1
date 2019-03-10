@@ -24,10 +24,11 @@
 
 using namespace std;
 c_Brain Brain;
-string Version       = "6.1.03.EN.009.030";
+string Version       = "6.1d.02d.EN.010.001";
 string ReleaseMode   = "debug";
 bool Verbose         = false;
 bool StoryMode       = false;
+bool EchoTraining    = true;
 int  BlockID         = -1;
 
 int  BaseSpeed       = 600000000;
@@ -68,6 +69,7 @@ ifstream myfile ("trainingdata.dat");
 // -enable StoryMode for no response processing
 // -disable StoryMode when finished
    StoryMode         = true;
+   Verbose           = false;
    Elapsed           = clock();
    string CommentTag = "";
   if (myfile.is_open())
@@ -77,18 +79,20 @@ ifstream myfile ("trainingdata.dat");
       CommentTag =  Raw_Sentence[0];
       CommentTag += Raw_Sentence[1];
       if(!( CommentTag == "//") ){  //training file comment
-      cout << Raw_Sentence << endl;
-      Brain.ControlProcessingUserInput( Raw_Sentence );}
+          if(EchoTraining){
+            cout << Raw_Sentence << endl;}
+            Brain.ControlProcessingUserInput( Raw_Sentence );}
       CommentTag = "";
     }
     Elapsed = clock() - Elapsed;
     myfile.close();
-
-    cout << "Training file processed in " << Elapsed << " milliseconds.\n";
+    if(EchoTraining)
+        cout << "Training file processed in " << Elapsed << " milliseconds.\n";
   }
 
-  else cout << "No training file found.";
+  else cout << "No training file found.\n";
 StoryMode = false;
+Verbose   = false;
 //*******************END TRAINING FILE READ****************************
 
 

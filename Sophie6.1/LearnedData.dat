@@ -1,4 +1,4 @@
-VERSION 6.1.03.EN.009.030, file version-Memory Cells
+VERSION 6.1d.02d.EN.010.001, file version-Memory Cells
 Original string----------,a
 Index  , [a]
 Lower Case string      ,a
@@ -24,7 +24,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -58,7 +58,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -92,7 +92,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -126,7 +126,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -160,7 +160,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -182,7 +182,7 @@ Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
-Gender class           ,m
+Gender class           ,u
 Is root                ,0
 Is Locked(old is set)  ,1
 Is Singular            ,s
@@ -195,17 +195,15 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
-Times used as sbj      ,6
+Day stamp              ,68
+Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
 Number of Mini Defs          ,0
-Number of Adjectives         ,1
-Adjective                ,threw
+Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,1
-Noun                     ,fence
+Related Nouns                ,0
 Original string----------,black
 Index  , [black]
 Lower Case string      ,black
@@ -231,7 +229,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -265,15 +263,18 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
-Times used as sbj      ,0
+Day stamp              ,68
+Times used as sbj      ,2
 Times used as ind obj  ,0
 Times used as dir obj  ,0
-Number of Mini Defs          ,0
+Number of Mini Defs          ,1
+Mini Def.                ,threw the ball
 Number of Adjectives         ,0
-Nunber of Verbs              ,0
+Nunber of Verbs              ,1
+Verb                     ,threw
 Number of Adverbs            ,0
-Related Nouns                ,0
+Related Nouns                ,1
+Noun                     ,fence
 Original string----------,broke
 Index  , [broke]
 Lower Case string      ,broke
@@ -299,7 +300,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -315,8 +316,8 @@ Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
+Word Type              ,v
+Word tense             ,p
 Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
@@ -333,7 +334,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -367,8 +368,8 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
-Times used as sbj      ,6
+Day stamp              ,68
+Times used as sbj      ,2
 Times used as ind obj  ,0
 Times used as dir obj  ,0
 Number of Mini Defs          ,1
@@ -404,7 +405,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -439,8 +440,8 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
-Times used as sbj      ,19
+Day stamp              ,68
+Times used as sbj      ,6
 Times used as ind obj  ,0
 Times used as dir obj  ,0
 Number of Mini Defs          ,3
@@ -452,8 +453,7 @@ Adjective                ,black
 Nunber of Verbs              ,1
 Verb                     ,is
 Number of Adverbs            ,0
-Related Nouns                ,3
-Noun                     ,mickey
+Related Nouns                ,2
 Noun                     ,animal
 Noun                     ,pet
 Original string----------,down
@@ -481,7 +481,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -515,7 +515,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -549,7 +549,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -558,7 +558,7 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,1
-Noun                     ,ball
+Noun                     ,boy
 Original string----------,fetch
 Index  , [fetch]
 Lower Case string      ,fetch
@@ -584,7 +584,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -618,7 +618,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -653,7 +653,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -687,7 +687,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -721,24 +721,22 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
-Times used as sbj      ,12
+Day stamp              ,68
+Times used as sbj      ,4
 Times used as ind obj  ,0
 Times used as dir obj  ,0
 Number of Mini Defs          ,2
 Mini Def.                ,went up the hill to fetch a pail
 Mini Def.                ,fell down
-Number of Adjectives         ,3
-Adjective                ,water
+Number of Adjectives         ,1
 Adjective                ,fetch
-Adjective                ,up
 Nunber of Verbs              ,2
 Verb                     ,went
 Verb                     ,fell
 Number of Adverbs            ,0
 Related Nouns                ,2
-Noun                     ,crown
 Noun                     ,hill
+Noun                     ,crown
 Original string----------,Jill
 Index  , [jill]
 Lower Case string      ,jill
@@ -764,8 +762,8 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
-Times used as sbj      ,6
+Day stamp              ,68
+Times used as sbj      ,2
 Times used as ind obj  ,0
 Times used as dir obj  ,0
 Number of Mini Defs          ,1
@@ -776,46 +774,6 @@ Verb                     ,tumbling
 Number of Adverbs            ,0
 Related Nouns                ,1
 Noun                     ,hill
-Original string----------,Mickey
-Index  , [mickey]
-Lower Case string      ,mickey
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,P
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,m
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,67
-Times used as sbj      ,5
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,3
-Mini Def.                ,is a boy 
-Mini Def.                ,is a pet 
-Mini Def.                ,is a dog 
-Number of Adjectives         ,0
-Nunber of Verbs              ,1
-Verb                     ,is
-Number of Adverbs            ,0
-Related Nouns                ,2
-Noun                     ,pet
-Noun                     ,dog
 Original string----------,of
 Index  , [of]
 Lower Case string      ,of
@@ -841,7 +799,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -875,7 +833,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -909,7 +867,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -943,7 +901,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -951,8 +909,7 @@ Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,2
-Noun                     ,mickey
+Related Nouns                ,1
 Noun                     ,dog
 Original string----------,the
 Index  , [the]
@@ -979,7 +936,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -987,7 +944,8 @@ Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,0
+Related Nouns                ,1
+Noun                     ,animal
 Original string----------,threw
 Index  , [threw]
 Lower Case string      ,threw
@@ -995,7 +953,7 @@ Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,a
+Word Type              ,v
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -1013,7 +971,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -1047,7 +1005,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -1081,7 +1039,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -1097,7 +1055,7 @@ Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,a
+Word Type              ,u
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -1115,7 +1073,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -1149,7 +1107,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -1166,7 +1124,7 @@ Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
 Word Type              ,v
-Word tense             ,u
+Word tense             ,p
 Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
@@ -1183,7 +1141,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,67
+Day stamp              ,68
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0

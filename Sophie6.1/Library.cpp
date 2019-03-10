@@ -21,7 +21,7 @@ using namespace std;
 extern string Version;
 
         /// Checks the current file version after the second decimal,
-        ///   against the one read.i.e. 6.1.02.009.28  02 is the file version
+        ///   against the one read.i.e. 6.1.02a.009.28  02a is the file version
         ///   Returns true if same / false if different
         bool VerifyFileVersion(string VersionToCheck){
             int    DecimalPointer1 = -1;
@@ -33,13 +33,13 @@ extern string Version;
 
             DecimalPointer1  = Version.find(".");
             DecimalPointer1  = Version.find(".",DecimalPointer1+1);
-            Extraction1      = Version.substr(DecimalPointer1+1,2);
+            Extraction1      = Version.substr(DecimalPointer1+1,3);
 
             DecimalPointer2  = VersionToCheck.find(".");
             if(DecimalPointer2 >=0){
                DecimalPointer2  = VersionToCheck.find(".",DecimalPointer2+1);}
             if(DecimalPointer2 >=0){
-               Extraction2      = VersionToCheck.substr(DecimalPointer2+1,2);}
+               Extraction2      = VersionToCheck.substr(DecimalPointer2+1,3);}
 
             if(Extraction1 == Extraction2) Result = true;
             return Result;

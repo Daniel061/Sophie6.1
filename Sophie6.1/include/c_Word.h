@@ -26,28 +26,28 @@ class c_Word
         virtual ~c_Word();
 
     protected:
-          string  w_WordForm                = "";    // the word data in its original form
-          string  w_WordFormLC              = "";    // the word data in all lowercase
-          string  w_ContractionFormFirst    = "";    // deconstructed contraction what's = what
-          string  w_ContractionFormSecond   = "";    // deconstructed contraction what's = is
-          string  w_SingularForm            = "";    // i.e. cats = cat
-          string  w_PluralRoot              = "";    // deconstructed plural to the root,cars = car
-          string  w_SubWord                 = "";    // replacement word, usually from subject
-          string  w_PossessiveRoot          = "";    // cat's  = cat
-          bool    w_isContraction           = false; // contraction flag
-          bool    w_isPlural                = false; // plural flag
-          bool    w_SingularPossessive      = false; // i.e. cat's
-          bool    w_PluralPossessive        = false; // i.e. cats'
-          int     w_QuoteLocation           = -1;    // location of quote if contraction
-          int     w_WordTokens              = -1;    // depreciated
-          char    w_PossessiveRootType      = 'u';   // usually a 'n' noun but not always
-          char    w_WordType                = 'u';   // defines word type  u = unknown
-          char    w_GenderClass             = 'u';   // defines gender     u = undefined
-          char    w_PluralWordFlag          = 'u';   // s = singular p=plural u = undefined
-          char    w_SecondaryType           = 'u';   // some words have more than 1 usage
-          char    w_AlternativeType         = 'u';   // some words have more than 1 usage
-          char    w_WordTense               = 'u';   // c - present p - past
-          char    w_Polarity                = 'p';   // positive/negative
+          string  w_WordForm                = "";    // 1)  the word data in its original form
+          string  w_WordFormLC              = "";    // 2)  the word data in all lowercase
+          string  w_ContractionFormFirst    = "";    // 3)  deconstructed contraction what's = what
+          string  w_ContractionFormSecond   = "";    // 4)  deconstructed contraction what's = is
+          string  w_SingularForm            = "";    // 5)  i.e. cats = cat
+          string  w_PluralRoot              = "";    // 6)  deconstructed plural to the root,cars = car
+          string  w_SubWord                 = "";    // 7)  replacement word, usually from subject
+          string  w_PossessiveRoot          = "";    // 8)  cat's  = cat
+          bool    w_isContraction           = false; // 9)  contraction flag
+          bool    w_isPlural                = false; // 10) plural flag
+          bool    w_SingularPossessive      = false; // 11) i.e. cat's
+          bool    w_PluralPossessive        = false; // 12) i.e. cats'
+          int     w_QuoteLocation           = -1;    // 13) location of quote if contraction
+          int     w_WordTokens              = -1;    // 14) depreciated
+          char    w_PossessiveRootType      = 'u';   // 15) usually a 'n' noun but not always
+          char    w_WordType                = 'u';   // 16) defines word type  u = unknown
+          char    w_GenderClass             = 'u';   // 17) defines gender     u = undefined
+          char    w_PluralWordFlag          = 'u';   // 18) s = singular p=plural u = undefined
+          char    w_SecondaryType           = 'u';   // 19) some words have more than 1 usage
+          char    w_AlternativeType         = 'u';   // 20) some words have more than 1 usage
+          char    w_WordTense               = 'u';   // 21) c - present p - past
+          char    w_Polarity                = 'p';   // 22) positive/negative
 //TODO: Store w_Polarity in files
 
 

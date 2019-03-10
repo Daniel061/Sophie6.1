@@ -53,6 +53,7 @@ class c_Sentence : public c_Personality
         int    sSecondSubjectLocation;           // For Dual subjects
         char   sPunctuation;                     // !  initialize to null
         char   sPolarity;                        // positive / negative sentence
+        char   sSentenceTense;                   // c-current p-past u-undefined
         bool   sHasPunctuation;                  // true / false initialize to false
         bool   sHasPluralPronoun;                // true / false initialize to false
         bool   sIsQuestion;                      // true / false initialize to false
@@ -67,55 +68,59 @@ class c_Sentence : public c_Personality
         int    sDaysOld;                         // day number stamp from 2019 beginning
         int    sUnderstandingLevel;              // the degree this sentence is known
 
-//TODO: Set variable sPolarity, store in files
+
 
 
     public:
         void InitializeVars(){
             //GLOBAL SENTENCE VARIABLES
-                sWordCount                     = 0;
-                sSubjectLocation               = -1;
-                sOriginalString                = "";
-                sPatternString                 = "";
-                sPreProcessedPattern           = "";
-                sSecondSubject                 = "";
-                sGistOfSentence                = "";
-                sSubGistOfSentence             = "";
-                sSupportivePhrase              = "";
-                sHasPreposition                = false;
-                sHasPluralPronoun              = false;
-                sHasPunctuation                = false;
-                sIsQuestion                    = false;
-                sHasContraction                = false;
-                sHasGreetingsWord              = false;
-                sHasGenderReference            = false;
-                sHasBeenUnderstood             = false;
-                sHasGenderDeterminer           = false;
-                sHasDualSubjects               = false;
-                sHasPronoun                    = false;
-                sSentenceDirection             = -1;
-                sPunctuation                   = 'x';  //not set or does not have
-                sPolarity                      = 'p';
-                sConjunctionLocation           = -1;
-                sAdverbLocation                = -1;
-                sNounCount                     = -1;
-                sVerbLocation                  = -1;
-                sAdjectiveLocation             = -1;
-                sNamePointer                   = -1;
-                sPrepositionPosition           = -1;
-                sSecondSubjectLocation         = -1;
-                sIndirectObjectLocation        = -1;
-                sDirectObjectLocation          = -1;
-                sUnderstandingLevel            = -1;
-                sDaysOld                       = 0;
+                sWordCount                     = 0;         // 1)
+                sSubjectLocation               = -1;        // 2)
+                sOriginalString                = "";        // 3)
+                sPatternString                 = "";        // 4)
+                sPreProcessedPattern           = "";        // 5)
+                sSecondSubject                 = "";        // 6)
+                sGistOfSentence                = "";        // 7)
+                sSubGistOfSentence             = "";        // 8)
+                sSupportivePhrase              = "";        // 9)
+                sHasPreposition                = false;     // 10)
+                sHasPluralPronoun              = false;     // 11)
+                sHasPunctuation                = false;     // 12)
+                sIsQuestion                    = false;     // 13)
+                sHasContraction                = false;     // 14)
+                sHasGreetingsWord              = false;     // 15)
+                sHasGenderReference            = false;     // 16)
+                sHasBeenUnderstood             = false;     // 17)
+                sHasGenderDeterminer           = false;     // 18)
+                sHasDualSubjects               = false;     // 19)
+                sHasPronoun                    = false;     // 20)
+                sSentenceDirection             = -1;        // 21)
+                sPunctuation                   = 'x';       // 22) not set or does not have
+                sPolarity                      = 'p';       // 23)
+                sSentenceTense                 = 'u';       // 24)
+                sConjunctionLocation           = -1;        // 25)
+                sAdverbLocation                = -1;        // 26)
+                sNounCount                     = -1;        // 27)
+                sVerbLocation                  = -1;        // 28)
+                sAdjectiveLocation             = -1;        // 29)
+                sNamePointer                   = -1;        // 30)
+                sPrepositionPosition           = -1;        // 31)
+                sSecondSubjectLocation         = -1;        // 32)
+                sIndirectObjectLocation        = -1;        // 33)
+                sDirectObjectLocation          = -1;        // 34)
+                sUnderstandingLevel            = -1;        // 35)
+                sDaysOld                       = 0;         // 36)
                 WordMap.clear();}
-//TODO: Add Set/Get function   Add file storage
+
 
        ///*******************ALL GLOBAL->SENTENCE DATA FUNCTIONS***************************
        ///**********'InSentence/FromSentence' is the function source flag******************
 
         char   GetFromSentencesPolarity(){return sPolarity;}
         void   SetInSentencesPolarity(char newVal){sPolarity = newVal;}
+
+        char   GetFromSentencesSentenceTense(){return sSentenceTense;}
+        void   SetInSentencesSentenceTense(char newVal){sSentenceTense = newVal;}
 
         int    GetFromSentenceDirectObjectLocation(){return sDirectObjectLocation;}
         void   SetInSentenceDirectObjectLocation(int newVal){sDirectObjectLocation = newVal;}

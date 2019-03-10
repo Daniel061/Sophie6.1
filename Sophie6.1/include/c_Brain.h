@@ -53,28 +53,32 @@ class c_Brain : public c_Cerebellum
         void ControlProcessingUserInput(string &strData){
             if(Verbose)cout << "[c_Brain.h::ControlProcessingUserInput]" << endl;
             int    CommandFound   = -1;
-            string tmpInputData = strData;
+            int    CL             = -1;
+            string tmpInputData   = strData;
             bool   OwnerShip,Plural;
             string Root,LongFormFirst,LongFormSecond;
+            string NP             = "";
 
             CommandCheckSentence.InitializeVars();
             CommandCheckSentence.Parse(strData);
             CommandFound     = CommandTrap();
 
             if(CommandFound == 0){
-              Parse(strData);                               // c_Sentence parse this data
-              SaveSentenceInLongTermMemory(strData);        // update Long term memory
-              GatherAndSetAllSentenceData();                // pull all data into c_sentence and c_words
-                                                            //  from memory and language helper
-              FindAndSetGistOfSentence();                   // extract gist of sentence
+              Parse(strData);                                    // c_Sentence parse this data
+              SaveSentenceInLongTermMemory(strData);             // update Long term memory
+              GatherAndSetAllSentenceData();                     // pull all data into c_sentence and c_words
+                                                                 //  from memory and language helper
+              //NP = PatternReview(GetFromSentencePattern(),CL);   // try to set more data
+              //SetInSentencePattern(NP);                          // put new pattern in sentence
+              //ReVerseBuildPattern();                             // push pattern data to words
+              //FindAndSetGistOfSentence();                        // extract gist of sentence
               DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,tmpInputData);
-              DecipherCurrentSentence(strData);             // Work with what is known at this point
-              RebuildPattern();                             // Updated corrected pattern
-              ReVerseBuildPattern();                        // push pattern data to word type
-              //TODO: word data and/or pattern data is not being updated after the previous call
-              LinkRelatedWords();                           // link related words together in word class
-              SaveAllSentenceWordDataToMemory();            // push sentence and word data to memory cells
-              SaveCurrentSentenceInMap();                   // push sentence class to map
+              DecipherCurrentSentence(strData);                  // Work with what is known at this point
+              RebuildPattern();                                  // Updated corrected pattern
+              ReVerseBuildPattern();                             // push pattern data to word type
+              LinkRelatedWords();                                // link related words together in word class
+              SaveAllSentenceWordDataToMemory();                 // push sentence and word data to memory cells
+              SaveCurrentSentenceInMap();                        // push sentence class to map
               SavePreAndPostPatternConstruction(GetFromSentencePreProcessedPattern(),GetFromSentencePattern());
 
             }
@@ -265,6 +269,7 @@ class c_Brain : public c_Cerebellum
                             }
                             cout << "Cell Secondary Word Type  :" << GetMemoryCellcharSecondaryWordType(strWorkingWord,Result) << endl;
                             cout << "Cell Alternate Word Type  :" << GetMemoryCellcharAlternateWordType(strWorkingWord,Result) << endl;
+                            cout << "Cell Data Tense           :" << GetMemoryCellcharWordTense(strWorkingWord,Result) << endl;
                             cout << "Cell Gender               :" << GetMemoryCellcharGenderClass(strWorkingWord,Result) << endl;
                             cout << "Cell Primary Usage        :" << GetMemoryCellcharPurpose(strWorkingWord,Result) << endl;
                             cout << "Cell Data is Set          :" << boolalpha << GetMemoryCellIsSet(strWorkingWord,Result) << endl;
@@ -297,8 +302,8 @@ class c_Brain : public c_Cerebellum
 
             case 21244631:   // map summary
                 {
-                    int NounCount,VerbCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,WordCount,UnknownCount;
-                    WordCount = GetRightLobeCellMapSummary(VerbCount,NounCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,UnknownCount);
+                    int NounCount,VerbCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,WordCount,UnknownCount,KnownCount;
+                    WordCount = GetRightLobeCellMapSummary(VerbCount,NounCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,UnknownCount,KnownCount);
                     cout << "Total Words in memory cells:" << WordCount <<  "  Total in Left Lobes:" << GetLeftLobeCellMapCount() << endl;
                     cout << " Nouns        :" << NounCount << endl;
                     cout << " Verbs        :" << VerbCount << endl;
@@ -307,6 +312,8 @@ class c_Brain : public c_Cerebellum
                     cout << " Pronouns     :" << PronounCount << endl;
                     cout << " Proper Nouns :" << PropernounCount << endl;
                     cout << " Unknown Words:" << UnknownCount << endl;
+                    cout << " Known Words  :" << KnownCount << endl;
+                    cout << " Memory Ratio :" << 100 - (float(KnownCount)/float(UnknownCount)) << endl;
                     Control = 2;
                     break;
                 }
