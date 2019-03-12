@@ -18,6 +18,8 @@
        Contributors provide an express grant of patent rights.
 
      see - https://github.com/Daniel061/Sophie6.1/blob/master/LICENSE
+
+     This is the ENGLISH version os language helper.
 */
 
 extern bool Verbose;
@@ -26,7 +28,7 @@ extern bool StoryMode;
 
 using namespace std;
 
-/*    Language Helper Class
+/**    Language Helper Class
 
       This class is responsible for the first setting  of word types
          (based on a small set of standards, finalizing word type setting is done elsewhere)
@@ -107,7 +109,7 @@ class c_Language : public c_LongTermMemory
    */
 
 ///*************CHANGE PATTERN STORAGE TO STRING STRING - no tokens
-     GetMemoryCellRawData(CorrectedPattern, Result, 'l', false);
+     GetMemoryCellRawData(CorrectedPattern, Result, 'l', false);  //left brain storage
      if(Result == true){  //seen this pattern before
             CorrectedPattern     = GetMemoryCellpResolvedPattern(CorrectedPattern,Result,'l',false);
             VerifyPattern        = true;
@@ -218,30 +220,33 @@ class c_Language : public c_LongTermMemory
 
            char tmpWordType = 'u';
 
-           string ProNounsInward =      " you your yours ";
-           string ProNounsOther =       " they them he him his she her it we ";
-           string ProNounsOutward =     " me mine my I i ";
-           string Determiners =         " the a an each every certain this that these those any all each some few either little many much ";
-           string Questions =           " what where how when who ";
-           string Verbs =               " go went can will be have do say get make go know take is see come fell ran think look want give use find tell ask work seem feel try leave call am been ";
-           string PastTenseVerbs =      " came went gone ";
-           string PluralVerbs =         " are ";
+           string ProNounsInward      = " you your yours ";
+           string ProNounsOther       = " they them he him his she her it we ";
+           string ProNounsOutward     = " me mine my I i ";
+           string Determiners         = " the a an each every certain this that these those any all each some few either little many much ";
+           string Questions           = " what where how when who ";
+           string Verbs               = " go went can will be have do say get make go know take is see come fell ran think look want give use find tell ask work seem feel try leave call am been ";
+           string PastTenseVerbs      = " came went gone ";
+           string PluralVerbs         = " are ";
            string SubjectReplacements = " it that this its ";
-           string Adverbs =             " very again ";
-           string Directives =          " compare same about ";
-           string JoiningWords =        " and ";
-           string AssociativeWord =     " name name's ";
-           string PluralPronoun =       " both ";
-           string ThrowAwayWords =      " of also ";
-           string GenderIndicator =     " boy male man men girl female woman women ";
-           string MaleGenderClass =     " boy male man men ";
-           string FemaleGenderClass =   " girl female woman women ";
-           string GenderDeterminer =    " gender ";
-           string GreetingsWord =       " hello hi ";
-           string ConjunctionWords =    " or either ";
-           string PrepositionWords =    " in into after to on with within of at until over across among throughout during towards upon across ";
-           string SingularWord  =       "";
-           string UCWord        =       GetswWords(LocationInSentence);
+           string Adverbs             = " very again ";
+           string Directives          = " compare same about ";
+           string JoiningWords        = " and ";
+           string AssociativeWord     = " name name's ";
+           string PluralPronoun       = " both ";
+           string ThrowAwayWords      = " of also ";
+           string GenderIndicator     = " boy male man men girl female woman women ";
+           string MaleGenderClass     = " boy male man men ";
+           string FemaleGenderClass   = " girl female woman women ";
+           string GenderDeterminer    = " gender ";
+           string GreetingsWord       = " hello hi ";
+           string ConjunctionWords    = " or either ";
+           string PrepositionWords    = " in into after to on with within of at until over across among throughout during towards upon across ";
+           string VerbTenseCombos     = " throw,threw  break,broke run,ran ";
+           string Vowels              = "aeiou";
+           string SingularWord        = "";
+           string VowelPattern        = "";  //for creation
+           string UCWord              = GetswWords(LocationInSentence);
 
 
            int  isPastTenseVerb     = -1;
@@ -268,7 +273,6 @@ class c_Language : public c_LongTermMemory
            int  isGenderDeterminer  = -1;
            int  QuoteMarker         = -1;
            int  PatternMarker       = -1;
-           int  ActionMarker        = -1;
            bool RuleTesting         = true;
            bool IsPlural            = false;
            bool Result              = false;
@@ -283,7 +287,6 @@ class c_Language : public c_LongTermMemory
               tmpWord = " " + tmpWord + " ";
 
                 isPastTenseVerb     = PastTenseVerbs.find(tmpWord);
-                ActionMarker        = tmpWord.find("ing");
                 isPreposition       = PrepositionWords.find(tmpWord);
                 isConjunction       = ConjunctionWords.find(tmpWord);
                 isPluralVerb        = PluralVerbs.find(tmpWord);
@@ -369,10 +372,6 @@ class c_Language : public c_LongTermMemory
 
                   if((UCWord[0] >='A') && (UCWord[0] <='Z') &&(tmpWordType == 'u') ) {
                         tmpWordType = 'P';}
-
-
-                  if( (ActionMarker >=0) && (tmpWordType == 'u') ) {
-                         tmpWordType = 'v';}
 
 
                   /// **TODO**  Check for plural verbs, i.e. are->is
@@ -524,6 +523,96 @@ class c_Language : public c_LongTermMemory
                   if(!IsPlural){
                       SetswPluralWordFlag(LocationInSentence,'s');  //set as singular
                   }
+
+//*******************GRAMMER RULE TESTING*****************************************************
+
+                  //Rule testing for past tense verbs
+                  // ends in 'ed
+                  // is not already set by previous operations, prevents proper nouns changing
+                  // longer than three letters
+                  if( (tmpWordType == 'u') && (OrigWord.size()>3)){
+                    if(OrigWord.substr(OrigWord.size()-3,2) == "ed" ){
+                        tmpWordType = 'v';
+                        SetswWordTense(LocationInSentence,'p');
+                        //TODO: Finish extraction
+                    }
+                  }
+
+
+                  //Rule testing for present tense verbs
+                  // ends in 'ing
+                  // is not already set by previous operations, prevents proper nouns changing
+                  // longer than five letters
+                  if( (tmpWordType == 'u') && (OrigWord.size()>=5)){
+                    if(OrigWord.substr(tmpWord.size()-4,3) == "ing" ){
+                        tmpWordType = 'v';
+                        SetswWordTense(LocationInSentence,'c');
+                        //extract root verb, i.e. [coming] root come is verb
+                        //TODO: Finish extraction
+                    }
+                  }
+
+ //TODO: Create word vowel pattern and compare, also store this pattern in word and memory cell class, ultimately files
+ //      Create present tense form storage i.e. remembered - past tense verb / present tense form is remember
+
+                  //Rule testing for adverbs
+                  // ends in 'ly
+                  // is not already set by previous operations, prevents proper nouns changing
+                  // longer than five letters
+                  if( (tmpWordType == 'u') && (OrigWord.size()>=4)){
+                    if(OrigWord.substr(tmpWord.size()-3,2) == "ly" ){
+                        tmpWordType = 'A';
+                        SetswWordTense(LocationInSentence,'c');
+                        //extract root verb, i.e. quick from quickly
+                        // -exceptions:[tepidly] root tepid is adjective
+                        //             [extendedly] subroot [extended] root extend is verb
+                        //TODO: Finish extraction
+                    }
+                  }
+
+
+
+
+
+                  //create vowel pattern and store it in sw_VowelPattern
+                  VowelPattern = "";
+                  int VowelMarker = -1;
+                  int Ymarker     = -1;
+                  int Cmarker     = -1;
+                  for(int x = 0; x < int(OrigWord.size()); x++){
+                    VowelMarker = Vowels.find(OrigWord[x]);
+                    if(VowelMarker >=0)
+                        VowelPattern += "V";
+                    else
+                        VowelPattern += "C";
+                  }
+                  //rule sometimes "y" is a vowel
+                  //  1) The word has no other vowel: gym, my.
+                  //  2) The letter is at the end of a word or syllable: candy, deny, bicycle, acrylic.
+                  //  3) The letter is in the middle of a syllable: system, borborygmus.
+                  //  4) Typically, the letter “y” is a consonant when it is at the beginning of a word, e.g., yes, you, yard and young.
+                  //  5) Ending y is not a vowel when preceded by a vowel
+                  Ymarker = OrigWord.find("y");
+                  if(Ymarker >= 0){
+                    if(Ymarker == int(OrigWord.size())-1){ //2) y at end of word check
+                        if(VowelPattern[Ymarker-1]== 'C'){ //5) ending y not preceded by vowel
+                           VowelPattern[Ymarker] = 'V';}}
+
+                  Cmarker = VowelPattern.find("V");
+                  if(!(Cmarker >=0)){                      //1) no other vowel in word
+                    VowelPattern[Ymarker] = 'V';}
+
+                  if(VowelPattern[Ymarker-1]== 'C'){       //3) y not preceded by vowel
+                     VowelPattern[Ymarker] = 'V';}
+
+                  if(Ymarker == 0){                        //4) beginning y is a consonant
+                     VowelPattern[Ymarker] == 'C';}
+
+
+
+                  }
+
+                  SetswVowelPattern(LocationInSentence,VowelPattern);
 
             if(Verbose)
                 cout << "tmpWord " << tmpWord <<" type:" << tmpWordType << endl;

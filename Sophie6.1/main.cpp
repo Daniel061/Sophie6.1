@@ -24,7 +24,7 @@
 
 using namespace std;
 c_Brain Brain;
-string Version       = "6.1d.02d.EN.010.001";
+string Version       = "6.1d.01s.EN.010.001";
 string ReleaseMode   = "debug";
 bool Verbose         = false;
 bool StoryMode       = false;

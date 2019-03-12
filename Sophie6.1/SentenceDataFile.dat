@@ -1,15 +1,15 @@
-VERSION 6.1d.02d.EN.010.001
-Original string           ,And Jill came tumbling after.
-Gist of sentence          ,tumbling
-subGist of sentence       ,after
-Supportive phrase         ,And Jill came 
-Word Count                ,5
-Subject Location          ,1
+VERSION 6.1d.01s.EN.010.001
+Original string           ,Elli Berwald was a normal ten year old Jewish girl, except for two things.
+Gist of sentence          ,
+subGist of sentence       ,
+Supportive phrase         ,
+Word Count                ,14
+Subject Location          ,0
 Indirect object location  ,-1
 Direct Object Location    ,-1
-Preposition Position      ,4
-Final pattern             ,jPvvI
-First pattern             ,jPvvI
+Preposition Position      ,-1
+Final pattern             ,PPuduuuuPuuuuu
+First pattern             ,PPuduuuuPuuuuu
 bool Has plural pronoun   ,0
 bool Has punctuation      ,1
 Punctuation character     ,.
@@ -17,71 +17,35 @@ bool Is question          ,0
 bool Has contraction      ,0
 bool Has greeting word    ,0
 bool Has gender reference ,0
-bool Has been understood  ,1
+bool Has been understood  ,0
 bool Has dual subjects    ,0
 bool Has Pronoun reference,0
 Second subject string     ,
 Second subject location   ,-1
 Sentence Polarity         ,p
-Sentence Tense            ,p
+Sentence Tense            ,c
 Adverb location           ,-1
 Noun count                ,1
-Verb location             ,3
+Verb location             ,-1
 Adjective location        ,-1
 Name pointer              ,-1
 bool Has Gender determiner,0
 Conjunction location      ,-1
 Sentence direction        ,-1
 Sentence polarity         ,p
-Days since 2019           ,68
-Understanding level       ,100
-Original string           ,Jack and Jill went up the hill to fetch a pail of water.
-Gist of sentence          ,went up the hill to fetch a pail
-subGist of sentence       ,of water
-Supportive phrase         ,Jack and Jill 
-Word Count                ,13
-Subject Location          ,0
-Indirect object location  ,6
-Direct Object Location    ,-1
-Preposition Position      ,11
-Final pattern             ,PjPvudnIudnIa
-First pattern             ,PjPvuduIuduIu
-bool Has plural pronoun   ,0
-bool Has punctuation      ,1
-Punctuation character     ,.
-bool Is question          ,0
-bool Has contraction      ,0
-bool Has greeting word    ,0
-bool Has gender reference ,0
-bool Has been understood  ,1
-bool Has dual subjects    ,1
-bool Has Pronoun reference,0
-Second subject string     ,Jill
-Second subject location   ,2
-Sentence Polarity         ,p
-Sentence Tense            ,p
-Adverb location           ,-1
-Noun count                ,2
-Verb location             ,3
-Adjective location        ,-1
-Name pointer              ,-1
-bool Has Gender determiner,0
-Conjunction location      ,-1
-Sentence direction        ,-1
-Sentence polarity         ,p
-Days since 2019           ,68
-Understanding level       ,50
-Original string           ,Jack fell down and broke his crown.
-Gist of sentence          ,fell down
-subGist of sentence       ,broke his crown 
-Supportive phrase         ,Jack 
-Word Count                ,7
-Subject Location          ,0
-Indirect object location  ,6
+Days since 2019           ,70
+Understanding level       ,25
+Original string           ,Elli just prayed that every scream she heard was not her mother’s.
+Gist of sentence          ,
+subGist of sentence       ,
+Supportive phrase         ,
+Word Count                ,12
+Subject Location          ,3
+Indirect object location  ,-1
 Direct Object Location    ,-1
 Preposition Position      ,-1
-Final pattern             ,Pvujupn
-First pattern             ,Pvujupu
+Final pattern             ,Puurdupuuupu
+First pattern             ,Puurdupuuupu
 bool Has plural pronoun   ,0
 bool Has punctuation      ,1
 Punctuation character     ,.
@@ -98,26 +62,170 @@ Sentence Polarity         ,p
 Sentence Tense            ,c
 Adverb location           ,-1
 Noun count                ,1
-Verb location             ,1
+Verb location             ,-1
 Adjective location        ,-1
 Name pointer              ,-1
 bool Has Gender determiner,0
 Conjunction location      ,-1
 Sentence direction        ,-1
 Sentence polarity         ,p
-Days since 2019           ,68
-Understanding level       ,50
-Original string           ,The boy threw the ball over the fence.
-Gist of sentence          ,threw the ball
-subGist of sentence       ,over the fence
-Supportive phrase         ,The boy 
-Word Count                ,8
-Subject Location          ,1
-Indirect object location  ,7
+Days since 2019           ,70
+Understanding level       ,25
+Original string           ,Her address was Auschwitz, the camp.
+Gist of sentence          ,
+subGist of sentence       ,
+Supportive phrase         ,
+Word Count                ,6
+Subject Location          ,3
+Indirect object location  ,1
 Direct Object Location    ,-1
-Preposition Position      ,5
-Final pattern             ,dGvdnIdn
-First pattern             ,dGuduIdu
+Preposition Position      ,-1
+Final pattern             ,pnuPdu
+First pattern             ,puuPdu
+bool Has plural pronoun   ,0
+bool Has punctuation      ,1
+Punctuation character     ,.
+bool Is question          ,0
+bool Has contraction      ,0
+bool Has greeting word    ,0
+bool Has gender reference ,0
+bool Has been understood  ,0
+bool Has dual subjects    ,0
+bool Has Pronoun reference,1
+Second subject string     ,
+Second subject location   ,-1
+Sentence Polarity         ,p
+Sentence Tense            ,c
+Adverb location           ,-1
+Noun count                ,1
+Verb location             ,-1
+Adjective location        ,-1
+Name pointer              ,-1
+bool Has Gender determiner,0
+Conjunction location      ,-1
+Sentence direction        ,-1
+Sentence polarity         ,p
+Days since 2019           ,70
+Understanding level       ,50
+Original string           ,Her ankle was still pretty messed up from it, as they had put screws and other things through it.
+Gist of sentence          ,
+subGist of sentence       ,
+Supportive phrase         ,
+Word Count                ,19
+Subject Location          ,0
+Indirect object location  ,1
+Direct Object Location    ,-1
+Preposition Position      ,-1
+Final pattern             ,pnuuuuuuuupuuujuuur
+First pattern             ,puuuuuuuuupuuujuuur
+bool Has plural pronoun   ,0
+bool Has punctuation      ,1
+Punctuation character     ,.
+bool Is question          ,0
+bool Has contraction      ,0
+bool Has greeting word    ,0
+bool Has gender reference ,0
+bool Has been understood  ,1
+bool Has dual subjects    ,0
+bool Has Pronoun reference,1
+Second subject string     ,
+Second subject location   ,-1
+Sentence Polarity         ,p
+Sentence Tense            ,c
+Adverb location           ,-1
+Noun count                ,1
+Verb location             ,-1
+Adjective location        ,-1
+Name pointer              ,-1
+bool Has Gender determiner,0
+Conjunction location      ,-1
+Sentence direction        ,-1
+Sentence polarity         ,p
+Days since 2019           ,70
+Understanding level       ,10
+Original string           ,Her best friend was a German outside of the concentration camp, which brought her to the second thing.
+Gist of sentence          ,
+subGist of sentence       ,
+Supportive phrase         ,
+Word Count                ,18
+Subject Location          ,5
+Indirect object location  ,1
+Direct Object Location    ,-1
+Preposition Position      ,14
+Final pattern             ,pnuudPuIdnuuupIdnu
+First pattern             ,puuudPuIduuuupIduu
+bool Has plural pronoun   ,0
+bool Has punctuation      ,1
+Punctuation character     ,.
+bool Is question          ,0
+bool Has contraction      ,0
+bool Has greeting word    ,0
+bool Has gender reference ,0
+bool Has been understood  ,0
+bool Has dual subjects    ,0
+bool Has Pronoun reference,1
+Second subject string     ,
+Second subject location   ,-1
+Sentence Polarity         ,p
+Sentence Tense            ,c
+Adverb location           ,-1
+Noun count                ,2
+Verb location             ,-1
+Adjective location        ,-1
+Name pointer              ,-1
+bool Has Gender determiner,0
+Conjunction location      ,-1
+Sentence direction        ,-1
+Sentence polarity         ,p
+Days since 2019           ,70
+Understanding level       ,50
+Original string           ,Her mother, pregnant with her third child, had been led away by a doctor or something like that.
+Gist of sentence          ,been led away by a doctor or something like that 
+subGist of sentence       ,with her third child, had
+Supportive phrase         ,Her mother, pregnant with her third child, had 
+Word Count                ,18
+Subject Location          ,0
+Indirect object location  ,1
+Direct Object Location    ,-1
+Preposition Position      ,3
+Final pattern             ,pnuIpuuuvuuuducuur
+First pattern             ,puuIpuuuvuuuducuur
+bool Has plural pronoun   ,0
+bool Has punctuation      ,1
+Punctuation character     ,.
+bool Is question          ,0
+bool Has contraction      ,0
+bool Has greeting word    ,0
+bool Has gender reference ,0
+bool Has been understood  ,1
+bool Has dual subjects    ,0
+bool Has Pronoun reference,1
+Second subject string     ,
+Second subject location   ,-1
+Sentence Polarity         ,p
+Sentence Tense            ,c
+Adverb location           ,-1
+Noun count                ,1
+Verb location             ,8
+Adjective location        ,-1
+Name pointer              ,-1
+bool Has Gender determiner,0
+Conjunction location      ,14
+Sentence direction        ,-1
+Sentence polarity         ,p
+Days since 2019           ,70
+Understanding level       ,25
+Original string           ,She didn’t know why they kept her, probably because they thought she was a boy.
+Gist of sentence          ,know why they kept her, probably because they thought she was a boy 
+subGist of sentence       ,
+Supportive phrase         ,She didn’t 
+Word Count                ,15
+Subject Location          ,0
+Indirect object location  ,-1
+Direct Object Location    ,-1
+Preposition Position      ,-1
+Final pattern             ,puvupuuuupupudG
+First pattern             ,puvupuuuupupudG
 bool Has plural pronoun   ,0
 bool Has punctuation      ,1
 Punctuation character     ,.
@@ -125,165 +233,165 @@ bool Is question          ,0
 bool Has contraction      ,0
 bool Has greeting word    ,0
 bool Has gender reference ,1
+bool Has been understood  ,1
+bool Has dual subjects    ,0
+bool Has Pronoun reference,1
+Second subject string     ,
+Second subject location   ,-1
+Sentence Polarity         ,p
+Sentence Tense            ,c
+Adverb location           ,-1
+Noun count                ,1
+Verb location             ,2
+Adjective location        ,-1
+Name pointer              ,-1
+bool Has Gender determiner,0
+Conjunction location      ,-1
+Sentence direction        ,-1
+Sentence polarity         ,p
+Days since 2019           ,70
+Understanding level       ,25
+Original string           ,She had heard about the terrible experiments they did on people, and she had a few preformed on her.
+Gist of sentence          ,
+subGist of sentence       ,
+Supportive phrase         ,
+Word Count                ,19
+Subject Location          ,0
+Indirect object location  ,16
+Direct Object Location    ,-1
+Preposition Position      ,17
+Final pattern             ,puuXduupuIpjpuddnIp
+First pattern             ,puuXduupuIujpudduIp
+bool Has plural pronoun   ,0
+bool Has punctuation      ,1
+Punctuation character     ,.
+bool Is question          ,0
+bool Has contraction      ,0
+bool Has greeting word    ,0
+bool Has gender reference ,0
+bool Has been understood  ,1
+bool Has dual subjects    ,0
+bool Has Pronoun reference,1
+Second subject string     ,
+Second subject location   ,-1
+Sentence Polarity         ,p
+Sentence Tense            ,c
+Adverb location           ,-1
+Noun count                ,1
+Verb location             ,-1
+Adjective location        ,-1
+Name pointer              ,-1
+bool Has Gender determiner,0
+Conjunction location      ,-1
+Sentence direction        ,-1
+Sentence polarity         ,p
+Days since 2019           ,70
+Understanding level       ,50
+Original string           ,She remembered being brought there, having her hair shaved and everything.
+Gist of sentence          ,
+subGist of sentence       ,
+Supportive phrase         ,
+Word Count                ,11
+Subject Location          ,0
+Indirect object location  ,-1
+Direct Object Location    ,-1
+Preposition Position      ,-1
+Final pattern             ,puuuuupuuju
+First pattern             ,puuuuupuuju
+bool Has plural pronoun   ,0
+bool Has punctuation      ,1
+Punctuation character     ,.
+bool Is question          ,0
+bool Has contraction      ,0
+bool Has greeting word    ,0
+bool Has gender reference ,0
+bool Has been understood  ,1
+bool Has dual subjects    ,0
+bool Has Pronoun reference,1
+Second subject string     ,
+Second subject location   ,-1
+Sentence Polarity         ,p
+Sentence Tense            ,c
+Adverb location           ,-1
+Noun count                ,1
+Verb location             ,-1
+Adjective location        ,-1
+Name pointer              ,-1
+bool Has Gender determiner,0
+Conjunction location      ,-1
+Sentence direction        ,-1
+Sentence polarity         ,p
+Days since 2019           ,70
+Understanding level       ,25
+Original string           ,She was limping as she walked to the fence to see her friend, Karolin.
+Gist of sentence          ,see her friend, Karolin 
+subGist of sentence       ,to
+Supportive phrase         ,She was limping as she walked to the fence to 
+Word Count                ,14
+Subject Location          ,13
+Indirect object location  ,8
+Direct Object Location    ,-1
+Preposition Position      ,9
+Final pattern             ,puuupuIdnIvpuP
+First pattern             ,puuupuIduIvpuP
+bool Has plural pronoun   ,0
+bool Has punctuation      ,1
+Punctuation character     ,.
+bool Is question          ,0
+bool Has contraction      ,0
+bool Has greeting word    ,0
+bool Has gender reference ,0
 bool Has been understood  ,0
 bool Has dual subjects    ,0
-bool Has Pronoun reference,0
-Second subject string     ,
-Second subject location   ,-1
-Sentence Polarity         ,p
-Sentence Tense            ,c
-Adverb location           ,-1
-Noun count                ,2
-Verb location             ,2
-Adjective location        ,-1
-Name pointer              ,-1
-bool Has Gender determiner,0
-Conjunction location      ,-1
-Sentence direction        ,-1
-Sentence polarity         ,p
-Days since 2019           ,68
-Understanding level       ,75
-Original string           ,black is a color
-Gist of sentence          ,is a color 
-subGist of sentence       ,
-Supportive phrase         ,black 
-Word Count                ,4
-Subject Location          ,3
-Indirect object location  ,-1
-Direct Object Location    ,-1
-Preposition Position      ,-1
-Final pattern             ,avdn
-First pattern             ,avdu
-bool Has plural pronoun   ,0
-bool Has punctuation      ,0
-Punctuation character     ,x
-bool Is question          ,0
-bool Has contraction      ,0
-bool Has greeting word    ,0
-bool Has gender reference ,0
-bool Has been understood  ,1
-bool Has dual subjects    ,0
-bool Has Pronoun reference,0
+bool Has Pronoun reference,1
 Second subject string     ,
 Second subject location   ,-1
 Sentence Polarity         ,p
 Sentence Tense            ,c
 Adverb location           ,-1
 Noun count                ,1
-Verb location             ,1
-Adjective location        ,0
-Name pointer              ,-1
-bool Has Gender determiner,0
-Conjunction location      ,-1
-Sentence direction        ,-1
-Sentence polarity         ,p
-Days since 2019           ,68
-Understanding level       ,100
-Original string           ,the dog is a pet
-Gist of sentence          ,is a pet 
-subGist of sentence       ,
-Supportive phrase         ,the dog 
-Word Count                ,5
-Subject Location          ,1
-Indirect object location  ,4
-Direct Object Location    ,-1
-Preposition Position      ,-1
-Final pattern             ,dnvdn
-First pattern             ,dnvdu
-bool Has plural pronoun   ,0
-bool Has punctuation      ,0
-Punctuation character     ,x
-bool Is question          ,0
-bool Has contraction      ,0
-bool Has greeting word    ,0
-bool Has gender reference ,0
-bool Has been understood  ,1
-bool Has dual subjects    ,0
-bool Has Pronoun reference,0
-Second subject string     ,
-Second subject location   ,-1
-Sentence Polarity         ,p
-Sentence Tense            ,c
-Adverb location           ,-1
-Noun count                ,2
-Verb location             ,2
+Verb location             ,10
 Adjective location        ,-1
 Name pointer              ,-1
 bool Has Gender determiner,0
 Conjunction location      ,-1
 Sentence direction        ,-1
 Sentence polarity         ,p
-Days since 2019           ,68
-Understanding level       ,100
-Original string           ,the dog is an animal
-Gist of sentence          ,is an animal 
+Days since 2019           ,70
+Understanding level       ,50
+Original string           ,The familiar slats in the fence greeted her and she knew where she was going.  
+Gist of sentence          ,she was going 
 subGist of sentence       ,
-Supportive phrase         ,the dog 
-Word Count                ,5
-Subject Location          ,1
-Indirect object location  ,4
+Supportive phrase         ,The familiar slats in the fence greeted her and she knew where 
+Word Count                ,15
+Subject Location          ,7
+Indirect object location  ,5
 Direct Object Location    ,-1
-Preposition Position      ,-1
-Final pattern             ,dnvdn
-First pattern             ,dnvdu
+Preposition Position      ,3
+Final pattern             ,duuIdnupjpuqpuv
+First pattern             ,duuIdnupjpuqpuu
 bool Has plural pronoun   ,0
-bool Has punctuation      ,0
-Punctuation character     ,x
-bool Is question          ,0
+bool Has punctuation      ,1
+Punctuation character     ,.
+bool Is question          ,1
 bool Has contraction      ,0
 bool Has greeting word    ,0
 bool Has gender reference ,0
 bool Has been understood  ,1
-bool Has dual subjects    ,0
-bool Has Pronoun reference,0
-Second subject string     ,
-Second subject location   ,-1
-Sentence Polarity         ,p
-Sentence Tense            ,c
-Adverb location           ,-1
-Noun count                ,2
-Verb location             ,2
-Adjective location        ,-1
-Name pointer              ,-1
-bool Has Gender determiner,0
-Conjunction location      ,-1
-Sentence direction        ,-1
-Sentence polarity         ,p
-Days since 2019           ,68
-Understanding level       ,75
-Original string           ,the dog is black
-Gist of sentence          ,is black 
-subGist of sentence       ,
-Supportive phrase         ,the dog 
-Word Count                ,4
-Subject Location          ,1
-Indirect object location  ,-1
-Direct Object Location    ,-1
-Preposition Position      ,-1
-Final pattern             ,dnva
-First pattern             ,duvu
-bool Has plural pronoun   ,0
-bool Has punctuation      ,0
-Punctuation character     ,x
-bool Is question          ,0
-bool Has contraction      ,0
-bool Has greeting word    ,0
-bool Has gender reference ,0
-bool Has been understood  ,1
-bool Has dual subjects    ,0
-bool Has Pronoun reference,0
-Second subject string     ,
-Second subject location   ,-1
+bool Has dual subjects    ,1
+bool Has Pronoun reference,1
+Second subject string     ,she
+Second subject location   ,9
 Sentence Polarity         ,p
 Sentence Tense            ,c
 Adverb location           ,-1
 Noun count                ,1
-Verb location             ,2
-Adjective location        ,3
+Verb location             ,14
+Adjective location        ,-1
 Name pointer              ,-1
 bool Has Gender determiner,0
 Conjunction location      ,-1
 Sentence direction        ,-1
 Sentence polarity         ,p
-Days since 2019           ,68
-Understanding level       ,75
+Days since 2019           ,70
+Understanding level       ,50

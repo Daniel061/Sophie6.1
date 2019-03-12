@@ -313,7 +313,7 @@ class c_Brain : public c_Cerebellum
                     cout << " Proper Nouns :" << PropernounCount << endl;
                     cout << " Unknown Words:" << UnknownCount << endl;
                     cout << " Known Words  :" << KnownCount << endl;
-                    cout << " Memory Ratio :" << 100 - (float(KnownCount)/float(UnknownCount)) << endl;
+                    cout << " Memory Ratio :" << (float(KnownCount)/float(WordCount)) * 100 << endl;
                     Control = 2;
                     break;
                 }

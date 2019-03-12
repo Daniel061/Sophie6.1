@@ -76,6 +76,7 @@ class c_LongTermMemory : public c_SubjectStack
                 CopySentence.SetswSingularForm(x,GetswSingularForm(x));                           //20 singular form
                 CopySentence.SetswPossessiveRoot(x,GetswPossessiveRoot(x));                       //21 possessive root
                 CopySentence.SetswPossessiveRootType(x,GetswPossessiveRootType(x));               //22 possessive root type
+                CopySentence.SetswVowelPattern(x,GetswVowelPattern(x));                           //23 vowel pattern
                 //                                                                                //lacking mini def but not a problem, stored in memory cell file
                 }
               CopySentence.SetInSentenceWordCount(GetFromSentenceWordCount());                      // 1)  word count
@@ -311,25 +312,26 @@ class c_LongTermMemory : public c_SubjectStack
                 if(Result){
                     SetMemoryCellpDaysOld(GetswWordsLC(x),GetDaysSinceDate());}                              /// 18  pDaysOld
                 SetMemoryCellpPolarity(GetswWordsLC(x),GetswPolarity(x));                                    /// 19  polarity
+                SetMemoryCellpVowelPattern(GetswWordsLC(x),GetswVowelPattern(x));                            /// 20  Vowel Pattern
 
                 if (Verbose)
                     cout << "Adjective count for " << GetswWords(x) << " is " << GetswAdjectiveFromWordCount(x) << endl;
-                for(int y = 0; y < GetswAdjectiveFromWordCount(x); y++){                                     /// 20  adjective list
+                for(int y = 0; y < GetswAdjectiveFromWordCount(x); y++){                                     /// 21  adjective list
 
                     SetMemoryCellAdjectiveInList(GetswWordsLC(x),GetswAdjectiveFromWord(x,y));}
 
-                for(int y = 0; y < GetswAdverbFromWordCount(x); y++){                                        /// 21  adverb list
+                for(int y = 0; y < GetswAdverbFromWordCount(x); y++){                                        /// 22  adverb list
                     SetMemoryCellAdverbInList(GetswWordsLC(x),GetswAdverbFromWord(x,y));}
                 if (Verbose)
                     cout << "Noun count for " << GetswWords(x) << " is " << GetswNounFromWordCount(x) << endl;
-                for(int y = 0; y < GetswNounFromWordCount(x); y++){                                          /// 22  noun list
+                for(int y = 0; y < GetswNounFromWordCount(x); y++){                                          /// 23  noun list
                     SetMemoryCellNounInList(GetswWordsLC(x),GetswNounFromWord(x,y));}
 
-                for(int y = 0; y < GetswVerbFromWordCount(x); y++){                                          /// 23  verb list
+                for(int y = 0; y < GetswVerbFromWordCount(x); y++){                                          /// 24  verb list
                     SetMemoryCellVerbInList(GetswWordsLC(x),GetswVerbFromWord(x,y));}
 
 // TODO (Dan#1#): finish storing to memory cells the remaining lists
-                if(GetFromSentenceSubjectLocation()==x) SetMemoryCellSubjectUsageCounterUpOne(GetswWordsLC(x));/// 24 subject usage count
+                if(GetFromSentenceSubjectLocation()==x) SetMemoryCellSubjectUsageCounterUpOne(GetswWordsLC(x));/// 25 subject usage count
 
             }// end for word count loop x iterator
         }

@@ -34,20 +34,21 @@ class c_Word
           string  w_PluralRoot              = "";    // 6)  deconstructed plural to the root,cars = car
           string  w_SubWord                 = "";    // 7)  replacement word, usually from subject
           string  w_PossessiveRoot          = "";    // 8)  cat's  = cat
-          bool    w_isContraction           = false; // 9)  contraction flag
-          bool    w_isPlural                = false; // 10) plural flag
-          bool    w_SingularPossessive      = false; // 11) i.e. cat's
-          bool    w_PluralPossessive        = false; // 12) i.e. cats'
-          int     w_QuoteLocation           = -1;    // 13) location of quote if contraction
-          int     w_WordTokens              = -1;    // 14) depreciated
-          char    w_PossessiveRootType      = 'u';   // 15) usually a 'n' noun but not always
-          char    w_WordType                = 'u';   // 16) defines word type  u = unknown
-          char    w_GenderClass             = 'u';   // 17) defines gender     u = undefined
-          char    w_PluralWordFlag          = 'u';   // 18) s = singular p=plural u = undefined
-          char    w_SecondaryType           = 'u';   // 19) some words have more than 1 usage
-          char    w_AlternativeType         = 'u';   // 20) some words have more than 1 usage
-          char    w_WordTense               = 'u';   // 21) c - present p - past
-          char    w_Polarity                = 'p';   // 22) positive/negative
+          string  w_VowelPattern            = "";    // 9)  C - constant V - vowel
+          bool    w_isContraction           = false; // 10)  contraction flag
+          bool    w_isPlural                = false; // 11) plural flag
+          bool    w_SingularPossessive      = false; // 12) i.e. cat's
+          bool    w_PluralPossessive        = false; // 13) i.e. cats'
+          int     w_QuoteLocation           = -1;    // 14) location of quote if contraction
+          int     w_WordTokens              = -1;    // 15) depreciated
+          char    w_PossessiveRootType      = 'u';   // 16) usually a 'n' noun but not always
+          char    w_WordType                = 'u';   // 17) defines word type  u = unknown
+          char    w_GenderClass             = 'u';   // 18) defines gender     u = undefined
+          char    w_PluralWordFlag          = 'u';   // 19) s = singular p=plural u = undefined
+          char    w_SecondaryType           = 'u';   // 20) some words have more than 1 usage
+          char    w_AlternativeType         = 'u';   // 21) some words have more than 1 usage
+          char    w_WordTense               = 'u';   // 22) c - present p - past
+          char    w_Polarity                = 'p';   // 23) positive/negative
 //TODO: Store w_Polarity in files
 
 
@@ -62,6 +63,9 @@ class c_Word
 
 
     public:
+        string   Getw_VowelPattern(){return w_VowelPattern;}
+        void     Setw_VowelPattern(string newVal){w_VowelPattern = newVal;}
+
         char     Getw_Polarity(){return w_Polarity;}
         void     Setw_Polarity(char newVal){w_Polarity = newVal;}
 
@@ -195,24 +199,25 @@ class c_Word
           w_PluralRoot               = "";      // deconstructed plural , i.e. cars = car       5
           w_SubWord                  = "";      // replacement word,usually from subject        6
           w_PossessiveRoot           = "";      // cat's = cat                                  7
-          w_isContraction            = false;   // contraction flag                             8
-          w_isPlural                 = false;   // plural flag                                  9
-          w_QuoteLocation            = -1;      // location of quote if contraction/possessive  10
-          w_WordTokens               = -1;      // depreciated                                  11
-          w_WordType                 = 'u';     // defines word type  u = unknown               12
-          w_GenderClass              = 'u';     // defines gender     u = undefined             13
-          w_PluralWordFlag           = 'u';     // s = singular  p=plural u = undefined         14
-          w_SecondaryType            = 'u';     // some words have more than 1 usage            15
-          w_AlternativeType          = 'u';     // some words have more than 1 usage            16
-          w_WordTense                = 'u';     // c - present p - past                         17
-          w_PossessiveRootType       = 'u';     // usually a 'n' noun but not always            18
-          w_Polarity                 = 'p';     // positive / negative                          19
-          w_SingularForm             = "";      // i.e. cats = cat                              20
+          w_VowelPattern             = "";      // C - constant V - vowel                       8
+          w_isContraction            = false;   // contraction flag                             9
+          w_isPlural                 = false;   // plural flag                                  10
+          w_QuoteLocation            = -1;      // location of quote if contraction/possessive  11
+          w_WordTokens               = -1;      // depreciated                                  12
+          w_WordType                 = 'u';     // defines word type  u = unknown               13
+          w_GenderClass              = 'u';     // defines gender     u = undefined             14
+          w_PluralWordFlag           = 'u';     // s = singular  p=plural u = undefined         15
+          w_SecondaryType            = 'u';     // some words have more than 1 usage            16
+          w_AlternativeType          = 'u';     // some words have more than 1 usage            17
+          w_WordTense                = 'u';     // c - present p - past                         18
+          w_PossessiveRootType       = 'u';     // usually a 'n' noun but not always            19
+          w_Polarity                 = 'p';     // positive / negative                          20
+          w_SingularForm             = "";      // i.e. cats = cat                              21
 
-          w_MiniDefinition.clear();             // usually Gist of sentence if used as subject  21
-          w_Adjectives.clear();                 // adjectives used towards this word            22
-          w_Adverbs.clear();                    // adverbs used towards this word               23
-          w_RelatedNouns.clear();               // nouns related to this word                   24
+          w_MiniDefinition.clear();             // usually Gist of sentence if used as subject  22
+          w_Adjectives.clear();                 // adjectives used towards this word            23
+          w_Adverbs.clear();                    // adverbs used towards this word               24
+          w_RelatedNouns.clear();               // nouns related to this word                   25
         }
 
 

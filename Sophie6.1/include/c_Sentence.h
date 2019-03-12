@@ -317,6 +317,9 @@ class c_Sentence : public c_Personality
         void   SetswVerbToWord(int Location, string VerbToSet){WordMap[Location].Setw_Verb(VerbToSet);}
         string GetswVerbFromWord(int Location, int WhichVerb){return WordMap[Location].Getw_Verb(WhichVerb);}
         int    GetswVerbFromWordCount(int Location){return WordMap[Location].Getw_VerbCount();}
+
+        string GetswVowelPattern(int Location){return WordMap[Location].Getw_VowelPattern();}
+        void   SetswVowelPattern(int Location, string newPattern){WordMap[Location].Setw_VowelPattern(newPattern);}
         ///*******************END ALL WORD DATA FUNCTIONS*********************
 
 

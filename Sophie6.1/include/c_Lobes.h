@@ -125,6 +125,19 @@ class c_Lobes : public c_MemoryCell
                     CellMapIT->second.SetpDaysOld(DaysOld);}
                return Result;}
 
+
+        /// Sets pVowelPattern if strSearchBase exists,
+        ///  returns True if added, else false if updated,
+        ///  send new vowel pattern data in strData,
+        ///  send owner word in strSearchBase.
+        bool SetMemoryCellpVowelPattern(string strSearchBase, string newPattern){
+           bool Result   = false;
+           CellMapIT     = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                    CellMapIT->second.SetpVowelPattern(newPattern);}
+               return Result;}
+
+
         /// Sets pResolvedPattern if exists,
         ///  returns True if added, else false if updated,
         ///  send pResolvedPattern data in strData,
@@ -531,6 +544,19 @@ class c_Lobes : public c_MemoryCell
                     return CellMapIT->second.GetpTimesUsedAsSubject();}
                else
                     return 0;}
+
+
+        /// Gets pVowelPattern if strSearchBase exists, else returns "",
+        ///  Returns True in the address of &Result if exists
+        ///  Returns pVowelPattern
+        string GetMemoryCellpVowelPattern(string strSearchBase, bool &Result){
+           Result = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                    return CellMapIT->second.GetpVowelPattern();}
+               else
+                    return "";}
+
 
         /// Gets pDaysOld if strSearchBase exists, else return 0,
         ///  Returns True in the address of &Result if exists
@@ -1277,6 +1303,7 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Original string----------,"<< CellMapIT->second.GetpCellDataString() << Delim;
                     LearnedDataFile << "Index  , ["                << CellMapIT->first << "]" << Delim;
                     LearnedDataFile << "Lower Case string      ," << CellMapIT->second.GetpCellDataLC() << Delim;
+                    LearnedDataFile << "Vowel Pattern          ," << CellMapIT->second.GetpVowelPattern() << Delim;
                     LearnedDataFile << "Given name             ," << CellMapIT->second.GetpCellGivenName() << Delim;
                     LearnedDataFile << "Contraction 1st        ," << CellMapIT->second.GetpCellContractionLongFormFirst() << Delim;
                     LearnedDataFile << "Contraction 2nd        ," << CellMapIT->second.GetpCellContractionLongFormSecond() << Delim;
@@ -1375,6 +1402,9 @@ class c_Lobes : public c_MemoryCell
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellDataLC(strLineData);                            //set the lower case string data
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpVowelPattern(strLineData);                          //set the vowel pattern data
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellGivenName(strLineData);                         //set the given name string
