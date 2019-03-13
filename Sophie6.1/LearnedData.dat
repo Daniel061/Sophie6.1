@@ -1,4 +1,4 @@
-VERSION 6.1d.01s.EN.010.001, file version-Memory Cells
+VERSION 6.1d.01y.EN.010.002, file version-Memory Cells
 Original string----------,a
 Index  , [a]
 Lower Case string      ,a
@@ -25,7 +25,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -34,15 +34,15 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,about
-Index  , [about]
-Lower Case string      ,about
-Vowel Pattern          ,VCVVC
+Original string----------,after
+Index  , [after]
+Lower Case string      ,after
+Vowel Pattern          ,VCCVC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,X
+Word Type              ,I
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -60,7 +60,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -69,15 +69,15 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,address
-Index  , [address]
-Lower Case string      ,address
-Vowel Pattern          ,VCCCVCC
+Original string----------,an
+Index  , [an]
+Lower Case string      ,an
+Vowel Pattern          ,VC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,n
+Word Type              ,d
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -95,7 +95,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -103,9 +103,8 @@ Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,1
-Noun                     ,auschwitz,
-Original string----------,and
+Related Nouns                ,0
+Original string----------,And
 Index  , [and]
 Lower Case string      ,and
 Vowel Pattern          ,VCC
@@ -131,7 +130,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -140,10 +139,10 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,ankle
-Index  , [ankle]
-Lower Case string      ,ankle
-Vowel Pattern          ,VCCCV
+Original string----------,animal
+Index  , [animal]
+Lower Case string      ,animal
+Vowel Pattern          ,VCVCVC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
@@ -153,79 +152,9 @@ Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
-Gender class           ,f
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,as
-Index  , [as]
-Lower Case string      ,as
-Vowel Pattern          ,VC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
 Gender class           ,u
 Is root                ,0
 Is Locked(old is set)  ,1
-Is Singular            ,p
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,Auschwitz,
-Index  , [auschwitz,]
-Lower Case string      ,auschwitz,
-Vowel Pattern          ,VVCCCCVCCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,P
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,f
-Is root                ,0
-Is Locked(old is set)  ,1
 Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
@@ -236,8 +165,8 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,2
+Day stamp              ,71
+Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
 Number of Mini Defs          ,0
@@ -245,185 +174,10 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,1
-Noun                     ,address
-Original string----------,away
-Index  , [away]
-Lower Case string      ,away
-Vowel Pattern          ,VCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,because
-Index  , [because]
-Lower Case string      ,because
-Vowel Pattern          ,CVCVVCV
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,been
-Index  , [been]
-Lower Case string      ,been
-Vowel Pattern          ,CVVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,v
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,being
-Index  , [being]
-Lower Case string      ,being
-Vowel Pattern          ,CVVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,Berwald
-Index  , [berwald]
-Lower Case string      ,berwald
-Vowel Pattern          ,CVCCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,P
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,best
-Index  , [best]
-Lower Case string      ,best
+Noun                     ,dog
+Original string----------,ball
+Index  , [ball]
+Lower Case string      ,ball
 Vowel Pattern          ,CVCC
 Given name             ,
 Contraction 1st        ,
@@ -447,7 +201,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -455,8 +209,42 @@ Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,1
-Noun                     ,german
+Related Nouns                ,0
+Original string----------,black
+Index  , [black]
+Lower Case string      ,black
+Vowel Pattern          ,CCVCC
+Given name             ,
+Contraction 1st        ,
+Contraction 2nd        ,
+Cell purpose           ,w
+Word Type              ,a
+Word tense             ,u
+Polarity               ,p
+Secondary type         ,u
+Alternate type         ,u
+Gender class           ,u
+Is root                ,0
+Is Locked(old is set)  ,1
+Is Singular            ,s
+Singular location      ,0
+Next Verb              ,0
+Next Noun              ,0
+Token                  ,0
+Resolved Pattern       ,
+Is Singular Possessive ,0
+Is Plural Possessive   ,0
+Possessive Root        ,
+Possessive Root Type   ,u
+Day stamp              ,71
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
+Number of Mini Defs          ,0
+Number of Adjectives         ,0
+Nunber of Verbs              ,0
+Number of Adverbs            ,0
+Related Nouns                ,0
 Original string----------,boy
 Index  , [boy]
 Lower Case string      ,boy
@@ -483,19 +271,22 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
+Day stamp              ,71
+Times used as sbj      ,2
 Times used as ind obj  ,0
 Times used as dir obj  ,0
-Number of Mini Defs          ,0
+Number of Mini Defs          ,1
+Mini Def.                ,threw the ball
 Number of Adjectives         ,0
-Nunber of Verbs              ,0
+Nunber of Verbs              ,1
+Verb                     ,threw
 Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,brought
-Index  , [brought]
-Lower Case string      ,brought
-Vowel Pattern          ,CCVVCCC
+Related Nouns                ,1
+Noun                     ,fence
+Original string----------,broke
+Index  , [broke]
+Lower Case string      ,broke
+Vowel Pattern          ,CCVCV
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
@@ -518,7 +309,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -527,15 +318,50 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,by
-Index  , [by]
-Lower Case string      ,by
-Vowel Pattern          ,CV
+Original string----------,came
+Index  , [came]
+Lower Case string      ,came
+Vowel Pattern          ,CVCV
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
+Word Type              ,v
+Word tense             ,p
+Polarity               ,p
+Secondary type         ,u
+Alternate type         ,u
+Gender class           ,u
+Is root                ,0
+Is Locked(old is set)  ,1
+Is Singular            ,s
+Singular location      ,0
+Next Verb              ,0
+Next Noun              ,0
+Token                  ,0
+Resolved Pattern       ,
+Is Singular Possessive ,0
+Is Plural Possessive   ,0
+Possessive Root        ,
+Possessive Root Type   ,u
+Day stamp              ,71
+Times used as sbj      ,0
+Times used as ind obj  ,0
+Times used as dir obj  ,0
+Number of Mini Defs          ,0
+Number of Adjectives         ,0
+Nunber of Verbs              ,0
+Number of Adverbs            ,0
+Related Nouns                ,0
+Original string----------,color
+Index  , [color]
+Lower Case string      ,color
+Vowel Pattern          ,CVCVC
+Given name             ,
+Contraction 1st        ,
+Contraction 2nd        ,
+Cell purpose           ,w
+Word Type              ,n
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -553,7 +379,45 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
+Times used as sbj      ,2
+Times used as ind obj  ,0
+Times used as dir obj  ,0
+Number of Mini Defs          ,1
+Mini Def.                ,is a color 
+Number of Adjectives         ,1
+Adjective                ,black
+Nunber of Verbs              ,1
+Verb                     ,is
+Number of Adverbs            ,0
+Related Nouns                ,0
+Original string----------,crown
+Index  , [crown]
+Lower Case string      ,crown
+Vowel Pattern          ,CCVCC
+Given name             ,
+Contraction 1st        ,
+Contraction 2nd        ,
+Cell purpose           ,w
+Word Type              ,n
+Word tense             ,u
+Polarity               ,p
+Secondary type         ,u
+Alternate type         ,u
+Gender class           ,u
+Is root                ,0
+Is Locked(old is set)  ,1
+Is Singular            ,s
+Singular location      ,0
+Next Verb              ,0
+Next Noun              ,0
+Token                  ,0
+Resolved Pattern       ,
+Is Singular Possessive ,0
+Is Plural Possessive   ,0
+Possessive Root        ,
+Possessive Root Type   ,u
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -561,10 +425,53 @@ Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,camp
-Index  , [camp]
-Lower Case string      ,camp
+Related Nouns                ,1
+Noun                     ,jack
+Original string----------,dog
+Index  , [dog]
+Lower Case string      ,dog
+Vowel Pattern          ,CVC
+Given name             ,
+Contraction 1st        ,
+Contraction 2nd        ,
+Cell purpose           ,w
+Word Type              ,n
+Word tense             ,u
+Polarity               ,p
+Secondary type         ,u
+Alternate type         ,u
+Gender class           ,u
+Is root                ,0
+Is Locked(old is set)  ,1
+Is Singular            ,s
+Singular location      ,0
+Next Verb              ,0
+Next Noun              ,0
+Token                  ,0
+Resolved Pattern       ,
+Is Singular Possessive ,0
+Is Plural Possessive   ,0
+Possessive Root        ,
+Possessive Root Type   ,u
+Day stamp              ,71
+Times used as sbj      ,6
+Times used as ind obj  ,0
+Times used as dir obj  ,0
+Number of Mini Defs          ,3
+Mini Def.                ,is a pet 
+Mini Def.                ,is an animal 
+Mini Def.                ,is black 
+Number of Adjectives         ,1
+Adjective                ,black
+Nunber of Verbs              ,1
+Verb                     ,is
+Number of Adverbs            ,0
+Related Nouns                ,2
+Noun                     ,pet
+Noun                     ,animal
+Original string----------,down
+Index  , [down]
+Lower Case string      ,down
 Vowel Pattern          ,CVCC
 Given name             ,
 Contraction 1st        ,
@@ -588,7 +495,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -597,15 +504,15 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,camp,
-Index  , [camp,]
-Lower Case string      ,camp,
-Vowel Pattern          ,CVCCC
+Original string----------,fell
+Index  , [fell]
+Lower Case string      ,fell
+Vowel Pattern          ,CVCC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
+Word Type              ,v
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -623,392 +530,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,child,
-Index  , [child,]
-Lower Case string      ,child,
-Vowel Pattern          ,CCVCCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,concentration
-Index  , [concentration]
-Lower Case string      ,concentration
-Vowel Pattern          ,CVCCVCCCVCVVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,n
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,did
-Index  , [did]
-Lower Case string      ,did
-Vowel Pattern          ,CVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,didn’t
-Index  , [didn’t]
-Lower Case string      ,didn’t
-Vowel Pattern          ,CVCCCCCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,doctor
-Index  , [doctor]
-Lower Case string      ,doctor
-Vowel Pattern          ,CVCCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,Elli
-Index  , [elli]
-Lower Case string      ,elli
-Vowel Pattern          ,VCCV
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,P
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,2
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,every
-Index  , [every]
-Lower Case string      ,every
-Vowel Pattern          ,VCVCV
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,d
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,everything
-Index  , [everything]
-Lower Case string      ,everything
-Vowel Pattern          ,VCVCVCCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,except
-Index  , [except]
-Lower Case string      ,except
-Vowel Pattern          ,VCCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,experiments
-Index  , [experiments]
-Lower Case string      ,experiments
-Vowel Pattern          ,VCCVCVCVCCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,p
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,familiar
-Index  , [familiar]
-Lower Case string      ,familiar
-Vowel Pattern          ,CVCVCVVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -1043,7 +565,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -1052,227 +574,16 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,1
-Noun                     ,karolin
-Original string----------,few
-Index  , [few]
-Lower Case string      ,few
-Vowel Pattern          ,CVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,d
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,for
-Index  , [for]
-Lower Case string      ,for
-Vowel Pattern          ,CVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,friend
-Index  , [friend]
-Lower Case string      ,friend
-Vowel Pattern          ,CCVVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,friend,
-Index  , [friend,]
-Lower Case string      ,friend,
-Vowel Pattern          ,CCVVCCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,from
-Index  , [from]
-Lower Case string      ,from
-Vowel Pattern          ,CCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,German
-Index  , [german]
-Lower Case string      ,german
-Vowel Pattern          ,CVCCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,P
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,f
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,2
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,1
-Noun                     ,best
-Original string----------,girl,
-Index  , [girl,]
-Lower Case string      ,girl,
+Noun                     ,boy
+Original string----------,fetch
+Index  , [fetch]
+Lower Case string      ,fetch
 Vowel Pattern          ,CVCCC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
+Word Type              ,n
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -1290,7 +601,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -1299,15 +610,15 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,going
-Index  , [going]
-Lower Case string      ,going
-Vowel Pattern          ,CVVCC
+Original string----------,green
+Index  , [green]
+Lower Case string      ,green
+Vowel Pattern          ,CCVVC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,v
+Word Type              ,a
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -1325,7 +636,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -1334,15 +645,15 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,greeted
-Index  , [greeted]
-Lower Case string      ,greeted
-Vowel Pattern          ,CCVVCVC
+Original string----------,hill
+Index  , [hill]
+Lower Case string      ,hill
+Vowel Pattern          ,CVCC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
+Word Type              ,n
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -1360,7 +671,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -1368,150 +679,11 @@ Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,had
-Index  , [had]
-Lower Case string      ,had
-Vowel Pattern          ,CVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,hair
-Index  , [hair]
-Lower Case string      ,hair
-Vowel Pattern          ,CVVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,having
-Index  , [having]
-Lower Case string      ,having
-Vowel Pattern          ,CVCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,heard
-Index  , [heard]
-Lower Case string      ,heard
-Vowel Pattern          ,CVVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,her
-Index  , [her]
-Lower Case string      ,her
+Related Nouns                ,1
+Noun                     ,jack
+Original string----------,his
+Index  , [his]
+Lower Case string      ,his
 Vowel Pattern          ,CVC
 Given name             ,
 Contraction 1st        ,
@@ -1535,47 +707,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,6
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,1
-Mini Def.                ,been led away by a doctor or something like that 
-Number of Adjectives         ,1
-Adjective                ,was
-Nunber of Verbs              ,2
-Verb                     ,been
-Verb                     ,going
-Number of Adverbs            ,0
-Related Nouns                ,1
-Noun                     ,mother,
-Original string----------,her,
-Index  , [her,]
-Lower Case string      ,her,
-Vowel Pattern          ,CVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -1584,293 +716,10 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,in
-Index  , [in]
-Lower Case string      ,in
+Original string----------,is
+Index  , [is]
+Lower Case string      ,is
 Vowel Pattern          ,VC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,I
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,it
-Index  , [it]
-Lower Case string      ,it
-Vowel Pattern          ,VC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,r
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,it,
-Index  , [it,]
-Lower Case string      ,it,
-Vowel Pattern          ,VCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,Jewish
-Index  , [jewish]
-Lower Case string      ,jewish
-Vowel Pattern          ,CVCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,P
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,just
-Index  , [just]
-Lower Case string      ,just
-Vowel Pattern          ,CVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,Karolin
-Index  , [karolin]
-Lower Case string      ,karolin
-Vowel Pattern          ,CVCVCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,P
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,f
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,2
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,1
-Mini Def.                ,see her friend, Karolin 
-Number of Adjectives         ,0
-Nunber of Verbs              ,1
-Verb                     ,see
-Number of Adverbs            ,0
-Related Nouns                ,1
-Noun                     ,fence
-Original string----------,kept
-Index  , [kept]
-Lower Case string      ,kept
-Vowel Pattern          ,CVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,knew
-Index  , [knew]
-Lower Case string      ,knew
-Vowel Pattern          ,CCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,know
-Index  , [know]
-Lower Case string      ,know
-Vowel Pattern          ,CCVC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
@@ -1893,7 +742,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -1902,15 +751,57 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,led
-Index  , [led]
-Lower Case string      ,led
-Vowel Pattern          ,CVC
+Original string----------,Jack
+Index  , [jack]
+Lower Case string      ,jack
+Vowel Pattern          ,CVCC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
+Word Type              ,P
+Word tense             ,u
+Polarity               ,p
+Secondary type         ,u
+Alternate type         ,u
+Gender class           ,m
+Is root                ,0
+Is Locked(old is set)  ,1
+Is Singular            ,s
+Singular location      ,0
+Next Verb              ,0
+Next Noun              ,0
+Token                  ,0
+Resolved Pattern       ,
+Is Singular Possessive ,0
+Is Plural Possessive   ,0
+Possessive Root        ,
+Possessive Root Type   ,u
+Day stamp              ,71
+Times used as sbj      ,4
+Times used as ind obj  ,0
+Times used as dir obj  ,0
+Number of Mini Defs          ,2
+Mini Def.                ,fell down
+Mini Def.                ,went up the hill to fetch a pail
+Number of Adjectives         ,1
+Adjective                ,up
+Nunber of Verbs              ,2
+Verb                     ,fell
+Verb                     ,went
+Number of Adverbs            ,0
+Related Nouns                ,2
+Noun                     ,crown
+Noun                     ,hill
+Original string----------,Jill
+Index  , [jill]
+Lower Case string      ,jill
+Vowel Pattern          ,CVCC
+Given name             ,
+Contraction 1st        ,
+Contraction 2nd        ,
+Cell purpose           ,w
+Word Type              ,P
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -1928,229 +819,21 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
+Day stamp              ,71
+Times used as sbj      ,2
 Times used as ind obj  ,0
 Times used as dir obj  ,0
-Number of Mini Defs          ,0
+Number of Mini Defs          ,1
+Mini Def.                ,tumbling
 Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,like
-Index  , [like]
-Lower Case string      ,like
-Vowel Pattern          ,CVCV
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,limping
-Index  , [limping]
-Lower Case string      ,limping
-Vowel Pattern          ,CVCCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,messed
-Index  , [messed]
-Lower Case string      ,messed
-Vowel Pattern          ,CVCCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,mother,
-Index  , [mother,]
-Lower Case string      ,mother,
-Vowel Pattern          ,CVCCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,n
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,f
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
+Nunber of Verbs              ,1
+Verb                     ,tumbling
 Number of Adverbs            ,0
 Related Nouns                ,1
-Noun                     ,her
-Original string----------,mother’s
-Index  , [mother’s]
-Lower Case string      ,mother’s
-Vowel Pattern          ,CVCCVCCCCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,p
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,normal
-Index  , [normal]
-Lower Case string      ,normal
-Vowel Pattern          ,CVCCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,not
-Index  , [not]
-Lower Case string      ,not
+Noun                     ,hill
+Original string----------,map
+Index  , [map]
+Lower Case string      ,map
 Vowel Pattern          ,CVC
 Given name             ,
 Contraction 1st        ,
@@ -2174,8 +857,8 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
+Day stamp              ,71
+Times used as sbj      ,2
 Times used as ind obj  ,0
 Times used as dir obj  ,0
 Number of Mini Defs          ,0
@@ -2209,7 +892,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -2218,45 +901,10 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,old
-Index  , [old]
-Lower Case string      ,old
-Vowel Pattern          ,VCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,on
-Index  , [on]
-Lower Case string      ,on
-Vowel Pattern          ,VC
+Original string----------,over
+Index  , [over]
+Lower Case string      ,over
+Vowel Pattern          ,VCVC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
@@ -2279,7 +927,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -2288,465 +936,10 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,or
-Index  , [or]
-Lower Case string      ,or
-Vowel Pattern          ,VC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,c
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,other
-Index  , [other]
-Lower Case string      ,other
-Vowel Pattern          ,VCCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,outside
-Index  , [outside]
-Lower Case string      ,outside
-Vowel Pattern          ,VVCCVCV
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,people,
-Index  , [people,]
-Lower Case string      ,people,
-Vowel Pattern          ,CVVCCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,p
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,prayed
-Index  , [prayed]
-Lower Case string      ,prayed
-Vowel Pattern          ,CCVCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,preformed
-Index  , [preformed]
-Lower Case string      ,preformed
-Vowel Pattern          ,CCVCVCCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,n
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,f
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,pregnant
-Index  , [pregnant]
-Lower Case string      ,pregnant
-Vowel Pattern          ,CCVCCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,pretty
-Index  , [pretty]
-Lower Case string      ,pretty
-Vowel Pattern          ,CCVCCV
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,probably
-Index  , [probably]
-Lower Case string      ,probably
-Vowel Pattern          ,CCVCVCCV
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,put
-Index  , [put]
-Lower Case string      ,put
-Vowel Pattern          ,CVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,remembered
-Index  , [remembered]
-Lower Case string      ,remembered
-Vowel Pattern          ,CVCVCCVCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,scream
-Index  , [scream]
-Lower Case string      ,scream
-Vowel Pattern          ,CCCVVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,screws
-Index  , [screws]
-Lower Case string      ,screws
-Vowel Pattern          ,CCCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,p
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,second
-Index  , [second]
-Lower Case string      ,second
-Vowel Pattern          ,CVCVCC
+Original string----------,pail
+Index  , [pail]
+Lower Case string      ,pail
+Vowel Pattern          ,CVVC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
@@ -2769,7 +962,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -2778,227 +971,15 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,see
-Index  , [see]
-Lower Case string      ,see
-Vowel Pattern          ,CVV
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,v
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,shaved
-Index  , [shaved]
-Lower Case string      ,shaved
-Vowel Pattern          ,CCVCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,she
-Index  , [she]
-Lower Case string      ,she
-Vowel Pattern          ,CCV
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,p
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,6
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,1
-Mini Def.                ,know why they kept her, probably because they thought she was a boy 
-Number of Adjectives         ,0
-Nunber of Verbs              ,1
-Verb                     ,know
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,slats
-Index  , [slats]
-Lower Case string      ,slats
-Vowel Pattern          ,CCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,p
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,something
-Index  , [something]
-Lower Case string      ,something
-Vowel Pattern          ,CVCVCCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,still
-Index  , [still]
-Lower Case string      ,still
-Vowel Pattern          ,CCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,ten
-Index  , [ten]
-Lower Case string      ,ten
+Original string----------,pet
+Index  , [pet]
+Lower Case string      ,pet
 Vowel Pattern          ,CVC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
+Word Type              ,n
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -3016,7 +997,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -3024,11 +1005,12 @@ Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,terrible
-Index  , [terrible]
-Lower Case string      ,terrible
-Vowel Pattern          ,CVCCVCCV
+Related Nouns                ,1
+Noun                     ,dog
+Original string----------,summary
+Index  , [summary]
+Lower Case string      ,summary
+Vowel Pattern          ,CVCCVCV
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
@@ -3051,43 +1033,8 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,that
-Index  , [that]
-Lower Case string      ,that
-Vowel Pattern          ,CCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,r
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,f
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,2
 Times used as ind obj  ,0
 Times used as dir obj  ,0
 Number of Mini Defs          ,0
@@ -3121,7 +1068,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -3129,16 +1076,17 @@ Number of Mini Defs          ,0
 Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,there,
-Index  , [there,]
-Lower Case string      ,there,
-Vowel Pattern          ,CCVCVC
+Related Nouns                ,1
+Noun                     ,animal
+Original string----------,threw
+Index  , [threw]
+Lower Case string      ,threw
+Vowel Pattern          ,CCCVC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
+Word Type              ,v
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -3156,217 +1104,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,they
-Index  , [they]
-Lower Case string      ,they
-Vowel Pattern          ,CCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,p
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,thing
-Index  , [thing]
-Lower Case string      ,thing
-Vowel Pattern          ,CCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,things
-Index  , [things]
-Lower Case string      ,things
-Vowel Pattern          ,CCVCCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,p
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,third
-Index  , [third]
-Lower Case string      ,third
-Vowel Pattern          ,CCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,n
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,thought
-Index  , [thought]
-Lower Case string      ,thought
-Vowel Pattern          ,CCVVCCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,through
-Index  , [through]
-Lower Case string      ,through
-Vowel Pattern          ,CCCVVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -3401,7 +1139,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -3410,16 +1148,16 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,two
-Index  , [two]
-Lower Case string      ,two
-Vowel Pattern          ,CCV
+Original string----------,tumbling
+Index  , [tumbling]
+Lower Case string      ,tumbling
+Vowel Pattern          ,CVCCCVCC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
+Word Type              ,v
+Word tense             ,c
 Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
@@ -3436,7 +1174,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -3453,76 +1191,6 @@ Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,walked
-Index  , [walked]
-Lower Case string      ,walked
-Vowel Pattern          ,CVCCVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,was
-Index  , [was]
-Lower Case string      ,was
-Vowel Pattern          ,CVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
 Word Type              ,a
 Word tense             ,u
 Polarity               ,p
@@ -3531,7 +1199,7 @@ Alternate type         ,u
 Gender class           ,u
 Is root                ,0
 Is Locked(old is set)  ,1
-Is Singular            ,p
+Is Singular            ,s
 Singular location      ,0
 Next Verb              ,0
 Next Noun              ,0
@@ -3541,7 +1209,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0
@@ -3550,15 +1218,15 @@ Number of Adjectives         ,0
 Nunber of Verbs              ,0
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,where
-Index  , [where]
-Lower Case string      ,where
-Vowel Pattern          ,CCVCV
+Original string----------,water
+Index  , [water]
+Lower Case string      ,water
+Vowel Pattern          ,CVCVC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,q
+Word Type              ,n
 Word tense             ,u
 Polarity               ,p
 Secondary type         ,u
@@ -3576,95 +1244,28 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
+Day stamp              ,71
+Times used as sbj      ,2
 Times used as ind obj  ,0
 Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
+Number of Mini Defs          ,1
+Mini Def.                ,is green 
+Number of Adjectives         ,1
+Adjective                ,green
+Nunber of Verbs              ,1
+Verb                     ,is
 Number of Adverbs            ,0
 Related Nouns                ,0
-Original string----------,which
-Index  , [which]
-Lower Case string      ,which
-Vowel Pattern          ,CCVCC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,why
-Index  , [why]
-Lower Case string      ,why
-Vowel Pattern          ,CCV
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,with
-Index  , [with]
-Lower Case string      ,with
+Original string----------,went
+Index  , [went]
+Lower Case string      ,went
 Vowel Pattern          ,CVCC
 Given name             ,
 Contraction 1st        ,
 Contraction 2nd        ,
 Cell purpose           ,w
-Word Type              ,I
-Word tense             ,u
+Word Type              ,v
+Word tense             ,p
 Polarity               ,p
 Secondary type         ,u
 Alternate type         ,u
@@ -3681,42 +1282,7 @@ Is Singular Possessive ,0
 Is Plural Possessive   ,0
 Possessive Root        ,
 Possessive Root Type   ,u
-Day stamp              ,70
-Times used as sbj      ,0
-Times used as ind obj  ,0
-Times used as dir obj  ,0
-Number of Mini Defs          ,0
-Number of Adjectives         ,0
-Nunber of Verbs              ,0
-Number of Adverbs            ,0
-Related Nouns                ,0
-Original string----------,year
-Index  , [year]
-Lower Case string      ,year
-Vowel Pattern          ,CVVC
-Given name             ,
-Contraction 1st        ,
-Contraction 2nd        ,
-Cell purpose           ,w
-Word Type              ,u
-Word tense             ,u
-Polarity               ,p
-Secondary type         ,u
-Alternate type         ,u
-Gender class           ,u
-Is root                ,0
-Is Locked(old is set)  ,1
-Is Singular            ,s
-Singular location      ,0
-Next Verb              ,0
-Next Noun              ,0
-Token                  ,0
-Resolved Pattern       ,
-Is Singular Possessive ,0
-Is Plural Possessive   ,0
-Possessive Root        ,
-Possessive Root Type   ,u
-Day stamp              ,70
+Day stamp              ,71
 Times used as sbj      ,0
 Times used as ind obj  ,0
 Times used as dir obj  ,0

@@ -2,6 +2,7 @@
 #include <fstream>
 #include <c_Brain.h>
 #include <time.h>
+#include <list>
 
 
 /** SOPHIE 6.1
@@ -21,15 +22,24 @@
 
 
 
-
+//LOCALS
 using namespace std;
 c_Brain Brain;
-string Version       = "6.1d.01s.EN.010.002";
+list <string> TrainingFileSet;
+list <string>::iterator TrainingIT;
+float OldLevel   = 1.0;
+float NewLevel   = 0.0;
+int   Iterations = 0;
+int   vc,nc,adc,ac,pc,pn,ukn,kn;
+
+// GLOBALS
+string Version       = "6.1d.01y.EN.010.002";
 string ReleaseMode   = "debug";
 bool Verbose         = false;
 bool StoryMode       = false;
 bool EchoTraining    = true;
 int  BlockID         = -1;
+// End GLOBALS
 
 int  BaseSpeed       = 600000000;
 int  SpeedStandard   = 1000;
@@ -39,7 +49,7 @@ float CalcSpeed;
 clock_t Elapsed;
 int main()
 {
-
+//TODO: write multi iterations for training file
 ///****Calculate machine speed for a constant delay used in SlowSpeak()
         Elapsed = clock();
          for(int t = 0; t<=BaseSpeed;t++);
@@ -72,6 +82,9 @@ ifstream myfile ("trainingdata.dat");
    Verbose           = false;
    Elapsed           = clock();
    string CommentTag = "";
+   //Brain.GetRightLobeCellMapSummary()
+   //Brain.ControlProcessingUserInput( Raw_Sentence );
+
   if (myfile.is_open())
   {
     while ( getline (myfile,Raw_Sentence) )
@@ -79,15 +92,31 @@ ifstream myfile ("trainingdata.dat");
       CommentTag =  Raw_Sentence[0];
       CommentTag += Raw_Sentence[1];
       if(!( CommentTag == "//") ){  //training file comment
-          if(EchoTraining){
-            cout << Raw_Sentence << endl;}
-            Brain.ControlProcessingUserInput( Raw_Sentence );}
-      CommentTag = "";
+        TrainingIT = TrainingFileSet.end();
+        TrainingFileSet.insert(TrainingIT,Raw_Sentence);}
+    }
+    myfile.close();
+    while (OldLevel != NewLevel){
+        Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,OldLevel);
+        for(TrainingIT = TrainingFileSet.begin(); TrainingIT != TrainingFileSet.end(); TrainingIT++){
+            Raw_Sentence = *TrainingIT;
+            Brain.ControlProcessingUserInput(Raw_Sentence,false);
+        }
+    Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,NewLevel);
+    Iterations++;
     }
     Elapsed = clock() - Elapsed;
-    myfile.close();
-    if(EchoTraining)
-        cout << "Training file processed in " << Elapsed << " milliseconds.\n";
+    for(TrainingIT = TrainingFileSet.begin(); TrainingIT != TrainingFileSet.end(); TrainingIT++){
+        Raw_Sentence = *TrainingIT;
+        CommentTag =  Raw_Sentence[0];
+        CommentTag += Raw_Sentence[1];
+        if(!( CommentTag == "//") ){
+                cout << *TrainingIT << endl;}
+    }
+
+    cout << "Training file processed in " << Elapsed << " milliseconds with " << Iterations << " iterations.\n";
+    Raw_Sentence = "map summary";
+    Brain.ControlProcessingUserInput(Raw_Sentence, true);
   }
 
   else cout << "No training file found.\n";
@@ -107,7 +136,7 @@ getline (cin,Raw_Sentence);
             {
                 if(Verbose)cout << "[main.cpp]\n";
                 if(Raw_Sentence != ""){
-                   Brain.ControlProcessingUserInput(Raw_Sentence);} /// First entry point to Brain
+                   Brain.ControlProcessingUserInput(Raw_Sentence,true);} /// First entry point to Brain
 
                 if(Raw_Sentence != "end"){
                     cout << ">>";

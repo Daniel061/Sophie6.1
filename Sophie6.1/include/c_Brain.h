@@ -50,7 +50,7 @@ class c_Brain : public c_Cerebellum
 
 
 
-        void ControlProcessingUserInput(string &strData){
+        void ControlProcessingUserInput(string &strData, bool ProcessCommands){
             if(Verbose)cout << "[c_Brain.h::ControlProcessingUserInput]" << endl;
             int    CommandFound   = -1;
             int    CL             = -1;
@@ -59,9 +59,13 @@ class c_Brain : public c_Cerebellum
             string Root,LongFormFirst,LongFormSecond;
             string NP             = "";
 
-            CommandCheckSentence.InitializeVars();
-            CommandCheckSentence.Parse(strData);
-            CommandFound     = CommandTrap();
+            if(ProcessCommands){
+               CommandCheckSentence.InitializeVars();
+               CommandCheckSentence.Parse(strData);
+               CommandFound     = CommandTrap();}
+               else{
+                CommandFound = 0;}
+
 
             if(CommandFound == 0){
               Parse(strData);                                    // c_Sentence parse this data
@@ -303,7 +307,8 @@ class c_Brain : public c_Cerebellum
             case 21244631:   // map summary
                 {
                     int NounCount,VerbCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,WordCount,UnknownCount,KnownCount;
-                    WordCount = GetRightLobeCellMapSummary(VerbCount,NounCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,UnknownCount,KnownCount);
+                    float Ratio;
+                    WordCount = GetRightLobeCellMapSummary(VerbCount,NounCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,UnknownCount,KnownCount,Ratio);
                     cout << "Total Words in memory cells:" << WordCount <<  "  Total in Left Lobes:" << GetLeftLobeCellMapCount() << endl;
                     cout << " Nouns        :" << NounCount << endl;
                     cout << " Verbs        :" << VerbCount << endl;
@@ -313,7 +318,7 @@ class c_Brain : public c_Cerebellum
                     cout << " Proper Nouns :" << PropernounCount << endl;
                     cout << " Unknown Words:" << UnknownCount << endl;
                     cout << " Known Words  :" << KnownCount << endl;
-                    cout << " Memory Ratio :" << (float(KnownCount)/float(WordCount)) * 100 << endl;
+                    cout << " Memory Ratio :" << Ratio << endl;
                     Control = 2;
                     break;
                 }

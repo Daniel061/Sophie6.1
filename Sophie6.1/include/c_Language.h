@@ -146,6 +146,14 @@ class c_Language : public c_LongTermMemory
                 CorrectedPattern[PatternPointer+2] = 'n';
                 ConfidenceLevel                    = 100;}
 
+
+            PatternPointer = LocPattern.find("Iu");
+            if(PatternPointer >= 0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+1] = 'n';
+                ConfidenceLevel                    = 100;}
+
+
             if(LocPattern == "duvu"){
                 CorrectedPattern = "dnvu";
                 ConfidenceLevel = 100;}
@@ -205,7 +213,7 @@ class c_Language : public c_LongTermMemory
 
    return CorrectedPattern;
  }
-//--------------------------End Language Review------------------------------------------------
+//--------------------------End Pattern Review------------------------------------------------
 
 
 //-------------------------Find Word Type------------------------------------------------------
@@ -525,13 +533,14 @@ class c_Language : public c_LongTermMemory
                   }
 
 //*******************GRAMMER RULE TESTING*****************************************************
-
+                  string  TrimSegment = "";
                   //Rule testing for past tense verbs
                   // ends in 'ed
                   // is not already set by previous operations, prevents proper nouns changing
                   // longer than three letters
                   if( (tmpWordType == 'u') && (OrigWord.size()>3)){
-                    if(OrigWord.substr(OrigWord.size()-3,2) == "ed" ){
+                    TrimSegment = OrigWord.substr(OrigWord.size()-2,2);
+                    if(TrimSegment == "ed" ){
                         tmpWordType = 'v';
                         SetswWordTense(LocationInSentence,'p');
                         //TODO: Finish extraction
@@ -544,7 +553,8 @@ class c_Language : public c_LongTermMemory
                   // is not already set by previous operations, prevents proper nouns changing
                   // longer than five letters
                   if( (tmpWordType == 'u') && (OrigWord.size()>=5)){
-                    if(OrigWord.substr(tmpWord.size()-4,3) == "ing" ){
+                    TrimSegment = OrigWord.substr(OrigWord.size()-3,3);
+                    if(TrimSegment == "ing" ){
                         tmpWordType = 'v';
                         SetswWordTense(LocationInSentence,'c');
                         //extract root verb, i.e. [coming] root come is verb
@@ -560,7 +570,8 @@ class c_Language : public c_LongTermMemory
                   // is not already set by previous operations, prevents proper nouns changing
                   // longer than five letters
                   if( (tmpWordType == 'u') && (OrigWord.size()>=4)){
-                    if(OrigWord.substr(tmpWord.size()-3,2) == "ly" ){
+                    TrimSegment = OrigWord.substr(OrigWord.size()-2,2);
+                    if(TrimSegment == "ly" ){
                         tmpWordType = 'A';
                         SetswWordTense(LocationInSentence,'c');
                         //extract root verb, i.e. quick from quickly
@@ -778,6 +789,25 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             return SubLocation;
         }
 //--------------------------------------------------end Find Subject----------------------------------------------------------
+
+       bool FindDirectAndIndirectObject(){
+
+        //  The direct object must be a noun or pronoun.
+        //  A direct object will never be in a prepositional phrase
+        //. The direct object will not equal the subject as the predicate nominatives
+        //, nor does it have a linking verb as a predicate nominative sentences does.
+        // ref. http://www.dailygrammar.com/Lesson-106-Direct-Object.htm
+
+        // An indirect object is really a prepositional phrase
+        // in which the preposition to or for is not stated but understood. It tells to whom or for whom something is done.
+        // The indirect object always comes between the verb and the direct object.
+        // The indirect object always modifies the verb.
+        // It may have modifiers and be compound. It is used with verbs such as give, tell, send, get, buy, show, build, do, make, save, and read.
+        //ref. http://www.dailygrammar.com/Lesson-191-Indirect-Objects.htm
+
+
+
+       }
 
 
 //----------------------------Find and Set Gist of Current Sentence-----------------------------------------------------------

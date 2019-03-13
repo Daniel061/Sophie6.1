@@ -508,7 +508,7 @@ class c_Lobes : public c_MemoryCell
         /// Gets RightLobeCellMap summary
         int GetRightLobeCellMapSummary(int &VerbCount, int &NounCount, int &AdjectiveCount,
                                        int &AdverbCount, int &PronounCount, int &PropernounCount,
-                                       int &UnknownCount, int &KnownCount){
+                                       int &UnknownCount, int &KnownCount, float &Ratio){
           CellMapIT       = RightLobeCellMap.begin();
           VerbCount       = 0;
           NounCount       = 0;
@@ -530,6 +530,7 @@ class c_Lobes : public c_MemoryCell
 
             CellMapIT++;
           }
+          Ratio = (float(KnownCount)/float(RightLobeCellMap.size())) * 100;
           return RightLobeCellMap.size();
         }
 
