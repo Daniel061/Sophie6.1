@@ -41,8 +41,8 @@ class c_LongTermMemory : public c_SubjectStack
         map <int,string>                         SentenceStorage;
         map <int,string>::iterator               ssIT;
 
-        map <string, c_Sentence>                 StringIndexedSentenceMap;
-        map <string, c_Sentence>::iterator       strMapIT;
+        unordered_map <string, c_Sentence>                 StringIndexedSentenceMap;
+        unordered_map <string, c_Sentence>::iterator       strMapIT;
 
         unordered_map <int,c_Sentence>           CopySentenceMap;
         unordered_map <int,c_Sentence>::iterator csIT;
@@ -173,13 +173,23 @@ class c_LongTermMemory : public c_SubjectStack
             if(!GetFromSentenceIsQuestion()){
                 CopyCurrentSentence();
                 SentenceToken = Tokenize(CopySentence.GetFromSentenceOriginalString());
-                CopySentenceMap.emplace(SentenceToken,CopySentence);
-                soIT = SentenceOrder.begin();
-                SentenceOrder.emplace(soIT,SentenceToken);
+                csIT = CopySentenceMap.find(SentenceToken);
+                if(csIT == CopySentenceMap.end()){//add sentence to map
+                   CopySentenceMap.emplace(SentenceToken,CopySentence);}
+                else{
+                    CopySentenceMap.erase(csIT); // update new info in sentence
+                    CopySentenceMap.emplace(SentenceToken,CopySentence);}
             }
             //*********NEW STRING MAP STORAGE*********************
             CopyCurrentSentence();
-            StringIndexedSentenceMap.emplace(GetFromSentenceOriginalString(),CopySentence);
+            strMapIT = StringIndexedSentenceMap.find(GetFromSentenceOriginalString());
+            if(strMapIT == StringIndexedSentenceMap.end()){
+               StringIndexedSentenceMap.emplace(GetFromSentenceOriginalString(),CopySentence);}
+            else{
+               StringIndexedSentenceMap.erase(strMapIT);
+               StringIndexedSentenceMap.emplace(GetFromSentenceOriginalString(),CopySentence);
+            }
+
         }
 
         bool FindPhraseInSentenceMap(string PhraseToFind){

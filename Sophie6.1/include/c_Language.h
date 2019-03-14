@@ -582,7 +582,7 @@ class c_Language : public c_LongTermMemory
                   }
 
 
-
+//TODO: Find and set nouns that end in 'er  like lawyer, teacher, worker
 
 
                   //create vowel pattern and store it in sw_VowelPattern
@@ -786,11 +786,16 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             if(Verbose)
                     cout << "Suggested subject location:" << SubLocation << " Pattern:" << GetFromSentencePattern() << " Indirect Object Location:" << GetFromSentenceIndirectObjectLocation()<< endl;
             SetInSentenceSubjectLocation(SubLocation);
+            FindDirectAndIndirectObject();
             return SubLocation;
         }
 //--------------------------------------------------end Find Subject----------------------------------------------------------
 
        bool FindDirectAndIndirectObject(){
+            int    VerbMarker = -1;
+            int    LastPos    = -1;
+            bool   Marked     = false;
+            string WorkingPattern = GetFromSentencePattern();
 
         //  The direct object must be a noun or pronoun.
         //  A direct object will never be in a prepositional phrase
@@ -805,8 +810,20 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
         // It may have modifiers and be compound. It is used with verbs such as give, tell, send, get, buy, show, build, do, make, save, and read.
         //ref. http://www.dailygrammar.com/Lesson-191-Indirect-Objects.htm
 
+       //find the noun after the verb and mark it as Direct Object
+       //TODO: Could be pronoun instead
 
-
+            LastPos      = int(WorkingPattern.size());
+            VerbMarker   = WorkingPattern.find("v");
+            if(VerbMarker == -1) VerbMarker = LastPos;
+            for(int x = VerbMarker; x < LastPos; x++){
+                if(WorkingPattern[x]=='n'){
+                    SetInSentenceDirectObjectLocation(x);
+                    Marked = true;
+                    break;
+                }
+            }
+            return Marked;
        }
 
 

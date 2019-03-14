@@ -33,7 +33,7 @@ int   Iterations = 0;
 int   vc,nc,adc,ac,pc,pn,ukn,kn;
 
 // GLOBALS
-string Version       = "6.1d.01y.EN.010.002";
+string Version       = "6.1d.02c.EN.010.002";
 string ReleaseMode   = "debug";
 bool Verbose         = false;
 bool StoryMode       = false;

@@ -80,6 +80,7 @@ class c_Brain : public c_Cerebellum
               DecipherCurrentSentence(strData);                  // Work with what is known at this point
               RebuildPattern();                                  // Updated corrected pattern
               ReVerseBuildPattern();                             // push pattern data to word type
+              FindDirectAndIndirectObject();                     // See if Direct and indirect object can be set now
               LinkRelatedWords();                                // link related words together in word class
               SaveAllSentenceWordDataToMemory();                 // push sentence and word data to memory cells
               SaveCurrentSentenceInMap();                        // push sentence class to map
