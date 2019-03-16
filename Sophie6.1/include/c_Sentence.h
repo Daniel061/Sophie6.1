@@ -320,6 +320,10 @@ class c_Sentence : public c_Personality
 
         string GetswVowelPattern(int Location){return WordMap[Location].Getw_VowelPattern();}
         void   SetswVowelPattern(int Location, string newPattern){WordMap[Location].Setw_VowelPattern(newPattern);}
+
+        string GetswPresentTenseForm(int Location){return WordMap[Location].Getw_PresentTenseForm();}
+        void   SetswPresentTenseForm(int Location, string newForm){WordMap[Location].Setw_PresentTenseForm(newForm);}
+
         ///*******************END ALL WORD DATA FUNCTIONS*********************
 
 

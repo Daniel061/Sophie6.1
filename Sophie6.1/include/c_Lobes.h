@@ -420,6 +420,19 @@ class c_Lobes : public c_MemoryCell
 
 
 
+        /// Sets pTenseForm if strSearchBase exists
+        ///  returns True if added, else false
+        ///  send pTenseForm data in strpTenseFormData
+        ///  send owner word in strSearchBase
+        bool SetMemoryCellpPresentTenseForm(string strSearchBase, string strpTenseFormData){
+           bool Result = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                  CellMapIT->second.SetpPresentTenseForm(strpTenseFormData);}
+               return Result;}
+
+
+
         /// Updates or Adds pCellData if exists
         ///  returns True if added, else false if updated
         ///  send pCellData data in strSearchBase
@@ -555,6 +568,18 @@ class c_Lobes : public c_MemoryCell
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
                     return CellMapIT->second.GetpVowelPattern();}
+               else
+                    return "";}
+
+
+        /// Gets pTenseForm if strSearchBase exists, else returns "",
+        ///  Returns True in the address of &Result if exists
+        ///  Returns pTenseForm
+        string GetMemoryCellpPresentTenseForm(string strSearchBase, bool &Result){
+           Result = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                    return CellMapIT->second.GetpPresentTenseForm();}
                else
                     return "";}
 
@@ -1311,6 +1336,7 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Cell purpose           ," << CellMapIT->second.GetpCellPurpose() << Delim;
                     LearnedDataFile << "Word Type              ," << CellMapIT->second.GetpCellWordType() << Delim;
                     LearnedDataFile << "Word tense             ," << CellMapIT->second.GetpCellWordTense() << Delim;
+                    LearnedDataFile << "Present Tense Form     ," << CellMapIT->second.GetpPresentTenseForm() << Delim;
                     LearnedDataFile << "Polarity               ," << CellMapIT->second.GetpPolarity() << Delim;
                     LearnedDataFile << "Secondary type         ," << CellMapIT->second.GetpCellSecondaryType() << Delim;
                     LearnedDataFile << "Alternate type         ," << CellMapIT->second.GetpCellAlternateType() << Delim;
@@ -1424,6 +1450,9 @@ class c_Lobes : public c_MemoryCell
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellWordTense(strLineData[0]);                      //set the char wordtense
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpPresentTenseForm(strLineData);                      //set present tense form
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpPolarity(strLineData[0]);                           //set the char polarity

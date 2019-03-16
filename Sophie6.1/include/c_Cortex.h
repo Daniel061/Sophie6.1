@@ -287,8 +287,8 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
        int Response;
        string tmpAdjective;
        int StatementDirection = -1;
-       int tmpAdjectiveLoc;
-       bool Testing = true;
+       int tmpAdjectiveLoc    = -1;;
+       bool Testing           = true;
        if(Verbose)
             cout << "Noun Loc:" << NounLocation << "Unknown Loc:" << UnKnownLocation << "Pattern:" << GetFromSentencePattern() << endl;
 

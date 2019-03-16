@@ -39,43 +39,42 @@ class c_MemoryCell
         string pSingularForm;                      // 7)  i.e. cats  = cat
         string pResolvedPattern;                   // 8)  if used as pattern storage, contains constructed pattern or to self if final construction form
         string pVowelPattern;                      // 9)  C- constant  V- vowel
-        char   pPossessiveRootType;                // 10) usually a 'n' noun type but not always
-        char   pCellPurpose;                       // 11) s-sentence w-word r-response m-memory
+        string pPresentTenseForm;                  // 10) threw = throw
+        char   pPossessiveRootType;                // 11) usually a 'n' noun type but not always
+        char   pCellPurpose;                       // 12) s-sentence w-word r-response m-memory
         char   pWordType;                          //     n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
                                                    //     n-noun p-pronoun v-verb q-question word a-adjective r-subject replacement P(cap) ProperNoun i.e. name A(cap) Adverb D(cap) Direct Object I(LC) Indirect object
                                                    //     s - plural possessive  X(cap) Directive j-joining word
                                                    //     initialize to 'u'
-        char   pWordTense;                         // 12) p-past c-present f-future s-plural
+        char   pWordTense;                         // 13) p-past c-present f-future s-plural
                                                    //      the decision on this word type is made elsewhere
-        char   pSecondaryType;                     // 13) Could be used as another type i.e. light-n light red - A box is light -a
-        char   pAlternateType;                     // 14) some words without modification could have a third type (All type references conform to pWordType definitions)
-        char   pGenderClass;                       // 15) n - neutral e- either m - male only f - female only u - undefined
-        char   pPolarity;                          // 16) Positive/Negative
-        bool   pIsRoot;                            // 17) the root of a word
-        bool   pIsLocked;                          // 18) this data is locked
-        bool   pIsPluralPossessive;                // 19) flag
-        bool   pIsSingularPossessive;              // 20) flag
-        char   pCellIsSingular;                    // 21) p = plural s = singular u = undefined
-        int    pSingularLocation;                  // 22) if CellIsSingular = p, this points to the memorycell containing the singular version
-        int    pNextVerb;                          // 23) pointer to next verb
-        int    pNextNoun;                          // 24) pointer to next noun
-        int    pToken;                             // 25) the token value of this data
-        int    pDaysOld;                           // 26) day stamp
-        int    pTimesUsedAsSubject;                // 27) Subject usage count, int to 0
-        int    pTimesUsedAsIndirectObject;         // 28) Indirect object usage count, int to 0
-        int    pTimesUsedAsDirectObject;           // 29) Direct Object usage count, int to 0
+        char   pSecondaryType;                     // 14) Could be used as another type i.e. light-n light red - A box is light -a
+        char   pAlternateType;                     // 15) some words without modification could have a third type (All type references conform to pWordType definitions)
+        char   pGenderClass;                       // 16) n - neutral e- either m - male only f - female only u - undefined
+        char   pPolarity;                          // 17) Positive/Negative
+        bool   pIsRoot;                            // 18) the root of a word
+        bool   pIsLocked;                          // 19) this data is locked
+        bool   pIsPluralPossessive;                // 20) flag
+        bool   pIsSingularPossessive;              // 21) flag
+        char   pCellIsSingular;                    // 22) p = plural s = singular u = undefined
+        int    pSingularLocation;                  // 23) if CellIsSingular = p, this points to the memorycell containing the singular version
+        int    pNextVerb;                          // 24) pointer to next verb
+        int    pNextNoun;                          // 25) pointer to next noun
+        int    pToken;                             // 26) the token value of this data
+        int    pDaysOld;                           // 27) day stamp
+        int    pTimesUsedAsSubject;                // 28) Subject usage count, int to 0
+        int    pTimesUsedAsIndirectObject;         // 29) Indirect object usage count, int to 0
+        int    pTimesUsedAsDirectObject;           // 30) Direct Object usage count, int to 0
 
-        //TODO: Add int pTimesUsedAsSubject
-        //TODO: Add int pTimesUsedAsIndirectobject
-        //TODO: Add int pTimesUsedAsDirectObject
 
-        unordered_set <string> pCellMiniDefinition;// 30) from GistOfSentence if this word was a subject
+
+        unordered_set <string> pCellMiniDefinition;// 31) from GistOfSentence if this word was a subject
                                                    //      can use list count as number of times used as subject
 
-        unordered_set <string> adjectiveList;      // 31) Adjective List for this word
-        unordered_set <string> verbList;           // 32) Verbs used with this word
-        unordered_set <string> adverbList;         // 33) Adverbs used with this word
-        unordered_set <string> relatedNounList;    // 34) Nouns related to this word
+        unordered_set <string> adjectiveList;      // 32) Adjective List for this word
+        unordered_set <string> verbList;           // 33) Verbs used with this word
+        unordered_set <string> adverbList;         // 34) Adverbs used with this word
+        unordered_set <string> relatedNounList;    // 35) Nouns related to this word
         unordered_set <string>::iterator SetIT;    // Local iterator for these sets
 
 
@@ -184,6 +183,9 @@ class c_MemoryCell
         int    GetpDaysOld(){return pDaysOld;}
         void   SetpDaysOld(int newVal){pDaysOld = newVal;}
 
+        string GetpPresentTenseForm(){return pPresentTenseForm;}
+        void   SetpPresentTenseForm(string newVal){pPresentTenseForm = newVal;}
+
 
 
         void InitializeAll(){
@@ -196,6 +198,7 @@ class c_MemoryCell
                 pCellContractionLongFormSecond  = "";
                 pPossessiveRoot                 = "";
                 pSingularForm                   = "";
+                pPresentTenseForm               = "";
                 pPossessiveRootType             = 'u';
                 pPolarity                       = 'u';
                 pCellPurpose                    = 'u'; //undefined

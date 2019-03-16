@@ -35,21 +35,22 @@ class c_Word
           string  w_SubWord                 = "";    // 7)  replacement word, usually from subject
           string  w_PossessiveRoot          = "";    // 8)  cat's  = cat
           string  w_VowelPattern            = "";    // 9)  C - constant V - vowel
-          bool    w_isContraction           = false; // 10)  contraction flag
-          bool    w_isPlural                = false; // 11) plural flag
-          bool    w_SingularPossessive      = false; // 12) i.e. cat's
-          bool    w_PluralPossessive        = false; // 13) i.e. cats'
-          int     w_QuoteLocation           = -1;    // 14) location of quote if contraction
-          int     w_WordTokens              = -1;    // 15) depreciated
-          char    w_PossessiveRootType      = 'u';   // 16) usually a 'n' noun but not always
-          char    w_WordType                = 'u';   // 17) defines word type  u = unknown
-          char    w_GenderClass             = 'u';   // 18) defines gender     u = undefined
-          char    w_PluralWordFlag          = 'u';   // 19) s = singular p=plural u = undefined
-          char    w_SecondaryType           = 'u';   // 20) some words have more than 1 usage
-          char    w_AlternativeType         = 'u';   // 21) some words have more than 1 usage
-          char    w_WordTense               = 'u';   // 22) c - present p - past
-          char    w_Polarity                = 'p';   // 23) positive/negative
-//TODO: Store w_Polarity in files
+          string  w_PresentTenseForm        = "";    // 10) Threw = throw
+          bool    w_isContraction           = false; // 11)  contraction flag
+          bool    w_isPlural                = false; // 12) plural flag
+          bool    w_SingularPossessive      = false; // 13) i.e. cat's
+          bool    w_PluralPossessive        = false; // 14) i.e. cats'
+          int     w_QuoteLocation           = -1;    // 15) location of quote if contraction
+          int     w_WordTokens              = -1;    // 16) depreciated
+          char    w_PossessiveRootType      = 'u';   // 17) usually a 'n' noun but not always
+          char    w_WordType                = 'u';   // 18) defines word type  u = unknown
+          char    w_GenderClass             = 'u';   // 19) defines gender     u = undefined
+          char    w_PluralWordFlag          = 'u';   // 20) s = singular p=plural u = undefined
+          char    w_SecondaryType           = 'u';   // 21) some words have more than 1 usage
+          char    w_AlternativeType         = 'u';   // 22) some words have more than 1 usage
+          char    w_WordTense               = 'u';   // 23) c - present p - past
+          char    w_Polarity                = 'p';   // 24) positive/negative
+
 
 
           unordered_set <string> w_MiniDefinition;   // if this word is a subject, gist of sentence is here too
@@ -63,6 +64,9 @@ class c_Word
 
 
     public:
+        string   Getw_PresentTenseForm(){return w_PresentTenseForm;}
+        void     Setw_PresentTenseForm(string newVal){w_PresentTenseForm = newVal;}
+
         string   Getw_VowelPattern(){return w_VowelPattern;}
         void     Setw_VowelPattern(string newVal){w_VowelPattern = newVal;}
 
@@ -213,11 +217,12 @@ class c_Word
           w_PossessiveRootType       = 'u';     // usually a 'n' noun but not always            19
           w_Polarity                 = 'p';     // positive / negative                          20
           w_SingularForm             = "";      // i.e. cats = cat                              21
+          w_PresentTenseForm         = "";      // threw = throw                                22
 
-          w_MiniDefinition.clear();             // usually Gist of sentence if used as subject  22
-          w_Adjectives.clear();                 // adjectives used towards this word            23
-          w_Adverbs.clear();                    // adverbs used towards this word               24
-          w_RelatedNouns.clear();               // nouns related to this word                   25
+          w_MiniDefinition.clear();             // usually Gist of sentence if used as subject  23
+          w_Adjectives.clear();                 // adjectives used towards this word            24
+          w_Adverbs.clear();                    // adverbs used towards this word               25
+          w_RelatedNouns.clear();               // nouns related to this word                   26
         }
 
 

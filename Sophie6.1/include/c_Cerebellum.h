@@ -117,6 +117,7 @@ public:
         //     int    sUnderstandingLevel (SET HERE)
 
         for(int x = 0; x  <= LocalWordCount-1; x++){                                //***First try to set wordtype
+
             LocalWordType    = FindWordType(GetswWordsLC(x),x);                       //Get Wordtype from language helper, receives 'u' if can't determine
             MemoryWordType   = GetMemoryCellcharWordType(GetswWordsLC(x),Result);     //Get Wordtype from memory cell, receives NULL if doesn't exist, else returns CellWordType
             SentenceWordType = GetswWordType(x);                                      //Get Wordtype from c_sentence
@@ -175,7 +176,9 @@ public:
         if(Verbose)
             cout << "[GatherAndSet]:LocalPattern " << LocalPattern;
 
-        SetInSentencePreProcessedPattern(LocalPattern);
+        SetInSentencePreProcessedPattern(LocalPattern);                             //store  first version of pattern
+        SetInSentencePattern(LocalPattern);                                         //store  pattern first time
+        //TODO: Give this pattern version to c_PTL
         SetInSentenceAdjectiveLocation(LocalAdjectiveLocation);                     //store  ADJECTIVE LOCATION in c_Sentence
         SetInSentenceAdverbLocation(LocalAdverbLocation);                           //store  ADVERB LOCATION in c_Sentence
         SetInSentenceNamePointer(LocalNamePointer);                                 //store  NAME POINTER in c_Sentence
@@ -189,8 +192,8 @@ public:
         SetInSentencesDaysOld(GetDaysSinceDate());                                  //day stamp this sentence
         LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);            //Check for corrections
         SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
-        LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);            //Check for corrections   do this twice
-        SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
+       // LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);            //Check for corrections   do this twice
+       // SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
         ImplyUnknowns();                                                            //let language try to set some unknowns
         ReVerseBuildPattern();                                                      //push from pattern to word types
         FindAndSetGistOfSentence();                                                 //store gist,subgist and supportive phrase in sentence

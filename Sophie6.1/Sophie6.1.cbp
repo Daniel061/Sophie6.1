@@ -45,6 +45,7 @@
 		<Unit filename="include/c_LongTermMemory.h" />
 		<Unit filename="include/c_Medulla.h" />
 		<Unit filename="include/c_MemoryCell.h" />
+		<Unit filename="include/c_PTL.h" />
 		<Unit filename="include/c_Personality.h" />
 		<Unit filename="include/c_Sentence.h" />
 		<Unit filename="include/c_ShortTermMemory.h" />
@@ -61,6 +62,7 @@
 		<Unit filename="src/c_LongTermMemory.cpp" />
 		<Unit filename="src/c_Medulla.cpp" />
 		<Unit filename="src/c_MemoryCell.cpp" />
+		<Unit filename="src/c_PTL.cpp" />
 		<Unit filename="src/c_Personality.cpp" />
 		<Unit filename="src/c_Sentence.cpp" />
 		<Unit filename="src/c_ShortTermMemory.cpp" />

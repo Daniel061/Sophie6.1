@@ -234,7 +234,7 @@ class c_Language : public c_LongTermMemory
            string Determiners         = " the a an each every certain this that these those any all each some few either little many much ";
            string Questions           = " what where how when who ";
            string Verbs               = " go went can will be have do say get make go know take is see come fell ran think look want give use find tell ask work seem feel try leave call am been ";
-           string PastTenseVerbs      = " came went gone ";
+           string PastTenseVerbs      = " came went gone threw broke ran sold fell ";
            string PluralVerbs         = " are ";
            string SubjectReplacements = " it that this its ";
            string Adverbs             = " very again ";
@@ -250,9 +250,10 @@ class c_Language : public c_LongTermMemory
            string GreetingsWord       = " hello hi ";
            string ConjunctionWords    = " or either ";
            string PrepositionWords    = " in into after to on with within of at until over across among throughout during towards upon across ";
-           string VerbTenseCombos     = " throw,threw  break,broke run,ran ";
+           string VerbTenseCombos     = " threw throw broke break ran run sold sell gone go fell fall came come was is went go ";
            string Vowels              = "aeiou";
            string SingularWord        = "";
+           string PresentTenseVerb    = "";
            string VowelPattern        = "";  //for creation
            string UCWord              = GetswWords(LocationInSentence);
 
@@ -284,6 +285,7 @@ class c_Language : public c_LongTermMemory
            bool RuleTesting         = true;
            bool IsPlural            = false;
            bool Result              = false;
+           bool VerbTenseSet        = false;
 
 
 
@@ -322,7 +324,8 @@ class c_Language : public c_LongTermMemory
 
                   if (isPastTenseVerb >= 0){
                       tmpWordType = 'v';
-                      SetswWordTense(LocationInSentence,'p');}
+                      SetswWordTense(LocationInSentence,'p');
+                      VerbTenseSet = true;}
 
                   if (QuoteMarker >= 0){
                       tmpWordType   = 'C';}
@@ -532,6 +535,16 @@ class c_Language : public c_LongTermMemory
                       SetswPluralWordFlag(LocationInSentence,'s');  //set as singular
                   }
 
+                  //Check for verb tense and try to set root
+                  if(VerbTenseSet){
+                    PatternMarker = VerbTenseCombos.find(tmpWord); // tmpWord has " " + OrigWord + " "
+                    if(PatternMarker >= 0){
+                        PresentTenseVerb = VerbTenseCombos.substr(PatternMarker+1);
+                        PatternMarker = PresentTenseVerb.find(" ");
+                        PresentTenseVerb = PresentTenseVerb.substr(PatternMarker+1,PresentTenseVerb.find(" "));
+                        SetswPresentTenseForm(LocationInSentence,PresentTenseVerb);}
+                  }
+
 //*******************GRAMMER RULE TESTING*****************************************************
                   string  TrimSegment = "";
                   //Rule testing for past tense verbs
@@ -543,7 +556,10 @@ class c_Language : public c_LongTermMemory
                     if(TrimSegment == "ed" ){
                         tmpWordType = 'v';
                         SetswWordTense(LocationInSentence,'p');
-                        //TODO: Finish extraction
+                        PresentTenseVerb = OrigWord.substr(0,OrigWord.size()-2);
+                        //PresentTenseVerb += "e";
+                        SetswPresentTenseForm(LocationInSentence,PresentTenseVerb);
+                        //TODO: test this extraction
                     }
                   }
 
@@ -557,13 +573,23 @@ class c_Language : public c_LongTermMemory
                     if(TrimSegment == "ing" ){
                         tmpWordType = 'v';
                         SetswWordTense(LocationInSentence,'c');
-                        //extract root verb, i.e. [coming] root come is verb
-                        //TODO: Finish extraction
+                        PresentTenseVerb = OrigWord.substr(0,OrigWord.size()-3);
+                        //TODO: Rules for adding 'e'
+                        // 1) for words that end in a silent 'e',
+                        //     drop the 'e' and add 'ing'
+                        //    example: smile -> smiling
+                        // 2) for one syllable words that end in consonant-vowel-consonant (except x and w)
+                        //    double the last letter and add 'ing'
+                        //    example: sit -> sitting
+                        // 3) for most other words (including words that end in 'y')
+                        //    add 'ing' with no changes
+                        //  ref) https://www.elsonjunior.co.uk/year-6-homework/english-2/496-week-beginning-25th-september-spelling-homework/file
+                        PresentTenseVerb += "e";
+                        SetswPresentTenseForm(LocationInSentence,PresentTenseVerb);
                     }
                   }
 
- //TODO: Create word vowel pattern and compare, also store this pattern in word and memory cell class, ultimately files
- //      Create present tense form storage i.e. remembered - past tense verb / present tense form is remember
+ //TODO:      Create present tense form storage i.e. remembered - past tense verb / present tense form is remember
 
                   //Rule testing for adverbs
                   // ends in 'ly
@@ -617,7 +643,7 @@ class c_Language : public c_LongTermMemory
                      VowelPattern[Ymarker] = 'V';}
 
                   if(Ymarker == 0){                        //4) beginning y is a consonant
-                     VowelPattern[Ymarker] == 'C';}
+                     VowelPattern[Ymarker] = 'C';}
 
 
 
@@ -694,7 +720,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             //  Check for and flag/store dual subjects, i.e. Jack and Jill
             //Order Of Preference:
             //  Proper Noun
-            ///  Pronoun   ****TODO***Check and use the other two types of Pronouns; ProNounsInward-m,ProNounsOutward-y, and still use ProNounsOther-p
+            //  Pronoun
             //  Noun
             //  Determiner +1
             //  Unknown word
@@ -705,6 +731,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             int WordCount;                WordCount            =  0;
             int SubLocation;              SubLocation          = -1;
             int NounLocation;             NounLocation         = -1;
+            int NounCount;                NounCount            = -1;
             int SecondNounLocation;       SecondNounLocation   = -1;
             int ProNounLocation;          ProNounLocation      = -1;
             int ProperNounLocation;       ProperNounLocation   = -1;
@@ -720,7 +747,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             for(int x = 0; x < WordCount; x++){
                 if(GetswWordType(x)== 'd') if(DeterminerLocation == -1) DeterminerLocation = x;
                 if(GetswWordType(x)== 'u') if(UnknownLocation == -1)    UnknownLocation    = x;
-                if(GetswWordType(x)== 'n'){if(NounLocation == -1)    { NounLocation       = x;} else SecondNounLocation = x;}
+                if(GetswWordType(x)== 'n'){if(NounLocation == -1)    { NounLocation       = x; NounCount ++;} else SecondNounLocation = x; NounCount++;}
                 if(GetswWordType(x)== 'r') if(SubLocation == -1)        SubLocation        = x;
                 if(GetswWordType(x)== 'p') if(ProNounLocation == -1)    ProNounLocation    = x;
                 if(GetswWordType(x)== 'P') if(ProperNounLocation == -1) ProperNounLocation = x;
@@ -734,9 +761,9 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                 if(GetswWordType(x)== 'I'){ SetInSentencePrepositionPosition(x);}
                 Pattern += GetswWordType(x);
             }
-            SetInSentencePattern(Pattern);
+            //SetInSentencePattern(Pattern);
             if(SecondNounLocation != -1) SetInSentenceIndirectObjectLocation(SecondNounLocation); else SetInSentenceIndirectObjectLocation(-1);
-            if(SecondNounLocation != -1) SetInSentenceNounCount(2); else SetInSentenceNounCount(1);
+            SetInSentenceNounCount(NounCount);
 
             if( (ProperNounLocation != -1) && (NounLocation != -1) ){
                 SetInSentenceIndirectObjectLocation(NounLocation);       //set indirect object

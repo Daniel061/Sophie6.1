@@ -28,12 +28,12 @@ c_Brain Brain;
 list <string> TrainingFileSet;
 list <string>::iterator TrainingIT;
 float OldLevel   = 1.0;
-float NewLevel   = 0.0;
+float NewLevel   = 1.1;
 int   Iterations = 0;
 int   vc,nc,adc,ac,pc,pn,ukn,kn;
 
 // GLOBALS
-string Version       = "6.1d.02c.EN.010.002";
+string Version       = "6.1d.02p.EN.012.002";
 string ReleaseMode   = "debug";
 bool Verbose         = false;
 bool StoryMode       = false;
@@ -49,7 +49,7 @@ float CalcSpeed;
 clock_t Elapsed;
 int main()
 {
-//TODO: write multi iterations for training file
+
 ///****Calculate machine speed for a constant delay used in SlowSpeak()
         Elapsed = clock();
          for(int t = 0; t<=BaseSpeed;t++);
@@ -82,8 +82,7 @@ ifstream myfile ("trainingdata.dat");
    Verbose           = false;
    Elapsed           = clock();
    string CommentTag = "";
-   //Brain.GetRightLobeCellMapSummary()
-   //Brain.ControlProcessingUserInput( Raw_Sentence );
+//FIXME: Float Comparison does not work in release mode
 
   if (myfile.is_open())
   {
@@ -96,7 +95,8 @@ ifstream myfile ("trainingdata.dat");
         TrainingFileSet.insert(TrainingIT,Raw_Sentence);}
     }
     myfile.close();
-    while (OldLevel != NewLevel){
+    while (!(OldLevel == NewLevel)){
+        //cout << OldLevel << " " << NewLevel << endl;
         Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,OldLevel);
         for(TrainingIT = TrainingFileSet.begin(); TrainingIT != TrainingFileSet.end(); TrainingIT++){
             Raw_Sentence = *TrainingIT;
