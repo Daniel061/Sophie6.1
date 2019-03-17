@@ -137,8 +137,8 @@ class c_Cortex : public c_Language
             if(GetFromSentenceHasPluralPronoun())UnderstandingDegree = 3;     //plural pronoun trap
             if(GetFromSentenceHasGreetingsWord())UnderstandingDegree = 4;     //greetings trap
 
-        ofstream PatternDataFile ("PatternData.dat", ios::out | ios::app);
-        if (PatternDataFile.is_open()){ PatternDataFile << Pattern << "," << GetFromSentenceOriginalString() << ",from before Switch(UnderstandingDegree)" << endl; PatternDataFile.close();}
+        //ofstream PatternDataFile ("PatternData.dat", ios::out | ios::app);
+        //if (PatternDataFile.is_open()){ PatternDataFile << Pattern << "," << GetFromSentenceOriginalString() << ",from before Switch(UnderstandingDegree)" << endl; PatternDataFile.close();}
         SetInSentencePattern(Pattern);
             switch (UnderstandingDegree)
             {
@@ -292,8 +292,8 @@ int WorkWithHalfLevel(string Pattern, int Determiner){
        if(Verbose)
             cout << "Noun Loc:" << NounLocation << "Unknown Loc:" << UnKnownLocation << "Pattern:" << GetFromSentencePattern() << endl;
 
-        ofstream HalfLevelDataFile ("HalfLevelPatternData.dat", ios::out | ios::app);
-        if (HalfLevelDataFile.is_open()){ HalfLevelDataFile << GetFromSentencePattern() << "," << GetFromSentenceOriginalString() << endl; HalfLevelDataFile.close();}
+        //ofstream HalfLevelDataFile ("HalfLevelPatternData.dat", ios::out | ios::app);
+       // if (HalfLevelDataFile.is_open()){ HalfLevelDataFile << GetFromSentencePattern() << "," << GetFromSentenceOriginalString() << endl; HalfLevelDataFile.close();}
        for(int x = 0; x < GetFromSentenceWordCount(); x++){
         if((GetswWordType(x) == 'y') || (GetswWordType(x) == 'm') || (GetswWordType(x) == 'p')){
             if(GetswWordType(x)== 'y') StatementDirection = 0; //Statement towards user

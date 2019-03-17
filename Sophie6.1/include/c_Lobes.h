@@ -122,8 +122,20 @@ class c_Lobes : public c_MemoryCell
            bool Result   = false;
            CellMapIT     = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    CellMapIT->second.SetpDaysOld(DaysOld);}
+                    CellMapIT->second.SetpCellDaysOld(DaysOld);}
                return Result;}
+
+        /// Sets pSingularForm if strSearchBase exists,
+        ///  returns True if added, else false if updated,
+        ///  send new pSingularForm data in strData,
+        ///  send owner word in strSearchBase.
+        bool SetMemoryCellpSingularForm(string strSearchBase, string newSingularForm){
+           bool Result   = false;
+           CellMapIT     = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                    CellMapIT->second.SetpCellSingularForm(newSingularForm);}
+               return Result;}
+
 
 
         /// Sets pVowelPattern if strSearchBase exists,
@@ -134,7 +146,7 @@ class c_Lobes : public c_MemoryCell
            bool Result   = false;
            CellMapIT     = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    CellMapIT->second.SetpVowelPattern(newPattern);}
+                    CellMapIT->second.SetpCellVowelPattern(newPattern);}
                return Result;}
 
 
@@ -218,7 +230,7 @@ class c_Lobes : public c_MemoryCell
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    CellMapIT->second.SetpPolarity(charData);}
+                    CellMapIT->second.SetpCellPolarity(charData);}
                return Result;}
 
 
@@ -230,7 +242,7 @@ class c_Lobes : public c_MemoryCell
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    CellMapIT->second.SetpIsSingularPossessive(boolData);}
+                    CellMapIT->second.SetpCellIsSingularPossessive(boolData);}
                return Result;}
 
         /// Sets pIsPluralPossessive if strSearchBase exists,
@@ -241,7 +253,7 @@ class c_Lobes : public c_MemoryCell
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    CellMapIT->second.SetpIsPluralPossessive(boolData);}
+                    CellMapIT->second.SetpCellIsPluralPossessive(boolData);}
                return Result;}
 
 
@@ -302,7 +314,7 @@ class c_Lobes : public c_MemoryCell
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                  CellMapIT->second.SetpIsPluralPossessive(boolIsPluralPossessive);}
+                  CellMapIT->second.SetpCellIsPluralPossessive(boolIsPluralPossessive);}
                return Result;}
 
 
@@ -403,7 +415,7 @@ class c_Lobes : public c_MemoryCell
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                  CellMapIT->second.SetpPossessiveRootType(charPossessiveRootDataType);}
+                  CellMapIT->second.SetpCellPossessiveRootType(charPossessiveRootDataType);}
                return Result;}
 
 
@@ -415,7 +427,7 @@ class c_Lobes : public c_MemoryCell
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                  CellMapIT->second.SetpPossessiveRoot(strPossessiveRootData);}
+                  CellMapIT->second.SetpCellPossessiveRoot(strPossessiveRootData);}
                return Result;}
 
 
@@ -428,7 +440,7 @@ class c_Lobes : public c_MemoryCell
            bool Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                  CellMapIT->second.SetpPresentTenseForm(strpTenseFormData);}
+                  CellMapIT->second.SetpCellPresentTenseForm(strpTenseFormData);}
                return Result;}
 
 
@@ -548,6 +560,19 @@ class c_Lobes : public c_MemoryCell
         }
 
 
+
+        /// Gets pSingularForm if strSearchBase exists, else returns "",
+        ///  Returns True in the address of &Result if exists
+        ///  Returns pSingularForm
+        string GetMemoryCellpSingularForm(string strSearchBase, bool &Result){
+           Result = false;
+           CellMapIT   = FindStringInMap(strSearchBase, Result);
+               if (Result){
+                    return CellMapIT->second.GetpCellSingularForm();}
+               else
+                    return "";}
+
+
         /// Gets pTimesUsedAsSubject if strSearchBase exists, else return 0,
         ///  Returns True in the address of &Result if exists
         ///  Returns pTimesUsedAsSubject
@@ -567,7 +592,7 @@ class c_Lobes : public c_MemoryCell
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    return CellMapIT->second.GetpVowelPattern();}
+                    return CellMapIT->second.GetpCellVowelPattern();}
                else
                     return "";}
 
@@ -579,7 +604,7 @@ class c_Lobes : public c_MemoryCell
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    return CellMapIT->second.GetpPresentTenseForm();}
+                    return CellMapIT->second.GetpCellPresentTenseForm();}
                else
                     return "";}
 
@@ -591,7 +616,7 @@ class c_Lobes : public c_MemoryCell
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    return CellMapIT->second.GetpDaysOld();}
+                    return CellMapIT->second.GetpCellDaysOld();}
                else
                     return 0;}
 
@@ -689,7 +714,7 @@ class c_Lobes : public c_MemoryCell
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    return CellMapIT->second.GetpPossessiveRoot();}
+                    return CellMapIT->second.GetpCellPossessiveRoot();}
                else
                     return "";}
 
@@ -702,7 +727,7 @@ class c_Lobes : public c_MemoryCell
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    return CellMapIT->second.GetpPossessiveRootType();}
+                    return CellMapIT->second.GetpCellPossessiveRootType();}
                else
                     return 'u';}
 
@@ -714,7 +739,7 @@ class c_Lobes : public c_MemoryCell
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    return CellMapIT->second.GetpPolarity();}
+                    return CellMapIT->second.GetpCellPolarity();}
                else
                     return 'u';}
 
@@ -818,7 +843,7 @@ class c_Lobes : public c_MemoryCell
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    return CellMapIT->second.GetpIsPluralPossessive();}
+                    return CellMapIT->second.GetpCellIsPluralPossessive();}
                else
                     return Result;}
 
@@ -831,7 +856,7 @@ class c_Lobes : public c_MemoryCell
            Result = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
-                    return CellMapIT->second.GetpIsSingularPossessive();}
+                    return CellMapIT->second.GetpCellIsSingularPossessive();}
                else
                     return Result;}
 
@@ -1158,64 +1183,6 @@ class c_Lobes : public c_MemoryCell
 
 
 
-//          /**Checks to see if the NewWord exists first,
-//            * if so AND Update = true, Updates the data, returns Installed = false.
-//            * If NewWord doesn't exist,
-//            *Stores all the data and returns Installed = true.
-//           */
-//          bool InstallNewWord(string NewWord, char WordType, char Purpose, bool Update=false,
-//                              char GenderClass = 'u', string LongFormFirst = "", string LongFormSecond = "",
-//                              char SingularValue = 'u', int SingularRoot = 0){     //currently right side only
-//                if(Verbose)cout << "[c_Lobes.h::InstallNewWord]\n";
-//                int tmpToken     = 0;
-//                tmpToken         = Tokenize(NewWord);
-//                bool Result      = false;
-//                bool Installed   = false;
-//                string NewWordLC = MakeStringLowerCase(NewWord);
-//                mapIT            = FindAddressInMap(tmpToken,Result);
-//                if (!Result){
-//                            WorkingCell.InitializeAll();
-//                            WorkingCell.SetpCellDataString(NewWord);                        //stores raw data
-//                            WorkingCell.SetpCellWordType(WordType);                         //stores word type
-//                            WorkingCell.SetpCellPurpose(Purpose);                           //store cell purpose i.e 'w' - word
-//                            WorkingCell.SetpCellDataLC(NewWordLC);                          //store the raw data in lower case
-//                            WorkingCell.SetpCellGenderClass(GenderClass);                   //store the gender class
-//                            WorkingCell.SetpCellContractionLongFormFirst(LongFormFirst);    //store the contraction word long form
-//                            WorkingCell.SetpCellContractionLongFormSecond(LongFormSecond);  //store the contraction word long form
-//                            WorkingCell.SetpCellIsSingular(SingularValue);                  //store p - plural s - singular u - undetermined
-//                            WorkingCell.SetpCellSingularLocation(SingularRoot);             //address of root i.e. address of "color" for "colors"
-//                            WorkingCell.SetpCellToken(Tokenize(NewWord));                   //store the token value of the word
-//
-//
-//                            RightLobeMemoryMap.emplace(tmpToken,WorkingCell);               //Add this new cell to map.
-//                            Installed = true;                                               //flag this operation as happened.
-//                            if(Verbose)
-//                             cout << "Storing new word-->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
-//                            }
-//                        else
-//                            if(Update){
-//                                mapIT->second.SetpCellDataString(NewWord);
-//                                mapIT->second.SetpCellWordType(WordType);
-//                                mapIT->second.SetpCellPurpose(Purpose);
-//                                mapIT->second.SetpCellDataLC(NewWordLC);
-//                                mapIT->second.SetpCellGenderClass(GenderClass);
-//                                mapIT->second.SetpCellContractionLongFormFirst(LongFormFirst);
-//                                mapIT->second.SetpCellContractionLongFormSecond(LongFormSecond);
-//                                mapIT->second.SetpCellIsSingular(SingularValue);
-//                                mapIT->second.SetpCellSingularLocation(SingularRoot);
-//                                mapIT->second.SetpCellToken(Tokenize(NewWord));
-//                                if(Verbose)
-//                                    cout << "Updating -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
-//                            }
-//                            else
-//                                if(Verbose)
-//                                 cout << "Not Storing -->" << NewWord << " at " << tmpToken << " as WordType:" << WordType << " as Gender " << GenderClass << endl;
-//
-//
-//                         return Installed;
-//        }
-
-
           bool CheckLinkOfTwoNounsWithAdjectives(string FirstNoun,string SecondNoun, string& VerbUsage, string MatchedAdjective[], int& MatchedCount){ //NOTE: NEEDS REWRITE FOR NEW LISTS
 
 
@@ -1292,30 +1259,30 @@ class c_Lobes : public c_MemoryCell
 
           }
 
+//            /// Returns pCellSingularForm from memorycell
+//            ///  Returns "" null, if memorycell doesn't exist
+//            ///  Send owner string data in strSearchBase
+//            ///   currently right side cells only, don't see a need for left side yet
+//          string GetMemoryCellpSingularForm(string strSearchBase){
+//                bool Result = false;
+//                CellMapIT       = FindStringInMap(strSearchBase,Result);
+//                if(Result){
+//                    return CellMapIT->second.GetpCellSingularForm();
+//                }
+//                else
+//                return "";}
+//
+//            /// Sets pCellIsSingular in memorycell
+//            ///  if memorycell exist
+//            ///  can send string data or tokenized string data for address
+//            ///  currently right side cells only, don't see a need for left side yet
+//          void SetMemoryCellpCellSingularForm(string strSearchBase, string SingularForm){
+//                bool Result = false;
+//                CellMapIT       = FindStringInMap(strSearchBase,Result);
+//                if(Result){
+//                    return CellMapIT->second.SetpCellSingularForm(SingularForm);
+//                }}
 
-            /// Returns pCellSingularForm from memorycell
-            ///  Returns "" null, if memorycell doesn't exist
-            ///  Send owner string data in strSearchBase
-            ///   currently right side cells only, don't see a need for left side yet
-          string GetMemoryCellpSingularForm(string strSearchBase){
-                bool Result = false;
-                CellMapIT       = FindStringInMap(strSearchBase,Result);
-                if(Result){
-                    return CellMapIT->second.GetpSingularForm();
-                }
-                else
-                return "";}
-
-            /// Sets pCellIsSingular in memorycell
-            ///  if memorycell exist
-            ///  can send string data or tokenized string data for address
-            ///  currently right side cells only, don't see a need for left side yet
-          void SetMemoryCellpCellSingularForm(string strSearchBase, string SingularForm){
-                bool Result = false;
-                CellMapIT       = FindStringInMap(strSearchBase,Result);
-                if(Result){
-                    return CellMapIT->second.SetpSingularForm(SingularForm);
-                }}
 
 
 
@@ -1329,15 +1296,15 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Original string----------,"<< CellMapIT->second.GetpCellDataString() << Delim;
                     LearnedDataFile << "Index  , ["                << CellMapIT->first << "]" << Delim;
                     LearnedDataFile << "Lower Case string      ," << CellMapIT->second.GetpCellDataLC() << Delim;
-                    LearnedDataFile << "Vowel Pattern          ," << CellMapIT->second.GetpVowelPattern() << Delim;
+                    LearnedDataFile << "Vowel Pattern          ," << CellMapIT->second.GetpCellVowelPattern() << Delim;
                     LearnedDataFile << "Given name             ," << CellMapIT->second.GetpCellGivenName() << Delim;
                     LearnedDataFile << "Contraction 1st        ," << CellMapIT->second.GetpCellContractionLongFormFirst() << Delim;
                     LearnedDataFile << "Contraction 2nd        ," << CellMapIT->second.GetpCellContractionLongFormSecond() << Delim;
                     LearnedDataFile << "Cell purpose           ," << CellMapIT->second.GetpCellPurpose() << Delim;
                     LearnedDataFile << "Word Type              ," << CellMapIT->second.GetpCellWordType() << Delim;
                     LearnedDataFile << "Word tense             ," << CellMapIT->second.GetpCellWordTense() << Delim;
-                    LearnedDataFile << "Present Tense Form     ," << CellMapIT->second.GetpPresentTenseForm() << Delim;
-                    LearnedDataFile << "Polarity               ," << CellMapIT->second.GetpPolarity() << Delim;
+                    LearnedDataFile << "Present Tense Form     ," << CellMapIT->second.GetpCellPresentTenseForm() << Delim;
+                    LearnedDataFile << "Polarity               ," << CellMapIT->second.GetpCellPolarity() << Delim;
                     LearnedDataFile << "Secondary type         ," << CellMapIT->second.GetpCellSecondaryType() << Delim;
                     LearnedDataFile << "Alternate type         ," << CellMapIT->second.GetpCellAlternateType() << Delim;
                     LearnedDataFile << "Gender class           ," << CellMapIT->second.GetpCellGenderClass() << Delim;
@@ -1345,15 +1312,16 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Is Locked(old is set)  ," << CellMapIT->second.GetpCellIsLocked() << Delim;
                     LearnedDataFile << "Is Singular            ," << CellMapIT->second.GetpCellIsSingular() << Delim;
                     LearnedDataFile << "Singular location      ," << CellMapIT->second.GetpCellSingularLocation() << Delim;
+                    LearnedDataFile << "Singular form          ," << CellMapIT->second.GetpCellSingularForm() << Delim;
                     LearnedDataFile << "Next Verb              ," << CellMapIT->second.GetpCellNextVerb() << Delim;
                     LearnedDataFile << "Next Noun              ," << CellMapIT->second.GetpCellNextNoun() << Delim;
                     LearnedDataFile << "Token                  ," << CellMapIT->second.GetpCellToken() << Delim;
                     LearnedDataFile << "Resolved Pattern       ," << CellMapIT->second.GetpCellResolvedPattern() << Delim;
-                    LearnedDataFile << "Is Singular Possessive ," << CellMapIT->second.GetpIsSingularPossessive() << Delim;
-                    LearnedDataFile << "Is Plural Possessive   ," << CellMapIT->second.GetpIsPluralPossessive() << Delim;
-                    LearnedDataFile << "Possessive Root        ," << CellMapIT->second.GetpPossessiveRoot() << Delim;
-                    LearnedDataFile << "Possessive Root Type   ," << CellMapIT->second.GetpPossessiveRootType() << Delim;
-                    LearnedDataFile << "Day stamp              ," << CellMapIT->second.GetpDaysOld() << Delim;
+                    LearnedDataFile << "Is Singular Possessive ," << CellMapIT->second.GetpCellIsSingularPossessive() << Delim;
+                    LearnedDataFile << "Is Plural Possessive   ," << CellMapIT->second.GetpCellIsPluralPossessive() << Delim;
+                    LearnedDataFile << "Possessive Root        ," << CellMapIT->second.GetpCellPossessiveRoot() << Delim;
+                    LearnedDataFile << "Possessive Root Type   ," << CellMapIT->second.GetpCellPossessiveRootType() << Delim;
+                    LearnedDataFile << "Day stamp              ," << CellMapIT->second.GetpCellDaysOld() << Delim;
                     LearnedDataFile << "Times used as sbj      ," << CellMapIT->second.GetpTimesUsedAsSubject() << Delim;
                     LearnedDataFile << "Times used as ind obj  ," << CellMapIT->second.GetpTimesUsedAsIndirectObject() << Delim;
                     LearnedDataFile << "Times used as dir obj  ," << CellMapIT->second.GetpTimesUsedAsDirectObject() << Delim;
@@ -1367,7 +1335,7 @@ class c_Lobes : public c_MemoryCell
                 Count = CellMapIT->second.GetNumberOfAdjectivesInList();
                 LearnedDataFile << "Number of Adjectives         ," << Count << Delim;
                 for (int x = 0; x < Count; x++){
-                    LearnedDataFile << "Adjective                ," << CellMapIT->second.GetAdjectiveFromList(x) << Delim; //NOTE: Adjective Storage to FILE
+                    LearnedDataFile << "Adjective                ," << CellMapIT->second.GetAdjectiveFromList(x) << Delim;
                 }
                 Count = CellMapIT->second.GetNumberOfVerbsInList();
                 LearnedDataFile << "Nunber of Verbs              ," << Count << Delim;
@@ -1431,7 +1399,7 @@ class c_Lobes : public c_MemoryCell
                         WorkingCell.SetpCellDataLC(strLineData);                            //set the lower case string data
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpVowelPattern(strLineData);                          //set the vowel pattern data
+                        WorkingCell.SetpCellVowelPattern(strLineData);                      //set the vowel pattern data
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellGivenName(strLineData);                         //set the given name string
@@ -1452,10 +1420,10 @@ class c_Lobes : public c_MemoryCell
                         WorkingCell.SetpCellWordTense(strLineData[0]);                      //set the char wordtense
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpPresentTenseForm(strLineData);                      //set present tense form
+                        WorkingCell.SetpCellPresentTenseForm(strLineData);                  //set present tense form
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpPolarity(strLineData[0]);                           //set the char polarity
+                        WorkingCell.SetpCellPolarity(strLineData[0]);                       //set the char polarity
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellSecondaryType(strLineData[0]);                  //set the char secondary type
@@ -1479,6 +1447,9 @@ class c_Lobes : public c_MemoryCell
                         WorkingCell.SetpCellSingularLocation(stoi(strLineData,&decType));   //set the int singular location
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpCellSingularForm(strLineData);                          //set singular form
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellNextVerb(stoi(strLineData,&decType));           //set the int next verb location
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
@@ -1491,19 +1462,19 @@ class c_Lobes : public c_MemoryCell
                         WorkingCell.SetpCellResolvedPattern(strLineData);                    //set the int pointer to next pattern
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpIsSingularPossessive(stoi(strLineData,&decType));    //set singular possessive
+                        WorkingCell.SetpCellIsSingularPossessive(stoi(strLineData,&decType));//set singular possessive
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpIsPluralPossessive(stoi(strLineData,&decType));      //set plural possessive
+                        WorkingCell.SetpCellIsPluralPossessive(stoi(strLineData,&decType)); //set plural possessive
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpPossessiveRoot(strLineData);                        //set Possessive root
+                        WorkingCell.SetpCellPossessiveRoot(strLineData);                    //set Possessive root
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpPossessiveRootType(strLineData[0]);                 // set possessive root type
+                        WorkingCell.SetpCellPossessiveRootType(strLineData[0]);             // set possessive root type
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpDaysOld(stoi(strLineData,&decType));                //set day stamp
+                        WorkingCell.SetpCellDaysOld(stoi(strLineData,&decType));            //set day stamp
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpTimesUsedAsSubject(stoi(strLineData,&decType));     //set times used as subject

@@ -112,7 +112,7 @@ class c_Brain : public c_Cerebellum
                  SaveReceivedInput(strData,true);                                                       //update short term memory
                  SaveSentenceInLongTermMemory(strData);                                                 //update Long Term Memory
                  GatherAndSetAllSentenceData();                                                         //check language helper, memory and pattern review for data
-                 SetInSentencePreProcessedPattern(GetFromSentencePattern());                            //save for later review
+                 //SetInSentencePreProcessedPattern(GetFromSentencePattern());                            //save for later review
                  //FindAndSetGistOfSentence();                                                          //save phrases of the sentence
                  if(IsThisSentenceDuplicated(strData))
                     SlowSpeak("You said that before.");
@@ -122,7 +122,7 @@ class c_Brain : public c_Cerebellum
                     //StoreNewWords();
                     Parse(strData);
                     GatherAndSetAllSentenceData();
-                    SetInSentencePreProcessedPattern(GetFromSentencePattern());
+                    //SetInSentencePreProcessedPattern(GetFromSentencePattern());
                     FindAndSetGistOfSentence();
                     SaveReceivedInput(strData,true);
                     SaveSentenceInLongTermMemory(strData);
@@ -273,7 +273,7 @@ class c_Brain : public c_Cerebellum
                             cout << "Cell Primary Usage        :" << GetMemoryCellcharPurpose(strWorkingWord,Result) << endl;
                             cout << "Cell Data is Set          :" << boolalpha << GetMemoryCellIsSet(strWorkingWord,Result) << endl;
                             cout << "Cell Plural flag          :" << GetMemoryCellcharIsSingular(strWorkingWord,Result) << endl;
-                            cout << "Plural Root               :" << GetMemoryCellpSingularForm(strWorkingWord) << endl;
+                            cout << "Plural Root               :" << GetMemoryCellpSingularForm(strWorkingWord,Result) << endl;
                             cout << "Cell used as subject count:" << GetMemoryCellpTimesUsedAsSubject(strWorkingWord,Result) << endl;
                             cout << "Cell adjectives stored in map:" << GetMemoryCellNumberOfAdjectives(strWorkingWord,Result) << endl;
                             cout << "Cell verbs stored in map     :" << GetMemoryCellNumberOfVerbs(strWorkingWord,Result) << endl;
@@ -304,7 +304,7 @@ class c_Brain : public c_Cerebellum
                     int NounCount,VerbCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,WordCount,UnknownCount,KnownCount;
                     float Ratio;
                     WordCount = GetRightLobeCellMapSummary(VerbCount,NounCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,UnknownCount,KnownCount,Ratio);
-                    cout << "Total Words in memory cells:" << WordCount <<  "  Total in Left Lobes:" << GetLeftLobeCellMapCount() << endl;
+                    cout << "Total Words in memory cells:" << WordCount <<  "  Total in Left Lobes:" << GetLeftLobeCellMapCount() <<  " Sentences saved:" << GetNumberOfSentencesSaved() << endl;
                     cout << " Nouns        :" << NounCount << endl;
                     cout << " Verbs        :" << VerbCount << endl;
                     cout << " Adjectives   :" << AdjectiveCount << endl;

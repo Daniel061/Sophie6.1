@@ -166,28 +166,28 @@ class c_LongTermMemory : public c_SubjectStack
         }
 
         int  GetNumberOfSentencesSaved(){
-             return SentenceStorage.size();
+             return StringIndexedSentenceMap.size();
         }
 
         void SaveCurrentSentenceInMap(){
-            int SentenceToken = 0;
-            if(!GetFromSentenceIsQuestion()){
-                CopyCurrentSentence();
-                SentenceToken = Tokenize(CopySentence.GetFromSentenceOriginalString());
-                csIT = CopySentenceMap.find(SentenceToken);
-                if(csIT == CopySentenceMap.end()){//add sentence to map
-                   CopySentenceMap.emplace(SentenceToken,CopySentence);}
-                else{
-                    CopySentenceMap.erase(csIT); // update new info in sentence
-                    CopySentenceMap.emplace(SentenceToken,CopySentence);}
-            }
+            string OldPreprocessedPattern = "";
+            if(Verbose)
+                cout << "[c_LongTermMemory;;SaveCurrentSentenceInMap()]\n";
+
             //*********NEW STRING MAP STORAGE*********************
+            //*********Original string is index*******************
             CopyCurrentSentence();
             strMapIT = StringIndexedSentenceMap.find(GetFromSentenceOriginalString());
             if(strMapIT == StringIndexedSentenceMap.end()){
+               if(Verbose)
+                  cout << "First pass pattern:" << CopySentence.GetFromSentencePreProcessedPattern() << endl;
                StringIndexedSentenceMap.emplace(GetFromSentenceOriginalString(),CopySentence);}
             else{
+               OldPreprocessedPattern = strMapIT->second.GetFromSentencePreProcessedPattern();
+               if(Verbose)
+                  cout << "Second pass Pattern:" << OldPreprocessedPattern << endl;
                StringIndexedSentenceMap.erase(strMapIT);
+               CopySentence.SetInSentencePreProcessedPattern(OldPreprocessedPattern);    //preserve original first pattern
                StringIndexedSentenceMap.emplace(GetFromSentenceOriginalString(),CopySentence);
             }
 
@@ -307,7 +307,7 @@ class c_LongTermMemory : public c_SubjectStack
                 SetMemoryCellContractionLongSecond(GetswWordsLC(x),GetswContractionLongFormSecond(x));       /// 5   Contraction second form
                 SetMemorypGenderClass(GetswWordsLC(x),GetswGenderClassInSentence(x));                        /// 6   Gender class
                 SetMemoryCellpCellIsSingular(GetswWordsLC(x),GetswPluralWordFlag(x));                        /// 7   plural word flag
-                SetMemoryCellpCellSingularForm(GetswWordsLC(x),GetswSingularForm(x));                        /// 8   singular form
+                SetMemoryCellpSingularForm(GetswWordsLC(x),GetswSingularForm(x));                            /// 8   singular form
                 SetMemoryCellpIsSingularPossessive(GetswWordsLC(x),GetswisSingularPossessive(x));            /// 9   singular possessive-bool
                 SetMemorypCellPurpose(GetswWordsLC(x),'w');                                                  /// 10  cell purpose
                 SetMemoryCellpIsPluralPossessive(GetswWordsLC(x),GetswisPluralPossessive(x));                /// 11  plural possessive-bool

@@ -28,12 +28,12 @@ c_Brain Brain;
 list <string> TrainingFileSet;
 list <string>::iterator TrainingIT;
 float OldLevel   = 1.0;
-float NewLevel   = 1.1;
+float NewLevel   = 2.1;
 int   Iterations = 0;
 int   vc,nc,adc,ac,pc,pn,ukn,kn;
 
 // GLOBALS
-string Version       = "6.1d.02p.EN.012.002";
+string Version       = "6.1d.03s.EN.012.002";
 string ReleaseMode   = "debug";
 bool Verbose         = false;
 bool StoryMode       = false;
@@ -95,8 +95,8 @@ ifstream myfile ("trainingdata.dat");
         TrainingFileSet.insert(TrainingIT,Raw_Sentence);}
     }
     myfile.close();
-    while (!(OldLevel == NewLevel)){
-        //cout << OldLevel << " " << NewLevel << endl;
+    while ((NewLevel-OldLevel)> 1){
+        cout << OldLevel << " " << NewLevel << endl;
         Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,OldLevel);
         for(TrainingIT = TrainingFileSet.begin(); TrainingIT != TrainingFileSet.end(); TrainingIT++){
             Raw_Sentence = *TrainingIT;
@@ -114,7 +114,9 @@ ifstream myfile ("trainingdata.dat");
                 cout << *TrainingIT << endl;}
     }
 
-    cout << "Training file processed in " << Elapsed << " milliseconds with " << Iterations << " iterations.\n";
+    cout << "Training file processed in " << Elapsed << " milliseconds with " << Iterations << " iterations for " << TrainingFileSet.size() << " lines.\n";
+    TrainingFileSet.clear(); // free up memory
+    cout << OldLevel << " " << NewLevel << endl;
     Raw_Sentence = "map summary";
     Brain.ControlProcessingUserInput(Raw_Sentence, true);
   }

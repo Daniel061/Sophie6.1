@@ -93,26 +93,26 @@ class c_MemoryCell
         void   IncrementpTimesUsedAsDirectObject(){pTimesUsedAsDirectObject++;}
         void   SetpTimesUsedAsDirectObject(int newVal){pTimesUsedAsDirectObject = newVal;}
 
-        string GetpVowelPattern(){return pVowelPattern;}
-        void   SetpVowelPattern(string newVal){pVowelPattern = newVal;}
+        string GetpCellVowelPattern(){return pVowelPattern;}
+        void   SetpCellVowelPattern(string newVal){pVowelPattern = newVal;}
 
-        char   GetpPolarity(){return pPolarity;}
-        void   SetpPolarity(char newVal){pPolarity = newVal;}
+        char   GetpCellPolarity(){return pPolarity;}
+        void   SetpCellPolarity(char newVal){pPolarity = newVal;}
 
-        string GetpSingularForm(){return pSingularForm;}
-        void   SetpSingularForm(string newVal){pSingularForm = newVal;}
+        string GetpCellSingularForm(){return pSingularForm;}
+        void   SetpCellSingularForm(string newVal){pSingularForm = newVal;}
 
-        bool   GetpIsPluralPossessive(){return pIsPluralPossessive;}
-        void   SetpIsPluralPossessive(bool newVal){pIsPluralPossessive = newVal;}
+        bool   GetpCellIsPluralPossessive(){return pIsPluralPossessive;}
+        void   SetpCellIsPluralPossessive(bool newVal){pIsPluralPossessive = newVal;}
 
-        bool   GetpIsSingularPossessive(){return pIsSingularPossessive;}
-        void   SetpIsSingularPossessive(bool newVal){pIsSingularPossessive = newVal;}
+        bool   GetpCellIsSingularPossessive(){return pIsSingularPossessive;}
+        void   SetpCellIsSingularPossessive(bool newVal){pIsSingularPossessive = newVal;}
 
-        string GetpPossessiveRoot(){return pPossessiveRoot;}
-        void   SetpPossessiveRoot(string newVal){pPossessiveRoot = newVal;}
+        string GetpCellPossessiveRoot(){return pPossessiveRoot;}
+        void   SetpCellPossessiveRoot(string newVal){pPossessiveRoot = newVal;}
 
-        char   GetpPossessiveRootType(){return pPossessiveRootType;}
-        void   SetpPossessiveRootType(char newVal){pPossessiveRootType = newVal;}
+        char   GetpCellPossessiveRootType(){return pPossessiveRootType;}
+        void   SetpCellPossessiveRootType(char newVal){pPossessiveRootType = newVal;}
 
         string GetpCellContractionLongFormFirst(){return pCellContractionLongFormFirst;}
         string GetpCellContractionLongFormSecond(){return pCellContractionLongFormSecond;}
@@ -180,11 +180,11 @@ class c_MemoryCell
         string GetpCellGivenName(){return pGivenName;}
         void   SetpCellGivenName(string NewName){pGivenName = NewName;}
 
-        int    GetpDaysOld(){return pDaysOld;}
-        void   SetpDaysOld(int newVal){pDaysOld = newVal;}
+        int    GetpCellDaysOld(){return pDaysOld;}
+        void   SetpCellDaysOld(int newVal){pDaysOld = newVal;}
 
-        string GetpPresentTenseForm(){return pPresentTenseForm;}
-        void   SetpPresentTenseForm(string newVal){pPresentTenseForm = newVal;}
+        string GetpCellPresentTenseForm(){return pPresentTenseForm;}
+        void   SetpCellPresentTenseForm(string newVal){pPresentTenseForm = newVal;}
 
 
 

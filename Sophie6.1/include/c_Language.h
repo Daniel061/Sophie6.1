@@ -416,7 +416,7 @@ class c_Language : public c_LongTermMemory
                   //            i.e. Jones - Jones' Texas - Texas'
 
 
-
+                  //FIXME: PluralForm data not making it to file storage
 
                   //Rule #3 comes before Rule #2 because pattern matching finds es before ves
                   while (RuleTesting){
@@ -432,6 +432,7 @@ class c_Language : public c_LongTermMemory
                             SetswIsPluralWord(LocationInSentence,true);
                             SetswPluralRoot(LocationInSentence,SingularWord);
                             SetswPluralWordFlag(LocationInSentence,'p');
+                            SetswSingularForm(LocationInSentence,SingularWord);
                             tmpWordType = 'P'; //proper noun
                             RuleTesting = false;
                             IsPlural    = true;
@@ -441,7 +442,7 @@ class c_Language : public c_LongTermMemory
                         PatternMarker = OrigWord.find("ves");
                         //Location must be the ending
                         if((PatternMarker >=0)&&((PatternMarker+3)==int(OrigWord.size()))){
-                            SingularWord = OrigWord.substr(0,PatternMarker);
+                            SingularWord = OrigWord.substr(0,PatternMarker-3);
                             //exceptions
                             if(SingularWord == "shel")
                                 SingularWord += "f";
@@ -452,6 +453,7 @@ class c_Language : public c_LongTermMemory
                             SetswPluralWordFlag(LocationInSentence,'p');
                             SetswWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
                             tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
+                            SetswSingularForm(LocationInSentence,SingularWord);
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -461,13 +463,14 @@ class c_Language : public c_LongTermMemory
                         PatternMarker = OrigWord.find("ses");
                         //Location must be the ending
                         if((PatternMarker >=0)&&((PatternMarker+3)==int(OrigWord.size()))){
-                            SingularWord = OrigWord.substr(0,PatternMarker);
+                            SingularWord = OrigWord.substr(0,PatternMarker-3);
                             SingularWord +="se";
                             SetswIsPluralWord(LocationInSentence,true);
                             SetswPluralRoot(LocationInSentence,SingularWord);
                             SetswPluralWordFlag(LocationInSentence,'p');
                             tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
                             SetswWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
+                            SetswSingularForm(LocationInSentence,SingularWord);
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -478,13 +481,14 @@ class c_Language : public c_LongTermMemory
                         PatternMarker = OrigWord.find("ffs");
                         //Location must be the ending
                         if((PatternMarker >=0)&&((PatternMarker+3)==int(OrigWord.size()))){
-                            SingularWord = OrigWord.substr(0,PatternMarker);
+                            SingularWord = OrigWord.substr(0,PatternMarker-3);
                             SingularWord +="ff";
                             SetswIsPluralWord(LocationInSentence,true);
                             SetswPluralRoot(LocationInSentence,SingularWord);
                             SetswPluralWordFlag(LocationInSentence,'p');
                             SetswWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
                             tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
+                            SetswSingularForm(LocationInSentence,SingularWord);
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -496,12 +500,13 @@ class c_Language : public c_LongTermMemory
                         PatternMarker = OrigWord.find("es");
                         //Location must be the ending
                         if((PatternMarker >=0)&&((PatternMarker+2)==int(OrigWord.size()))){
-                            SingularWord = OrigWord.substr(0,PatternMarker);
+                            SingularWord = OrigWord.substr(0,PatternMarker-2);
                             SetswIsPluralWord(LocationInSentence,true);
                             SetswPluralRoot(LocationInSentence,SingularWord);
                             SetswPluralWordFlag(LocationInSentence,'p');
                             SetswWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
                             tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
+                            SetswSingularForm(LocationInSentence,SingularWord);
                             RuleTesting = false;
                             IsPlural    = true;
                             break;
@@ -517,12 +522,13 @@ class c_Language : public c_LongTermMemory
                               // end in ss don't proceed
                             }
                             else{
-                                SingularWord = OrigWord.substr(0,PatternMarker);
+                                SingularWord = OrigWord.substr(0,OrigWord.size()-1);
                                 SetswIsPluralWord(LocationInSentence,true);
                                 SetswPluralRoot(LocationInSentence,SingularWord);
                                 SetswPluralWordFlag(LocationInSentence,'p');
                                 SetswWordType(GetMemoryCellcharWordType(SingularWord,Result),LocationInSentence);
                                 tmpWordType = GetMemoryCellcharWordType(SingularWord,Result);
+                                SetswSingularForm(LocationInSentence,SingularWord);
                                 RuleTesting = false;
                                 IsPlural    = true;
                                 break;}
@@ -584,7 +590,7 @@ class c_Language : public c_LongTermMemory
                         // 3) for most other words (including words that end in 'y')
                         //    add 'ing' with no changes
                         //  ref) https://www.elsonjunior.co.uk/year-6-homework/english-2/496-week-beginning-25th-september-spelling-homework/file
-                        PresentTenseVerb += "e";
+                        //PresentTenseVerb += "e";
                         SetswPresentTenseForm(LocationInSentence,PresentTenseVerb);
                     }
                   }

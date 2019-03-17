@@ -174,9 +174,9 @@ public:
         SetswWordType(SelectedWordType,x);                                          //update word type in sentence class
         } //END of for loop to scan sentence
         if(Verbose)
-            cout << "[GatherAndSet]:LocalPattern " << LocalPattern;
+            cout << "[GatherAndSet]:LocalPattern " << LocalPattern << endl;;
 
-        SetInSentencePreProcessedPattern(LocalPattern);                             //store  first version of pattern
+        SetInSentencePreProcessedPattern(LocalPattern);                             //store  first version of pattern if empty
         SetInSentencePattern(LocalPattern);                                         //store  pattern first time
         //TODO: Give this pattern version to c_PTL
         SetInSentenceAdjectiveLocation(LocalAdjectiveLocation);                     //store  ADJECTIVE LOCATION in c_Sentence
@@ -261,7 +261,7 @@ public:
           for(int y = 0; y < GetMemoryCellMiniDefinitionCount(GetswWordsLC(x),Result); y++){
             SetswMiniDefinition(x,GetMemoryCellMiniDef(GetswWordsLC(x),Result,y));}
 
-          SetswSingularForm(x,GetMemoryCellpSingularForm(GetswWordsLC(x)));
+          //SetswSingularForm  Already taken care of in SetWordTypes
           SetswPossessiveRootType(x,GetMemoryCellPossessiveRootType(GetswWordsLC(x),Result));
           SetswPossessiveRoot(x,GetMemoryCellPossessiveRoot(GetswWordsLC(x),Result));
           SetswisSingularPossessive(x,GetMemoryCellIsSingularPossessive(GetswWordsLC(x),Result));
@@ -270,7 +270,7 @@ public:
           SetswContractionLongFormSecond(x,GetMemoryCellContractionSecond(GetswWordsLC(x),Result));
           //SetswSubWords(x,Getmemorycellsubwords)
           //SetPluralWordFlag(x,Getmemorycell)   correct this all the way to memory cell
-          SetswPluralRoot(x,GetMemoryCellpSingularForm(GetswWordsLC(x)));
+          SetswPluralRoot(x,GetMemoryCellpSingularForm(GetswWordsLC(x),Result));
           //SetIsPluralWord(x,Getmemorycell)   memory cell doesn't agree with this type
           //SetswisContraction(x,getmemorycellisContraction)
 
