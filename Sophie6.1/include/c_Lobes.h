@@ -1304,13 +1304,13 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Word Type              ," << CellMapIT->second.GetpCellWordType() << Delim;
                     LearnedDataFile << "Word tense             ," << CellMapIT->second.GetpCellWordTense() << Delim;
                     LearnedDataFile << "Present Tense Form     ," << CellMapIT->second.GetpCellPresentTenseForm() << Delim;
-                    LearnedDataFile << "Polarity               ," << CellMapIT->second.GetpCellPolarity() << Delim;
+                    LearnedDataFile << "(p)ositive - (n)egative," << CellMapIT->second.GetpCellPolarity() << Delim;
                     LearnedDataFile << "Secondary type         ," << CellMapIT->second.GetpCellSecondaryType() << Delim;
                     LearnedDataFile << "Alternate type         ," << CellMapIT->second.GetpCellAlternateType() << Delim;
                     LearnedDataFile << "Gender class           ," << CellMapIT->second.GetpCellGenderClass() << Delim;
                     LearnedDataFile << "Is root                ," << CellMapIT->second.GetpCellIsRoot() << Delim;
                     LearnedDataFile << "Is Locked(old is set)  ," << CellMapIT->second.GetpCellIsLocked() << Delim;
-                    LearnedDataFile << "Is Singular            ," << CellMapIT->second.GetpCellIsSingular() << Delim;
+                    LearnedDataFile << "(s)ingular-(p)lural    ," << CellMapIT->second.GetpCellIsSingular() << Delim;
                     LearnedDataFile << "Singular location      ," << CellMapIT->second.GetpCellSingularLocation() << Delim;
                     LearnedDataFile << "Singular form          ," << CellMapIT->second.GetpCellSingularForm() << Delim;
                     LearnedDataFile << "Next Verb              ," << CellMapIT->second.GetpCellNextVerb() << Delim;

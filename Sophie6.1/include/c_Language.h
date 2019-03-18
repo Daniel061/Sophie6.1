@@ -109,13 +109,13 @@ class c_Language : public c_LongTermMemory
    */
 
 ///*************CHANGE PATTERN STORAGE TO STRING STRING - no tokens
-     GetMemoryCellRawData(CorrectedPattern, Result, 'l', false);  //left brain storage
-     if(Result == true){  //seen this pattern before
-            CorrectedPattern     = GetMemoryCellpResolvedPattern(CorrectedPattern,Result,'l',false);
-            VerifyPattern        = true;
-     }
+//     GetMemoryCellRawData(CorrectedPattern, Result, 'l', false);  //left brain storage
+//     if(Result == true){  //seen this pattern before
+//            CorrectedPattern     = GetMemoryCellpResolvedPattern(CorrectedPattern,Result,'l',false);
+//            VerifyPattern        = true;
+//     }
 
-    else{
+//    else{
             PatternPointer = LocPattern.find("Aun");
             if(PatternPointer >= 0){
                 CorrectedPattern                   = LocPattern;
@@ -181,7 +181,10 @@ class c_Language : public c_LongTermMemory
             if (LocPattern == "dntua"){
                 CorrectedPattern = "dntva";
                 ConfidenceLevel = 100;}
-          }
+            if (LocPattern == "dnvvu"){
+                CorrectedPattern = "dnvvn";
+                ConfidenceLevel = 100;}
+//          }
 
       if(VerifyPattern){
         //check rules

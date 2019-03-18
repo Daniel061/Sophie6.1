@@ -424,12 +424,14 @@ class c_Sentence : public c_Personality
                     int_Last_Pos--;
                   }
 
-             //----------------------------Space off a comma-----------------------------------------------------------------
+             //----------------------------Space off any commas-----------------------------------------------------------------
              //---------------bla bla bla, bla bla   Becomes bla bla bla , bla bla
                 t = str_Sentence_Data.find(", ");
-                if(t >=0){
+                while(t >=0){
                     str_Sentence_Data = str_Sentence_Data.substr(0,t) + " " + str_Sentence_Data.substr(t);
+                    t = str_Sentence_Data.find(", ",t+2);
                 }
+                SetInSentenceOriginalString(str_Sentence_Data);  //put back expanded data
             //--------------------------------NOW PARSE THE SENTENCE---------------------------------------------------------
 
                 t = str_Sentence_Data.find(" ",x);                              //find first occurrence of space after word
