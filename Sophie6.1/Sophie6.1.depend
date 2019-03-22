@@ -1,28 +1,28 @@
 # depslib dependency file v1.0
-1552905220 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
+1553252908 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
 	<iostream>
 	<fstream>
 	<c_Brain.h>
 	<time.h>
 	<list>
 
-1552840024 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
+1553253960 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
 	<c_Cerebellum.h>
 
-1552841282 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
+1553253470 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
 	<c_Cortex.h>
 
-1552824644 h:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
+1553080294 h:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
 	<c_Language.h>
 
-1552905684 h:\c++projects\sophie6.1\sophie6.1\include\c_language.h
+1553080746 h:\c++projects\sophie6.1\sophie6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<c_LongTermMemory.h>
 	<string>
 	<iostream>
 
-1552905684 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
+1553252692 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
 	<c_Personality.h>
 	<c_Word.h>
 	<map>

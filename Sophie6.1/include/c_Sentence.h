@@ -455,8 +455,8 @@ class c_Sentence : public c_Personality
 
 
 
-                cWords.Setw_WordForm(str_Sentence_Data.substr(x,int_Last_Pos-x)); //extract word to cWords class
-                WordMap.emplace(int_Word_Count,cWords);                           //place this word in the map
+                cWords.Setw_WordForm(str_Sentence_Data.substr(x,int_Last_Pos-x)); //extract LAST word to cWords class
+                WordMap.emplace(int_Word_Count,cWords);                           //place LAST word in the map
                 int_Word_Count++;
 
 
@@ -472,6 +472,7 @@ class c_Sentence : public c_Personality
                     if((QuoteLoc >=0)&(QuoteLoc<int_Last_Pos)){
                         WordMap[x].Setw_WordType('C');              //Set Contraction flag
                         WordMap[x].Setw_isContraction(true);        //flag the word
+                        SetInSentenceHasContraction(true);          //notify c_sentence there is a contraction
                         sHasContraction = true;}
                     WordMap[x].Setw_QuoteLocation(QuoteLoc);        //store pointer to quote
                     string tmpWord;

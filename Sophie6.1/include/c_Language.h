@@ -252,7 +252,7 @@ class c_Language : public c_LongTermMemory
            string GenderDeterminer    = " gender ";
            string GreetingsWord       = " hello hi ";
            string ConjunctionWords    = " or either ";
-           string PrepositionWords    = " in into after to on with within of at until over across among throughout during towards upon across ";
+           string PrepositionWords    = " in into after to on with within of at until over across among from throughout during towards upon across ";
            string VerbTenseCombos     = " threw throw broke break ran run sold sell gone go fell fall came come was is went go ";
            string Vowels              = "aeiou";
            string SingularWord        = "";

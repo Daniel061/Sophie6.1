@@ -38,7 +38,6 @@ class c_Cerebellum : public c_Cortex
          int    LocalUnderstandingDegree = 0;
          int    LocalAltLocation         = -1;
          int    LocalPastTenseWords      = -1;
-         int    QuoteMarker              = -1;
          float  LocalUnderstandingRatio  = 0.0;
          string LocalPattern             = "";
          string LocalWordCopy            = "";
@@ -49,7 +48,6 @@ class c_Cerebellum : public c_Cortex
          char   SentenceWordType         = 'u';
          char   SelectedWordType         = 'u';
          bool   LocalBoolFlag            = false;
-         bool   LocalContractionFlag     = false;
          bool   LocalHasAlternateType    = false;
          bool   LocalSentenceTense       = false;
          bool   Result                   = false;
@@ -68,7 +66,6 @@ class c_Cerebellum : public c_Cortex
                  LocalUnderstandingLevel  = 0;
                  LocalUnderstandingRatio  = 0.0;
                  LocalUnderstandingDegree = 0;
-                 QuoteMarker              = -1;
                  LocalPattern             = "";
                  LocalWordCopy            = "";
                  SentenceWordType         = 'u';
@@ -79,8 +76,7 @@ class c_Cerebellum : public c_Cortex
                  LocalBoolFlag            = false;
                  LocalHasAlternateType    = false;
                  Result                   = false;
-                 LocalSentenceTense       = false;
-                 LocalContractionFlag     = false;}
+                 LocalSentenceTense       = false;}
 
 public:
 
@@ -92,6 +88,7 @@ public:
 
         InitializeAll();
         LocalWordCount     = GetFromSentenceWordCount();
+        string LocalOriginalString= GetFromSentenceOriginalString();
         //check for empty sentence
         if(LocalWordCount == 0) return -1;
 
@@ -123,7 +120,7 @@ public:
             SentenceWordType = GetswWordType(x);                                      //Get Wordtype from c_sentence
             LocalWordCopy    = GetswWords(x);                                         //Get a copy of the word
 
-            if(MemoryWordType == '\0') MemoryWordType = 'u';
+            //if(MemoryWordType == '\0') MemoryWordType = 'u';                      //removed due to redundancy
 
             if(MemoryWordType == 'u'){                                              //Nothing in memory cell
                 SelectedWordType = LocalWordType;}                                  //  -use type from language helper, could still be 'u'
@@ -153,8 +150,6 @@ public:
                                                  SelectedWordType = MemoryWordType; //Use MemoryWordType because language helper did not help
                                                 }
 
-         QuoteMarker = LocalWordCopy.find('\'');                                    //check for contraction
-         if(QuoteMarker >=0) SelectedWordType = 'C';                                //Mark the word type
 
          LocalPattern += SelectedWordType;                                          //build the pattern as we go
          SetswWordType(SelectedWordType,x);                                         //set the selected word type in the sentence
@@ -163,7 +158,6 @@ public:
          if(SelectedWordType == 'g') LocalNamePointer = x;                          //save the name pointer
          if(SelectedWordType == 'A') LocalAdverbLocation = x;                       //save the Adverb location
          if(SelectedWordType == 'a') LocalAdjectiveLocation = x;                    //save the adjective location
-         if(SelectedWordType == 'C') LocalContractionFlag = true;                   //mark has contraction
          if(SelectedWordType == 'c') SetInSentenceConjunctionLocation(x);           //save the conjunction location
          if(SelectedWordType == 'I') SetInSentenceHasPreposition(true);             //flag preposition in sentence
 
@@ -187,7 +181,6 @@ public:
         if(LocalHasAlternateType){
             SetswAlternateType(LocalAlternateType,LocalAltLocation);                //store in c_Sentence
         }
-        SetInSentenceHasContraction(LocalContractionFlag);                          //Store contraction flag
         SetInSentenceSentenceDirection(DetermineDirectionOfPhrase());               //Store phrase/question direction in sentence data
         SetInSentencesDaysOld(GetDaysSinceDate());                                  //day stamp this sentence
         LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);            //Check for corrections

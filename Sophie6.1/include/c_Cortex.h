@@ -224,13 +224,13 @@ class c_Cortex : public c_Language
                 case 50:{  ///stronger understanding but also depends on ratio
                    if (Verbose)
                     cout << "[c_Cortex.h::DeciperCurrentSentence] Case 50 -send to WorkWithHalfLevel()" << endl;
-                     WorkWithHalfLevel(Pattern,DeterminerLocation);
+                     //WorkWithHalfLevel(Pattern,DeterminerLocation);
                      break;}
 
                 case 75:{  ///Much stronger
                    if (Verbose)
                     cout << "[c_Cortex.h::DeciperCurrentSentence] Case 75 - send to Handle75LevelUnderstanding" << endl;
-                     Handle75LevelUnderstanding(strData);
+                     //Handle75LevelUnderstanding(strData);
                      break;}
 
                 case 100:{  ///very strong
