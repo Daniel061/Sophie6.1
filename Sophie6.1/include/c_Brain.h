@@ -186,7 +186,7 @@ class c_Brain : public c_Cerebellum
                             cout << "Cell String     :" << GetMemoryCellRawData(strWorkingWord,Result)<< endl;
                             cout << "Cell String (LC):" << GetMemoryCellDataLC(strWorkingWord,Result) << endl;
                             cout << "Cell Word Type  :" << GetMemoryCellcharWordType(strWorkingWord,Result) << endl;
-                            if(GetMemoryCellcharWordType(strWorkingWord,Result)=='C'){
+                            if(GetMemoryCellcharWordType(strWorkingWord,Result)==typeContraction){
                                 cout << "  Contraction Word Long Form First:" << GetMemoryCellContractionFirst(strWorkingWord,Result) << endl;
                                 cout << "  Contraction Word Long Form Second:" << GetMemoryCellContractionSecond(strWorkingWord,Result) << endl;
                             }
@@ -344,51 +344,6 @@ class c_Brain : public c_Cerebellum
         }//end command trap
 
 
-      //------------------------SETWORDTYPES---------------------------------------------------------------------------
-      //     scan sentence words and set their types
-      //     Check memory storage first (search only lowercase storage)
-      //     if already stored set the sentence word type to the memory value
-      //     if not, has already been initialized to 'u' unless sentence parser has set something other than 'u'
-      //     doCorrection is control to not override wordtype stored in brain  true = change it to whatever is set by others
-
-       void SetWordTypes(bool doCorrection = false)
-        {
-            if(Verbose){cout << "[c_Brain.h::SetWordTypes]" << endl;}
-            char tmpTypeInSentence, tmpTypeInMemoryCell, tmpTypeFromLanguageHelper;
-            char tmpGenderClassFromMemoryCell;
-            bool isSetInMemory;
-            bool Result = false;
-            for(int x = 0; x < GetFromSentenceWordCount(); x++){
-                    tmpTypeInSentence            = GetswWordType(x);
-                    tmpTypeInMemoryCell          = GetMemoryCellcharWordType(GetswWordsLC(x),Result);
-                    tmpTypeFromLanguageHelper    = FindWordType(GetswWordsLC(x),x);
-                    isSetInMemory                = GetMemoryCellIsSet(GetswWordsLC(x),Result);
-                    tmpGenderClassFromMemoryCell = GetMemoryCellcharGenderClass(GetswWordsLC(x),Result);
-                    if(tmpGenderClassFromMemoryCell != '\0')
-                        SetswGenderClassInSentence(x,tmpGenderClassFromMemoryCell);
-                    if(Verbose){
-                        cout << "WordLC:  " << GetswWordsLC(x) << endl;
-                        cout << "  Sentence Set:" << tmpTypeInSentence << endl;
-                        cout << "  MemoryCell Set:" << tmpTypeInMemoryCell << endl;
-                        cout << "  Language helper Set:" << tmpTypeFromLanguageHelper << endl;
-                        cout << "  Memory Cell Previously set?" << boolalpha << isSetInMemory << endl;}
-
-                    if(isSetInMemory && doCorrection) isSetInMemory = false;
-
-                    if(isSetInMemory == false){
-                        if(tmpTypeInSentence == 'u')
-                            SetswWordType(tmpTypeFromLanguageHelper,x);}
-                    else{
-                        SetswWordType(tmpTypeInMemoryCell,x);}
-
-                     if( GetswWordType(x) == 'q') SetInSentenceIsQuestion(true);
-                     if( GetswWordType(x) == 'g') SetInSentenceNamePointer(x);
-                     if( GetswWordType(x) == 'C') SetInSentenceHasContraction(true);
-
-            }
-        }//------END SET WORD TYPES---------------------------------------------------------------
-
-///----------------------------------------------------------------------------------------------
 
 
  //----------------------------------FIRST RUN WELCOME MESSAGE--------------------------------------------------------

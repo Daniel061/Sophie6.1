@@ -83,7 +83,7 @@ class c_Language : public c_LongTermMemory
 
     */
     //CorrectedPattern = GetFromSentencePattern();
-    JoinerLocation = LocPattern.find("j");
+    JoinerLocation = LocPattern.find("+");
     if((JoinerLocation >=1) & (JoinerLocation < int(LocPattern.size()))){  //not the first word and not the last word
         LeftOfJoiner = LocPattern.substr(JoinerLocation + LeftOfJoinerLocation,1);
         RightOfJoiner = LocPattern.substr(JoinerLocation + RightOfJoinerLocation,1);
@@ -116,43 +116,128 @@ class c_Language : public c_LongTermMemory
 //     }
 
 //    else{
+            if(LocPattern[LocPattern.size()-1] == typeAdjective){
+                CorrectedPattern                  = LocPattern;
+                CorrectedPattern[CorrectedPattern.size()-1] = typeNoun;
+                ConfidenceLevel                   = 100;}
+
+
+            PatternPointer = LocPattern.find("vdu");
+            if(PatternPointer >= 0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+2] = typeNoun;
+                ConfidenceLevel                    = 100;}
+
+
+            PatternPointer = LocPattern.find("dGvvdu");
+            if(PatternPointer >= 0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+5] = typeNoun;
+                ConfidenceLevel                    = 100;}
+
+
+            PatternPointer = LocPattern.find("ntu");
+            if(PatternPointer >= 0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+1] = typeNoun;
+                ConfidenceLevel                    = 100;}
+
+            PatternPointer = LocPattern.find("dGvvvu");
+            if(PatternPointer >= 0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+4] = typeAdjective;
+                CorrectedPattern[PatternPointer+5] = typeNoun;
+                ConfidenceLevel                    = 100;}
+
+
             PatternPointer = LocPattern.find("Aun");
             if(PatternPointer >= 0){
                 CorrectedPattern                   = LocPattern;
-                CorrectedPattern[PatternPointer+1] = 'a';
+                CorrectedPattern[PatternPointer+1] = typeAdjective;
                 ConfidenceLevel                    = 100;}
 
             PatternPointer = LocPattern.find("Gu");
             if(PatternPointer >= 0){
                 CorrectedPattern                   = LocPattern;
-                CorrectedPattern[PatternPointer+1] = 'v';
+                CorrectedPattern[PatternPointer+1] = typeVerb;
                 ConfidenceLevel                    = 100;}
 
-            PatternPointer = LocPattern.find("Idau");
+            PatternPointer = LocPattern.find(">dau");
             if(PatternPointer >= 0){
                 CorrectedPattern                   = LocPattern;
-                CorrectedPattern[PatternPointer+3] = 'n';
+                CorrectedPattern[PatternPointer+3] = typeNoun;
                 ConfidenceLevel                    = 100;}
 
-            PatternPointer = LocPattern.find("Idvu");
+            PatternPointer = LocPattern.find(">dvu");
             if(PatternPointer >= 0){
                 CorrectedPattern                   = LocPattern;
-                CorrectedPattern[PatternPointer+3] = 'n';
+                CorrectedPattern[PatternPointer+3] = typeNoun;
                 ConfidenceLevel                    = 100;}
 
-            PatternPointer = LocPattern.find("Idu");
+            PatternPointer = LocPattern.find(">du");
             if(PatternPointer >= 0){
                 CorrectedPattern                   = LocPattern;
-                CorrectedPattern[PatternPointer+2] = 'n';
+                CorrectedPattern[PatternPointer+2] = typeNoun;
                 ConfidenceLevel                    = 100;}
 
 
-            PatternPointer = LocPattern.find("Iu");
+            PatternPointer = LocPattern.find(">u");
             if(PatternPointer >= 0){
                 CorrectedPattern                   = LocPattern;
-                CorrectedPattern[PatternPointer+1] = 'n';
+                CorrectedPattern[PatternPointer+1] = typeNoun;
                 ConfidenceLevel                    = 100;}
 
+            PatternPointer = LocPattern.find("nvvuu");
+            if(PatternPointer >=0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+3] = typeAdjective;
+                CorrectedPattern[PatternPointer+4] = typeNoun;
+                ConfidenceLevel = 100;}
+
+            PatternPointer = LocPattern.find("ddu"); //change to "dan"
+            if(PatternPointer >=0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+1] = typeAdjective;
+                CorrectedPattern[PatternPointer+2] = typeNoun;
+                ConfidenceLevel = 100;}
+
+
+            PatternPointer = LocPattern.find("dnn"); //change to dan
+            if(PatternPointer >=0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+1] = typeAdjective;
+                CorrectedPattern[PatternPointer+2] = typeNoun;
+                ConfidenceLevel = 100;}
+
+
+            PatternPointer = LocPattern.find("avvuu"); //change to avvan
+            if(PatternPointer >=0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+3] = typeAdjective;
+                CorrectedPattern[PatternPointer+4] = typeNoun;
+                ConfidenceLevel = 100;}
+
+
+            PatternPointer = LocPattern.find("duvv"); //change tp dnvv
+            if(PatternPointer >=0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+1] = typeNoun;
+                ConfidenceLevel = 100;}
+
+
+            PatternPointer = LocPattern.find("aGvvu"); //change tp aGvvn
+            if(PatternPointer >=0){
+                CorrectedPattern                   = LocPattern;
+                CorrectedPattern[PatternPointer+4] = typeNoun;
+                ConfidenceLevel = 100;}
+
+            PatternPointer = LocPattern.find(">duu");//check for adject-noun combo
+            if(PatternPointer >=0 ){
+                CorrectedPattern                       = LocPattern;
+                if(GetswWordsLC(PatternPointer+2)[GetswWordsLC(PatternPointer+2).size()-1] == 'y'){
+                    CorrectedPattern[PatternPointer+2] = typeAdjective;
+                    CorrectedPattern[PatternPointer+3] = typeNoun;}
+            }
 
             if(LocPattern == "duvu"){
                 CorrectedPattern = "dnvu";
@@ -194,7 +279,7 @@ class c_Language : public c_LongTermMemory
         //(3) there should be a verb in the sentence
 
         //(1)
-        PatternPointer = CorrectedPattern.find('P');
+        PatternPointer = CorrectedPattern.find(typeProperNoun);
         if(PatternPointer >=0){
             WorkingWord = GetswWords(PatternPointer);
             if((WorkingWord[0]>='A') && (WorkingWord[0]<='Z')){
@@ -229,7 +314,7 @@ class c_Language : public c_LongTermMemory
            string OrigWordUC;
 
 
-           char tmpWordType = 'u';
+           char tmpWordType = typeUnknownWord;
 
            string ProNounsInward      = " you your yours ";
            string ProNounsOther       = " they them he him his she her it we ";
@@ -241,6 +326,7 @@ class c_Language : public c_LongTermMemory
            string PluralVerbs         = " are ";
            string SubjectReplacements = " it that this its ";
            string Adverbs             = " very again ";
+           string Adjectives          = " black white blue brown red green clear tan purple hazel blond yellow gray grey ";
            string Directives          = " compare same about ";
            string JoiningWords        = " and ";
            string AssociativeWord     = " name name's ";
@@ -251,16 +337,22 @@ class c_Language : public c_LongTermMemory
            string FemaleGenderClass   = " girl female woman women ";
            string GenderDeterminer    = " gender ";
            string GreetingsWord       = " hello hi ";
+           string ExclamationWord     = " there ";
            string ConjunctionWords    = " or either ";
-           string PrepositionWords    = " in into after to on with within of at until over across among from throughout during towards upon across ";
+           string PrepositionWords    = " in into after to on with within of at until over across among from throughout through during towards upon across ";
            string VerbTenseCombos     = " threw throw broke break ran run sold sell gone go fell fall came come was is went go ";
+           string NumericWords        = " zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty ";
            string Vowels              = "aeiou";
+           string SentenceBreak       = " , ; ";
            string SingularWord        = "";
            string PresentTenseVerb    = "";
            string VowelPattern        = "";  //for creation
            string UCWord              = GetswWords(LocationInSentence);
 
 
+           int  isExclamationWord   = -1;
+           int  isAdjective         = -1;
+           int  isNumericWord       = -1;
            int  isPastTenseVerb     = -1;
            int  isPreposition       = -1;
            int  isThrowAwayWord     = -1;
@@ -283,12 +375,14 @@ class c_Language : public c_LongTermMemory
            int  isMaleGenderClass   = -1;
            int  isFemaleGenderClass = -1;
            int  isGenderDeterminer  = -1;
+           int  isCommaDetected     = -1;
            int  QuoteMarker         = -1;
            int  PatternMarker       = -1;
            bool RuleTesting         = true;
            bool IsPlural            = false;
            bool Result              = false;
            bool VerbTenseSet        = false;
+           bool WordTypeIsSet       = false;
 
 
 
@@ -299,6 +393,10 @@ class c_Language : public c_LongTermMemory
               OrigWordUC   = GetswWords(LocationInSentence);
               tmpWord = " " + tmpWord + " ";
 
+                isExclamationWord   = ExclamationWord.find(tmpWord);
+                isAdjective         = Adjectives.find(tmpWord);
+                isNumericWord       = NumericWords.find(tmpWord);
+                isCommaDetected     = SentenceBreak.find(tmpWord);
                 isPastTenseVerb     = PastTenseVerbs.find(tmpWord);
                 isPreposition       = PrepositionWords.find(tmpWord);
                 isConjunction       = ConjunctionWords.find(tmpWord);
@@ -323,70 +421,160 @@ class c_Language : public c_LongTermMemory
                 isAssociativeWord   = AssociativeWord.find(tmpWord);
                 QuoteMarker         = tmpWord.find("'");
 
+                while(!WordTypeIsSet){
 
+                  if(isExclamationWord >=0){ //Set exclamation type 'E'
+                    tmpWordType   = typeExclamation;
+                    WordTypeIsSet = true;
+                    break;
+                  }
 
-                  if (isPastTenseVerb >= 0){
-                      tmpWordType = 'v';
+                  if(isAdjective >=0){      //Set Adjective type 'a'
+                      tmpWordType = typeAdjective;
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if(isNumericWord >=0){    //Set NumericWord type '#'
+                      tmpWordType = typeNumericWord;
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if(isCommaDetected >= 0){ //Set Comma Type '_'
+                      tmpWordType = typeSentenceBreak;
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if (isPastTenseVerb >= 0){ //Set PastTenseVerb 'v'
+                      tmpWordType = typeVerb;
                       SetswWordTense(LocationInSentence,'p');
-                      VerbTenseSet = true;}
+                      VerbTenseSet = true;
+                      WordTypeIsSet = true;
+                      break;}
 
-                  if (QuoteMarker >= 0){
-                      tmpWordType   = 'C';}
-                  if (isConjunction >= 0){
-                      tmpWordType  = 'c';}
-                  if (isVerb >= 0){
-                      tmpWordType = 'v';}
-                  if (isDeterminer >= 0){
-                       tmpWordType = 'd';}
-                  if (isProNounsOther >= 0){
-                       tmpWordType = 'p';}
-                  if (isProNounsInward >=0){
-                       tmpWordType = 'm';}
-                  if (isProNounsOutward >=0){
-                       tmpWordType = 'y';}
-                  if (isQuestion >= 0){
-                       tmpWordType = 'q';
-                       SetInSentenceIsQuestion(true);}
-                  if (isSubRep >=0){
-                        tmpWordType = 'r';}
-                  if (isAdverb >=0){
-                        tmpWordType = 'A';}
-                  if (isDirective >=0){
-                        tmpWordType = 'X';}
-                  if (isJoiner >=0){
-                        tmpWordType = 'j';}
-                  if (isAssociativeWord >=0){
-                        tmpWordType = 'g';}
-                  if (isPluralPronoun >=0){
-                        tmpWordType = 'N';
-                        SetInSentenceHasPluralPronoun(true);}
-                  if (isThrowAwayWord >=0){
-                        tmpWordType = 't';}
-                  if (isGenderIndicator >=0){
-                        tmpWordType = 'G';
-                        SetInSentenceHasGenderReference(true);}
-                  if (isGreetingsWord >=0){
-                        tmpWordType = 'W';
-                        SetInSentenceHasGreetingsWord(true);}
-                  if (isGenderDeterminer >=0){
-                        tmpWordType = 'B';
-                        SetInSentenceHasGenderDeterminer(true);}
-                  if ((isFemaleGenderClass >=0) && (LocationInSentence != -1)){
-                        SetswGenderClassInSentence(LocationInSentence,'f');}
-                  if ((isMaleGenderClass >=0) && (LocationInSentence != -1)){
-                        SetswGenderClassInSentence(LocationInSentence,'m');}
-                  if(isPluralVerb >=0){
-                        tmpWordType = 'v';
-                        SetswIsPluralWord(LocationInSentence,true);
-                        SetswPluralWordFlag(LocationInSentence,'p');}
-                  if(isPreposition >=0){
-                        tmpWordType = 'I';
-                        SetInSentenceHasPreposition(true);
-                        SetInSentencePrepositionPosition(LocationInSentence);}
+                  if (QuoteMarker >= 0){     //Set Contraction Type 'C'
+                      tmpWordType   = typeContraction;
+                      WordTypeIsSet = true;
+                      break;}
 
-                  if((UCWord[0] >='A') && (UCWord[0] <='Z') &&(tmpWordType == 'u') ) {
-                        tmpWordType = 'P';}
+                  if (isConjunction >= 0){  //Set Conjunction Type 'c'
+                      tmpWordType  = typeConjunction;
+                      WordTypeIsSet = true;
+                      break;}
 
+                  if (isVerb >= 0){         //Set Verb Type 'v'
+                      tmpWordType = typeVerb;
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if (isDeterminer >= 0){   //Set Determiner Type 'd'
+                       tmpWordType = typeDeterminer;
+                       WordTypeIsSet = true;
+                       break;}
+
+                  if (isProNounsOther >= 0){//Set ProNounsOther Type 'p'
+                       tmpWordType = typePronoun;
+                       WordTypeIsSet = true;
+                       break;}
+
+                  if (isProNounsInward >=0){//Set ProNounsInward Type 'm'
+                       tmpWordType = typeProNounsInward;
+                       WordTypeIsSet = true;
+                       break;}
+
+                  if (isProNounsOutward >=0){//Set ProNounsOutward Type 'y'
+                       tmpWordType = typeProNounsOutward;
+                       WordTypeIsSet = true;
+                       break;}
+
+                  if (isQuestion >= 0){     //Set Question type 'q'
+                       tmpWordType = typeQuestion;
+                       SetInSentenceIsQuestion(true);
+                       WordTypeIsSet = true;
+                       break;}
+
+                  if (isSubRep >=0){        //Set Replacement Word Type 'r'
+                      tmpWordType = typeReplacementWord;
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if (isAdverb >=0){        //Set Adverb Type 'A'
+                      tmpWordType = typeAdverb;
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if (isDirective >=0){     //Set Directive Type 'X'
+                      tmpWordType = typeDirective;
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if (isJoiner >=0){        //Set Joiner Type '+'
+                      tmpWordType = typeJoinerWord;
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if (isAssociativeWord >=0){//Set Associative Word Type 'g'
+                      tmpWordType = typeAssociativeWord;
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if (isPluralPronoun >=0){ //Set Plural Pronoun Type 'N'
+                      tmpWordType = typePluralPronoun;
+                      SetInSentenceHasPluralPronoun(true);
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if (isThrowAwayWord >=0){ //Set Throwaway Word Type 't'
+                      tmpWordType = typeThrowAwayWord;
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if (isGenderIndicator >=0){//Set Gender Indicator 'G'
+                      tmpWordType = typeGenderIndicator;
+                      SetInSentenceHasGenderReference(true);
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if (isGreetingsWord >=0){  //Set Greeting Word Type 'W'
+                      tmpWordType = typeGreetingsWord;
+                      SetInSentenceHasGreetingsWord(true);
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if (isGenderDeterminer >=0){//Set Gender Determiner Type 'B'
+                      tmpWordType = typeGenderDeterminer;
+                      SetInSentenceHasGenderDeterminer(true);
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if ((isFemaleGenderClass >=0) && (LocationInSentence != -1)){ //Set Female Gender Type 'f'
+                      SetswGenderClassInSentence(LocationInSentence,typeFemaleClass);
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if ((isMaleGenderClass >=0) && (LocationInSentence != -1)){  //Set Male Gender Type 'm'
+                      SetswGenderClassInSentence(LocationInSentence,typeMaleClass);
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if(isPluralVerb >=0){     //Set Plural Verb Type 'v'  ~same as verb but marks plural
+                      tmpWordType = typeVerb;
+                      SetswIsPluralWord(LocationInSentence,true);
+                      SetswPluralWordFlag(LocationInSentence,'p'); //set plural flag
+                      WordTypeIsSet = true;
+                      break;}
+
+                  if(isPreposition >=0){    //Set Preposition Type 'I'
+                      tmpWordType = typePreposition;
+                      SetInSentenceHasPreposition(true);
+                      SetInSentencePrepositionPosition(LocationInSentence);
+
+                      break;}
+
+                  if((UCWord[0] >='A') && (UCWord[0] <='Z') &&(tmpWordType == 'u') ) {  //Set Proper Noun Type 'P'
+                        tmpWordType = typeProperNoun;}
+
+                      WordTypeIsSet = true;
+                }//end while loop
 
                   /// **TODO**  Check for plural verbs, i.e. are->is
                   ///           Try to set tense flag
@@ -425,8 +613,8 @@ class c_Language : public c_LongTermMemory
                   while (RuleTesting){
 
                         //Rule #1 Must Not be verb, must not be preset as pronoun
-                        if(tmpWordType == 'v') {RuleTesting = false; break;}
-                        if((tmpWordType == 'p') || (tmpWordType == 'm') || (tmpWordType == 'y')) {SetInSentenceHasPronoun(true); RuleTesting = false; break;}
+                        if(tmpWordType == typeVerb) {RuleTesting = false; break;}
+                        if((tmpWordType == typePronoun) || (tmpWordType == typeProNounsInward) || (tmpWordType == typeProNounsOutward)) {SetInSentenceHasPronoun(true); RuleTesting = false; break;}
 
                         //Rule #9 Plural Proper Noun Check
                         PatternMarker = OrigWord.find("s'");
@@ -436,7 +624,7 @@ class c_Language : public c_LongTermMemory
                             SetswPluralRoot(LocationInSentence,SingularWord);
                             SetswPluralWordFlag(LocationInSentence,'p');
                             SetswSingularForm(LocationInSentence,SingularWord);
-                            tmpWordType = 'P'; //proper noun
+                            tmpWordType = typeProperNoun;
                             RuleTesting = false;
                             IsPlural    = true;
                             break; }
@@ -560,10 +748,10 @@ class c_Language : public c_LongTermMemory
                   // ends in 'ed
                   // is not already set by previous operations, prevents proper nouns changing
                   // longer than three letters
-                  if( (tmpWordType == 'u') && (OrigWord.size()>3)){
+                  if( (tmpWordType == typeUnknownWord) && (OrigWord.size()>3)){
                     TrimSegment = OrigWord.substr(OrigWord.size()-2,2);
                     if(TrimSegment == "ed" ){
-                        tmpWordType = 'v';
+                        tmpWordType = typeVerb;
                         SetswWordTense(LocationInSentence,'p');
                         PresentTenseVerb = OrigWord.substr(0,OrigWord.size()-2);
                         //PresentTenseVerb += "e";
@@ -577,10 +765,10 @@ class c_Language : public c_LongTermMemory
                   // ends in 'ing
                   // is not already set by previous operations, prevents proper nouns changing
                   // longer than five letters
-                  if( (tmpWordType == 'u') && (OrigWord.size()>=5)){
+                  if( (tmpWordType == typeUnknownWord) && (OrigWord.size()>=5)){
                     TrimSegment = OrigWord.substr(OrigWord.size()-3,3);
                     if(TrimSegment == "ing" ){
-                        tmpWordType = 'v';
+                        tmpWordType = typeVerb;
                         SetswWordTense(LocationInSentence,'c');
                         PresentTenseVerb = OrigWord.substr(0,OrigWord.size()-3);
                         //TODO: Rules for adding 'e'
@@ -604,10 +792,10 @@ class c_Language : public c_LongTermMemory
                   // ends in 'ly
                   // is not already set by previous operations, prevents proper nouns changing
                   // longer than five letters
-                  if( (tmpWordType == 'u') && (OrigWord.size()>=4)){
+                  if( (tmpWordType == typeUnknownWord) && (OrigWord.size()>=4)){
                     TrimSegment = OrigWord.substr(OrigWord.size()-2,2);
                     if(TrimSegment == "ly" ){
-                        tmpWordType = 'A';
+                        tmpWordType = typeAdverb;
                         SetswWordTense(LocationInSentence,'c');
                         //extract root verb, i.e. quick from quickly
                         // -exceptions:[tepidly] root tepid is adjective
@@ -754,20 +942,20 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             if ((GetswWordsLC(0)== "is") || (GetswWordsLC(0)=="can") || (GetswWordsLC(0)=="will") || (GetswWordsLC(0)=="are") ) SetInSentenceIsQuestion(true);
 
             for(int x = 0; x < WordCount; x++){
-                if(GetswWordType(x)== 'd') if(DeterminerLocation == -1) DeterminerLocation = x;
-                if(GetswWordType(x)== 'u') if(UnknownLocation == -1)    UnknownLocation    = x;
-                if(GetswWordType(x)== 'n'){if(NounLocation == -1)    { NounLocation       = x; NounCount ++;} else SecondNounLocation = x; NounCount++;}
-                if(GetswWordType(x)== 'r') if(SubLocation == -1)        SubLocation        = x;
-                if(GetswWordType(x)== 'p') if(ProNounLocation == -1)    ProNounLocation    = x;
-                if(GetswWordType(x)== 'P') if(ProperNounLocation == -1) ProperNounLocation = x;
-                if(GetswWordType(x)== 'm') if(ProNounLocation == -1) ProNounLocation = x;
-                if(GetswWordType(x)== 'y') if(ProNounLocation == -1) ProNounLocation = x;
-                if(GetswWordType(x)== 'G') if(ProNounOtherLocation == -1) ProNounOtherLocation = x;
-                if(GetswWordType(x)== 'j') JoinerLocation = x;
-                if(GetswWordType(x)== 'v'){ SetInSentenceVerbLocation(x);}
-                if(GetswWordType(x)== 'a'){ SetInSentenceAdjectiveLocation(x);}
-                if(GetswWordType(x)== 'A'){ SetInSentenceAdverbLocation(x);}
-                if(GetswWordType(x)== 'I'){ SetInSentencePrepositionPosition(x);}
+                if(GetswWordType(x)== typeDeterminer) if(DeterminerLocation == -1) DeterminerLocation = x;
+                if(GetswWordType(x)== typeUnknownWord) if(UnknownLocation == -1)    UnknownLocation    = x;
+                if(GetswWordType(x)== typeNoun){if(NounLocation == -1)    { NounLocation       = x; NounCount ++;} else SecondNounLocation = x; NounCount++;}
+                if(GetswWordType(x)== typeReplacementWord) if(SubLocation == -1)        SubLocation        = x;
+                if(GetswWordType(x)== typePronoun) if(ProNounLocation == -1)    ProNounLocation    = x;
+                if(GetswWordType(x)== typeProperNoun) if(ProperNounLocation == -1) ProperNounLocation = x;
+                if(GetswWordType(x)== typeProNounsInward) if(ProNounLocation == -1) ProNounLocation = x;
+                if(GetswWordType(x)== typeProNounsOutward) if(ProNounLocation == -1) ProNounLocation = x;
+                if(GetswWordType(x)== typeGenderIndicator) if(ProNounOtherLocation == -1) ProNounOtherLocation = x;
+                if(GetswWordType(x)== typeJoinerWord) JoinerLocation = x;
+                if(GetswWordType(x)== typeVerb){ SetInSentenceVerbLocation(x);}
+                if(GetswWordType(x)== typeAdjective){ SetInSentenceAdjectiveLocation(x);}
+                if(GetswWordType(x)== typeAdverb){ SetInSentenceAdverbLocation(x);}
+                if(GetswWordType(x)== typePreposition){ SetInSentencePrepositionPosition(x);}
                 Pattern += GetswWordType(x);
             }
             //SetInSentencePattern(Pattern);
@@ -853,7 +1041,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             VerbMarker   = WorkingPattern.find("v");
             if(VerbMarker == -1) VerbMarker = LastPos;
             for(int x = VerbMarker; x < LastPos; x++){
-                if(WorkingPattern[x]=='n'){
+                if(WorkingPattern[x] == typeNoun){
                     SetInSentenceDirectObjectLocation(x);
                     Marked = true;
                     break;
@@ -882,9 +1070,9 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             string LocalPattern    =GetFromSentencePattern();
 
             for(int x = 0; x <=int(LocalPattern.size()); x++){
-                if(LocalPattern[x] == 'v') VerbPointer     = x;
-                if(LocalPattern[x] == 'q') QuestionPointer = x;
-                if(LocalPattern[x] == 'j') JoinerPointer   = x;
+                if(LocalPattern[x] == typeVerb) VerbPointer     = x;
+                if(LocalPattern[x] == typeQuestion) QuestionPointer = x;
+                if(LocalPattern[x] == typeJoinerWord) JoinerPointer   = x;
             }
 
             if( (VerbPointer < 0) && (!GetFromSentenceIsQuestion()) ) Checking = false; //no verb, cannot find gist without it(yet)
@@ -994,20 +1182,20 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
 
             //Check for noun possible in this pattern 'duIduvu'
             // the unknown follows a determiner and then has a preposition, most likely a noun a position 1
-            PatternPointer = LocalPattern.find("duI");
+            PatternPointer = LocalPattern.find("du>");
             while(PatternPointer >=0){
-                LocalPattern[PatternPointer+1] = 'n';
-                SetswWordType('n',PatternPointer+1);
+                LocalPattern[PatternPointer+1] = typeNoun;
+                SetswWordType(typeNoun,PatternPointer+1);
                 SetInSentencePattern(LocalPattern);
-                PatternPointer = LocalPattern.find("duI");   //check again
+                PatternPointer = LocalPattern.find("du>");   //check again
                 SettingPattern = false;
                 //break;} // allow next pattern check to proceed
                 }
 
             PatternPointer = LocalPattern.find("duvu");
             if(PatternPointer >= 0){
-                LocalPattern[PatternPointer+1] = 'n';
-                SetswWordType('n',PatternPointer+1);
+                LocalPattern[PatternPointer+1] = typeNoun;
+                SetswWordType(typeNoun,PatternPointer+1);
                 SetInSentencePattern(LocalPattern);
                 break;}
 
@@ -1015,11 +1203,23 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
             PatternPointer = LocalPattern.find("pu"); //check for implied noun by ownership, i.e. "his bone"
             if(PatternPointer >= 0){
                if((GetswWordsLC(PatternPointer) == "his") || (GetswWordsLC(PatternPointer) == "her")){
-                   LocalPattern[PatternPointer+1] = 'n';
-                   SetswWordType('n',PatternPointer+1);
+                   LocalPattern[PatternPointer+1] = typeNoun;
+                   SetswWordType(typeNoun,PatternPointer+1);
                    SetInSentencePattern(LocalPattern);
                    SettingPattern = false;
                    break;}
+            }
+
+            //TODO: Some process is over riding this
+            PatternPointer = LocalPattern.find(">duu");//check for adject-noun combo
+            if(PatternPointer >=0 ){
+                if(GetswWordsLC(PatternPointer+2)[GetswWordsLC(PatternPointer+2).size()-1] == 'y'){
+                    LocalPattern[PatternPointer+2] = typeAdjective;
+                    LocalPattern[PatternPointer+3] = typeNoun;
+                    SetInSentencePattern(LocalPattern);
+                    SettingPattern = false;
+                    break;
+                }
             }
 
          SettingPattern = false;

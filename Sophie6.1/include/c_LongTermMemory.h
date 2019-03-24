@@ -116,6 +116,7 @@ class c_LongTermMemory : public c_SubjectStack
               CopySentence.SetInSentenceDirectObjectLocation(GetFromSentenceDirectObjectLocation());// 34) direct object location
               CopySentence.SetInSentencesPolarity(GetFromSentencesPolarity());                      // 35) polarity
               CopySentence.SetInSentencesSentenceTense(GetFromSentencesSentenceTense());            // 36) sentence tense p-past c-current u-undefined
+              CopySentence.SetInSentenceTaggedSentence(GetFromSentenceTaggedSentence());            // 37) tagged sentence
 
 
 
@@ -176,6 +177,7 @@ class c_LongTermMemory : public c_SubjectStack
 
             //*********NEW STRING MAP STORAGE*********************
             //*********Original string is index*******************
+            CreateTaggedSentence();
             CopyCurrentSentence();
             strMapIT = StringIndexedSentenceMap.find(GetFromSentenceOriginalString());
             if(strMapIT == StringIndexedSentenceMap.end()){
@@ -344,11 +346,20 @@ class c_LongTermMemory : public c_SubjectStack
 
 // TODO (Dan#1#): finish storing to memory cells the remaining lists
                 if(GetFromSentenceSubjectLocation()==x) SetMemoryCellSubjectUsageCounterUpOne(GetswWordsLC(x));/// 26 subject usage count
+                if(GetFromSentenceDirectObjectLocation()==x) SetMemoryCellDirectObjectUsageCounterUpOne(GetswWordsLC(x));/// 27 Direct Object usage count
+                if(GetFromSentenceIndirectObjectLocation()==x) SetMemoryCellIndirectObjectUsageCounterUpOne(GetswWordsLC(x));/// 28 Indirect Object usage count
+                if(GetswWordType(x)== typeNoun) SetMemoryCellNounUsageCounterUpOne(GetswWordsLC(x));        /// 29 noun usage count
+                if(GetswWordType(x)== typeVerb) SetMemoryCellVerbUsageCounterUpOne(GetswWordsLC(x));        /// 30 verb usage count
+                if(GetswWordType(x)== typeAdjective) SetMemoryCellAdjectiveUsageCounterUpOne(GetswWordsLC(x));/// 31 Adjective usage count
+                if(GetswWordType(x)== typeAdverb) SetMemoryCellAdverbUsageCounterUpOne(GetswWordsLC(x));    /// 32 Adverb usage count
+                if(GetswWordType(x)== typePronoun) SetMemoryCellPronounUsageCounterUpOne(GetswWordsLC(x));  /// 33 Pronoun usage count
+                if(GetswWordType(x)== typeProperNoun) SetMemoryCellPropernounUsageCounterUpOne(GetswWordsLC(x));/// 34 Propernoun usage count
+
+
 
             }// end for word count loop x iterator
         }
 //********************END OF SaveAllSentenceWordDataToMemory()***********************************************
-
 
 
         void LTMSaveSentencesInFile(){
@@ -360,6 +371,8 @@ class c_LongTermMemory : public c_SubjectStack
                       //if(!strMapIT->second.GetFromSentenceIsQuestion()){
                         SentenceDataFile << "Original string           ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceOriginalString() << Deliminator;
+                        SentenceDataFile << "Tagged Sentence           ,";
+                        SentenceDataFile << strMapIT->second.GetFromSentenceTaggedSentence() << Deliminator;
                         SentenceDataFile << "Gist of sentence          ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceGistOfSentence() << Deliminator;
                         SentenceDataFile << "subGist of sentence       ,";
@@ -463,6 +476,9 @@ class c_LongTermMemory : public c_SubjectStack
 
                 CopySentence.InitializeVars();
                 CopySentence.SetInSentenceOriginalString(strLineData);                    //set OriginalString
+                getline (SentenceDataFile,strLineData,',');
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetInSentenceTaggedSentence(strLineData);                    //set tagged sentence
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetInSentenceGistOfSentence(strLineData);                    //set Gist data

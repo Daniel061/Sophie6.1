@@ -122,19 +122,19 @@ public:
 
             //if(MemoryWordType == '\0') MemoryWordType = 'u';                      //removed due to redundancy
 
-            if(MemoryWordType == 'u'){                                              //Nothing in memory cell
+            if(MemoryWordType == typeUnknownWord){                                  //Nothing in memory cell
                 SelectedWordType = LocalWordType;}                                  //  -use type from language helper, could still be 'u'
             else
                 if(MemoryWordType == LocalWordType){
                     SelectedWordType = LocalWordType;
                     }
                     else
-                        if((MemoryWordType == 'u') && ( LocalWordType != 'u')){     //Use LocalWordType
+                        if((MemoryWordType == typeUnknownWord) && ( LocalWordType != typeUnknownWord)){     //Use LocalWordType
                             SelectedWordType = LocalWordType;
                             }
                             else
-                                if((MemoryWordType != 'u') &&
-                                (LocalWordType != 'u') &&
+                                if((MemoryWordType != typeUnknownWord) &&
+                                (LocalWordType != typeUnknownWord) &&
                                 (MemoryWordType != LocalWordType)){
                                    //cout << "Disagreement!\n";
                                   //disagreement here!!!                            //We have a disagreement here between memory cell wordtype and language helper
@@ -143,7 +143,7 @@ public:
                                    LocalAltLocation      = x;                       //save x for storage function   ***Possible double disagreement******
                                    SelectedWordType      = MemoryWordType;}         // use memory type for now ****NEEDS REVIEW*****
                                     else
-                                        if(SentenceWordType != 'u'){
+                                        if(SentenceWordType != typeUnknownWord){
                                             SelectedWordType = SentenceWordType;}   //use c_Sentence wordtype
                                                 else
                                                 {
@@ -153,16 +153,16 @@ public:
 
          LocalPattern += SelectedWordType;                                          //build the pattern as we go
          SetswWordType(SelectedWordType,x);                                         //set the selected word type in the sentence
-         if(SelectedWordType == 'n') LocalNounCount++;                              //count the nouns
-         if(SelectedWordType == 'v') LocalVerbLocation = x;                         //save the verb location
-         if(SelectedWordType == 'g') LocalNamePointer = x;                          //save the name pointer
-         if(SelectedWordType == 'A') LocalAdverbLocation = x;                       //save the Adverb location
-         if(SelectedWordType == 'a') LocalAdjectiveLocation = x;                    //save the adjective location
-         if(SelectedWordType == 'c') SetInSentenceConjunctionLocation(x);           //save the conjunction location
-         if(SelectedWordType == 'I') SetInSentenceHasPreposition(true);             //flag preposition in sentence
+         if(SelectedWordType == typeNoun) LocalNounCount++;                         //count the nouns
+         if(SelectedWordType == typeVerb) LocalVerbLocation = x;                    //save the verb location
+         if(SelectedWordType == typeAssociativeWord) LocalNamePointer = x;          //save the name pointer
+         if(SelectedWordType == typeAdverb) LocalAdverbLocation = x;                //save the Adverb location
+         if(SelectedWordType == typeAdjective) LocalAdjectiveLocation = x;          //save the adjective location
+         if(SelectedWordType == typeConjunction) SetInSentenceConjunctionLocation(x);//save the conjunction location
+         if(SelectedWordType == typePreposition) SetInSentenceHasPreposition(true); //flag preposition in sentence
 
          LocalGenderClass = GetMemoryCellcharGenderClass(GetswWordsLC(x),Result);   //take care of GenderClass in sentence
-         if(LocalGenderClass != 'u')
+         if(LocalGenderClass != typeUnknownWord)
             SetswGenderClassInSentence(x,LocalGenderClass);
 
         SetswWordType(SelectedWordType,x);                                          //update word type in sentence class
@@ -192,7 +192,7 @@ public:
         FindAndSetGistOfSentence();                                                 //store gist,subgist and supportive phrase in sentence
 
         for (int x = 0; x < int(LocalPattern.size()); x++ ){                        //for calc in understanding level
-            if(LocalPattern[x] == 'u')
+            if(LocalPattern[x] == typeUnknownWord)
               LocalUnknownCount ++;
             else
               LocalUnderstandingLevel ++;
@@ -267,7 +267,7 @@ public:
           //SetIsPluralWord(x,Getmemorycell)   memory cell doesn't agree with this type
           //SetswisContraction(x,getmemorycellisContraction)
 
-          if(GetMemoryCellcharWordTense(GetswWordsLC(x),Result)!='u')            //set swWordTense if not unknown
+          if(GetMemoryCellcharWordTense(GetswWordsLC(x),Result)!=typeUnknownWord)            //set swWordTense if not unknown
                 SetswWordTense(x,GetMemoryCellcharWordTense(GetswWordsLC(x),Result));
 
 
@@ -304,17 +304,17 @@ public:
         string cSentenceDirection   = "muYPMGx";
 
         for(int x =0; x<= GetFromSentenceWordCount(); x++){
-            if((GetswWordType(x)== 'm')&&(DirectionDetected == -1)){ DirectionDetected = 0;}        //mentioned me, so to me
+            if((GetswWordType(x)== typeProNounsInward)&&(DirectionDetected == -1)){ DirectionDetected = 0;}        //mentioned me, so to me
              else
-                if((GetswWordType(x)=='y')&&(DirectionDetected == -1)) DirectionDetected = 1;       //user mentioned self, so to user
+                if((GetswWordType(x)==typeProNounsOutward)&&(DirectionDetected == -1)) DirectionDetected = 1;       //user mentioned self, so to user
                   else
-                    if((GetswWordType(x)=='B')&&(DirectionDetected == -1)) DirectionDetected = 2;}  //user used a pronoun
+                    if((GetswWordType(x)==typeGenderDeterminer)&&(DirectionDetected == -1)) DirectionDetected = 2;}  //user used a pronoun
 
-        if(GetswWordType(0) == 'v'){
+        if(GetswWordType(0) == typeVerb){
             if( (GetswWordsLC(0)=="is") || (GetswWordsLC(0)=="can") || (GetswWordsLC(0)== "will") || (GetswWordsLC(0)=="are") || (GetswWordsLC(0)== "do") || (GetswWordsLC(0)=="would") ){
                 DirectionDetected = 3;}}                                                          //most likely a question
 
-        PatternMatch = WorkingPattern.find('g');
+        PatternMatch = WorkingPattern.find(typeAssociativeWord);
         if(PatternMatch >=0) DirectionDetected = 4;                                               //user mentioned 'name' in statement
 
         PatternMatch = WorkingPattern.find("vmv");      //i.e. do you know

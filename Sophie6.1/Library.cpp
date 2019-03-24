@@ -19,6 +19,36 @@
 
 using namespace std;
 extern string Version;
+char typeDeterminer       = 'd';
+char typeVerb             = 'v';
+char typeAdverb           = 'A';
+char typePronoun          = 'p';
+char typeProperNoun       = 'P';
+char typeNoun             = 'n';
+char typeAdjective        = 'a';
+char typeSentenceBreak    = '_';
+char typeContraction      = 'C';
+char typeConjunction      = 'c';
+char typeProNounsInward   = 'm';
+char typeProNounsOutward  = 'y';
+char typeQuestion         = 'q';
+char typeReplacementWord  = 'r';
+char typeDirective        = 'X';
+char typeJoinerWord       = '+';
+char typeAssociativeWord  = 'g';
+char typePluralPronoun    = 'N';
+char typeThrowAwayWord    = 't';
+char typeGenderIndicator  = 'G';
+char typeGreetingsWord    = 'W';
+char typeGenderDeterminer = 'B';
+char typeFemaleClass      = 'f';
+char typeMaleClass        = 'b';
+char typePreposition      = '>';
+char typeUnknownWord      = 'u';
+char typeNumericWord      = '#';
+char typeExclamation      = 'E';
+
+
 
         /// Checks the current file version after the second decimal,
         ///   against the one read.i.e. 6.1.02a.009.28  02a is the file version

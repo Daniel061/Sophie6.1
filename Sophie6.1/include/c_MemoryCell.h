@@ -65,16 +65,22 @@ class c_MemoryCell
         int    pTimesUsedAsSubject;                // 28) Subject usage count, int to 0
         int    pTimesUsedAsIndirectObject;         // 29) Indirect object usage count, int to 0
         int    pTimesUsedAsDirectObject;           // 30) Direct Object usage count, int to 0
+        int    pTimesUsedAsNoun;                   // 31) Noun usage count, int to 0
+        int    pTimesUsedAsVerb;                   // 32) Verb usage count, int to 0
+        int    pTimesUsedAsAdjective;              // 33) Adjective usage count, int to 0
+        int    pTimesUsedAsAdverb;                 // 34) Adverb usage count, int to 0
+        int    pTimesUsedAsPronoun;                // 35) Pronoun usage count, int to 0
+        int    pTimesUsedAsPropernoun;             // 36) Propernoun usage count, int to 0
 
 
 
-        unordered_set <string> pCellMiniDefinition;// 31) from GistOfSentence if this word was a subject
+        unordered_set <string> pCellMiniDefinition;// 37) from GistOfSentence if this word was a subject
                                                    //      can use list count as number of times used as subject
 
-        unordered_set <string> adjectiveList;      // 32) Adjective List for this word
-        unordered_set <string> verbList;           // 33) Verbs used with this word
-        unordered_set <string> adverbList;         // 34) Adverbs used with this word
-        unordered_set <string> relatedNounList;    // 35) Nouns related to this word
+        unordered_set <string> adjectiveList;      // 38) Adjective List for this word
+        unordered_set <string> verbList;           // 39) Verbs used with this word
+        unordered_set <string> adverbList;         // 40) Adverbs used with this word
+        unordered_set <string> relatedNounList;    // 41) Nouns related to this word
         unordered_set <string>::iterator SetIT;    // Local iterator for these sets
 
 
@@ -92,6 +98,32 @@ class c_MemoryCell
         int    GetpTimesUsedAsDirectObject(){return pTimesUsedAsDirectObject;}
         void   IncrementpTimesUsedAsDirectObject(){pTimesUsedAsDirectObject++;}
         void   SetpTimesUsedAsDirectObject(int newVal){pTimesUsedAsDirectObject = newVal;}
+
+        int    GetpTimesUsedAsNoun(){return pTimesUsedAsNoun;}
+        void   IncrementpTimesUsedAsNoun(){pTimesUsedAsNoun++;}
+        void   SetpTimesUsedAsNoun(int newVal){pTimesUsedAsNoun = newVal;}
+
+        int    GetpTimesUsedAsVerb(){return pTimesUsedAsVerb;}
+        void   IncrementpTimesUsedAsVerb(){pTimesUsedAsVerb++;}
+        void   SetpTimesUsedAsVerb(int newVal){pTimesUsedAsVerb = newVal;}
+
+        int    GetpTimesUsedAsAdjective(){return pTimesUsedAsAdjective;}
+        void   IncrementpTimesUsedAsAdjective(){pTimesUsedAsAdjective++;}
+        void   SetpTimesUsedAsAdjective(int newVal){pTimesUsedAsAdjective = newVal;}
+
+        int    GetpTimesUsedAsAdverb(){return pTimesUsedAsAdverb;}
+        void   IncrementpTimesUsedAsAdverb(){pTimesUsedAsAdverb++;}
+        void   SetpTimesUsedAsAdverb(int newVal){pTimesUsedAsAdverb = newVal;}
+
+
+        int    GetpTimesUsedAsPronoun(){return pTimesUsedAsPronoun;}
+        void   IncrementpTimesUsedAsPronoun(){pTimesUsedAsPronoun++;}
+        void   SetpTimesUsedAsPronoun(int newVal){pTimesUsedAsPronoun = newVal;}
+
+
+        int    GetpTimesUsedAsPropernoun(){return pTimesUsedAsPropernoun;}
+        void   IncrementpTimesUsedAsPropernoun(){pTimesUsedAsPropernoun++;}
+        void   SetpTimesUsedAsPropernoun(int newVal){pTimesUsedAsPropernoun = newVal;}
 
         string GetpCellVowelPattern(){return pVowelPattern;}
         void   SetpCellVowelPattern(string newVal){pVowelPattern = newVal;}
@@ -224,6 +256,12 @@ class c_MemoryCell
                 pTimesUsedAsSubject             = 0;
                 pTimesUsedAsIndirectObject      = 0;
                 pTimesUsedAsDirectObject        = 0;
+                pTimesUsedAsNoun                = 0;
+                pTimesUsedAsVerb                = 0;
+                pTimesUsedAsAdjective           = 0;
+                pTimesUsedAsAdverb              = 0;
+                pTimesUsedAsPronoun             = 0;
+                pTimesUsedAsPropernoun          = 0;
         }
 
 

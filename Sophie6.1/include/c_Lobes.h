@@ -27,6 +27,34 @@
 
 extern bool   Verbose;
 extern string Version;
+extern char typeDeterminer;
+extern char typeVerb;
+extern char typeAdverb;
+extern char typePronoun;
+extern char typeProperNoun;
+extern char typeNoun;
+extern char typeAdjective;
+extern char typeSentenceBreak;
+extern char typeContraction;
+extern char typeConjunction;
+extern char typeProNounsInward;
+extern char typeProNounsOutward;
+extern char typeQuestion;
+extern char typeReplacementWord;
+extern char typeDirective;
+extern char typeJoinerWord;
+extern char typeAssociativeWord;
+extern char typePluralPronoun;
+extern char typeThrowAwayWord;
+extern char typeGenderIndicator;
+extern char typeGreetingsWord;
+extern char typeGenderDeterminer;
+extern char typeFemaleClass;
+extern char typeMaleClass;
+extern char typePreposition;
+extern char typeUnknownWord;
+extern char typeNumericWord;
+extern char typeExclamation;
 
 
 
@@ -105,14 +133,84 @@ class c_Lobes : public c_MemoryCell
 
 //-----------------SET FUNCTIONS----------------------------------
 
-        /// Advances pTimesUsedAsSubject is strSearchBase Exists
+        /// Advances pTimesUsedAsSubject if strSearchBase Exists
         bool SetMemoryCellSubjectUsageCounterUpOne(string strSearchBase){
           bool Result = false;
           CellMapIT   = FindStringInMap(strSearchBase,Result);
                if(Result){
                    CellMapIT->second.IncrementpTimesUsedAsSubject();}
                return Result;}
-//TODO: Finish the other counters
+
+
+        /// Advances pTimesUsedAsDirectObject if strSearchBase Exists
+        bool SetMemoryCellDirectObjectUsageCounterUpOne(string strSearchBase){
+          bool Result = false;
+          CellMapIT   = FindStringInMap(strSearchBase,Result);
+               if(Result){
+                   CellMapIT->second.IncrementpTimesUsedAsDirectObject();}
+               return Result;}
+
+
+        /// Advances pTimesUsedAsNoun if strSearchBase Exists
+        bool SetMemoryCellNounUsageCounterUpOne(string strSearchBase){
+          bool Result = false;
+          CellMapIT   = FindStringInMap(strSearchBase,Result);
+               if(Result){
+                   CellMapIT->second.IncrementpTimesUsedAsNoun();}
+               return Result;}
+
+        /// Advances pTimesUsedAsIndirectObject if strSearchBase Exists
+        bool SetMemoryCellIndirectObjectUsageCounterUpOne(string strSearchBase){
+          bool Result = false;
+          CellMapIT   = FindStringInMap(strSearchBase,Result);
+               if(Result){
+                   CellMapIT->second.IncrementpTimesUsedAsIndirectObject();}
+               return Result;}
+
+
+        /// Advances pTimesUsedAsVerb if strSearchBase Exists
+        bool SetMemoryCellVerbUsageCounterUpOne(string strSearchBase){
+          bool Result = false;
+          CellMapIT   = FindStringInMap(strSearchBase,Result);
+               if(Result){
+                   CellMapIT->second.IncrementpTimesUsedAsVerb();}
+               return Result;}
+
+        /// Advances pTimesUsedAsAdjective if strSearchBase Exists
+        bool SetMemoryCellAdjectiveUsageCounterUpOne(string strSearchBase){
+          bool Result = false;
+          CellMapIT   = FindStringInMap(strSearchBase,Result);
+               if(Result){
+                   CellMapIT->second.IncrementpTimesUsedAsAdjective();}
+               return Result;}
+
+
+        /// Advances pTimesUsedAsAdverb if strSearchBase Exists
+        bool SetMemoryCellAdverbUsageCounterUpOne(string strSearchBase){
+          bool Result = false;
+          CellMapIT   = FindStringInMap(strSearchBase,Result);
+               if(Result){
+                   CellMapIT->second.IncrementpTimesUsedAsAdverb();}
+               return Result;}
+
+
+        /// Advances pTimesUsedAsPronoun if strSearchBase Exists
+        bool SetMemoryCellPronounUsageCounterUpOne(string strSearchBase){
+          bool Result = false;
+          CellMapIT   = FindStringInMap(strSearchBase,Result);
+               if(Result){
+                   CellMapIT->second.IncrementpTimesUsedAsPronoun();}
+               return Result;}
+
+
+        /// Advances pTimesUsedAsPropernoun if strSearchBase Exists
+        bool SetMemoryCellPropernounUsageCounterUpOne(string strSearchBase){
+          bool Result = false;
+          CellMapIT   = FindStringInMap(strSearchBase,Result);
+               if(Result){
+                   CellMapIT->second.IncrementpTimesUsedAsPropernoun();}
+               return Result;}
+
 
         /// Sets pDaysOld if strSearchBase exists,
         ///  returns True if added, else false if updated,
@@ -544,14 +642,14 @@ class c_Lobes : public c_MemoryCell
           UnknownCount    = 0;
           KnownCount      = 0;
           for(int x = 0; x < int(RightLobeCellMap.size()); x++){
-            if(CellMapIT->second.GetpCellWordType() == 'n') NounCount ++;
-            if(CellMapIT->second.GetpCellWordType() == 'v') VerbCount ++;
-            if(CellMapIT->second.GetpCellWordType() == 'A') AdverbCount ++;
-            if(CellMapIT->second.GetpCellWordType() == 'a') AdjectiveCount ++;
-            if(CellMapIT->second.GetpCellWordType() == 'p') PronounCount ++;
-            if(CellMapIT->second.GetpCellWordType() == 'P') PropernounCount ++;
-            if(CellMapIT->second.GetpCellWordType() == 'u') UnknownCount ++;
-            if(CellMapIT->second.GetpCellWordType() != 'u') KnownCount ++;
+            if(CellMapIT->second.GetpCellWordType() == typeNoun) NounCount ++;
+            if(CellMapIT->second.GetpCellWordType() == typeVerb) VerbCount ++;
+            if(CellMapIT->second.GetpCellWordType() == typeAdverb) AdverbCount ++;
+            if(CellMapIT->second.GetpCellWordType() == typeAdjective) AdjectiveCount ++;
+            if(CellMapIT->second.GetpCellWordType() == typePronoun) PronounCount ++;
+            if(CellMapIT->second.GetpCellWordType() == typeProperNoun) PropernounCount ++;
+            if(CellMapIT->second.GetpCellWordType() == typeUnknownWord) UnknownCount ++;
+            if(CellMapIT->second.GetpCellWordType() != typeUnknownWord) KnownCount ++;
 
             CellMapIT++;
           }
@@ -1259,29 +1357,7 @@ class c_Lobes : public c_MemoryCell
 
           }
 
-//            /// Returns pCellSingularForm from memorycell
-//            ///  Returns "" null, if memorycell doesn't exist
-//            ///  Send owner string data in strSearchBase
-//            ///   currently right side cells only, don't see a need for left side yet
-//          string GetMemoryCellpSingularForm(string strSearchBase){
-//                bool Result = false;
-//                CellMapIT       = FindStringInMap(strSearchBase,Result);
-//                if(Result){
-//                    return CellMapIT->second.GetpCellSingularForm();
-//                }
-//                else
-//                return "";}
-//
-//            /// Sets pCellIsSingular in memorycell
-//            ///  if memorycell exist
-//            ///  can send string data or tokenized string data for address
-//            ///  currently right side cells only, don't see a need for left side yet
-//          void SetMemoryCellpCellSingularForm(string strSearchBase, string SingularForm){
-//                bool Result = false;
-//                CellMapIT       = FindStringInMap(strSearchBase,Result);
-//                if(Result){
-//                    return CellMapIT->second.SetpCellSingularForm(SingularForm);
-//                }}
+
 
 
 
@@ -1325,6 +1401,13 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Times used as sbj      ," << CellMapIT->second.GetpTimesUsedAsSubject() << Delim;
                     LearnedDataFile << "Times used as ind obj  ," << CellMapIT->second.GetpTimesUsedAsIndirectObject() << Delim;
                     LearnedDataFile << "Times used as dir obj  ," << CellMapIT->second.GetpTimesUsedAsDirectObject() << Delim;
+                    LearnedDataFile << "Times used as Noun     ," << CellMapIT->second.GetpTimesUsedAsNoun() << Delim;
+                    LearnedDataFile << "Times used as Verb     ," << CellMapIT->second.GetpTimesUsedAsVerb() << Delim;
+                    LearnedDataFile << "Times used as Adjective," << CellMapIT->second.GetpTimesUsedAsAdjective() << Delim;
+                    LearnedDataFile << "Times used as Adverb   ," << CellMapIT->second.GetpTimesUsedAsAdverb() << Delim;
+                    LearnedDataFile << "Times used as Pronoun  ," << CellMapIT->second.GetpTimesUsedAsPronoun() << Delim;
+                    LearnedDataFile << "Times used as Propernoun," << CellMapIT->second.GetpTimesUsedAsPropernoun() << Delim;
+
 
                 Count = CellMapIT->second.GetpCellMiniDefinitionCount();
                 LearnedDataFile << "Number of Mini Defs          ," << Count << Delim;
@@ -1484,6 +1567,24 @@ class c_Lobes : public c_MemoryCell
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpTimesUsedAsDirectObject(stoi(strLineData,&decType)); //set times used as direct object
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpTimesUsedAsNoun(stoi(strLineData,&decType));         //set times used as noun
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpTimesUsedAsVerb(stoi(strLineData,&decType));         //set times used as Verb
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpTimesUsedAsAdjective(stoi(strLineData,&decType));    //set times used as adjective
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpTimesUsedAsAdverb(stoi(strLineData,&decType));       //set times used as adverb
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpTimesUsedAsPronoun(stoi(strLineData,&decType));      //set times used as pronoun
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpTimesUsedAsPropernoun(stoi(strLineData,&decType));   //set times used as propernoun
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         Count = stoi(strLineData,&decType);                                  //got number of mini defs

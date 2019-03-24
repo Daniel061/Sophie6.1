@@ -33,11 +33,12 @@ int   Iterations = 0;
 int   vc,nc,adc,ac,pc,pn,ukn,kn;
 
 // GLOBALS
-string Version       = "6.1d.04a.EN.012.002";
+string Version       = "6.1d.05b.EN.012.002";
 string ReleaseMode   = "debug";
 bool Verbose         = false;
 bool StoryMode       = false;
 bool EchoTraining    = true;
+bool TrainingMode    = false;
 int  BlockID         = -1;
 // End GLOBALS
 
@@ -62,12 +63,11 @@ int main()
 
 
 ///***SET SOME GLOBAL VARIABLES*****************************************
-        Brain.SetMyGender('f');
+        Brain.SetMyGender(typeFemaleClass);
         Brain.SetMyName("Sophie");
         Brain.SlowSpeak("Remembering...",false,0,false);
         Brain.LTMReadSentencesInFile();
         Brain.LobesReadTheLearnedWords();
-        Brain.FirstRunWelcomeMessage();
         string Raw_Sentence;
         Verbose = false;
 //***********END SETTING GLOBALS****************************************
@@ -79,6 +79,7 @@ ifstream myfile ("trainingdata.dat");
 // -enable StoryMode for no response processing
 // -disable StoryMode when finished
    StoryMode         = true;
+   TrainingMode      = true;
    Verbose           = false;
    Elapsed           = clock();
    string CommentTag = "";
@@ -95,7 +96,7 @@ ifstream myfile ("trainingdata.dat");
         TrainingFileSet.insert(TrainingIT,Raw_Sentence);}
     }
     myfile.close();
-    while ((NewLevel-OldLevel)> 1){
+    while ((NewLevel-OldLevel)> .5){
         cout << OldLevel << " " << NewLevel << endl;
         Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,OldLevel);
         for(TrainingIT = TrainingFileSet.begin(); TrainingIT != TrainingFileSet.end(); TrainingIT++){
@@ -126,6 +127,10 @@ StoryMode = false;
 Verbose   = false;
 //*******************END TRAINING FILE READ****************************
 
+if(!TrainingMode)
+    Brain.FirstRunWelcomeMessage();
+else
+    TrainingMode = false;
 
 cout << ">>";
 getline (cin,Raw_Sentence);

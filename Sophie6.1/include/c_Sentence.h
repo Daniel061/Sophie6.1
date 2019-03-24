@@ -44,6 +44,7 @@ class c_Sentence : public c_Personality
         int    sNamePointer;                     // position of the word name
         int    sPrepositionPosition;             // position of preposition
         string sOriginalString;                  // the whole unedited string  initialize to ""
+        string sTaggedSentence;                  // i.e. A[d] woman[G] is[v] not[u] riding[v] a[d] horse[n]
         string sPatternString;                   // i.e. dnvua  initialize to ""
         string sPreProcessedPattern;             // i.e. duvu
         string sGistOfSentence;                  // the meat of the phrase. i.e the dog is black = is black, initialize to ""
@@ -83,38 +84,42 @@ class c_Sentence : public c_Personality
                 sGistOfSentence                = "";        // 7)
                 sSubGistOfSentence             = "";        // 8)
                 sSupportivePhrase              = "";        // 9)
-                sHasPreposition                = false;     // 10)
-                sHasPluralPronoun              = false;     // 11)
-                sHasPunctuation                = false;     // 12)
-                sIsQuestion                    = false;     // 13)
-                sHasContraction                = false;     // 14)
-                sHasGreetingsWord              = false;     // 15)
-                sHasGenderReference            = false;     // 16)
-                sHasBeenUnderstood             = false;     // 17)
-                sHasGenderDeterminer           = false;     // 18)
-                sHasDualSubjects               = false;     // 19)
-                sHasPronoun                    = false;     // 20)
-                sSentenceDirection             = -1;        // 21)
-                sPunctuation                   = 'x';       // 22) not set or does not have
-                sPolarity                      = 'p';       // 23)
-                sSentenceTense                 = 'u';       // 24)
-                sConjunctionLocation           = -1;        // 25)
-                sAdverbLocation                = -1;        // 26)
-                sNounCount                     = -1;        // 27)
-                sVerbLocation                  = -1;        // 28)
-                sAdjectiveLocation             = -1;        // 29)
-                sNamePointer                   = -1;        // 30)
-                sPrepositionPosition           = -1;        // 31)
-                sSecondSubjectLocation         = -1;        // 32)
-                sIndirectObjectLocation        = -1;        // 33)
-                sDirectObjectLocation          = -1;        // 34)
-                sUnderstandingLevel            = -1;        // 35)
-                sDaysOld                       = 0;         // 36)
+                sTaggedSentence                = "";        // 10)
+                sHasPreposition                = false;     // 11)
+                sHasPluralPronoun              = false;     // 12)
+                sHasPunctuation                = false;     // 13)
+                sIsQuestion                    = false;     // 14)
+                sHasContraction                = false;     // 15)
+                sHasGreetingsWord              = false;     // 16)
+                sHasGenderReference            = false;     // 17)
+                sHasBeenUnderstood             = false;     // 18)
+                sHasGenderDeterminer           = false;     // 19)
+                sHasDualSubjects               = false;     // 20)
+                sHasPronoun                    = false;     // 21)
+                sSentenceDirection             = -1;        // 22)
+                sPunctuation                   = 'x';       // 23) not set or does not have
+                sPolarity                      = 'p';       // 24)
+                sSentenceTense                 = 'u';       // 25)
+                sConjunctionLocation           = -1;        // 26)
+                sAdverbLocation                = -1;        // 27)
+                sNounCount                     = -1;        // 28)
+                sVerbLocation                  = -1;        // 29)
+                sAdjectiveLocation             = -1;        // 30)
+                sNamePointer                   = -1;        // 31)
+                sPrepositionPosition           = -1;        // 32)
+                sSecondSubjectLocation         = -1;        // 33)
+                sIndirectObjectLocation        = -1;        // 34)
+                sDirectObjectLocation          = -1;        // 35)
+                sUnderstandingLevel            = -1;        // 36)
+                sDaysOld                       = 0;         // 37)
                 WordMap.clear();}
 
 
        ///*******************ALL GLOBAL->SENTENCE DATA FUNCTIONS***************************
        ///**********'InSentence/FromSentence' is the function source flag******************
+
+        string GetFromSentenceTaggedSentence(){return sTaggedSentence;}
+        void   SetInSentenceTaggedSentence(string newVal){sTaggedSentence = newVal;}
 
         char   GetFromSentencesPolarity(){return sPolarity;}
         void   SetInSentencesPolarity(char newVal){sPolarity = newVal;}
@@ -330,7 +335,7 @@ class c_Sentence : public c_Personality
 
         int    GetAdverbLocation(){
           for(int x =0; x < sWordCount; x++){
-            if(GetswWordType(x)=='A') sAdverbLocation = x;}
+            if(GetswWordType(x)==typeAdverb) sAdverbLocation = x;}
             return sAdverbLocation;
           }
 
@@ -349,12 +354,21 @@ class c_Sentence : public c_Personality
         int GetVerbPointingToAdjective(){
             int VerbLoc; VerbLoc = -1;
             for(int x = 0; x < GetFromSentenceWordCount(); x++)
-                if((GetswWordType(x)=='v') & (GetswWordType(x+1)=='a')) VerbLoc = x;
+                if((GetswWordType(x)==typeVerb) & (GetswWordType(x+1)==typeAdjective)) VerbLoc = x;
             if(VerbLoc == -1){
                 for(int x = 0; x< GetFromSentenceWordCount(); x++){
-                    if(GetswWordType(x) == 'v')VerbLoc = x;}}
+                    if(GetswWordType(x) == typeVerb)VerbLoc = x;}}
             return VerbLoc;
             }
+
+
+        void CreateTaggedSentence(){
+            string TaggedString = "";
+            for(int x = 0; x < GetFromSentenceWordCount(); x++){
+                TaggedString += GetswWords(x) + "[" + GetswWordType(x) + "] ";
+            }
+            SetInSentenceTaggedSentence(TaggedString);
+        }
 
 //----------------------PARSE---------------------------------------------------------------------------------------------------------
         void Parse (string str_Sentence_Data)
@@ -430,8 +444,10 @@ class c_Sentence : public c_Personality
                 while(t >=0){
                     str_Sentence_Data = str_Sentence_Data.substr(0,t) + " " + str_Sentence_Data.substr(t);
                     t = str_Sentence_Data.find(", ",t+2);
+                    int_Last_Pos++;
                 }
                 SetInSentenceOriginalString(str_Sentence_Data);  //put back expanded data
+
             //--------------------------------NOW PARSE THE SENTENCE---------------------------------------------------------
 
                 t = str_Sentence_Data.find(" ",x);                              //find first occurrence of space after word
@@ -470,7 +486,7 @@ class c_Sentence : public c_Personality
                     tmpWordData = WordMap[x].Getw_WordForm();       //pull the raw word data from the map
                     QuoteLoc = tmpWordData.find('\'');
                     if((QuoteLoc >=0)&(QuoteLoc<int_Last_Pos)){
-                        WordMap[x].Setw_WordType('C');              //Set Contraction flag
+                        WordMap[x].Setw_WordType(typeContraction);  //Set Contraction flag
                         WordMap[x].Setw_isContraction(true);        //flag the word
                         SetInSentenceHasContraction(true);          //notify c_sentence there is a contraction
                         sHasContraction = true;}
