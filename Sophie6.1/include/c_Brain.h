@@ -70,7 +70,7 @@ class c_Brain : public c_Cerebellum
               SaveSentenceInLongTermMemory(strData);             // update Long term memory
               GatherAndSetAllSentenceData();                     // pull all data into c_sentence and c_words
                                                                  //  from memory and language helper
-              DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,tmpInputData);
+              //DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,tmpInputData);
               DecipherCurrentSentence(strData);                  // Work with what is known at this point
               RebuildPattern();                                  // Updated corrected pattern
               ReVerseBuildPattern();                             // push pattern data to word type

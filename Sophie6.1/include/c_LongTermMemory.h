@@ -52,6 +52,9 @@ class c_LongTermMemory : public c_SubjectStack
 
 
         void CopyCurrentSentence(){
+            bool UpDating = false;
+            strMapIT = StringIndexedSentenceMap.find(GetFromSentenceOriginalString());
+            if(strMapIT != StringIndexedSentenceMap.end()) UpDating = true;
             CopySentence.InitializeVars();
             for (int x =0; x<GetFromSentenceWordCount(); x++){
                 CopySentence.SetswWords(x,GetswWords(x));                                         //1  raw data
@@ -86,7 +89,10 @@ class c_LongTermMemory : public c_SubjectStack
               CopySentence.SetInSentenceConjunctionLocation(GetFromSentenceConjunctionLocation());  // 4)  conjunction location
               CopySentence.SetInSentenceSentenceDirection(GetFromSentenceSentenceDirection());      // 5)  sentence direction
               CopySentence.SetInSentencePattern(GetFromSentencePattern());                          // 6)  pattern
-              CopySentence.SetInSentencePreProcessedPattern(GetFromSentencePreProcessedPattern());  // 7)  preprocessed pattern
+              if(UpDating)
+                CopySentence.SetInSentencePreProcessedPattern(strMapIT->second.GetFromSentencePreProcessedPattern(),true);
+                else
+                CopySentence.SetInSentencePreProcessedPattern(GetFromSentencePreProcessedPattern());// 7)  preprocessed pattern
               CopySentence.SetInSentenceHasPluralPronoun(GetFromSentenceHasPluralPronoun());        // 8)  has plural pronoun
               CopySentence.SetInSentenceHasPunctuation(GetFromSentenceHasPunctuation());            // 9)  has punctuation
               CopySentence.SetInSentencePunctuation(GetFromSentencePunctuation());                  // 10) punctuation char
@@ -117,6 +123,9 @@ class c_LongTermMemory : public c_SubjectStack
               CopySentence.SetInSentencesPolarity(GetFromSentencesPolarity());                      // 35) polarity
               CopySentence.SetInSentencesSentenceTense(GetFromSentencesSentenceTense());            // 36) sentence tense p-past c-current u-undefined
               CopySentence.SetInSentenceTaggedSentence(GetFromSentenceTaggedSentence());            // 37) tagged sentence
+              CopySentence.SetInSentencePrimeSubject(GetFromSentencePrimeSubject());                // 38) set subject word or phrase
+              CopySentence.SetInSentenceDirectObject(GetFromSentenceDirectObject());                // 39) set direct object word or phrase
+              CopySentence.SetInSentenceIndirectObject(GetFromSentenceIndirectObject());            // 40) set indirect object word or phrase
 
 
 
@@ -189,7 +198,7 @@ class c_LongTermMemory : public c_SubjectStack
                if(Verbose)
                   cout << "Second pass Pattern:" << OldPreprocessedPattern << endl;
                StringIndexedSentenceMap.erase(strMapIT);
-               CopySentence.SetInSentencePreProcessedPattern(OldPreprocessedPattern);    //preserve original first pattern
+               CopySentence.SetInSentencePreProcessedPattern(OldPreprocessedPattern,true);    //preserve original first pattern, override on
                StringIndexedSentenceMap.emplace(GetFromSentenceOriginalString(),CopySentence);
             }
 
@@ -345,15 +354,15 @@ class c_LongTermMemory : public c_SubjectStack
                     SetMemoryCellVerbInList(GetswWordsLC(x),GetswVerbFromWord(x,y));}
 
 // TODO (Dan#1#): finish storing to memory cells the remaining lists
-                if(GetFromSentenceSubjectLocation()==x) SetMemoryCellSubjectUsageCounterUpOne(GetswWordsLC(x));/// 26 subject usage count
-                if(GetFromSentenceDirectObjectLocation()==x) SetMemoryCellDirectObjectUsageCounterUpOne(GetswWordsLC(x));/// 27 Direct Object usage count
-                if(GetFromSentenceIndirectObjectLocation()==x) SetMemoryCellIndirectObjectUsageCounterUpOne(GetswWordsLC(x));/// 28 Indirect Object usage count
-                if(GetswWordType(x)== typeNoun) SetMemoryCellNounUsageCounterUpOne(GetswWordsLC(x));        /// 29 noun usage count
-                if(GetswWordType(x)== typeVerb) SetMemoryCellVerbUsageCounterUpOne(GetswWordsLC(x));        /// 30 verb usage count
-                if(GetswWordType(x)== typeAdjective) SetMemoryCellAdjectiveUsageCounterUpOne(GetswWordsLC(x));/// 31 Adjective usage count
-                if(GetswWordType(x)== typeAdverb) SetMemoryCellAdverbUsageCounterUpOne(GetswWordsLC(x));    /// 32 Adverb usage count
-                if(GetswWordType(x)== typePronoun) SetMemoryCellPronounUsageCounterUpOne(GetswWordsLC(x));  /// 33 Pronoun usage count
-                if(GetswWordType(x)== typeProperNoun) SetMemoryCellPropernounUsageCounterUpOne(GetswWordsLC(x));/// 34 Propernoun usage count
+                if(GetFromSentenceSubjectLocation()==x) SetMemoryCellSubjectUsageCounterUpOne(GetswWordsLC(x));                /// 26 subject usage count
+                if(GetFromSentenceDirectObjectLocation()==x) SetMemoryCellDirectObjectUsageCounterUpOne(GetswWordsLC(x));      /// 27 Direct Object usage count
+                if(GetFromSentenceIndirectObjectLocation()==x) SetMemoryCellIndirectObjectUsageCounterUpOne(GetswWordsLC(x));  /// 28 Indirect Object usage count
+                if(GetswWordType(x)== typeNoun) SetMemoryCellNounUsageCounterUpOne(GetswWordsLC(x));                           /// 29 noun usage count
+                if(GetswWordType(x)== typeVerb) SetMemoryCellVerbUsageCounterUpOne(GetswWordsLC(x));                           /// 30 verb usage count
+                if(GetswWordType(x)== typeAdjective) SetMemoryCellAdjectiveUsageCounterUpOne(GetswWordsLC(x));                 /// 31 Adjective usage count
+                if(GetswWordType(x)== typeAdverb) SetMemoryCellAdverbUsageCounterUpOne(GetswWordsLC(x));                       /// 32 Adverb usage count
+                if(GetswWordType(x)== typePronoun) SetMemoryCellPronounUsageCounterUpOne(GetswWordsLC(x));                     /// 33 Pronoun usage count
+                if(GetswWordType(x)== typeProperNoun) SetMemoryCellPropernounUsageCounterUpOne(GetswWordsLC(x));               /// 34 Propernoun usage count
 
 
 
@@ -379,9 +388,15 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << strMapIT->second.GetFromSentenceSubGistOfSentence() << Deliminator;
                         SentenceDataFile << "Supportive phrase         ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceSupportivePhrase() << Deliminator;
+                        SentenceDataFile << "Subject string            ,";
+                        SentenceDataFile << strMapIT->second.GetFromSentencePrimeSubject() << Deliminator;
+                        SentenceDataFile << "Direct Object string      ,";
+                        SentenceDataFile << strMapIT->second.GetFromSentenceDirectObject() << Deliminator;
+                        SentenceDataFile << "Indirect Object string    ,";
+                        SentenceDataFile << strMapIT->second.GetFromSentenceIndirectObject() << Deliminator;
                         SentenceDataFile << "Word Count                ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceWordCount() << Deliminator;
-                        SentenceDataFile << "Subject Location          ,";
+                        SentenceDataFile << "Subject Loc. 0=first word ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceSubjectLocation() << Deliminator;
                         SentenceDataFile << "Indirect object location  ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceIndirectObjectLocation() << Deliminator;
@@ -393,31 +408,31 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << strMapIT->second.GetFromSentencePattern() << Deliminator;
                         SentenceDataFile << "First pattern             ,";
                         SentenceDataFile << strMapIT->second.GetFromSentencePreProcessedPattern()<< Deliminator;
-                        SentenceDataFile << "bool Has plural pronoun   ,";
+                        SentenceDataFile << "Has plural pronoun 0 = No ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceHasPluralPronoun() << Deliminator;
-                        SentenceDataFile << "bool Has punctuation      ,";
+                        SentenceDataFile << "Has punctuation    1 = yes,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceHasPunctuation() << Deliminator;
                         SentenceDataFile << "Punctuation character     ,";
                         SentenceDataFile << strMapIT->second.GetFromSentencePunctuation() << Deliminator;
-                        SentenceDataFile << "bool Is question          ,";
+                        SentenceDataFile << "Is a question             ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceIsQuestion() << Deliminator;
-                        SentenceDataFile << "bool Has contraction      ,";
+                        SentenceDataFile << "Has contractions          ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceHasContraction() << Deliminator;
-                        SentenceDataFile << "bool Has greeting word    ,";
+                        SentenceDataFile << "Has greeting words        ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceHasGreetingsWord() << Deliminator;
-                        SentenceDataFile << "bool Has gender reference ,";
+                        SentenceDataFile << "Has gender reference      ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceHasGenderReference() << Deliminator;
-                        SentenceDataFile << "bool Has been understood  ,";
+                        SentenceDataFile << "Has been understood       ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceHasBeenUnderstood() << Deliminator;
-                        SentenceDataFile << "bool Has dual subjects    ,";
+                        SentenceDataFile << "Has dual subjects         ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceHasDualSubjects() << Deliminator;
-                        SentenceDataFile << "bool Has Pronoun reference,";
+                        SentenceDataFile << "Has Pronoun reference     ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceHasPronoun() << Deliminator;
-                        SentenceDataFile << "Second subject string     ,";
+                        SentenceDataFile << "Second Subject string     ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceSecondSubject() << Deliminator;
                         SentenceDataFile << "Second subject location   ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceSecondSubjectLocation() << Deliminator;
-                        SentenceDataFile << "Sentence Polarity         ,";
+                        SentenceDataFile << "Sentence Positive/Negative,";
                         SentenceDataFile << strMapIT->second.GetFromSentencesPolarity() << Deliminator;
                         SentenceDataFile << "Sentence Tense            ,";
                         SentenceDataFile << strMapIT->second.GetFromSentencesSentenceTense() << Deliminator;
@@ -431,15 +446,13 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << strMapIT->second.GetFromSentenceAdjectiveLocation() << Deliminator;
                         SentenceDataFile << "Name pointer              ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceNamePointer() << Deliminator;
-                        SentenceDataFile << "bool Has Gender determiner,";
+                        SentenceDataFile << "Has Gender determiner     ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceHasGenderDeterminer() << Deliminator;
                         SentenceDataFile << "Conjunction location      ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceConjunctionLocation() << Deliminator;
                         SentenceDataFile << "Sentence direction        ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceSentenceDirection() << Deliminator;
-                        SentenceDataFile << "Sentence polarity         ,";
-                        SentenceDataFile << strMapIT->second.GetFromSentencesPolarity() << Deliminator;
-                        SentenceDataFile << "Days since 2019           ,";
+                        SentenceDataFile << "Days since 2019(day stamp),";
                         SentenceDataFile << strMapIT->second.GetFromSentencesDaysOld() << Deliminator;
                         SentenceDataFile << "Understanding level       ,";
                         SentenceDataFile << strMapIT->second.GetFromSentencesUnderstandingLevel() << Deliminator;
@@ -488,6 +501,15 @@ class c_LongTermMemory : public c_SubjectStack
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetInSentenceSupportivePhrase(strLineData);                  //set supportive phrase data
+                getline (SentenceDataFile,strLineData,',');
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetInSentencePrimeSubject(strLineData);                      //set subject string
+                getline (SentenceDataFile,strLineData,',');
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetInSentenceDirectObject(strLineData);                      //set direct object string
+                getline (SentenceDataFile,strLineData,',');
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetInSentenceIndirectObject(strLineData);                    //set indirect object string
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetInSentenceWordCount(stoi(strLineData,&decType));          //set WordCount
@@ -575,9 +597,6 @@ class c_LongTermMemory : public c_SubjectStack
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetInSentenceSentenceDirection(stoi(strLineData,&decType));  //set Sentence Direction
-                getline (SentenceDataFile,strLineData,',');
-                getline (SentenceDataFile,strLineData);
-                CopySentence.SetInSentencesPolarity(strLineData[0]);                      //set Sentence Polarity
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetInSentencesDaysOld(stoi(strLineData,&decType)); //set Days since 2019

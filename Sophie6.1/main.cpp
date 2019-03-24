@@ -33,12 +33,13 @@ int   Iterations = 0;
 int   vc,nc,adc,ac,pc,pn,ukn,kn;
 
 // GLOBALS
-string Version       = "6.1d.05b.EN.012.002";
+string Version       = "6.1d.07e.EN.012.007";
 string ReleaseMode   = "debug";
 bool Verbose         = false;
 bool StoryMode       = false;
-bool EchoTraining    = true;
+bool EchoTraining    = false;
 bool TrainingMode    = false;
+bool DoIterating     = false;
 int  BlockID         = -1;
 // End GLOBALS
 
@@ -81,6 +82,7 @@ ifstream myfile ("trainingdata.dat");
    StoryMode         = true;
    TrainingMode      = true;
    Verbose           = false;
+   DoIterating       = true;
    Elapsed           = clock();
    string CommentTag = "";
 //FIXME: Float Comparison does not work in release mode
@@ -96,25 +98,39 @@ ifstream myfile ("trainingdata.dat");
         TrainingFileSet.insert(TrainingIT,Raw_Sentence);}
     }
     myfile.close();
-    while ((NewLevel-OldLevel)> .5){
-        cout << OldLevel << " " << NewLevel << endl;
-        Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,OldLevel);
-        for(TrainingIT = TrainingFileSet.begin(); TrainingIT != TrainingFileSet.end(); TrainingIT++){
-            Raw_Sentence = *TrainingIT;
-            Brain.ControlProcessingUserInput(Raw_Sentence,false);
-        }
-    Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,NewLevel);
-    Iterations++;
+    if(DoIterating){
+        while (NewLevel != OldLevel){
+            cout << OldLevel << " " << NewLevel << endl;
+            Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,OldLevel);
+            for(TrainingIT = TrainingFileSet.begin(); TrainingIT != TrainingFileSet.end(); TrainingIT++){
+                Raw_Sentence = *TrainingIT;
+                Brain.ControlProcessingUserInput(Raw_Sentence,false);
+            }
+        Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,NewLevel);
+        Iterations++;}
     }
-    Elapsed = clock() - Elapsed;
-    for(TrainingIT = TrainingFileSet.begin(); TrainingIT != TrainingFileSet.end(); TrainingIT++){
-        Raw_Sentence = *TrainingIT;
-        CommentTag =  Raw_Sentence[0];
-        CommentTag += Raw_Sentence[1];
-        if(!( CommentTag == "//") ){
-                cout << *TrainingIT << endl;}
+    else
+    {
+            cout << OldLevel << " " << NewLevel << endl;
+            Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,OldLevel);
+            for(TrainingIT = TrainingFileSet.begin(); TrainingIT != TrainingFileSet.end(); TrainingIT++){
+                Raw_Sentence = *TrainingIT;
+                Brain.ControlProcessingUserInput(Raw_Sentence,false);
+            }
+        Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,NewLevel);
+        Iterations++;
     }
 
+    Elapsed = clock() - Elapsed;
+    if(EchoTraining){
+        for(TrainingIT = TrainingFileSet.begin(); TrainingIT != TrainingFileSet.end(); TrainingIT++){
+            Raw_Sentence = *TrainingIT;
+            CommentTag =  Raw_Sentence[0];
+            CommentTag += Raw_Sentence[1];
+            if(!( CommentTag == "//") ){
+                    cout << *TrainingIT << endl;}
+        }
+    }
     cout << "Training file processed in " << Elapsed << " milliseconds with " << Iterations << " iterations for " << TrainingFileSet.size() << " lines.\n";
     TrainingFileSet.clear(); // free up memory
     cout << OldLevel << " " << NewLevel << endl;

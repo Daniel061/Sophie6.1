@@ -183,10 +183,11 @@ public:
         }
         SetInSentenceSentenceDirection(DetermineDirectionOfPhrase());               //Store phrase/question direction in sentence data
         SetInSentencesDaysOld(GetDaysSinceDate());                                  //day stamp this sentence
-        LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);            //Check for corrections
+        LocalPattern = PatternJoinerCheck(LocalPattern);
+        LocalPattern = PatternReview();                                             //Check for corrections
         SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
-       // LocalPattern = PatternReview(LocalPattern,LocalConfidenceLevel);            //Check for corrections   do this twice
-       // SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
+        LocalPattern = PatternReview();                                             //Check for corrections   do this twice
+        SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
         ImplyUnknowns();                                                            //let language try to set some unknowns
         ReVerseBuildPattern();                                                      //push from pattern to word types
         FindAndSetGistOfSentence();                                                 //store gist,subgist and supportive phrase in sentence

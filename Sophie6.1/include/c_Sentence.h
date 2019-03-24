@@ -51,6 +51,9 @@ class c_Sentence : public c_Personality
         string sSubGistOfSentence;               // usually follows a preposition to the verb or end of sentence
         string sSupportivePhrase;                // Data before the verb
         string sSecondSubject;                   // For DualSubjects
+        string sPrimeSubject;                    // Word or phrase
+        string sDirectObject;                    // Word or phrase
+        string sIndirectObject;                  // Word or phrase
         int    sSecondSubjectLocation;           // For Dual subjects
         char   sPunctuation;                     // !  initialize to null
         char   sPolarity;                        // positive / negative sentence
@@ -81,42 +84,54 @@ class c_Sentence : public c_Personality
                 sPatternString                 = "";        // 4)
                 sPreProcessedPattern           = "";        // 5)
                 sSecondSubject                 = "";        // 6)
-                sGistOfSentence                = "";        // 7)
-                sSubGistOfSentence             = "";        // 8)
-                sSupportivePhrase              = "";        // 9)
-                sTaggedSentence                = "";        // 10)
-                sHasPreposition                = false;     // 11)
-                sHasPluralPronoun              = false;     // 12)
-                sHasPunctuation                = false;     // 13)
-                sIsQuestion                    = false;     // 14)
-                sHasContraction                = false;     // 15)
-                sHasGreetingsWord              = false;     // 16)
-                sHasGenderReference            = false;     // 17)
-                sHasBeenUnderstood             = false;     // 18)
-                sHasGenderDeterminer           = false;     // 19)
-                sHasDualSubjects               = false;     // 20)
-                sHasPronoun                    = false;     // 21)
-                sSentenceDirection             = -1;        // 22)
-                sPunctuation                   = 'x';       // 23) not set or does not have
-                sPolarity                      = 'p';       // 24)
-                sSentenceTense                 = 'u';       // 25)
-                sConjunctionLocation           = -1;        // 26)
-                sAdverbLocation                = -1;        // 27)
-                sNounCount                     = -1;        // 28)
-                sVerbLocation                  = -1;        // 29)
-                sAdjectiveLocation             = -1;        // 30)
-                sNamePointer                   = -1;        // 31)
-                sPrepositionPosition           = -1;        // 32)
-                sSecondSubjectLocation         = -1;        // 33)
-                sIndirectObjectLocation        = -1;        // 34)
-                sDirectObjectLocation          = -1;        // 35)
-                sUnderstandingLevel            = -1;        // 36)
-                sDaysOld                       = 0;         // 37)
+                sPrimeSubject                  = "";        // 7)
+                sDirectObject                  = "";        // 8)
+                sIndirectObject                = "";        // 9)
+                sGistOfSentence                = "";        // 10)
+                sSubGistOfSentence             = "";        // 11)
+                sSupportivePhrase              = "";        // 12)
+                sTaggedSentence                = "";        // 13)
+                sHasPreposition                = false;     // 14)
+                sHasPluralPronoun              = false;     // 15)
+                sHasPunctuation                = false;     // 16)
+                sIsQuestion                    = false;     // 17)
+                sHasContraction                = false;     // 18)
+                sHasGreetingsWord              = false;     // 19)
+                sHasGenderReference            = false;     // 20)
+                sHasBeenUnderstood             = false;     // 21)
+                sHasGenderDeterminer           = false;     // 22)
+                sHasDualSubjects               = false;     // 23)
+                sHasPronoun                    = false;     // 24)
+                sSentenceDirection             = -1;        // 25)
+                sPunctuation                   = 'x';       // 26) not set or does not have
+                sPolarity                      = 'p';       // 27)
+                sSentenceTense                 = 'u';       // 28)
+                sConjunctionLocation           = -1;        // 29)
+                sAdverbLocation                = -1;        // 30)
+                sNounCount                     = -1;        // 31)
+                sVerbLocation                  = -1;        // 32)
+                sAdjectiveLocation             = -1;        // 33)
+                sNamePointer                   = -1;        // 34)
+                sPrepositionPosition           = -1;        // 35)
+                sSecondSubjectLocation         = -1;        // 36)
+                sIndirectObjectLocation        = -1;        // 37)
+                sDirectObjectLocation          = -1;        // 38)
+                sUnderstandingLevel            = -1;        // 39)
+                sDaysOld                       = 0;         // 40)
                 WordMap.clear();}
 
 
        ///*******************ALL GLOBAL->SENTENCE DATA FUNCTIONS***************************
        ///**********'InSentence/FromSentence' is the function source flag******************
+
+        string GetFromSentencePrimeSubject(){return sPrimeSubject;}
+        void   SetInSentencePrimeSubject(string newVal){sPrimeSubject = newVal;}
+
+        string GetFromSentenceDirectObject(){return sDirectObject;}
+        void   SetInSentenceDirectObject(string newVal){sDirectObject = newVal;}
+
+        string GetFromSentenceIndirectObject(){return sIndirectObject;}
+        void   SetInSentenceIndirectObject(string newVal){sIndirectObject = newVal;}
 
         string GetFromSentenceTaggedSentence(){return sTaggedSentence;}
         void   SetInSentenceTaggedSentence(string newVal){sTaggedSentence = newVal;}
@@ -163,7 +178,9 @@ class c_Sentence : public c_Personality
         void   SetInSentenceConjunctionLocation(int newVal){sConjunctionLocation = newVal;}
         int    GetFromSentenceConjunctionLocation(){return sConjunctionLocation;}
 
-        void   SetInSentencePreProcessedPattern(string newVal){sPreProcessedPattern = newVal;}
+        void   SetInSentencePreProcessedPattern(string newVal,bool Override = false){
+               if((sPreProcessedPattern == "") || (Override)){
+                  sPreProcessedPattern  = newVal;}}
         string GetFromSentencePreProcessedPattern(){return sPreProcessedPattern;}
 
         void   SetInSentenceGistOfSentence(string newVal){sGistOfSentence = newVal;}
@@ -346,8 +363,8 @@ class c_Sentence : public c_Personality
             for(int x =0; x < GetFromSentenceWordCount(); x++) LocalPattern += GetswWordType(x);
             SetInSentencePattern(LocalPattern);}
 
-        void ReVerseBuildPattern(){
-            for(int x = 0; x < GetFromSentenceWordCount(); x++)
+        void ReVerseBuildPattern(){  //push pattern data to word types
+            for(int x = 0; x <= GetFromSentenceWordCount(); x++)
                 SetswWordType(GetFromSentencePattern()[x],x);
         }
 

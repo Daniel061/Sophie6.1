@@ -2,6 +2,7 @@
 #define C_WORD_H
 
 #include <string>
+#include <iostream>
 #include <unordered_set>
 
 /** SOPHIE 6.1
@@ -123,7 +124,8 @@ class c_Word
         void     Setw_WordTokens(int newVal){w_WordTokens = newVal;}
 
         char     Getw_WordType(){return w_WordType;}
-        void     Setw_WordType(char newVal){w_WordType = newVal;}
+        void     Setw_WordType(char newVal){
+                 w_WordType = newVal;}
 
         char     Getw_GenderClass(){return w_GenderClass;}
         void     Setw_GenderClass(char newVal){w_GenderClass = newVal;}
