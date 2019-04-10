@@ -71,7 +71,7 @@ class c_Brain : public c_Cerebellum
               GatherAndSetAllSentenceData();                     // pull all data into c_sentence and c_words
                                                                  //  from memory and language helper
               //DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,tmpInputData);
-              DecipherCurrentSentence(strData);                  // Work with what is known at this point
+              //DecipherCurrentSentence(strData);                  // Work with what is known at this point
               RebuildPattern();                                  // Updated corrected pattern
               ReVerseBuildPattern();                             // push pattern data to word type
               FindDirectAndIndirectObject();                     // See if Direct and indirect object can be set now

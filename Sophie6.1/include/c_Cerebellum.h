@@ -136,12 +136,16 @@ public:
                                 if((MemoryWordType != typeUnknownWord) &&
                                 (LocalWordType != typeUnknownWord) &&
                                 (MemoryWordType != LocalWordType)){
-                                   //cout << "Disagreement!\n";
+                                  if(Verbose){
+                                   cout << "Disagreement!\n";
+                                   cout << "MemmoryWordType=" << MemoryWordType << " LocalWordType=" << LocalWordType << " Working Word:" << GetswWords(x) << "\n";
+                                   cout << "Sentence:" << GetFromSentenceOriginalString() << endl;}
                                   //disagreement here!!!                            //We have a disagreement here between memory cell wordtype and language helper
                                    LocalHasAlternateType = true;
+                                   SelectedWordType      = MemoryWordType;          //MemoryWordType wins
                                    LocalAlternateType    = LocalWordType;           //Save for alternate type storage
                                    LocalAltLocation      = x;                       //save x for storage function   ***Possible double disagreement******
-                                   SelectedWordType      = MemoryWordType;}         // use memory type for now ****NEEDS REVIEW*****
+                                   }         // using FindWordType
                                     else
                                         if(SentenceWordType != typeUnknownWord){
                                             SelectedWordType = SentenceWordType;}   //use c_Sentence wordtype
@@ -150,6 +154,16 @@ public:
                                                  SelectedWordType = MemoryWordType; //Use MemoryWordType because language helper did not help
                                                 }
 
+         if(SelectedWordType == typeProperNoun){
+            if((GetswWords(x)[0] >= 'A') && (GetswWords(x)[0] <= 'Z')){
+                //Proper Noun usage ok
+            }
+            else{
+                SelectedWordType = typeNoun;
+                //Proper Noun form not used this time
+            }
+
+         }
 
          LocalPattern += SelectedWordType;                                          //build the pattern as we go
          SetswWordType(SelectedWordType,x);                                         //set the selected word type in the sentence
@@ -183,12 +197,12 @@ public:
         }
         SetInSentenceSentenceDirection(DetermineDirectionOfPhrase());               //Store phrase/question direction in sentence data
         SetInSentencesDaysOld(GetDaysSinceDate());                                  //day stamp this sentence
-        LocalPattern = PatternJoinerCheck(LocalPattern);
+        //LocalPattern = PatternJoinerCheck(LocalPattern);
         LocalPattern = PatternReview();                                             //Check for corrections
         SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
-        LocalPattern = PatternReview();                                             //Check for corrections   do this twice
-        SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
-        ImplyUnknowns();                                                            //let language try to set some unknowns
+        //LocalPattern = PatternReview();                                             //Check for corrections   do this twice
+        //SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
+        //ImplyUnknowns();                                                            //let language try to set some unknowns
         ReVerseBuildPattern();                                                      //push from pattern to word types
         FindAndSetGistOfSentence();                                                 //store gist,subgist and supportive phrase in sentence
 

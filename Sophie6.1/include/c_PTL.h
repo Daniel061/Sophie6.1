@@ -26,9 +26,12 @@ class c_PTL
     protected:
 
     private:
+        string    OriginalSentence;             // raw data
         string    BeginningPattern;             // starting point for pattern work
         string    NextPattern;                  // next step in processing
         string    RelatedPattern;               // a similar pattern path
+        string    RelatedSentence;              // a similar sentence
+        string    ComparisonResult;             // the product of the compare routine
         bool      FinalPattern;                 // this is the end of a dendrite
 
 
@@ -43,6 +46,16 @@ class c_PTL
 
         }
 
+        //Standard Sets/Gets
+
+        string GetPTLComparisonResult(){return ComparisonResult;}
+        void   SetPTLComparisonResult(string newVal){ComparisonResult = newVal;}
+
+        string GetPTLRelatedSentence(){return RelatedSentence;}
+        void   SetPTLRelatedSentence(string newVal){RelatedSentence = newVal;}
+
+        string GetPTLOriginalSentence(){return OriginalSentence;}
+        void   SetPTLOriginalSentence(string newVal){OriginalSentence = newVal;}
 
         string GetPTLBeginningPattern(){return BeginningPattern;}
         void   SetPTLBeginningPattern(string newVal){BeginningPattern = newVal;}

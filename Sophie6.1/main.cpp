@@ -33,8 +33,12 @@ int   Iterations = 0;
 int   vc,nc,adc,ac,pc,pn,ukn,kn;
 
 // GLOBALS
-string Version       = "6.1d.07e.EN.012.007";
+string Version       = "6.1d.08x.EN.012.007";
 string ReleaseMode   = "debug";
+
+string Test1  = "The dog is black.";
+string Test2  = "The cat is black.";
+string Test3  = "                 ";
 bool Verbose         = false;
 bool StoryMode       = false;
 bool EchoTraining    = false;
@@ -147,6 +151,13 @@ if(!TrainingMode)
     Brain.FirstRunWelcomeMessage();
 else
     TrainingMode = false;
+
+for(int x = 0; x<Test1.size(); x++){
+    if(Test1[x] == Test2[x]){
+        Test3[x] = Test1[x];
+    }
+}
+cout << "Test3 = " << Test3 << endl;
 
 cout << ">>";
 getline (cin,Raw_Sentence);

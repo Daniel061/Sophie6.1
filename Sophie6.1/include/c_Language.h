@@ -108,293 +108,474 @@ class c_Language : public c_LongTermMemory
 //--------------------------End Pattern Review------------------------------------------------
 //------------------------------NEW PATTERN REVIEW--------------------------------------------
 string PatternReview(){
+    if(Verbose)
+        cout << "[c_Language::PatternReview()\n";
     string   CorrectedPattern    = GetFromSentencePattern(); //pattern is preset in FindWordTypes
     bool     Correcting          = true;
+    bool     Corrected           = false;
     int      PatternPointer      = -1;
+    int      SecondMatch         = -1;
 
     //large pattern corrections first
     //one change at a time with loop-break control
 
     while(Correcting){
-        PatternPointer = CorrectedPattern.find("dG+dGvvu>du");    //change to dG+dGvvA>dn
+//        PatternPointer = CorrectedPattern.find("dG+dGvvu>du");    //change to dG+dGvvA>dn
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+7]  = typeAdverb;
+//            CorrectedPattern[PatternPointer+10] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//        PatternPointer = CorrectedPattern.find("dG+dGvvA>du");    //change to dG+dGvvA>dn
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+7]  = typeAdverb;
+//            CorrectedPattern[PatternPointer+10] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//        PatternPointer = CorrectedPattern.find("dG>duvv>du+vdu");    //change to dG>dnvv>dn+vdn
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+4]  = typeNoun;
+//            CorrectedPattern[PatternPointer+9]  = typeNoun;
+//            CorrectedPattern[PatternPointer+13] = typeNoun;
+//            Correcting = false;
+//            break;}
+
+//        PatternPointer = CorrectedPattern.find("dGvvdu");    //change to dGvvdn
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+5] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//
+//        PatternPointer = CorrectedPattern.find(">avvuu+v");    //change to >avvan+v
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+4] = typeAdjective;
+//            CorrectedPattern[PatternPointer+5] = typeNoun;
+//            Correcting = false;
+//            break;}
+
+
+
+//        PatternPointer = CorrectedPattern.find(">dGv>nvvan");    //change to >dGv>avvan
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+4] = typeAdjective;
+//            Correcting = false;
+//            break;}
+//
+//        PatternPointer = CorrectedPattern.find("duvvdn");    //change to dnvvdn
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+1] = typeNoun;
+//            Correcting = false;
+//            break;}
+
+
+//        PatternPointer = CorrectedPattern.find("dnvv>du");    //change to dnvv>dn
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+6] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//
+//        PatternPointer = CorrectedPattern.find("dGvvvu");
+//        if(PatternPointer >= 0){
+//            CorrectedPattern[PatternPointer+4] = typeAdjective;
+//            CorrectedPattern[PatternPointer+5] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//        PatternPointer = CorrectedPattern.find("ntu");      //change to ntn
+//        if(PatternPointer >= 0){
+//            CorrectedPattern[PatternPointer+2] = typeNoun;
+//            Correcting = false;
+//            break;}
+
+
+//        PatternPointer = CorrectedPattern.find("dGvvdu");
+//        if(PatternPointer >= 0){
+//            CorrectedPattern[PatternPointer+5] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//
+//
+//        PatternPointer = CorrectedPattern.find("vdu");
+//        if(PatternPointer >= 0){
+//            CorrectedPattern[PatternPointer+2] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//
+//        PatternPointer = CorrectedPattern.find("Aun");
+//        if(PatternPointer >= 0){
+//            CorrectedPattern[PatternPointer+1] = typeAdjective;
+//            Correcting = false;
+//            break;}
+//
+//        PatternPointer = CorrectedPattern.find("Gu");
+//        if(PatternPointer >= 0){
+//            CorrectedPattern[PatternPointer+1] = typeVerb;
+//            Correcting = false;
+//            break;}
+
+//        PatternPointer = CorrectedPattern.find(">dau");
+//        if(PatternPointer >= 0){
+//            CorrectedPattern[PatternPointer+3] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//        PatternPointer = CorrectedPattern.find(">dvu");
+//        if(PatternPointer >= 0){
+//            CorrectedPattern[PatternPointer+3] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//        PatternPointer = CorrectedPattern.find("vv>da");
+//        if(PatternPointer >= 0){
+//            CorrectedPattern[PatternPointer+4] = typeNoun;
+//            Correcting = false;
+//            break;}
+
+
+//        PatternPointer = CorrectedPattern.find(">u");
+//        if(PatternPointer >= 0){
+//            CorrectedPattern[PatternPointer+1] = typeNoun;
+//            Correcting = false;
+//            break;}
+
+        PatternPointer = CorrectedPattern.find("dnvvu");
         if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+7]  = typeAdverb;
-            CorrectedPattern[PatternPointer+10] = typeNoun;
+            CorrectedPattern[PatternPointer+4] = typeNoun;
             Correcting = false;
             break;}
 
-        PatternPointer = CorrectedPattern.find("dG+dGvvA>du");    //change to dG+dGvvA>dn
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+7]  = typeAdverb;
-            CorrectedPattern[PatternPointer+10] = typeNoun;
-            Correcting = false;
-            break;}
-
-        PatternPointer = CorrectedPattern.find("dG>duvv>du+vdu");    //change to dG>dnvv>dn+vdn
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+4]  = typeNoun;
-            CorrectedPattern[PatternPointer+9]  = typeNoun;
-            CorrectedPattern[PatternPointer+13] = typeNoun;
-            Correcting = false;
-            break;}
-
-        PatternPointer = CorrectedPattern.find("dGvvdu");    //change to dGvvdn
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+5] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-        PatternPointer = CorrectedPattern.find(">avvuu+v");    //change to >avvan+v
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+4] = typeAdjective;
-            CorrectedPattern[PatternPointer+5] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-
-        PatternPointer = CorrectedPattern.find(">dGv>nvvan");    //change to >dGv>avvan
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+4] = typeAdjective;
-            Correcting = false;
-            break;}
-
-        PatternPointer = CorrectedPattern.find("duvvdn");    //change to dnvvdn
+       PatternPointer = CorrectedPattern.find("muvv");
         if(PatternPointer >=0){
             CorrectedPattern[PatternPointer+1] = typeNoun;
             Correcting = false;
             break;}
 
 
-        PatternPointer = CorrectedPattern.find("dnvv>du");    //change to dnvv>dn
+       PatternPointer = CorrectedPattern.find("du>uv");
         if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+6] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-        PatternPointer = CorrectedPattern.find("dGvvvu");
-        if(PatternPointer >= 0){
-            CorrectedPattern[PatternPointer+4] = typeAdjective;
-            CorrectedPattern[PatternPointer+5] = typeNoun;
-            Correcting = false;
-            break;}
-
-        PatternPointer = CorrectedPattern.find("ntu");      //change to ntn
-        if(PatternPointer >= 0){
-            CorrectedPattern[PatternPointer+2] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-        PatternPointer = CorrectedPattern.find("dGvvdu");
-        if(PatternPointer >= 0){
-            CorrectedPattern[PatternPointer+5] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-
-        PatternPointer = CorrectedPattern.find("vdu");
-        if(PatternPointer >= 0){
-            CorrectedPattern[PatternPointer+2] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-        PatternPointer = CorrectedPattern.find("Aun");
-        if(PatternPointer >= 0){
-            CorrectedPattern[PatternPointer+1] = typeAdjective;
-            Correcting = false;
-            break;}
-
-        PatternPointer = CorrectedPattern.find("Gu");
-        if(PatternPointer >= 0){
-            CorrectedPattern[PatternPointer+1] = typeVerb;
-            Correcting = false;
-            break;}
-
-        PatternPointer = CorrectedPattern.find(">dau");
-        if(PatternPointer >= 0){
-            CorrectedPattern[PatternPointer+3] = typeNoun;
-            Correcting = false;
-            break;}
-
-        PatternPointer = CorrectedPattern.find(">dvu");
-        if(PatternPointer >= 0){
-            CorrectedPattern[PatternPointer+3] = typeNoun;
-            Correcting = false;
-            break;}
-
-        PatternPointer = CorrectedPattern.find("vv>da");
-        if(PatternPointer >= 0){
-            CorrectedPattern[PatternPointer+4] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-        PatternPointer = CorrectedPattern.find(">u");
-        if(PatternPointer >= 0){
             CorrectedPattern[PatternPointer+1] = typeNoun;
-            Correcting = false;
-            break;}
-
-        PatternPointer = CorrectedPattern.find("nvvuu");
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+3] = typeAdjective;
-            CorrectedPattern[PatternPointer+4] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-       PatternPointer = CorrectedPattern.find("vv>nn");
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+3] = typeAdjective;
-            CorrectedPattern[PatternPointer+4] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-        PatternPointer = CorrectedPattern.find("vvdnu");
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+3] = typeAdjective;
-            CorrectedPattern[PatternPointer+4] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-        PatternPointer = CorrectedPattern.find("vvnn");
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+2] = typeAdjective;
             CorrectedPattern[PatternPointer+3] = typeNoun;
             Correcting = false;
             break;}
 
 
+        PatternPointer = CorrectedPattern.find("vvduu");
+        if(PatternPointer >=0){
+            CorrectedPattern[PatternPointer+3] = typeAdjective;
+            CorrectedPattern[PatternPointer+4] = typeNoun;
+            Correcting = false;
+            break;}
 
-        PatternPointer = CorrectedPattern.find(">duu");//check for adject-noun combo
+
+        PatternPointer = CorrectedPattern.find("vvu");
+        if(PatternPointer >=0){
+            CorrectedPattern[PatternPointer+2] = typeNoun;
+            Correcting = false;
+            break;}
+
+
+        PatternPointer = CorrectedPattern.find(">udu>");
         if(PatternPointer >=0 ){
-            if(GetswWordsLC(PatternPointer+2)[GetswWordsLC(PatternPointer+2).size()-1] == 'y'){
-                CorrectedPattern[PatternPointer+2] = typeAdjective;
+                CorrectedPattern[PatternPointer+1] = typeVerb;
                 CorrectedPattern[PatternPointer+3] = typeNoun;
                 Correcting = false;
                 break;}
+
+        PatternPointer = CorrectedPattern.find(">uu+");
+        if(PatternPointer >=0 ){
+                CorrectedPattern[PatternPointer+1] = typeAdjective;
+                CorrectedPattern[PatternPointer+2] = typeNoun;
+                Correcting = false;
+                break;}
+
+
+
+        PatternPointer = CorrectedPattern.find(">du>");
+        if(PatternPointer >=0 ){
+                CorrectedPattern[PatternPointer+2] = typeNoun;
+                Correcting = false;
+                break;}
+
+
+
+        PatternPointer = CorrectedPattern.find(">duvv");
+        if(PatternPointer >=0 ){
+                CorrectedPattern[PatternPointer+2] = typeNoun;
+                Correcting = false;
+                break;}
+
+
+        PatternPointer = CorrectedPattern.find("dauvv"); //change to danvv
+        if(PatternPointer >=0){
+            CorrectedPattern[PatternPointer+2] = typeNoun;
+            Correcting = false;
+            break;}
+
+
+//        PatternPointer = CorrectedPattern.find("ddu"); //change to "dan"
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+1] = typeAdjective;
+//            CorrectedPattern[PatternPointer+2] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//
+//        PatternPointer = CorrectedPattern.find("dnn"); //change to dan
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+1] = typeAdjective;
+//            CorrectedPattern[PatternPointer+2] = typeNoun;
+//            Correcting = false;
+//            break;}
+
+
+//        PatternPointer = CorrectedPattern.find("davv"); //change to dnvv
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+1] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//
+//        PatternPointer = CorrectedPattern.find("duG"); //change to daG
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+1] = typeAdjective;
+//            Correcting = false;
+//            break;}
+//
+//
+//        PatternPointer = CorrectedPattern.find("vnu>"); //change to van>
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+1] = typeAdjective;
+//            CorrectedPattern[PatternPointer+2] = typeNoun;
+//            Correcting = false;
+//            break;}
+
+
+//        PatternPointer = CorrectedPattern.find("dAvv"); //change to dnvv
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+1] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//
+//        PatternPointer = CorrectedPattern.find("avvuu"); //change to avvan
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+3] = typeAdjective;
+//            CorrectedPattern[PatternPointer+4] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//
+//        PatternPointer = CorrectedPattern.find("duvv"); //change to dnvv
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+1] = typeNoun;
+//            Correcting = false;
+//            break;}
+//
+//
+//        PatternPointer = CorrectedPattern.find("aGvvu"); //change to aGvvn
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+4] = typeNoun;
+//            Correcting = false;
+//            break;}
+
+//        PatternPointer = CorrectedPattern.find("vvda"); //change to vvdn
+//        if(PatternPointer >=0){
+//            CorrectedPattern[PatternPointer+3] = typeNoun;
+//            Correcting = false;
+//            break;}
+
+        PatternPointer = CorrectedPattern.find("Pvu+vpu");
+        if(PatternPointer == 0){ //begining of sentence
+            CorrectedPattern[PatternPointer+2] = typeNoun;
+            CorrectedPattern[PatternPointer+6] = typeNoun;
+            Corrected  = true;
+            Correcting = false;
+            break;
         }
 
 
-        PatternPointer = CorrectedPattern.find("dnavv"); //change to danvv
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+1] = typeAdjective;
-            CorrectedPattern[PatternPointer+2] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-        PatternPointer = CorrectedPattern.find("ddu"); //change to "dan"
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+1] = typeAdjective;
-            CorrectedPattern[PatternPointer+2] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-        PatternPointer = CorrectedPattern.find("dnn"); //change to dan
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+1] = typeAdjective;
-            CorrectedPattern[PatternPointer+2] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-        PatternPointer = CorrectedPattern.find("davv"); //change to dnvv
-        if(PatternPointer >=0){
+        PatternPointer = CorrectedPattern.find("duvv");
+        if(PatternPointer == 0){ //begining of sentence
             CorrectedPattern[PatternPointer+1] = typeNoun;
+            Corrected  = true;
             Correcting = false;
-            break;}
+            break;
+        }
 
 
-        PatternPointer = CorrectedPattern.find("duG"); //change to daG
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+1] = typeAdjective;
-            Correcting = false;
-            break;}
 
-
-        PatternPointer = CorrectedPattern.find("vnu>"); //change to van>
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+1] = typeAdjective;
-            CorrectedPattern[PatternPointer+2] = typeNoun;
-            Correcting = false;
-            break;}
-
-
-        PatternPointer = CorrectedPattern.find("dAvv"); //change to dnvv
-        if(PatternPointer >=0){
+        if(IsThisPatternAtEndOfSentence("du",PatternPointer)==true){
             CorrectedPattern[PatternPointer+1] = typeNoun;
+            Corrected  = true;
             Correcting = false;
-            break;}
+            break;
+        }
 
 
-        PatternPointer = CorrectedPattern.find("avvuu"); //change to avvan
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+3] = typeAdjective;
+        PatternPointer = CorrectedPattern.find("vvdau");
+        if(PatternPointer >= 0){
             CorrectedPattern[PatternPointer+4] = typeNoun;
+            Corrected  = true;
             Correcting = false;
-            break;}
+            break;
+        }
+
+        PatternPointer = CorrectedPattern.find("dnu>d");
+        if(PatternPointer == 0){ //begining of sentence
+            CorrectedPattern[PatternPointer+1] = typeAdjective;
+            CorrectedPattern[PatternPointer+2] = typeNoun;
+            Corrected  = true;
+            Correcting = false;
+            break;
+        }
 
 
-        PatternPointer = CorrectedPattern.find("duvv"); //change to dnvv
+        if(IsThisPatternAtEndOfSentence("nnvv",PatternPointer)==true){
+            CorrectedPattern[PatternPointer] = typeAdjective;
+            Corrected  = true;
+            Correcting = false;
+            break;
+        }
+
+
+        if(IsThisPatternAtEndOfSentence("dun",PatternPointer)==true){
+            CorrectedPattern[PatternPointer+1] = typeAdjective;
+            Corrected  = true;
+            Correcting = false;
+            break;
+        }
+
+        if(IsThisPatternAtEndOfSentence("vv>duu",PatternPointer)==true){
+            CorrectedPattern[PatternPointer+4] = typeAdjective;
+            CorrectedPattern[PatternPointer+5] = typeNoun;
+            Corrected  = true;
+            Correcting = false;
+            break;
+        }
+
+
+        if(IsThisPatternAtEndOfSentence("vvun",PatternPointer)==true){
+            CorrectedPattern[PatternPointer+2] = typeAdjective;
+            Corrected  = true;
+            Correcting = false;
+            break;
+        }
+
+
+        PatternPointer = CorrectedPattern.find("danvvun");
+        if(PatternPointer == 0){
+            CorrectedPattern[PatternPointer+5] = typeAdjective;
+            Corrected  = true;
+            Correcting = false;
+            break;
+        }
+
+
+        if(IsThisPatternAtEndOfSentence("dau>dau",PatternPointer)==true){
+            CorrectedPattern[PatternPointer+2] = typeNoun;
+            CorrectedPattern[PatternPointer+6] = typeNoun;
+            Corrected  = true;
+            Correcting = false;
+            break;
+        }
+
+        if(IsThisPatternAtEndOfSentence("dau",PatternPointer)==true){
+            CorrectedPattern[PatternPointer+2] = typeNoun;
+            Corrected  = true;
+            Correcting = false;
+            break;
+        }
+
+        PatternPointer    = CorrectedPattern.find("n");
+        if(PatternPointer == -1){             //no noun
+           PatternPointer = CorrectedPattern.find("u");
+           if(PatternPointer >= 0){
+               SecondMatch    = CorrectedPattern.find("u",PatternPointer+1);
+               if(SecondMatch >= 0){                          //more than 1 unknown, cannot help
+               }
+               else{
+                CorrectedPattern[PatternPointer]  = typeNoun;
+                Corrected  = true;
+                Correcting = false;
+                break;
+               }
+           }
+        }
+
+        PatternPointer = CorrectedPattern.find("duvvduu"); //change to dnvvdan
         if(PatternPointer >=0){
+            CorrectedPattern[PatternPointer+5] = typeAdjective;
+            CorrectedPattern[PatternPointer+6] = typeNoun;
             CorrectedPattern[PatternPointer+1] = typeNoun;
             Correcting = false;
+            Corrected  = true;
             break;}
 
 
-        PatternPointer = CorrectedPattern.find("aGvvu"); //change to aGvvn
+        PatternPointer = CorrectedPattern.find("duvvdu"); //change to dnvvdn
         if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+4] = typeNoun;
+            CorrectedPattern[PatternPointer+5] = typeNoun;
+            CorrectedPattern[PatternPointer+1] = typeNoun;
             Correcting = false;
-            break;}
-
-        PatternPointer = CorrectedPattern.find("vvda"); //change to vvdn
-        if(PatternPointer >=0){
-            CorrectedPattern[PatternPointer+3] = typeNoun;
-            Correcting = false;
+            Corrected  = true;
             break;}
 
 
+//            if(CorrectedPattern == "duvu"){
+//                CorrectedPattern = "dnvu";}
+//            if(CorrectedPattern == "dun"){
+//                CorrectedPattern = "dan";}
+//            if(CorrectedPattern == "duva"){
+//                CorrectedPattern = "dnva";}
+//            if(CorrectedPattern == "uuv"){
+//                CorrectedPattern = "dnv";}
+//            if(CorrectedPattern == "dvdun"){
+//                CorrectedPattern = "dvdan";}
+//            if(CorrectedPattern == "dvdu"){
+//                CorrectedPattern = "dvdn";}
+//            if(CorrectedPattern == "dnup"){
+//                CorrectedPattern = "dnvp";}
+//            if(CorrectedPattern == "avdu"){
+//                CorrectedPattern = "avdn";}
+//            if (CorrectedPattern == "dntua"){
+//                CorrectedPattern = "dntva";}
 
-
-            if(CorrectedPattern == "duvu"){
-                CorrectedPattern = "dnvu";}
-            if(CorrectedPattern == "dun"){
-                CorrectedPattern = "dan";}
-            if(CorrectedPattern == "duva"){
-                CorrectedPattern = "dnva";}
-            if(CorrectedPattern == "uuv"){
-                CorrectedPattern = "dnv";}
-            if(CorrectedPattern == "dvdun"){
-                CorrectedPattern = "dvdan";}
-            if(CorrectedPattern == "dvdu"){
-                CorrectedPattern = "dvdn";}
-            if(CorrectedPattern == "dnup"){
-                CorrectedPattern = "dnvp";}
-            if(CorrectedPattern == "avdu"){
-                CorrectedPattern = "avdn";}
-            if (CorrectedPattern == "dntua"){
-                CorrectedPattern = "dntva";}
-            if (CorrectedPattern == "dnvvu"){
-                CorrectedPattern = "dnvvn";}
+            if (CorrectedPattern == "dnvvdu"){
+                CorrectedPattern = "dnvvdn";}
 
         Correcting = false;
     }//end While correcting loop
 
-
+    if((Corrected)&& (Verbose)){
+        cout << "Original Sentence:" << GetFromSentenceOriginalString() << endl;
+        cout << "Corrected pattern " << GetFromSentencePattern() << " to " << CorrectedPattern << endl;}
 
     return CorrectedPattern;
 }
 //------------------------------END of NEW PATTERN REVIEW-------------------------------------
+
+//-------------------------Bool EndOfSentencePatternCheck-------------------------------------
+ bool IsThisPatternAtEndOfSentence(string PatternToSearch, int &PositionFound){
+
+        int    PatternPointer = -1;
+        string WorkingPattern = GetFromSentencePattern();
+        bool   Result         = false;
+
+        PatternPointer        = WorkingPattern.find(PatternToSearch);
+        if(PatternPointer    >=0){
+            if( (PatternToSearch.size()+PatternPointer ) == WorkingPattern.size()){
+                PositionFound = PatternPointer;
+                Result        = true;}
+        }
+        return Result;
+    }
+//--------------------------END of EndOfSentencePAtternCheck----------------------------------
 
 //-------------------------Find Word Type------------------------------------------------------
  char FindWordType(string tmpWord, int LocationInSentence = -1){
@@ -409,16 +590,17 @@ string PatternReview(){
            char tmpWordType = typeUnknownWord;
 
            string ProNounsInward      = " you your yours ";
-           string ProNounsOther       = " they them he him his she her it we which ";
+           string ProNounsOther       = " they them he him his she her we which someone ";
            string ProNounsOutward     = " me mine my I i ";
-           string Determiners         = " the a an each every certain this that these those any all each some few either little many much no ";
+           string Determiners         = " the a an each every certain this that these those any all each some much no ";
            string Questions           = " what where how when who ";
            string Verbs               = " go went can will be have do say get make go know take is see come fell ran think look want give use find tell ask work seem feel try leave call am been ";
            string PastTenseVerbs      = " came went gone threw broke ran sold fell ";
+           string BaseNouns           = " dog cat ball tree person horse car cow front ";
            string PluralVerbs         = " are ";
            string SubjectReplacements = " it that this its ";
            string Adverbs             = " very again ";
-           string Adjectives          = " black white blue brown red green clear tan purple hazel blond yellow gray grey pink ";
+           string Adjectives          = " black white blue brown red green clear tan purple hazel blond yellow gray grey pink orange little few many ";
            string Directives          = " compare same about ";
            string JoiningWords        = " and ";
            string AssociativeWord     = " name name's ";
@@ -431,7 +613,7 @@ string PatternReview(){
            string GreetingsWord       = " hello hi ";
            string ExclamationWord     = " there ";
            string ConjunctionWords    = " or either ";
-           string PrepositionWords    = " in into after to on with within of at until over across among from throughout through during towards upon across ";
+           string PrepositionWords    = " in into up after to on with under within of at near until over across among while from throughout through during towards by upon across ";
            string VerbTenseCombos     = " threw throw broke break ran run sold sell gone go fell fall came come was is went go ";
            string NumericWords        = " zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty ";
            string Vowels              = "aeiou";
@@ -442,6 +624,8 @@ string PatternReview(){
            string UCWord              = GetswWords(LocationInSentence);
 
 
+
+           int  isBaseNoun          = -1;
            int  isExclamationWord   = -1;
            int  isAdjective         = -1;
            int  isNumericWord       = -1;
@@ -485,6 +669,7 @@ string PatternReview(){
               OrigWordUC   = GetswWords(LocationInSentence);
               tmpWord = " " + tmpWord + " ";
 
+                isBaseNoun          = BaseNouns.find(tmpWord);
                 isExclamationWord   = ExclamationWord.find(tmpWord);
                 isAdjective         = Adjectives.find(tmpWord);
                 isNumericWord       = NumericWords.find(tmpWord);
@@ -514,6 +699,11 @@ string PatternReview(){
                 QuoteMarker         = tmpWord.find("'");
 
                 while(!WordTypeIsSet){
+
+                  if(isBaseNoun >= 0) {      //Set noun type 'n'
+                    tmpWordType   = typeNoun;
+                    WordTypeIsSet = true;
+                    break;}
 
                   if(isExclamationWord >=0){ //Set exclamation type 'E'
                     tmpWordType   = typeExclamation;
@@ -655,7 +845,7 @@ string PatternReview(){
                       WordTypeIsSet = true;
                       break;}
 
-                  if(isPreposition >=0){    //Set Preposition Type 'I'
+                  if(isPreposition >=0){    //Set Preposition Type '>'
                       tmpWordType = typePreposition;
                       SetInSentenceHasPreposition(true);
                       SetInSentencePrepositionPosition(LocationInSentence);
@@ -964,6 +1154,14 @@ string PatternReview(){
                   }
 
                   SetswVowelPattern(LocationInSentence,VowelPattern);
+
+
+//-------------------------------------------check Propernoun rule-----------------------------------------
+                    if(tmpWordType == typeUnknownWord){
+                       if(GetMemoryCellcharWordType(tmpWord,Result) == typeProperNoun){ //was used as a proper noun before but here a noun
+                        tmpWordType = typeNoun;
+                       }
+                    }
 
             if(Verbose)
                 cout << "tmpWord " << tmpWord <<" type:" << tmpWordType << endl;
