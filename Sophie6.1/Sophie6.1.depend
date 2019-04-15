@@ -1,13 +1,13 @@
 # depslib dependency file v1.0
-1553811456 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
+1555254398 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
 	<iostream>
 	<fstream>
 	<c_Brain.h>
 	<time.h>
 	<list>
 
-1553552660 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
-	<c_Cerebellum.h>
+1555261986 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
+	<c_PTLControl.h>
 
 1554040340 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
 	<c_Cortex.h>
@@ -22,7 +22,7 @@
 	<string>
 	<iostream>
 
-1553448180 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
+1555252186 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
 	<c_Personality.h>
 	<c_Word.h>
 	<map>
@@ -247,19 +247,22 @@
 	<string>
 	<time.h>
 
-1552648326 source:h:\c++projects\sophie6.1\sophie6.1\src\c_ptl.cpp
+1555252554 source:h:\c++projects\sophie6.1\sophie6.1\src\c_ptl.cpp
 	"c_PTL.h"
 
-1554041186 h:\c++projects\sophie6.1\sophie6.1\include\c_ptl.h
+1555268678 h:\c++projects\sophie6.1\sophie6.1\include\c_ptl.h
 	<string>
+	<c_Word.h>
+	<map>
+	<math.h>
 
 1554041126 source:h:\c++projects\sophie6.1\sophie6.1\src\c_ptlcontrol.cpp
 	"c_PTLControl.h"
 
-1554240374 h:\c++projects\sophie6.1\sophie6.1\include\c_ptlcontrol.h
+1555267876 h:\c++projects\sophie6.1\sophie6.1\include\c_ptlcontrol.h
 	<string>
 	<vector>
 	<map>
 	<c_PTL.h>
-	<c_Sentence.h>
+	<c_Cerebellum.h>
 

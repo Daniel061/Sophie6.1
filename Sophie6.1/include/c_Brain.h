@@ -1,9 +1,10 @@
 #ifndef C_BRAIN_H
 #define C_BRAIN_H
 
-#include <c_Cerebellum.h>
+#include <c_PTLControl.h>
 extern string Version;
 extern bool   StoryMode;
+extern bool   TrainingMode;
 
 /** SOPHIE 6.1
      author - Daniel W. Ankrom ©2019
@@ -19,7 +20,7 @@ extern bool   StoryMode;
      see - https://github.com/Daniel061/Sophie6.1/blob/master/LICENSE
 */
 
-class c_Brain : public c_Cerebellum
+class c_Brain : public c_PTLControl
 {
     public:
         c_Brain();
@@ -66,19 +67,25 @@ class c_Brain : public c_Cerebellum
 
 
             if(CommandFound == 0){
-              Parse(strData);                                    // c_Sentence parse this data
-              SaveSentenceInLongTermMemory(strData);             // update Long term memory
-              GatherAndSetAllSentenceData();                     // pull all data into c_sentence and c_words
-                                                                 //  from memory and language helper
+
+              Parse(strData);                                                                                        // c_Sentence parse this data
+              SaveSentenceInLongTermMemory(strData);                                                                 // update Long term memory
+              GatherAndSetAllSentenceData();                                                                         // pull all data into c_sentence and c_words
+                                                                                                                     //  from memory and language helper
               //DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,tmpInputData);
               //DecipherCurrentSentence(strData);                  // Work with what is known at this point
-              RebuildPattern();                                  // Updated corrected pattern
-              ReVerseBuildPattern();                             // push pattern data to word type
-              FindDirectAndIndirectObject();                     // See if Direct and indirect object can be set now
-              LinkRelatedWords();                                // link related words together in word class
-              SaveAllSentenceWordDataToMemory();                 // push sentence and word data to memory cells
-              SaveCurrentSentenceInMap();                        // push sentence class to map
+              RebuildPattern();                                                                                      // Updated corrected pattern
+              ReVerseBuildPattern();                                                                                 // push pattern data to word type
+              FindDirectAndIndirectObject();                                                                         // See if Direct and indirect object can be set now
+              LinkRelatedWords();                                                                                    // link related words together in word class
+              SaveAllSentenceWordDataToMemory();                                                                     // push sentence and word data to memory cells
+              SaveCurrentSentenceInMap();                                                                            // push sentence class to map
               SavePreAndPostPatternConstruction(GetFromSentencePreProcessedPattern(),GetFromSentencePattern());
+              if(TrainingMode){
+              ProcessPTLData(strData,GetFromSentenceWordCount(),GetFromSentencePattern(),GetFromSentenceWordMap());} // give sentence data to PTLControl
+              if(!TrainingMode){
+                CreateSoftCompareMap(GetFromSentenceWordMap(),GetFromSentenceWordCount());
+              }
 
             }
             else{

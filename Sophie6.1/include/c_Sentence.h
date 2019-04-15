@@ -124,6 +124,8 @@ class c_Sentence : public c_Personality
        ///*******************ALL GLOBAL->SENTENCE DATA FUNCTIONS***************************
        ///**********'InSentence/FromSentence' is the function source flag******************
 
+        map <int,c_Word> GetFromSentenceWordMap(){return WordMap;}
+
         string GetFromSentencePrimeSubject(){return sPrimeSubject;}
         void   SetInSentencePrimeSubject(string newVal){sPrimeSubject = newVal;}
 
