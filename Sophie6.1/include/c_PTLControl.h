@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <c_PTL.h>
+#include <c_WordFreqTracker.h>
 #include <c_Cerebellum.h>
 
 
@@ -16,15 +17,20 @@ class c_PTLControl : public c_Cerebellum
     protected:
 
     private:
-        c_Sentence                        PTLSentence;
-        vector   <string>                 PTLVectorData;
-        vector   <string>::iterator       PTLVectorIT;
-        map      <string,c_PTL>           PTLMapData;
-        map      <string,c_PTL>::iterator PTLMapIT;
-        multimap <int,c_PTL>              PTLmmData;
-        multimap <int,c_PTL>::iterator    PTLmmIT;
-        multimap <float,c_PTL>            PTLSoftCompareMap;
-        multimap <float,c_PTL>::iterator  PTLSoftCmpIT;
+        c_Sentence                                PTLSentence;
+        c_WordFreqTracker                         PTLeWFT;
+        map<string,c_WordFreqTracker>             PTLeWFTMap;
+        map<string,c_WordFreqTracker>::iterator   PTLeWFTMapIT;
+        multimap<int,c_WordFreqTracker>           PTLeWFTOrderedMap;
+        multimap<int,c_WordFreqTracker>::iterator PTLeWFTOrderedMapIT;
+        vector   <string>                         PTLVectorData;
+        vector   <string>::iterator               PTLVectorIT;
+        map      <string,c_PTL>                   PTLMapData;
+        map      <string,c_PTL>::iterator         PTLMapIT;
+        multimap <int,c_PTL>                      PTLmmData;
+        multimap <int,c_PTL>::iterator            PTLmmIT;
+        multimap <float,c_PTL>                    PTLSoftCompareMap;
+        multimap <float,c_PTL>::iterator          PTLSoftCmpIT;
 
 
 
@@ -54,7 +60,7 @@ class c_PTLControl : public c_Cerebellum
             ofstream PTLmmDataFile ("PTLSoftCompareMap.dat", ios::out);
             if (PTLmmDataFile.is_open()){
                 for(PTLSoftCmpIT = PTLSoftCompareMap.begin(); PTLSoftCmpIT != PTLSoftCompareMap.end(); PTLSoftCmpIT++){
-                    PTLmmDataFile << PTLSoftCmpIT->first << " " << PTLSoftCmpIT->second.GetPTLOriginalSentence() << " " << PTLSoftCmpIT->second.GetPTLComparisonResult() << endl;
+                    PTLmmDataFile << PTLSoftCmpIT->first << " " << PTLSoftCmpIT->second.GetPTLOriginalSentence() << " " << PTLSoftCmpIT->second.GetPTLBeginningPattern() << endl;
                 }
             }
             PTLmmDataFile.close();
@@ -68,6 +74,7 @@ class c_PTLControl : public c_Cerebellum
         }
 
         void FilePTLmmData(){
+
             ofstream PTLmmDataFile ("PTLmmData.dat", ios::out);
             if (PTLmmDataFile.is_open()){
                for(PTLmmIT = PTLmmData.begin(); PTLmmIT != PTLmmData.end(); PTLmmIT++){
@@ -75,6 +82,49 @@ class c_PTLControl : public c_Cerebellum
                }
             PTLmmDataFile.close();
         }
+        }
+
+        void PTLProcessSentenceIneWFT(){
+            int tmpWordCount = GetFromSentenceWordCount();
+            for(int x =0; x < tmpWordCount; x++){
+                PTLeWFTMapIT = PTLeWFTMap.find(GetswWordsLC(x));
+                if(PTLeWFTMapIT == PTLeWFTMap.end()){
+                    PTLeWFT.WFTInitialize(GetswWordsLC(x));
+                    PTLeWFTMap.emplace(GetswWordsLC(x),PTLeWFT);                                               //store new word
+                    PTLeWFTMapIT = PTLeWFTMap.find(GetswWordsLC(x));
+                }
+                if(x !=0){
+                    PTLeWFTMapIT->second.WFTAddBeforeWord(GetswWordsLC(x-1));                                  //add before word
+                    if(x < tmpWordCount){
+                        PTLeWFTMapIT->second.WFTAddAfterWord(GetswWordsLC(x+1));}                              //add after word if not last
+                }
+                else{
+                    if(x < tmpWordCount){
+                        PTLeWFTMapIT->second.WFTAddAfterWord(GetswWordsLC(x+1));                               //this was the first word so only add after word if not last
+                    }
+                }
+            }
+
+        }
+
+        void PTLCreateWFTFile(){
+            PTLeWFTOrderedMap.clear();
+
+            for(PTLeWFTMapIT = PTLeWFTMap.begin(); PTLeWFTMapIT != PTLeWFTMap.end(); PTLeWFTMapIT++){
+                    PTLeWFTOrderedMap.emplace(PTLeWFTMapIT->second.WFTGetNumberOfBeforeWords(),PTLeWFTMapIT->second);
+            }
+
+            ofstream PTLeWFTDataFile ("PTLeWFTData.dat", ios::out);
+            if (PTLeWFTDataFile.is_open()){
+//                for(PTLeWFTMapIT = PTLeWFTMap.begin(); PTLeWFTMapIT != PTLeWFTMap.end(); PTLeWFTMapIT++){
+//                    PTLeWFTDataFile << PTLeWFTMapIT->first << " Words Before:" << PTLeWFTMapIT->second.WFTGetNumberOfBeforeWords() << " Words After:" << PTLeWFTMapIT->second.WFTGetNumberOfAfterWords() << endl;
+//                }
+
+                for(PTLeWFTOrderedMapIT = PTLeWFTOrderedMap.begin(); PTLeWFTOrderedMapIT != PTLeWFTOrderedMap.end(); PTLeWFTOrderedMapIT++){
+                    PTLeWFTDataFile << "Words Before:" << PTLeWFTOrderedMapIT->first << " [" << PTLeWFTOrderedMapIT->second.WTFGetThisWord() << "] Words After:" << PTLeWFTOrderedMapIT->second.WFTGetNumberOfAfterWords() << endl;
+                }
+            }
+            PTLeWFTDataFile.close();
         }
 };
 

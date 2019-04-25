@@ -1,15 +1,15 @@
 # depslib dependency file v1.0
-1555254398 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
+1556227788 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
 	<iostream>
 	<fstream>
 	<c_Brain.h>
 	<time.h>
 	<list>
 
-1555261986 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
+1556227788 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
 	<c_PTLControl.h>
 
-1554040340 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
+1556227788 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
 	<c_Cortex.h>
 
 1553348176 h:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
@@ -57,7 +57,7 @@
 	<string>
 	<iostream>
 
-1553447950 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
+1555849382 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
 	<c_Sentence.h>
 	<c_SubjectStack.h>
 	<unordered_map>
@@ -250,7 +250,7 @@
 1555252554 source:h:\c++projects\sophie6.1\sophie6.1\src\c_ptl.cpp
 	"c_PTL.h"
 
-1555268678 h:\c++projects\sophie6.1\sophie6.1\include\c_ptl.h
+1555326740 h:\c++projects\sophie6.1\sophie6.1\include\c_ptl.h
 	<string>
 	<c_Word.h>
 	<map>
@@ -259,10 +259,18 @@
 1554041126 source:h:\c++projects\sophie6.1\sophie6.1\src\c_ptlcontrol.cpp
 	"c_PTLControl.h"
 
-1555267876 h:\c++projects\sophie6.1\sophie6.1\include\c_ptlcontrol.h
+1555765792 h:\c++projects\sophie6.1\sophie6.1\include\c_ptlcontrol.h
 	<string>
 	<vector>
 	<map>
 	<c_PTL.h>
+	<c_WordFreqTracker.h>
 	<c_Cerebellum.h>
+
+1555764964 h:\c++projects\sophie6.1\sophie6.1\include\c_wordfreqtracker.h
+	<map>
+	<string>
+
+1555757680 source:h:\c++projects\sophie6.1\sophie6.1\src\c_wordfreqtracker.cpp
+	"c_WordFreqTracker.h"
 

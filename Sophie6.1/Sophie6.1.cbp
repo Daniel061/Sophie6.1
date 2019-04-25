@@ -53,6 +53,7 @@
 		<Unit filename="include/c_SubjectData.h" />
 		<Unit filename="include/c_SubjectStack.h" />
 		<Unit filename="include/c_Word.h" />
+		<Unit filename="include/c_WordFreqTracker.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/c2_Sentence.cpp" />
 		<Unit filename="src/c_Brain.cpp" />
@@ -71,6 +72,7 @@
 		<Unit filename="src/c_SubjectData.cpp" />
 		<Unit filename="src/c_SubjectStack.cpp" />
 		<Unit filename="src/c_Word.cpp" />
+		<Unit filename="src/c_WordFreqTracker.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

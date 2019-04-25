@@ -464,6 +464,16 @@ class c_LongTermMemory : public c_SubjectStack
                 cout << "file didn't open" << endl;
             }
             SentenceDataFile.close();
+
+
+            ofstream SentenceCSVDataFile ("SentenceDataFile.csv", ios::out);
+            if (SentenceCSVDataFile.is_open()){
+                SentenceCSVDataFile << "Original Sentence;Word Pattern;Word Count" << endl;
+                for (strMapIT = StringIndexedSentenceMap.begin(); strMapIT != StringIndexedSentenceMap.end(); strMapIT++){
+                SentenceCSVDataFile << strMapIT->second.GetFromSentenceOriginalString() << ";" << strMapIT->second.GetFromSentencePattern() << ";" << strMapIT->second.GetFromSentenceWordCount() << endl;
+                }
+            }
+            SentenceCSVDataFile.close();
         }
 
 

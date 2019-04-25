@@ -78,7 +78,7 @@
 5,Child running on a sidewalk.	nv>dn
 5,Cannot see picture to describe.	Pvn>u
 5,Person jumping into the water.	av>dn
-5,People wait to board boats.	nu>an
+5,People wait to board boats.	nu>nn
 5,The people are horseback riding.	dnvnv
 5,Two kids riding on sleds	#nv>v
 5,Two girls are playing softball.	#Gvva
@@ -154,7 +154,7 @@
 6,A man becomes airborne while windsurfing.	dGuu>v
 6,A man parasailing in rough waters.	dGv>un
 6,A snowboarder goes up a ramp.	dan>dn
-6,A man playing music on stage.	dGva>n
+6,A man playing music on stage.	dGvn>n
 6,Three little children playing behind bars	#anvnu
 6,Two middle eastern men on cellphones.	#nnG>u
 6,A batter swings at a ball.	duv>dn
@@ -176,7 +176,7 @@
 6,Three girls jumping on a lawn.	#Gv>dn
 6,Cancer survivors race for a cure.	Punndn
 6,Two dogs are shaking water off.	#nvvnn
-6,A band plays their music indoors.	dnnnau
+6,A band plays their music indoors.	dnnnnu
 6,Three men are walking and singing.	#Gvv+v
 6,Some men are attending a meeting.	dGvvdv
 6,Three skateboarders are in a park.	#nv>dn
@@ -247,7 +247,7 @@
 6,Two men in magenta costumes performing.	#G>uuv
 6,Two men exercise on the beach.	#Gn>dn
 6,Old car driving down the road.	nnvndn
-6,Some hipsters dancing to the music.	dnv>da
+6,Some hipsters dancing to the music.	duv>dn
 6,A woman sitting surrounded by produce.	dGvv>n
 6,Hockey players fighting over a puck.	nnv>dn
 6,A man runs with his bike.	dGu>pn
@@ -255,7 +255,7 @@
 6,Two of the girls are smiling	#>dGvv
 6,A man kayaks through rough water.	dGu>un
 6,Man creates art using spray paint.	Guuvun
-6,A man playing music on stage.	dGva>n
+6,A man playing music on stage.	dGvn>n
 6,A girl is riding a horse	dGvvdn
 6,A person is playing a drum	davvdn
 6,Some kids are eating the food	dnvvdn
@@ -386,7 +386,7 @@
 6,A woman is riding a horse	dGvvdn
 6,A person is peeling a potato	davvdn
 6,Two men are holding fishing poles	#Gvvvn
-6,Four people are performing music outdoors	#nvvan
+6,Four people are performing music outdoors	#nvvnn
 6,A man is playing a flute	dGvvdn
 6,A woman is slicing a tomato	dGvvdn
 6,An animal is biting someone's finger	dnvvnn
@@ -426,7 +426,7 @@
 6,A toddler is eating a banana.	dnvvdn
 6,I sometimes give my cat fish.	yuvynn
 6,My children prefer to eat vegetables.	ynu>un
-6,The baby likes listening to music.	danv>a
+6,The baby likes listening to music.	dauv>n
 6,My mom cleaned under the bed.	yuv>dn
 6,I have organized in the refrigerator	yvv>dn
 7,Street vendors serve passer-by's in the city.	nuuu>dn
@@ -717,7 +717,7 @@
 7,Someone is pouring ingredients into a pot	pvvn>dn
 7,Some children are playing on a playground	dnvv>dn
 7,The girl is trotting on the horse	dGvv>dn
-7,A panda bear is eating some bamboo	dnuvvda
+7,A panda bear is eating some bamboo	dnuvvdn
 7,A man is speaking on a podium	dGvv>dn
 7,The man is playing with a skull	dGvv>dn
 7,A dog is playing with a toy	davv>dn
@@ -777,7 +777,7 @@
 8,A group of women posing for a picture.	dn>Gvndn
 8,A man in a checkered shirt playing guitar.	dG>dvnvn
 8,Man in business attire speaks into a microphone.	G>uuu>dn
-8,A group of people playing a board game.	dn>nvdan
+8,A group of people playing a board game.	dn>nvdnn
 8,Two senor citizens talking on a public street.	#uuv>dnn
 8,Two men in brown coats on the street.	#G>an>dn
 8,A group of friends talk around a table.	dn>nundn
@@ -961,7 +961,7 @@
 8,A couple is looking at a street guide	dnvv>dnu
 8,An animal is being ridden by a woman	dnvvn>dG
 8,The animal with big eyes is voraciously eating	dn>auvAv
-8,Music is being performed by four people outdoors	avvv>#nn
+8,Music is being performed by four people outdoors	nvvv>#nn
 8,The brown dog is running in the snow	daavv>dn
 8,There is no woman chopping up an octopus	EvdGv>dn
 8,A tomato is being sliced by a woman	dnvvv>dG
@@ -1235,7 +1235,7 @@
 9,Someone is being boiled with okra in a pot	pvvv>n>dn
 9,A man is riding a horse in the desert	dGvvdn>dn
 9,A man is cleaning the edge of a bowl	dGvvdn>dn
-9,Somebody is leaping in the air on a board	Pvv>dn>da
+9,Somebody is leaping in the air on a board	Pvv>dn>dn
 9,The man is gracefully singing and playing the guitar	dGvAv+vdn
 9,A group of racing dogs are nosing a muzzle	dn>vnvvdn
 9,There is no milk being drunk by a cat	Evdnvn>dn
@@ -1250,7 +1250,7 @@
 9,The man is riding a horse by a stream	dGvvdn>dn
 9,The snowboarder is jumping off a snow covered hill	davvndnvn
 9,The black dog is not running through the grass	daavnv>dn
-9,Some bamboo is being eaten by a panda bear	davvn>dnu
+9,Some bamboo is being eaten by a panda bear	dnvvn>dnu
 9,A woman is slicing a pepper which is green	dGvvdnpva
 9,The woman is not poking holes in the potato	dGvnvn>dn
 9,The woman is not stirring meat in a bowl	dGvnvn>dn
@@ -1474,7 +1474,7 @@
 10,A large white dog and a smaller brown dog fight.	dnaa+duaau
 10,A white dog opens its mouth near a smaller dog.	daaarn>dua
 10,A white dog plays with a brown dog on carpet.	daan>daa>n
-10,A blond man looking rather lost at a music festival.	daGvuu>dan
+10,A blond man looking rather lost at a music festival.	daGvuu>dnn
 10,A girl stands on a tree lined road during sunset.	dGn>dnvn>n
 10,A seductive bartender mixing a large drink at a nightclub.	duuvdnn>du
 10,A dog's head over the backs of some white animals.	dun>dn>dan
@@ -1486,7 +1486,7 @@
 10,The hockey players and referee are preparing for a face-off.	dnn+uvvndn
 10,Hockey players waiting for the referee to drop the puck.	nnvndu>udn
 10,A bicycle racer runs up a ramp with his bike.	dnuu>dn>pn
-10,A blond man looking rather lost at a music festival.	daGvuu>dan
+10,A blond man looking rather lost at a music festival.	daGvuu>dnn
 10,Players are getting ready for a game of laser tag.	nvvandn>uu
 10,A man on a street corner works on a drawing.	dG>dnnv>dv
 10,A group of dancing swimmers doing one of their routines.	dn>vnv#>nu
@@ -1603,7 +1603,7 @@
 11,Several children in white shirts run their fingers through a railing.	nn>anunn>dv
 11,Two men are talking on their cellphones while in an alleyway.	#Gvv>nu>>dn
 11,Three male construction workers on a roof working in the sun.	#Gnn>dnv>dn
-11,Surfer in black wetsuit falling off his board into the water.	n>anvnpa>dn
+11,Surfer in black wetsuit falling off his board into the water.	n>anvnpn>dn
 11,Blond bicyclist wearing a helmet and pink goggles, looks down.	anvdn+au_vn
 11,A small boy, fully dressed, playing in the sand.	daG_Av_v>dn
 11,Woman standing in front of group with black folders in hand.	Gv>n>n>au>u
@@ -1781,7 +1781,7 @@
 11,A surfer in a white wetsuit is riding a foamy wave	dn>danvvdan
 11,A magician is cutting a girl into two pieces like butter	dnvvdG>#uun
 11,The large brown dog is not running outside in the dirt	dnaavnvn>da
-11,A leap over white snow is greatly appealing to the snowboarders	du>anvAv>da
+11,A leap over white snow is greatly appealing to the snowboarders	du>anvAv>dn
 11,A young mother is playing with her boy in the park	danvv>pG>dn
 11,A black animal is jumping from a dock into the water	danvv>dn>dn
 11,A dog is pushing a toddler into a puddle of rain	davvdn>dn>n
@@ -1885,7 +1885,7 @@
 12,A child in a red jacket playing street hockey guarding a goal.	dn>danvnnvdn
 12,A boy with a stick kneeling in front of a goalie net	dG>duv>n>duu
 12,A little girl in a blue dress climbing on some old wood.	daG>danv>dna
-12,A man is sitting with his music stand in front of him.	dGvv>pan>n>p
+12,A man is sitting with his music stand in front of him.	dGvv>pnn>n>p
 12,Four men in white shirts and baseball caps sitting around a table.	#G>an+anvndn
 12,"Four men in white T-shirts, blue jeans, and hats talking."	uG>an_an_+nu
 12,A cowboy riding on his horse that is jumping in the air.	dnv>pndvv>dn
@@ -2110,7 +2110,7 @@
 13,Two dogs are shaking themselves dry on the path next to the water.	#nvvnu>dnn>dn
 13,A man with tattoos carrying a skateboard gives thumbs up on the sidewalk.	dG>uvdnuu>>dn
 13,An all male choir and soloist are performing, with a piano nearby.	ddGn+uvv_>dna
-13,A family of all ages sitting on the floor playing a board game.	dA>duv>dnvdan
+13,A family of all ages sitting on the floor playing a board game.	dA>duv>dnvdnn
 13,Four men with baseball caps and logo t-shirts laughing together at a table.	#G>an+unvn>dn
 13,A man with a cowboy hat is riding a horse that is jumping.	dG>dnnvvdndvv
 13,A woman is sitting on a rock at the edge of some water.	dGvv>da>dn>dn
@@ -2478,10 +2478,10 @@
 15,Three men are sitting on a sofa having a casual meal at the coffee table.	#Gvv>dnvdua>dan
 15,An African American woman sitting on a seat holding her purse talking on her cellphone.	dnnGv>duvpnv>pn
 15,A snowboarder rides a rail on the cement handrail of steps with snow all around.	daudn>dau>n>ndn
-15,In the snow a person on a board traverses down a concrete wall beside bleachers.	>dnda>daundannu
+15,In the snow a person on a board traverses down a concrete wall beside bleachers.	>dnda>dnundannu
 15,The yellow dog is running next to a bush on a path in the grass.	daavvn>dn>dn>dn
 15,People in a bounce house shaped like a castle with several people sitting and watching.	n>dunvudu>nnv+v
-15,A man is making a cut on a piece of board with an electrical saw.	dGvvdn>dn>a>duu
+15,A man is making a cut on a piece of board with an electrical saw.	dGvvdn>dn>n>duu
 15,Two women in bathing suits watching people on the steps with a huge white bubble.	#G>vnvn>dn>daau
 15,Two women in swimsuits by a bench are staring up at a giant white balloon.	#G>n>dnvv>>duan
 15,A little girl in a red jumpsuit is posing in a tree she has climbed.	daG>danvv>dnpuv
@@ -2559,7 +2559,7 @@
 15,A football player in a purple jersey is running with the ball for a touchdown	dnn>danvv>dnndn
 15,A group of racing dogs is wearing striped uniforms and is running down a track	dn>vnvvvn+vvndn
 15,A boy is jumping off a platform and two other boys are standing and watching	dGvvndn+#aGvv+v
-15,A classroom full of students is looking in the same direction inside a bamboo structure	dnu>uvv>dXundan
+15,A classroom full of students is looking in the same direction inside a bamboo structure	dnu>uvv>dXundnn
 15,A man in a red jacket and khaki pants is walking through an American state	dG>dan+uuvv>dnn
 15,The man is standing on a rocky mountain and gray clouds are in the background	dGvv>dan+auv>dn
 15,A young oriental girl is standing above the crowd and is playing with a pinwheel	danGvvndn+vv>dn
@@ -2599,7 +2599,7 @@
 16,A man wearing glasses and a kilt is wearing a backpack and giving the thumbs up.	dGvu+dnvvdn+vdu>
 16,A group of young adults come together to perform song complete with drums and a guitar.	dn>anvn>uuu>n+dn
 16,Three young men playing musical instruments, one has a guitar and one is on drums.	#aGvan_#udn+#v>n
-16,A large Asian family gathers while seated on the floor to interact with a board apparatus.	dnnAu>v>dn>u>dan
+16,A large Asian family gathers while seated on the floor to interact with a board apparatus.	dnnAu>v>dn>u>dnu
 16,A man in a hat and blazer performs on the street with his guitar and harmonica.	dG>dn+uu>dn>pn+u
 16,A woman painted on a wall and a man in the doorway in the same wall.	dGv>dn+dG>dn>dXn
 16,Two men trying to give directions and failing completely, confusing their victim in the process.	#Gv>vu+vA_vnu>dn
@@ -2872,7 +2872,7 @@
 19,A shirtless man, wearing a brown kilt and backpack, gives a thumbs up on a city sidewalk.	duG_vdan+n_udu>>dnn
 19,A man in a suit, sitting behind a desk covered with radio paraphernalia, speaks into a microphone.	dG>dn_vndnv>uu_u>dn
 19,Black man in a nice suite that matches the rest of the choir he's singing with near a piano.	aG>daudndn>dnuv>>dn
-19,Five musicians, a man and four women, practicing sheet music (using flutes ) in a living room.	#n_dG+#G_vuavuu>dvn
+19,Five musicians, a man and four women, practicing sheet music (using flutes ) in a living room.	#n_dG+#G_vunvuu>dvn
 19,A man is standing inside a doorway that is in a wall painted with a mural of a woman.	dGvvndndv>dnv>dn>dG
 19,A woman wearing glasses and a brown beanie next to a girl with long brown hair holding a book.	dGvu+daun>dG>aanvdn
 19,2 females, 1 from germany and 1 from China, compete in a wrestling match on a mat.	uu_u>u+u>P_u>dvn>dn
@@ -2895,7 +2895,7 @@
 19,A man is standing at a Latino birthday party with a large, white, unfolded piece of paper.	dGvv>dPun>dn_a_vn>n
 19,A young man has a newspaper covering his face as he sleeps in a chair outside by a bicycle.	daGudnvpadpu>dnn>dn
 19,Two commandos with gun by a staircase and an old man holding a hat is sitting on the stairs.	#u>n>dn+dnGvdnvv>dn
-19,Five musicians, a man and four women, practicing sheet music (using flutes ) in a living room.	#n_dG+#G_vuavuu>dvn
+19,Five musicians, a man and four women, practicing sheet music (using flutes ) in a living room.	#n_dG+#G_vunvuu>dvn
 19,Black man stands outside a building with a Van Wagner sign while wearing a blue suit and tan hat.	aGnndv>dnPn>vdan+an
 19,Guy in a green shirt sitting on stairs in front of a statue of a lion and a man.	n>danv>n>n>dn>dn+dG
 19,The referee is about to drop the puck in a hockey game, the players are ready for action.	duvX>udn>dnn_dnvanu
@@ -2992,7 +2992,7 @@
 21,A man is wearing a red jacket and standing beside a yellow canoe on some boulders with water in the background	dGvvdan+vndan>dn>n>dn
 21,A dog, which is large and gray, is carrying a ball in its mouth and running across the grass	da_pvn+a_vvdn>rn+v>dn
 21,A man is wearing a red jacket and standing beside a yellow canoe on some rocks with water in the background	dGvvdan+vndan>da>n>dn
-22,A woman holding a camera and another woman, both with long flowing dresses, look into the distant on a riverbank.	dGvdn+nG_N>avn_v>dn>dn
+22,A woman holding a camera and another woman, both with long flowing dresses, look into the distant on a riverbank.	dGvdn+nG_N>avu_v>dn>dn
 22,An older man in a red sweatshirt stands in front of a group of children sitting on benches in front of him.	dnG>dann>n>dn>nv>u>n>p
 22,Six casually dressed people watch from the comfort and protection of a wooden rail while a restaurant employee stands in the background.	#Avnu>du+u>dan>dnun>dn
 22,A man with a goatee, glasses, hate with wings is examining what looks to be some kind of sound equipment.	dG>du_u_u>uvvqv>vdu>nn
@@ -3076,7 +3076,7 @@
 25,A teenage boy in a white shirt is speaking to a group of teenagers who are sitting at picnic tables in front of a park.	dnG>danvv>dn>uqvv>au>n>dn
 25,A teenage boy in a white shirt is speaking to a group of teenagers who are sitting at picnic tables in front of a park.	dnG>danvv>dn>uqvv>au>n>dn
 25,A man in a tee and jeans helps a boy in a cap, tee, and jeans across a stepping stone path in water.	dG>dn+nudG>dn_n_+n>dvun>n
-25,Two men of southeast Asian descent are sitting Indian style on a bamboo floor, playing chess while two young boys watch in the foreground.	#G>unuvvPu>dan_vn>#aGu>dn
+25,Two men of southeast Asian descent are sitting Indian style on a bamboo floor, playing chess while two young boys watch in the foreground.	#G>unuvvPu>dnn_vn>#aGu>dn
 25,A smiling blond girl with a red striped shirt is sitting in a chair at a table with a white porcelain bowl on her head.	dvaG>davnvv>dn>dn>daun>pn
 25,A woman is sitting at a desk on her computer, and other people are behind her with laptops in front of them as well.	dGvv>dn>pn_+anvnp>n>n>pdn
 25,An old man in a baseball hat and an old woman in a jean jacket are standing outside, but are covered mostly in shadow.	dnG>dan+dnG>dunvvn_uvvA>u
@@ -3085,7 +3085,7 @@
 25,A teenage boy in a white shirt is speaking to a group of teenagers who are sitting at picnic tables in front of a park.	dnG>danvv>dn>uqvv>au>n>dn
 26,A young asian man and woman stand open-mouthed in front of microphones, they are dressed in rockabilly style and the man has a blue guitar	danG+Gnv>n>u_pvv>Au+dGudan
 26,A group of musicians perform in a room before a crowd of people including one man wearing a checkered jacket and a girl with pink hair.	dn>nu>dnudn>nv#Gvdvn+dG>an
-26,A smiling man with gray hair and glasses, dressed in black, is sitting in a chair with a music stand in front of him.	dvG>an+u_v>a_vv>dn>dan>n>p
+26,A smiling man with gray hair and glasses, dressed in black, is sitting in a chair with a music stand in front of him.	dvG>an+u_v>a_vv>dn>dnn>n>p
 26,A man wearing a red boxing uniform throws a punch with his right hand as a man wearing blue boxing gloves and headgear blocks the punch.	dGvdavnudn>pnuddGvavu+uudn
 26,There are five white individuals on a stage in a line, the outer four are looking inward toward the middle individual who has a beard.	Ev#au>dn>dn_du#vvnndnuqudn
 26,A man with a green t-shirt and beard is carrying a backpack while standing next to a woman wearing a white sleeveless blouse and a purse.	dG>dan+nvvdn>vn>dGvdauu+dn

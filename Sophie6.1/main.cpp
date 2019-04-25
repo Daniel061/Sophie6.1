@@ -33,7 +33,7 @@ int   Iterations = 0;
 int   vc,nc,adc,ac,pc,pn,ukn,kn;
 
 // GLOBALS
-string Version       = "6.1d.08x.EN.012.007";
+string Version       = "6.1d.09a.EN.012.007";
 string ReleaseMode   = "debug";
 
 bool Verbose         = false;
@@ -170,6 +170,7 @@ getline (cin,Raw_Sentence);
   /// Save all data learned in files
     Brain.LTMSaveSentencesInFile();
     Brain.LobesStoreTheLearnedWords();
-    Brain.FilePTLmmData();
+//    Brain.FilePTLmmData();
+//    Brain.PTLCreateWFTFile();
     return 0;
 }

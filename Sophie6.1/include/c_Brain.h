@@ -81,11 +81,12 @@ class c_Brain : public c_PTLControl
               SaveAllSentenceWordDataToMemory();                                                                     // push sentence and word data to memory cells
               SaveCurrentSentenceInMap();                                                                            // push sentence class to map
               SavePreAndPostPatternConstruction(GetFromSentencePreProcessedPattern(),GetFromSentencePattern());
-              if(TrainingMode){
-              ProcessPTLData(strData,GetFromSentenceWordCount(),GetFromSentencePattern(),GetFromSentenceWordMap());} // give sentence data to PTLControl
-              if(!TrainingMode){
-                CreateSoftCompareMap(GetFromSentenceWordMap(),GetFromSentenceWordCount());
-              }
+//              if(TrainingMode){
+//              ProcessPTLData(strData,GetFromSentenceWordCount(),GetFromSentencePattern(),GetFromSentenceWordMap());} // give sentence data to PTLControl
+//              PTLProcessSentenceIneWFT();                                                                            // create extended word frequency map
+//              if(!TrainingMode){
+//                CreateSoftCompareMap(GetFromSentenceWordMap(),GetFromSentenceWordCount());
+//              }
 
             }
             else{
