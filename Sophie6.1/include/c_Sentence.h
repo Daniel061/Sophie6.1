@@ -255,6 +255,9 @@ class c_Sentence : public c_Personality
         ///+++++++++++++++++++++++++'sw' is the function source flag***********************
         ///*******Location = which place in the sentence***********************************
 
+        string GetswExtendedWordType(int Location){return WordMap[Location].Getw_ExtendedWordType();}
+        void   SetswExtendedWordType(int Location,string newVal){WordMap[Location].Setw_ExtendedWordType(newVal);}
+
         string GetswMiniDefinition(int Location, int intWhich){return WordMap[Location].Getw_MiniDefinition(intWhich);}
         void   SetswMiniDefinition(int Location,string newVal){WordMap[Location].Setw_MiniDefinition(newVal);}
         int    GetswMiniDefinitionCount(int Location){return WordMap[Location].Getw_MiniDefinitionCount();}
@@ -384,7 +387,7 @@ class c_Sentence : public c_Personality
         void CreateTaggedSentence(){
             string TaggedString = "";
             for(int x = 0; x < GetFromSentenceWordCount(); x++){
-                TaggedString += GetswWords(x) + "[" + GetswWordType(x) + "] ";
+                TaggedString += GetswWords(x) + "[" + GetswExtendedWordType(x) + "] ";
             }
             SetInSentenceTaggedSentence(TaggedString);
         }

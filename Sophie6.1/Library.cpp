@@ -20,9 +20,24 @@
 using namespace std;
 extern string Version;
 char typeDeterminer       = 'd';
+ string typeDeterminerBase       = "DB";
+ string typeDefiniteArticle      = "DA";
+ string typeDemonstrativePronoun = "PD";
+ string typeDeterminerQuantifier = "DQ";
+ string typeDistributive         = "DV";
+
 char typeVerb             = 'v';
+ string typeVerbBase             = "VB";
+ string typePastTenseVerb        = "VP";
+ string typeLinkingVerb          = "VL";
+ string typeActionVerb           = "VA";
+
 char typeAdverb           = 'A';
+
 char typePronoun          = 'p';
+ string typePronounBase          = "PB";
+ string typePossessivePronoun    = "PO";
+
 char typeProperNoun       = 'P';
 char typeNoun             = 'n';
 char typeAdjective        = 'a';
@@ -43,9 +58,12 @@ char typeGreetingsWord    = 'W';
 char typeGenderDeterminer = 'B';
 char typeFemaleClass      = 'f';
 char typeMaleClass        = 'b';
-char typePreposition      = '>';
+char typePreposition      = 'I';
+ string typePrepositionWord         = "PREP";
 char typeUnknownWord      = 'u';
+
 char typeNumericWord      = '#';
+ string typeCardinalNumber          = "CN";
 char typeExclamation      = 'E';
 
 

@@ -87,8 +87,10 @@ public:
             cout << "[c_Cerebellum.h::GatherAndSetAllSentenceData()]\n";
 
         InitializeAll();
-        LocalWordCount     = GetFromSentenceWordCount();
-        string LocalOriginalString= GetFromSentenceOriginalString();
+        LocalWordCount               = GetFromSentenceWordCount();
+        string LocalOriginalString   = GetFromSentenceOriginalString();
+        string LocalExtendedWordType = "";
+        string MemoryExtWordType     = "";
         //check for empty sentence
         if(LocalWordCount == 0) return -1;
 
@@ -113,17 +115,18 @@ public:
         //     int    sDaysOld (SET HERE)
         //     int    sUnderstandingLevel (SET HERE)
 
-        for(int x = 0; x  <= LocalWordCount-1; x++){                                //***First try to set wordtype
+        for(int x = 0; x  <= LocalWordCount-1; x++){                                  //***First try to set wordtype
 
-            LocalWordType    = FindWordType(GetswWordsLC(x),x);                       //Get Wordtype from language helper, receives 'u' if can't determine
-            MemoryWordType   = GetMemoryCellcharWordType(GetswWordsLC(x),Result);     //Get Wordtype from memory cell, receives NULL if doesn't exist, else returns CellWordType
-            SentenceWordType = GetswWordType(x);                                      //Get Wordtype from c_sentence
-            LocalWordCopy    = GetswWords(x);                                         //Get a copy of the word
+            LocalWordType     = FindWordType(GetswWordsLC(x),LocalExtendedWordType,x); //Get Wordtype from language helper, receives 'u' if can't determine
+            MemoryWordType    = GetMemoryCellcharWordType(GetswWordsLC(x),Result);     //Get Wordtype from memory cell, receives NULL if doesn't exist, else returns CellWordType
+            SentenceWordType  = GetswWordType(x);                                      //Get Wordtype from c_sentence
+            MemoryExtWordType = GetMemoryCellpExtendedWordType(GetswWordsLC(x),Result);//Get memory cell extended word type
+            LocalWordCopy     = GetswWords(x);                                         //Get a copy of the word
 
             //if(MemoryWordType == '\0') MemoryWordType = 'u';                      //removed due to redundancy
 
-            if(MemoryWordType == typeUnknownWord){                                  //Nothing in memory cell
-                SelectedWordType = LocalWordType;}                                  //  -use type from language helper, could still be 'u'
+            if(MemoryWordType == typeUnknownWord){                                    //Nothing in memory cell
+                SelectedWordType = LocalWordType;}                                    //  -use type from language helper, could still be 'u'
             else
                 if(MemoryWordType == LocalWordType){
                     SelectedWordType = LocalWordType;
@@ -143,6 +146,7 @@ public:
                                   //disagreement here!!!                            //We have a disagreement here between memory cell wordtype and language helper
                                    LocalHasAlternateType = true;
                                    SelectedWordType      = MemoryWordType;          //MemoryWordType wins
+                                   LocalExtendedWordType = MemoryExtWordType;       //Use Memory cell extended word type
                                    LocalAlternateType    = LocalWordType;           //Save for alternate type storage
                                    LocalAltLocation      = x;                       //save x for storage function   ***Possible double disagreement******
                                    }         // using FindWordType
@@ -167,6 +171,7 @@ public:
 
          LocalPattern += SelectedWordType;                                          //build the pattern as we go
          SetswWordType(SelectedWordType,x);                                         //set the selected word type in the sentence
+         SetswExtendedWordType(x,LocalExtendedWordType);                            //Set the extended word type in the sentence
          if(SelectedWordType == typeNoun) LocalNounCount++;                         //count the nouns
          if(SelectedWordType == typeVerb) LocalVerbLocation = x;                    //save the verb location
          if(SelectedWordType == typeAssociativeWord) LocalNamePointer = x;          //save the name pointer

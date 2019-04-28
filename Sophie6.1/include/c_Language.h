@@ -575,10 +575,10 @@ string PatternReview(){
         }
         return Result;
     }
-//--------------------------END of EndOfSentencePAtternCheck----------------------------------
+//--------------------------END of EndOfSentencePatternCheck----------------------------------
 
 //-------------------------Find Word Type------------------------------------------------------
- char FindWordType(string tmpWord, int LocationInSentence = -1){
+ char FindWordTypeOLD(string tmpWord, int LocationInSentence = -1){
 
            if(Verbose)cout << "[c_Language::FindWordType] :";
 
@@ -1169,6 +1169,119 @@ string PatternReview(){
 
  }
 //--------------------------------end Find Word Type--------------------------------------
+
+
+//--------------------------------New Find Word Type(Extended)----------------------------
+
+char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentence = -1){
+
+           char   LocalWordType             = 'u';
+           ExtendedType                     = "uu";
+           string SearchWord                = " " + LocalWord + " ";
+           //----Cardinal Numbers---------------
+           string CardinalNumbers           = " one two three four five six seven eight nine ten ";
+           //----DETERMINERS--------------------
+           string Determiners               = " the a an each every certain this that these those any all few many each some much no ";
+           string DefiniteArticles          = " the ";
+           string DemonstrativePronouns     = " this that these those ";
+           string DeterminerQuantifiers     = " few many little much lot most some any enough ";
+           string Distributives             = " all both half either neither each every ";
+           string PossessivePronouns        = " my your his her its our their ";
+           //----VERBS--------------------------
+           string Verbs                     = " are go went can will be have do say get make go know take is see come fell ran think look want give use find tell ask work seem feel try leave call am been ";
+           string LinkingVerbs              = " is ";
+           string PastTenseVerbs            = " came went gone threw broke ran sold fell ";
+           //----PREPOSITIONS-------------------
+           string PrepositionWords          = " in into up after to on with under within of at near until over across among while from throughout through during towards by upon across ";
+           //----PREPOSITION POINTERS-----------
+           int    isPreposition             = -1;
+           //----DETERMINER POINTERS------------
+           int    isDeterminer              = -1;
+           int    isDefiniteArticle         = -1;
+           int    isDemonstrativePronoun    = -1;
+           int    isDeterminerQuantifier    = -1;
+           int    isPossessivePronoun       = -1;
+           int    isDistributive            = -1;
+           //----VERB POINTERS------------------
+           int    isVerb                    = -1;
+           int    isPastTenseVerb           = -1;
+           int    isLinkingVerb             = -1;
+           //----Cardinal Pointers--------------
+           int    isCardinalNumber          = -1;
+
+           //----LOCAL WORK VARIABLES-----------
+           int    MatchPos                  = -1;   //pointer for substring searches
+
+           isDeterminer                     = Determiners.find(SearchWord);                  ///base type
+            isDefiniteArticle               = DefiniteArticles.find(SearchWord);             //extended types
+            isDemonstrativePronoun          = DemonstrativePronouns.find(SearchWord);        //extended types
+            isDeterminerQuantifier          = DeterminerQuantifiers.find(SearchWord);        //extended types
+            isPossessivePronoun             = PossessivePronouns.find(SearchWord);           //extended types
+            isDistributive                  = Distributives.find(SearchWord);                //extended types
+
+           isVerb                           = Verbs.find(SearchWord);                        ///base type
+            isPastTenseVerb                 = PastTenseVerbs.find(SearchWord);               //extended types
+            isLinkingVerb                   = LinkingVerbs.find(SearchWord);                 //extended types
+
+           isCardinalNumber                 = CardinalNumbers.find(SearchWord);              ///base type '#'
+           isPreposition                    = PrepositionWords.find(SearchWord);             ///base type 'I'
+
+
+          // Process Preposition
+          if(isPreposition >= 0){
+             LocalWordType = typePreposition;                                                ///base type 'I'
+             ExtendedType  = typePrepositionWord;                                            // extended type "PR"
+             return LocalWordType;}
+
+
+          // Process Cardinal
+          if(isCardinalNumber >= 0){
+             LocalWordType = typeNumericWord;                                               ///base type '#'
+             ExtendedType  = typeCardinalNumber;                                            //extended type "cn"
+             return LocalWordType;}
+
+          // Process Determiners and their extended types
+           if(isDeterminer >=0){
+              LocalWordType = typeDeterminer;                                                //  'd'
+              if(isDefiniteArticle >= 0){
+               ExtendedType = typeDefiniteArticle;}                                          /// "da"
+                else
+                    if(isDeterminerQuantifier >= 0){
+                        ExtendedType = typeDeterminerQuantifier;}                            /// "dq"
+                    else
+                        if(isDistributive >=0){
+                            ExtendedType = typeDistributive;}                                /// "dv"
+                        else
+                            ExtendedType = typeDeterminerBase;                               /// "dd"
+                            return LocalWordType;
+           }
+
+          // Process Verbs and their extended types
+           if(isVerb >= 0){                                                                  // 'v'
+               LocalWordType = typeVerb;
+               if(isPastTenseVerb >= 0){
+                ExtendedType = typePastTenseVerb;}                                            /// "vp"
+                else
+                    if(isLinkingVerb >=0){
+                        ExtendedType = typeLinkingVerb;}                                      /// "vL"
+                    else
+                       ExtendedType = typeVerbBase;                                           /// "vv"
+                       return LocalWordType;
+           }
+
+           // Check for action verb
+           // word type will still be unknown at this point
+           MatchPos = LocalWord.find("ing");
+           if((MatchPos >=0) && ((MatchPos + 3) == LocalWord.size())){      //must be at end of sentence
+                LocalWordType = typeVerb;                                                     //  'v'
+                ExtendedType  = typeActionVerb;                                               /// "va"
+                return LocalWordType;}
+
+
+
+           return LocalWordType;
+
+}
 
 //-----------------------SlowSpeak--------------------------------------------------------
 void SlowSpeak(string str_Data, bool Recording = true, int Delay = ThisSpeed, bool CarriageReturn = true ){

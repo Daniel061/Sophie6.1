@@ -40,6 +40,7 @@ class c_MemoryCell
         string pResolvedPattern;                   // 8)  if used as pattern storage, contains constructed pattern or to self if final construction form
         string pVowelPattern;                      // 9)  C- constant  V- vowel
         string pPresentTenseForm;                  // 10) threw = throw
+        string pExtendedWordType;                  // 11) i.e. dd = determiner base type
         char   pPossessiveRootType;                // 11) usually a 'n' noun type but not always
         char   pCellPurpose;                       // 12) s-sentence w-word r-response m-memory
         char   pWordType;                          //     n-noun v-verb p-pronoun a-adjective d-determiner(the) r-subject representative(it that) u-unknown c-connecting word(and)  C(cap) Contraction word
@@ -87,6 +88,9 @@ class c_MemoryCell
 
 
     public:
+        string GetpExtendedWordType(){return pExtendedWordType;}
+        void   SetpExtendedWordType(string newVal){pExtendedWordType = newVal;}
+
         int    GetpTimesUsedAsSubject(){return pTimesUsedAsSubject;}
         void   IncrementpTimesUsedAsSubject(){pTimesUsedAsSubject++;}
         void   SetpTimesUsedAsSubject(int newVal){pTimesUsedAsSubject = newVal;}
@@ -231,6 +235,7 @@ class c_MemoryCell
                 pPossessiveRoot                 = "";
                 pSingularForm                   = "";
                 pPresentTenseForm               = "";
+                pExtendedWordType               = "uu";
                 pPossessiveRootType             = 'u';
                 pPolarity                       = 'u';
                 pCellPurpose                    = 'u'; //undefined

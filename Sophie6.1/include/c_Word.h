@@ -37,20 +37,22 @@ class c_Word
           string  w_PossessiveRoot          = "";    // 8)  cat's  = cat
           string  w_VowelPattern            = "";    // 9)  C - constant V - vowel
           string  w_PresentTenseForm        = "";    // 10) Threw = throw
-          bool    w_isContraction           = false; // 11)  contraction flag
-          bool    w_isPlural                = false; // 12) plural flag
-          bool    w_SingularPossessive      = false; // 13) i.e. cat's
-          bool    w_PluralPossessive        = false; // 14) i.e. cats'
-          int     w_QuoteLocation           = -1;    // 15) location of quote if contraction
-          int     w_WordTokens              = -1;    // 16) depreciated
-          char    w_PossessiveRootType      = 'u';   // 17) usually a 'n' noun but not always
-          char    w_WordType                = 'u';   // 18) defines word type  u = unknown
-          char    w_GenderClass             = 'u';   // 19) defines gender     u = undefined
-          char    w_PluralWordFlag          = 'u';   // 20) s = singular p=plural u = undefined
-          char    w_SecondaryType           = 'u';   // 21) some words have more than 1 usage
-          char    w_AlternativeType         = 'u';   // 22) some words have more than 1 usage
-          char    w_WordTense               = 'u';   // 23) c - present p - past
-          char    w_Polarity                = 'p';   // 24) positive/negative
+          string  w_ExtendedWordType        = "uu";  // 11) i.e. dd = determiner base type
+          bool    w_isContraction           = false; // 12)  contraction flag
+          bool    w_isPlural                = false; // 13) plural flag
+          bool    w_SingularPossessive      = false; // 14) i.e. cat's
+          bool    w_PluralPossessive        = false; // 15) i.e. cats'
+          int     w_QuoteLocation           = -1;    // 16) location of quote if contraction
+          int     w_WordTokens              = -1;    // 17) depreciated
+          char    w_PossessiveRootType      = 'u';   // 18) usually a 'n' noun but not always
+          char    w_WordType                = 'u';   // 19) defines word type  u = unknown
+          char    w_GenderClass             = 'u';   // 20) defines gender     u = undefined
+          char    w_PluralWordFlag          = 'u';   // 21) s = singular p=plural u = undefined
+          char    w_SecondaryType           = 'u';   // 22) some words have more than 1 usage
+          char    w_AlternativeType         = 'u';   // 23) some words have more than 1 usage
+          char    w_WordTense               = 'u';   // 24) c - present p - past
+          char    w_Polarity                = 'p';   // 25) positive/negative
+
 
 
 
@@ -65,6 +67,9 @@ class c_Word
 
 
     public:
+        string   Getw_ExtendedWordType(){return w_ExtendedWordType;}
+        void     Setw_ExtendedWordType(string newVal){w_ExtendedWordType = newVal;}
+
         string   Getw_PresentTenseForm(){return w_PresentTenseForm;}
         void     Setw_PresentTenseForm(string newVal){w_PresentTenseForm = newVal;}
 
@@ -208,23 +213,26 @@ class c_Word
           w_VowelPattern             = "";      // C - constant V - vowel                       8
           w_isContraction            = false;   // contraction flag                             9
           w_isPlural                 = false;   // plural flag                                  10
-          w_QuoteLocation            = -1;      // location of quote if contraction/possessive  11
-          w_WordTokens               = -1;      // depreciated                                  12
-          w_WordType                 = 'u';     // defines word type  u = unknown               13
-          w_GenderClass              = 'u';     // defines gender     u = undefined             14
-          w_PluralWordFlag           = 'u';     // s = singular  p=plural u = undefined         15
-          w_SecondaryType            = 'u';     // some words have more than 1 usage            16
-          w_AlternativeType          = 'u';     // some words have more than 1 usage            17
-          w_WordTense                = 'u';     // c - present p - past                         18
-          w_PossessiveRootType       = 'u';     // usually a 'n' noun but not always            19
-          w_Polarity                 = 'p';     // positive / negative                          20
-          w_SingularForm             = "";      // i.e. cats = cat                              21
-          w_PresentTenseForm         = "";      // threw = throw                                22
+          w_SingularPossessive       = false;   // singular possessive flag                     11
+          w_PluralPossessive         = false;   // plural possessive flag                       12
+          w_QuoteLocation            = -1;      // location of quote if contraction/possessive  13
+          w_WordTokens               = -1;      // depreciated                                  14
+          w_WordType                 = 'u';     // defines word type  u = unknown               15
+          w_GenderClass              = 'u';     // defines gender     u = undefined             16
+          w_PluralWordFlag           = 'u';     // s = singular  p=plural u = undefined         17
+          w_SecondaryType            = 'u';     // some words have more than 1 usage            18
+          w_AlternativeType          = 'u';     // some words have more than 1 usage            19
+          w_WordTense                = 'u';     // c - present p - past                         20
+          w_PossessiveRootType       = 'u';     // usually a 'n' noun but not always            21
+          w_Polarity                 = 'p';     // positive / negative                          22
+          w_SingularForm             = "";      // i.e. cats = cat                              23
+          w_PresentTenseForm         = "";      // threw = throw                                24
+          w_ExtendedWordType         = "uu";    // i.e. dd = determiner base type               25
 
-          w_MiniDefinition.clear();             // usually Gist of sentence if used as subject  23
-          w_Adjectives.clear();                 // adjectives used towards this word            24
-          w_Adverbs.clear();                    // adverbs used towards this word               25
-          w_RelatedNouns.clear();               // nouns related to this word                   26
+          w_MiniDefinition.clear();             // usually Gist of sentence if used as subject  26
+          w_Adjectives.clear();                 // adjectives used towards this word            27
+          w_Adverbs.clear();                    // adverbs used towards this word               28
+          w_RelatedNouns.clear();               // nouns related to this word                   29
         }
 
 

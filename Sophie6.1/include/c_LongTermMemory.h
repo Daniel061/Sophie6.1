@@ -327,42 +327,43 @@ class c_LongTermMemory : public c_SubjectStack
                 SetMemorypWordTense(GetswWordsLC(x),GetswWordTense(x));                                      /// 14  word tense
                 SetMemorypSecondaryType(GetswWordsLC(x),GetswSecondaryType(x));                              /// 15  secondary type
                 SetMemorypAlternateType(GetswWordsLC(x),GetswAlternateType(x));                              /// 16  alternate type
+                SetMemoryCellpExtendedWordType(GetswWordsLC(x),GetswExtendedWordType(x));                    /// 17  extended word type
                 if((x == GetFromSentenceSubjectLocation()) && (!GetFromSentenceIsQuestion()) ){
                     SetMemorypCellMiniDefinition(GetswWordsLC(x),GetFromSentenceGistOfSentence());}                      //use gist if subject & not a question sentence
-                                                                                                             /// 17  mini def
+                                                                                                             /// 18  mini def
                 GetMemoryCellpDaysOld(GetswWordsLC(x),Result);
                 if(Result){
-                    SetMemoryCellpDaysOld(GetswWordsLC(x),GetDaysSinceDate());}                              /// 18  pDaysOld
-                SetMemoryCellpPolarity(GetswWordsLC(x),GetswPolarity(x));                                    /// 19  polarity
-                SetMemoryCellpVowelPattern(GetswWordsLC(x),GetswVowelPattern(x));                            /// 20  Vowel Pattern
-                SetMemoryCellpPresentTenseForm(GetswWordsLC(x),GetswPresentTenseForm(x));                    /// 21  Present tense form
+                    SetMemoryCellpDaysOld(GetswWordsLC(x),GetDaysSinceDate());}                              /// 19  pDaysOld
+                SetMemoryCellpPolarity(GetswWordsLC(x),GetswPolarity(x));                                    /// 20  polarity
+                SetMemoryCellpVowelPattern(GetswWordsLC(x),GetswVowelPattern(x));                            /// 21  Vowel Pattern
+                SetMemoryCellpPresentTenseForm(GetswWordsLC(x),GetswPresentTenseForm(x));                    /// 22  Present tense form
 
                 if (Verbose)
                     cout << "Adjective count for " << GetswWords(x) << " is " << GetswAdjectiveFromWordCount(x) << endl;
-                for(int y = 0; y < GetswAdjectiveFromWordCount(x); y++){                                     /// 22  adjective list
+                for(int y = 0; y < GetswAdjectiveFromWordCount(x); y++){                                     /// 23  adjective list
 
                     SetMemoryCellAdjectiveInList(GetswWordsLC(x),GetswAdjectiveFromWord(x,y));}
 
-                for(int y = 0; y < GetswAdverbFromWordCount(x); y++){                                        /// 23  adverb list
+                for(int y = 0; y < GetswAdverbFromWordCount(x); y++){                                        /// 24  adverb list
                     SetMemoryCellAdverbInList(GetswWordsLC(x),GetswAdverbFromWord(x,y));}
                 if (Verbose)
                     cout << "Noun count for " << GetswWords(x) << " is " << GetswNounFromWordCount(x) << endl;
-                for(int y = 0; y < GetswNounFromWordCount(x); y++){                                          /// 24  noun list
+                for(int y = 0; y < GetswNounFromWordCount(x); y++){                                          /// 25  noun list
                     SetMemoryCellNounInList(GetswWordsLC(x),GetswNounFromWord(x,y));}
 
-                for(int y = 0; y < GetswVerbFromWordCount(x); y++){                                          /// 25  verb list
+                for(int y = 0; y < GetswVerbFromWordCount(x); y++){                                          /// 26  verb list
                     SetMemoryCellVerbInList(GetswWordsLC(x),GetswVerbFromWord(x,y));}
 
 // TODO (Dan#1#): finish storing to memory cells the remaining lists
-                if(GetFromSentenceSubjectLocation()==x) SetMemoryCellSubjectUsageCounterUpOne(GetswWordsLC(x));                /// 26 subject usage count
-                if(GetFromSentenceDirectObjectLocation()==x) SetMemoryCellDirectObjectUsageCounterUpOne(GetswWordsLC(x));      /// 27 Direct Object usage count
-                if(GetFromSentenceIndirectObjectLocation()==x) SetMemoryCellIndirectObjectUsageCounterUpOne(GetswWordsLC(x));  /// 28 Indirect Object usage count
-                if(GetswWordType(x)== typeNoun) SetMemoryCellNounUsageCounterUpOne(GetswWordsLC(x));                           /// 29 noun usage count
-                if(GetswWordType(x)== typeVerb) SetMemoryCellVerbUsageCounterUpOne(GetswWordsLC(x));                           /// 30 verb usage count
-                if(GetswWordType(x)== typeAdjective) SetMemoryCellAdjectiveUsageCounterUpOne(GetswWordsLC(x));                 /// 31 Adjective usage count
-                if(GetswWordType(x)== typeAdverb) SetMemoryCellAdverbUsageCounterUpOne(GetswWordsLC(x));                       /// 32 Adverb usage count
-                if(GetswWordType(x)== typePronoun) SetMemoryCellPronounUsageCounterUpOne(GetswWordsLC(x));                     /// 33 Pronoun usage count
-                if(GetswWordType(x)== typeProperNoun) SetMemoryCellPropernounUsageCounterUpOne(GetswWordsLC(x));               /// 34 Propernoun usage count
+                if(GetFromSentenceSubjectLocation()==x) SetMemoryCellSubjectUsageCounterUpOne(GetswWordsLC(x));                /// 27 subject usage count
+                if(GetFromSentenceDirectObjectLocation()==x) SetMemoryCellDirectObjectUsageCounterUpOne(GetswWordsLC(x));      /// 28 Direct Object usage count
+                if(GetFromSentenceIndirectObjectLocation()==x) SetMemoryCellIndirectObjectUsageCounterUpOne(GetswWordsLC(x));  /// 29 Indirect Object usage count
+                if(GetswWordType(x)== typeNoun) SetMemoryCellNounUsageCounterUpOne(GetswWordsLC(x));                           /// 30 noun usage count
+                if(GetswWordType(x)== typeVerb) SetMemoryCellVerbUsageCounterUpOne(GetswWordsLC(x));                           /// 31 verb usage count
+                if(GetswWordType(x)== typeAdjective) SetMemoryCellAdjectiveUsageCounterUpOne(GetswWordsLC(x));                 /// 32 Adjective usage count
+                if(GetswWordType(x)== typeAdverb) SetMemoryCellAdverbUsageCounterUpOne(GetswWordsLC(x));                       /// 33 Adverb usage count
+                if(GetswWordType(x)== typePronoun) SetMemoryCellPronounUsageCounterUpOne(GetswWordsLC(x));                     /// 34 Pronoun usage count
+                if(GetswWordType(x)== typeProperNoun) SetMemoryCellPropernounUsageCounterUpOne(GetswWordsLC(x));               /// 35 Propernoun usage count
 
 
 

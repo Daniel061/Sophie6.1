@@ -55,7 +55,19 @@ extern char typePreposition;
 extern char typeUnknownWord;
 extern char typeNumericWord;
 extern char typeExclamation;
-
+extern string typeDeterminerBase;
+extern string typeDefiniteArticle;
+extern string typeDemonstrativePronoun;
+extern string typeDeterminerQuantifier;
+extern string typePossessivePronoun;
+extern string typePronounBase;
+extern string typePastTenseVerb;
+extern string typeVerbBase;
+extern string typeDistributive;
+extern string typeLinkingVerb;
+extern string typeActionVerb;
+extern string typeCardinalNumber;
+extern string typePrepositionWord;
 
 
 class c_Lobes : public c_MemoryCell
@@ -132,6 +144,16 @@ class c_Lobes : public c_MemoryCell
 //------------------------NEW STRING INDEXED MEMORY CELL MAP FUNCTIONS----------------
 
 //-----------------SET FUNCTIONS----------------------------------
+
+        /// Stores extended word type if strSearchBaseExists
+        bool SetMemoryCellpExtendedWordType(string strSearchBase,string newType){
+          bool Result = false;
+          CellMapIT   = FindStringInMap(strSearchBase,Result);
+               if(Result){
+                   CellMapIT->second.SetpExtendedWordType(newType);}
+               return Result;}
+
+
 
         /// Advances pTimesUsedAsSubject if strSearchBase Exists
         bool SetMemoryCellSubjectUsageCounterUpOne(string strSearchBase){
@@ -658,12 +680,20 @@ class c_Lobes : public c_MemoryCell
         }
 
 
+        /// Gets pExtendedWordType if strSearchBase exists, else returns "uu",
+        ///  Returns True if exists and the extended word type
+        string GetMemoryCellpExtendedWordType(string strSearchBase, bool &Result){
+           Result    = false;
+           CellMapIT = FindStringInMap(strSearchBase,Result);
+               if(Result){
+                   return CellMapIT->second.GetpExtendedWordType();}
+               else
+                   return "uu";}
 
         /// Gets pSingularForm if strSearchBase exists, else returns "",
-        ///  Returns True in the address of &Result if exists
         ///  Returns pSingularForm
         string GetMemoryCellpSingularForm(string strSearchBase, bool &Result){
-           Result = false;
+           Result      = false;
            CellMapIT   = FindStringInMap(strSearchBase, Result);
                if (Result){
                     return CellMapIT->second.GetpCellSingularForm();}
@@ -1378,6 +1408,7 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Contraction 2nd        ," << CellMapIT->second.GetpCellContractionLongFormSecond() << Delim;
                     LearnedDataFile << "Cell purpose           ," << CellMapIT->second.GetpCellPurpose() << Delim;
                     LearnedDataFile << "Word Type              ," << CellMapIT->second.GetpCellWordType() << Delim;
+                    LearnedDataFile << "Extended Word Type     ," << CellMapIT->second.GetpExtendedWordType() << Delim;
                     LearnedDataFile << "Word tense             ," << CellMapIT->second.GetpCellWordTense() << Delim;
                     LearnedDataFile << "Present Tense Form     ," << CellMapIT->second.GetpCellPresentTenseForm() << Delim;
                     LearnedDataFile << "(p)ositive - (n)egative," << CellMapIT->second.GetpCellPolarity() << Delim;
@@ -1497,7 +1528,10 @@ class c_Lobes : public c_MemoryCell
                         WorkingCell.SetpCellPurpose(strLineData[0]);                        //set the char cell purpose
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpCellWordType(strLineData[0]);                       //set the char wordtype
+                        WorkingCell.SetpCellWordType(strLineData[0]);                       //set the char word type
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
+                        WorkingCell.SetpExtendedWordType(strLineData);                      //set the string extended word type
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellWordTense(strLineData[0]);                      //set the char wordtense
