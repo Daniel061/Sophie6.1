@@ -56,6 +56,7 @@ extern char typeUnknownWord;
 extern char typeNumericWord;
 extern char typeExclamation;
 extern string typeDeterminerBase;
+extern string typeIndefiniteArticle;
 extern string typeDefiniteArticle;
 extern string typeDemonstrativePronoun;
 extern string typeDeterminerQuantifier;
@@ -68,7 +69,16 @@ extern string typeLinkingVerb;
 extern string typeActionVerb;
 extern string typeCardinalNumber;
 extern string typePrepositionWord;
-
+extern string typeSubjectPronoun;
+extern string typeObjectPronoun;
+extern string typeInterrogativePronoun;
+extern string typeIndefinatePronoun;
+extern string typeConjunctionBase;
+extern string typeCoordinatingConjunction;
+extern string typeExUnknownWord;
+extern string typeGenderNounSingular;
+extern string typeGenderNounPlural;
+extern string typeNounWeekDay;
 
 class c_Lobes : public c_MemoryCell
 {

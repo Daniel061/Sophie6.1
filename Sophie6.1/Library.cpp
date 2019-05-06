@@ -20,30 +20,42 @@
 using namespace std;
 extern string Version;
 char typeDeterminer       = 'd';
- string typeDeterminerBase       = "DB";
- string typeDefiniteArticle      = "DA";
- string typeDemonstrativePronoun = "PD";
- string typeDeterminerQuantifier = "DQ";
- string typeDistributive         = "DV";
+ string typeDeterminerBase       = "DDDB";
+ string typeDefiniteArticle      = "DFAT";
+ string typeIndefiniteArticle    = "DIND";
+ string typeDeterminerQuantifier = "DQNT";
+ string typeDistributive         = "DDIV";
 
 char typeVerb             = 'v';
- string typeVerbBase             = "VB";
- string typePastTenseVerb        = "VP";
- string typeLinkingVerb          = "VL";
- string typeActionVerb           = "VA";
+ string typeVerbBase             = "VVVB";
+ string typePastTenseVerb        = "VPST";
+ string typeLinkingVerb          = "VLNK";
+ string typeActionVerb           = "VACT";
 
 char typeAdverb           = 'A';
 
 char typePronoun          = 'p';
- string typePronounBase          = "PB";
- string typePossessivePronoun    = "PO";
+ string typePronounBase          = "PPPB";
+ string typePossessivePronoun    = "POSS";
+ string typeSubjectPronoun       = "PSUB";
+ string typeObjectPronoun        = "POBJ";
+ string typeInterrogativePronoun = "PQST";
+ string typeIndefinatePronoun    = "PIND";
+ string typeDemonstrativePronoun = "PDEM";
 
 char typeProperNoun       = 'P';
 char typeNoun             = 'n';
+ string typeGenderNounSingular   = "NNGS";
+ string typeGenderNounPlural     = "NNGP";
+ string typeNounWeekDay          = "NWDY";
+
 char typeAdjective        = 'a';
 char typeSentenceBreak    = '_';
 char typeContraction      = 'C';
 char typeConjunction      = 'c';
+ string typeConjunctionBase       = "CB";
+ string typeCoordinatingConjunction = "COOR";
+
 char typeProNounsInward   = 'm';
 char typeProNounsOutward  = 'y';
 char typeQuestion         = 'q';
@@ -61,9 +73,10 @@ char typeMaleClass        = 'b';
 char typePreposition      = 'I';
  string typePrepositionWord         = "PREP";
 char typeUnknownWord      = 'u';
+ string typeExUnknownWord           = "UUUU";
 
 char typeNumericWord      = '#';
- string typeCardinalNumber          = "CN";
+ string typeCardinalNumber          = "CARD";
 char typeExclamation      = 'E';
 
 

@@ -93,39 +93,40 @@ class c_LongTermMemory : public c_SubjectStack
                 CopySentence.SetInSentencePreProcessedPattern(strMapIT->second.GetFromSentencePreProcessedPattern(),true);
                 else
                 CopySentence.SetInSentencePreProcessedPattern(GetFromSentencePreProcessedPattern());// 7)  preprocessed pattern
-              CopySentence.SetInSentenceHasPluralPronoun(GetFromSentenceHasPluralPronoun());        // 8)  has plural pronoun
-              CopySentence.SetInSentenceHasPunctuation(GetFromSentenceHasPunctuation());            // 9)  has punctuation
-              CopySentence.SetInSentencePunctuation(GetFromSentencePunctuation());                  // 10) punctuation char
-              CopySentence.SetInSentenceIsQuestion(GetFromSentenceIsQuestion());                    // 11) is question
-              CopySentence.SetInSentenceHasContraction(GetFromSentenceHasContraction());            // 12) has contraction
-              CopySentence.SetInSentenceHasGreetingsWord(GetFromSentenceHasGreetingsWord());        // 13) has greeting word
-              CopySentence.SetInSentenceHasGenderReference(GetFromSentenceHasGenderReference());    // 14) has gender reference
-              CopySentence.SetInSentenceHasBeenUnderstood(GetFromSentenceHasBeenUnderstood());      // 15) has been understood
-              CopySentence.SetInSentenceAdverbLocation(GetAdverbLocation());                        // 16) adverb location
-              CopySentence.SetInSentenceNounCount(GetFromSentenceNounCount());                      // 17) sentence noun count
-              CopySentence.SetInSentenceVerbLocation(GetFromSentenceVerbLocation());                // 18) verb location
-              CopySentence.SetInSentenceAdjectiveLocation(GetFromSentenceAdjectiveLocation());      // 19) adjective location
-              CopySentence.SetInSentenceNamePointer(GetFromSentenceNamePointer());                  // 20) name pointer
-              CopySentence.SetInSentenceIndirectObjectLocation(GetFromSentenceIndirectObjectLocation());// 21) indirect object location
-              CopySentence.SetInSentenceHasGenderDeterminer(GetFromSentenceHasGenderDeterminer());  // 22) gender determiner
-              CopySentence.SetInSentenceGistOfSentence(GetFromSentenceGistOfSentence());            // 23) gist of sentence
-              CopySentence.SetInSentenceSubGistOfSentence(GetFromSentenceSubGistOfSentence());      // 24) subgist of sentence
-              CopySentence.SetInSentenceSupportivePhrase(GetFromSentenceSupportivePhrase());        // 25) supportive phrase
-              CopySentence.SetInSentenceHasDualSubjects(GetFromSentenceHasDualSubjects());          // 26) has dual subjects
-              CopySentence.SetInSentenceSecondSubject(GetFromSentenceSecondSubject());              // 27) second subject
-              CopySentence.SetInSentenceSecondSubjectLocation(GetFromSentenceSecondSubjectLocation());// 28) second subject location
-              CopySentence.SetInSentencesUnderstandingLevel(GetFromSentencesUnderstandingLevel());  // 29) understanding level
-              CopySentence.SetInSentencesDaysOld(GetFromSentencesDaysOld());                        // 30) day stamp
-              CopySentence.SetInSentenceHasPronoun(GetFromSentenceHasPronoun());                    // 31) has pronoun
-              CopySentence.SetInSentencePrepositionPosition(GetFromSentencePrepositionPosition());  // 32) preposition position
-              CopySentence.SetInSentenceHasPreposition(GetFromSentenceHasPreposition());            // 33) has preposition
-              CopySentence.SetInSentenceDirectObjectLocation(GetFromSentenceDirectObjectLocation());// 34) direct object location
-              CopySentence.SetInSentencesPolarity(GetFromSentencesPolarity());                      // 35) polarity
-              CopySentence.SetInSentencesSentenceTense(GetFromSentencesSentenceTense());            // 36) sentence tense p-past c-current u-undefined
-              CopySentence.SetInSentenceTaggedSentence(GetFromSentenceTaggedSentence());            // 37) tagged sentence
-              CopySentence.SetInSentencePrimeSubject(GetFromSentencePrimeSubject());                // 38) set subject word or phrase
-              CopySentence.SetInSentenceDirectObject(GetFromSentenceDirectObject());                // 39) set direct object word or phrase
-              CopySentence.SetInSentenceIndirectObject(GetFromSentenceIndirectObject());            // 40) set indirect object word or phrase
+              CopySentence.SetInSentenceExtendedPattern(GetFromSentenceExtendedPattern());          // 8)  extended pattern
+              CopySentence.SetInSentenceHasPluralPronoun(GetFromSentenceHasPluralPronoun());        // 9)  has plural pronoun
+              CopySentence.SetInSentenceHasPunctuation(GetFromSentenceHasPunctuation());            // 10)  has punctuation
+              CopySentence.SetInSentencePunctuation(GetFromSentencePunctuation());                  // 11) punctuation char
+              CopySentence.SetInSentenceIsQuestion(GetFromSentenceIsQuestion());                    // 12) is question
+              CopySentence.SetInSentenceHasContraction(GetFromSentenceHasContraction());            // 13) has contraction
+              CopySentence.SetInSentenceHasGreetingsWord(GetFromSentenceHasGreetingsWord());        // 14) has greeting word
+              CopySentence.SetInSentenceHasGenderReference(GetFromSentenceHasGenderReference());    // 15) has gender reference
+              CopySentence.SetInSentenceHasBeenUnderstood(GetFromSentenceHasBeenUnderstood());      // 16) has been understood
+              CopySentence.SetInSentenceAdverbLocation(GetAdverbLocation());                        // 17) adverb location
+              CopySentence.SetInSentenceNounCount(GetFromSentenceNounCount());                      // 18) sentence noun count
+              CopySentence.SetInSentenceVerbLocation(GetFromSentenceVerbLocation());                // 19) verb location
+              CopySentence.SetInSentenceAdjectiveLocation(GetFromSentenceAdjectiveLocation());      // 20) adjective location
+              CopySentence.SetInSentenceNamePointer(GetFromSentenceNamePointer());                  // 21) name pointer
+              CopySentence.SetInSentenceIndirectObjectLocation(GetFromSentenceIndirectObjectLocation());// 22) indirect object location
+              CopySentence.SetInSentenceHasGenderDeterminer(GetFromSentenceHasGenderDeterminer());  // 23) gender determiner
+              CopySentence.SetInSentenceGistOfSentence(GetFromSentenceGistOfSentence());            // 24) gist of sentence
+              CopySentence.SetInSentenceSubGistOfSentence(GetFromSentenceSubGistOfSentence());      // 25) subgist of sentence
+              CopySentence.SetInSentenceSupportivePhrase(GetFromSentenceSupportivePhrase());        // 26) supportive phrase
+              CopySentence.SetInSentenceHasDualSubjects(GetFromSentenceHasDualSubjects());          // 27) has dual subjects
+              CopySentence.SetInSentenceSecondSubject(GetFromSentenceSecondSubject());              // 28) second subject
+              CopySentence.SetInSentenceSecondSubjectLocation(GetFromSentenceSecondSubjectLocation());// 29) second subject location
+              CopySentence.SetInSentencesUnderstandingLevel(GetFromSentencesUnderstandingLevel());  // 30) understanding level
+              CopySentence.SetInSentencesDaysOld(GetFromSentencesDaysOld());                        // 31) day stamp
+              CopySentence.SetInSentenceHasPronoun(GetFromSentenceHasPronoun());                    // 32) has pronoun
+              CopySentence.SetInSentencePrepositionPosition(GetFromSentencePrepositionPosition());  // 33) preposition position
+              CopySentence.SetInSentenceHasPreposition(GetFromSentenceHasPreposition());            // 34) has preposition
+              CopySentence.SetInSentenceDirectObjectLocation(GetFromSentenceDirectObjectLocation());// 35) direct object location
+              CopySentence.SetInSentencesPolarity(GetFromSentencesPolarity());                      // 36) polarity
+              CopySentence.SetInSentencesSentenceTense(GetFromSentencesSentenceTense());            // 37) sentence tense p-past c-current u-undefined
+              CopySentence.SetInSentenceTaggedSentence(GetFromSentenceTaggedSentence());            // 38) tagged sentence
+              CopySentence.SetInSentencePrimeSubject(GetFromSentencePrimeSubject());                // 39) set subject word or phrase
+              CopySentence.SetInSentenceDirectObject(GetFromSentenceDirectObject());                // 40) set direct object word or phrase
+              CopySentence.SetInSentenceIndirectObject(GetFromSentenceIndirectObject());            // 41) set indirect object word or phrase
 
 
 
@@ -409,6 +410,8 @@ class c_LongTermMemory : public c_SubjectStack
                         SentenceDataFile << strMapIT->second.GetFromSentencePattern() << Deliminator;
                         SentenceDataFile << "First pattern             ,";
                         SentenceDataFile << strMapIT->second.GetFromSentencePreProcessedPattern()<< Deliminator;
+                        SentenceDataFile << "Extended Pattern          ,";
+                        SentenceDataFile << strMapIT->second.GetFromSentenceExtendedPattern()<< Deliminator;
                         SentenceDataFile << "Has plural pronoun 0 = No ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceHasPluralPronoun() << Deliminator;
                         SentenceDataFile << "Has punctuation    1 = yes,";
@@ -542,6 +545,9 @@ class c_LongTermMemory : public c_SubjectStack
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetInSentencePreProcessedPattern(strLineData);               //set PreProcessedPattern
+                getline (SentenceDataFile,strLineData,',');
+                getline (SentenceDataFile,strLineData);
+                CopySentence.SetInSentenceExtendedPattern(strLineData);                   //set extended pattern
                 getline (SentenceDataFile,strLineData,',');
                 getline (SentenceDataFile,strLineData);
                 CopySentence.SetInSentenceHasPluralPronoun(stoi(strLineData,&decType));   //set bool HasPluralPronoun

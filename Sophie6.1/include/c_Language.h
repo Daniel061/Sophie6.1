@@ -5,6 +5,7 @@
 #include <c_LongTermMemory.h>
 #include <string>
 #include <iostream>
+#include <stack>
 
 /** SOPHIE 6.1
      author - Daniel W. Ankrom ©2019
@@ -1176,48 +1177,96 @@ string PatternReview(){
 char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentence = -1){
 
            char   LocalWordType             = 'u';
-           ExtendedType                     = "uu";
+           ExtendedType                     = typeExUnknownWord;
            string SearchWord                = " " + LocalWord + " ";
+           //----PRONOUNS-----------------------
+           string Pronouns                  = " I you he she it they me him her my mine your yours our his hers its who those whom whose what which another each everything nobody either someone myself yourself himself herself itself this that ";
+           string PossessivePronouns        = " my your his her its our their mine yours hers its ";
+           string SubjectPronouns           = " I you he she it they ";
+           string ObjectPronouns            = " me you him her ";
+           string InterrogativePronouns     = " who whom whose what which ";
+           string IndefinatePronouns        = " another each everything nobody either someone ";
+           string DemonstrativePronouns     = " this that these those ";
+           //----CONJUNCTIONS-------------------
+           string Conjunctions              = " and but for nor or so yet ";
            //----Cardinal Numbers---------------
            string CardinalNumbers           = " one two three four five six seven eight nine ten ";
            //----DETERMINERS--------------------
-           string Determiners               = " the a an each every certain this that these those any all few many each some much no ";
+           string Determiners               = " the a an each every certain this that these those any all few many each some much no lot most enough both half neither ";
            string DefiniteArticles          = " the ";
-           string DemonstrativePronouns     = " this that these those ";
-           string DeterminerQuantifiers     = " few many little much lot most some any enough ";
+           string IndefiniteArticles        = " a an ";
+           string DeterminerQuantifiers     = " few many much lot most some any enough ";
            string Distributives             = " all both half either neither each every ";
-           string PossessivePronouns        = " my your his her its our their ";
            //----VERBS--------------------------
-           string Verbs                     = " are go went can will be have do say get make go know take is see come fell ran think look want give use find tell ask work seem feel try leave call am been ";
+           string Verbs                     = " came are go gone went threw broke can will be have do say get make go know take is see come fell ran run think look want give use find tell ask work seem feel try leave call am been sold ";
            string LinkingVerbs              = " is ";
            string PastTenseVerbs            = " came went gone threw broke ran sold fell ";
            //----PREPOSITIONS-------------------
            string PrepositionWords          = " in into up after to on with under within of at near until over across among while from throughout through during towards by upon across ";
+           //----SPECIFIC NOUNS-----------------
+           string SpecificNouns             = " man woman girl boy men women girls boys lady ladies sunday monday tuesday wednesday thursday friday saturday ";
+           string GenderNounsSingular       = " man woman lady girl boy ";
+           string GenderNounsPlural         = " men women girls boys ladies ";
+           string WeekDayNames              = " sunday monday tuesday wednesday thursday friday saturday ";
+
+           //----ALL CONSTRUCTION WORDS---------
+           string AllConstructionWords      = Pronouns + PossessivePronouns + SubjectPronouns + ObjectPronouns +
+                                              InterrogativePronouns + IndefinatePronouns + DemonstrativePronouns + CardinalNumbers +
+                                              Determiners + DefiniteArticles + DeterminerQuantifiers + Distributives +
+                                              Verbs + LinkingVerbs + PastTenseVerbs + PrepositionWords + Conjunctions + SpecificNouns;
+
+           //----ALL CONSTRUCTION WORDS POINTER-
+           int    isInBaseWords             = -1;
+           //----CONJUNCTION POINTERS-----------
+           int    isConjunction             = -1;
            //----PREPOSITION POINTERS-----------
            int    isPreposition             = -1;
            //----DETERMINER POINTERS------------
            int    isDeterminer              = -1;
            int    isDefiniteArticle         = -1;
-           int    isDemonstrativePronoun    = -1;
+           int    isIndefiniteArticle       = -1;
            int    isDeterminerQuantifier    = -1;
-           int    isPossessivePronoun       = -1;
            int    isDistributive            = -1;
            //----VERB POINTERS------------------
            int    isVerb                    = -1;
            int    isPastTenseVerb           = -1;
            int    isLinkingVerb             = -1;
+           //----NOUN POINTERS------------------
+           int    isSpecificNoun            = -1;
+           int    isGenderNounSingular      = -1;
+           int    isGenderNounPlural        = -1;
+           int    isWeekDayName             = -1;
            //----Cardinal Pointers--------------
            int    isCardinalNumber          = -1;
-
+           //----PRONOUN POINTERS---------------
+           int    isDemonstrativePronoun    = -1;
+           int    isPossessivePronoun       = -1;
+           int    isPronoun                 = -1;
+           int    isSubjectPronoun          = -1;
+           int    isObjectPronoun           = -1;
+           int    isInterrogativePronoun    = -1;
+           int    isIndefinatePronoun       = -1;
            //----LOCAL WORK VARIABLES-----------
            int    MatchPos                  = -1;   //pointer for substring searches
 
+           isInBaseWords                    = AllConstructionWords.find(SearchWord);        //screen word
+           if(isInBaseWords){
+
+           isConjunction                    = Conjunctions.find(SearchWord);                ///base type
+
+           isPronoun                        = Pronouns.find(SearchWord);                    ///base type
+            isDemonstrativePronoun          = DemonstrativePronouns.find(SearchWord);       //extended type
+            isPossessivePronoun             = PossessivePronouns.find(SearchWord);          //extended type
+            isSubjectPronoun                = SubjectPronouns.find(SearchWord);             //extended type
+            isObjectPronoun                 = ObjectPronouns.find(SearchWord);              //extended type
+            isInterrogativePronoun          = InterrogativePronouns.find(SearchWord);       //extended type
+            isIndefinatePronoun             = IndefinatePronouns.find(SearchWord);          //extended type
+
            isDeterminer                     = Determiners.find(SearchWord);                  ///base type
             isDefiniteArticle               = DefiniteArticles.find(SearchWord);             //extended types
-            isDemonstrativePronoun          = DemonstrativePronouns.find(SearchWord);        //extended types
             isDeterminerQuantifier          = DeterminerQuantifiers.find(SearchWord);        //extended types
-            isPossessivePronoun             = PossessivePronouns.find(SearchWord);           //extended types
             isDistributive                  = Distributives.find(SearchWord);                //extended types
+            isIndefiniteArticle             = IndefiniteArticles.find(SearchWord);           //extended type
 
            isVerb                           = Verbs.find(SearchWord);                        ///base type
             isPastTenseVerb                 = PastTenseVerbs.find(SearchWord);               //extended types
@@ -1225,6 +1274,43 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
 
            isCardinalNumber                 = CardinalNumbers.find(SearchWord);              ///base type '#'
            isPreposition                    = PrepositionWords.find(SearchWord);             ///base type 'I'
+
+           isSpecificNoun                   = SpecificNouns.find(SearchWord);                ///base
+           isGenderNounSingular             = GenderNounsSingular.find(SearchWord);          //extended type
+           isGenderNounPlural               = GenderNounsPlural.find(SearchWord);            //extended type
+           isWeekDayName                    = WeekDayNames.find(SearchWord);                 //extended type
+
+
+          // Process Conjunctions
+          if(isConjunction >=0){
+             LocalWordType = typeConjunction;                                               ///base type
+             ExtendedType  = typeCoordinatingConjunction;                                   // extended type "CC"
+             return LocalWordType;}
+
+          // Process Pronouns
+          if(isPronoun >= 0){
+             LocalWordType = typePronoun;                                                   ///base type 'p'
+             if(isSubjectPronoun >= 0){
+                ExtendedType = typeSubjectPronoun;}                                         // extended type "PS"
+             else
+             if(isObjectPronoun >=0 ){
+                ExtendedType = typeObjectPronoun;}                                          // extended type "PJ"
+                else
+                if(isInterrogativePronoun >=0){
+                   ExtendedType = typeInterrogativePronoun;}                                // extended type "PQ"
+                   else
+                   if(isIndefinatePronoun >= 0){
+                      ExtendedType = typeIndefinatePronoun;}                                // extended type "PI"
+                      else
+                      if(isPossessivePronoun >=0){
+                         ExtendedType = typePossessivePronoun;}                             // extended type "PO"
+                         else
+                         if(isDemonstrativePronoun >=0){
+                            ExtendedType = typeDemonstrativePronoun;}                       // extended type "PD"
+                            else
+                                ExtendedType = typePronounBase;                             // extended type "PB"
+              return LocalWordType;
+          }
 
 
           // Process Preposition
@@ -1252,6 +1338,9 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
                         if(isDistributive >=0){
                             ExtendedType = typeDistributive;}                                /// "dv"
                         else
+                           if(isIndefiniteArticle >=0){
+                              ExtendedType = typeIndefiniteArticle;}
+                            else
                             ExtendedType = typeDeterminerBase;                               /// "dd"
                             return LocalWordType;
            }
@@ -1266,8 +1355,24 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
                         ExtendedType = typeLinkingVerb;}                                      /// "vL"
                     else
                        ExtendedType = typeVerbBase;                                           /// "vv"
-                       return LocalWordType;
-           }
+                       return LocalWordType;}
+
+           // Process Specific Nouns
+            if(isSpecificNoun >=0){
+                LocalWordType = typeNoun;                                                     // 'n'
+                if(isGenderNounPlural >=0){
+                    ExtendedType = typeGenderNounPlural;}
+                else
+                    if(isGenderNounSingular >=0){
+                       ExtendedType = typeGenderNounSingular;}
+                else
+                    if(isWeekDayName >=0){
+                       ExtendedType = typeNounWeekDay;}
+
+                return LocalWordType;}
+
+           }//end of screened word
+
 
            // Check for action verb
            // word type will still be unknown at this point
@@ -1282,7 +1387,24 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
            return LocalWordType;
 
 }
+//---------------------------------END NEW FIND WORD TYPE (EXTENDED)----------------------
 
+//----------------------------------APPLY GRAMMAR RULES TO DISCOVER NEW WORDS-------------
+bool ApplyGrammarRules(){
+       stack <int> DefinateArticalLocs;
+
+        for(int x= 0; x<GetFromSentenceWordCount(); x++){
+            if(GetswExtendedWordType(x) == typeDefiniteArticle){
+                DefinateArticalLocs.push(x);
+            }
+        }
+
+
+
+
+
+}
+//--------------------------------END APPLY GRAMMAR RULES---------------------------------
 //-----------------------SlowSpeak--------------------------------------------------------
 void SlowSpeak(string str_Data, bool Recording = true, int Delay = ThisSpeed, bool CarriageReturn = true ){
     if(StoryMode == false){

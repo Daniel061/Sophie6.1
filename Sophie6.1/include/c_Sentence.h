@@ -47,6 +47,7 @@ class c_Sentence : public c_Personality
         string sTaggedSentence;                  // i.e. A[d] woman[G] is[v] not[u] riding[v] a[d] horse[n]
         string sPatternString;                   // i.e. dnvua  initialize to ""
         string sPreProcessedPattern;             // i.e. duvu
+        string sExtendedPattern;                 // i.e. DFAT UUUU UUUU VLNK
         string sGistOfSentence;                  // the meat of the phrase. i.e the dog is black = is black, initialize to ""
         string sSubGistOfSentence;               // usually follows a preposition to the verb or end of sentence
         string sSupportivePhrase;                // Data before the verb
@@ -83,41 +84,42 @@ class c_Sentence : public c_Personality
                 sOriginalString                = "";        // 3)
                 sPatternString                 = "";        // 4)
                 sPreProcessedPattern           = "";        // 5)
-                sSecondSubject                 = "";        // 6)
-                sPrimeSubject                  = "";        // 7)
-                sDirectObject                  = "";        // 8)
-                sIndirectObject                = "";        // 9)
-                sGistOfSentence                = "";        // 10)
-                sSubGistOfSentence             = "";        // 11)
-                sSupportivePhrase              = "";        // 12)
-                sTaggedSentence                = "";        // 13)
-                sHasPreposition                = false;     // 14)
-                sHasPluralPronoun              = false;     // 15)
-                sHasPunctuation                = false;     // 16)
-                sIsQuestion                    = false;     // 17)
-                sHasContraction                = false;     // 18)
-                sHasGreetingsWord              = false;     // 19)
-                sHasGenderReference            = false;     // 20)
-                sHasBeenUnderstood             = false;     // 21)
-                sHasGenderDeterminer           = false;     // 22)
-                sHasDualSubjects               = false;     // 23)
-                sHasPronoun                    = false;     // 24)
-                sSentenceDirection             = -1;        // 25)
-                sPunctuation                   = 'x';       // 26) not set or does not have
-                sPolarity                      = 'p';       // 27)
-                sSentenceTense                 = 'u';       // 28)
-                sConjunctionLocation           = -1;        // 29)
-                sAdverbLocation                = -1;        // 30)
-                sNounCount                     = -1;        // 31)
-                sVerbLocation                  = -1;        // 32)
-                sAdjectiveLocation             = -1;        // 33)
-                sNamePointer                   = -1;        // 34)
-                sPrepositionPosition           = -1;        // 35)
-                sSecondSubjectLocation         = -1;        // 36)
-                sIndirectObjectLocation        = -1;        // 37)
-                sDirectObjectLocation          = -1;        // 38)
-                sUnderstandingLevel            = -1;        // 39)
-                sDaysOld                       = 0;         // 40)
+                sExtendedPattern               = "";        // 6)
+                sSecondSubject                 = "";        // 7)
+                sPrimeSubject                  = "";        // 8)
+                sDirectObject                  = "";        // 9)
+                sIndirectObject                = "";        // 10)
+                sGistOfSentence                = "";        // 11)
+                sSubGistOfSentence             = "";        // 12)
+                sSupportivePhrase              = "";        // 13)
+                sTaggedSentence                = "";        // 14)
+                sHasPreposition                = false;     // 15)
+                sHasPluralPronoun              = false;     // 16)
+                sHasPunctuation                = false;     // 17)
+                sIsQuestion                    = false;     // 18)
+                sHasContraction                = false;     // 19)
+                sHasGreetingsWord              = false;     // 20)
+                sHasGenderReference            = false;     // 21)
+                sHasBeenUnderstood             = false;     // 22)
+                sHasGenderDeterminer           = false;     // 23)
+                sHasDualSubjects               = false;     // 24)
+                sHasPronoun                    = false;     // 25)
+                sSentenceDirection             = -1;        // 26)
+                sPunctuation                   = 'x';       // 27) not set or does not have
+                sPolarity                      = 'p';       // 28)
+                sSentenceTense                 = 'u';       // 29)
+                sConjunctionLocation           = -1;        // 30)
+                sAdverbLocation                = -1;        // 31)
+                sNounCount                     = -1;        // 32)
+                sVerbLocation                  = -1;        // 33)
+                sAdjectiveLocation             = -1;        // 34)
+                sNamePointer                   = -1;        // 35)
+                sPrepositionPosition           = -1;        // 36)
+                sSecondSubjectLocation         = -1;        // 37)
+                sIndirectObjectLocation        = -1;        // 38)
+                sDirectObjectLocation          = -1;        // 39)
+                sUnderstandingLevel            = -1;        // 40)
+                sDaysOld                       = 0;         // 41)
                 WordMap.clear();}
 
 
@@ -137,6 +139,9 @@ class c_Sentence : public c_Personality
 
         string GetFromSentenceTaggedSentence(){return sTaggedSentence;}
         void   SetInSentenceTaggedSentence(string newVal){sTaggedSentence = newVal;}
+
+        string GetFromSentenceExtendedPattern(){return sExtendedPattern;}
+        void   SetInSentenceExtendedPattern(string newVal){sExtendedPattern = newVal;}
 
         char   GetFromSentencesPolarity(){return sPolarity;}
         void   SetInSentencesPolarity(char newVal){sPolarity = newVal;}

@@ -40,6 +40,7 @@ class c_Cerebellum : public c_Cortex
          int    LocalPastTenseWords      = -1;
          float  LocalUnderstandingRatio  = 0.0;
          string LocalPattern             = "";
+         string LocalExtendedPattern     = "";
          string LocalWordCopy            = "";
          char   LocalAlternateType       = 'u';
          char   LocalGenderClass         = 'u';
@@ -68,6 +69,7 @@ class c_Cerebellum : public c_Cortex
                  LocalUnderstandingDegree = 0;
                  LocalPattern             = "";
                  LocalWordCopy            = "";
+                 LocalExtendedPattern     = "";
                  SentenceWordType         = 'u';
                  LocalWordType            = 'u';
                  MemoryWordType           = 'u';
@@ -170,6 +172,7 @@ public:
          }
 
          LocalPattern += SelectedWordType;                                          //build the pattern as we go
+         LocalExtendedPattern += LocalExtendedWordType + " ";                       //build the extended pattern
          SetswWordType(SelectedWordType,x);                                         //set the selected word type in the sentence
          SetswExtendedWordType(x,LocalExtendedWordType);                            //Set the extended word type in the sentence
          if(SelectedWordType == typeNoun) LocalNounCount++;                         //count the nouns
@@ -297,6 +300,7 @@ public:
 
          //FindAndSetGistOfSentence();
          FindSubject();
+         SetInSentenceExtendedPattern(LocalExtendedPattern);
         return LocalWordCount;                                                      //finished
 
     }
