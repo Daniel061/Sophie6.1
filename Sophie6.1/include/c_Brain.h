@@ -201,6 +201,7 @@ class c_Brain : public c_PTLControl
                             cout << "Cell Secondary Word Type  :" << GetMemoryCellcharSecondaryWordType(strWorkingWord,Result) << endl;
                             cout << "Cell Alternate Word Type  :" << GetMemoryCellcharAlternateWordType(strWorkingWord,Result) << endl;
                             cout << "Cell Data Tense           :" << GetMemoryCellcharWordTense(strWorkingWord,Result) << endl;
+                            cout << "Cell Extended Word type   :" << GetMemoryCellpExtendedWordType(strWorkingWord,Result) << endl;
                             cout << "Cell Gender               :" << GetMemoryCellcharGenderClass(strWorkingWord,Result) << endl;
                             cout << "Cell Primary Usage        :" << GetMemoryCellcharPurpose(strWorkingWord,Result) << endl;
                             cout << "Cell Data is Set          :" << boolalpha << GetMemoryCellIsSet(strWorkingWord,Result) << endl;

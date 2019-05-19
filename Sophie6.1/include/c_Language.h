@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <stack>
+#include <queue>
 
 /** SOPHIE 6.1
      author - Daniel W. Ankrom ©2019
@@ -1180,8 +1181,12 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
            ExtendedType                     = typeExUnknownWord;
            string SearchWord                = " " + LocalWord + " ";
            //----PRONOUNS-----------------------
-           string Pronouns                  = " I you he she it they me him her my mine your yours our his hers its who those whom whose what which another each everything nobody either someone myself yourself himself herself itself this that ";
-           string PossessivePronouns        = " my your his her its our their mine yours hers its ";
+           string Pronouns                  = " I you he she it they me him her my mine your ";
+                  Pronouns                 += " yours our his hers its who those whom whose ";
+                  Pronouns                 += " what which another each everything nobody ";
+                  Pronouns                 += " either someone myself yourself himself ";
+                  Pronouns                 += " herself itself this that these those ";
+           string PossessivePronouns        = " my your his her its our their mine yours hers ";
            string SubjectPronouns           = " I you he she it they ";
            string ObjectPronouns            = " me you him her ";
            string InterrogativePronouns     = " who whom whose what which ";
@@ -1192,28 +1197,41 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
            //----Cardinal Numbers---------------
            string CardinalNumbers           = " one two three four five six seven eight nine ten ";
            //----DETERMINERS--------------------
-           string Determiners               = " the a an each every certain this that these those any all few many each some much no lot most enough both half neither ";
+           string Determiners               = " the a an each every certain any all few many ";
+                  Determiners              += " each some much no lot most enough both half neither ";
            string DefiniteArticles          = " the ";
            string IndefiniteArticles        = " a an ";
            string DeterminerQuantifiers     = " few many much lot most some any enough ";
            string Distributives             = " all both half either neither each every ";
            //----VERBS--------------------------
-           string Verbs                     = " came are go gone went threw broke can will be have do say get make go know take is see come fell ran run think look want give use find tell ask work seem feel try leave call am been sold ";
+           string Verbs                     = " came are go gone went threw broke can will be ";
+                  Verbs                    += " have do say get make go know take is see come ";
+                  Verbs                    += " fell ran run think look want give use find tell ";
+                  Verbs                    += " ask work seem feel try leave call am been sold ";
            string LinkingVerbs              = " is ";
            string PastTenseVerbs            = " came went gone threw broke ran sold fell ";
            //----PREPOSITIONS-------------------
-           string PrepositionWords          = " in into up after to on with under within of at near until over across among while from throughout through during towards by upon across ";
+           string PrepositionWords          = " in into up after to on with under within ";
+                  PrepositionWords         += " of at near until over across among while ";
+                  PrepositionWords         += " from throughout through during towards by upon ";
+                  PrepositionWords         += " across ";
            //----SPECIFIC NOUNS-----------------
-           string SpecificNouns             = " man woman girl boy men women girls boys lady ladies sunday monday tuesday wednesday thursday friday saturday ";
+           string SpecificNouns             = " man woman girl boy men women girls boys lady ";
+                  SpecificNouns            += " ladies sunday monday tuesday wednesday ";
+                  SpecificNouns            += " thursday friday saturday ";
            string GenderNounsSingular       = " man woman lady girl boy ";
            string GenderNounsPlural         = " men women girls boys ladies ";
-           string WeekDayNames              = " sunday monday tuesday wednesday thursday friday saturday ";
+           string WeekDayNames              = " sunday monday tuesday wednesday ";
+                  WeekDayNames             += " thursday friday saturday ";
 
            //----ALL CONSTRUCTION WORDS---------
-           string AllConstructionWords      = Pronouns + PossessivePronouns + SubjectPronouns + ObjectPronouns +
-                                              InterrogativePronouns + IndefinatePronouns + DemonstrativePronouns + CardinalNumbers +
-                                              Determiners + DefiniteArticles + DeterminerQuantifiers + Distributives +
-                                              Verbs + LinkingVerbs + PastTenseVerbs + PrepositionWords + Conjunctions + SpecificNouns;
+           string AllConstructionWords      = Pronouns + PossessivePronouns + SubjectPronouns +
+                                              ObjectPronouns + InterrogativePronouns +
+                                              IndefinatePronouns + DemonstrativePronouns +
+                                              CardinalNumbers + Determiners + DefiniteArticles +
+                                              DeterminerQuantifiers + Distributives +
+                                              Verbs + LinkingVerbs + PastTenseVerbs +
+                                              PrepositionWords + Conjunctions + SpecificNouns;
 
            //----ALL CONSTRUCTION WORDS POINTER-
            int    isInBaseWords             = -1;
@@ -1391,20 +1409,143 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
 
 //----------------------------------APPLY GRAMMAR RULES TO DISCOVER NEW WORDS-------------
 bool ApplyGrammarRules(){
-       stack <int> DefinateArticalLocs;
+       stack <int>    DefiniteArticleLocs;
+       queue <string> FollowingWords;
+       queue <int>    intFollowingWords;
+       int            NextWord;
+       bool           Correction = false;
 
+        //store all definite article locations
         for(int x= 0; x<GetFromSentenceWordCount(); x++){
             if(GetswExtendedWordType(x) == typeDefiniteArticle){
-                DefinateArticalLocs.push(x);
+                DefiniteArticleLocs.push(x);
             }
         }
 
+        while(DefiniteArticleLocs.size()>0){
+            NextWord = 1;
+            while (!FollowingWords.empty()) FollowingWords.pop();       //empty the queue
+            while (!intFollowingWords.empty()) intFollowingWords.pop(); //empty the queue
+
+            //store words that follow the definite article up to the end of sentence, or verb or preposition
+            while(((DefiniteArticleLocs.top() + NextWord) != GetFromSentenceWordCount()) &&
+            (GetswWordType(DefiniteArticleLocs.top()+NextWord) != typeVerb) && (GetswWordType(DefiniteArticleLocs.top()+NextWord) != typePreposition) ) {
+            FollowingWords.push(GetswExtendedWordType(DefiniteArticleLocs.top()+NextWord));
+            intFollowingWords.push(DefiniteArticleLocs.top()+NextWord);
+            NextWord++;
+            }
+                if(FollowingWords.size() >0){
+                    if( (FollowingWords.size() == 1) && (GetswExtendedWordType(intFollowingWords.front()) == typeExUnknownWord) ){
+                        //only 1 unknown between definite article and verb, end of sentence or preposition
+                        SetswExtendedWordType(intFollowingWords.front(),typeNounBase); //set extended type
+                        SetswWordType(typeNoun,intFollowingWords.front());             //set char type
+                        FollowingWords.pop();
+                        intFollowingWords.pop();
+                        Correction = true;
+                    }
+                    else
+                        if( (FollowingWords.size() == 2) && (GetswExtendedWordType(intFollowingWords.front()) == typeExUnknownWord) ) {
+                            //2 words between with the first being unknown
+                            SetswExtendedWordType(intFollowingWords.front(),typeExAdjective);   //set extended type
+                            SetswWordType(typeAdjective,intFollowingWords.front());             //set char type
+                            FollowingWords.pop();
+                            intFollowingWords.pop();
+                            if(GetswExtendedWordType(intFollowingWords.front()) == typeExUnknownWord){
+                                SetswExtendedWordType(intFollowingWords.front(),typeNounBase); //set extended type
+                                SetswWordType(typeNoun,intFollowingWords.front());             //set char type
+                                FollowingWords.pop();
+                                intFollowingWords.pop();
+                                Correction = true;}
+                        }
+
+                    else{
+                        FollowingWords.pop();
+                        intFollowingWords.pop();}
 
 
+                }
+            DefiniteArticleLocs.pop();
+        }
 
+
+    return Correction;
 
 }
 //--------------------------------END APPLY GRAMMAR RULES---------------------------------
+
+//--------------------------------ENHANCE PATTERN-----------------------------------------
+bool EnhancePattern(){
+    int     PatternMatchPointer           = -1;
+    string Patterns [1] [3] = {{typeDefiniteArticle + " " + typeExUnknownWord + " " + typeEndofSentence,
+                                 typeDefiniteArticle + " " + typeNounBase + " " + typeEndofSentence,
+                                 typeNoun + "\n"}};
+    string  LocalExtendedPattern          = GetFromSentenceExtendedPattern();
+    string  LocalShortPattern             = GetFromSentencePattern();
+    string  DefiniteArticleEOSPattern     = typeDefiniteArticle + " " + typeExUnknownWord + " " + typeEndofSentence;
+    string  DefiniteArticleEOSCorrect     = typeDefiniteArticle + " " + typeNounBase + " " + typeEndofSentence;
+    string  DefiniteArticleVerbPattern    = typeDefiniteArticle + " " + typeExUnknownWord + " " + typeLinkingVerb;
+    string  DefiniteArticleVerbCorrect    = typeDefiniteArticle + " " + typeNounBase + " " + typeLinkingVerb;
+    string  DefiniteArticleAdjective      = typeDefiniteArticle + " " + typeExUnknownWord + " " + typeNounBase;
+    string  DefiniteArticleAdjCorrect     = typeDefiniteArticle + " " + typeExAdjective + " " + typeNounBase;
+    string  IndefiniteArticleAdjective    = typeIndefiniteArticle + " " + typeExUnknownWord + " " + typeNounBase;
+    string  IndefiniteArticleAdjCorrect   = typeIndefiniteArticle + " " + typeExAdjective + " " + typeNounBase;
+    string  IndefiniteArticleVerbPattern  = typeIndefiniteArticle + " " + typeExUnknownWord + " " + typeLinkingVerb;
+    string  IndefiniteArticleVerbCorrect  = typeIndefiniteArticle + " " + typeNounBase + " " + typeLinkingVerb;
+
+
+    PatternMatchPointer = LocalExtendedPattern.find(DefiniteArticleEOSPattern);
+
+    if(PatternMatchPointer >=0){
+       LocalExtendedPattern.replace(PatternMatchPointer,DefiniteArticleEOSPattern.size(),DefiniteArticleEOSCorrect);
+       LocalShortPattern[(PatternMatchPointer/5)+1] = typeNoun;
+       SetInSentenceExtendedPattern(LocalExtendedPattern);
+       SetInSentencePattern(LocalShortPattern);
+       return true;
+    }
+
+    PatternMatchPointer = LocalExtendedPattern.find(DefiniteArticleVerbPattern);
+
+    if(PatternMatchPointer >=0){
+       LocalExtendedPattern.replace(PatternMatchPointer,DefiniteArticleVerbPattern.size(),DefiniteArticleVerbCorrect);
+       LocalShortPattern[(PatternMatchPointer/5)+1] = typeNoun;
+       SetInSentenceExtendedPattern(LocalExtendedPattern);
+       SetInSentencePattern(LocalShortPattern);
+       return true;
+    }
+
+    PatternMatchPointer = LocalExtendedPattern.find(DefiniteArticleAdjective);
+
+    if(PatternMatchPointer >=0){
+       LocalExtendedPattern.replace(PatternMatchPointer,DefiniteArticleAdjective.size(),DefiniteArticleAdjCorrect);
+       LocalShortPattern[(PatternMatchPointer/5)+1] = typeAdjective;
+       SetInSentenceExtendedPattern(LocalExtendedPattern);
+       SetInSentencePattern(LocalShortPattern);
+       return true;
+    }
+
+    PatternMatchPointer = LocalExtendedPattern.find(IndefiniteArticleAdjective);
+
+    if(PatternMatchPointer >=0){
+       LocalExtendedPattern.replace(PatternMatchPointer,IndefiniteArticleAdjective.size(),IndefiniteArticleAdjCorrect);
+       LocalShortPattern[(PatternMatchPointer/5)+1] = typeAdjective;
+       SetInSentenceExtendedPattern(LocalExtendedPattern);
+       SetInSentencePattern(LocalShortPattern);
+       return true;
+    }
+
+    PatternMatchPointer = LocalExtendedPattern.find(IndefiniteArticleVerbPattern);
+
+    if(PatternMatchPointer >=0){
+       LocalExtendedPattern.replace(PatternMatchPointer,IndefiniteArticleVerbPattern.size(),IndefiniteArticleVerbCorrect);
+       LocalShortPattern[(PatternMatchPointer/5)+1] = typeNoun;
+       SetInSentenceExtendedPattern(LocalExtendedPattern);
+       SetInSentencePattern(LocalShortPattern);
+       return true;
+    }
+
+    return false;
+}
+//--------------------------------END ENHANCE PATTERN-------------------------------------
 //-----------------------SlowSpeak--------------------------------------------------------
 void SlowSpeak(string str_Data, bool Recording = true, int Delay = ThisSpeed, bool CarriageReturn = true ){
     if(StoryMode == false){
@@ -1678,7 +1819,7 @@ int RequestUserResponse(string AltPositiveResponse = "", string AltNegativeRespo
                                StopPoint = GetFromSentenceWordCount();
                         }
                         GistStart = VerbPointer;
-                        for(int x = VerbPointer; x <= StopPoint; x++){
+                        for(int x = VerbPointer; x < StopPoint; x++){
                             GistString += " " + GetswWords(x);
                         }
                         Result   = true;  //control, Gist was found

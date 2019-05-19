@@ -79,6 +79,9 @@ extern string typeExUnknownWord;
 extern string typeGenderNounSingular;
 extern string typeGenderNounPlural;
 extern string typeNounWeekDay;
+extern string typeNounBase;
+extern string typeExAdjective;
+extern string typeEndofSentence;
 
 class c_Lobes : public c_MemoryCell
 {

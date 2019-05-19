@@ -48,8 +48,11 @@ char typeNoun             = 'n';
  string typeGenderNounSingular   = "NNGS";
  string typeGenderNounPlural     = "NNGP";
  string typeNounWeekDay          = "NWDY";
+ string typeNounBase             = "NNBS";
 
 char typeAdjective        = 'a';
+string typeExAdjective           = "ADJT";
+
 char typeSentenceBreak    = '_';
 char typeContraction      = 'C';
 char typeConjunction      = 'c';
@@ -78,6 +81,8 @@ char typeUnknownWord      = 'u';
 char typeNumericWord      = '#';
  string typeCardinalNumber          = "CARD";
 char typeExclamation      = 'E';
+
+ string typeEndofSentence           = "ENDS";
 
 
 

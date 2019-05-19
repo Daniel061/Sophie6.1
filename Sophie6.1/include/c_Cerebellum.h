@@ -128,10 +128,13 @@ public:
             //if(MemoryWordType == '\0') MemoryWordType = 'u';                      //removed due to redundancy
 
             if(MemoryWordType == typeUnknownWord){                                    //Nothing in memory cell
-                SelectedWordType = LocalWordType;}                                    //  -use type from language helper, could still be 'u'
+                SelectedWordType = LocalWordType;}                                     //  -use type from language helper, could still be 'u'
+
+
             else
                 if(MemoryWordType == LocalWordType){
                     SelectedWordType = LocalWordType;
+                    LocalExtendedWordType = MemoryExtWordType;
                     }
                     else
                         if((MemoryWordType == typeUnknownWord) && ( LocalWordType != typeUnknownWord)){     //Use LocalWordType
@@ -158,6 +161,7 @@ public:
                                                 else
                                                 {
                                                  SelectedWordType = MemoryWordType; //Use MemoryWordType because language helper did not help
+                                                 LocalExtendedWordType = MemoryExtWordType;
                                                 }
 
          if(SelectedWordType == typeProperNoun){
@@ -188,12 +192,16 @@ public:
             SetswGenderClassInSentence(x,LocalGenderClass);
 
         SetswWordType(SelectedWordType,x);                                          //update word type in sentence class
+        SetswExtendedWordType(x,LocalExtendedWordType);                             //update extended word type in sentence class
         } //END of for loop to scan sentence
+        LocalExtendedPattern += typeEndofSentence;                                  //tag the end of the extended pattern
         if(Verbose)
             cout << "[GatherAndSet]:LocalPattern " << LocalPattern << endl;;
 
+
         SetInSentencePreProcessedPattern(LocalPattern);                             //store  first version of pattern if empty
         SetInSentencePattern(LocalPattern);                                         //store  pattern first time
+        SetInSentenceExtendedPattern(LocalExtendedPattern);                         //store extended pattern in sentence;
         //TODO: Give this pattern version to c_PTL
         SetInSentenceAdjectiveLocation(LocalAdjectiveLocation);                     //store  ADJECTIVE LOCATION in c_Sentence
         SetInSentenceAdverbLocation(LocalAdverbLocation);                           //store  ADVERB LOCATION in c_Sentence
@@ -211,6 +219,10 @@ public:
         //LocalPattern = PatternReview();                                             //Check for corrections   do this twice
         //SetInSentencePattern(LocalPattern);                                         //store in c_Sentence
         //ImplyUnknowns();                                                            //let language try to set some unknowns
+        if(EnhancePattern()){
+            ReVerseBuildPattern();
+        }
+        RebuildPattern();
         ReVerseBuildPattern();                                                      //push from pattern to word types
         FindAndSetGistOfSentence();                                                 //store gist,subgist and supportive phrase in sentence
 

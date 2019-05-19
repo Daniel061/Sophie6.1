@@ -73,14 +73,15 @@ class c_LongTermMemory : public c_SubjectStack
                 CopySentence.SetswPluralRoot(x,GetswPluralRoot(x));                               //14 plural root
                 CopySentence.SetswPluralWordFlag(x,GetswPluralWordFlag(x));                       //15 plural word flag
                 CopySentence.SetswWordTense(x,GetswWordTense(x));                                 //16 word tense
-                CopySentence.SetswisPluralPossessive(x,GetswisPluralPossessive(x));               //17 is plural possessive
-                CopySentence.SetswisSingularPossessive(x,GetswisSingularPossessive(x));           //18 is singular possessive
-                CopySentence.SetswPolarity(x,GetswPolarity(x));                                   //19 polarity
-                CopySentence.SetswSingularForm(x,GetswSingularForm(x));                           //20 singular form
-                CopySentence.SetswPossessiveRoot(x,GetswPossessiveRoot(x));                       //21 possessive root
-                CopySentence.SetswPossessiveRootType(x,GetswPossessiveRootType(x));               //22 possessive root type
-                CopySentence.SetswVowelPattern(x,GetswVowelPattern(x));                           //23 vowel pattern
-                CopySentence.SetswPresentTenseForm(x,GetswPresentTenseForm(x));                   //23 present tense form
+                CopySentence.SetswExtendedWordType(x,GetswExtendedWordType(x));                   //17 extended word type
+                CopySentence.SetswisPluralPossessive(x,GetswisPluralPossessive(x));               //18 is plural possessive
+                CopySentence.SetswisSingularPossessive(x,GetswisSingularPossessive(x));           //19 is singular possessive
+                CopySentence.SetswPolarity(x,GetswPolarity(x));                                   //20 polarity
+                CopySentence.SetswSingularForm(x,GetswSingularForm(x));                           //21 singular form
+                CopySentence.SetswPossessiveRoot(x,GetswPossessiveRoot(x));                       //22 possessive root
+                CopySentence.SetswPossessiveRootType(x,GetswPossessiveRootType(x));               //23 possessive root type
+                CopySentence.SetswVowelPattern(x,GetswVowelPattern(x));                           //24 vowel pattern
+                CopySentence.SetswPresentTenseForm(x,GetswPresentTenseForm(x));                   //25 present tense form
                 //                                                                                //lacking mini def but not a problem, stored in memory cell file
                 }
               CopySentence.SetInSentenceWordCount(GetFromSentenceWordCount());                      // 1)  word count

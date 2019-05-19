@@ -370,12 +370,23 @@ class c_Sentence : public c_Personality
 
         void RebuildPattern(){
             string LocalPattern = "";
-            for(int x =0; x < GetFromSentenceWordCount(); x++) LocalPattern += GetswWordType(x);
-            SetInSentencePattern(LocalPattern);}
+            string LocalExtendedPattern = "";
+            for(int x =0; x < GetFromSentenceWordCount(); x++){
+                 LocalPattern += GetswWordType(x);
+                 LocalExtendedPattern += GetswExtendedWordType(x) + " ";}
+            LocalExtendedPattern += typeEndofSentence;
+            SetInSentencePattern(LocalPattern);
+            SetInSentenceExtendedPattern(LocalExtendedPattern);
+            }
 
         void ReVerseBuildPattern(){  //push pattern data to word types
-            for(int x = 0; x <= GetFromSentenceWordCount(); x++)
+            for(int x = 0; x <= GetFromSentenceWordCount(); x++){
                 SetswWordType(GetFromSentencePattern()[x],x);
+                SetswExtendedWordType(x,GetFromSentenceExtendedPattern().substr(x*5,4));
+                //if(GetFromSentencePattern()[x] == 'a') SetswExtendedWordType(x,typeExAdjective);
+                //if(GetFromSentencePattern()[x] == 'n') SetswExtendedWordType(x,typeNounBase);
+
+                }
         }
 
         int GetVerbPointingToAdjective(){
