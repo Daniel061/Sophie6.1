@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <unordered_set>
+#include <map>
 
 /** SOPHIE 6.1
      author - Daniel W. Ankrom ©2019
@@ -63,11 +64,27 @@ class c_Word
           unordered_set <string> w_Verbs;            // verbs used towards this word
           unordered_set <string> w_RelatedNouns;     // Nouns related to this word
 
+          map       <string,int> w_ExtendedWordTypes;// extended type, usage frequency
+          map       <char,int>   w_ShortWordTypes;   // char type, usage frequency
+
+          map <string,int>::iterator w_ExtWTPtr;     // extended type map iterator
+          map <char,int>::iterator   w_ShortPtr;     // char type map iterator
+
     private:
 
 
     public:
-        string   Getw_ExtendedWordType(){return w_ExtendedWordType;}
+        string   Getw_ExtendedWordType(int WhichOne = 0){
+                 ///Sends back the most frequently used type unless
+                 /// WhichOne requests other order, i.e. 1 = 2nd most frequent
+                 ///returns "UUUU" if empty or out of bounds
+                 //check for empty map or out of bounds request
+                 if((int(w_ExtendedWordTypes.size()==0)) || (WhichOne > int(w_ExtendedWordTypes.size()))) {
+                    return "UUUU";}
+
+
+
+                 return w_ExtendedWordType;}
         void     Setw_ExtendedWordType(string newVal){w_ExtendedWordType = newVal;}
 
         string   Getw_PresentTenseForm(){return w_PresentTenseForm;}
@@ -227,7 +244,7 @@ class c_Word
           w_Polarity                 = 'p';     // positive / negative                          22
           w_SingularForm             = "";      // i.e. cats = cat                              23
           w_PresentTenseForm         = "";      // threw = throw                                24
-          w_ExtendedWordType         = "uu";    // i.e. dd = determiner base type               25
+          w_ExtendedWordType         = "UUUU";  // i.e. dd = determiner base type               25
 
           w_MiniDefinition.clear();             // usually Gist of sentence if used as subject  26
           w_Adjectives.clear();                 // adjectives used towards this word            27

@@ -383,9 +383,6 @@ class c_Sentence : public c_Personality
             for(int x = 0; x <= GetFromSentenceWordCount(); x++){
                 SetswWordType(GetFromSentencePattern()[x],x);
                 SetswExtendedWordType(x,GetFromSentenceExtendedPattern().substr(x*5,4));
-                //if(GetFromSentencePattern()[x] == 'a') SetswExtendedWordType(x,typeExAdjective);
-                //if(GetFromSentencePattern()[x] == 'n') SetswExtendedWordType(x,typeNounBase);
-
                 }
         }
 

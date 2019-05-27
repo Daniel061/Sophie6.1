@@ -1,21 +1,21 @@
 # depslib dependency file v1.0
-1558272068 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
+1558890102 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
 	<iostream>
 	<fstream>
 	<c_Brain.h>
 	<time.h>
 	<list>
 
-1558190112 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
+1558524648 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
 	<c_PTLControl.h>
 
-1558271392 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
+1558882860 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
 	<c_Cortex.h>
 
 1553348176 h:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
 	<c_Language.h>
 
-1558290096 h:\c++projects\sophie6.1\sophie6.1\include\c_language.h
+1558890102 h:\c++projects\sophie6.1\sophie6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<c_LongTermMemory.h>
@@ -24,7 +24,7 @@
 	<stack>
 	<queue>
 
-1558270872 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
+1558353918 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
 	<c_Personality.h>
 	<c_Word.h>
 	<map>
@@ -38,7 +38,7 @@
 1552086014 h:\c++projects\sophie6.1\sophie6.1\include\c_medulla.h
 	<c_Lobes.h>
 
-1558269808 h:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
+1558887676 h:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
 	<Library.h>
 	<c_MemoryCell.h>
 	<unordered_map>
@@ -232,10 +232,11 @@
 1544995944 source:d:\c++projects\sophie6.1\sophie6.1\src\c_subjectstack.cpp
 	"c_SubjectStack.h"
 
-1556574214 h:\c++projects\sophie6.1\sophie6.1\include\c_word.h
+1558959390 h:\c++projects\sophie6.1\sophie6.1\include\c_word.h
 	<string>
 	<iostream>
 	<unordered_set>
+	<map>
 
 1551617324 source:h:\c++projects\sophie6.1\sophie6.1\src\c_word.cpp
 	"c_Word.h"
@@ -244,7 +245,7 @@
 	<string>
 	<time.h>
 
-1558269808 source:h:\c++projects\sophie6.1\sophie6.1\library.cpp
+1558889104 source:h:\c++projects\sophie6.1\sophie6.1\library.cpp
 	<Library.h>
 	<string>
 	<time.h>

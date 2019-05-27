@@ -82,6 +82,14 @@ extern string typeNounWeekDay;
 extern string typeNounBase;
 extern string typeExAdjective;
 extern string typeEndofSentence;
+extern string typeTransitiveVerb;
+extern string typesNoun;
+extern string typesVerb;
+extern string typesAdjective;
+extern string typeExSentenceBreak;
+extern string typesAdverb;
+extern string typeExAdverb;
+extern string typeExProperNoun;
 
 class c_Lobes : public c_MemoryCell
 {
@@ -693,7 +701,7 @@ class c_Lobes : public c_MemoryCell
         }
 
 
-        /// Gets pExtendedWordType if strSearchBase exists, else returns "uu",
+        /// Gets pExtendedWordType if strSearchBase exists, else returns "UUUU",
         ///  Returns True if exists and the extended word type
         string GetMemoryCellpExtendedWordType(string strSearchBase, bool &Result){
            Result    = false;
@@ -701,7 +709,7 @@ class c_Lobes : public c_MemoryCell
                if(Result){
                    return CellMapIT->second.GetpExtendedWordType();}
                else
-                   return "uu";}
+                   return typeExUnknownWord;}
 
         /// Gets pSingularForm if strSearchBase exists, else returns "",
         ///  Returns pSingularForm

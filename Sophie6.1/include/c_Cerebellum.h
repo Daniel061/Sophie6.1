@@ -222,6 +222,7 @@ public:
         if(EnhancePattern()){
             ReVerseBuildPattern();
         }
+        ExtrapolateNounForms();
         RebuildPattern();
         ReVerseBuildPattern();                                                      //push from pattern to word types
         FindAndSetGistOfSentence();                                                 //store gist,subgist and supportive phrase in sentence

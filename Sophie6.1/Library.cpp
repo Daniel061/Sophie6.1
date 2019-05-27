@@ -27,12 +27,16 @@ char typeDeterminer       = 'd';
  string typeDistributive         = "DDIV";
 
 char typeVerb             = 'v';
+ string typesVerb         = "v";
  string typeVerbBase             = "VVVB";
  string typePastTenseVerb        = "VPST";
  string typeLinkingVerb          = "VLNK";
  string typeActionVerb           = "VACT";
+ string typeTransitiveVerb       = "VTRN";
 
 char typeAdverb           = 'A';
+ string typesAdverb       = "A";
+ string typeExAdverb             = "ADVB";
 
 char typePronoun          = 'p';
  string typePronounBase          = "PPPB";
@@ -44,19 +48,23 @@ char typePronoun          = 'p';
  string typeDemonstrativePronoun = "PDEM";
 
 char typeProperNoun       = 'P';
+ string typeExProperNoun         = "NPRO";
 char typeNoun             = 'n';
+ string typesNoun         = "n";
  string typeGenderNounSingular   = "NNGS";
  string typeGenderNounPlural     = "NNGP";
  string typeNounWeekDay          = "NWDY";
  string typeNounBase             = "NNBS";
 
 char typeAdjective        = 'a';
-string typeExAdjective           = "ADJT";
+ string typesAdjective    = "a";
+ string typeExAdjective             = "ADJT";
 
 char typeSentenceBreak    = '_';
+ string typeExSentenceBreak         = "STOP";
 char typeContraction      = 'C';
 char typeConjunction      = 'c';
- string typeConjunctionBase       = "CB";
+ string typeConjunctionBase         = "CNJB";
  string typeCoordinatingConjunction = "COOR";
 
 char typeProNounsInward   = 'm';
@@ -83,6 +91,113 @@ char typeNumericWord      = '#';
 char typeExclamation      = 'E';
 
  string typeEndofSentence           = "ENDS";
+
+  //Patterns and corrections for bool EnhancePattern() in C_Language
+  // 0) Pattern to search for
+  // 1) Pattern to replace with
+  // 2) string version of the char word type to correct the short pattern
+  // 3) control character, y = process this pattern , anything else don't process it
+    int    PatternCount        = 32;
+    string Patterns [32][4]    = {{typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typeEndofSentence,
+                                   typeDefiniteArticle      + " " + typeNounBase             + " " + typeEndofSentence,
+                                   typesNoun,"y"},
+                                 { typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typePrepositionWord,
+                                   typeDefiniteArticle      + " " + typeNounBase             + " " + typePrepositionWord,
+                                   typesNoun,"y"},
+                                 { typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typeLinkingVerb,
+                                   typeDefiniteArticle      + " " + typeNounBase             + " " + typeLinkingVerb,
+                                   typesNoun,"y"},
+                                 { typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typeNounBase,
+                                   typeDefiniteArticle      + " " + typeExAdjective          + " " + typeNounBase,
+                                   typesAdjective,"y"},
+                                 { typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typeGenderNounSingular,
+                                   typeDefiniteArticle      + " " + typeExAdjective          + " " + typeGenderNounSingular,
+                                   typesAdjective,"y"},
+                                 { typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typeGenderNounPlural,
+                                   typeDefiniteArticle      + " " + typeExAdjective          + " " + typeGenderNounPlural,
+                                   typesAdjective,"y"},
+                                 { typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typeCoordinatingConjunction,
+                                   typeDefiniteArticle      + " " + typeNounBase             + " " + typeCoordinatingConjunction,
+                                   typesNoun,"y"},
+                                 { typeDefiniteArticle      + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typeLinkingVerb,
+                                   typeDefiniteArticle      + " " + typeExAdjective          + " " + typeNounBase          + " " + typeLinkingVerb,
+                                   typesNoun,"y"},
+                                 { typeDefiniteArticle      + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typeActionVerb,
+                                   typeDefiniteArticle      + " " + typeExAdjective          + " " + typeNounBase          + " " + typeActionVerb,
+                                   typesNoun,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typeEndofSentence,
+                                   typeIndefiniteArticle    + " " + typeNounBase             + " " + typeEndofSentence,
+                                   typesNoun,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typeNounBase          + " " + typeEndofSentence,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typeEndofSentence,
+                                   typesAdjective,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typeLinkingVerb       + " " + typeActionVerb,
+                                   typeIndefiniteArticle    + " " + typeNounBase             + " " + typeLinkingVerb       + " " + typeActionVerb,
+                                   typesNoun,"y"},
+                                 { typeIndefiniteArticle    + " " + typeGenderNounSingular   + " " + typeExUnknownWord     + " " + typeDefiniteArticle,
+                                   typeIndefiniteArticle    + " " + typeGenderNounSingular   + " " + typeTransitiveVerb    + " " + typeDefiniteArticle,
+                                   typesVerb,"y"},
+                                 { typeCardinalNumber       + " " + typeExUnknownWord        + " " + typeVerbBase,
+                                   typeCardinalNumber       + " " + typeNounBase             + " " + typeVerbBase,
+                                   typesNoun,"y"},
+                                 { typeCardinalNumber       + " " + typeExUnknownWord        + " " + typePrepositionWord,
+                                   typeCardinalNumber       + " " + typeNounBase             + " " + typePrepositionWord,
+                                   typesNoun,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typeNounBase,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExAdjective       + " " + typeNounBase,
+                                   typesAdjective,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typeGenderNounSingular,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExAdjective       + " " + typeGenderNounSingular,
+                                   typesAdjective,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typeVerbBase,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typeVerbBase,
+                                   typesNoun,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typeCoordinatingConjunction,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typeCoordinatingConjunction,
+                                   typesNoun,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typePrepositionWord,
+                                   typeIndefiniteArticle    + " " + typeNounBase             + " " + typePrepositionWord,
+                                   typesNoun,"y"},
+                                 { typeDeterminerQuantifier + " " + typeExUnknownWord        + " " + typeVerbBase,
+                                   typeDeterminerQuantifier + " " + typeNounBase             + " " + typeVerbBase,
+                                   typesNoun,"y"},
+                                 { typeVerbBase             + " " + typeActionVerb           + " " + typeExUnknownWord     + " " + typePrepositionWord,
+                                   typeVerbBase             + " " + typeActionVerb           + " " + typeExAdverb          + " " + typePrepositionWord,
+                                   typesAdverb,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typeEndofSentence,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typeEndofSentence,
+                                   typesNoun,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typeEndofSentence,
+                                   typeIndefiniteArticle    + " " + typeNounBase             + " " + typeEndofSentence,
+                                   typesNoun,"y"},
+                                 { typeActionVerb           + " " + typeIndefiniteArticle    + " " + typeExUnknownWord     + " " + typePrepositionWord,
+                                   typeActionVerb           + " " + typeIndefiniteArticle    + " " + typeNounBase          + " " + typePrepositionWord,
+                                   typesNoun,"y"},
+                                 { typePrepositionWord      + " " + typeIndefiniteArticle    + " " + typeExUnknownWord     + " " + typePrepositionWord,
+                                   typePrepositionWord      + " " + typeIndefiniteArticle    + " " + typeNounBase          + " " + typePrepositionWord,
+                                   typesNoun,"y"},
+                                 { typeVerbBase             + " " + typeExUnknownWord        + " " + typeActionVerb,
+                                   typeVerbBase             + " " + typeExAdverb             + " " + typeActionVerb,
+                                   typesAdverb,"y"},
+                                 { typeLinkingVerb          + " " + typeExUnknownWord        + " " + typeActionVerb,
+                                   typeLinkingVerb          + " " + typeExAdverb             + " " + typeActionVerb,
+                                   typesAdverb,"y"},
+                                 { typeNounBase             + " " + typeLinkingVerb          + " " + typeActionVerb        + " " + typeExUnknownWord       + " " + typePrepositionWord,
+                                   typeNounBase             + " " + typeLinkingVerb          + " " + typeActionVerb        + " " + typeExAdverb            + " " + typePrepositionWord,
+                                   typesAdverb,"y"},
+                                 { typeNounBase             + " " + typeExUnknownWord        + " " + typePrepositionWord,
+                                   typeNounBase             + " " + typeTransitiveVerb       + " " + typePrepositionWord,
+                                   typesVerb,"n"},
+                                 { typePrepositionWord      + " " + typeDeterminerQuantifier + " " + typeExUnknownWord     + " " + typeEndofSentence,
+                                   typePrepositionWord      + " " + typeDeterminerQuantifier + " " + typeNounBase          + " " + typeEndofSentence,
+                                   typesNoun,"y"},
+                                 { typeNounBase             + " " + typePrepositionWord      + " " + typeIndefiniteArticle + " " + typeExUnknownWord,
+                                   typeNounBase             + " " + typePrepositionWord      + " " + typeIndefiniteArticle + " " + typeNounBase,
+                                   typesNoun,"y"}
+
+                                   };
+
+
 
 
 

@@ -1177,52 +1177,66 @@ string PatternReview(){
 
 char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentence = -1){
 
-           char   LocalWordType             = 'u';
-           ExtendedType                     = typeExUnknownWord;
+           char   LocalWordType             = typeUnknownWord;  //char
+           ExtendedType                     = typeExUnknownWord;//string
            string SearchWord                = " " + LocalWord + " ";
+           string RawWord                   = GetswWords(LocationInSentence);
            //----PRONOUNS-----------------------
            string Pronouns                  = " I you he she it they me him her my mine your ";
                   Pronouns                 += " yours our his hers its who those whom whose ";
                   Pronouns                 += " what which another each everything nobody ";
-                  Pronouns                 += " either someone myself yourself himself ";
-                  Pronouns                 += " herself itself this that these those ";
+                  Pronouns                 += " either someone myself yourself himself their ";
+                  Pronouns                 += " herself itself this that these those them ";
            string PossessivePronouns        = " my your his her its our their mine yours hers ";
            string SubjectPronouns           = " I you he she it they ";
            string ObjectPronouns            = " me you him her ";
            string InterrogativePronouns     = " who whom whose what which ";
-           string IndefinatePronouns        = " another each everything nobody either someone ";
+           string IndefinatePronouns        = " another each everything nobody either someone them ";
            string DemonstrativePronouns     = " this that these those ";
            //----CONJUNCTIONS-------------------
-           string Conjunctions              = " and but for nor or so yet ";
+           string Conjunctions              = " and but for nor or so yet as ";
            //----Cardinal Numbers---------------
            string CardinalNumbers           = " one two three four five six seven eight nine ten ";
            //----DETERMINERS--------------------
            string Determiners               = " the a an each every certain any all few many ";
                   Determiners              += " each some much no lot most enough both half neither ";
+                  Determiners              += " there several ";
            string DefiniteArticles          = " the ";
-           string IndefiniteArticles        = " a an ";
-           string DeterminerQuantifiers     = " few many much lot most some any enough ";
+           string IndefiniteArticles        = " a an there ";
+           string DeterminerQuantifiers     = " few many much lot most some any enough several ";
            string Distributives             = " all both half either neither each every ";
            //----VERBS--------------------------
            string Verbs                     = " came are go gone went threw broke can will be ";
                   Verbs                    += " have do say get make go know take is see come ";
                   Verbs                    += " fell ran run think look want give use find tell ";
                   Verbs                    += " ask work seem feel try leave call am been sold ";
+                  Verbs                    += " has made attach attached runs ";
            string LinkingVerbs              = " is ";
-           string PastTenseVerbs            = " came went gone threw broke ran sold fell ";
+           string PastTenseVerbs            = " came went gone threw broke ran sold fell has made ";
+                  PastTenseVerbs           += " attached ";
            //----PREPOSITIONS-------------------
            string PrepositionWords          = " in into up after to on with under within ";
                   PrepositionWords         += " of at near until over across among while ";
                   PrepositionWords         += " from throughout through during towards by upon ";
-                  PrepositionWords         += " across ";
+                  PrepositionWords         += " across beside along onto between toward ";
+                  PrepositionWords         += " behind ";
            //----SPECIFIC NOUNS-----------------
            string SpecificNouns             = " man woman girl boy men women girls boys lady ";
                   SpecificNouns            += " ladies sunday monday tuesday wednesday ";
-                  SpecificNouns            += " thursday friday saturday ";
+                  SpecificNouns            += " thursday friday saturday clothing building ";
+                  SpecificNouns            += " bikinis railing people children dress ";
            string GenderNounsSingular       = " man woman lady girl boy ";
            string GenderNounsPlural         = " men women girls boys ladies ";
            string WeekDayNames              = " sunday monday tuesday wednesday ";
                   WeekDayNames             += " thursday friday saturday ";
+           //----SPECIFIC ADJECTIVES------------
+           string SpecificAdjectives        = " brown blue red white black green yellow pink ";
+                  SpecificAdjectives       += " grey gray clear purple dyed dressed other ";
+                  SpecificAdjectives       += " tan long young little ";
+           //----SPECIFIC ADVERBS---------------
+           string SpecificAdverbs           = " very where ahead ";
+           //----SENTENCE STOP/PAUSE------------
+           string SentencePause             = " , ";
 
            //----ALL CONSTRUCTION WORDS---------
            string AllConstructionWords      = Pronouns + PossessivePronouns + SubjectPronouns +
@@ -1231,7 +1245,8 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
                                               CardinalNumbers + Determiners + DefiniteArticles +
                                               DeterminerQuantifiers + Distributives +
                                               Verbs + LinkingVerbs + PastTenseVerbs +
-                                              PrepositionWords + Conjunctions + SpecificNouns;
+                                              PrepositionWords + Conjunctions + SpecificNouns +
+                                              SentencePause + SpecificAdjectives + SpecificAdverbs;
 
            //----ALL CONSTRUCTION WORDS POINTER-
            int    isInBaseWords             = -1;
@@ -1264,6 +1279,12 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
            int    isObjectPronoun           = -1;
            int    isInterrogativePronoun    = -1;
            int    isIndefinatePronoun       = -1;
+           //----SPECIFIC ADJECTIVE POINTER-----
+           int    isSpecificAdjective       = -1;
+           //----SPECIFIC ADVERB POINTER--------
+           int    isSpecificAdverb          = -1;
+           //----SENTENCE STOP/PAUSE POINTER----
+           int    isSentenceStop            = -1;
            //----LOCAL WORK VARIABLES-----------
            int    MatchPos                  = -1;   //pointer for substring searches
 
@@ -1271,6 +1292,9 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
            if(isInBaseWords){
 
            isConjunction                    = Conjunctions.find(SearchWord);                ///base type
+           isSentenceStop                   = SentencePause.find(SearchWord);               //Extended type
+           isSpecificAdjective              = SpecificAdjectives.find(SearchWord);          //Extended type
+           isSpecificAdverb                 = SpecificAdverbs.find(SearchWord);             //Extended type
 
            isPronoun                        = Pronouns.find(SearchWord);                    ///base type
             isDemonstrativePronoun          = DemonstrativePronouns.find(SearchWord);       //extended type
@@ -1304,6 +1328,24 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
              LocalWordType = typeConjunction;                                               ///base type
              ExtendedType  = typeCoordinatingConjunction;                                   // extended type "CC"
              return LocalWordType;}
+
+          // Process Adjectives
+          if(isSpecificAdjective >=0){
+             LocalWordType = typeAdjective;                                                 ///base type
+             ExtendedType  = typeExAdjective;                                               // extended type
+             return LocalWordType;}
+
+          // Process Adverbs
+          if(isSpecificAdverb >=0){
+             LocalWordType = typeAdverb;                                                    ///base type
+             ExtendedType  = typeExAdverb;                                                  // extended type
+             return LocalWordType;}
+
+          // Process Comma
+          if(isSentenceStop >=0){
+            LocalWordType  = typeSentenceBreak;                                             ///Base type
+            ExtendedType   = typeExSentenceBreak;                                           // Extended type
+            return LocalWordType;}
 
           // Process Pronouns
           if(isPronoun >= 0){
@@ -1386,6 +1428,8 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
                 else
                     if(isWeekDayName >=0){
                        ExtendedType = typeNounWeekDay;}
+                else
+                       ExtendedType = typeNounBase;
 
                 return LocalWordType;}
 
@@ -1400,7 +1444,21 @@ char  FindWordType(string LocalWord, string &ExtendedType, int LocationInSentenc
                 ExtendedType  = typeActionVerb;                                               /// "va"
                 return LocalWordType;}
 
+           // Check for proper noun
+           // Word type is still unknown here
+           if( (RawWord[0] >='A' && RawWord[0] <= 'Z') && (LocationInSentence > 0) ){
+                LocalWordType = typeProperNoun;
+                ExtendedType  = typeExProperNoun;
+                return LocalWordType;}
 
+
+           // Check for 'ly' endings for adverb
+           // word type still unknown at this point
+           MatchPos = LocalWord.find("ly");
+           if((MatchPos >=0) && ((MatchPos + 2) == LocalWord.size()) ) {
+               LocalWordType = typeAdverb;
+               ExtendedType  = typeExAdverb;
+               return LocalWordType;}
 
            return LocalWordType;
 
@@ -1475,77 +1533,75 @@ bool ApplyGrammarRules(){
 
 //--------------------------------ENHANCE PATTERN-----------------------------------------
 bool EnhancePattern(){
-    int     PatternMatchPointer           = -1;
-    string Patterns [1] [3] = {{typeDefiniteArticle + " " + typeExUnknownWord + " " + typeEndofSentence,
-                                 typeDefiniteArticle + " " + typeNounBase + " " + typeEndofSentence,
-                                 typeNoun + "\n"}};
-    string  LocalExtendedPattern          = GetFromSentenceExtendedPattern();
-    string  LocalShortPattern             = GetFromSentencePattern();
-    string  DefiniteArticleEOSPattern     = typeDefiniteArticle + " " + typeExUnknownWord + " " + typeEndofSentence;
-    string  DefiniteArticleEOSCorrect     = typeDefiniteArticle + " " + typeNounBase + " " + typeEndofSentence;
-    string  DefiniteArticleVerbPattern    = typeDefiniteArticle + " " + typeExUnknownWord + " " + typeLinkingVerb;
-    string  DefiniteArticleVerbCorrect    = typeDefiniteArticle + " " + typeNounBase + " " + typeLinkingVerb;
-    string  DefiniteArticleAdjective      = typeDefiniteArticle + " " + typeExUnknownWord + " " + typeNounBase;
-    string  DefiniteArticleAdjCorrect     = typeDefiniteArticle + " " + typeExAdjective + " " + typeNounBase;
-    string  IndefiniteArticleAdjective    = typeIndefiniteArticle + " " + typeExUnknownWord + " " + typeNounBase;
-    string  IndefiniteArticleAdjCorrect   = typeIndefiniteArticle + " " + typeExAdjective + " " + typeNounBase;
-    string  IndefiniteArticleVerbPattern  = typeIndefiniteArticle + " " + typeExUnknownWord + " " + typeLinkingVerb;
-    string  IndefiniteArticleVerbCorrect  = typeIndefiniteArticle + " " + typeNounBase + " " + typeLinkingVerb;
+    int    PatternMatchPointer     = -1;
+    int    ShortPatternPointer     = -1;
+    extern int PatternCount;
+    extern string Patterns [][4];         //defined in library.cpp
+    string tmptype                 = "";
+    string  LocalExtendedPattern   = GetFromSentenceExtendedPattern();
+    string  LocalShortPattern      = GetFromSentencePattern();
+    bool    Corrected              = false;
 
 
-    PatternMatchPointer = LocalExtendedPattern.find(DefiniteArticleEOSPattern);
-
-    if(PatternMatchPointer >=0){
-       LocalExtendedPattern.replace(PatternMatchPointer,DefiniteArticleEOSPattern.size(),DefiniteArticleEOSCorrect);
-       LocalShortPattern[(PatternMatchPointer/5)+1] = typeNoun;
-       SetInSentenceExtendedPattern(LocalExtendedPattern);
-       SetInSentencePattern(LocalShortPattern);
-       return true;
+    for( int x =0; x < PatternCount; x++){
+      if(Patterns[x][3] == "y"){
+          PatternMatchPointer = LocalExtendedPattern.find(Patterns[x][0]);
+            if(PatternMatchPointer >=0){
+               LocalExtendedPattern.replace(PatternMatchPointer,Patterns[x][0].size(),Patterns[x][1]);
+               ShortPatternPointer = Patterns[x][0].find(typeExUnknownWord);
+               ShortPatternPointer = ShortPatternPointer / 5;
+               tmptype = Patterns[x][2];
+               LocalShortPattern[(PatternMatchPointer/5)+ShortPatternPointer] = tmptype[0];
+               SetInSentenceExtendedPattern(LocalExtendedPattern);
+               SetInSentencePattern(LocalShortPattern);
+               Corrected = true;
+               return Corrected;}
+      }
     }
 
-    PatternMatchPointer = LocalExtendedPattern.find(DefiniteArticleVerbPattern);
-
-    if(PatternMatchPointer >=0){
-       LocalExtendedPattern.replace(PatternMatchPointer,DefiniteArticleVerbPattern.size(),DefiniteArticleVerbCorrect);
-       LocalShortPattern[(PatternMatchPointer/5)+1] = typeNoun;
-       SetInSentenceExtendedPattern(LocalExtendedPattern);
-       SetInSentencePattern(LocalShortPattern);
-       return true;
-    }
-
-    PatternMatchPointer = LocalExtendedPattern.find(DefiniteArticleAdjective);
-
-    if(PatternMatchPointer >=0){
-       LocalExtendedPattern.replace(PatternMatchPointer,DefiniteArticleAdjective.size(),DefiniteArticleAdjCorrect);
-       LocalShortPattern[(PatternMatchPointer/5)+1] = typeAdjective;
-       SetInSentenceExtendedPattern(LocalExtendedPattern);
-       SetInSentencePattern(LocalShortPattern);
-       return true;
-    }
-
-    PatternMatchPointer = LocalExtendedPattern.find(IndefiniteArticleAdjective);
-
-    if(PatternMatchPointer >=0){
-       LocalExtendedPattern.replace(PatternMatchPointer,IndefiniteArticleAdjective.size(),IndefiniteArticleAdjCorrect);
-       LocalShortPattern[(PatternMatchPointer/5)+1] = typeAdjective;
-       SetInSentenceExtendedPattern(LocalExtendedPattern);
-       SetInSentencePattern(LocalShortPattern);
-       return true;
-    }
-
-    PatternMatchPointer = LocalExtendedPattern.find(IndefiniteArticleVerbPattern);
-
-    if(PatternMatchPointer >=0){
-       LocalExtendedPattern.replace(PatternMatchPointer,IndefiniteArticleVerbPattern.size(),IndefiniteArticleVerbCorrect);
-       LocalShortPattern[(PatternMatchPointer/5)+1] = typeNoun;
-       SetInSentenceExtendedPattern(LocalExtendedPattern);
-       SetInSentencePattern(LocalShortPattern);
-       return true;
-    }
-
-    return false;
+    return Corrected;
 }
 //--------------------------------END ENHANCE PATTERN-------------------------------------
+
+//---------------------------EXTRAPOLATE NOUN FORMS---------------------------------------
+void ExtrapolateNounForms(){
+    string  WorkingWord    =  "";
+    string  tmpWord        =  "";
+
+    for(int x = 0; x< GetFromSentenceWordCount(); x++){
+        if(GetswWordType(x) == typeNoun){
+           WorkingWord = GetswWordsLC(x);
+           if(WorkingWord[WorkingWord.size()-1] != 's') {
+            //make plural
+            tmpWord  = WorkingWord + "s";
+            SetMemoryCellpCellData(tmpWord);
+            SetMemoryCellpSingularForm(tmpWord,WorkingWord);
+            SetMemoryCellpExtendedWordType(tmpWord,typeNounBase);
+            SetMemorypWordType(tmpWord,typeNoun);
+
+            tmpWord  = WorkingWord + "'s";
+            SetMemoryCellpCellData(tmpWord);
+            SetMemoryCellpSingularForm(tmpWord,WorkingWord);
+            SetMemoryCellpExtendedWordType(tmpWord,typeNounBase);
+            SetMemorypWordType(tmpWord,typeNoun);
+
+//            tmpWord  = WorkingWord + "s'";
+//            SetMemoryCellpCellData(tmpWord);
+//            SetMemoryCellpSingularForm(tmpWord,WorkingWord);
+//            SetMemoryCellpExtendedWordType(tmpWord,typeNounBase);
+//            SetMemorypWordType(tmpWord,typeNoun);
+
+
+           }
+        }
+    }
+
+
+}
+
+//------------------------------END EXTRAPOLATE NOUN FORMS--------------------------------
+
+
 //-----------------------SlowSpeak--------------------------------------------------------
 void SlowSpeak(string str_Data, bool Recording = true, int Delay = ThisSpeed, bool CarriageReturn = true ){
     if(StoryMode == false){

@@ -194,6 +194,7 @@ class c_Brain : public c_PTLControl
                             cout << "Cell String     :" << GetMemoryCellRawData(strWorkingWord,Result)<< endl;
                             cout << "Cell String (LC):" << GetMemoryCellDataLC(strWorkingWord,Result) << endl;
                             cout << "Cell Word Type  :" << GetMemoryCellcharWordType(strWorkingWord,Result) << endl;
+                            cout << "Cell Extended Word type   :" << GetMemoryCellpExtendedWordType(strWorkingWord,Result) << endl;
                             if(GetMemoryCellcharWordType(strWorkingWord,Result)==typeContraction){
                                 cout << "  Contraction Word Long Form First:" << GetMemoryCellContractionFirst(strWorkingWord,Result) << endl;
                                 cout << "  Contraction Word Long Form Second:" << GetMemoryCellContractionSecond(strWorkingWord,Result) << endl;
@@ -201,28 +202,28 @@ class c_Brain : public c_PTLControl
                             cout << "Cell Secondary Word Type  :" << GetMemoryCellcharSecondaryWordType(strWorkingWord,Result) << endl;
                             cout << "Cell Alternate Word Type  :" << GetMemoryCellcharAlternateWordType(strWorkingWord,Result) << endl;
                             cout << "Cell Data Tense           :" << GetMemoryCellcharWordTense(strWorkingWord,Result) << endl;
-                            cout << "Cell Extended Word type   :" << GetMemoryCellpExtendedWordType(strWorkingWord,Result) << endl;
+
                             cout << "Cell Gender               :" << GetMemoryCellcharGenderClass(strWorkingWord,Result) << endl;
                             cout << "Cell Primary Usage        :" << GetMemoryCellcharPurpose(strWorkingWord,Result) << endl;
                             cout << "Cell Data is Set          :" << boolalpha << GetMemoryCellIsSet(strWorkingWord,Result) << endl;
                             cout << "Cell Plural flag          :" << GetMemoryCellcharIsSingular(strWorkingWord,Result) << endl;
                             cout << "Plural Root               :" << GetMemoryCellpSingularForm(strWorkingWord,Result) << endl;
-                            cout << "Cell used as subject count:" << GetMemoryCellpTimesUsedAsSubject(strWorkingWord,Result) << endl;
-                            cout << "Cell adjectives stored in map:" << GetMemoryCellNumberOfAdjectives(strWorkingWord,Result) << endl;
-                            cout << "Cell verbs stored in map     :" << GetMemoryCellNumberOfVerbs(strWorkingWord,Result) << endl;
-                            cout << "Cell adverbs stored in map   :" << GetMemoryCellNumberOfAdVerbs(strWorkingWord,Result) << endl;
-                            cout << "Cell Adjectives, Verbs, Adverbs:\n";
-                              for(int x = 0; x< GetMemoryCellNumberOfAdjectives(strWorkingWord,Result); x++){
-                                 cout  << "   " << GetMemoryCellAdjectiveFromList(strWorkingWord,x,Result) << " " << GetMemoryCellVerbFromList(strWorkingWord,x,Result)
-                                       << " " << GetMemoryCellAdverbFromList(strWorkingWord,x,Result) << endl;
-                               }
-                            cout << endl;
-                            y = GetMemoryCellNumberOfRelatedNouns(strWorkingWord,Result);
-                            cout << "Cell related Nouns("  << y << "):\n";
-
-                               for(int x = 0; x< y;x++){
-                                 cout << "   " << GetMemoryCellNounFromList(strWorkingWord,x,Result) << endl;
-                               }
+//                            cout << "Cell used as subject count:" << GetMemoryCellpTimesUsedAsSubject(strWorkingWord,Result) << endl;
+//                            cout << "Cell adjectives stored in map:" << GetMemoryCellNumberOfAdjectives(strWorkingWord,Result) << endl;
+//                            cout << "Cell verbs stored in map     :" << GetMemoryCellNumberOfVerbs(strWorkingWord,Result) << endl;
+//                            cout << "Cell adverbs stored in map   :" << GetMemoryCellNumberOfAdVerbs(strWorkingWord,Result) << endl;
+//                            cout << "Cell Adjectives, Verbs, Adverbs:\n";
+//                              for(int x = 0; x< GetMemoryCellNumberOfAdjectives(strWorkingWord,Result); x++){
+//                                 cout  << "   " << GetMemoryCellAdjectiveFromList(strWorkingWord,x,Result) << " " << GetMemoryCellVerbFromList(strWorkingWord,x,Result)
+//                                       << " " << GetMemoryCellAdverbFromList(strWorkingWord,x,Result) << endl;
+//                               }
+//                            cout << endl;
+//                            y = GetMemoryCellNumberOfRelatedNouns(strWorkingWord,Result);
+//                            cout << "Cell related Nouns("  << y << "):\n";
+//
+//                               for(int x = 0; x< y;x++){
+//                                 cout << "   " << GetMemoryCellNounFromList(strWorkingWord,x,Result) << endl;
+//                               }
 
                     }//end if result
                     else
