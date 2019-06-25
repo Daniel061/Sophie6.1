@@ -27,13 +27,13 @@ using namespace std;
 c_Brain Brain;
 list <string> TrainingFileSet;
 list <string>::iterator TrainingIT;
-float OldLevel   = 1.0;
-float NewLevel   = 2.1;
-int   Iterations = 0;
-int   vc,nc,adc,ac,pc,pn,ukn,kn;
+double OldLevel   = 1.0;
+double NewLevel   = 2.1;
+int    Iterations = 0;
+int    vc,nc,adc,ac,pc,pn,ukn,kn;
 
 // GLOBALS
-string Version       = "6.1d.12p.EN.015.019";
+string Version       = "6.1d.16k.EN.015.019";
 string ReleaseMode   = "debug";
 
 bool Verbose         = false;
@@ -76,7 +76,6 @@ int main()
 
 //****************FOR INPUT TEXT TESTING********************************
 //*****uncomment the following******************************************
-ifstream myfile ("trainingdata.dat");
 //testtext.txt file format is single lines terminated by CR
 // -enable StoryMode for no response processing
 // -disable StoryMode when finished
@@ -86,8 +85,9 @@ ifstream myfile ("trainingdata.dat");
    DoIterating       = true;
    Elapsed           = clock();
    string CommentTag = "";
-//FIXME: Float Comparison does not work in release mode
-
+//FIXME: Float Comparison does not work in release mode, it will not -- convert to double?
+if(TrainingMode){
+  ifstream myfile ("trainingdata.dat");
   if (myfile.is_open())
   {
     while ( getline (myfile,Raw_Sentence) )
@@ -100,9 +100,10 @@ ifstream myfile ("trainingdata.dat");
     }
     myfile.close();
     if(DoIterating){
-        while (NewLevel != OldLevel){
+        while (NewLevel-OldLevel >.5){
             cout << OldLevel << " " << NewLevel << endl;
-            Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,OldLevel);
+            //Brain.GetRightLobeCellMapSummary(vc,nc,adc,ac,pc,pn,ukn,kn,OldLevel);
+            OldLevel = NewLevel;
             for(TrainingIT = TrainingFileSet.begin(); TrainingIT != TrainingFileSet.end(); TrainingIT++){
                 Raw_Sentence = *TrainingIT;
                 Brain.ControlProcessingUserInput(Raw_Sentence,false);
@@ -140,6 +141,7 @@ ifstream myfile ("trainingdata.dat");
   }
 
   else cout << "No training file found.\n";
+}//end if Training mode
 StoryMode = false;
 Verbose   = false;
 //*******************END TRAINING FILE READ****************************

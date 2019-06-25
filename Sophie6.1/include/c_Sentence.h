@@ -260,7 +260,8 @@ class c_Sentence : public c_Personality
         ///+++++++++++++++++++++++++'sw' is the function source flag***********************
         ///*******Location = which place in the sentence***********************************
 
-        string GetswExtendedWordType(int Location){return WordMap[Location].Getw_ExtendedWordType();}
+        string GetswExtendedWordType(int Location,int Sequencer = -1){return WordMap[Location].Getw_ExtendedWordType(0,Sequencer);}
+        int    GetswExtendedWordTypeCount(int Location){return WordMap[Location].Getw_ExtendedWordTypeCount();}
         void   SetswExtendedWordType(int Location,string newVal){WordMap[Location].Setw_ExtendedWordType(newVal);}
 
         string GetswMiniDefinition(int Location, int intWhich){return WordMap[Location].Getw_MiniDefinition(intWhich);}
@@ -382,7 +383,7 @@ class c_Sentence : public c_Personality
         void ReVerseBuildPattern(){  //push pattern data to word types
             for(int x = 0; x <= GetFromSentenceWordCount(); x++){
                 SetswWordType(GetFromSentencePattern()[x],x);
-                SetswExtendedWordType(x,GetFromSentenceExtendedPattern().substr(x*5,4));
+                SetswExtendedWordType(x,GetFromSentenceExtendedPattern().substr(x*ExtendedTypeSize,ExtendedTypeSize-1));
                 }
         }
 
@@ -398,9 +399,10 @@ class c_Sentence : public c_Personality
 
 
         void CreateTaggedSentence(){
+
             string TaggedString = "";
             for(int x = 0; x < GetFromSentenceWordCount(); x++){
-                TaggedString += GetswWords(x) + "[" + GetswExtendedWordType(x) + "] ";
+                TaggedString += GetswWords(x) + "[" + GetFromSentenceExtendedPattern().substr(x*ExtendedTypeSize,ExtendedTypeSize-1) + "] ";
             }
             SetInSentenceTaggedSentence(TaggedString);
         }
@@ -521,7 +523,7 @@ class c_Sentence : public c_Personality
                     tmpWordData = WordMap[x].Getw_WordForm();       //pull the raw word data from the map
                     QuoteLoc = tmpWordData.find('\'');
                     if((QuoteLoc >=0)&(QuoteLoc<int_Last_Pos)){
-                        WordMap[x].Setw_WordType(typeContraction);  //Set Contraction flag
+                        //WordMap[x].Setw_WordType(typeContraction);  //Set Contraction flag
                         WordMap[x].Setw_isContraction(true);        //flag the word
                         SetInSentenceHasContraction(true);          //notify c_sentence there is a contraction
                         sHasContraction = true;}

@@ -19,6 +19,8 @@
 
 using namespace std;
 extern string Version;
+int ExtendedTypeSize   = 5; // 4 + space seperator
+
 char typeDeterminer       = 'd';
  string typeDeterminerBase       = "DDDB";
  string typeDefiniteArticle      = "DFAT";
@@ -55,14 +57,18 @@ char typeNoun             = 'n';
  string typeGenderNounPlural     = "NNGP";
  string typeNounWeekDay          = "NWDY";
  string typeNounBase             = "NNBS";
+ string typeNounSingularPossessive = "NSPS";
+ string typeNounPluralPossessive   = "NPPS";
 
 char typeAdjective        = 'a';
  string typesAdjective    = "a";
  string typeExAdjective             = "ADJT";
+ string typePossessiveAdjective     = "APOS";
 
 char typeSentenceBreak    = '_';
  string typeExSentenceBreak         = "STOP";
 char typeContraction      = 'C';
+ string typeExContraction           = "CONT";
 char typeConjunction      = 'c';
  string typeConjunctionBase         = "CNJB";
  string typeCoordinatingConjunction = "COOR";
@@ -97,15 +103,28 @@ char typeExclamation      = 'E';
   // 1) Pattern to replace with
   // 2) string version of the char word type to correct the short pattern
   // 3) control character, y = process this pattern , anything else don't process it
-    int    PatternCount        = 32;
-    string Patterns [32][4]    = {{typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typeEndofSentence,
+  // ** the typeExUnknownWord is the only type the will be replaced
+    int    PatternCount        = 53;
+    string Patterns [53][4]    = {{typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typeEndofSentence,
                                    typeDefiniteArticle      + " " + typeNounBase             + " " + typeEndofSentence,
                                    typesNoun,"y"},
                                  { typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typePrepositionWord,
                                    typeDefiniteArticle      + " " + typeNounBase             + " " + typePrepositionWord,
                                    typesNoun,"y"},
+                                 { typeDefiniteArticle      + " " + typeNounBase             + " " + typeExUnknownWord        + " " + typePrepositionWord,
+                                   typeDefiniteArticle      + " " + typeNounBase             + " " + typeVerbBase             + " " + typePrepositionWord,
+                                   typesVerb,"y"},
+                                 { typeDefiniteArticle      + " " + typeGenderNounSingular   + " " + typeExUnknownWord        + " " + typePrepositionWord,
+                                   typeDefiniteArticle      + " " + typeGenderNounSingular   + " " + typeVerbBase             + " " + typePrepositionWord,
+                                   typesVerb,"y"},
                                  { typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typeLinkingVerb,
                                    typeDefiniteArticle      + " " + typeNounBase             + " " + typeLinkingVerb,
+                                   typesNoun,"y"},
+                                 { typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typeVerbBase,
+                                   typeDefiniteArticle      + " " + typeNounBase             + " " + typeVerbBase,
+                                   typesNoun,"y"},
+                                 { typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typeActionVerb,
+                                   typeDefiniteArticle      + " " + typeNounBase             + " " + typeActionVerb,
                                    typesNoun,"y"},
                                  { typeDefiniteArticle      + " " + typeExUnknownWord        + " " + typeNounBase,
                                    typeDefiniteArticle      + " " + typeExAdjective          + " " + typeNounBase,
@@ -128,9 +147,27 @@ char typeExclamation      = 'E';
                                  { typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typeEndofSentence,
                                    typeIndefiniteArticle    + " " + typeNounBase             + " " + typeEndofSentence,
                                    typesNoun,"y"},
+                                 { typeIndefiniteArticle    + " " + typeGenderNounSingular   + " " + typeExUnknownWord,
+                                   typeIndefiniteArticle    + " " + typeGenderNounSingular   + " " + typeVerbBase,
+                                   typesVerb,"y"},
+                                 { typeIndefiniteArticle    + " " + typeGenderNounPlural     + " " + typeExUnknownWord,
+                                   typeIndefiniteArticle    + " " + typeGenderNounPlural     + " " + typeVerbBase,
+                                   typesVerb,"y"},
                                  { typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typeNounBase          + " " + typeEndofSentence,
                                    typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typeEndofSentence,
                                    typesAdjective,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typeNounBase,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase,
+                                   typesAdjective,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typeGenderNounSingular,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeGenderNounSingular,
+                                   typesAdjective,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typeGenderNounPlural,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeGenderNounPlural,
+                                   typesAdjective,"y"},
+                                 { typeIndefiniteArticle    + " " + typeNounSingularPossessive  + " " + typeExUnknownWord  + " " + typeEndofSentence,
+                                   typeIndefiniteArticle    + " " + typeNounSingularPossessive  + " " + typeNounBase       + " " + typeEndofSentence,
+                                   typesNoun,"y"},
                                  { typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typeLinkingVerb       + " " + typeActionVerb,
                                    typeIndefiniteArticle    + " " + typeNounBase             + " " + typeLinkingVerb       + " " + typeActionVerb,
                                    typesNoun,"y"},
@@ -146,12 +183,21 @@ char typeExclamation      = 'E';
                                  { typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typeNounBase,
                                    typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExAdjective       + " " + typeNounBase,
                                    typesAdjective,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typeExAdjective       + " " + typeNounBase,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExAdjective       + " " + typeNounBase,
+                                   typesAdjective,"y"},
                                  { typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typeGenderNounSingular,
                                    typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExAdjective       + " " + typeGenderNounSingular,
                                    typesAdjective,"y"},
                                  { typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typeVerbBase,
                                    typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typeVerbBase,
                                    typesNoun,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typePastTenseVerb,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typePastTenseVerb,
+                                   typesNoun,"y"},
+                                 { typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typeExUnknownWord            + " " + typeIndefiniteArticle   + " " + typeExAdjective + " " + typeNounBase,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typeVerbBase                 + " " + typeIndefiniteArticle   + " " + typeExAdjective + " " + typeNounBase,
+                                   typesVerb,"y"},
                                  { typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typeCoordinatingConjunction,
                                    typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typeCoordinatingConjunction,
                                    typesNoun,"y"},
@@ -164,6 +210,9 @@ char typeExclamation      = 'E';
                                  { typeVerbBase             + " " + typeActionVerb           + " " + typeExUnknownWord     + " " + typePrepositionWord,
                                    typeVerbBase             + " " + typeActionVerb           + " " + typeExAdverb          + " " + typePrepositionWord,
                                    typesAdverb,"y"},
+                                 { typeLinkingVerb          + " " + typeActionVerb           + " " + typeExUnknownWord     + " " + typePrepositionWord,
+                                   typeLinkingVerb          + " " + typeActionVerb           + " " + typeNounBase          + " " + typePrepositionWord,
+                                   typesNoun,"y"},
                                  { typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeExUnknownWord     + " " + typeEndofSentence,
                                    typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typeEndofSentence,
                                    typesNoun,"y"},
@@ -193,8 +242,57 @@ char typeExclamation      = 'E';
                                    typesNoun,"y"},
                                  { typeNounBase             + " " + typePrepositionWord      + " " + typeIndefiniteArticle + " " + typeExUnknownWord,
                                    typeNounBase             + " " + typePrepositionWord      + " " + typeIndefiniteArticle + " " + typeNounBase,
+                                   typesNoun,"y"},
+                                 { typeDemonstrativePronoun + " " + typeExUnknownWord        + " " + typeVerbBase,
+                                   typeDemonstrativePronoun + " " + typeNounBase             + " " + typeVerbBase,
+                                   typesNoun,"y"},
+                                 { typeLinkingVerb          + " " + typeActionVerb           + " " + typeExUnknownWord     + " " + typeEndofSentence,
+                                   typeLinkingVerb          + " " + typeActionVerb           + " " + typeNounBase          + " " + typeEndofSentence,
+                                   typesNoun,"y"},
+                                 { typePrepositionWord      + " " + typeExUnknownWord        + " " + typeNounBase,
+                                   typePrepositionWord      + " " + typeExAdjective          + " " + typeNounBase,
+                                   typesAdjective,"y"},
+                                 { typeExAdjective          + " " + typeExUnknownWord        + " " + typeCoordinatingConjunction,
+                                   typeExAdjective          + " " + typeNounBase             + " " + typeCoordinatingConjunction,
+                                   typesNoun,"y"},
+                                 { typeExAdverb             + " " + typeExUnknownWord        + " " + typePrepositionWord,
+                                   typeExAdverb             + " " + typeVerbBase             + " " + typePrepositionWord,
+                                   typesVerb,"y"},
+                                 { typeExAdjective          + " " + typeExUnknownWord        + " " + typeActionVerb,
+                                   typeExAdjective          + " " + typeNounBase             + " " + typeActionVerb,
                                    typesNoun,"y"}
 
+                                   };
+
+    int    GrammerPatternCount  = 9;
+    string GrammerPatterns[9][7] = {
+                                  {typeNounBase             + " " + typeNounBase             + " " + typeEndofSentence,
+                                   typeExAdjective          + " " + typeNounBase             + " " + typeEndofSentence,
+                                   typesAdjective,"y","0","","-1"},
+                                  {typeIndefiniteArticle    + " " + typeNounBase             + " " + typeNounBase          + " " + typePrepositionWord,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typePrepositionWord,
+                                   typesAdjective,"y","1","","-1"},
+                                  {typeActionVerb           + " " + typeExUnknownWord        + " " + typeExUnknownWord     + " " + typePrepositionWord,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase          + " " + typePrepositionWord,
+                                   typesAdjective,"y","1",typesNoun,"2"},
+                                  {typeDefiniteArticle      + " " + typeNounBase             + " " + typeNounBase          + " " + typeActionVerb,
+                                   typeDefiniteArticle      + " " + typeExAdjective          + " " + typeNounBase          + " " + typeActionVerb,
+                                   typesAdjective,"y","1","","-1"},
+                                  {typeDefiniteArticle      + " " + typeNounBase             + " " + typeNounBase,
+                                   typeDefiniteArticle      + " " + typeExAdjective          + " " + typeNounBase,
+                                   typesAdjective,"y","1","","-1"},
+                                  {typeIndefiniteArticle    + " " + typeNounSingularPossessive + " " + typeNounBase,
+                                   typeIndefiniteArticle    + " " + typePossessiveAdjective    + " " + typeNounBase,
+                                   typesAdjective,"y","1","","-1"},
+                                  {typeIndefiniteArticle    + " " + typeNounBase             + " " + typeExUnknownWord,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase,
+                                   typesAdjective,"y","1",typesNoun,"2"},
+                                  {typeIndefiniteArticle    + " " + typeExProperNoun         + " " + typeExUnknownWord,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase,
+                                   typesAdjective,"y","1",typesNoun,"2"},
+                                  {typeIndefiniteArticle    + " " + typeExUnknownWord        + " " + typeExUnknownWord,
+                                   typeIndefiniteArticle    + " " + typeExAdjective          + " " + typeNounBase,
+                                   typesAdjective,"y","1",typesNoun,"2"}
                                    };
 
 

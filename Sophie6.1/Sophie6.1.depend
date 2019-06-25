@@ -1,21 +1,21 @@
 # depslib dependency file v1.0
-1558890102 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
+1560608178 source:h:\c++projects\sophie6.1\sophie6.1\main.cpp
 	<iostream>
 	<fstream>
 	<c_Brain.h>
 	<time.h>
 	<list>
 
-1558524648 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
+1559479200 h:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
 	<c_PTLControl.h>
 
-1558882860 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
+1559999068 h:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
 	<c_Cortex.h>
 
 1553348176 h:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
 	<c_Language.h>
 
-1558890102 h:\c++projects\sophie6.1\sophie6.1\include\c_language.h
+1560608178 h:\c++projects\sophie6.1\sophie6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<c_LongTermMemory.h>
@@ -24,7 +24,7 @@
 	<stack>
 	<queue>
 
-1558353918 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
+1560091660 h:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
 	<c_Personality.h>
 	<c_Word.h>
 	<map>
@@ -38,7 +38,7 @@
 1552086014 h:\c++projects\sophie6.1\sophie6.1\include\c_medulla.h
 	<c_Lobes.h>
 
-1558887676 h:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
+1560089430 h:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
 	<Library.h>
 	<c_MemoryCell.h>
 	<unordered_map>
@@ -49,9 +49,10 @@
 	<string>
 	<time.h>
 
-1556366514 h:\c++projects\sophie6.1\sophie6.1\include\c_memorycell.h
+1559856798 h:\c++projects\sophie6.1\sophie6.1\include\c_memorycell.h
 	<string>
 	<map>
+	<unordered_map>
 	<iostream>
 	<unordered_set>
 
@@ -59,7 +60,7 @@
 	<string>
 	<iostream>
 
-1558269806 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
+1559861622 h:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
 	<c_Sentence.h>
 	<c_SubjectStack.h>
 	<unordered_map>
@@ -121,72 +122,84 @@
 1544995944 source:h:\c++projects\sophie6.1\sophie6.1\src\c_subjectstack.cpp
 	"c_SubjectStack.h"
 
-1549367690 source:d:\c++projects\sophie6.1\sophie6.1\main.cpp
+1560612866 source:d:\c++projects\sophie6.1\sophie6.1\main.cpp
 	<iostream>
 	<fstream>
 	<c_Brain.h>
 	<time.h>
+	<list>
 
-1549221956 d:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
-	<c_Cerebellum.h>
+1561501024 d:\c++projects\sophie6.1\sophie6.1\include\c_brain.h
+	<c_PTLControl.h>
 
-1549366770 d:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
+1561163370 d:\c++projects\sophie6.1\sophie6.1\include\c_cerebellum.h
 	<c_Cortex.h>
 
-1549406144 d:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
+1553351776 d:\c++projects\sophie6.1\sophie6.1\include\c_cortex.h
 	<c_Language.h>
 
-1549406144 d:\c++projects\sophie6.1\sophie6.1\include\c_language.h
+1561471878 d:\c++projects\sophie6.1\sophie6.1\include\c_language.h
 	<c_Sentence.h>
 	<c2_Sentence.h>
 	<c_LongTermMemory.h>
 	<string>
 	<iostream>
+	<stack>
+	<queue>
 
-1549406144 d:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
+1560095260 d:\c++projects\sophie6.1\sophie6.1\include\c_sentence.h
 	<c_Personality.h>
+	<c_Word.h>
+	<map>
 
-1548375606 d:\c++projects\sophie6.1\sophie6.1\include\c_personality.h
+1551910882 d:\c++projects\sophie6.1\sophie6.1\include\c_personality.h
 	<c_ShortTermMemory.h>
 
-1546092816 d:\c++projects\sophie6.1\sophie6.1\include\c_shorttermmemory.h
+1551910882 d:\c++projects\sophie6.1\sophie6.1\include\c_shorttermmemory.h
 	<c_Medulla.h>
 
-1546092816 d:\c++projects\sophie6.1\sophie6.1\include\c_medulla.h
+1552086014 d:\c++projects\sophie6.1\sophie6.1\include\c_medulla.h
 	<c_Lobes.h>
 
-1549367236 d:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
+1561501000 d:\c++projects\sophie6.1\sophie6.1\include\c_lobes.h
+	<Library.h>
 	<c_MemoryCell.h>
 	<unordered_map>
+	<map>
+	<cstdio>
 	<fstream>
 	<iostream>
 	<string>
+	<time.h>
 
-1549225240 d:\c++projects\sophie6.1\sophie6.1\include\c_memorycell.h
+1559860398 d:\c++projects\sophie6.1\sophie6.1\include\c_memorycell.h
 	<string>
 	<map>
+	<unordered_map>
 	<iostream>
+	<unordered_set>
 
-1547397584 d:\c++projects\sophie6.1\sophie6.1\include\c2_sentence.h
+1549725270 d:\c++projects\sophie6.1\sophie6.1\include\c2_sentence.h
 	<string>
 	<iostream>
 
-1549322124 d:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
+1559865222 d:\c++projects\sophie6.1\sophie6.1\include\c_longtermmemory.h
 	<c_Sentence.h>
 	<c_SubjectStack.h>
 	<unordered_map>
+	<cstdio>
 	<fstream>
 	<map>
 	<vector>
 	<string>
 
-1549107672 d:\c++projects\sophie6.1\sophie6.1\include\c_subjectstack.h
+1551910884 d:\c++projects\sophie6.1\sophie6.1\include\c_subjectstack.h
 	<vector>
 	<map>
 	<c_Sentence.h>
 	<c_SubjectData.h>
 
-1549109846 d:\c++projects\sophie6.1\sophie6.1\include\c_subjectdata.h
+1551910884 d:\c++projects\sophie6.1\sophie6.1\include\c_subjectdata.h
 	<map>
 	<string>
 
@@ -214,7 +227,7 @@
 1544998410 source:d:\c++projects\sophie6.1\sophie6.1\src\c_medulla.cpp
 	"c_Medulla.h"
 
-1547904456 source:d:\c++projects\sophie6.1\sophie6.1\src\c_memorycell.cpp
+1551026018 source:d:\c++projects\sophie6.1\sophie6.1\src\c_memorycell.cpp
 	"c_MemoryCell.h"
 
 1544995222 source:d:\c++projects\sophie6.1\sophie6.1\src\c_personality.cpp
@@ -232,7 +245,7 @@
 1544995944 source:d:\c++projects\sophie6.1\sophie6.1\src\c_subjectstack.cpp
 	"c_SubjectStack.h"
 
-1558959390 h:\c++projects\sophie6.1\sophie6.1\include\c_word.h
+1560091660 h:\c++projects\sophie6.1\sophie6.1\include\c_word.h
 	<string>
 	<iostream>
 	<unordered_set>
@@ -245,7 +258,7 @@
 	<string>
 	<time.h>
 
-1558889104 source:h:\c++projects\sophie6.1\sophie6.1\library.cpp
+1560608852 source:h:\c++projects\sophie6.1\sophie6.1\library.cpp
 	<Library.h>
 	<string>
 	<time.h>
@@ -275,5 +288,50 @@
 	<string>
 
 1555757680 source:h:\c++projects\sophie6.1\sophie6.1\src\c_wordfreqtracker.cpp
+	"c_WordFreqTracker.h"
+
+1560612452 source:d:\c++projects\sophie6.1\sophie6.1\library.cpp
+	<Library.h>
+	<string>
+	<time.h>
+
+1552146406 d:\c++projects\sophie6.1\sophie6.1\include\library.h
+	<string>
+	<time.h>
+
+1555769392 d:\c++projects\sophie6.1\sophie6.1\include\c_ptlcontrol.h
+	<string>
+	<vector>
+	<map>
+	<c_PTL.h>
+	<c_WordFreqTracker.h>
+	<c_Cerebellum.h>
+
+1555330340 d:\c++projects\sophie6.1\sophie6.1\include\c_ptl.h
+	<string>
+	<c_Word.h>
+	<map>
+	<math.h>
+
+1560095260 d:\c++projects\sophie6.1\sophie6.1\include\c_word.h
+	<string>
+	<iostream>
+	<unordered_set>
+	<map>
+
+1555768564 d:\c++projects\sophie6.1\sophie6.1\include\c_wordfreqtracker.h
+	<map>
+	<string>
+
+1555256154 source:d:\c++projects\sophie6.1\sophie6.1\src\c_ptl.cpp
+	"c_PTL.h"
+
+1554044726 source:d:\c++projects\sophie6.1\sophie6.1\src\c_ptlcontrol.cpp
+	"c_PTLControl.h"
+
+1551617324 source:d:\c++projects\sophie6.1\sophie6.1\src\c_word.cpp
+	"c_Word.h"
+
+1555761280 source:d:\c++projects\sophie6.1\sophie6.1\src\c_wordfreqtracker.cpp
 	"c_WordFreqTracker.h"
 

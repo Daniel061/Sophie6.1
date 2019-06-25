@@ -27,6 +27,7 @@
 
 extern bool   Verbose;
 extern string Version;
+extern int ExtendedTypeSize;
 extern char typeDeterminer;
 extern char typeVerb;
 extern char typeAdverb;
@@ -90,7 +91,10 @@ extern string typeExSentenceBreak;
 extern string typesAdverb;
 extern string typeExAdverb;
 extern string typeExProperNoun;
-
+extern string typeExContraction;
+extern string typeNounSingularPossessive;
+extern string typeNounPluralPossessive;
+extern string typePossessiveAdjective;
 class c_Lobes : public c_MemoryCell
 {
 
@@ -674,7 +678,7 @@ class c_Lobes : public c_MemoryCell
         /// Gets RightLobeCellMap summary
         int GetRightLobeCellMapSummary(int &VerbCount, int &NounCount, int &AdjectiveCount,
                                        int &AdverbCount, int &PronounCount, int &PropernounCount,
-                                       int &UnknownCount, int &KnownCount, float &Ratio){
+                                       int &UnknownCount, int &KnownCount, double &Ratio){
           CellMapIT       = RightLobeCellMap.begin();
           VerbCount       = 0;
           NounCount       = 0;
@@ -696,7 +700,7 @@ class c_Lobes : public c_MemoryCell
 
             CellMapIT++;
           }
-          Ratio = (float(KnownCount)/float(RightLobeCellMap.size())) * 100;
+          Ratio = (double(KnownCount)/double(RightLobeCellMap.size())) * 100;
           return RightLobeCellMap.size();
         }
 
@@ -705,6 +709,7 @@ class c_Lobes : public c_MemoryCell
         ///  Returns True if exists and the extended word type
         string GetMemoryCellpExtendedWordType(string strSearchBase, bool &Result){
            Result    = false;
+           int Usage = 0;
            CellMapIT = FindStringInMap(strSearchBase,Result);
                if(Result){
                    return CellMapIT->second.GetpExtendedWordType();}
@@ -1416,6 +1421,7 @@ class c_Lobes : public c_MemoryCell
         void LobesStoreTheLearnedWords(){
             string Delim            = "\n";
             int    Count            = 0;
+            int    Usage            = 0;
             ofstream LearnedDataFile ("LearnedData.dat", ios::out);
             if (LearnedDataFile.is_open()){
                     LearnedDataFile << "VERSION " << Version << ", file version-Memory Cells" << Delim;
@@ -1430,6 +1436,7 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Cell purpose           ," << CellMapIT->second.GetpCellPurpose() << Delim;
                     LearnedDataFile << "Word Type              ," << CellMapIT->second.GetpCellWordType() << Delim;
                     LearnedDataFile << "Extended Word Type     ," << CellMapIT->second.GetpExtendedWordType() << Delim;
+                    LearnedDataFile << " ^This usage count     ," << CellMapIT->second.GetpExtendedWordTypeFrequency(0) << Delim;
                     LearnedDataFile << "Word tense             ," << CellMapIT->second.GetpCellWordTense() << Delim;
                     LearnedDataFile << "Present Tense Form     ," << CellMapIT->second.GetpCellPresentTenseForm() << Delim;
                     LearnedDataFile << "(p)ositive - (n)egative," << CellMapIT->second.GetpCellPolarity() << Delim;
@@ -1459,6 +1466,12 @@ class c_Lobes : public c_MemoryCell
                     LearnedDataFile << "Times used as Adverb   ," << CellMapIT->second.GetpTimesUsedAsAdverb() << Delim;
                     LearnedDataFile << "Times used as Pronoun  ," << CellMapIT->second.GetpTimesUsedAsPronoun() << Delim;
                     LearnedDataFile << "Times used as Propernoun," << CellMapIT->second.GetpTimesUsedAsPropernoun() << Delim;
+                    LearnedDataFile << "Extended Type Map Size ," << CellMapIT->second.GetpExtendedWordTypeMapSize() << Delim;
+
+                    Count = CellMapIT->second.GetpExtendedWordTypeMapSize();
+                    for(int x = 0; x < Count; x++){
+                    LearnedDataFile << " Extended type         ," << CellMapIT->second.GetpExtendedWordType(0,x) << "," << CellMapIT->second.GetpExtendedWordTypeFrequency(x) << Delim;
+                    }
 
 
                 Count = CellMapIT->second.GetpCellMiniDefinitionCount();
@@ -1508,7 +1521,9 @@ class c_Lobes : public c_MemoryCell
         void LobesReadTheLearnedWords(){
                 //ensure datafile version is the same as our version, if not, delete the file
                 string     strLineData     = "";
+                string     tmpLineData     = "";
                 int        Count           = 0;
+                int        Usage           = 0;
                 ifstream LearnedDataFile ("LearnedData.dat");
                 string::size_type decType;
                 cout << "..";
@@ -1552,7 +1567,9 @@ class c_Lobes : public c_MemoryCell
                         WorkingCell.SetpCellWordType(strLineData[0]);                       //set the char word type
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
-                        WorkingCell.SetpExtendedWordType(strLineData);                      //set the string extended word type
+                        //WorkingCell.SetpExtendedWordType(strLineData);                      //set the string extended word type
+                        getline(LearnedDataFile,strLineData,',');                           //skip usage count
+                        getline(LearnedDataFile,strLineData);
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
                         WorkingCell.SetpCellWordTense(strLineData[0]);                      //set the char wordtense
@@ -1642,6 +1659,16 @@ class c_Lobes : public c_MemoryCell
                         WorkingCell.SetpTimesUsedAsPropernoun(stoi(strLineData,&decType));   //set times used as propernoun
                         getline(LearnedDataFile,strLineData,',');
                         getline(LearnedDataFile,strLineData);
+                        Count = stoi(strLineData,&decType);                                  //got size of extended type map
+                        for(int x = 0; x< Count; x++){
+                            getline(LearnedDataFile,strLineData,',');
+                            getline(LearnedDataFile,strLineData,',');
+                            getline(LearnedDataFile,tmpLineData);                            //got the usage count for this type
+                            Usage = stoi(tmpLineData,&decType);
+                            WorkingCell.SetpExtendedWordType(strLineData,Usage);
+                        }
+                        getline(LearnedDataFile,strLineData,',');
+                        getline(LearnedDataFile,strLineData);
                         Count = stoi(strLineData,&decType);                                  //got number of mini defs
                         //count = mini def count
                         for(int x = 0; x< Count; x++){
@@ -1688,7 +1715,10 @@ class c_Lobes : public c_MemoryCell
                         //if(WorkingCell.GetpCellDataLC() == "dog") cout << " Dog related noun =" << strLineData << endl;
                             WorkingCell.AssociateNounInMap(strLineData);
                         }//end for nouns loop
-                    getline(LearnedDataFile,strLineData,',');
+
+
+
+                    getline(LearnedDataFile,strLineData,',');                                //must do this to continue the loop
                     RightLobeMemoryMap.emplace(WorkingCell.GetpCellToken(),WorkingCell);
                     RightLobeCellMap.emplace(WorkingCell.GetpCellDataLC(),WorkingCell);
 

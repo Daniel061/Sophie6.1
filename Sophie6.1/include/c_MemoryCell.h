@@ -2,6 +2,7 @@
 #define C_MEMORYCELL_H
 #include <string>
 #include <map>
+#include <unordered_map>
 #include <iostream>
 #include <unordered_set>
 
@@ -84,12 +85,87 @@ class c_MemoryCell
         unordered_set <string> relatedNounList;    // 41) Nouns related to this word
         unordered_set <string>::iterator SetIT;    // Local iterator for these sets
 
+        map       <string,int> pExtendedWordTypes; // 42) Extended type, usage frequency
+        map         <char,int> pWordTypes;         // 43) char type, usage frequency
+        map <string,int>::iterator pExtWTPtr;      // local iterator for extended type map
+        map   <char,int>::iterator pShortPtr;      // local iterator for char type map
+
 
 
 
     public:
-        string GetpExtendedWordType(){return pExtendedWordType;}
-        void   SetpExtendedWordType(string newVal){pExtendedWordType = newVal;}
+
+        int    GetpExtendedWordTypeFrequency(int WhichOne = 0){
+             ///Returns the frequency of the word type in the map
+             /// Returns the first in the map unless WhichOne is > 0
+             int Sequencer = 0;
+
+             pExtWTPtr = pExtendedWordTypes.begin();
+             for(Sequencer = 0; Sequencer < WhichOne; Sequencer++){
+                 pExtWTPtr++;
+            }
+            return pExtWTPtr->second;
+        }
+
+        string GetpExtendedWordType(int WhichOne = 0, int SequenceOutput = -1){
+             ///Sends back the most frequently used type unless
+             /// WhichOne requests other order, i.e. 1 = 2nd most frequent
+             ///returns "UUUU" if empty or out of bounds
+
+             int    Marker          = 0;
+             int    Sequencer       = 0;
+             string tmpExtendedType = "UUUU";
+             unordered_map <int,string> SortedWordTypes;          //sorted by usage
+             unordered_map <int,string>::iterator SortedPTR;
+
+             SortedWordTypes.clear();
+             for(pExtWTPtr = pExtendedWordTypes.begin(); pExtWTPtr != pExtendedWordTypes.end(); pExtWTPtr++){
+                 SortedWordTypes.emplace(pExtWTPtr->second,pExtWTPtr->first);
+             }
+             //check for empty map or out of bounds request
+             if((pExtendedWordTypes.empty()) || (WhichOne > int(pExtendedWordTypes.size()))) {
+                return "UUUU";}
+
+
+
+             if(SequenceOutput >= 0){
+                if( SequenceOutput > int(pExtendedWordTypes.size())  ) return "UUUU";  //error check
+                pExtWTPtr = pExtendedWordTypes.begin();
+                for(Sequencer = 0; Sequencer < SequenceOutput; Sequencer++){
+                  pExtWTPtr++;
+                }
+
+                return pExtWTPtr->first;
+             }
+
+             for(pExtWTPtr = pExtendedWordTypes.begin(); pExtWTPtr != pExtendedWordTypes.end(); pExtWTPtr++){
+                if( (pExtWTPtr->second > Marker) && (pExtWTPtr->first != "UUUU") ){
+                    Marker          = pExtWTPtr->second;
+                    tmpExtendedType = pExtWTPtr->first;
+                }
+             }
+
+               return tmpExtendedType;}
+
+        void   SetpExtendedWordType(string newVal, int Usage = 0){
+             ///stores the extended type in the map with a count of 1 if new to
+             /// the map, otherwise increments the count
+
+             pExtendedWordTypes.emplace(newVal,Usage);
+             pExtWTPtr = pExtendedWordTypes.find(newVal);
+             if(pExtWTPtr->first == "UUUU"){
+                pExtWTPtr->second = 1;
+             }
+             else{
+                Usage = pExtWTPtr->second;
+                Usage++;
+                pExtWTPtr->second = Usage;
+             }
+
+             pExtendedWordType = newVal;}
+
+
+        int    GetpExtendedWordTypeMapSize(){return pExtendedWordTypes.size();}
 
         int    GetpTimesUsedAsSubject(){return pTimesUsedAsSubject;}
         void   IncrementpTimesUsedAsSubject(){pTimesUsedAsSubject++;}
@@ -235,7 +311,7 @@ class c_MemoryCell
                 pPossessiveRoot                 = "";
                 pSingularForm                   = "";
                 pPresentTenseForm               = "";
-                pExtendedWordType               = "uu";
+                pExtendedWordType               = "UUUU";
                 pPossessiveRootType             = 'u';
                 pPolarity                       = 'u';
                 pCellPurpose                    = 'u'; //undefined
@@ -267,6 +343,8 @@ class c_MemoryCell
                 pTimesUsedAsAdverb              = 0;
                 pTimesUsedAsPronoun             = 0;
                 pTimesUsedAsPropernoun          = 0;
+                pExtendedWordTypes.clear();
+                pExtendedWordTypes.emplace("UUUU",1);   //seed the map
         }
 
 

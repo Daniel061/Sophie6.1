@@ -74,18 +74,59 @@ class c_Word
 
 
     public:
-        string   Getw_ExtendedWordType(int WhichOne = 0){
+
+        char     Getw_WordType(){return w_WordType;}
+        void     Setw_WordType(char newVal){
+                 if((w_WordType == 'd') && (newVal == 'a') ){
+                    cout << "Determiner changed to adjective for:" << w_WordFormLC << endl;
+                 }
+            w_WordType = newVal;}
+
+        int      Getw_ExtendedWordTypeCount(){return w_ExtendedWordTypes.size();}
+
+        string   Getw_ExtendedWordType(int WhichOne = 0, int SequenceOutput = -1){
                  ///Sends back the most frequently used type unless
                  /// WhichOne requests other order, i.e. 1 = 2nd most frequent
                  ///returns "UUUU" if empty or out of bounds
+
+                 int    Marker          = 0;
+                 int    Sequencer       = 0;
+                 string tmpExtendedType = "UUUU";
+
                  //check for empty map or out of bounds request
-                 if((int(w_ExtendedWordTypes.size()==0)) || (WhichOne > int(w_ExtendedWordTypes.size()))) {
+                 if((w_ExtendedWordTypes.empty()) || (WhichOne > int(w_ExtendedWordTypes.size()))) {
                     return "UUUU";}
 
+                 if(SequenceOutput >=0){
+                    for(auto w_ExtWTPtr: w_ExtendedWordTypes){
+                        if(Sequencer == SequenceOutput){
+                            return w_ExtWTPtr.first;
+                        }
+                    }
+                 }
+
+                 for(w_ExtWTPtr = w_ExtendedWordTypes.begin(); w_ExtWTPtr != w_ExtendedWordTypes.end(); w_ExtWTPtr++){
+                    if( (w_ExtWTPtr->second > Marker) && (w_ExtWTPtr->first != "UUUU") ){
+                        Marker          = w_ExtWTPtr->second;
+                        tmpExtendedType = w_ExtWTPtr->first;
+                    }
+                 }
 
 
-                 return w_ExtendedWordType;}
-        void     Setw_ExtendedWordType(string newVal){w_ExtendedWordType = newVal;}
+                 return tmpExtendedType;}
+
+        void     Setw_ExtendedWordType(string newVal, int Usage = 0){
+                 ///stores the extended type in the map with a count of 1 if new to
+                 /// the map, otherwise increments the count
+                 w_ExtendedWordTypes.emplace(newVal,Usage);
+                 w_ExtWTPtr = w_ExtendedWordTypes.find(newVal);
+
+                 Usage = w_ExtWTPtr->second;
+                 Usage++;
+                 w_ExtWTPtr->second = Usage;
+                 w_ExtendedWordType = newVal;}
+
+
 
         string   Getw_PresentTenseForm(){return w_PresentTenseForm;}
         void     Setw_PresentTenseForm(string newVal){w_PresentTenseForm = newVal;}
@@ -144,10 +185,6 @@ class c_Word
 
         int      Getw_WordTokens(){return w_WordTokens;}
         void     Setw_WordTokens(int newVal){w_WordTokens = newVal;}
-
-        char     Getw_WordType(){return w_WordType;}
-        void     Setw_WordType(char newVal){
-                 w_WordType = newVal;}
 
         char     Getw_GenderClass(){return w_GenderClass;}
         void     Setw_GenderClass(char newVal){w_GenderClass = newVal;}
@@ -250,6 +287,7 @@ class c_Word
           w_Adjectives.clear();                 // adjectives used towards this word            27
           w_Adverbs.clear();                    // adverbs used towards this word               28
           w_RelatedNouns.clear();               // nouns related to this word                   29
+          w_ExtendedWordTypes.clear();          // Extended word type map                       30
         }
 
 

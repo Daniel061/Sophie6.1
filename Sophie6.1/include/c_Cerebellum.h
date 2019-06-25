@@ -88,7 +88,7 @@ public:
         if(Verbose)
             cout << "[c_Cerebellum.h::GatherAndSetAllSentenceData()]\n";
 
-        InitializeAll();
+        InitializeAll();               //preset and set all variables
         LocalWordCount               = GetFromSentenceWordCount();
         string LocalOriginalString   = GetFromSentenceOriginalString();
         string LocalExtendedWordType = "";
@@ -127,7 +127,7 @@ public:
 
             //if(MemoryWordType == '\0') MemoryWordType = 'u';                      //removed due to redundancy
 
-            if(MemoryWordType == typeUnknownWord){                                    //Nothing in memory cell
+            if(MemoryWordType == typeUnknownWord){                                     //Nothing in memory cell
                 SelectedWordType = LocalWordType;}                                     //  -use type from language helper, could still be 'u'
 
 
@@ -169,7 +169,8 @@ public:
                 //Proper Noun usage ok
             }
             else{
-                SelectedWordType = typeNoun;
+                SelectedWordType      = typeNoun;
+                LocalExtendedWordType = typeNounBase;
                 //Proper Noun form not used this time
             }
 
@@ -223,8 +224,12 @@ public:
             ReVerseBuildPattern();
         }
         ExtrapolateNounForms();
-        RebuildPattern();
-        ReVerseBuildPattern();                                                      //push from pattern to word types
+
+        if (GrammerPatternCheck()){
+            ReVerseBuildPattern();
+        }
+        //RebuildPattern();
+        //ReVerseBuildPattern();                                                      //push from pattern to word types
         FindAndSetGistOfSentence();                                                 //store gist,subgist and supportive phrase in sentence
 
         for (int x = 0; x < int(LocalPattern.size()); x++ ){                        //for calc in understanding level
@@ -313,7 +318,7 @@ public:
 
          //FindAndSetGistOfSentence();
          FindSubject();
-         SetInSentenceExtendedPattern(LocalExtendedPattern);
+        // SetInSentenceExtendedPattern(LocalExtendedPattern);
         return LocalWordCount;                                                      //finished
 
     }

@@ -303,9 +303,10 @@ class c_LongTermMemory : public c_SubjectStack
             if (Verbose)
                 cout << "[c_LongTermMemory::SaveAllSentenceDataToMemory]\n";
 
-            int     NewWordCount     = 0;
-            int     UpDatedWordCount = 0;
-            bool    Result           = false;
+            int     NewWordCount      = 0;
+            int     UpDatedWordCount  = 0;
+            int     ExtendedTypeCount = 0;
+            bool    Result            = false;
 
             for(int x = 0; x < GetFromSentenceWordCount(); x++){
                 //start storing all the word data
@@ -329,7 +330,9 @@ class c_LongTermMemory : public c_SubjectStack
                 SetMemorypWordTense(GetswWordsLC(x),GetswWordTense(x));                                      /// 14  word tense
                 SetMemorypSecondaryType(GetswWordsLC(x),GetswSecondaryType(x));                              /// 15  secondary type
                 SetMemorypAlternateType(GetswWordsLC(x),GetswAlternateType(x));                              /// 16  alternate type
-                SetMemoryCellpExtendedWordType(GetswWordsLC(x),GetswExtendedWordType(x));                    /// 17  extended word type
+                ExtendedTypeCount = GetswExtendedWordTypeCount(x);
+                for(int z = 0; z < ExtendedTypeCount; z++){
+                   SetMemoryCellpExtendedWordType(GetswWordsLC(x),GetswExtendedWordType(x,z));}              /// 17  extended word type
                 if((x == GetFromSentenceSubjectLocation()) && (!GetFromSentenceIsQuestion()) ){
                     SetMemorypCellMiniDefinition(GetswWordsLC(x),GetFromSentenceGistOfSentence());}                      //use gist if subject & not a question sentence
                                                                                                              /// 18  mini def
@@ -376,11 +379,18 @@ class c_LongTermMemory : public c_SubjectStack
 
         void LTMSaveSentencesInFile(){
             ofstream SentenceDataFile ("SentenceDataFile.dat", ios::out);
+            ofstream SentenceCorrectionFile ("SentenceCorrectionFile.dat", ios::out);
+            ofstream SentencePatternFile ("SentencePatternFile.dat", ios::out);
             if (SentenceDataFile.is_open()){
                 SentenceDataFile << "VERSION " << Version << Deliminator;
+                SentenceCorrectionFile << "VERSION " << Version << Deliminator;
+                SentencePatternFile << "VERSION " << Version << Deliminator;
                 //for (csIT = CopySentenceMap.begin(); csIT != CopySentenceMap.end(); csIT++){
                 for (strMapIT = StringIndexedSentenceMap.begin(); strMapIT != StringIndexedSentenceMap.end(); strMapIT++){
                       //if(!strMapIT->second.GetFromSentenceIsQuestion()){
+                       SentenceCorrectionFile << strMapIT->second.GetFromSentenceOriginalString() << Deliminator;
+                       SentenceCorrectionFile << strMapIT->second.GetFromSentenceTaggedSentence() << Deliminator;
+                       SentencePatternFile << strMapIT->second.GetFromSentenceExtendedPattern()<< Deliminator;
                         SentenceDataFile << "Original string           ,";
                         SentenceDataFile << strMapIT->second.GetFromSentenceOriginalString() << Deliminator;
                         SentenceDataFile << "Tagged Sentence           ,";
@@ -469,6 +479,8 @@ class c_LongTermMemory : public c_SubjectStack
                 cout << "file didn't open" << endl;
             }
             SentenceDataFile.close();
+            SentenceCorrectionFile.close();
+            SentencePatternFile.close();
 
 
             ofstream SentenceCSVDataFile ("SentenceDataFile.csv", ios::out);

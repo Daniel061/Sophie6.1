@@ -74,8 +74,8 @@ class c_Brain : public c_PTLControl
                                                                                                                      //  from memory and language helper
               //DeconstructContractions(OwnerShip,Plural,Root,LongFormFirst,LongFormSecond,tmpInputData);
               //DecipherCurrentSentence(strData);                  // Work with what is known at this point
-              RebuildPattern();                                                                                      // Updated corrected pattern
-              ReVerseBuildPattern();                                                                                 // push pattern data to word type
+              //RebuildPattern();                                                                                      // Updated corrected pattern
+              //ReVerseBuildPattern();                                                                                 // push pattern data to word type
               FindDirectAndIndirectObject();                                                                         // See if Direct and indirect object can be set now
               LinkRelatedWords();                                                                                    // link related words together in word class
               SaveAllSentenceWordDataToMemory();                                                                     // push sentence and word data to memory cells
@@ -185,7 +185,7 @@ class c_Brain : public c_PTLControl
                     int AdverbsInMap[20];
                     int VerbsInMap[20];
                     int RelatedNounsInMap[20];
-                    int y = 0;
+                    //int y = 0;
                     bool Result = false;
 
                     GetMemoryCellRawData(strWorkingWord,Result);
@@ -236,7 +236,7 @@ class c_Brain : public c_PTLControl
             case 21244631:   // map summary
                 {
                     int NounCount,VerbCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,WordCount,UnknownCount,KnownCount;
-                    float Ratio;
+                    double Ratio;
                     WordCount = GetRightLobeCellMapSummary(VerbCount,NounCount,AdjectiveCount,AdverbCount,PronounCount,PropernounCount,UnknownCount,KnownCount,Ratio);
                     cout << "Total Words in memory cells:" << WordCount <<  "  Total in Left Lobes:" << GetLeftLobeCellMapCount() <<  " Sentences saved:" << GetNumberOfSentencesSaved() << endl;
                     cout << " Nouns        :" << NounCount << endl;
